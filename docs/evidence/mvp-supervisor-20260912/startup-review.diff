@@ -1,0 +1,11 @@
+--- before/src/gah/supervised_run.py
++++ src/gah/supervised_run.py
+@@ -300,7 +300,7 @@
+         if mode != 'run' and self.checkpoint.get('request-prepare') is None:
+             raise SupervisorError('CHECKPOINT_REQUIRED')
+         self.prepare()
+-        if mode == 'run' or mode == 'resume' and self.checkpoint.get('request-begin') is not None:
++        if mode in ('run', 'resume'):
+             self.call(OPERATOR, 'run_begin', 'begin', durable=True, manifest=self.manifest,
+                 plan=self.bound['plan'], contract_series_id=self.request['contract_series_id'])
+         snapshot = self.status()

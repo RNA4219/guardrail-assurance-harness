@@ -1,0 +1,28 @@
+{
+  "id": "docs/acceptance/AC-20260911-04.md",
+  "role": "acceptance",
+  "title": "Acceptance: 期限後回収と取消し・終了の永続化",
+  "summary": "[Task](../tasks/TASK.lifecycle-core-09-11-2026.md)の詳細仕様、0.2.0の台帳Schema v2、明示的v1移行、回収lease、取消し・停止確認、終了記録、診断CLI、監督レビューと実DB試験。外部provider、OS/IAM認証、実際の子処理の停止、全MVP受入・公開は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/lifecycle-core-20260911.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "docs/acceptance/INDEX.md",
+    "docs/evidence/README.md",
+    "docs/reviews/lifecycle-core-20260911.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f78e7eb82b2c67f5a2e5667b873df8021fd251ca193ff3113aad0d7e552c1003"
+}

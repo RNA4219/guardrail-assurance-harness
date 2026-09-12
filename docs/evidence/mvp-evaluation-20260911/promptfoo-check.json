@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T08:01:45.194375+00:00",
+  "passed": true,
+  "checks": {
+    "normal_mapped": true,
+    "execution_error_mapped": true,
+    "sources_unchanged": true
+  },
+  "records": [
+    {
+      "scenario": "normal",
+      "process_exit_code": 0,
+      "normalized": {
+        "schema_version": 1,
+        "kind": "normalized_result",
+        "binding": {
+          "run_id": "run-1",
+          "operation_id": "operation-1",
+          "owner_epoch": 2,
+          "contract_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "target_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "obligation_id": "obligation-1",
+          "case_id": "pf-normal",
+          "trial_id": "trial-1",
+          "stage_id": "stage-1",
+          "fixture_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "adapter_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "policy_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "evaluator_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "isolation_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "mode": "llm",
+        "observation": null,
+        "mutation_outcome": null,
+        "detection": "allow",
+        "deviation": false,
+        "error_class": null,
+        "raw_digest": "76c4869122d5858957eb48bc06f7d4956f72a20bdcafa3d23e77900f2c2c2d78"
+      },
+      "files": {
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/normal/config.json": "1b9e19a8f75adb15f76311490c7ae5c9a7d04ae451d5b72e7f297a88c4e0c2ef",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/normal/prepared.json": "762d0619959adafe5c32b3bd45c2ffc22ffbe67f5b29d92e4dc79b9206adb194",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/normal/provider.cjs": "184a6fb706a33aa5ce8a42f2a06d5cc7197b8655cefb47ecb0b44e241b7c5cd7",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/normal/receipt.json": "71c804070c438f3c4399b3ead18e629a6f4a506fe200540e334a3f70558c5cfc",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/normal/result.json": "76c4869122d5858957eb48bc06f7d4956f72a20bdcafa3d23e77900f2c2c2d78"
+      }
+    },
+    {
+      "scenario": "execution_error",
+      "process_exit_code": 100,
+      "normalized": {
+        "schema_version": 1,
+        "kind": "normalized_result",
+        "binding": {
+          "run_id": "run-1",
+          "operation_id": "operation-1",
+          "owner_epoch": 2,
+          "contract_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "target_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "obligation_id": "obligation-1",
+          "case_id": "pf-execution-error",
+          "trial_id": "trial-1",
+          "stage_id": "stage-1",
+          "fixture_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "adapter_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "policy_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "evaluator_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "isolation_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "mode": null,
+        "observation": null,
+        "mutation_outcome": "ERROR",
+        "detection": null,
+        "deviation": null,
+        "error_class": "EXECUTION_FAILURE",
+        "raw_digest": null
+      },
+      "files": {
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/execution_error/config.json": "0e3c3424bcfb3da8491fa6068d3a317384d3121bae920b0699e26992586cb567",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/execution_error/prepared.json": "f0a71b34e1cf708a9a62c4ede06c7a8a7001e6a64c6ed4b3a0abdabe19205948",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/execution_error/provider.cjs": "9c800e42f9bda3359b312dc116b3fd6d20ba1517d4e51bdeb1aa2076c10fa4a4",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/execution_error/receipt.json": "178d530af52d187fd03a4eef38648e348172a861ad4b4ad31230f3687151177b",
+        ".ga/mvp-evaluation-20260911/promptfoo-runtime-02/execution_error/result.json": "b3c27d4ffacf5fc51e91aaf43b071a0409ba78bbe8cf164d295f8bf7813c7244"
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/gah/promptfoo_adapter.py": "a30c924729aa30cc7f17e561106030c6c77913629e6fe20d34d7d67642f552e3",
+    "src/gah/normalized.py": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+    "tests/test_promptfoo_adapter.py": "9c9846f06239200327d94e9a247b1c50aedd38c9ac13f67f5430f9e7695a7641",
+    ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/promptfoo/dist/src/entrypoint.js": "b1f2d2cbe07ef2308d6e3eea067789d86c4e97d664636f3d1250f74a8ac04003",
+    ".ga/mvp-evaluation-20260911/promptfoo-runtime/package-lock.json": "01be286b9c185d0a067a6a5c75c46f9e8945dc44eb2a7e2d451b5b6130a934b2"
+  },
+  "promptfoo_version": "0.123.0",
+  "model_calls": 0,
+  "ci_eligible": false,
+  "limitations": [
+    "single_row_profile",
+    "runtime_eval_id_observed_from_process_stdout",
+    "authority_and_registry_adoption_not_connected"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260911-01.md",
+  "role": "acceptance",
+  "title": "Acceptance: 設計初版の再検討",
+  "summary": "[Task](../tasks/TASK.design-review-09-11-2026.md)の設計文書改訂、6件の指摘の処遇、追加の25例と既存43例の整合。製品実装・状態機械の動作試験・実モデルの性能測定は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/design-review-20260911.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "29a6adfeb279d77fdc6b2d4722852a7ce9cd2aa6b36c7e315a9637abbc84bead"
+}

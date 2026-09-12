@@ -1,0 +1,961 @@
+{
+  "checked_at": "2026-09-10T23:47:12.649158+00:00",
+  "status": "pass",
+  "scope": "静的・算術照合。製品runtime・状態機械・性能・手動ケースは未実行。",
+  "checks": {
+    "unchanged_docs/requirements.md": true,
+    "unchanged_docs/acceptance-criteria.md": true,
+    "unchanged_docs/operating-policy.md": true,
+    "unchanged_docs/contracts/initial-policy.v1.json": true,
+    "unchanged_docs/contracts/decision-examples.v1.json": true,
+    "unchanged_docs/contracts/review-examples.v2.json": true,
+    "requirements_32": true,
+    "acceptance_32": true,
+    "design_mapping_32": true,
+    "oracle_T01": true,
+    "oracle_T02": true,
+    "oracle_T03": true,
+    "oracle_T04": true,
+    "oracle_T05": true,
+    "oracle_T06": true,
+    "oracle_T07": true,
+    "oracle_T08": true,
+    "oracle_T09": true,
+    "oracle_T10": true,
+    "oracle_T11": true,
+    "oracle_T12": true,
+    "oracle_T13": true,
+    "oracle_T14": true,
+    "oracle_F01": true,
+    "oracle_F02": true,
+    "oracle_F03": true,
+    "oracle_F04": true,
+    "oracle_F05": true,
+    "oracle_F06": true,
+    "oracle_W01": true,
+    "oracle_W02": true,
+    "oracle_W03": true,
+    "oracle_B01": true,
+    "oracle_B02": true,
+    "oracle_B03": true,
+    "oracle_B04": true,
+    "oracle_B05": true,
+    "oracle_C01": true,
+    "oracle_C02": true,
+    "oracle_C03": true,
+    "oracle_C04": true,
+    "oracle_C05": true,
+    "oracle_C06": true,
+    "oracle_C07": true,
+    "oracle_C08": true,
+    "oracle_C09": true,
+    "oracle_C10": true,
+    "oracle_P01": true,
+    "oracle_P02": true,
+    "oracle_P03": true,
+    "oracle_P04": true,
+    "oracle_P05": true,
+    "43_unique_oracle_examples": true,
+    "no_product_files_added": true,
+    "new_S01": true,
+    "new_S02": true,
+    "new_S03": true,
+    "new_S04": true,
+    "new_S05": true,
+    "new_S06": true,
+    "new_S07": true,
+    "new_S08": true,
+    "new_R01": true,
+    "new_R02": true,
+    "new_R03": true,
+    "new_R04": true,
+    "new_Y01": true,
+    "new_Y02": true,
+    "new_Y03": true,
+    "new_Y04": true,
+    "new_G01": true,
+    "new_G02": true,
+    "new_G03": true,
+    "new_G04": true,
+    "new_D01": true,
+    "new_D02": true,
+    "new_D03": true,
+    "new_D04": true,
+    "new_D05": true,
+    "new_cases_25": true,
+    "artifact_status": true,
+    "v3_oracle_B01": true,
+    "v3_trace_B01": true,
+    "v3_oracle_B02": true,
+    "v3_trace_B02": true,
+    "v3_oracle_B03": true,
+    "v3_trace_B03": true,
+    "v3_oracle_B04": true,
+    "v3_trace_B04": true,
+    "v3_oracle_B05": true,
+    "v3_trace_B05": true,
+    "v3_oracle_B06": true,
+    "v3_trace_B06": true,
+    "v3_oracle_A01": true,
+    "v3_trace_A01": true,
+    "v3_oracle_A02": true,
+    "v3_trace_A02": true,
+    "v3_oracle_A03": true,
+    "v3_trace_A03": true,
+    "v3_oracle_A04": true,
+    "v3_trace_A04": true,
+    "v3_oracle_A05": true,
+    "v3_trace_A05": true,
+    "v3_oracle_A06": true,
+    "v3_trace_A06": true,
+    "v3_oracle_R01": true,
+    "v3_trace_R01": true,
+    "v3_oracle_R02": true,
+    "v3_trace_R02": true,
+    "v3_oracle_R03": true,
+    "v3_trace_R03": true,
+    "v3_oracle_R04": true,
+    "v3_trace_R04": true,
+    "v3_oracle_R05": true,
+    "v3_trace_R05": true,
+    "v3_oracle_R06": true,
+    "v3_trace_R06": true,
+    "v3_oracle_C01": true,
+    "v3_trace_C01": true,
+    "v3_oracle_C02": true,
+    "v3_trace_C02": true,
+    "v3_oracle_C03": true,
+    "v3_trace_C03": true,
+    "v3_oracle_C04": true,
+    "v3_trace_C04": true,
+    "v3_oracle_D01": true,
+    "v3_trace_D01": true,
+    "v3_oracle_D02": true,
+    "v3_trace_D02": true,
+    "v3_oracle_D03": true,
+    "v3_trace_D03": true,
+    "v3_oracle_D04": true,
+    "v3_trace_D04": true,
+    "v3_oracle_T01": true,
+    "v3_trace_T01": true,
+    "v3_oracle_T02": true,
+    "v3_trace_T02": true,
+    "v3_oracle_T03": true,
+    "v3_trace_T03": true,
+    "v3_oracle_T04": true,
+    "v3_trace_T04": true,
+    "v3_oracle_T05": true,
+    "v3_trace_T05": true,
+    "v3_oracle_T06": true,
+    "v3_trace_T06": true,
+    "new_cases_32": true,
+    "product_cases_not_run": true,
+    "total_examples_100": true,
+    "terminal_truth_1": true,
+    "terminal_truth_2": true,
+    "terminal_truth_3": true,
+    "terminal_truth_4": true,
+    "terminal_truth_5": true,
+    "terminal_truth_6": true,
+    "terminal_truth_7": true,
+    "terminal_truth_8": true,
+    "terminal_truth_9": true,
+    "terminal_truth_10": true,
+    "terminal_truth_11": true,
+    "terminal_truth_12": true,
+    "terminal_truth_13": true,
+    "terminal_truth_14": true,
+    "terminal_truth_15": true,
+    "terminal_truth_16": true,
+    "terminal_truth_17": true,
+    "terminal_truth_18": true,
+    "terminal_truth_19": true,
+    "terminal_truth_20": true,
+    "terminal_truth_21": true,
+    "terminal_truth_22": true,
+    "terminal_truth_23": true,
+    "terminal_truth_24": true,
+    "terminal_truth_25": true,
+    "terminal_truth_26": true,
+    "terminal_truth_27": true,
+    "terminal_truth_28": true,
+    "terminal_truth_29": true,
+    "terminal_truth_30": true,
+    "terminal_truth_31": true,
+    "terminal_truth_32": true,
+    "risk_score_SR1": true,
+    "risk_score_SR2": true,
+    "risk_score_SR3": true,
+    "risk_score_SR4": true,
+    "risk_score_SR5": true,
+    "risk_score_SR6": true,
+    "version_docs/design.md": true,
+    "version_docs/spec.md": true,
+    "version_docs/contracts/evaluation-contract.md": true,
+    "version_docs/contracts/evaluation-design.md": true,
+    "version_docs/contracts/lifecycle-contract.md": true,
+    "lifecycle_sections": true,
+    "manual_gate_not_run": true,
+    "qwen_completed": true,
+    "qwen_output_hash": true,
+    "qwen_source_docs/design.md": true,
+    "qwen_source_docs/contracts/evaluation-contract.md": true,
+    "snapshot_AGENTS.md": true,
+    "snapshot_README.md": true,
+    "snapshot_HUB.codex.md": true,
+    "snapshot_docs/design.md": true,
+    "snapshot_docs/spec.md": true,
+    "snapshot_docs/contracts/README.md": true,
+    "snapshot_docs/contracts/evaluation-contract.md": true,
+    "snapshot_docs/contracts/evaluation-design.md": true,
+    "snapshot_docs/contracts/initial-policy.v1.json": true,
+    "snapshot_docs/contracts/decision-examples.v1.json": true,
+    "snapshot_docs/contracts/review-examples.v2.json": true,
+    "snapshot_docs/ADR/0002-contract-boundaries.md": true,
+    "snapshot_docs/open-questions.md": true,
+    "snapshot_docs/requirements.md": true,
+    "snapshot_docs/acceptance-criteria.md": true,
+    "snapshot_docs/operating-policy.md": true,
+    "snapshot_docs/tasks/README.md": true,
+    "snapshot_docs/reviews/README.md": true,
+    "snapshot_orchestration/development-plan.md": true,
+    "snapshot_CHANGELOG.md": true
+  },
+  "findings": 6,
+  "old_examples": 68,
+  "new_examples": 32,
+  "total_examples": 100,
+  "supplemental_terminal_truth_rows": [
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        0
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        1
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 1,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        0
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        1
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 1,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        0
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        1
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 1,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        0
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "COMPLETED",
+        1
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 1,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        null,
+        null
+      ],
+      "calculated": {
+        "terminal": false,
+        "execution_status": null,
+        "exit_code": null,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        null,
+        null
+      ],
+      "calculated": {
+        "terminal": false,
+        "execution_status": null,
+        "exit_code": null,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "CANCELLED",
+        3
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "CANCELLED",
+        "exit_code": 3,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "CANCELLED",
+        3
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "CANCELLED",
+        "exit_code": 3,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "CANCELLED",
+        3
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "CANCELLED",
+        "exit_code": 3,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "CANCELLED",
+        3
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "CANCELLED",
+        "exit_code": 3,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": true,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected_status_and_exit": [
+        "FAILED",
+        2
+      ],
+      "calculated": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    }
+  ],
+  "product_tests": "NOT_RUN",
+  "remote_validation": "NOT_RUN",
+  "source_sha256": {
+    "AGENTS.md": "9c00c1bd10213a9ab9e3192ea63f20c66e163a2832b095805cb544ccd8c7971f",
+    "README.md": "99b1c4b572fff3fc31fe155636d1c32e37f1258ee187859e067a1764ae8469b9",
+    "HUB.codex.md": "ed2cb916e1465faafc833f5668f22394c450208a56574001654828ae7d3a85f2",
+    "docs/design.md": "1567b2ebaea5ad6fca933c9b9d581485941cbc41e04f0b7fa69fbb680d088e65",
+    "docs/spec.md": "1c3270d8c3b63aa6f49bb45e8dae9535a5ad716cc97928f3da11ce5b51a1493b",
+    "docs/contracts/README.md": "e1cdd203b07a3b9599ce9221ff728e55538ebb562dc07559f35ed6f7e0adf236",
+    "docs/contracts/evaluation-contract.md": "dfb779810b75d95ccc6c276d8d69e781d5d6073b67e7c85882a2a000f52a7495",
+    "docs/contracts/evaluation-design.md": "f1765bef7ae1d0606eeb22025fceac49c5965bfd16bd8f1583d049dacc8b60f9",
+    "docs/contracts/initial-policy.v1.json": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+    "docs/contracts/decision-examples.v1.json": "5e4a0849d13939245ac2a6cd6abd5b655b9cf2f0a223c9c692fe730f742e9642",
+    "docs/contracts/review-examples.v2.json": "85591a676583d0732e71759a676258b67254072bc44702fb1697f506564c583c",
+    "docs/ADR/0002-contract-boundaries.md": "cc8ee87490775991446e7db97452034948026e0cc5ae49f4e5d51ededa437c3e",
+    "docs/open-questions.md": "2552e8a5ae80d6c7cd23ba5331157d62d0c75606910d7f04e972ab2fac8a57af",
+    "docs/requirements.md": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98",
+    "docs/acceptance-criteria.md": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa",
+    "docs/operating-policy.md": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025",
+    "docs/tasks/README.md": "e496ea14916017220399a76421b995dd6bc56905be1bbc64026a426c19c7970c",
+    "docs/reviews/README.md": "819332ecc49b1cc051d045f950d7d849bc0e9a253fbc726e641fe0471a31dab3",
+    "orchestration/development-plan.md": "e5a11058cef2345386a6b40d277769f9833c0abb2384a9e20ef4a75b38a447dc",
+    "CHANGELOG.md": "861ffbd159992fc0e7484a1520b195398a57581cd0d6958d844f4410d8903f59",
+    "docs/contracts/lifecycle-contract.md": "dfd7d2b14c2b0728f20cb162370c25510d835c1eddb8670d15b8d8416b1020e2",
+    "docs/contracts/state-examples.v3.json": "2857e6688e9bfb425a2a4d01fb9a9a65de0ba250419f0b7c68f8b4c054fb1539",
+    "docs/reviews/state-review-20260911.md": "04f0247c92fd930cfdf5a513db22b65e46a81af9636b0aa01a1c8ec8d5edaea2",
+    "docs/tasks/TASK.state-review-09-11-2026.md": "89c96af67c472fefc19d93d069fbd656e5eba984b0eed4d6726642560cafa89c",
+    "docs/acceptance/AC-20260911-02.md": "4e240d991eb76ba84bed0e66ced19fa7e0cce3997163d83be01403f79b56ab2a"
+  },
+  "reused_checker_sha256": {
+    ".ga\\contract-design-20260910\\verify_design.py": "a6a6df0e03bf3dd4113a55c5bf9a620a1744a6b5c0fbd106a0725925af116bb7",
+    ".ga\\design-review-20260911\\verify_review.py": "45491f5af72b8723098525764c0021fac8ff7a438c3cfdd3127b03783f6b9ac9"
+  },
+  "diff_sha256": "0e7eb11b3b52ecd330796bd8e9349062f607e1445ee769eae916cd9efc2a5276",
+  "checker_sha256": "57d11fe234c26df3050eb367443f57026dc76515b0ef3490d148ceec6bc4c930",
+  "qwen": {
+    "requested_at": "2026-09-10T23:28:52.152125+00:00",
+    "source_sha256": {
+      "docs/design.md": "32ff875d66a59193d058a23da360fa86f0b5a9660202e6c8acf01d7d6f8ac6f2",
+      "docs/contracts/evaluation-contract.md": "6a9402e821c089fde943836a19087f2d45ef6226ba3721067efb93374222e1ca"
+    },
+    "product_execution": false,
+    "model": "qwen3.8-flash-next",
+    "usage": {
+      "prompt_tokens": 6517,
+      "total_tokens": 6632,
+      "completion_tokens": 115,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "finish_reason": "stop",
+    "status": "complete",
+    "output_sha256": "82073306e1218da5f2849e8a4d9e8ea83c9b19a8a579319c29d169b4cea204db",
+    "completed_at": "2026-09-10T23:28:59.555240+00:00",
+    "elapsed_seconds": 7.39
+  },
+  "independent_product_validation": false
+}

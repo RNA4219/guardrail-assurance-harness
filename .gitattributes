@@ -1,0 +1,4 @@
+# Keep source, fixture and evidence bytes identical across clones.
+# Runtime locks and evidence manifests contain SHA-256 hashes of raw bytes.
+# New text is formatted by .editorconfig; Git must not rewrite existing data.
+* -text

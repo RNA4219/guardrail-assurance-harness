@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "commands": [
+    {
+      "action": "generate",
+      "exit_code": 0,
+      "output": "{\n  \"changed\": true,\n  \"generation\": \"00038\",\n  \"nodes\": 104\n}\n"
+    },
+    {
+      "action": "check",
+      "exit_code": 0,
+      "output": "{\n  \"schema_version\": 1,\n  \"checked_at\": \"2026-09-11T07:21:07+00:00\",\n  \"scope\": \"local workflow adoption\",\n  \"python\": \"3.12.14\",\n  \"status\": \"pass\",\n  \"checks\": {\n    \"adoption_tier_3\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"downstream_onboarding\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"documents\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"acceptance_format\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"task_acceptance\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"generated_artifacts\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"birdseye_freshness\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"ci_gate_matrix\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"checker_stages\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"branch_desired_configuration\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"local_security_posture\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    },\n    \"source_provenance\": {\n      \"status\": \"pass\",\n      \"errors\": []\n    }\n  },\n  \"remote_validation\": \"not_run\",\n  \"product_acceptance\": \"not_run\"\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "scope": "利用者指定外部参照元の固定版の静的確認。上流コード・テストは未実行。GAH製品への移植は未実施",
+  "repository": "[参照先非掲載]",
+  "commit": "nonpublic-revision",
+  "branch_at_inspection": "main",
+  "observed_at": "2026-09-10T02:27:20.579622+00:00",
+  "package_version": "0.1.0",
+  "license_metadata": {
+    "text": "Proprietary"
+  },
+  "license_files": [],
+  "tracked_files": 23,
+  "worktree_clean": true,
+  "reviewed_files": [
+    {
+      "path": "README.md",
+      "git_blob": "8962c5a11a5a1b310b24a979d6561c64be95cfbb",
+      "sha256_raw": "4c9af4b01bf45cb6712e7872d64c1f9ee7c5c1d4d7a5d3e8dc3748715c6029a5"
+    },
+    {
+      "path": "HUB.codex.md",
+      "git_blob": "bfa8d6bd92e37b639e3a45ec0eec55eab078299c",
+      "sha256_raw": "d4f90c0a98b770986f16eb1a87eba13ccc9bc429b06e362ac89a1c8f1b7b0816"
+    },
+    {
+      "path": "AGENTS.md",
+      "git_blob": "126bcc20c2ae262768d01f3388a942db7b0ca345",
+      "sha256_raw": "ffdfbefbd07244580c0addb6e090510aabda981c827240ac910f1c86b4f41ffd"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "git_blob": "ab8ad855e43586cf75ee787fd8e2fbba6a8640b3",
+      "sha256_raw": "cf0ba5d403f010c78b25c7a2dcfa0218aed156a0ad0a057c55b83ed094d9543c"
+    },
+    {
+      "path": "EVALUATION.md",
+      "git_blob": "de15bd8813b6468d591655386b73669cf5ccc2dc",
+      "sha256_raw": "132d6a75e2e0e5059e956522a77fcb8b94c887688570ebb9fb82e444725781e9"
+    },
+    {
+      "path": "pyproject.toml",
+      "git_blob": "e394e8953a50d0b327a6032e0a55f8e529b879da",
+      "sha256_raw": "0da7aef495e792a969577abc875fbe0ad04cc378d84e8dbf3db571b9481902de"
+    },
+    {
+      "path": "docs/workflow-cookbook-mapping.md",
+      "git_blob": "0378f86ef807099aefcabb8de12b8ded101d4f0b",
+      "sha256_raw": "abcc3ae347a9b18596108aca8ac46015cf167c3720b1cef00397c61f75aa3eb1"
+    },
+    {
+      "path": "src/private_reference/__init__.py",
+      "git_blob": "683d249c9985ca7f47ef51c78157d6804fbce181",
+      "sha256_raw": "768112229e329c52b9ac24bb9b2a6b77ef9bb50444033e53cce1e4add1e22072",
+      "definitions": []
+    },
+    {
+      "path": "src/private_reference/campaign.py",
+      "git_blob": "4a4d8576dcc941580294a3cf7b70a86e5c44f3b4",
+      "sha256_raw": "0f7c136c245faa78222944a97813cd356488496770e87a7ae775dc414793ea0e",
+      "definitions": [
+        {
+          "name": "CampaignError",
+          "line": 27,
+          "end_line": 28
+        },
+        {
+          "name": "_parse_utc",
+          "line": 31,
+          "end_line": 44
+        },
+        {
+          "name": "_format_utc",
+          "line": 47,
+          "end_line": 48
+        },
+        {
+          "name": "_as_dict",
+          "line": 51,
+          "end_line": 54
+        },
+        {
+          "name": "build_manifest",
+          "line": 57,
+          "end_line": 174
+        },
+        {
+          "name": "validate_manifest",
+          "line": 177,
+          "end_line": 295
+        },
+        {
+          "name": "compute_status",
+          "line": 298,
+          "end_line": 380
+        },
+        {
+          "name": "_canonical_json",
+          "line": 383,
+          "end_line": 384
+        },
+        {
+          "name": "initialize_campaign",
+          "line": 387,
+          "end_line": 434
+        },
+        {
+          "name": "checkpoint_manifest",
+          "line": 437,
+          "end_line": 510
+        },
+        {
+          "name": "project_active_slots",
+          "line": 513,
+          "end_line": 557
+        }
+      ]
+    },
+    {
+      "path": "src/private_reference/cli.py",
+      "git_blob": "0792881be2b23d9ea57c496a72efcc15a32a0637",
+      "sha256_raw": "5bd4379722502671634c9b820ac87a6da49be161d9694830b30dca9fd734464f",
+      "definitions": [
+        {
+          "name": "_json_dump",
+          "line": 19,
+          "end_line": 20
+        },
+        {
+          "name": "_parser",
+          "line": 23,
+          "end_line": 63
+        },
+        {
+          "name": "_load_json",
+          "line": 66,
+          "end_line": 67
+        },
+        {
+          "name": "main",
+          "line": 70,
+          "end_line": 143
+        }
+      ]
+    },
+    {
+      "path": "schemas/campaign-manifest.schema.json",
+      "git_blob": "ad745cacfdc8173cf62137b3eb70574b94e9a089",
+      "sha256_raw": "f824930b2df37015b43b5eebe67a74ec509986df3d6a99c9ac124cc8e833481e"
+    },
+    {
+      "path": "tests/test_campaign.py",
+      "git_blob": "64f4adb69770e2ca265388c282f95b5c1e238ca0",
+      "sha256_raw": "4e865396aaeabc2647a92018d604778ddbc341f96b2bcc57f0986c0fd1658691",
+      "definitions": [
+        {
+          "name": "make_manifest",
+          "line": 24,
+          "end_line": 33
+        },
+        {
+          "name": "test_build_manifest_is_valid_and_outcome_first",
+          "line": 36,
+          "end_line": 45
+        },
+        {
+          "name": "test_validate_rejects_deadline_before_start_and_missing_lane",
+          "line": 48,
+          "end_line": 56
+        },
+        {
+          "name": "test_status_escalates_when_first_actual_is_late",
+          "line": 59,
+          "end_line": 66
+        },
+        {
+          "name": "test_status_escalates_on_gate_budget_and_generation_cap",
+          "line": 69,
+          "end_line": 77
+        },
+        {
+          "name": "test_status_holds_on_fault_and_freezes_near_deadline",
+          "line": 80,
+          "end_line": 89
+        },
+        {
+          "name": "test_initialize_campaign_creates_reusable_workspace",
+          "line": 92,
+          "end_line": 111
+        },
+        {
+          "name": "test_checkpoint_is_monotonic_and_atomic",
+          "line": 114,
+          "end_line": 144
+        },
+        {
+          "name": "test_portfolio_projection_detects_protected_displacement",
+          "line": 147,
+          "end_line": 184
+        },
+        {
+          "name": "test_cli_init_validate_and_status",
+          "line": 187,
+          "end_line": 228
+        },
+        {
+          "name": "test_build_manifest_rejects_invalid_arguments",
+          "line": 245,
+          "end_line": 258
+        },
+        {
+          "name": "test_validate_reports_structural_and_field_errors",
+          "line": 261,
+          "end_line": 307
+        },
+        {
+          "name": "test_status_handles_invalid_expired_compress_and_release_ready",
+          "line": 310,
+          "end_line": 333
+        },
+        {
+          "name": "test_initialize_and_checkpoint_reject_unsafe_updates",
+          "line": 336,
+          "end_line": 382
+        },
+        {
+          "name": "test_portfolio_rejects_invalid_inputs",
+          "line": 385,
+          "end_line": 395
+        },
+        {
+          "name": "test_cli_checkpoint_portfolio_text_status_and_error",
+          "line": 398,
+          "end_line": 475
+        }
+      ]
+    },
+    {
+      "path": "tests/test_schema.py",
+      "git_blob": "1f258ba8f28ed2e0a7a8a459b16dbf59a5f48aaa",
+      "sha256_raw": "891e3b29df87ae06de9e0dd909e635656ccbede80b4d2085ee6fdc5e9b7489cf",
+      "definitions": [
+        {
+          "name": "test_schema_is_valid_and_accepts_builder_output",
+          "line": 16,
+          "end_line": 29
+        },
+        {
+          "name": "test_template_matches_schema_and_runtime_contract",
+          "line": 32,
+          "end_line": 37
+        }
+      ]
+    }
+  ],
+  "mapping": "docs/reference-boundary.md",
+  "upstream_tests": "not_run",
+  "gah_product_import": "not_run",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

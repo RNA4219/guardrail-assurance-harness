@@ -1,0 +1,51 @@
+{
+  "id": "docs/reference-boundary.md",
+  "role": "reference-boundary",
+  "title": "独立設計と情報非掲載の方針",
+  "summary": "利用者の指示により、外部のクローズド資産をGAHへ直接利用せず、参照元の名称も掲載しない。一般的な運用の考え方だけを参考にし、以前の「転用対応表」「移植設計」の方針は取り消す。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/operating-policy.md",
+    "docs/requirements.md",
+    "docs/tasks/TASK.reference-anonymization-09-10-2026.md",
+    "docs/tasks/TASK.reference-boundary-09-10-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "CHANGELOG.md",
+    "GUARDRAILS.md",
+    "HUB.codex.md",
+    "README.md",
+    "datasets/README.md",
+    "docs/acceptance-criteria.md",
+    "docs/acceptance/AC-20260910-08.md",
+    "docs/acceptance/AC-20260910-09.md",
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/oss-publication.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md",
+    "docs/tasks/TASK.reference-anonymization-09-10-2026.md",
+    "docs/tasks/TASK.reference-boundary-09-10-2026.md",
+    "docs/tasks/TASK.reference-confirmation-09-10-2026.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c653ba25de833fde5139d3b877defaf6e736f0555edfcbb88ea649a6db6eae0b"
+}

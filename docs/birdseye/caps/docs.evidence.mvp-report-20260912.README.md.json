@@ -1,0 +1,35 @@
+{
+  "id": "docs/evidence/mvp-report-20260912/README.md",
+  "role": "evidence",
+  "title": "通常runの要約CLIの証跡",
+  "summary": "[統合記録](verification-v2.json)に、直前の[全体回帰534件](../mvp-cancellation-20260912/verification.json)と、 追加した[専用7テスト](unit-check.json)を区別して記録した。追加CLIは全体回帰の実行後に作成したため、 7件は別の対象検証である。実DBを使った[製品CLIの15項目](runtime-check.json)も成功した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md",
+    "docs/evidence/mvp-report-20260912/regression-runtime-report.md",
+    "docs/reviews/mvp-report-20260912.md",
+    "docs/run-report-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/detail-spec.md",
+    "docs/evidence/README.md",
+    "docs/open-questions.md",
+    "docs/reviews/mvp-report-20260912.md",
+    "docs/run-report-detail-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f30b0f6d850df673359f02053cdc0b672697fbf02f21c107b7eccc2472f41633"
+}

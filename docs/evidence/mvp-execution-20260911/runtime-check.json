@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "suite": "full",
+  "fixture_only": true,
+  "full_mvp_accepted": false,
+  "passed": true,
+  "rejected_payload_absent": true,
+  "expected_count": 36,
+  "executed_count": 36,
+  "checks": [
+    {
+      "scenario": "probe:isolation",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": null
+    },
+    {
+      "scenario": "constraint:C01:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C01:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C02:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C02:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C03:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C03:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C04:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C04:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C05:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C05:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C06:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C06:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C07:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C07:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C08:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C08:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C09:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C09:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "constraint:C10:good",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "PASS"
+    },
+    {
+      "scenario": "constraint:C10:bad",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "FAIL"
+    },
+    {
+      "scenario": "mutation:F01:healthy",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "KILLED"
+    },
+    {
+      "scenario": "mutation:F01:decayed",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "SURVIVED"
+    },
+    {
+      "scenario": "mutation:F02:healthy",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "KILLED"
+    },
+    {
+      "scenario": "mutation:F02:decayed",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "SURVIVED"
+    },
+    {
+      "scenario": "mutation:F03:healthy",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "KILLED"
+    },
+    {
+      "scenario": "mutation:F03:decayed",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "SURVIVED"
+    },
+    {
+      "scenario": "mutation:F04:healthy",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "KILLED"
+    },
+    {
+      "scenario": "mutation:F04:decayed",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "SURVIVED"
+    },
+    {
+      "scenario": "mutation:F05:healthy",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "KILLED"
+    },
+    {
+      "scenario": "mutation:F05:decayed",
+      "passed": true,
+      "status": "COMPLETED",
+      "value": "SURVIVED"
+    },
+    {
+      "scenario": "probe:oversized",
+      "passed": true,
+      "status": "FAILED",
+      "value": "OUTPUT_TOO_LARGE"
+    },
+    {
+      "scenario": "probe:malformed",
+      "passed": true,
+      "status": "FAILED",
+      "value": "OUTPUT_REJECTED"
+    },
+    {
+      "scenario": "probe:rejected_marker",
+      "passed": true,
+      "status": "FAILED",
+      "value": "OUTPUT_REJECTED"
+    },
+    {
+      "scenario": "probe:crash",
+      "passed": true,
+      "status": "FAILED",
+      "value": "EXECUTION_FAILURE"
+    },
+    {
+      "scenario": "probe:child_timeout",
+      "passed": true,
+      "status": "TIMEOUT",
+      "value": "TIMEOUT"
+    }
+  ],
+  "pending_count": 0,
+  "image_id": "sha256:0d976e4fc7e42ad0db3e5f0e4e8523113d4510eded42ded0970b887f7afa8816",
+  "source_sha256": {
+    "src/gah/docker_runner.py": "9aa82169200c7f4ef9a0551bb1e76d72884cb5c210386147402670533c4eb870",
+    "src/gah/normalized.py": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+    "src/gah/execution_journal.py": "8b7eeb2ab0998bb4466603813dca9721b5097b631c9fd35cc21afb47eaabf9f0",
+    "fixtures/runtime/fixture_worker.py": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+    "config/fixture-runtime.lock.json": "740845f15dbf01fe29716451e157383547771d414ef0d24c0dc9251e255443b9",
+    "tools/verify_fixture_runtime.py": "adc535123e30681f2b4e2f2a4415aff6d89dbb8e6ab195f6e541aad75fbe7e0f"
+  }
+}

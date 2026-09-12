@@ -1,0 +1,26 @@
+{
+  "id": "docs/evidence/mvp-adoption-20260911/README.md",
+  "role": "evidence",
+  "title": "固定UC-CI初回baselineの接続証跡",
+  "summary": "[統合検証](verification.json)は、固定15件の実Docker実行を同DBの精算・Evidence・初回baseline採択へ結んだ工程の記録である。 全MVP、通常CI、契約更新、UC-LLMの認証・モデル資源管理は未完了で、releaseはno_go、ci_eligibleはfalseを維持する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-adoption-20260911.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/evidence/README.md",
+    "docs/reviews/mvp-adoption-20260911.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2381701d84e69fa8293d528ce19977b217659a7787cf329e24bd6f9f1c0e45e9"
+}

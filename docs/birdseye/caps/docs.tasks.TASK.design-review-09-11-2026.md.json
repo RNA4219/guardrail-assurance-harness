@@ -1,0 +1,28 @@
+{
+  "id": "docs/tasks/TASK.design-review-09-11-2026.md",
+  "role": "tasks",
+  "title": "Task: 設計初版の再検討",
+  "summary": "設計v0.1を要求と反例から見直し、誤った成功や実装解釈の分岐を防ぐ改訂へ反映する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/design-review-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "1f284cb77d92c973d28396e314c683a283d06fe17d912fdc7e677224156875bc"
+}

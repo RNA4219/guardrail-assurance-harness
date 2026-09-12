@@ -1,0 +1,22 @@
+{
+  "id": "docs/ADR/0003-runtime-core.md",
+  "role": "ADR",
+  "title": "ADR 0003: 決定的コアと診断の実装",
+  "summary": "利用者が詳細仕様以降の作成とDGX Qwen/Lunaを使う監督・コードレビューを指示した。製品コードがなかったため、[Task](../tasks/TASK.runtime-core-09-11-2026.md)で、外部実行に依存しない判定と永続台帳を先に実装する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/detail-spec.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "docs/ADR/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b29893af902b9f1a625f45e78d367e50c0d1d56e5034b1331ba2ca2b11c30bc1"
+}

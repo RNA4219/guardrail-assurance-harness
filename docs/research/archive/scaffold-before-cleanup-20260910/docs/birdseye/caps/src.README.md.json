@@ -1,0 +1,20 @@
+{
+  "id": "src/README.md",
+  "role": "src",
+  "title": "製品ソース",
+  "summary": "解析CLI・adapter・再構成処理・Explorerの実装予定領域。現在は未実装。[設計](../docs/design.md) と [開発順序](../orchestration/m0-development.md) に従い、責務ごとのmoduleを実装Taskで追加する。ワークフロー補助はtoolsに置く。",
+  "public_api": [],
+  "deps_out": [
+    "docs/design.md",
+    "orchestration/m0-development.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "25ca5768fac7c92e34fa091722f82a552d800c5a83e18be0d2b9607a7123b2d1"
+}

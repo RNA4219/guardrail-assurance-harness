@@ -1,0 +1,35 @@
+{
+  "id": "docs/regression-ci-detail-spec.md",
+  "role": "regression-ci-detail-spec",
+  "title": "固定UC-CIの通常run・成果物・CI利用仕様",
+  "summary": "[baseline 1→2の更新](baseline-refresh-detail-spec.md)後も、通常contract 2のrunは保存されたbaseline 1を完全参照で照合する。最新pointerへの自動置換は行わない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/auth-adoption-detail-spec.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/mvp-completion-audit.md",
+    "docs/run-cancellation-detail-spec.md",
+    "docs/run-recovery-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/detail-spec.md",
+    "docs/evidence/mvp-regression-20260912/README.md",
+    "docs/run-cancellation-detail-spec.md",
+    "docs/run-report-detail-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "05abe9b2bc788df8eb0615877079debacc540287bbeb018fc9e9ff8b97ff7d90"
+}

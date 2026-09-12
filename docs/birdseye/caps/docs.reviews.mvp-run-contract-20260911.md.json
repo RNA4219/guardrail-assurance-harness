@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/mvp-run-contract-20260911.md",
+  "role": "reviews",
+  "title": "評価契約・実行開始・資源管理の監督記録",
+  "summary": "[全MVP Task](../tasks/TASK.mvp-completion-09-11-2026.md)の一工程として、[詳細仕様](../run-contract-detail-spec.md)から初回評価契約の採択、実行計画、同DBでの開始・全資源予約、固定fixtureの実行と停止/精算を接続した。全MVPの合格を出すレビューではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/run-contract-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "60854e247abc57876077dd42ef1ab64378b0f35c9c6f0c960c368293ab884a98"
+}

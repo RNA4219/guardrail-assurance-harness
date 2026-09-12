@@ -1,0 +1,35 @@
+---
+intent_id: INT-REPLACE
+owner: your-handle
+status: active
+last_reviewed_at: YYYY-MM-DD
+next_review_due: YYYY-MM-DD
+template_version: 1.0.0
+---
+
+# Agent Hub
+
+## Purpose
+
+- Describe the repository entry points for human and agent contributors.
+- Route tasks to the smallest relevant source document before implementation.
+- Keep repo-specific guidance here; link to upstream workflow-cookbook for shared policy.
+
+## Read Order
+
+1. `README.md`
+2. `BLUEPRINT.md`
+3. `RUNBOOK.md` if operational steps are needed
+4. `EVALUATION.md` before final validation
+
+## Task Routing
+
+| Request Type | Start Here | Notes |
+| --- | --- | --- |
+| Scope or intent clarification | `BLUEPRINT.md` | Confirm in/out boundaries first. |
+| Implementation or maintenance | `RUNBOOK.md` | Follow local commands and rollback notes. |
+| Quality or release review | `EVALUATION.md` | Verify acceptance and test evidence. |
+
+## Update Rule
+
+- Update this hub when a new primary document or task route is added.

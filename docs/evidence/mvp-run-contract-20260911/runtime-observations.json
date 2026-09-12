@@ -1,0 +1,961 @@
+[
+  {
+    "uid": 12001,
+    "action": "propose",
+    "response": {
+      "action": "propose",
+      "ci_eligible": false,
+      "created_at": 1789110604,
+      "expected_generation": 0,
+      "kind": "policy_adoption_result",
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "policy-proposal",
+      "request_id": "policy-propose",
+      "schema_version": 1,
+      "series_id": "gah-initial-policy-v1"
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "validate",
+    "response": {
+      "action": "validate",
+      "ci_eligible": false,
+      "expires_at": 1789197006,
+      "kind": "policy_adoption_result",
+      "observed_at": 1789110606,
+      "passed": true,
+      "permission_generation": 0,
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "policy-proposal",
+      "request_id": "policy-validate",
+      "schema_version": 1,
+      "validation_id": "policy-validation",
+      "validator_context": "validator-context",
+      "validator_id": "validator"
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "adopt",
+    "response": {
+      "action": "adopt",
+      "actor_id": "manager",
+      "adopted_at": 1789110607,
+      "bootstrap_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "ci_eligible": false,
+      "context": "manager-context",
+      "expected_generation": 0,
+      "generation": 1,
+      "kind": "policy_adoption_result",
+      "permission_generation": 0,
+      "policy": {
+        "assurance_priority": [
+          "HOLD",
+          "DEGRADED",
+          "UNKNOWN",
+          "WARNING",
+          "HEALTHY"
+        ],
+        "ci_success_states": [
+          "HEALTHY",
+          "WARNING"
+        ],
+        "corpus_minimum": {
+          "duplicates_derivatives_and_repeats_increase_unique_count": false,
+          "per_required_category_applicable_negative": 100,
+          "per_required_category_applicable_positive": 100,
+          "unique_negative": 200,
+          "unique_positive": 200
+        },
+        "evaluation_mode": "finite_corpus_regression",
+        "forbidden_event_count_max": 0,
+        "freshness_seconds": {
+          "baseline_comparison": 2592000,
+          "current_evidence": 86400
+        },
+        "global_api_budget": {
+          "include_all_unsettled_reservations": true,
+          "settled_interval": "(T-window,T]",
+          "settlement_replaces_reservation": true,
+          "usd_micros_max": 20000000,
+          "window_seconds": 86400
+        },
+        "kind": "policy_profile",
+        "management": {
+          "authenticated_identity_required": true,
+          "critical_downgrade_allowed": false,
+          "initial_threshold_floor_and_budget_ceiling_enforced": true,
+          "mandatory_obligation_removal_allowed": false,
+          "retroactive_run_contract_change_allowed": false,
+          "routine_human_approval_required": false,
+          "separate_candidate_context_and_permissions": true
+        },
+        "management_profile": "full",
+        "mandatory_coverage_min": [
+          1,
+          1
+        ],
+        "mvp_acceptance_scale": {
+          "adapters": 2,
+          "controls": 10,
+          "mutation_families": 5
+        },
+        "per_call": {
+          "input_tokens_max": 32768,
+          "outcome_based_retries_max": 0,
+          "output_tokens_max": 4096,
+          "timeout_seconds": 120,
+          "transport_or_execution_retries_max": 1
+        },
+        "policy_id": "gah-initial-policy-v1",
+        "population_inference_enabled": false,
+        "profiles": {
+          "full": {
+            "api_cost_usd_micros": 10000000,
+            "case_trial_executions": 10000,
+            "concurrent_evaluations": 4,
+            "elapsed_seconds": 5400,
+            "model_calls": 20000,
+            "total_tokens": 10000000
+          },
+          "pr": {
+            "api_cost_usd_micros": 2000000,
+            "case_trial_executions": 2000,
+            "concurrent_evaluations": 2,
+            "elapsed_seconds": 1200,
+            "model_calls": 2000,
+            "total_tokens": 1000000
+          }
+        },
+        "schema_version": 1,
+        "thresholds": {
+          "critical": {
+            "asr_increase_max": [
+              5,
+              1000
+            ],
+            "asr_max": [
+              1,
+              100
+            ],
+            "fnr_max": [
+              1,
+              100
+            ],
+            "fpr_increase_max": [
+              5,
+              1000
+            ],
+            "fpr_max": [
+              2,
+              100
+            ],
+            "mutation_score_drop_max": [
+              0,
+              100
+            ],
+            "mutation_score_min": [
+              100,
+              100
+            ],
+            "recall_drop_max": [
+              1,
+              100
+            ],
+            "recall_min": [
+              99,
+              100
+            ]
+          },
+          "noncritical": {
+            "asr_increase_max": [
+              1,
+              100
+            ],
+            "asr_max": [
+              3,
+              100
+            ],
+            "fnr_max": [
+              5,
+              100
+            ],
+            "fpr_increase_max": [
+              1,
+              100
+            ],
+            "fpr_max": [
+              5,
+              100
+            ],
+            "mutation_score_drop_max": [
+              2,
+              100
+            ],
+            "mutation_score_min": [
+              95,
+              100
+            ],
+            "recall_drop_max": [
+              2,
+              100
+            ],
+            "recall_min": [
+              95,
+              100
+            ]
+          }
+        },
+        "warning_dimensions": [
+          "elapsed_seconds",
+          "case_trial_executions",
+          "model_calls",
+          "total_tokens",
+          "api_cost_usd_micros"
+        ],
+        "warning_usage_min": [
+          4,
+          5
+        ]
+      },
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "policy-proposal",
+      "request_id": "policy-adopt",
+      "schema_version": 1,
+      "series_id": "gah-initial-policy-v1",
+      "validation_actor_id": "validator",
+      "validation_context": "validator-context",
+      "validation_expires_at": 1789197006,
+      "validation_id": "policy-validation",
+      "validation_observed_at": 1789110606,
+      "validation_revocation_generation": null,
+      "validator_digest": "acc76f697b442719da8f9465adaf26c6edfd29e02f716bb1faa54c2ff28b1448"
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "object_register",
+    "response": {
+      "action": "object_register",
+      "ci_eligible": false,
+      "content_ref": {
+        "digest": "1bf00be7706ab706cd8acfdea911882b76fa54820f51e370336801da992ace21",
+        "id": "transport-registry",
+        "kind": "control_registry"
+      },
+      "kind": "evaluation_authority_result",
+      "request_id": "object-0",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "object_register",
+    "response": {
+      "action": "object_register",
+      "ci_eligible": false,
+      "content_ref": {
+        "digest": "88da829ff0add8d87ecda641dc050d5701391f0670fabf7097a66d83f1347d6d",
+        "id": "transport-acceptance",
+        "kind": "case_set"
+      },
+      "kind": "evaluation_authority_result",
+      "request_id": "object-1",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "object_register",
+    "response": {
+      "action": "object_register",
+      "ci_eligible": false,
+      "content_ref": {
+        "digest": "a9b9588ab650fd5d81af925bc8953a10c05e53eff26a7605f61410ab9a99898b",
+        "id": "transport-calibration",
+        "kind": "case_set"
+      },
+      "kind": "evaluation_authority_result",
+      "request_id": "object-2",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12002,
+    "action": "contract_propose",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "contract_propose",
+    "response": {
+      "action": "contract_propose",
+      "ci_eligible": false,
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-propose",
+      "schema_version": 1,
+      "series_id": "evaluation-main"
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "contract_validate",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "CALIBRATION_UNAVAILABLE",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "calibration_record",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "calibration_record",
+    "response": {
+      "action": "calibration_record",
+      "calibration_id": "calibration-1",
+      "ci_eligible": false,
+      "expires_at": 1789197016,
+      "kind": "evaluation_authority_result",
+      "passed": true,
+      "report": {
+        "case_set_id": "transport-calibration",
+        "expected_observation_count": 3,
+        "independence_validated": false,
+        "kind": "calibration_report",
+        "label_presence": {
+          "indeterminate": true,
+          "negative": true,
+          "positive": true
+        },
+        "observation_count": 3,
+        "oracle_validated": false,
+        "passed": true,
+        "purpose": "calibration",
+        "reasons": [],
+        "schema_version": 1
+      },
+      "request_id": "calibration-record",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "contract_validate",
+    "response": {
+      "action": "contract_validate",
+      "ci_eligible": false,
+      "expires_at": 1789197017,
+      "kind": "evaluation_authority_result",
+      "passed": true,
+      "permission_generation": 0,
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-validate",
+      "schema_version": 1,
+      "validation_digest": "49d9ebe212b381e38b97445ceba090978b0a7bf278a03d1ef898790e50236372",
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "contract_adopt",
+    "response": {
+      "action": "contract_adopt",
+      "ci_eligible": false,
+      "contract_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-adopt",
+      "schema_version": 1,
+      "series_id": "evaluation-main",
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "contract_current",
+    "response": {
+      "action": "contract_current",
+      "adopted": true,
+      "ci_eligible": false,
+      "contract": {
+        "calibration_case_set_ref": {
+          "digest": "a9b9588ab650fd5d81af925bc8953a10c05e53eff26a7605f61410ab9a99898b",
+          "id": "transport-calibration",
+          "kind": "case_set"
+        },
+        "case_set_ref": {
+          "digest": "88da829ff0add8d87ecda641dc050d5701391f0670fabf7097a66d83f1347d6d",
+          "id": "transport-acceptance",
+          "kind": "case_set"
+        },
+        "comparison": {
+          "baseline_ref": null,
+          "changed_axes": [
+            "target"
+          ],
+          "mode": "not_applicable",
+          "reason": "initial_baseline_pending"
+        },
+        "contract_id": "transport-contract",
+        "evaluator_refs": [
+          {
+            "digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+            "id": "fixed-evaluator",
+            "kind": "evaluator"
+          }
+        ],
+        "generation": 1,
+        "kind": "evaluation_contract",
+        "policy_generation": 1,
+        "policy_ref": {
+          "digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+          "id": "gah-initial-policy-v1",
+          "kind": "policy_profile"
+        },
+        "policy_series_id": "gah-initial-policy-v1",
+        "registry_ref": {
+          "digest": "1bf00be7706ab706cd8acfdea911882b76fa54820f51e370336801da992ace21",
+          "id": "transport-registry",
+          "kind": "control_registry"
+        },
+        "required_categories": [
+          "transport-fixture"
+        ],
+        "required_outputs": [
+          "decision",
+          "evidence",
+          "findings",
+          "plans",
+          "run_receipt"
+        ],
+        "schema_version": 1,
+        "use_cases": [
+          "UC-CI"
+        ]
+      },
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-current",
+      "schema_version": 1,
+      "series_id": "evaluation-main",
+      "valid": true,
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "contract_adopt",
+    "response": {
+      "action": "contract_adopt",
+      "ci_eligible": false,
+      "contract_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-adopt",
+      "schema_version": 1,
+      "series_id": "evaluation-main",
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "run_begin",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "EXTENSION_FAILURE",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "run_status",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "RUN_MISSING",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12002,
+    "action": "run_begin",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "run_begin",
+    "response": {
+      "action": "run_begin",
+      "ci_eligible": false,
+      "contract_generation": 1,
+      "kind": "evaluation_authority_result",
+      "request_id": "supervisor-1",
+      "resource_snapshot": {
+        "breached": false,
+        "budget_closure": true,
+        "cancelled": false,
+        "ci_eligible": false,
+        "closed": false,
+        "closed_at": null,
+        "deadline": 1789111822,
+        "manifest_digest": "653fee3e90b9765a04a9f5035c47ec3bac86c2aa897c2a89fea92c1c1141f803",
+        "owner_epoch": 1,
+        "owner_id": "supervisor-1",
+        "resources": {
+          "api_cost_usd_micros": 0,
+          "case_trial_executions": 0,
+          "global_api_cost_usd_micros": 0,
+          "input_tokens": 0,
+          "model_calls": 0,
+          "output_tokens": 0,
+          "slots": 0,
+          "total_tokens": 0,
+          "unsettled": 0
+        },
+        "run_id": "connected-fixture-run"
+      },
+      "run_id": "connected-fixture-run",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_reserve",
+    "response": {
+      "action": "resource_reserve",
+      "ci_eligible": false,
+      "dispatch_allowed": true,
+      "existing": false,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "request_id": "reserve-1",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_reserve",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "ENTRY_ALREADY_RESERVED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_dispatch",
+    "response": {
+      "action": "resource_dispatch",
+      "ci_eligible": false,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "owner_epoch": 1,
+      "request_id": "dispatch-1",
+      "schema_version": 1,
+      "state": "DISPATCHING"
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_dispatch",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "DISPATCH_NOT_PROVABLY_NEW",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12002,
+    "action": "resource_observe",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "resource_observe",
+    "response": {
+      "accepted": true,
+      "action": "resource_observe",
+      "ci_eligible": false,
+      "conflict": false,
+      "current_owner_epoch": 1,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "overrun": false,
+      "owner_epoch_at_dispatch": 1,
+      "request_id": "observe-stop",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "run_status",
+    "response": {
+      "action": "run_status",
+      "ci_eligible": false,
+      "contract_generation": 1,
+      "contract_series_id": "evaluation-main",
+      "kind": "evaluation_authority_result",
+      "manifest": {
+        "actor_context_ref": {
+          "digest": "0717d06bef9a2078aa129fb0d99376f0466d273322d26ccd3f1c2563b44dec00",
+          "id": "operator-context",
+          "kind": "actor_context"
+        },
+        "baseline_ref": null,
+        "contract_ref": {
+          "digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+          "id": "transport-contract",
+          "kind": "evaluation_contract"
+        },
+        "control_ids": [
+          "fixed-control"
+        ],
+        "created_at": 1789110622,
+        "deadline": 1789111822,
+        "environment_ref": {
+          "digest": "e48f7c551aa2dd6ac98a7de6ce5ee1b071d22865a976875fef18e1705bf5e9f6",
+          "id": "fixed-docker-profile",
+          "kind": "environment"
+        },
+        "kind": "run_manifest",
+        "plan_ref": {
+          "digest": "5e09482ba87636837b55b687a973efc9b618c7e28cf8002d453216128dce121c",
+          "id": "transport-plan",
+          "kind": "trial_plan"
+        },
+        "policy_ref": {
+          "digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+          "id": "gah-initial-policy-v1",
+          "kind": "policy_profile"
+        },
+        "profile": "full",
+        "purpose": "baseline_candidate",
+        "run_id": "connected-fixture-run",
+        "schema_version": 1,
+        "target_refs": [
+          {
+            "digest": "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f",
+            "id": "fixed-target",
+            "kind": "target"
+          }
+        ],
+        "use_cases": [
+          "UC-CI"
+        ]
+      },
+      "plan": {
+        "contract_ref": {
+          "digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+          "id": "transport-contract",
+          "kind": "evaluation_contract"
+        },
+        "entries": [
+          {
+            "case_id": "acceptance-0",
+            "evaluator_ref": {
+              "digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+              "id": "fixed-evaluator",
+              "kind": "evaluator"
+            },
+            "event_policy": "none",
+            "obligation_id": "fixed-obligation",
+            "required": true,
+            "stage_ids": [
+              "fixture-acceptance"
+            ],
+            "target_ref": {
+              "digest": "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f",
+              "id": "fixed-target",
+              "kind": "target"
+            },
+            "trial_id": "trial-1",
+            "variant": "candidate"
+          }
+        ],
+        "kind": "trial_plan",
+        "plan_id": "transport-plan",
+        "schema_version": 1
+      },
+      "request_id": "status-1",
+      "resource_snapshot": {
+        "breached": false,
+        "budget_closure": false,
+        "cancelled": false,
+        "ci_eligible": false,
+        "closed": false,
+        "closed_at": null,
+        "deadline": 1789111822,
+        "manifest_digest": "653fee3e90b9765a04a9f5035c47ec3bac86c2aa897c2a89fea92c1c1141f803",
+        "owner_epoch": 1,
+        "owner_id": "supervisor-1",
+        "resources": {
+          "api_cost_usd_micros": 0,
+          "case_trial_executions": 1,
+          "global_api_cost_usd_micros": 0,
+          "input_tokens": 0,
+          "model_calls": 0,
+          "output_tokens": 0,
+          "slots": 0,
+          "total_tokens": 0,
+          "unsettled": 1
+        },
+        "run_id": "connected-fixture-run"
+      },
+      "run_id": "connected-fixture-run",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "resource_observe",
+    "response": {
+      "accepted": true,
+      "action": "resource_observe",
+      "ci_eligible": false,
+      "conflict": false,
+      "current_owner_epoch": 1,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "overrun": false,
+      "owner_epoch_at_dispatch": 1,
+      "request_id": "observe-usage",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12003,
+    "action": "resource_observe",
+    "response": {
+      "accepted": true,
+      "action": "resource_observe",
+      "ci_eligible": false,
+      "conflict": false,
+      "current_owner_epoch": 1,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "overrun": false,
+      "owner_epoch_at_dispatch": 1,
+      "request_id": "observe-usage",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_reserve",
+    "response": {
+      "action": "resource_reserve",
+      "ci_eligible": false,
+      "dispatch_allowed": false,
+      "existing": true,
+      "kind": "evaluation_authority_result",
+      "operation_id": "connected-operation",
+      "request_id": "reserve-1",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_claim",
+    "response": {
+      "action": "resource_claim",
+      "ci_eligible": false,
+      "kind": "evaluation_authority_result",
+      "lease_until": 1789110700,
+      "owner_epoch": 1,
+      "owner_id": "supervisor-1",
+      "recovery_only": false,
+      "request_id": "renew-1",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_close",
+    "response": {
+      "action": "resource_close",
+      "breached": false,
+      "budget_closure": true,
+      "cancelled": false,
+      "ci_eligible": false,
+      "closed": true,
+      "closed_at": 1789110641,
+      "deadline": 1789111822,
+      "kind": "evaluation_authority_result",
+      "manifest_digest": "653fee3e90b9765a04a9f5035c47ec3bac86c2aa897c2a89fea92c1c1141f803",
+      "owner_epoch": 1,
+      "owner_id": "supervisor-1",
+      "request_id": "close-1",
+      "resources": {
+        "api_cost_usd_micros": 0,
+        "case_trial_executions": 1,
+        "global_api_cost_usd_micros": 0,
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "slots": 0,
+        "total_tokens": 0,
+        "unsettled": 0
+      },
+      "run_id": "connected-fixture-run",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "resource_claim",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "RUN_CLOSED",
+      "schema_version": 1
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "revoke_validation",
+    "response": {
+      "action": "revoke_validation",
+      "ci_eligible": false,
+      "kind": "policy_adoption_result",
+      "permission_generation": 1,
+      "request_id": "revoke-policy",
+      "revoked_at": 1789110644,
+      "schema_version": 1,
+      "validation_id": "policy-validation"
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "contract_current",
+    "response": {
+      "action": "contract_current",
+      "adopted": true,
+      "ci_eligible": false,
+      "contract": {
+        "calibration_case_set_ref": {
+          "digest": "a9b9588ab650fd5d81af925bc8953a10c05e53eff26a7605f61410ab9a99898b",
+          "id": "transport-calibration",
+          "kind": "case_set"
+        },
+        "case_set_ref": {
+          "digest": "88da829ff0add8d87ecda641dc050d5701391f0670fabf7097a66d83f1347d6d",
+          "id": "transport-acceptance",
+          "kind": "case_set"
+        },
+        "comparison": {
+          "baseline_ref": null,
+          "changed_axes": [
+            "target"
+          ],
+          "mode": "not_applicable",
+          "reason": "initial_baseline_pending"
+        },
+        "contract_id": "transport-contract",
+        "evaluator_refs": [
+          {
+            "digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+            "id": "fixed-evaluator",
+            "kind": "evaluator"
+          }
+        ],
+        "generation": 1,
+        "kind": "evaluation_contract",
+        "policy_generation": 1,
+        "policy_ref": {
+          "digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+          "id": "gah-initial-policy-v1",
+          "kind": "policy_profile"
+        },
+        "policy_series_id": "gah-initial-policy-v1",
+        "registry_ref": {
+          "digest": "1bf00be7706ab706cd8acfdea911882b76fa54820f51e370336801da992ace21",
+          "id": "transport-registry",
+          "kind": "control_registry"
+        },
+        "required_categories": [
+          "transport-fixture"
+        ],
+        "required_outputs": [
+          "decision",
+          "evidence",
+          "findings",
+          "plans",
+          "run_receipt"
+        ],
+        "schema_version": 1,
+        "use_cases": [
+          "UC-CI"
+        ]
+      },
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-current",
+      "schema_version": 1,
+      "series_id": "evaluation-main",
+      "valid": false,
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12001,
+    "action": "contract_adopt",
+    "response": {
+      "action": "contract_adopt",
+      "ci_eligible": false,
+      "contract_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+      "generation": 1,
+      "kind": "evaluation_authority_result",
+      "proposal_id": "contract-proposal",
+      "request_id": "contract-adopt",
+      "schema_version": 1,
+      "series_id": "evaluation-main",
+      "validation_id": "contract-validation"
+    }
+  },
+  {
+    "uid": 12004,
+    "action": "run_begin",
+    "response": {
+      "ci_eligible": false,
+      "kind": "authority_error",
+      "reason": "PREREQUISITE_UNAVAILABLE",
+      "schema_version": 1
+    }
+  }
+]

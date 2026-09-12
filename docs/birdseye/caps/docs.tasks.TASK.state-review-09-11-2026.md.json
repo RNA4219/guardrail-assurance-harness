@@ -1,0 +1,30 @@
+{
+  "id": "docs/tasks/TASK.state-review-09-11-2026.md",
+  "role": "tasks",
+  "title": "Task: 状態・権限・境界の組合せ検討",
+  "summary": "設計v0.2の初回採択・再開・複合障害を反例で検討し、実装の解釈が分かれる欠落を補正する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/state-review-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "89c96af67c472fefc19d93d069fbd656e5eba984b0eed4d6726642560cafa89c"
+}

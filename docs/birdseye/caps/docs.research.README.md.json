@@ -1,0 +1,37 @@
+{
+  "id": "docs/research/README.md",
+  "role": "research",
+  "title": "資料来歴",
+  "summary": "GAHの要求原稿と、コピー元が残っていた整理前構成を分けて保存する。archiveは現行の要求・指示・検収として適用しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/research/citation-register.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "RUNBOOK.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/UPSTREAM.md",
+    "docs/evidence/README.md",
+    "docs/requirements.md",
+    "docs/reviews/README.md",
+    "docs/tasks/README.md",
+    "tools/review/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "748de5f12ea2425a14b2330857c6e249feb24e4f397d14c89446594ad54b819a"
+}

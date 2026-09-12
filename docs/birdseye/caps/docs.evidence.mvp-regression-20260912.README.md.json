@@ -1,0 +1,27 @@
+{
+  "id": "docs/evidence/mvp-regression-20260912/README.md",
+  "role": "evidence",
+  "title": "通常run・成果物・CI利用の検証",
+  "summary": "固定UC-CIの通常generation 2 run、Finding/Planの保存・取得、現在のCI利用を接続した。523テストと実Docker198項目が成功し、前工程の507テスト・150項目を保持した。初回15件・旧条件15件・新条件30件・通常30件の計90件を実行し、停止・精算・cleanupを確認した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/regression-ci-detail-spec.md",
+    "docs/reviews/mvp-regression-20260912.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/reviews/mvp-regression-20260912.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "65cbb036e001820f0bc9620c51b89c20a0a82bb3ae777e995bdef765c73b3b31"
+}

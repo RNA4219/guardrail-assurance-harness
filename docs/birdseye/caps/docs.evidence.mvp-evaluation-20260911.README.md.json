@@ -1,0 +1,27 @@
+{
+  "id": "docs/evidence/mvp-evaluation-20260911/README.md",
+  "role": "evidence",
+  "title": "評価経路の実測と検証証跡",
+  "summary": "[全MVP Task](../../tasks/TASK.mvp-completion-09-11-2026.md)の途中経過。実入力400件・校正18件・開発12件、固定応答による測定側の校正、DGX Qwenを対象とする診断、Promptfoo通常出力、試行集計と関連部品の回帰を記録する。全MVP受入と通常CIの許可は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evaluation-detail-spec.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/assurance-authority-detail-spec.md",
+    "docs/reviews/mvp-adoption-20260911.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "3f18220888ce61ebe096399a14e225c2d4d6b4200feab60f6dbb882bbfcd5f0c"
+}

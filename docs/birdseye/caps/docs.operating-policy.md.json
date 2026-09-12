@@ -1,0 +1,45 @@
+{
+  "id": "docs/operating-policy.md",
+  "role": "operating-policy",
+  "title": "初期運用方針 v1",
+  "summary": "2026-09-10の利用者指定「CIで許す」「閾値と予算はおまかせ」「評価周りはopsのOSSから転用」「管理主体は生成AI」を具体化する。CI方針と管理主体は利用者決定、数値は委任を受けたCodexが選定した初期値。製品は要求段階で、以下を実装・計測した記録ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reference-boundary.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "datasets/README.md",
+    "docs/acceptance-criteria.md",
+    "docs/auth-adoption-detail-spec.md",
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/extension-roadmap.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/reviews/operating-decisions-20260910.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025"
+}

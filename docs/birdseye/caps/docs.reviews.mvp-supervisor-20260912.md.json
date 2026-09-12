@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/mvp-supervisor-20260912.md",
+  "role": "reviews",
+  "title": "製品監督の親レビュー",
+  "summary": "親が実装・レビュー・検証を担当した。この工程で外部モデル・subagentへ委任していない。操作状態照会を現在の送信許可と分け、保存manifest/plan/予約/usageのdigestと元epochへ結合した。元Evidence撤回後も停止処理に必要な状態を読める。既知DB移行では世代1・2と元runの保存根拠を検査し、期限・撤回を変更しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/supervised-run-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a1206e4b1d8a325c8cbf939f0e3604d92753efbfaed7f47b73bf0daaf64ec1df"
+}

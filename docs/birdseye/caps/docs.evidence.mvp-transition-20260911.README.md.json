@@ -1,0 +1,24 @@
+{
+  "id": "docs/evidence/mvp-transition-20260911/README.md",
+  "role": "evidence",
+  "title": "比較契約への移行前検査の証跡",
+  "summary": "保存済み初回baselineを保持した契約移行の事前検査を、固定15件の実Docker経路へ接続した。 [検証manifest](verification.json)は全463テスト、既存441件の保持、実Docker52項目、 要求・受入条件・方針・設計例7ファイルの不変、実行時ソースとimageの一致を確認する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/mvp-transition-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/evidence/README.md",
+    "docs/reviews/mvp-transition-20260911.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "503e5786457fcc20c0ed9e123b60c3fa7e4ab927fb0ba3eba02894900e95587d"
+}

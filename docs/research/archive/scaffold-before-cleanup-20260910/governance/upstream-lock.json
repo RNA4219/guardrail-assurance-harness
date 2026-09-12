@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "upstream": "RNA4219/workflow-cookbook",
+  "upstream_version": "1.2.0",
+  "commit": "db3b2141c1fef0f4835170dd82f85aabc6000fc3",
+  "imported_at": "2026-09-09",
+  "hash_policy": "UTF-8 text normalized to LF",
+  "files": [
+    {
+      "path": "tools/ci/check_acceptance.py",
+      "sha256_lf": "bdcf6231915c3e7c1c1db5f515cfec7203f1307bf0986924aa4e0a5168663b4f"
+    },
+    {
+      "path": "tools/ci/check_adoption_tier.py",
+      "sha256_lf": "7a0615e060ba8f435916fe0e32403c5b6649d9c804f0516d47a38c6757717aa6"
+    },
+    {
+      "path": "tools/ci/check_birdseye_freshness.py",
+      "sha256_lf": "107b60ca24041d2c76733d17435753656e67ac3c491d307cfdd4b2fb44a2119c"
+    },
+    {
+      "path": "tools/ci/check_branch_protection.py",
+      "sha256_lf": "1ca68888c4bd80d5248b3a93ebd307681f3d36c4bfba2f8a4fcc0ebf37cf557f"
+    },
+    {
+      "path": "tools/ci/check_ci_gate_matrix.py",
+      "sha256_lf": "6292170da02227cfaaacba18277fb1e6e91ab3d99659d2af8d65092aac45ccad"
+    },
+    {
+      "path": "tools/ci/check_downstream_onboarding.py",
+      "sha256_lf": "4c7feb7e81cb35b753cb132559ec6b0221059217de6638e8e32c2727e7b38707"
+    },
+    {
+      "path": "tools/ci/check_security_posture.py",
+      "sha256_lf": "9c715faff2427910f9bf1de303cc061de203033c064def4857a2d8f6a34a1dde"
+    },
+    {
+      "path": "tools/ci/check_task_acceptance_bidirectional.py",
+      "sha256_lf": "86333f0e2c4f4e6846fd4934738a53c8054e4605b39e204892953351aefec34f"
+    },
+    {
+      "path": "templates/BLUEPRINT.md.template",
+      "sha256_lf": "82fed296e1fd6fb379f4e836857e39d0ddb63002d994ca6a1156bbf35d68aa15"
+    },
+    {
+      "path": "templates/EVALUATION.md.template",
+      "sha256_lf": "7646ec42ffc83bf6d8aa4b6ba2ef417f953e76efabce50a5a2eb68715ccffdf7"
+    },
+    {
+      "path": "templates/GUARDRAILS.md.template",
+      "sha256_lf": "c4f943f2af323f5b7ba6c19835680424a81019fa5d2a14ac8e693be7f5975f33"
+    },
+    {
+      "path": "templates/HUB.codex.md.template",
+      "sha256_lf": "02891df950c1cbaff7c7c7b6bb24fa97ef077589006ddb454e86a5db4b156706"
+    },
+    {
+      "path": "templates/RUNBOOK.md.template",
+      "sha256_lf": "c6d0488a079d8405f7448a474a1e5d9d9eed0b052bfedce584a325ef679fc312"
+    },
+    {
+      "path": "third_party/workflow-cookbook.LICENSE",
+      "sha256_lf": "df6ce27ea878c45685a8d536e37c4957842ea08ad22955e685632bb296fe03c9"
+    }
+  ]
+}

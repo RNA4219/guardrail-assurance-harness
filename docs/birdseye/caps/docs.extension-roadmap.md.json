@@ -1,0 +1,30 @@
+{
+  "id": "docs/extension-roadmap.md",
+  "role": "extension-roadmap",
+  "title": "要求の拡張案と着手条件",
+  "summary": "[要求v0.4](requirements.md)の二つの利用場面を支える拡張案。根拠は[敵対的検証](reviews/requirements-adversarial-20260910.md)。必要性と着手条件の提案であり、実装済み機能や採択済みの開発日程ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/operating-policy.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-20260910.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/open-questions.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b407c45772b25765479d779d8b40af99f26b8f227d5ee719361b8b070e8ca3b3"
+}

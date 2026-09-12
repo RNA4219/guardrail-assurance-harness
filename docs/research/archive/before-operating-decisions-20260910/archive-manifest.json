@@ -1,0 +1,73 @@
+{
+  "mutable": false,
+  "saved_at": "2026-09-10",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256_raw": "33d22cb689774849b9253743af0cef12dd3a70808f6be6b245f05492f4c6d52a"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "16f12cb14cbe1cb6b31b785caa166f81964362ad4328d531fad2b2dd14ff40d9"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "239e03d58f4d6fcd5220b9f23eca4f9830bcb4139ac90e7d46b4c475d61a8475"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "96c0ea4a037a53049018967c7b79d9c59c186546980baaa9f6c81e8a82f51eee"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "c10223a237f5d8ef044689d939761515ad3fe21d9b36b32c3fc2a817bff0f0c2"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "aee1b0520102a37a5b4b03a50c584ff045c0419873be80db0bd55a7923a46343"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "8dbab2d19ada6a024c401180591b42d445b657a5d0cc2a5fa373f9216de4b991"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "649ad017eaa5c8fc69d487f8cc54004f7de92c03361970c3ecfd7d94664f003c"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "22283bde18d7fc63e9fd2c02ab79cfe0ce807c92f0527e89abc513069c24cbcb"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "d6c18d4cac7021f11650524094940e251316e864f5b7f6cbbf238df301f6b827"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "2afc0ab109849da464db4504069f1bc1b57063f714e6acdaff2743157530c7b4"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "e89e2dd0806c70ebdb554d188adc16f6ae8d0164821e37120fdee64cdd5da597"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "ac933ffbc6f4d67b122f1954bbe8fc7aba147d1c839a1bf628fc8c8603391860"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "ac4bb55cfe9c613efeec715b8f04a0be91ada94f8d12312f39f68c404b69aed2"
+    },
+    {
+      "path": "docs/extension-roadmap.md",
+      "sha256_raw": "a20d2d2baa6e4a4c33a3f67adace5e05d24c729b7cc497b5a782dc082a3c50fe"
+    }
+  ],
+  "reason": "利用者のCI・閾値予算委任・評価転用・生成AI管理の判断を反映する前のv0.3",
+  "task_id": "20260910-07",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

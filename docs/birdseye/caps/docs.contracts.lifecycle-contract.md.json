@@ -1,0 +1,34 @@
+{
+  "id": "docs/contracts/lifecycle-contract.md",
+  "role": "contracts",
+  "title": "初回・採択・再開・終了の契約 v0.3",
+  "summary": "[評価契約](evaluation-contract.md)の補足。製品実装・正式Schemaではない。[見直し](../reviews/state-review-20260911.md)のSR01〜SR06に対応する。要求・初期方針を変更せず、重なった条件の適用順と信頼起点を定める。例は[状態例JSON](state-examples.v3.json)、製品試験は全件NOT_RUN。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/evaluation-contract.md",
+    "docs/reviews/state-review-20260911.md"
+  ],
+  "deps_in": [
+    "docs/auth-adoption-detail-spec.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/contracts/README.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/design.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "dfd7d2b14c2b0728f20cb162370c25510d835c1eddb8670d15b8d8416b1020e2"
+}

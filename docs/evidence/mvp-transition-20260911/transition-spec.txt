@@ -1,0 +1,90 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-11
+next_review_due: 2026-10-11
+---
+
+# 初回baselineから比較契約への移行詳細仕様
+
+[採択・更新仕様](baseline-adoption-detail-spec.md)の初回後の接続を具体化する。
+[要求](requirements.md)と[初回・採択契約](contracts/lifecycle-contract.md)を変更せず、
+旧条件を固定したまま比較必須の契約を検証する。現在の実装対象は条件の事前検査であり、
+generation 2の採択・通常回帰・通常CIは、この検査の成功では成立しない。
+
+## 1. 循環を避ける実行順序
+
+1. 初回契約generation 1と、完了した初回candidateに基づくbaseline generation 1を採択する。
+2. managerは別ID・generation 2の契約をproposalへ保存する。旧契約の方針、Registry、
+   CaseSet、校正集合、evaluator、カテゴリ、必要出力を維持し、比較だけを
+   `required`、採択済みbaselineの完全参照、`reason=null`、`changed_axes=[]`へ変更する。
+3. validatorは保存済みのproposal、旧契約と履歴、baselineと全根拠を同じtransactionで
+   検査する。ここで返すpreflightは候補実行の前提確認であり、採択validationではない。
+4. 次の接続工程で、proposalの版へ固定した候補専用runを作る。候補には旧条件での回帰と
+   新条件の受入を実行し、別々の目的・binding・Evidence・closureを保存する。
+   候補runを採択済み契約に基づく通常runやCI成功へ読み替えない。
+5. 全根拠を再検査したvalidationを使い、managerが旧・新契約とbaselineの期待世代を
+   同じ確定点で検査してから採択する。現行pointerと不変履歴の更新は同一transactionとする。
+
+手順4〜5は未接続である。preflightを保存済みvalidationの代用品にしない。
+契約の値を緩める改訂、baseline自体の更新、target等の条件差は別の更新検証を必要とし、
+この限定した初回移行へ通さない。初回契約の比較非適用を通常回帰の免除に使わない。
+
+## 2. 純粋な条件検査
+
+`bind_contract_transition(previous_contract, next_contract, baseline_record=..., baseline_source_bound=...)`
+は厳密な構造検査と実体からの参照再計算を行う。source bundleは既存runの8個のcore fieldを
+持ち、再bindingした値と完全一致する必要がある。余剰fieldや入力の書換えを許さない。
+
+旧契約とsource契約、baselineのsource run・TrialPlan・方針・Registry・CaseSet・target・
+evaluator・oracle・反復条件を照合し、次契約のgenerationが1から2へ一つ進むこと、
+別contract IDであること、比較以外の条件が変わらないことを確認する。
+baselineと旧契約の完全参照はkind・ID・digestの全てで一致させる。
+
+この関数にはDB、認証、時計を渡さない。返す構造検査結果からEvidenceの存在、期限、
+採択、実行完了、現在利用を推測しない。`ci_eligible`、`authority_connected`、
+`adoption_verified`は全てfalseである。
+
+## 3. authorityの事前検査
+
+`contract_preflight`はOS認証されたvalidatorだけが呼べる。要求は次の項目に限定する。
+
+| 項目 | 内容 |
+|---|---|
+| schema_version / action / request_id | 1 / contract_preflight / 要求ID |
+| proposal_id | managerが保存した次契約proposal |
+| baseline_series_id | 現行baseline系列 |
+| expected_contract_ref | 旧契約の完全参照 |
+| expected_baseline_ref | 採択済みbaselineの完全参照 |
+
+同一transactionで次を実行する。
+
+- proposalの本文digestと列の世代・manager/contextを照合する。
+- 契約currentと不変履歴が完全一致すること、旧契約のvalidation、方針・校正が現在も有効なことを確認する。
+- baselineのcurrent・不変採択・proposal・validationを再検査し、Evidence、実入力、Decision、精算を確認する。
+- baseline recordの`source_run_ref`から完了済み初回candidateの保存bundleを解決し、
+  `baseline_source_bound`へ渡す。次契約proposalを`next_contract`、現行旧契約を
+  `previous_contract`へ渡した`bind_contract_transition`の結果を`transition`へ含める。
+  まだ存在しない移行候補runのEvidenceをpreflightの前提へ循環させない。
+
+成功結果は`preflight_ready=true`、`candidate_run_required=true`、`adoption_verified=false`、
+`ci_eligible=false`を返す。検査時刻とpermission generationはその照会時の値であり、
+後続実行の許可証ではない。新しいvalidation、run、operation、adoptionを作らない。
+AdoptionStoreの単調時計・認証の管理情報は通常どおり更新できる。
+
+このactionはfresh照会であり、同一request IDでも撤回・期限・permissionと最新pointerを
+再計算する。旧preflightの表示や終了コードを再利用して採択しない。
+現行`contract_validate`/`contract_adopt`は候補run未接続のgeneration 2を拒否し続ける。
+後続の候補実行開始と採択の各適用時点では、LC02の権限・世代・現行方針・必要証拠・
+最新失効状態を再照合する。preflightの成功を持参したことによって、この再検査を省略しない。
+
+## 4. 履歴と今後の受入
+
+旧runの実行・Evidence解決は保存された契約世代から行う。現行実装の`_check_start`は
+`eval_adoptions`をrunの保存世代で解決しているため、最新pointerへの読み替えは加えない。
+実行継続には当時の条件の現在有効性を再検査し、停止済み観測の保存とは分ける。
+
+現在の受入対象は、初回移行の構造・現在前提・主体分離・再照会時の撤回・不変履歴の
+保持までである。候補runの実行、両世代のCAS、旧条件回帰の実測、更新後の新旧run、
+契約とbaselineの片側保存障害を含むrollbackは、接続後に別の実行証跡で確認する。

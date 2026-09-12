@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/mvp-cancellation-20260912.md",
+  "role": "reviews",
+  "title": "通常run取消しの親レビュー",
+  "summary": "利用者の指示により、親が実装・コードレビュー・試験を担当した。この工程では外部モデルへ委任していない。 対象は固定UC-CIの通常generation 2 run、取消し確定、保存成果物、後日精算、現在のCI判定と既知DB移行である。 [詳細仕様](../run-cancellation-detail-spec.md)と[全体監査](../mvp-completion-audit.md)へ結ぶ。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/run-cancellation-detail-spec.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "42061228bec7005b4765d23c3cc64f7713cde23510a8517ffb604103e98465d1"
+}

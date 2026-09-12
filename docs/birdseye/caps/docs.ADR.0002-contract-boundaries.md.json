@@ -1,0 +1,27 @@
+{
+  "id": "docs/ADR/0002-contract-boundaries.md",
+  "role": "ADR",
+  "title": "ADR 0002: GAH独自の評価契約と判定境界",
+  "summary": "二つの利用場面、WARNINGのCI成功、初期数値、生成AIによる管理が確認済み。要求から実装へ進むため、採択・実行・観測・判定・保存・CIを区別する必要がある。[Task](../tasks/TASK.contract-design-09-10-2026.md)で設計初版を作成した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/design.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md"
+  ],
+  "deps_in": [
+    "docs/ADR/README.md",
+    "docs/design.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "1cf1349cb9efb3cb26e15d11d46a91315e47efba477c40259895522a49109a1d"
+}

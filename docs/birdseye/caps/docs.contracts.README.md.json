@@ -1,0 +1,36 @@
+{
+  "id": "docs/contracts/README.md",
+  "role": "contracts",
+  "title": "データ契約の入口",
+  "summary": "要求v0.4から独立に作成した基本設計を置く。判定・保存・診断CLIは[コア詳細仕様](../detail-spec.md)へ具体化し、部品入力Schemaと実装を追加した。全MVPの正式Schema・実行監督・外部adapterは未完成。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/detail-spec.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "fixtures/README.md",
+    "schemas/README.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/open-questions.md",
+    "fixtures/README.md",
+    "schemas/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "3a63fd5a764f543b626ccca1d8b7cef68118a8beaa24ee09e6f51d0e7a209f54"
+}

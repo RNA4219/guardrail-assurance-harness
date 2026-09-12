@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/mvp-adoption-20260911.md",
+  "role": "reviews",
+  "title": "採択と実行証跡の接続レビュー",
+  "summary": "この工程は実装中であり、全MVP受入を完了した記録ではない。前工程の357テストと 実モデル実測は[当時の検証](../evidence/mvp-evaluation-20260911/README.md)として保持する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-adoption-20260911/README.md",
+    "docs/evidence/mvp-evaluation-20260911/README.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/evidence/mvp-adoption-20260911/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2694f0685e6a19cbcd31cd4cef63e8c8faf75be0d8d51edb79bbfa411a5a443a"
+}

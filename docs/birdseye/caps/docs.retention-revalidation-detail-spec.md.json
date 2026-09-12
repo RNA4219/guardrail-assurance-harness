@@ -1,0 +1,23 @@
+{
+  "id": "docs/retention-revalidation-detail-spec.md",
+  "role": "retention-revalidation-detail-spec",
+  "title": "authorityの保持・削除と修復確認の接続仕様",
+  "summary": "元条件と新条件の比較には[意味的条件の部品](semantic-conditions-detail-spec.md)を用いる。対象内容の変更、改名、条件変更を分けるが、比較成立だけではVERIFIEDにしない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/remediation-detail-spec.md",
+    "docs/run-evidence-detail-spec.md",
+    "docs/semantic-conditions-detail-spec.md"
+  ],
+  "deps_in": [
+    "docs/detail-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "9894edc44b0330ee36d9f705d9b9ed6062e7a129d661aa31771a9e544c46b87b"
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 0,
+    "response": {
+      "action": "propose",
+      "ci_eligible": false,
+      "created_at": 1789126197,
+      "expected_generation": 0,
+      "kind": "policy_adoption_result",
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "startup-proposal-0",
+      "request_id": "startup-propose-0",
+      "schema_version": 1,
+      "series_id": "gah-initial-policy-v1"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 1,
+    "response": {
+      "action": "propose",
+      "ci_eligible": false,
+      "created_at": 1789126199,
+      "expected_generation": 0,
+      "kind": "policy_adoption_result",
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "startup-proposal-1",
+      "request_id": "startup-propose-1",
+      "schema_version": 1,
+      "series_id": "gah-initial-policy-v1"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 2,
+    "response": {
+      "action": "propose",
+      "ci_eligible": false,
+      "created_at": 1789126200,
+      "expected_generation": 0,
+      "kind": "policy_adoption_result",
+      "proposal_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "proposal_id": "startup-proposal-2",
+      "request_id": "startup-propose-2",
+      "schema_version": 1,
+      "series_id": "gah-initial-policy-v1"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  }
+]

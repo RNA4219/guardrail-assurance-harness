@@ -1,0 +1,28 @@
+{
+  "id": "docs/ADR/0001-workflow-cookbook-adoption.md",
+  "role": "ADR",
+  "title": "ADR-0001: Workflow-Cookbook Tier 3: Fullを採用",
+  "summary": "状態: accepted（フォルダ・様式の採用）。日付: 2026-09-09。",
+  "public_api": [],
+  "deps_out": [
+    "docs/UPSTREAM.md",
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/ADR/README.md",
+    "docs/UPSTREAM.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "70833189b27dad7da53b96c1515b4b1339fd530b081bb26c29e07262d8168f75"
+}

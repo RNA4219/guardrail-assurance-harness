@@ -1,0 +1,6 @@
+test_populated_previous_adoption_version_migrates_without_rewriting_history (test_regression_integration.RegressionIntegrationTests.test_populated_previous_adoption_version_migrates_without_rewriting_history) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 78.493s
+
+OK

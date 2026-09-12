@@ -1,0 +1,27 @@
+{
+  "id": "docs/contracts/README.md",
+  "role": "contracts",
+  "title": "データ契約",
+  "summary": "正本は [要件定義](../requirements.md)。Evidence、snapshot、scope、仕様候補、coverage、診断・失敗状態、Schema互換性を実装時にここから追跡する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md",
+    "fixtures/README.md",
+    "schemas/README.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/design.md",
+    "docs/spec.md",
+    "fixtures/README.md",
+    "schemas/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "6650eefd82119342a68355f526bb9d7e92ecfa86d3238223b7da24d50a1d4dc8"
+}

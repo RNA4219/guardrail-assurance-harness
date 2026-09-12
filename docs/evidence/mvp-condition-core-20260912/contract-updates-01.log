@@ -1,0 +1,17 @@
+test_baseline_generation_and_oracle_refs_are_bound (test_contract_updates.ContractUpdateTests.test_baseline_generation_and_oracle_refs_are_bound) ... ok
+test_baseline_record_must_reference_saved_previous_contract_and_source (test_contract_updates.ContractUpdateTests.test_baseline_record_must_reference_saved_previous_contract_and_source) ... ok
+test_comparison_must_use_this_baseline_with_no_declared_change (test_contract_updates.ContractUpdateTests.test_comparison_must_use_this_baseline_with_no_declared_change) ... ok
+test_contract_id_reuse_and_generation_skip_are_rejected (test_contract_updates.ContractUpdateTests.test_contract_id_reuse_and_generation_skip_are_rejected) ... ok
+test_empty_change_set_preserves_comparison_and_strict_types (test_contract_updates.ContractUpdateTests.test_empty_change_set_preserves_comparison_and_strict_types) ... ok
+test_inputs_are_not_mutated (test_contract_updates.ContractUpdateTests.test_inputs_are_not_mutated) ... ok
+test_previous_contract_must_match_the_saved_source (test_contract_updates.ContractUpdateTests.test_previous_contract_must_match_the_saved_source) ... ok
+test_relinked_contract_cannot_claim_different_source_documents (test_contract_updates.ContractUpdateTests.test_relinked_contract_cannot_claim_different_source_documents) ... ok
+test_source_is_rebound_and_unknown_or_mutated_fields_are_rejected (test_contract_updates.ContractUpdateTests.test_source_is_rebound_and_unknown_or_mutated_fields_are_rejected) ... ok
+test_source_must_be_the_initial_baseline_candidate (test_contract_updates.ContractUpdateTests.test_source_must_be_the_initial_baseline_candidate) ... ok
+test_unrelated_policy_evaluator_and_output_changes_are_rejected (test_contract_updates.ContractUpdateTests.test_unrelated_policy_evaluator_and_output_changes_are_rejected) ... ok
+test_valid_transition_rebinds_actual_fixture_and_disables_authority (test_contract_updates.ContractUpdateTests.test_valid_transition_rebinds_actual_fixture_and_disables_authority) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.163s
+
+OK

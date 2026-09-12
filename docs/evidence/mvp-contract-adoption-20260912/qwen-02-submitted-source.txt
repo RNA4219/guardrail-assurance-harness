@@ -1,0 +1,201 @@
+src/gah/transition_acceptance.py
+def history(db: sqlite3.Connection, current: sqlite3.Row, contract: dict[str, Any]) -> sqlite3.Row:
+    """gen2 currentと専用validation/historyの不変結合を返す。"""
+    try:
+        contract = validate_evaluation_contract(contract)
+        if current is None or current["generation"] != contract["generation"] or contract["generation"] != 2:
+            raise _error("STORAGE_CORRUPT")
+        current_contract = _load(current, "payload_json", "digest")
+        if current_contract != contract:
+            raise _error("STORAGE_CORRUPT")
+        validation_row, payload = _validation_row(db, current["validation_id"])
+        if (current["proposal_id"] != validation_row["proposal_id"]
+                or current["digest"] != content_ref("evaluation_contract", contract["contract_id"], contract)["digest"]
+                or payload["contract"] != contract):
+            raise _error("STORAGE_CORRUPT")
+        proposal_row, proposal_contract = _proposal(db, current["proposal_id"])
+        if (proposal_row["series_id"] != current["series_id"] or proposal_row["actor_id"] != "manager"
+                or proposal_row["context"] != "manager-context" or proposal_contract != contract
+                or proposal_row["digest"] != payload["proposal_digest"]):
+            raise _error("STORAGE_CORRUPT")
+        adopted = db.execute("SELECT * FROM eval_adoptions WHERE series_id=? AND generation=?",
+                             (current["series_id"], current["generation"])).fetchone()
+        if adopted is None or any(adopted[key] != current[key] for key in
+                                  ("series_id", "generation", "proposal_id", "validation_id", "payload_json", "digest")):
+            raise _error("STORAGE_CORRUPT")
+        candidate_row, candidate = _candidate_value(db, payload["candidate_id"], payload["checked_at"])
+        transition, old, new = _candidate_parts(candidate)
+        if (content_ref("contract_candidate", payload["candidate_id"], candidate) != payload["candidate_ref"]
+                or candidate_row["permission_generation"] != payload["permission_generation"]
+                or candidate["proposal_id"] != payload["proposal_id"]
+                or candidate["proposal_digest"] != payload["proposal_digest"]
+                or candidate["expected_contract_ref"] != payload["expected_contract_ref"]
+                or candidate["expected_baseline_ref"] != payload["expected_baseline_ref"]
+                or transition["next_contract"] != payload["contract"]):
+            raise _error("STORAGE_CORRUPT")
+        old_id, new_id = _source_ids(candidate)
+        if (payload["old_receipt_ref"]["id"] != old_id or payload["new_receipt_ref"]["id"] != new_id):
+            raise _error("STORAGE_CORRUPT")
+        _stored_receipt_ref(db, payload["old_receipt_ref"])
+        _stored_receipt_ref(db, payload["new_receipt_ref"])
+        return validation_row
+    except AdoptionError:
+        raise
+    except (ContractError, KeyError, TypeError, ValueError, RecursionError):
+        raise _error("STORAGE_CORRUPT") from None
+
+
+def _insert_validation(db: sqlite3.Connection, request: dict[str, Any], payload: dict[str, Any],
+                       proposal_digest: str, now: int, permission: int) -> tuple[str, int]:
+    raw, digest = _pack(payload)
+    expires = min(MAX_INTEGER, now + VALIDATION_TTL)
+    existing = db.execute("SELECT * FROM eval_validations WHERE id=?", (request["validation_id"],)).fetchone()
+    if existing is not None:
+        if (existing["digest"] != digest or existing["payload_json"] != raw
+                or existing["proposal_id"] != payload["proposal_id"]
+                or existing["proposal_digest"] != proposal_digest
+                or existing["created_at"] != now or existing["permission_generation"] != permission):
+            raise _error("VALIDATION_CONFLICT")
+        _validation_row(db, request["validation_id"])
+        return digest, existing["expires_at"]
+    db.execute("INSERT INTO eval_validations VALUES(?,?,?,?,?,?,?,?)",
+               (request["validation_id"], payload["proposal_id"], proposal_digest, raw, digest,
+                now, expires, permission))
+    return digest, expires
+
+
+def execute(store: Any, db: sqlite3.Connection, request: dict[str, Any], actor_id: str,
+            context: str, now: int, check_candidate: Callable[[str], Any],
+            resolve_source: Callable[[str], Any]) -> dict[str, Any]:
+    """既存AdoptionStore transaction内で候補検証/gen2採択を行う。"""
+    if not isinstance(db, sqlite3.Connection) or not db.in_transaction:
+        raise _error("TRANSACTION_REQUIRED")
+    request = validate_request(request)
+    action = request["action"]
+    if actor_id not in ACTIONS[action] or context != actor_id + "-context":
+        raise _error("AUTHORITY_DENIED")
+    _uint(now)
+    if not callable(check_candidate):
+        raise _error("CANDIDATE_UNAVAILABLE")
+    try:
+        fresh = check_candidate(request["candidate_id"])
+    except AdoptionError:
+        raise
+    except Exception:
+        raise _error("CANDIDATE_UNAVAILABLE") from None
+    if type(fresh) is not tuple or len(fresh) != 2:
+        raise _error("CANDIDATE_UNAVAILABLE")
+    candidate_row, candidate = fresh
+    if type(candidate_row) is not sqlite3.Row and not hasattr(candidate_row, "keys"):
+        raise _error("CANDIDATE_UNAVAILABLE")
+    if type(candidate) is not dict or candidate.get("candidate_id") != request["candidate_id"]:
+        raise _error("CANDIDATE_INVALID")
+    transition, old, new = _candidate_parts(candidate)
+    old_receipt, new_receipt = _live_sources(db, candidate, now, resolve_source)
+    permission = store._permission_generation(db)
+    payload = _build_validation(candidate_row, candidate, old_receipt, new_receipt, now, permission)
+    proposal_row, contract = _proposal(db, payload["proposal_id"])
+    if proposal_row["actor_id"] != "manager" or proposal_row["context"] != "manager-context" \
+            or proposal_row["digest"] != payload["proposal_digest"] or contract != payload["contract"]:
+        raise _error("PROPOSAL_MISMATCH")
+    if action == "contract_candidate_validate":
+        digest, expires = _insert_validation(db, request, payload, proposal_row["digest"], now, permission)
+        return {"validation_id": request["validation_id"], "candidate_id": request["candidate_id"],
+                "validation_digest": digest, "expires_at": expires, "permission_generation": permission,
+                "passed": True, "adoption_verified": False}
+
+    if request["expected_contract_generation"] != 1 or request["expected_baseline_generation"] != 1:
+        raise _error("GENERATION_CONFLICT")
+    validation_row, saved_payload = _validation_row(db, request["validation_id"])
+    validate_live_proof(store, db, saved_payload, now, resolve_source)
+    # 時刻だけは検証実行時刻として変化し得るが、候補・proposal・receipt・
+    # 権限世代など証明の意味部分は同一でなければならない。
+    comparable_saved = deepcopy(saved_payload)
+    comparable_now = deepcopy(payload)
+    comparable_saved.pop("checked_at", None)
+    comparable_now.pop("checked_at", None)
+    if comparable_saved != comparable_now:
+        raise _error("VALIDATION_MISMATCH")
+    if not validation_row["created_at"] <= now < validation_row["expires_at"]:
+        raise _error("VALIDATION_EXPIRED")
+    if candidate_row["context"] != "validator-context":
+        raise _error("CANDIDATE_INVALID")
+    current = db.execute("SELECT * FROM eval_current WHERE series_id=?", (proposal_row["series_id"],)).fetchone()
+    if current is None or current["generation"] != 1:
+        raise _error("GENERATION_CONFLICT")
+    old_contract = validate_evaluation_contract(transition["previous_contract"])
+    old_raw, old_digest = _pack(old_contract)
+    if _load(current, "payload_json", "digest") != old_contract or current["digest"] != old_digest:
+        raise _error("CURRENT_MISMATCH")
+    old_history = db.execute("SELECT * FROM eval_adoptions WHERE series_id=? AND generation=1",
+                             (proposal_row["series_id"],)).fetchone()
+    if old_history is None or old_history["digest"] != old_digest or _load(old_history, "payload_json", "digest") != old_contract:
+        raise _error("HISTORY_MISMATCH")
+    new_raw, new_digest = _pack(contract)
+    updated = db.execute("UPDATE eval_current SET generation=2,proposal_id=?,validation_id=?,payload_json=?,digest=? "
+                         "WHERE series_id=? AND generation=1 AND digest=?",
+                         (proposal_row["id"], request["validation_id"], new_raw, new_digest,
+                          proposal_row["series_id"], old_digest))
+    if updated.rowcount != 1:
+        raise _error("GENERATION_CONFLICT")
+    db.execute("INSERT INTO eval_adoptions VALUES(?,?,?,?,?,?)",
+               (proposal_row["series_id"], 2, proposal_row["id"], request["validation_id"], new_raw, new_digest))
+    current2 = db.execute("SELECT * FROM eval_current WHERE series_id=?", (proposal_row["series_id"],)).fetchone()
+    history(db, current2, contract)
+    return {"candidate_id": request["candidate_id"], "series_id": proposal_row["series_id"],
+            "generation": 2, "proposal_id": proposal_row["id"], "validation_id": request["validation_id"],
+            "contract_digest": content_ref("evaluation_contract", contract["contract_id"], contract)["digest"],
+            "adoption_verified": True}
+
+
+__all__ = ["ACTIONS", "FIELDS", "VALIDATION_TTL", "execute", "history", "validate_live_proof", "validate_request"]
+
+
+src/gah/evaluation_authority.py
+def _validate_transition_state(store, db, contract, now, *, policy_state=None):
+    """採択後は旧currentへ戻らず、不変のgen1根拠と候補証拠を再検査する。"""
+    histories = db.execute("SELECT * FROM eval_adoptions WHERE generation=2 AND digest=?",
+        (_packed(contract)[1],)).fetchall()
+    if len(histories) != 1:
+        raise _error("CONTRACT_INVALID")
+    current = histories[0]
+    validation = _assert_contract_history(db, current, contract)
+    payload = _load_json(validation, "payload_json", "digest")
+    _assert_contract_fresh(store, db, current, contract, now)
+    candidate_row, candidate = transition_authority.load_candidate(db, payload["candidate_id"], now)
+    if candidate_row["permission_generation"] != store._permission_generation(db):
+        raise _error("CANDIDATE_EXPIRED")
+    previous = candidate["runs"]["transition"]["previous_contract"]
+    old = db.execute("SELECT * FROM eval_adoptions WHERE series_id=? AND generation=1",
+        (current["series_id"],)).fetchone()
+    if old is None or _load_json(old, "payload_json", "digest") != previous:
+        raise _error("CONTRACT_INVALID")
+    checked = _validate_state(store, db, previous, now, policy_state=policy_state)
+    _assert_contract_fresh(store, db, old, previous, now)
+    extension = EvaluationExtension()
+    sources = {}
+
+    def resolve_source(run_id):
+        source = extension._baseline_source(store, db, run_id, now)
+        sources[run_id] = source
+        return source
+
+    baseline = baseline_authority.execute(store, db, {
+        "schema_version": 1, "action": "baseline_use", "request_id": candidate["candidate_id"],
+        "series_id": candidate["baseline_series_id"],
+        "expected_baseline_ref": candidate["expected_baseline_ref"],
+        "expected_contract_ref": candidate["expected_contract_ref"],
+    }, "validator", "validator-context", now, resolve_source)
+    if baseline.get("use") is not True:
+        raise _error("PREREQUISITE_UNAVAILABLE")
+    record = baseline["baseline"]
+    transition = contract_updates.bind_contract_transition(previous, contract,
+        baseline_record=record, baseline_source_bound=sources[record["source_run_ref"]["id"]]["bound"])
+    if transition != candidate["runs"]["transition"]:
+        raise _error("CANDIDATE_INVALID")
+    transition_acceptance.validate_live_proof(store, db, payload, now,
+        lambda run_id: assurance_authority.baseline_source(store, db, run_id, now,
+            lambda identifier: extension._bound_evidence_run(store, db, identifier, now)))
+    return {**checked, "contract": copy.deepcopy(contract)}
+
+

@@ -1,0 +1,14 @@
+test_candidate_baseline_pair_and_non_applicable_rule (test_run_contracts.BindingTests.test_candidate_baseline_pair_and_non_applicable_rule) ... ok
+test_changed_baseline_target_requires_declared_axis_and_bound_context (test_run_contracts.BindingTests.test_changed_baseline_target_requires_declared_axis_and_bound_context) ... ok
+test_evaluation_binding_checks_refs_purposes_and_returns_copy (test_run_contracts.BindingTests.test_evaluation_binding_checks_refs_purposes_and_returns_copy) ... ok
+test_manifest_binding_checks_purpose_use_cases_and_deadline (test_run_contracts.BindingTests.test_manifest_binding_checks_purpose_use_cases_and_deadline) ... ok
+test_trial_binding_checks_dependency_closure_and_all_stage (test_run_contracts.BindingTests.test_trial_binding_checks_dependency_closure_and_all_stage) ... ok
+test_content_ref_direct_values_follow_wire_limits (test_run_contracts.ContentAndShapeTests.test_content_ref_direct_values_follow_wire_limits) ... ok
+test_content_ref_is_canonical_and_strict (test_run_contracts.ContentAndShapeTests.test_content_ref_is_canonical_and_strict) ... ok
+test_contract_rejects_unknown_fields_duplicate_and_bool_integer (test_run_contracts.ContentAndShapeTests.test_contract_rejects_unknown_fields_duplicate_and_bool_integer) ... ok
+test_plan_and_manifest_reject_kind_or_stage_renaming (test_run_contracts.ContentAndShapeTests.test_plan_and_manifest_reject_kind_or_stage_renaming) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.077s
+
+OK

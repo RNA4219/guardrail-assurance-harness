@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T20:35:26.784891+00:00",
+  "status": "partial",
+  "checks": {
+    "evidence_hashes_match": true,
+    "tested_sources_match": true,
+    "seven_preserved_sources_match": true,
+    "workflow_passed": true,
+    "index_sources_match": true,
+    "privacy_full_coverage_passed": false,
+    "limited_scope_preserved": true
+  },
+  "verification_sha256": "0d8abf61740875ba4d3c5b369d1e6e0a8643a6e3e99a53c0df4084a9813289a1",
+  "final_artifact_sha256": {
+    "privacy-final.json": "774ec17f56760fe0f88ccd7a31cff6e08b41a12118cce41720b7f7a8c8883dfb",
+    "workflow-final.json": "c7a46464081b86b674bdfdf1331fc58fc20c1ceb27ec35d4912ca94910a46ec0",
+    "final-checker.py": "eec4f2c3e4f8a7e89b1df95bc7df9f5b914cef43df66aa74ca7c46527a930dfc",
+    "privacy-checker.py": "7f57d73e87251294129c67115414425ee5cde42a3858140210f3961e62e18031"
+  },
+  "birdseye_generation": "00047",
+  "birdseye_nodes": 122,
+  "birdseye_index_sha256": "47ececa9391e0ee79550591287f16a609528cb2a24661706b701af101548640c",
+  "privacy_uninspected_paths": [
+    ".ga/authority-images/a3117c1630933eb7-xa1d5cpf"
+  ],
+  "qwen_final_review_completed": false,
+  "luna_final_review_completed": false,
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

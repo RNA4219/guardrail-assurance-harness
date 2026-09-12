@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/contract-design-20260910.md",
+  "role": "reviews",
+  "title": "契約・評価設計の照合",
+  "summary": "[Task](../tasks/TASK.contract-design-09-10-2026.md)で要求v0.4と初期運用方針v1を、GAH独自の論理契約へ具体化した。32要求・受入条件・初期数値は維持する。設計文書と算術の技術検収であり、製品試験・実測ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/open-questions.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md"
+  ],
+  "deps_in": [
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "bb987f94c8ed899a0088829526066b2cce28cdf11e6e101885851986dbed51fc"
+}

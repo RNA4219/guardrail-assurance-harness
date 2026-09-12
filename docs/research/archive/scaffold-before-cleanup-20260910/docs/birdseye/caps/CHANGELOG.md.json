@@ -1,0 +1,33 @@
+{
+  "id": "CHANGELOG.md",
+  "role": "CHANGELOG",
+  "title": "Changelog",
+  "summary": "通番は4桁ゼロ埋め、既存最大値に1を加える。未公開の変更はUnreleasedへ記録する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "deps_in": [
+    "CHECKLISTS.md",
+    "docs/TASKS.md",
+    "docs/releases/README.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "8083c539d1cba2f96d7843414aab22903217ade7ecf2ad6d57ae06800184edb4"
+}

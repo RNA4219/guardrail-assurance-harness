@@ -1,0 +1,18 @@
+{
+  "task_id": "20260910-05",
+  "attempted_at": "2026-09-10",
+  "purpose": "要求明確化の補助として、前回指定されたDGX Qwenの既存接続先を確認",
+  "endpoint": "http://127.0.0.1:18000/v1/models",
+  "status": "unavailable",
+  "attempts": 2,
+  "observed_error": "The response ended prematurely. (ResponseEnded)",
+  "model_inference_requests": 0,
+  "model_response_used": false,
+  "fallback": "親Codexによる文書編集と照合",
+  "scope": "今回の文書補助の接続結果。GAH製品のLLM評価・モデル承認ではない",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

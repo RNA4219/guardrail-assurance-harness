@@ -1,0 +1,77 @@
+--- src/gah/supervised_run.py.before
++++ src/gah/supervised_run.py
+@@ -237,6 +237,22 @@
+         if receipt['execution_status'] != 'COMPLETED':
+             raise SupervisorError('EXECUTION_INCOMPLETE')
+ 
++    def unresolved_resources(self, snapshot):
++        if snapshot['resources']['slots'] == 0 and snapshot['resources']['unsettled'] == 0:
++            return []
++        unresolved = []
++        for op, _, _ in self.entries:
++            try:
++                state = self.operation(op)
++            except SupervisorError as error:
++                if str(error) == 'OPERATION_MISSING':
++                    continue
++                raise
++            if state['dispatch_intended'] and (not state['stopped'] or not state['settled']):
++                unresolved.append({'operation_id': op, 'stopped': state['stopped'], 'settled': state['settled'],
++                    'reason': 'STOP_UNCONFIRMED' if not state['stopped'] else 'USAGE_UNCONFIRMED'})
++        return unresolved
++
+     def cancel(self, reason='CANCEL_REQUESTED'):
+         if self.checkpoint.get('cancel-requested') is None:
+             self.checkpoint.put('cancel-requested', {'reason': reason})
+@@ -247,7 +263,7 @@
+             run_id=self.run_id, owner_id=self.tag + '-begin')
+         if acquired.get('already_terminal') is True:
+             return self.gate()
+-        pending = False
++        pending = []
+         for op, entry, record in self.entries:
+             try:
+                 status = self.operation(op)
+@@ -265,7 +281,8 @@
+                 if end is not None and end['receipt'] == receipt:
+                     self.record_attempt(op, entry, receipt, end)
+             except Exception:
+-                pending = True
++                pending.append({'operation_id': op, 'reason': 'STOP_UNCONFIRMED' if not status['stopped']
++                    else 'RECOVERY_EVIDENCE_UNAVAILABLE'})
+         if not pending:
+             snapshot = self.status()
+             if not snapshot['closed']:
+@@ -274,6 +291,7 @@
+             self.call(OPERATOR, 'run_cancel_finalize', 'cancel-finalize', durable=True, run_id=self.run_id)
+         result = self.gate()
+         result['interruption_reason'] = self.checkpoint.get('cancel-requested')['reason']
++        result['unresolved_operations'] = pending
+         return result
+ 
+     def execute(self, mode):
+@@ -289,6 +307,7 @@
+         if mode == 'status':
+             result = self.gate()
+             result['resources'] = snapshot
++            result['unresolved_operations'] = self.unresolved_resources(snapshot)
+             return result
+         if mode == 'cancel' or snapshot['cancelled'] or self.checkpoint.get('cancel-requested') is not None:
+             return self.cancel()
+--- tests/test_supervised_run.py.before
++++ tests/test_supervised_run.py
+@@ -136,7 +136,13 @@
+         self.assertEqual(self.count(),0)
+         result=self.run_mode('cancel')
+         self.assertEqual(result['exit_code'],2,result)
+-        self.assertIn('STOP_UNCONFIRMED',result['gate']['reasons'])
++        self.assertEqual(result['unresolved_operations'],[{'operation_id':self.runner.recovered[0],
++            'reason':'STOP_UNCONFIRMED'}])
++        status=self.run_mode('status')
++        self.assertEqual(status['exit_code'],2)
++        self.assertEqual(status['unresolved_operations'][0]['reason'],'STOP_UNCONFIRMED')
++        self.assertFalse(status['unresolved_operations'][0]['stopped'])
++        self.assertIsNone(self.store._db.execute("SELECT usage_json FROM resource_operations WHERE run_id='supervised-run'").fetchone()[0])
+         self.assertEqual(self.count(),0)
+ 
+     def test_revocation_after_observation_prevents_new_dispatch(self):

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "request_count": 1,
+  "started_at": "2026-09-11T13:05:38.879444+00:00",
+  "source_sha256": {
+    "src/gah/transition_authority.py": "fc32390e349813859f07cc2a80aaaea60d87b602f8d5643c21d168dcf0ee3db8",
+    "docs/contract-transition-detail-spec.md": "adddd53b5765845ad6098e5a2178ee6858749499aecbaad235d3ac7a884385f9"
+  },
+  "submitted_sha256": "f4fe09dee8f819006b34261dd6b67c42c51c3afddaf469dd2d15a4b7f8b6e333",
+  "request_sha256": "9574c0fa2e63dd86fdedf4b6817877be0dc4954beb9aea1cfcbf00e8bf7de319",
+  "model": "qwen3.8-flash-next",
+  "timeout_seconds": 50,
+  "max_tokens": 1600,
+  "authority_evidence": false,
+  "ci_eligible": false,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 4175,
+    "total_tokens": 4501,
+    "completion_tokens": 326,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "response_sha256": "071cd370439ab986d5e5e04d74068b6cbff9dfa678a3cb1a15c8944999882870",
+  "response_text_sha256": "8fc16473418e1d45b98306a9c67ab9025b148c477264f0e1d70cce4fd64e0e67",
+  "elapsed_seconds": 19.125
+}

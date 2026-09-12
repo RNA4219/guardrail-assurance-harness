@@ -1,0 +1,25 @@
+{
+  "id": "GUARDRAILS.md",
+  "role": "GUARDRAILS",
+  "title": "Guardrails",
+  "summary": "小さく検証可能な変更を行う。利用者や他作業の変更を保持する。 文書の正本は [要件定義](docs/requirements.md)、生成物はその文書から再現する。 確定していない設計・未実装機能・未実行の評価を完了と表示しない。",
+  "public_api": [],
+  "deps_out": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/BIRDSEYE.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "a272f23e9a5e006201ae92f273f3cb43651b074768b9412ff767b16ab026e1dc"
+}

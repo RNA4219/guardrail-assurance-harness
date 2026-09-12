@@ -1,0 +1,9 @@
+{
+  "matched": true,
+  "observed": {
+    "normal": "ADOPTED_CONDITIONS_UNAVAILABLE",
+    "recovery": "RECOVERY_NOT_REQUIRED",
+    "cancel": "OWNER_STALE"
+  },
+  "scope": "resource_authority; start callback rejects; lease expired; no Docker"
+}

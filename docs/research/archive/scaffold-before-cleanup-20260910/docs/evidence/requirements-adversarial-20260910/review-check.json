@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-09T17:10:52+00:00",
+  "scope": "requirements document and counterexample provenance",
+  "status": "pass",
+  "checks": {
+    "archive_hashes": true,
+    "normative_product_requirements_unchanged": true,
+    "release_metrics_unchanged": true,
+    "m0_m1_m2_scope_unchanged": true,
+    "nfr_targets_unchanged": true,
+    "new_ids_exactly_ten": true,
+    "new_declarations_unique": true,
+    "acceptance_mapping_complete": true,
+    "models_map_to_new_requirements": true,
+    "counterexamples_reproduced": true,
+    "model_runner_unchanged": true,
+    "eighteen_distinct_scenarios": true,
+    "docs/spec.md_unchanged": true,
+    "docs/design.md_unchanged": true
+  },
+  "requirements_before_sha256_raw": "940c93624ec2c4ddb4f68b1798eac3490fb5a34e29382a7d37e229649d9fb67b",
+  "requirements_after_sha256_raw": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a",
+  "unchanged_spec_design_sha256_lf": {
+    "docs/spec.md": "cafaa1ab428cbc922bde5637da90bb49721d4e0d5cabad782cf34b4db7d6167a",
+    "docs/design.md": "eda2d0cf2b48161f17b742585525108d45053f6e5b3cc933422be94b6ea30ff3"
+  },
+  "new_requirement_ids": [
+    "BUDGET-01",
+    "EVAL-02",
+    "EVAL-03",
+    "IDENTITY-01",
+    "METADATA-01",
+    "OUTPUT-02",
+    "POLICY-01",
+    "RETENTION-02",
+    "RUN-02",
+    "RUN-03"
+  ],
+  "scenario_count": 18,
+  "modeled_counterexamples": 10,
+  "already_covered_scenarios": 8,
+  "product_validation": "not_run"
+}

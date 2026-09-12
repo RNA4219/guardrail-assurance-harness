@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T08:20:44.036060+00:00",
+  "purpose": "acceptance",
+  "passed": true,
+  "checks": {
+    "all_cases_complete": true,
+    "all_stages_observed": true,
+    "usage_known": true,
+    "no_unsettled_reservations": true,
+    "sources_unchanged": true,
+    "diagnostic_not_ci": true
+  },
+  "summary": {
+    "schema_version": 1,
+    "kind": "synthetic_llm_summary",
+    "purpose": "acceptance",
+    "pack_digest": "c5295f92cd8d4ef8e9792fc21a39d9b8725d61eb06afc50a76765b1bc19cdc8c",
+    "case_count": 400,
+    "expected_call_count": 600,
+    "complete_case_count": 400,
+    "missing_case_count": 0,
+    "expected_stage_count": 600,
+    "observed_stage_count": 600,
+    "stage_mismatch_count": 0,
+    "metrics": {
+      "TP": 200,
+      "FN": 0,
+      "FP": 0,
+      "TN": 200,
+      "indeterminate_expected": 0,
+      "indeterminate_match": 0,
+      "indeterminate_mismatch": 0
+    },
+    "usage": {
+      "prompt_tokens": 167364,
+      "completion_tokens": 6909,
+      "total_tokens": 174273
+    },
+    "usage_known": true,
+    "reserved_tokens_remaining": 0,
+    "provider_model": "qwen3.8-flash-next",
+    "model_weights_revision_verified": false,
+    "configured_local_cost_zero_is_not_billing_measurement": true,
+    "authority_connected": false,
+    "resource_ledger_connected": false,
+    "ci_eligible": false,
+    "calibration_passed": null,
+    "status": "COMPLETE",
+    "started_at": 1789114442,
+    "finished_at": 1789114844,
+    "run_timeout_seconds": 5400
+  },
+  "source_sha256": {
+    "src/gah/evaluation_data.py": "5f5985722aa061dc62c1fad444510ca927a28d8d48f96508ef26e17078ca3c63",
+    "src/gah/llm_evaluator.py": "ff783a386411f91a5c5890cc534a680355da9abe74f605e5031ab6b25af87fc0",
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "83b9f7925f7176d81db5e4fe3d85b5169f66f900de84f67b5ebb1f59958537da",
+    "tools/synthetic_llm_provider.py": "d37e32d37e51c37030a1107da808093d3f24b3cde4c329986780d8464e0a8420",
+    "tools/verify_synthetic_llm.py": "fc16414b799645098a13cfb5b7db83d91f1e310f6b0a0b3a7bab8bae3c44c7a3",
+    "datasets/synthetic-policy-v1/pack.json": "6008a0ea789b7e391d9e136d202b4ddc79d919573ec800500d5724cd5d573432"
+  },
+  "elapsed_seconds": 402.266,
+  "ci_eligible": false,
+  "full_mvp_acceptance": "NOT_RUN",
+  "evidence_sha256": {
+    "manifest.json": "21077745386bd42761ed3133b153411853fd564e7f7d088080fe6150c79918d0",
+    "records.json": "fb8d69c212e65faec82a94a1cc4fbd3654c2554af1aca17a345b65e6ae918d6c",
+    "summary.json": "6b3c46767a592b823258988fc322c58aefea12f43654255c79bac0421329f3d8"
+  }
+}

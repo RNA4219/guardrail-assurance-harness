@@ -1,0 +1,33 @@
+{
+  "id": "docs/contracts/evaluation-contract.md",
+  "role": "contracts",
+  "title": "評価契約 v0.3",
+  "summary": "[要求](../requirements.md)を実装へ渡す論理契約。以下の全MVPオブジェクトのフィールド名とenumは設計案である。初期実装の部品Schema・API・診断CLIは[詳細仕様](../detail-spec.md)に分け、この全契約を完成済みとは扱わない。[初期値JSON](initial-policy.v1.json)、[算術例](decision-examples.v1.json)、[状態と境界の追加例](review-examples.v2.json)も設計資料である。v0.2の補正を保ち、v0.3では[初回・採択・再開・終了の契約](lifecycle-contract.md)を加えた。複合条件には同補足の確定時検査と優先順を適用する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/lifecycle-contract.md",
+    "docs/detail-spec.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/contracts/README.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/runtime-contract-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c86f8b1389d02b18c4f3c44a3f5a0106c7878bf038859bb9d4329a59db5eaab7"
+}

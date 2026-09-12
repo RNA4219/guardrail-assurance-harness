@@ -1,0 +1,52 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 620B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/7] FROM docker.io/library/python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 797.03kB 0.1s done
+#5 DONE 0.2s
+
+#4 [1/7] FROM docker.io/library/python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+#4 CACHED
+
+#6 [2/7] COPY src /opt/gah/src
+#6 DONE 0.0s
+
+#7 [3/7] COPY config /opt/gah/config
+#7 DONE 0.0s
+
+#8 [4/7] COPY tools /opt/gah/tools
+#8 DONE 0.1s
+
+#9 [5/7] COPY fixtures /opt/gah/fixtures
+#9 DONE 0.0s
+
+#10 [6/7] RUN mkdir /ipc /state /work && chown 12000:12000 /ipc /state /work && chmod 0755 /ipc && chmod 0700 /state
+#10 DONE 0.2s
+
+#11 [7/7] WORKDIR /work
+#11 DONE 0.1s
+
+#12 exporting to image
+#12 exporting layers 0.1s done
+#12 writing image sha256:0e5e035e31190ac7252d15d3f3119d4ecba2af4c5f7e95cfaa2e38133761adba done
+#12 naming to docker.io/library/gah-authority:ac0733337a4e2043 done
+#12 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/default/default/ccwzcfh87oubsdglb98lbhfq0
+{"status": "prepared", "image_id": "sha256:0e5e035e31190ac7252d15d3f3119d4ecba2af4c5f7e95cfaa2e38133761adba", "sources_digest": "ac0733337a4e2043f23da01e5208408cc3a96f3ac14b12837be97667964a004f"}

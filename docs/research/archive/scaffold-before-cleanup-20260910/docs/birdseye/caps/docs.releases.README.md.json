@@ -1,0 +1,21 @@
+{
+  "id": "docs/releases/README.md",
+  "role": "releases",
+  "title": "Release記録",
+  "summary": "まだreleaseはない。[CHANGELOG](../../CHANGELOG.md) のUnreleasedが変更履歴の正本。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md"
+  ],
+  "deps_in": [
+    "CHECKLISTS.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "4f3d5363bf83d5e1137df817ffd37d7ddec994435539dbd6c99a48dbeffd65a7"
+}

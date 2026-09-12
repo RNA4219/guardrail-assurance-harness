@@ -1,0 +1,11 @@
+[project]
+name = "guardrail-assurance-harness"
+version = "0.2.0"
+description = "Guardrail Assurance Harness: 判定・永続化・診断コアと文書運用基盤"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "third_party/*.LICENSE"]
+dependencies = []
+
+[tool.uv]
+package = false

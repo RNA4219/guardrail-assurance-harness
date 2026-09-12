@@ -1,0 +1,37 @@
+{
+  "id": "docs/reviews/state-review-20260911.md",
+  "role": "reviews",
+  "title": "複合条件と初回・再開の見直し",
+  "summary": "対象は編集前に固定した設計v0.2。文書上の曖昧さ6件をv0.3へ修正した。製品の障害・脆弱性を実証したものではない。32要求、32受入条件、初期方針・数値、既存68例は維持した。manual-bb-test-harnessの手順で整理し、DGX Qwenへ6論点を照合させ、親が要求と反例で判断した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/requirements.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/open-questions.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "04f0247c92fd930cfdf5a513db22b65e46a81af9636b0aa01a1c8ec8d5edaea2"
+}

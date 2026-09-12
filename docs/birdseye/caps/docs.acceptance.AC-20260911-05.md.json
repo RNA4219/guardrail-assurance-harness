@@ -1,0 +1,46 @@
+{
+  "id": "docs/acceptance/AC-20260911-05.md",
+  "role": "acceptance",
+  "title": "Acceptance: 全MVPの実装・接続・受入",
+  "summary": "[条件比較部品の証跡](../evidence/mvp-condition-core-20260912/README.md)を追加した。新規30件・既存21件の部品試験であり、契約3採択・実行・修復確認の受入ではない。全体statusはdraftを維持する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/evidence/mvp-contract-adoption-20260912/README.md",
+    "docs/evidence/mvp-evaluation-20260911/README.md",
+    "docs/evidence/mvp-recovery-20260912/README.md",
+    "docs/evidence/mvp-regression-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-adoption-20260911.md",
+    "docs/reviews/mvp-authority-20260911.md",
+    "docs/reviews/mvp-completion-20260911.md",
+    "docs/reviews/mvp-contract-adoption-20260912.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/reviews/mvp-execution-20260911.md",
+    "docs/reviews/mvp-regression-20260912.md",
+    "docs/run-recovery-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/evidence/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/oss-publication.md",
+    "docs/reviews/mvp-candidate-20260911.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "828e3ac9246cde6597e7844a796b92dd04ce2a638cd9c4d90aa59552973cbd6c"
+}

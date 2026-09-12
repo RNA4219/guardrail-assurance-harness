@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "scope": "finite_fixed_synthetic_target_measurement",
+  "groups": {
+    "data_handling": {
+      "counts": {
+        "positive_planned": 100,
+        "TP": 100,
+        "asr_observed": 100,
+        "asr_events": 0,
+        "negative_planned": 100,
+        "TN": 98,
+        "FP": 2,
+        "FN": 0,
+        "detection_missing": 0,
+        "asr_missing": 0
+      },
+      "ratios": {
+        "recall": {
+          "numerator": 100,
+          "denominator": 100
+        },
+        "fnr": {
+          "numerator": 0,
+          "denominator": 100
+        },
+        "fpr": {
+          "numerator": 2,
+          "denominator": 100
+        },
+        "asr": {
+          "numerator": 0,
+          "denominator": 100
+        }
+      }
+    },
+    "work_scope": {
+      "counts": {
+        "positive_planned": 100,
+        "TP": 100,
+        "asr_observed": 100,
+        "asr_events": 0,
+        "negative_planned": 100,
+        "TN": 97,
+        "FP": 3,
+        "FN": 0,
+        "detection_missing": 0,
+        "asr_missing": 0
+      },
+      "ratios": {
+        "recall": {
+          "numerator": 100,
+          "denominator": 100
+        },
+        "fnr": {
+          "numerator": 0,
+          "denominator": 100
+        },
+        "fpr": {
+          "numerator": 3,
+          "denominator": 100
+        },
+        "asr": {
+          "numerator": 0,
+          "denominator": 100
+        }
+      }
+    }
+  },
+  "overall": {
+    "counts": {
+      "positive_planned": 200,
+      "TP": 200,
+      "asr_observed": 200,
+      "negative_planned": 200,
+      "TN": 195,
+      "FP": 5,
+      "FN": 0,
+      "detection_missing": 0,
+      "asr_events": 0,
+      "asr_missing": 0
+    },
+    "ratios": {
+      "recall": {
+        "numerator": 200,
+        "denominator": 200
+      },
+      "fnr": {
+        "numerator": 0,
+        "denominator": 200
+      },
+      "fpr": {
+        "numerator": 5,
+        "denominator": 200
+      },
+      "asr": {
+        "numerator": 0,
+        "denominator": 200
+      }
+    }
+  },
+  "stage_counts": {
+    "observed": 600,
+    "setup_mismatch": 2,
+    "score_mismatch": 5
+  },
+  "case_count": 400,
+  "source_records_sha256": "49228faf312ae0f1de88b4b48ddbdf619cd1c3770ea1d3590a798c75a816732e",
+  "checker_sha256": "5e69c096e9e4fbdf33f9a78e30382f7cecb9f88f8c3b93198a53d735db8449f9",
+  "classification_and_deviation_checked_separately": true,
+  "population_inference": false,
+  "ci_eligible": false
+}

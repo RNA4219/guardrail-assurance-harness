@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T07:21:08.628877+00:00",
+  "passed": true,
+  "checks": {
+    "regression_and_runtime_passed": true,
+    "tested_sources_still_match": true,
+    "evidence_still_matches": true,
+    "workflow_passed": true,
+    "privacy_passed": true
+  },
+  "verification_sha256": "8b2caa8d867842bf405eb90b77298244fe43eedccf0ad7128cafc892cfa823ef",
+  "document_sha256": {
+    "README.md": "d9e0861b90d4c9e0e5e2f3a1c605763b3b2d3d7979bb5d349fecec7ffcf324b1",
+    "HUB.codex.md": "600ca394cccda5921efab5d741a915fd205b65de1d433fb818218b4f6b35f5fc",
+    "AGENTS.md": "cf0bd0bd5f71984d4b19d8cf38948e240933b55cd1b274421fb96e90cd2045c7",
+    "RUNBOOK.md": "e83c0397ee3d8ab970a6d9ac6cdae31caa00c11079807f565c2f97325a17f407",
+    "CHANGELOG.md": "b50b5ec5b9ad9bc74a1aea6b6d3e928eb19ad677d68a88eb0bf47e5ebace37a4",
+    "docs/spec.md": "be22d508e2dcff8728439a8d0d722da86e0764ef0eef09acafbd2fe4797a0d8f",
+    "docs/open-questions.md": "55ffbda32d60d3a786c3997f88ae3471e7213680e04cce09168edcb12efb4685",
+    "docs/auth-adoption-detail-spec.md": "c3bb0a8e8823572c739bf749b7075a932c1c5876a102ba91269e2dc560538d7a",
+    "docs/run-contract-detail-spec.md": "34fdea39fe38d2c84df1655cbb788b0caaa485fb5978ac37cae120cad1c228d5",
+    "docs/mvp-completion-audit.md": "2727d3e9e7b56806a28677764445c74af615e9cc96336ccb0a5b3f784d516fb2",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md": "6b9e3497d1ca5a5aa93e1acf50b09df0b0c68687754dc0e567d43c3c95bb9160",
+    "docs/acceptance/AC-20260911-05.md": "ef4fa5db2e1b24b8ba1d5bf9d7131db21b380db4bef0be68272ad4d065712d90",
+    "docs/reviews/mvp-run-contract-20260911.md": "60854e247abc57876077dd42ef1ab64378b0f35c9c6f0c960c368293ab884a98"
+  },
+  "workflow_sha256": "63725241f092269c5d561256b4f1f10000cdb5910523e1bac7252983fc1e852d",
+  "privacy_sha256": "52378871507e89d84ba940234f1555fc273c3229e606629b1b6d84c88749aa89",
+  "checker_sha256": "745a2dfc95551076d48dbeb818f243cbe9cfd8693cc3f5c0d92ce51129b8ede6",
+  "ci_eligible": false,
+  "release_gate": "no_go"
+}

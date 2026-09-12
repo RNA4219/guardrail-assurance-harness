@@ -1,0 +1,33 @@
+{
+  "id": "docs/run-contract-detail-spec.md",
+  "role": "run-contract-detail-spec",
+  "title": "評価契約・実行計画・開始境界の詳細仕様",
+  "summary": "[全MVP Task](tasks/TASK.mvp-completion-09-11-2026.md)の次の接続工程。[評価契約](contracts/evaluation-contract.md)と[LC01〜LC06](contracts/lifecycle-contract.md)を正本とする。以下の構造検査、管理DBの拡張、資源台帳を実装し、管理主体と実行監督へ接続する。未接続の部品を通常CI成功へ使わない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-transition-detail-spec.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "RUNBOOK.md",
+    "docs/auth-adoption-detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/mvp-run-contract-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "ffed6a1203fc3e0f09de62b316b7f73bc48924d181fdf7793f241ab1b499daef"
+}

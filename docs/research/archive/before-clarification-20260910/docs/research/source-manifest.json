@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "project": "guardrail-assurance-harness",
+  "organized_at": "2026-09-10",
+  "current": {
+    "path": "docs/requirements.md",
+    "stage": "requirements_draft",
+    "mutable": true,
+    "edit_scope": "frontmatter, headings, TSV tables, math delimiters, citation labels, editorial notice"
+  },
+  "archive": {
+    "path": "docs/research/archive/gah-requirements-original-20260910.md",
+    "original_name": "docs/requirements.md (before documentation cleanup)",
+    "sha256_raw": "3070d72b290135eb1d1135213ec459aa640989798613401689cd99dc1ed8051c",
+    "mutable": false
+  },
+  "copied_scaffold": {
+    "path": "docs/research/archive/scaffold-before-cleanup-20260910",
+    "manifest": "archive-manifest.json",
+    "file_count": 148,
+    "assurance_for_gah": false
+  },
+  "body_preservation": {
+    "method": "Reverse the explicit presentation transforms; compare all nonblank source lines including fenced examples",
+    "equal": true
+  },
+  "citations": {
+    "register": "docs/research/citation-register.md",
+    "status": "unresolved_unverified",
+    "unique_references": 52
+  },
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

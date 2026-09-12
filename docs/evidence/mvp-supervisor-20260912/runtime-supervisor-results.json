@@ -1,0 +1,110 @@
+{
+  "normal": {
+    "schema_version": 1,
+    "kind": "supervised_run_result",
+    "run_id": "supervised-normal-runtime",
+    "trigger": "scheduled_full",
+    "executed_scope": "full",
+    "scope_reason": "FULL_REQUESTED",
+    "control_ids": [
+      "fixture-C01",
+      "fixture-C02",
+      "fixture-C03",
+      "fixture-C04",
+      "fixture-C05",
+      "fixture-C06",
+      "fixture-C07",
+      "fixture-C08",
+      "fixture-C09",
+      "fixture-C10",
+      "fixture-F01",
+      "fixture-F02",
+      "fixture-F03",
+      "fixture-F04",
+      "fixture-F05"
+    ],
+    "gate": {
+      "action": "ci_check",
+      "assurance": "HEALTHY",
+      "checked_at": 1789205832,
+      "ci_eligible": true,
+      "execution_status": "COMPLETED",
+      "exit_code": 0,
+      "expected_manifest_ref": {
+        "digest": "879ba5994d12e21a5994fecbb966567a0e8e6653338f1b9beeeb0d9e238b5d92",
+        "id": "supervised-normal-runtime",
+        "kind": "run_manifest"
+      },
+      "kind": "ci_gate_result",
+      "outputs_ref": {
+        "digest": "4f69c35ee8f57e15311cb2a453489c2f3419ffb0ada03aca18cb1fea1a410407",
+        "id": "supervised-normal-runtime",
+        "kind": "run_outputs"
+      },
+      "reasons": [],
+      "request_id": "supervised-afd76ee7e4a6e8ba7567c102-ci",
+      "run_id": "supervised-normal-runtime",
+      "schema_version": 1,
+      "use": true
+    },
+    "ci_eligible": true,
+    "exit_code": 0
+  },
+  "interrupted": {
+    "schema_version": 1,
+    "kind": "supervised_run_result",
+    "run_id": "supervised-interrupted-runtime",
+    "trigger": "manual",
+    "executed_scope": "full",
+    "scope_reason": "FULL_REQUESTED",
+    "control_ids": [
+      "fixture-C01",
+      "fixture-C02",
+      "fixture-C03",
+      "fixture-C04",
+      "fixture-C05",
+      "fixture-C06",
+      "fixture-C07",
+      "fixture-C08",
+      "fixture-C09",
+      "fixture-C10",
+      "fixture-F01",
+      "fixture-F02",
+      "fixture-F03",
+      "fixture-F04",
+      "fixture-F05"
+    ],
+    "gate": {
+      "action": "ci_check",
+      "assurance": "UNKNOWN",
+      "checked_at": 1789205954,
+      "ci_eligible": false,
+      "execution_status": "CANCELLED",
+      "exit_code": 3,
+      "expected_manifest_ref": {
+        "digest": "a6fc44f35ba940cec330f4cf3efd33def72948b592484703a6d314b0ba5357a4",
+        "id": "supervised-interrupted-runtime",
+        "kind": "run_manifest"
+      },
+      "kind": "ci_gate_result",
+      "outputs_ref": {
+        "digest": "22c598cd9aba5cf8d0c8d224781f546a3ccefcf31c53f9d7b8e62844f7b6d5d0",
+        "id": "supervised-interrupted-runtime",
+        "kind": "run_outputs"
+      },
+      "reasons": [
+        "CANCEL_REQUESTED",
+        "ASSURANCE_NOT_ALLOWED"
+      ],
+      "request_id": "supervised-9660015bfe6b1c5992334540-ci",
+      "run_id": "supervised-interrupted-runtime",
+      "schema_version": 1,
+      "use": false
+    },
+    "ci_eligible": false,
+    "exit_code": 3,
+    "interruption_reason": "INTERRUPTED_OPERATION",
+    "unresolved_operations": []
+  },
+  "full_mvp_accepted": false
+}

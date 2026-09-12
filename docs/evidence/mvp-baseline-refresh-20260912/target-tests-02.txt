@@ -1,0 +1,14 @@
+test_cancelled_source_and_bool_in_stored_proposal_are_rejected (test_baseline_refresh.BaselineRefreshTests.test_cancelled_source_and_bool_in_stored_proposal_are_rejected) ... ok
+test_competing_proposals_and_wrong_roles_cannot_advance_twice (test_baseline_refresh.BaselineRefreshTests.test_competing_proposals_and_wrong_roles_cannot_advance_twice) ... ok
+test_missing_predecessor_and_wrong_reference_fail_closed (test_baseline_refresh.BaselineRefreshTests.test_missing_predecessor_and_wrong_reference_fail_closed) ... ok
+test_negative_run_cannot_be_promoted_and_keeps_findings (test_baseline_refresh.BaselineRefreshTests.test_negative_run_cannot_be_promoted_and_keeps_findings) ... ok
+test_predecessor_revocation_invalidates_unrevoked_successor (test_baseline_refresh.BaselineRefreshTests.test_predecessor_revocation_invalidates_unrevoked_successor) ... ok
+test_previous_recovery_store_migrates_but_cannot_contain_refresh (test_baseline_refresh.BaselineRefreshTests.test_previous_recovery_store_migrates_but_cannot_contain_refresh) ... ok
+test_reference_revocation_is_scoped_and_dependency_loss_propagates (test_baseline_refresh.BaselineRefreshTests.test_reference_revocation_is_scoped_and_dependency_loss_propagates) ... ok
+test_refresh_keeps_contract_baseline_and_historical_artifacts (test_baseline_refresh.BaselineRefreshTests.test_refresh_keeps_contract_baseline_and_historical_artifacts) ... ok
+test_update_failure_rolls_back_pointer_history_and_receipt (test_baseline_refresh.BaselineRefreshTests.test_update_failure_rolls_back_pointer_history_and_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 484.253s
+
+OK

@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/mvp-baseline-refresh-20260912.md",
+  "role": "reviews",
+  "title": "baseline更新の親レビュー",
+  "summary": "利用者の指示に従い、親が実装・レビュー・検証を担当した。この工程で外部モデルへ委任していない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "734fbba5a92369ba07d72fb5b02983d8348e112e3db1018e67f71fb266c4c8f8"
+}

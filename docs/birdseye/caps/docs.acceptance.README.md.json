@@ -1,0 +1,24 @@
+{
+  "id": "docs/acceptance/README.md",
+  "role": "acceptance",
+  "title": "Acceptance運用",
+  "summary": "[雛形](ACCEPTANCE_TEMPLATE.md) をAC-YYYYMMDD-NN.mdへ複製し、task_idで [Task](../tasks/README.md) に結ぶ。[索引](INDEX.md) は自動生成する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md"
+  ],
+  "deps_in": [
+    "RUNBOOK.md",
+    "docs/TASKS.md",
+    "docs/acceptance/INDEX.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "00259bc9233ebc9f9b08ebdd12b28de9cb629192650a801439c3e90d3c7fffe3"
+}

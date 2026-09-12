@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/mvp-report-20260912.md",
+  "role": "reviews",
+  "title": "通常run要約の親レビュー",
+  "summary": "親がR19の固定UC-CI接続を実装・レビュー・検証した。補助モデルへの委任は行っていない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/mvp-completion-audit.md"
+  ],
+  "deps_in": [
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/run-report-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "de209ea1a45730052ded28b32bc3d45b762bdf7e84c5a55ae578e0ea4c92182b"
+}

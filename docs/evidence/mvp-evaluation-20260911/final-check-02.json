@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T09:30:34.322179+00:00",
+  "passed": true,
+  "checks": {
+    "regression_and_runtime_passed": true,
+    "tested_sources_still_match": true,
+    "evidence_still_matches": true,
+    "test_log_matches": true,
+    "workflow_passed": true,
+    "privacy_passed": true
+  },
+  "verification_sha256": "5e72f8f003276b677f80cbb3c88f343a5f3cbd7e18e5609b3046501400d709b6",
+  "document_sha256": {
+    "README.md": "e8103ed7d7629f097e1ef9e1e0f77c2a98d5f0d3cfbf66349e9c4615b1fb27b0",
+    "HUB.codex.md": "65295ce1d83528373a4e75dcf1b8f006daab72baa62a2795d347ef2c45d8edb6",
+    "AGENTS.md": "5b16d60dcf505cc47d51a7f413a38e91fd3a0782149d9b1912320a65f381de77",
+    "RUNBOOK.md": "f2f13fd2995b14b6ac8a6672aeb7edf417969b6ab1181dab17bea5b7075bc183",
+    "CHANGELOG.md": "0a15cbca2161b4b14749ee6ffe9ac24ddcad81e20136a0740a3b42cdd887a531",
+    "docs/spec.md": "31fd6551560154e8e0b5eb042747bb2bb446485e80f3a54a0b6a60f981efff6b",
+    "docs/open-questions.md": "c34788ce6c39b5efb2db50e3d8c5e146146c33d52d9324b82663d71da9158ee1",
+    "docs/evaluation-detail-spec.md": "a54146bcbd83752f47ce63870d730e52c8502e349b1ea1be62a0a09fd021d6d4",
+    "docs/run-evidence-detail-spec.md": "22e7c994eda1d562aadeb223a70a642b2209f4fcafc7c50cbdfeefd3d274a18e",
+    "docs/remediation-detail-spec.md": "32f0743e3df9dc2e908055974069ea934e03401d91f9b75088a73497b601e4a5",
+    "docs/baseline-adoption-detail-spec.md": "78ad15c864e5457402f4d1a3e17d543b252bfd08a30703ccd514aa18e24696f3",
+    "docs/adapter-spec.md": "8fbae7f465e6bad9e23b89ad919664ba8109160fd60ad8daa028ce510b7540a2",
+    "docs/mvp-completion-audit.md": "93b37207f9eaca8334d0b0d63dcce73154952fd7f18f9d4c749fb9cad32cdc1d",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md": "08446475f47829233688445e03530b0982cbb75f9f7f0577513eb94f4eb67b29",
+    "docs/acceptance/AC-20260911-05.md": "e84f265c55e66bfc8fdf58f17642e97b533e82bfe19d837764cd1b6fdafaa304",
+    "docs/reviews/mvp-evaluation-20260911.md": "a7aa7c359d29e66b9a196d9ec42d612ed0e5ab737ac174657b15f0b14963b459",
+    "docs/evidence/mvp-evaluation-20260911/README.md": "3f18220888ce61ebe096399a14e225c2d4d6b4200feab60f6dbb882bbfcd5f0c",
+    "datasets/synthetic-policy-v1/README.md": "6cb46ab71cfb19bcc11653057e9e98aced3ad9c75c0419941489cd5e78c4617d"
+  },
+  "workflow_sha256": "cc7e9d3e38f29b26458eaca29eb24aae907c51072a23eb842e5b3f8f78e15600",
+  "privacy_sha256": "98b3e9c4bcef97f42c49af4f1eaf1d0a76acc3ee5f262b77f5e04b0920bad921",
+  "checker_sha256": "52d02c20cfeb7fa1c711062b27ef99f21e15b60df83b60e306887b5ae9e5c453",
+  "ci_eligible": false,
+  "release_gate": "no_go",
+  "full_mvp_acceptance": "NOT_RUN"
+}

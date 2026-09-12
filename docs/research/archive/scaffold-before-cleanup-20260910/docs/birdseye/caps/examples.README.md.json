@@ -1,0 +1,19 @@
+{
+  "id": "examples/README.md",
+  "role": "examples",
+  "title": "利用例",
+  "summary": "実装が成立した段階で、合成入力、実行コマンド、期待結果、制約を揃えた例を置く。現時点で製品CLIは実装されていないため架空の解析コマンドは掲載しない。現時点の操作は [RUNBOOK](../RUNBOOK.md)。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "9a9f967b747b228ae009ec621525e952af568d6327084028dd6b79f59a916540"
+}

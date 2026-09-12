@@ -1,0 +1,61 @@
+{
+  "saved_at": "2026-09-10",
+  "reason": "利用者が初期対象をcoding agent開発・CIとLLMガードレール評価の両方と確認したため、改訂前のv0.1を保存",
+  "mutable": false,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256_raw": "a84ca210b3c6e36d840190ca429b34a5c55c4678c657fb9b3c56efdaf5e941c4"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "f7108f731968fe8be87d8f49cb6355ecdfc26308f1dc825db7084d9bcf231782"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "a6f7a00d65e83f818f95cc91e4610bd5706ca979a42aebc86842704fbac3bb8f"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "be97680b94fa8c2e369f0b8a8084fe27f7831c6a8704667f34642c9ae6b344d8"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "856eae9cd3632244d247ba5b382ef111d55b24736a8349019741509431c1d59e"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "b44dd81837f7060a6c1de3611e638743dafab5a524d893e49981570fa6e927ad"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "49e524f885bef59477651d5ee44a763a1f70c7028f413e904ddc7986a07bac55"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "88f3d77430f8bea766b3b9863d9697ee34d5704734eb397f3f8a688794025dbf"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "ea519cb064d92ecfe1d42928d130c6c86d57dd3523218edfc0254a609d290ce5"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "d8fa9f585eb6d7ff82ca875103e9db717f2ee87964b8b76603f87ed3a2ab0e9f"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "272892476adafeaa78a65001d5f76109a8af3f46d09b6e3c4d79082d07eab515"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "8a4f40ba34213498e2a763d36e142533053c392a127308fe71c5f560f3657392"
+    }
+  ],
+  "task_id": "20260910-05",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

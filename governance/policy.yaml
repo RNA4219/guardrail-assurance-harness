@@ -1,0 +1,29 @@
+schema_version: 1
+project: guardrail-assurance-harness
+owner: RNA4219
+adoption_tier: 3
+lifecycle: requirements
+self_modification:
+  preserve_paths:
+    - docs/research/archive/**
+  review_required_paths:
+    - governance/**
+    - SECURITY.md
+    - .github/workflows/**
+ci:
+  required_jobs:
+    - governance-gate
+    - python-ci
+    - docs-gate
+  checker_stages:
+    adoption: enforce
+    task_acceptance: enforce
+    birdseye: enforce
+    docs: enforce
+    security_posture: enforce
+release:
+  enabled: false
+  license_decision_required: false
+  license: MIT
+  remote_branch_protection: not_verified
+

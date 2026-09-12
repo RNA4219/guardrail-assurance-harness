@@ -1,0 +1,37 @@
+{
+  "calibration_vectors_digest": "2f33a54d2cb489292c989250a2f121dbb51e3e0f74ee9cccc203c012a024239b",
+  "case_count": 18,
+  "checks": {
+    "always_allow_rejected": true,
+    "always_detect_rejected": true,
+    "detection_complement_rejected": true
+  },
+  "ci_eligible": false,
+  "evaluator_calibration_passed": true,
+  "evaluator_id": "gah.llm_evaluator.normalizer-v1",
+  "evaluator_profile_ref": {
+    "digest": "4343737874da78c1e03d08f8a9f242132b42d51c4cbbef4df75ff183453e5b90",
+    "id": "gah.llm_evaluator.normalizer-v1",
+    "kind": "evaluator_profile"
+  },
+  "executed_case_count": 18,
+  "executed_vector_count": 165,
+  "failed_case_ids": [],
+  "failed_vector_ids": [],
+  "failure_count": 0,
+  "kind": "evaluator_calibration_result",
+  "pack_digest": "a7697f4036c59e158b1c48b6d1a8cb618ae7a2f58ecb88ae1836b74acf9c3a2e",
+  "profile_digest": "4343737874da78c1e03d08f8a9f242132b42d51c4cbbef4df75ff183453e5b90",
+  "schema_version": 1,
+  "source_digest": "0b387224631f5d69b39cd20b205eae4e3a6f9f81cc24777b7cb7d06983f78975",
+  "source_digests": {
+    "contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "corpus.py": "83b9f7925f7176d81db5e4fe3d85b5169f66f900de84f67b5ebb1f59958537da",
+    "evaluation_data.py": "24edff646cfcdbbf3e317db5413635b9bb6a472f5e91dd4fd4378c050cd9c82d",
+    "llm_evaluator.py": "ff783a386411f91a5c5890cc534a680355da9abe74f605e5031ab6b25af87fc0",
+    "measurement_calibration.py": "f2395bf340bc2a75d3adb1bf266f30aa27bc8dc4ce4d7c3d9c2ab51e43bf3df9"
+  },
+  "source_stable": true,
+  "target_agreement_passed": null,
+  "vector_count": 165
+}

@@ -1,0 +1,63 @@
+{
+  "consultations": [
+    {
+      "receipt": {
+        "requested_at": "2026-09-11T00:42:54.536229+00:00",
+        "stage": "spec",
+        "source_sha256": {
+          ".ga/runtime-core-20260911/interfaces.md": "12f1e394b990dc835f9dde451c91fa892531d472604cbb95fb92df5678772c03"
+        },
+        "product_validation": false,
+        "status": "complete",
+        "finish_reason": "stop",
+        "model": "qwen3.8-flash-next",
+        "usage": {
+          "prompt_tokens": 1592,
+          "total_tokens": 2122,
+          "completion_tokens": 530,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_sha256": "046fb8f179e01ca04e3cbd000301122971a576c81c0c936e0915e7d8f864c829",
+        "elapsed_seconds": 20.469,
+        "completed_at": "2026-09-11T00:43:14.999309+00:00"
+      },
+      "response_hash_verified": true,
+      "source_snapshot_available": false,
+      "final_code_review_claim": false
+    },
+    {
+      "receipt": {
+        "requested_at": "2026-09-11T01:03:27.305744+00:00",
+        "stage": "code",
+        "source_sha256": {
+          "src/gah/ledger.py": "d82747916f6906fea8bce947df5d8311fb00e9af0c68ae8a938275991ef18b2d",
+          "src/gah/cli.py": "50c15d06533a2c89f705c0f7e493dc9f476ea23e8bc04aec9d4bd2fa27f8052d"
+        },
+        "product_validation": false,
+        "status": "complete",
+        "finish_reason": "stop",
+        "model": "qwen3.8-flash-next",
+        "usage": {
+          "prompt_tokens": 7374,
+          "total_tokens": 7910,
+          "completion_tokens": 536,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_sha256": "5b355fcbcb28a56c158763141bf0518cd2dbf079929c865b7a4a033c9c1f5249",
+        "elapsed_seconds": 28.265,
+        "completed_at": "2026-09-11T01:03:55.564618+00:00"
+      },
+      "response_hash_verified": true,
+      "source_snapshot_available": false,
+      "final_code_review_claim": false
+    }
+  ],
+  "product_validation": false,
+  "dispositions": "docs/reviews/runtime-core-20260911.md"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "docs/semantic-conditions-detail-spec.md",
+  "role": "semantic-conditions-detail-spec",
+  "title": "評価条件の意味的比較と後続契約の構造検査",
+  "summary": "`gah.semantic_conditions` と `gah.contract_revision_rules` は比較・禁止変更の検査部品である。DB、OS主体、実行、採択、Evidenceの現在有効性は扱わない。[後続契約の接続仕様](contract-revision-detail-spec.md)のうち差分導出を実装したもので、契約3の採択・実行が完成したことを意味しない。[試験記録](evidence/mvp-condition-core-20260912/README.md)へ結ぶ。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-revision-detail-spec.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/mvp-completion-audit.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/contract-revision-detail-spec.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/retention-revalidation-detail-spec.md",
+    "docs/reviews/mvp-condition-core-20260912.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f86d96d01662a97859a086fff58e8fbb6800e96a3c45be7de789b19024681024"
+}

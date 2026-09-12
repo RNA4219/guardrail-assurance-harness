@@ -1,0 +1,28 @@
+test_factory_binding_tamper_cannot_begin (test_regression_integration.RegressionIntegrationTests.test_factory_binding_tamper_cannot_begin) ... ok
+test_incomplete_run_and_missing_outputs_cannot_pass_ci (test_regression_integration.RegressionIntegrationTests.test_incomplete_run_and_missing_outputs_cannot_pass_ci) ... ok
+test_negative_observation_creates_resolvable_findings_and_plans (test_regression_integration.RegressionIntegrationTests.test_negative_observation_creates_resolvable_findings_and_plans) ... ok
+test_normal_complete_outputs_and_fresh_ci_survive_restart_then_revocation (test_regression_integration.RegressionIntegrationTests.test_normal_complete_outputs_and_fresh_ci_survive_restart_then_revocation) ... ok
+test_populated_previous_adoption_version_migrates_without_rewriting_history (test_regression_integration.RegressionIntegrationTests.test_populated_previous_adoption_version_migrates_without_rewriting_history) ... ERROR
+test_previous_version_cannot_contain_new_normal_run (test_regression_integration.RegressionIntegrationTests.test_previous_version_cannot_contain_new_normal_run) ... ok
+test_report_insert_failure_rolls_back_terminal_and_can_retry (test_regression_integration.RegressionIntegrationTests.test_report_insert_failure_rolls_back_terminal_and_can_retry) ... ok
+test_roles_shape_and_reserved_ids_reject_without_creating_runs (test_regression_integration.RegressionIntegrationTests.test_roles_shape_and_reserved_ids_reject_without_creating_runs) ... ok
+
+======================================================================
+ERROR: test_populated_previous_adoption_version_migrates_without_rewriting_history (test_regression_integration.RegressionIntegrationTests.test_populated_previous_adoption_version_migrates_without_rewriting_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\tests\test_regression_integration.py", line 213, in test_populated_previous_adoption_version_migrates_without_rewriting_history
+    result = migrations.migrate_evaluation_store(self.path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\src\gah\adoption_migrations.py", line 571, in migrate_evaluation_store
+    _verify_v3_json_rows(db)
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\src\gah\adoption_migrations.py", line 210, in _verify_v3_json_rows
+    _verify_v3_history_graph(db)
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\src\gah\adoption_migrations.py", line 334, in _verify_v3_history_graph
+    raise _error("STORAGE_CORRUPT")
+gah.adoption_migrations.MigrationError: STORAGE_CORRUPT
+
+----------------------------------------------------------------------
+Ran 8 tests in 567.222s
+
+FAILED (errors=1)

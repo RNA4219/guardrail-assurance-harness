@@ -1,0 +1,32 @@
+{
+  "id": "BLUEPRINT.md",
+  "role": "BLUEPRINT",
+  "title": "Blueprint",
+  "summary": "coding agentの変更による制約・検査系の劣化と、LLMガードレールの変更による検出性能・誤検知の変化を追跡する。GAHは、その制御を今どこまで信用できるかを証拠に基づいて示し、問題があればCI判定と修復計画につなぐ構想である。",
+  "public_api": [],
+  "deps_out": [
+    "EVALUATION.md",
+    "RUNBOOK.md",
+    "docs/acceptance-criteria.md",
+    "docs/adapter-spec.md",
+    "docs/contracts/README.md",
+    "docs/detail-spec.md",
+    "docs/extension-roadmap.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "7664e03fc6d2ee019e8028855b483ff75e30c02593bcc310653332987a53ad60"
+}

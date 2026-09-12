@@ -1,0 +1,16 @@
+{
+  "extension_digest": "383ce252324586ee69bfff9a6ee3d562f318a9105608003010555826bf589575",
+  "sha256": {
+    "src/gah/resources.py": "35fdefe09d8405e138ffaee401197153135e245677a465563dfac1271d37c06a",
+    "src/gah/resource_authority.py": "13feeff9e6939ce43c5fe2813248027276d2db7fc1689209cbaffb35ea74ba6a",
+    "src/gah/evaluation_authority.py": "ece9ba2776f2c5029acd37611fb0d17299c1ce9feb6025779bf9e49f5ed24e0a",
+    "src/gah/adoption_migrations.py": "cb613c7f744b72e1f3ec56f854c56b1726cbe75f6a1d18209e6ddb483c93aa7b",
+    "docs/requirements.md": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98",
+    "docs/acceptance-criteria.md": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa",
+    "docs/operating-policy.md": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025",
+    "docs/contracts/initial-policy.v1.json": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+    "docs/contracts/decision-examples.v1.json": "5e4a0849d13939245ac2a6cd6abd5b655b9cf2f0a223c9c692fe730f742e9642",
+    "docs/contracts/review-examples.v2.json": "85591a676583d0732e71759a676258b67254072bc44702fb1697f506564c583c",
+    "docs/contracts/state-examples.v3.json": "2857e6688e9bfb425a2a4d01fb9a9a65de0ba250419f0b7c68f8b4c054fb1539"
+  }
+}

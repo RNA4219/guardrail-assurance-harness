@@ -1,0 +1,32 @@
+{
+  "id": "docs/auth-adoption-detail-spec.md",
+  "role": "auth-adoption-detail-spec",
+  "title": "管理主体の認証と方針採択の詳細仕様",
+  "summary": "[全MVP Task](tasks/TASK.mvp-completion-09-11-2026.md)の管理境界を具体化する。[LC01/LC02](contracts/lifecycle-contract.md)と[運用方針](operating-policy.md)を正本とし、候補が自分の基準を採択する経路を作らない。第一段階はPolicyProfileの提案・決定的検証・採択を接続する。EvaluationContract、baseline、実評価証拠の採択は後続の同じ管理境界へ接続し、この方針採択を通常CI成功へ使わない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-transition-detail-spec.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/operating-policy.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/adapter-spec.md",
+    "docs/oss-publication.md",
+    "docs/regression-ci-detail-spec.md",
+    "docs/reviews/mvp-authority-20260911.md",
+    "docs/spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c31d02c8f3fab25ef87419986a18002e6d3c9edc456845b4d25b6be513bd5b3d"
+}

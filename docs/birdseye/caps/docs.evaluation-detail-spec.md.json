@@ -1,0 +1,37 @@
+{
+  "id": "docs/evaluation-detail-spec.md",
+  "role": "evaluation-detail-spec",
+  "title": "実評価データ・試行集計・比較の詳細仕様",
+  "summary": "[全MVP Task](tasks/TASK.mvp-completion-09-11-2026.md)の評価経路を具体化する。正本は[要求](requirements.md)、[評価設計](contracts/evaluation-design.md)、[初期方針](operating-policy.md)。前工程の400個の輸送用参照と区別し、ここでは実際に評価器へ渡す入力とoracleを作る。実装・校正・実測が揃うまでは実評価の受入済みにしない。",
+  "public_api": [],
+  "deps_out": [
+    "datasets/synthetic-policy-v1/README.md",
+    "docs/adapter-spec.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/operating-policy.md",
+    "docs/requirements.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "datasets/README.md",
+    "docs/evidence/mvp-evaluation-20260911/README.md",
+    "docs/llm-authority-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a54146bcbd83752f47ce63870d730e52c8502e349b1ea1be62a0a09fd021d6d4"
+}

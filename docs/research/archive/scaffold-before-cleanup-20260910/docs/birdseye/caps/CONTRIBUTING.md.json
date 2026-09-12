@@ -1,0 +1,23 @@
+{
+  "id": "CONTRIBUTING.md",
+  "role": "CONTRIBUTING",
+  "title": "Contributing",
+  "summary": "[HUB](HUB.codex.md) から対象の正本を読み、[Task Seed](TASK.codex.md) を作成する。 標準の変更手順は [RUNBOOK](RUNBOOK.md)、完了条件は [EVALUATION](EVALUATION.md)。",
+  "public_api": [],
+  "deps_out": [
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "RUNBOOK.md",
+    "TASK.codex.md",
+    "docs/UPSTREAM.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "522f975c5e6129f5e2efd3309b3fc538c4b13da956f78268fe3a2cfd5446594d"
+}

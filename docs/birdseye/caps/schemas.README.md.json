@@ -1,0 +1,23 @@
+{
+  "id": "schemas/README.md",
+  "role": "schemas",
+  "title": "Schema",
+  "summary": "[component-assessment.v1.schema.json](component-assessment.v1.schema.json)に部品診断入力を定義した。追加fieldを拒否し、版・型・容量・値域を固定する。JSONの整数表記、重複key/ID、分数の整合、fnrのbaseline等は[実装の検査](../src/gah/decision.py)と[wire検査](../src/gah/wire.py)を併用する。汎用Schema評価器によるmetaschema検証は未実施。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/runtime-contract-spec.md"
+  ],
+  "deps_in": [
+    "docs/contracts/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "cfbf48bbde76af660fed7b95aa5f16a499a216f456c9e32e6c9360ae2edd1939"
+}

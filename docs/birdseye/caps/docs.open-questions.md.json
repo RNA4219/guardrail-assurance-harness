@@ -1,0 +1,59 @@
+{
+  "id": "docs/open-questions.md",
+  "role": "open-questions",
+  "title": "決定事項と残る設計事項",
+  "summary": "[baseline更新](baseline-refresh-detail-spec.md)は固定contract 2・同条件で1→2まで実装した。基準2を参照する後続契約と対象・条件を変える更新は引き続き未完了である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/README.md",
+    "docs/adapter-spec.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/contracts/README.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/execution-detail-spec.md",
+    "docs/extension-roadmap.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reference-boundary.md",
+    "docs/remediation-detail-spec.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/run-evidence-detail-spec.md",
+    "docs/run-recovery-detail-spec.md",
+    "docs/run-report-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/detail-spec.md",
+    "docs/research/README.md",
+    "docs/reviews/contract-design-20260910.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md",
+    "docs/tasks/TASK.dual-usecases-09-10-2026.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-clarification-09-10-2026.md",
+    "orchestration/development-plan.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "4afbf6526645be21cca98c2862b2631df4ef701a6bbdb064a1b0fa8c08dea556"
+}

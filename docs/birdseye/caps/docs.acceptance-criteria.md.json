@@ -1,0 +1,38 @@
+{
+  "id": "docs/acceptance-criteria.md",
+  "role": "acceptance-criteria",
+  "title": "MVPの受入条件案",
+  "summary": "対象は[要求明確化案v0.4](requirements.md)のGAH-R01〜GAH-R32と[初期運用方針v1](operating-policy.md)。GAH-AC番号は対応する要求番号と一致する。MVPの受入にはUC-CIとUC-LLMの両方を含める。すべて未実行の製品受入条件であり、文書検査やQwenの回答を実行結果にしない。敵対的な反例の根拠・優先度は[検討記録](reviews/requirements-adversarial-20260910.md)を参照する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-20260910.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "README.md",
+    "datasets/README.md",
+    "docs/contracts/README.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/detail-spec.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa"
+}

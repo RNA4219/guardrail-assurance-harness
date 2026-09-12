@@ -1,0 +1,24 @@
+{
+  "id": "datasets/synthetic-policy-v1/README.md",
+  "role": "datasets",
+  "title": "synthetic-policy-v1",
+  "summary": "無害な合成入力だけで構成した400件の有限LLM評価packです。data_handlingとwork_scopeを各200件、各カテゴリのpositive/negativeを100件ずつ含みます。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "README.md",
+    "RUNBOOK.md",
+    "datasets/README.md",
+    "docs/evaluation-detail-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f526b7f0fb682f5cb13888219caca4275902a2a76056a8573cd5aa3e7b2560ef"
+}

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": {
+    "unittest_succeeded": true,
+    "seven_tests": true,
+    "sources_unchanged": true
+  },
+  "tests": [
+    "test_run_report.RunReportTests.test_cancelled_gate_stays_cancelled_even_with_healthy_historical_decision",
+    "test_run_report.RunReportTests.test_json_and_human_summary_share_the_same_grounding_and_last_gate",
+    "test_run_report.RunReportTests.test_main_invalid_input_and_broken_output_return_two",
+    "test_run_report.RunReportTests.test_mutated_artifact_wrong_target_and_changed_output_root_fail_closed",
+    "test_run_report.RunReportTests.test_revocation_during_artifact_read_is_reflected_in_final_report",
+    "test_run_report.RunReportTests.test_transport_shape_and_output_errors_return_two",
+    "test_run_report.RunReportTests.test_unknown_metric_keeps_missing_value_and_comparison_unknown"
+  ],
+  "source_sha256": {
+    "tools/gah_report.py": "6ca096017425b057940318af11eacd2e84e889883add1f9c94dfc65d9e89f57e",
+    "tests/test_run_report.py": "7a9627e0026f66a1871bf3fd209e61e53732508d58c6d4d45554250b6bb9d8da",
+    "tools/gah_ci.py": "8a48e64e9ff2606ab86cb7e1072ecb4f1619ddf3011d9c56cbfa92f075884d8d",
+    "tools/authority_runtime.py": "b208c660ec4b76e8bb1fd2c64ffb9770f266dc8566cc366a72e0f31485572a8d"
+  },
+  "log_sha256": "efad4cdbe185b92e63193f6b556fd70807a449cc06d37272dd30d9103198ac5d",
+  "exit_code": 0
+}

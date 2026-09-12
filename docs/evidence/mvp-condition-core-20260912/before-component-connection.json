@@ -1,0 +1,17 @@
+{
+  "previous_verification_sha256": "a8388853b9b846f34b6da17fc21506ea4e6e01c6c2fc754749b149f977876533",
+  "files": [
+    "src/gah/semantic_conditions.py",
+    "src/gah/contract_revision_rules.py",
+    "tests/test_semantic_conditions.py",
+    "tests/test_contract_revision_rules.py"
+  ],
+  "candidate_source_sha256": {
+    "src/gah/semantic_conditions.py": "2a594cb5bf890364e7c9ea39b386acddb97b39e2f48463748b7a0aa209dd9777",
+    "src/gah/contract_revision_rules.py": "f2b7f41860e9bc7cd03de108593112145b6b6415cefba0cf1a256c2c110c7fae",
+    "tests/test_semantic_conditions.py": "92444f37fd3c6858068845944401c8ecaa12c37dce2bc2f7f6dcd4eaf88baec6",
+    "tests/test_contract_revision_rules.py": "1b5a04193ffc51559a33d50f9a00e537354ec11e4c5dd2411b24d44e6d722f12"
+  },
+  "authority_connected": false,
+  "full_mvp_accepted": false
+}

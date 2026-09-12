@@ -1,0 +1,63 @@
+{
+  "id": "docs/requirements.md",
+  "role": "requirements",
+  "title": "Guardrail Assurance Harness — 要求明確化案 v0.4",
+  "summary": "GAHは、登録されたガードレールとその検査系について、現在の証拠が有効か、以前より検知能力が落ちていないかを確認し、問題の根拠と修復計画を利用者と管理AIへ返す。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/extension-roadmap.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/research/README.md",
+    "docs/reviews/requirements-adversarial-20260910.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "CHANGELOG.md",
+    "CHECKLISTS.md",
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "HUB.codex.md",
+    "README.md",
+    "SECURITY.md",
+    "datasets/README.md",
+    "docs/acceptance-criteria.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/contracts/README.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/design.md",
+    "docs/detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/extension-roadmap.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/research/README.md",
+    "docs/research/citation-register.md",
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/security/SAC.md",
+    "docs/spec.md",
+    "docs/supervised-run-detail-spec.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md",
+    "docs/tasks/TASK.dual-usecases-09-10-2026.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-clarification-09-10-2026.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
+}

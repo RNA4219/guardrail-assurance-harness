@@ -1,0 +1,59 @@
+{
+  "scope": "要求・転用対応表・固定上流版・来歴の静的照合。製品の振る舞いの検査ではない",
+  "checked_at": "2026-09-10T02:31:06.422720+00:00",
+  "status": "pass",
+  "checks": {
+    "requirements_32_unique_complete": true,
+    "acceptance_32_one_to_one": true,
+    "requirements_rows_unchanged": true,
+    "initial_policy_tables_unchanged": true,
+    "original_17_functional_ids_preserved": true,
+    "original_14_mvp_items_preserved": true,
+    "D04_resolved_and_design_handoff": true,
+    "reuse_6_rows_complete": true,
+    "upstream_metrics_data_calibration_gap_recorded": true,
+    "upstream_counts_not_evidence": true,
+    "identity_atomicity_limits_recorded": true,
+    "CI_and_AI_policy_preserved": true,
+    "snapshot_15_hashes_match": true,
+    "confirmation_manifest_matches": true,
+    "original_source_unchanged": true,
+    "inspected_commit_clean": true,
+    "inspected_13_files_hash_and_blob_match": true,
+    "source_links_pinned_and_resolve_locally": true,
+    "license_metadata_reported_as_observed": true,
+    "product_import_and_upstream_tests_not_claimed": true,
+    "GAH_product_directories_unchanged": true
+  },
+  "counts": {
+    "requirements": 32,
+    "acceptance_criteria": 32,
+    "reuse_mappings": 6,
+    "archived_files": 15,
+    "inspected_upstream_files": 13
+  },
+  "source_sha256_raw": {
+    "README.md": "a0cfa07b49a8eacf76e567af1e477de04a99b662954c8c92845a459bc108092a",
+    "BLUEPRINT.md": "7e279f0536eb4729b4d401d0c263c63b64c0528b8685257dab2e84cff15a8159",
+    "HUB.codex.md": "8571c1b2dfd3d65a5b08adcc503d81dc59721aab00b0828814a39b05a6600769",
+    "CHANGELOG.md": "c66b8d07611e4b7fe976ca2d4e80e5ffb6f250feeaa84de8b71db4980b01d4fd",
+    "docs/requirements.md": "07087e8a93915c5345ab14b5dba23a65366ab6109e9e7aa708f3ff37237571fe",
+    "docs/acceptance-criteria.md": "8c4bff00aa3d7211397ca24f36be635090f68e2a1a67dbfe35f5c026c03bc210",
+    "docs/open-questions.md": "c7336ed82096b2618dd9ba4a1fb17bb9918dc8666d74843aab7432bf8de93e3b",
+    "docs/operating-policy.md": "6889502e7cf45dc7e92b09266f643bfd5744162a5787f378e371a8175312ad2b",
+    "docs/requirements-traceability.md": "eeb2f9ce635218effb03329aefe8d890c72daa69bc6176e4c58b85f868dff9fa",
+    "docs/research/README.md": "42d4c13b8c8a7925f2a1aa88b0c340e3beeb9c076a68f50477e2217ba8cc7320",
+    "docs/research/source-manifest.json": "279ec7f813609cb9c7638a477d746eaf3d28d28f0b11cad466066dcba75731d3",
+    "docs/tasks/README.md": "c6dbd270f56bfb1eba3aae27631028b435d1becbc5462d5f8d07527bdc1b41f3",
+    "docs/contracts/README.md": "5e475c957a050d1b0bad94e2bfbfec7cfd74298505779367e8edeb3d82649817",
+    "orchestration/development-plan.md": "b26e5f9b073d7f0a2229d64ddc0c6b881847f1ac47cb06a44df2a3eeace0072f",
+    "datasets/README.md": "09858170140567f76e0ae0fe8ff067248ed3c697b9da22b13cdb9b022ca25433",
+    "docs/reference-boundary.md": "6276236e4b0afa8fd5ca956f9c6ffacd819262aef48593cf35533b33f445ae71",
+    "docs/evidence/reference-confirmation-20260910/source-inspection.json": "a71a27f6ddf96aa3694ce146339ae93e5230ff7074c20c183716e4b650532fca"
+  },
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

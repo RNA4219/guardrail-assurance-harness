@@ -1,0 +1,13 @@
+**1. 入力状態**
+`docs/baseline-adoption-detail-spec.md` §3.1 の `kind=baseline_record` 定義。
+**問題**
+本文では `kind=baseline_record` と記載されているが、末尾注記で「名称baseline_recordは実装ではkind=baselineへ統一予定」とあり、定義と実装予定名が不一致。
+**最小修正**
+§3.1 のコードブロックおよび本文内の `kind=baseline_record` を `kind=baseline` に置換える。
+
+**2. 入力状態**
+`docs/baseline-adoption-detail-spec.md` §3.0 手順3 と §3.1 の `expected_baseline_generation` 定義。
+**問題**
+§3.0 手順3 で初回は `expected_baseline_generation=0` とするが、§3.1 で「初回baselineだけは...`expected_baseline_generation=0`を許可し」とあり、§3.0 の「既存の初回contract refをそのまま保持」という説明と、§3.1 の「`previous_baseline_ref=null`」という説明の間で、初回時の `previous_baseline_ref` の扱い（nullか、既存contract refか）が曖昧。特に §3.0 手順3 は `expected_contract_generation=1` と `expected_baseline_generation=0` を並列し、§3.1 は `previous_baseline_ref=null` とするが、§3.0 手順3 の「既存の初回contract refをそのまま保持」が `previous_contract_ref` を指すのか `new_contract_ref` を指すのか不明確。
+**最小修正**
+§3.0 手順3 の記述を、§3.1 の定義に合わせ、`previous_baseline_ref=null`、`new_baseline_ref` は生成される record の ID、`expected_baseline_generation=0` と明確化し、`previous_contract_ref` と `new_contract_ref` の関係を §3.1 の定義通り（初回は同一 ref を指す等）に整理する。

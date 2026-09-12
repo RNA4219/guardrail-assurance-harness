@@ -1,0 +1,24 @@
+{
+  "id": "SECURITY.md",
+  "role": "SECURITY",
+  "title": "Security",
+  "summary": "このrepoは開発途中のruntime、診断部品、文書・検証ツールを公開している。現在のmainを調査・修正対象とするが、安定版・全MVPの受入済み版はまだない。過去の証跡は記録した版と条件に対する結果として扱う。 製品の信頼境界は [要求草案](docs/requirements.md)、開発上の確認は [SAC](docs/security/SAC.md) に記載する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md",
+    "docs/security/SAC.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/security/SAC.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2fb789f27f15641f8531f7eaac5a13ea779c00952190b0b211d4109c553bce11"
+}

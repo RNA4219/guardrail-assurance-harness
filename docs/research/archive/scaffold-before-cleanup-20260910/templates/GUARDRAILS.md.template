@@ -1,0 +1,30 @@
+---
+intent_id: INT-REPLACE
+owner: your-handle
+status: active
+last_reviewed_at: YYYY-MM-DD
+next_review_due: YYYY-MM-DD
+template_version: 1.0.0
+---
+
+# Guardrails
+
+## Principles
+
+- Prefer small, reviewable changes with clear validation evidence.
+- Do not rewrite unrelated user or teammate changes.
+- Keep generated artifacts and source documents synchronized.
+
+## Safety Boundaries
+
+- Do not commit secrets or environment-specific credentials.
+- Do not change release, security, or policy files without explicit review.
+
+## Context Intake
+
+- Read `README.md`, `HUB.codex.md`, and the smallest relevant source document first.
+- If a knowledge map exists, use it to narrow the reading scope.
+
+## Output Contract
+
+- Summarize scope, validation, and residual risk in the final handoff.

@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-09-11T03:33:45.982054+00:00",
+  "status": "passed",
+  "counts": {
+    "files": 749,
+    "path_matches": 0,
+    "content_matches": 0,
+    "read_errors": 0
+  },
+  "scope": "workspace files including local drafts and generated indexes; excluding .git",
+  "generation": "00034"
+}

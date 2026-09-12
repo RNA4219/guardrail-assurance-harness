@@ -1,0 +1,39 @@
+{
+  "id": "RUNBOOK.md",
+  "role": "RUNBOOK",
+  "title": "Runbook",
+  "summary": "Python 3.11以上の標準ライブラリを用いる。作業ディレクトリはこのrepoのroot。 以下の文書検証コマンドにネットワーク・API key・隣接repoへの依存はない。WindowsでもPythonの実体パスを指定して同じコマンドを使える。 CIの定義は [ci-config](docs/ci-config.md) に記載する。",
+  "public_api": [],
+  "deps_out": [
+    "datasets/synthetic-policy-v1/README.md",
+    "docs/acceptance/README.md",
+    "docs/ci-config.md",
+    "docs/detail-spec.md",
+    "docs/evidence/README.md",
+    "docs/execution-detail-spec.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/research/README.md",
+    "docs/run-contract-detail-spec.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "CONTRIBUTING.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "README.md",
+    "TASK.codex.md",
+    "docs/birdseye/README.md",
+    "docs/ci-config.md",
+    "docs/spec.md",
+    "examples/README.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f2f13fd2995b14b6ac8a6672aeb7edf417969b6ab1181dab17bea5b7075bc183"
+}

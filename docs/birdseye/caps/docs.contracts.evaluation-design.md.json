@@ -1,0 +1,29 @@
+{
+  "id": "docs/contracts/evaluation-design.md",
+  "role": "contracts",
+  "title": "評価設計 v0.3",
+  "summary": "MVPを検証するケース・oracle・追跡の設計。以下の製品試験は全て**NOT_RUN**。[判定例JSON](decision-examples.v1.json)の構文・算術確認を製品の合格や性能測定へ読み替えない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/reviews/state-review-20260911.md"
+  ],
+  "deps_in": [
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a70358ce0c3ca8b5d712211e645bfd98b9fd6f33e6998d528466c03c13edd6cc"
+}

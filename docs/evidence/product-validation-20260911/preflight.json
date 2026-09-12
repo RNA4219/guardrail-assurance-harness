@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-09-10T23:53:04.015555+00:00",
+  "product_validation": "BLOCKED_NO_IMPLEMENTATION",
+  "product_source_files": [],
+  "declared_cli_entrypoints": {},
+  "inventory": {
+    "src": [
+      "src/README.md"
+    ],
+    "schemas": [
+      "schemas/README.md"
+    ],
+    "fixtures": [
+      "fixtures/README.md"
+    ],
+    "datasets": [
+      "datasets/README.md"
+    ],
+    "examples": [
+      "examples/README.md"
+    ]
+  },
+  "existing_tests": [
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_generation_is_idempotent_and_contains_real_edges"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_source_change_is_stale_then_regenerated"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_missing_link_and_outside_link_fail"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_fenced_examples_do_not_create_document_links"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_mixed_generation_and_tampered_caps_fail"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_removed_document_caps_are_detected_and_cleaned"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_done_task_requires_approved_acceptance"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_duplicate_task_and_mismatched_intent_fail"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_acceptance_index_detects_changed_status"
+    },
+    {
+      "file": "tests/test_workflow.py",
+      "name": "test_branch_mapping_requires_docs_gate"
+    }
+  ],
+  "existing_test_scope": "文書ワークフローのみ。製品試験ではない。",
+  "source_sha256": {
+    "pyproject.toml": "585d6562f168472343adadd0b174c984db37bee8f1a77715017a2f82882709af",
+    "README.md": "99b1c4b572fff3fc31fe155636d1c32e37f1258ee187859e067a1764ae8469b9",
+    "src/README.md": "c80e3dcd138a40308bd5c0591a2cbdeb321b2137c1c2b0b76fb5ba07bc766a08",
+    "schemas/README.md": "d3361e96f0a4314e60c59a70750dd1f758f685b6aa43c8c85bbd0830727e5665"
+  }
+}

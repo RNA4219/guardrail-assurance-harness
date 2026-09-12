@@ -1,0 +1,13 @@
+test_baseline_or_source_mutation_is_rejected (test_transition_materialization.TransitionMaterializationTests.test_baseline_or_source_mutation_is_rejected) ... ok
+test_builds_old_15_and_new_30_with_bound_purpose (test_transition_materialization.TransitionMaterializationTests.test_builds_old_15_and_new_30_with_bound_purpose) ... ok
+test_ids_must_be_distinct_from_source_and_each_other (test_transition_materialization.TransitionMaterializationTests.test_ids_must_be_distinct_from_source_and_each_other) ... ok
+test_materialization_records_preserve_source_payload_refs (test_transition_materialization.TransitionMaterializationTests.test_materialization_records_preserve_source_payload_refs) ... ok
+test_new_context_and_contract_refs_are_exact (test_transition_materialization.TransitionMaterializationTests.test_new_context_and_contract_refs_are_exact) ... ok
+test_next_target_change_is_rejected (test_transition_materialization.TransitionMaterializationTests.test_next_target_change_is_rejected) ... ok
+test_old_and_new_manifest_refs_are_run_specific (test_transition_materialization.TransitionMaterializationTests.test_old_and_new_manifest_refs_are_run_specific) ... ok
+test_source_metadata_and_clock_boundaries_are_rejected (test_transition_materialization.TransitionMaterializationTests.test_source_metadata_and_clock_boundaries_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.335s
+
+OK

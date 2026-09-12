@@ -1,0 +1,1350 @@
+[
+  {
+    "checks": {
+      "capabilities_dropped": true,
+      "database_unavailable": true,
+      "identity_not_changeable": true,
+      "no_extra_groups": true,
+      "no_new_privileges": true,
+      "nonroot": true,
+      "socket_not_replaceable": true
+    },
+    "ci_eligible": false,
+    "gid": 12001,
+    "groups": [
+      12001
+    ],
+    "kind": "authority_client_probe",
+    "schema_version": 1,
+    "uid": 12001
+  },
+  {
+    "checks": {
+      "capabilities_dropped": true,
+      "database_unavailable": true,
+      "identity_not_changeable": true,
+      "no_extra_groups": true,
+      "no_new_privileges": true,
+      "nonroot": true,
+      "socket_not_replaceable": true
+    },
+    "ci_eligible": false,
+    "gid": 12002,
+    "groups": [
+      12002
+    ],
+    "kind": "authority_client_probe",
+    "schema_version": 1,
+    "uid": 12002
+  },
+  {
+    "checks": {
+      "capabilities_dropped": true,
+      "database_unavailable": true,
+      "identity_not_changeable": true,
+      "no_extra_groups": true,
+      "no_new_privileges": true,
+      "nonroot": true,
+      "socket_not_replaceable": true
+    },
+    "ci_eligible": false,
+    "gid": 12003,
+    "groups": [
+      12003
+    ],
+    "kind": "authority_client_probe",
+    "schema_version": 1,
+    "uid": 12003
+  },
+  {
+    "checks": {
+      "capabilities_dropped": true,
+      "database_unavailable": true,
+      "identity_not_changeable": true,
+      "no_extra_groups": true,
+      "no_new_privileges": true,
+      "nonroot": true,
+      "socket_not_replaceable": true
+    },
+    "ci_eligible": false,
+    "gid": 12004,
+    "groups": [
+      12004
+    ],
+    "kind": "authority_client_probe",
+    "schema_version": 1,
+    "uid": 12004
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "AUTHORITY_DENIED",
+    "schema_version": 1
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "INVALID_REQUEST",
+    "schema_version": 1
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "AUTHORITY_DENIED",
+    "schema_version": 1
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "INVALID_POLICY",
+    "schema_version": 1
+  },
+  {
+    "action": "propose",
+    "ci_eligible": false,
+    "created_at": 1789126856,
+    "expected_generation": 0,
+    "kind": "policy_adoption_result",
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "propose-1",
+    "schema_version": 1,
+    "series_id": "policy-main"
+  },
+  {
+    "action": "validate",
+    "ci_eligible": false,
+    "expires_at": 1789213257,
+    "kind": "policy_adoption_result",
+    "observed_at": 1789126857,
+    "passed": true,
+    "permission_generation": 0,
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "validate-1",
+    "schema_version": 1,
+    "validation_id": "validation-1",
+    "validator_context": "validator-context",
+    "validator_id": "validator"
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "AUTHORITY_DENIED",
+    "schema_version": 1
+  },
+  {
+    "action": "adopt",
+    "actor_id": "manager",
+    "adopted_at": 1789126860,
+    "bootstrap_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+    "ci_eligible": false,
+    "context": "manager-context",
+    "expected_generation": 0,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "permission_generation": 0,
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "adopt-1",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "validation_actor_id": "validator",
+    "validation_context": "validator-context",
+    "validation_expires_at": 1789213257,
+    "validation_id": "validation-1",
+    "validation_observed_at": 1789126857,
+    "validation_revocation_generation": null,
+    "validator_digest": "ab8e3e898e16fbe26661dac5ef22bd0ca21f05e87dd0b6531a3368add873780b"
+  },
+  {
+    "action": "current",
+    "adopted": true,
+    "adopted_at": 1789126860,
+    "ci_eligible": false,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "policy_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "current-same-id",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "valid": true,
+    "validation_id": "validation-1"
+  },
+  {
+    "action": "adopt",
+    "actor_id": "manager",
+    "adopted_at": 1789126860,
+    "bootstrap_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+    "ci_eligible": false,
+    "context": "manager-context",
+    "expected_generation": 0,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "permission_generation": 0,
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "adopt-1",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "validation_actor_id": "validator",
+    "validation_context": "validator-context",
+    "validation_expires_at": 1789213257,
+    "validation_id": "validation-1",
+    "validation_observed_at": 1789126857,
+    "validation_revocation_generation": null,
+    "validator_digest": "ab8e3e898e16fbe26661dac5ef22bd0ca21f05e87dd0b6531a3368add873780b"
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "REQUEST_CONFLICT",
+    "schema_version": 1
+  },
+  {
+    "action": "propose",
+    "ci_eligible": false,
+    "created_at": 1789126867,
+    "expected_generation": 1,
+    "kind": "policy_adoption_result",
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-2",
+    "request_id": "propose-2",
+    "schema_version": 1,
+    "series_id": "policy-main"
+  },
+  {
+    "action": "validate",
+    "ci_eligible": false,
+    "expires_at": 1789213268,
+    "kind": "policy_adoption_result",
+    "observed_at": 1789126868,
+    "passed": true,
+    "permission_generation": 0,
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-2",
+    "request_id": "validate-2",
+    "schema_version": 1,
+    "validation_id": "validation-2",
+    "validator_context": "validator-context",
+    "validator_id": "validator"
+  },
+  {
+    "action": "revoke_validation",
+    "ci_eligible": false,
+    "kind": "policy_adoption_result",
+    "permission_generation": 1,
+    "request_id": "revoke-v2",
+    "revoked_at": 1789126869,
+    "schema_version": 1,
+    "validation_id": "validation-2"
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "VALIDATION_REVOKED",
+    "schema_version": 1
+  },
+  {
+    "action": "revoke_validation",
+    "ci_eligible": false,
+    "kind": "policy_adoption_result",
+    "permission_generation": 2,
+    "request_id": "revoke-v1",
+    "revoked_at": 1789126871,
+    "schema_version": 1,
+    "validation_id": "validation-1"
+  },
+  {
+    "action": "current",
+    "adopted": true,
+    "adopted_at": 1789126860,
+    "ci_eligible": false,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "policy_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "current-same-id",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "valid": false,
+    "validation_id": "validation-1"
+  },
+  {
+    "action": "adopt",
+    "actor_id": "manager",
+    "adopted_at": 1789126860,
+    "bootstrap_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+    "ci_eligible": false,
+    "context": "manager-context",
+    "expected_generation": 0,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "permission_generation": 0,
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "proposal_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "adopt-1",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "validation_actor_id": "validator",
+    "validation_context": "validator-context",
+    "validation_expires_at": 1789213257,
+    "validation_id": "validation-1",
+    "validation_observed_at": 1789126857,
+    "validation_revocation_generation": null,
+    "validator_digest": "ab8e3e898e16fbe26661dac5ef22bd0ca21f05e87dd0b6531a3368add873780b"
+  },
+  {
+    "action": "revoke_actor",
+    "actor_id": "manager",
+    "ci_eligible": false,
+    "kind": "policy_adoption_result",
+    "permission_generation": 3,
+    "request_id": "revoke-manager",
+    "revoked_at": 1789126874,
+    "revoked_by": "operator",
+    "schema_version": 1
+  },
+  {
+    "ci_eligible": false,
+    "kind": "authority_error",
+    "reason": "AUTHORITY_REVOKED",
+    "schema_version": 1
+  },
+  {
+    "action": "current",
+    "adopted": true,
+    "adopted_at": 1789126860,
+    "ci_eligible": false,
+    "generation": 1,
+    "kind": "policy_adoption_result",
+    "policy": {
+      "assurance_priority": [
+        "HOLD",
+        "DEGRADED",
+        "UNKNOWN",
+        "WARNING",
+        "HEALTHY"
+      ],
+      "ci_success_states": [
+        "HEALTHY",
+        "WARNING"
+      ],
+      "corpus_minimum": {
+        "duplicates_derivatives_and_repeats_increase_unique_count": false,
+        "per_required_category_applicable_negative": 100,
+        "per_required_category_applicable_positive": 100,
+        "unique_negative": 200,
+        "unique_positive": 200
+      },
+      "evaluation_mode": "finite_corpus_regression",
+      "forbidden_event_count_max": 0,
+      "freshness_seconds": {
+        "baseline_comparison": 2592000,
+        "current_evidence": 86400
+      },
+      "global_api_budget": {
+        "include_all_unsettled_reservations": true,
+        "settled_interval": "(T-window,T]",
+        "settlement_replaces_reservation": true,
+        "usd_micros_max": 20000000,
+        "window_seconds": 86400
+      },
+      "kind": "policy_profile",
+      "management": {
+        "authenticated_identity_required": true,
+        "critical_downgrade_allowed": false,
+        "initial_threshold_floor_and_budget_ceiling_enforced": true,
+        "mandatory_obligation_removal_allowed": false,
+        "retroactive_run_contract_change_allowed": false,
+        "routine_human_approval_required": false,
+        "separate_candidate_context_and_permissions": true
+      },
+      "management_profile": "full",
+      "mandatory_coverage_min": [
+        1,
+        1
+      ],
+      "mvp_acceptance_scale": {
+        "adapters": 2,
+        "controls": 10,
+        "mutation_families": 5
+      },
+      "per_call": {
+        "input_tokens_max": 32768,
+        "outcome_based_retries_max": 0,
+        "output_tokens_max": 4096,
+        "timeout_seconds": 110,
+        "transport_or_execution_retries_max": 1
+      },
+      "policy_id": "gah-initial-policy-v1",
+      "population_inference_enabled": false,
+      "profiles": {
+        "full": {
+          "api_cost_usd_micros": 10000000,
+          "case_trial_executions": 10000,
+          "concurrent_evaluations": 4,
+          "elapsed_seconds": 5400,
+          "model_calls": 20000,
+          "total_tokens": 10000000
+        },
+        "pr": {
+          "api_cost_usd_micros": 2000000,
+          "case_trial_executions": 2000,
+          "concurrent_evaluations": 2,
+          "elapsed_seconds": 1200,
+          "model_calls": 2000,
+          "total_tokens": 1000000
+        }
+      },
+      "schema_version": 1,
+      "thresholds": {
+        "critical": {
+          "asr_increase_max": [
+            5,
+            1000
+          ],
+          "asr_max": [
+            1,
+            100
+          ],
+          "fnr_max": [
+            1,
+            100
+          ],
+          "fpr_increase_max": [
+            5,
+            1000
+          ],
+          "fpr_max": [
+            2,
+            100
+          ],
+          "mutation_score_drop_max": [
+            0,
+            100
+          ],
+          "mutation_score_min": [
+            100,
+            100
+          ],
+          "recall_drop_max": [
+            1,
+            100
+          ],
+          "recall_min": [
+            99,
+            100
+          ]
+        },
+        "noncritical": {
+          "asr_increase_max": [
+            1,
+            100
+          ],
+          "asr_max": [
+            3,
+            100
+          ],
+          "fnr_max": [
+            5,
+            100
+          ],
+          "fpr_increase_max": [
+            1,
+            100
+          ],
+          "fpr_max": [
+            5,
+            100
+          ],
+          "mutation_score_drop_max": [
+            2,
+            100
+          ],
+          "mutation_score_min": [
+            95,
+            100
+          ],
+          "recall_drop_max": [
+            2,
+            100
+          ],
+          "recall_min": [
+            95,
+            100
+          ]
+        }
+      },
+      "warning_dimensions": [
+        "elapsed_seconds",
+        "case_trial_executions",
+        "model_calls",
+        "total_tokens",
+        "api_cost_usd_micros"
+      ],
+      "warning_usage_min": [
+        4,
+        5
+      ]
+    },
+    "policy_digest": "53091cb1d4f1029896bb326b6f7d5fe5c54c3b9acce99ed64451f1a441d5f571",
+    "proposal_id": "proposal-1",
+    "request_id": "operator-current",
+    "schema_version": 1,
+    "series_id": "policy-main",
+    "valid": false,
+    "validation_id": "validation-1"
+  }
+]

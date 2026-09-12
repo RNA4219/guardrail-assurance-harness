@@ -1,0 +1,22 @@
+{
+  "id": "docs/ci-config.md",
+  "role": "ci-config",
+  "title": "CI構成とGate対応",
+  "summary": "[policy](../governance/policy.yaml) のrequired_jobsと次の対応を同時に変更する。公開後の実行結果はGitHub上の各commitのChecksを参照する。初回公開準備時点ではリモート成功は未確認。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "RUNBOOK.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f2e8a42aa44f2ce2b1ed1f6994ed271997e874f1bcf287be70df4286b6ffedeb"
+}

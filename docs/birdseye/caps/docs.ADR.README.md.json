@@ -1,0 +1,25 @@
+{
+  "id": "docs/ADR/README.md",
+  "role": "ADR",
+  "title": "判断記録",
+  "summary": "背景、判断、代替案、影響、状態、対象Taskを記録する。運用上の判断と製品の設計決定を区別する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/ADR/0003-runtime-core.md",
+    "docs/ADR/0004-lifecycle-recovery.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/open-questions.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "5aba7db57c5745da7268ab4130b88a1be0abccacf5b4ca0765ad9f317a80000b"
+}

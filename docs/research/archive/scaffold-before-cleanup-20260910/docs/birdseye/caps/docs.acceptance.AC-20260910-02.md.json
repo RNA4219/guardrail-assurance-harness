@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-02.md",
+  "role": "acceptance",
+  "title": "Acceptance: 要件定義の品質評価作業",
+  "summary": "[Task](../tasks/TASK.requirements-quality-09-10-2026.md) の評価報告の技術検収。要件全体や製品releaseの承認ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "815bef93477920e6e6fc5682e61385b8143e339a32472e497d2bb9377682ebcd"
+}

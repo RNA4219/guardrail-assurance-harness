@@ -1,0 +1,85 @@
+--- tools/candidate_runtime_checks.py.before
++++ tools/candidate_runtime_checks.py
+@@ -9,7 +9,7 @@
+ 
+ 
+ def verify(*, success, denied, check, runtime, runner, prepared, preflight_request,
+-           transition, receipts, active, save_observations, adopt=False, regression=False, cancellation=False, recovery=False, baseline_refresh=False, call=None):
++           transition, receipts, active, save_observations, adopt=False, regression=False, cancellation=False, recovery=False, baseline_refresh=False, supervisor=False, call=None):
+     def request(action, identifier, **fields):
+         return {"schema_version": 1, "action": action, "request_id": identifier, **fields}
+ 
+@@ -167,6 +167,14 @@
+                 if after_recovery is not None:
+                     after_recovery()
+             return after_both
++        if supervisor:
++            from tools.supervisor_runtime_checks import verify as verify_supervisor
++            after_supervisor = verify_supervisor(runtime=runtime, call=call, check=check,
++                contract=transition["next_contract"], receipts=receipts, save_observations=save_observations)
++            def after_supervised():
++                after_adoption()
++                after_supervisor()
++            return after_supervised
+         return after_adoption
+     # 追加の候補は予約までに留める。撤回後のdispatch拒否を、closedによる
+     # 拒否と混同せず検査し、未送信予約を取消して回収する。
+--- tools/verify_baseline_runtime.py.before
++++ tools/verify_baseline_runtime.py
+@@ -43,7 +43,12 @@
+     parser.add_argument("--cancellation", action="store_true", help="通常runの停止済み取消しと後日精算も検査する")
+     parser.add_argument("--recovery", action="store_true", help="実時計のlease切れ・根拠撤回後の取消し取得も検査する")
+     parser.add_argument("--baseline-refresh", action="store_true", help="通常runからbaselineをgen2へ更新し、固定参照と依存失効も検査する")
++    parser.add_argument("--supervisor", action="store_true", help="製品監督で通常30件・中断1件と再開・現在CIを検査する")
+     args = parser.parse_args()
++    if args.supervisor:
++        if args.regression or args.cancellation or args.recovery or args.baseline_refresh:
++            parser.error("--supervisorは通常run検証flag群と別に実行する")
++        args.candidate_adoption = True
+     if args.baseline_refresh:
+         args.recovery = True
+     if args.recovery:
+@@ -120,7 +125,8 @@
+             "tools/cancellation_runtime_checks.py",
+             "tools/recovery_runtime_checks.py",
+             "tools/baseline_refresh_runtime_checks.py",
+-            "tools/gah_ci.py",
++            "tools/gah_ci.py", "tools/gah_run.py", "tools/supervisor_runtime_checks.py",
++            "src/gah/supervised_run.py", "src/gah/supervisor_checkpoint.py",
+             "src/gah/execution_journal.py", "src/gah/normalized.py",
+             "src/gah/evaluation_authority.py", "src/gah/assurance_authority.py",
+             "src/gah/baseline_authority.py", "src/gah/fixture_admission.py",
+@@ -140,6 +146,7 @@
+             "schema_version": 1,
+             "kind": "baseline_runtime_manifest",
+             "baseline_refresh_enabled": args.baseline_refresh,
++            "supervisor_enabled": args.supervisor,
+             "started_at": int(time.time()),
+             "source_sha256": source_hashes,
+             "entry_count": 15,
+@@ -443,7 +450,7 @@
+             after_candidate_revocation = verify(success=success, denied=denied, check=check, runtime=runtime, runner=runner,
+                 prepared=prepared, preflight_request=preflight_request, transition=transition,
+                 receipts=receipts, active=active, save_observations=save_observations,
+-                adopt=args.candidate_adoption, regression=args.regression, cancellation=args.cancellation, recovery=args.recovery, baseline_refresh=args.baseline_refresh, call=call)
++                adopt=args.candidate_adoption, regression=args.regression, cancellation=args.cancellation, recovery=args.recovery, baseline_refresh=args.baseline_refresh, supervisor=args.supervisor, call=call)
+         success(12004, _request("evidence_revoke", "evidence-revoke-baseline-runtime", run_id=run_id))
+         if after_candidate_revocation is not None:
+             after_candidate_revocation()
+@@ -522,7 +529,7 @@
+         "source_sha256": source_hashes,
+         "image_id": runtime.lock["image_id"] if runtime is not None else None,
+         "fixture_image_id": runner.lock["image_id"] if runner is not None else None,
+-        "entry_count": 92 if args.recovery else (91 if args.cancellation else (90 if args.regression else (60 if args.candidate_runs else 15))),
++        "entry_count": 91 if args.supervisor else 92 if args.recovery else (91 if args.cancellation else (90 if args.regression else (60 if args.candidate_runs else 15))),
+         "baseline_entry_count": 15,
+         "candidate_entry_counts": {"old": 15, "new": 30} if args.candidate_runs else {},
+         "candidate_runs_enabled": args.candidate_runs,
+@@ -531,6 +538,7 @@
+         "cancellation_enabled": args.cancellation,
+         "recovery_enabled": args.recovery,
+         "baseline_refresh_enabled": args.baseline_refresh,
++        "supervisor_enabled": args.supervisor,
+         "synthetic_fixture_only": True,
+         "full_mvp": False,
+         "ci_eligible": False,

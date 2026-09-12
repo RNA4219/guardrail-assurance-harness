@@ -1,0 +1,42 @@
+---
+intent_id: INT-REPLACE
+owner: your-handle
+status: active
+last_reviewed_at: YYYY-MM-DD
+next_review_due: YYYY-MM-DD
+template_version: 1.0.0
+---
+
+# Runbook
+
+## Environments
+
+- Local:
+  - Describe runtime versions, setup commands, and required credentials.
+- CI:
+  - Link workflow names and required checks.
+
+## Execute
+
+```bash
+# Install dependencies
+<install command>
+
+# Run tests
+<test command>
+```
+
+## Observability
+
+- List logs, metrics, reports, or dashboards used to confirm health.
+
+## Confirm
+
+- [ ] Required tests pass
+- [ ] Documentation affected by the change is updated
+- [ ] Release or rollback evidence is recorded when needed
+
+## Rollback / Retry
+
+- Describe the smallest safe rollback action.
+- Record follow-up tasks for any unresolved issue.

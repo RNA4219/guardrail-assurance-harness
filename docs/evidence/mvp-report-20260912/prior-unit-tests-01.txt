@@ -1,0 +1,11 @@
+test_cancelled_gate_stays_cancelled_even_with_healthy_historical_decision (test_run_report.RunReportTests.test_cancelled_gate_stays_cancelled_even_with_healthy_historical_decision) ... ok
+test_json_and_human_summary_share_the_same_grounding_and_last_gate (test_run_report.RunReportTests.test_json_and_human_summary_share_the_same_grounding_and_last_gate) ... ok
+test_mutated_artifact_wrong_target_and_changed_output_root_fail_closed (test_run_report.RunReportTests.test_mutated_artifact_wrong_target_and_changed_output_root_fail_closed) ... ok
+test_revocation_during_artifact_read_is_reflected_in_final_report (test_run_report.RunReportTests.test_revocation_during_artifact_read_is_reflected_in_final_report) ... ok
+test_transport_shape_and_output_errors_return_two (test_run_report.RunReportTests.test_transport_shape_and_output_errors_return_two) ... ok
+test_unknown_metric_keeps_missing_value_and_comparison_unknown (test_run_report.RunReportTests.test_unknown_metric_keeps_missing_value_and_comparison_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.009s
+
+OK

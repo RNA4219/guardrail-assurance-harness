@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "migrated_at": "2026-09-09",
+  "reviewed": {
+    "original_name": "deep-research-report (12).md",
+    "path": "docs/requirements.md",
+    "migration": "frontmatterのみ追加、元本文はSHA-256一致を移設時に確認",
+    "body_sha256_at_migration": "4a790032ecaad371fa83f3d8dbd436c8d07db551f74627eacf7e92a55551d3e7",
+    "mutable": true
+  },
+  "archive": {
+    "original_name": "deep-research-report (12).before-review-2026-09-09.md",
+    "path": "docs/research/archive/requirements-before-review-2026-09-09.md",
+    "sha256_raw": "8957e61038bb7403131fb8a7be0c13fe4fead30cb8b7e199cfb0fdcec0368380",
+    "mutable": false
+  },
+  "review_archives": [
+    {
+      "review": "requirements-adversarial-2026-09-10",
+      "source_version": "0.2",
+      "path": "docs/research/archive/requirements-before-adversarial-2026-09-10.md",
+      "sha256_raw": "940c93624ec2c4ddb4f68b1798eac3490fb5a34e29382a7d37e229649d9fb67b",
+      "mutable": false
+    }
+  ],
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

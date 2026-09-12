@@ -1,0 +1,943 @@
+{
+  "generated_at": "00006",
+  "nodes": {
+    "AGENTS.md": {
+      "role": "AGENTS",
+      "caps": "docs/birdseye/caps/AGENTS.md.json",
+      "mtime": "00006",
+      "source_sha256": "3dd8d64d4aca84e3073392dfcc17448bec0323a009b2516bc5509b6e858e4745"
+    },
+    "BLUEPRINT.md": {
+      "role": "BLUEPRINT",
+      "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "mtime": "00006",
+      "source_sha256": "858e78db70e806a5c39ae5c0328033409d7334ad9a291513825ac97fde9f91dd"
+    },
+    "CHANGELOG.md": {
+      "role": "CHANGELOG",
+      "caps": "docs/birdseye/caps/CHANGELOG.md.json",
+      "mtime": "00006",
+      "source_sha256": "8083c539d1cba2f96d7843414aab22903217ade7ecf2ad6d57ae06800184edb4"
+    },
+    "CHECKLISTS.md": {
+      "role": "CHECKLISTS",
+      "caps": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "mtime": "00006",
+      "source_sha256": "612671d5d602ea267fd8a2f18ade141d0409386418daf441e8d8776171152280"
+    },
+    "CONTRIBUTING.md": {
+      "role": "CONTRIBUTING",
+      "caps": "docs/birdseye/caps/CONTRIBUTING.md.json",
+      "mtime": "00006",
+      "source_sha256": "522f975c5e6129f5e2efd3309b3fc538c4b13da956f78268fe3a2cfd5446594d"
+    },
+    "datasets/README.md": {
+      "role": "datasets",
+      "caps": "docs/birdseye/caps/datasets.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "fa3d42c16c691b493398e57c303acc821f93e9208cb58567b87a453f986f7c00"
+    },
+    "docs/acceptance/AC-20260909-01.md": {
+      "role": "acceptance",
+      "caps": "docs/birdseye/caps/docs.acceptance.AC-20260909-01.md.json",
+      "mtime": "00006",
+      "source_sha256": "aee401bb18232de648c369b27185367c0ea44e2d9ab5083f0e7722f406e1e9d7"
+    },
+    "docs/acceptance/AC-20260910-01.md": {
+      "role": "acceptance",
+      "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-01.md.json",
+      "mtime": "00006",
+      "source_sha256": "0a4430ae9fdbb07629e73a34ab12e4f7a6bc8c8faa965eeef4408c8fe80bf62b"
+    },
+    "docs/acceptance/AC-20260910-02.md": {
+      "role": "acceptance",
+      "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-02.md.json",
+      "mtime": "00006",
+      "source_sha256": "815bef93477920e6e6fc5682e61385b8143e339a32472e497d2bb9377682ebcd"
+    },
+    "docs/acceptance/INDEX.md": {
+      "role": "acceptance",
+      "caps": "docs/birdseye/caps/docs.acceptance.INDEX.md.json",
+      "mtime": "00006",
+      "source_sha256": "814d2cbff1092cec69b5c665e238c4d055e02ce207d523cb59050684bc22edfb"
+    },
+    "docs/acceptance/README.md": {
+      "role": "acceptance",
+      "caps": "docs/birdseye/caps/docs.acceptance.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "ffd5fbb3de6dfdc54b7e2f8f0e2e46e1056aa6aab413f43b785016be3481243b"
+    },
+    "docs/ADR/0001-workflow-cookbook-adoption.md": {
+      "role": "ADR",
+      "caps": "docs/birdseye/caps/docs.ADR.0001-workflow-cookbook-adoption.md.json",
+      "mtime": "00006",
+      "source_sha256": "70833189b27dad7da53b96c1515b4b1339fd530b081bb26c29e07262d8168f75"
+    },
+    "docs/ADR/README.md": {
+      "role": "ADR",
+      "caps": "docs/birdseye/caps/docs.ADR.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "4b4757076c02c821c9822d3461604901ad9776f03823f0ba0132c1c28925b530"
+    },
+    "docs/birdseye/README.md": {
+      "role": "birdseye",
+      "caps": "docs/birdseye/caps/docs.birdseye.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "276aa215a33493d727b56b8aa8ba58f09bb3a28f85e645f54c65c172865816a0"
+    },
+    "docs/BIRDSEYE.md": {
+      "role": "BIRDSEYE",
+      "caps": "docs/birdseye/caps/docs.BIRDSEYE.md.json",
+      "mtime": "00006",
+      "source_sha256": "7c13ba10c8841333c3ed945c216b4b14e4ce3df4e36f26d9555d56f12027b0bc"
+    },
+    "docs/ci-config.md": {
+      "role": "ci-config",
+      "caps": "docs/birdseye/caps/docs.ci-config.md.json",
+      "mtime": "00006",
+      "source_sha256": "a2f25d80aa40726c91045154bdca6fb3ab25bfd17e1d870e334527974b4b7e84"
+    },
+    "docs/contracts/README.md": {
+      "role": "contracts",
+      "caps": "docs/birdseye/caps/docs.contracts.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "6650eefd82119342a68355f526bb9d7e92ecfa86d3238223b7da24d50a1d4dc8"
+    },
+    "docs/design.md": {
+      "role": "design",
+      "caps": "docs/birdseye/caps/docs.design.md.json",
+      "mtime": "00006",
+      "source_sha256": "eda2d0cf2b48161f17b742585525108d45053f6e5b3cc933422be94b6ea30ff3"
+    },
+    "docs/evidence/README.md": {
+      "role": "evidence",
+      "caps": "docs/birdseye/caps/docs.evidence.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "166c0453f25987414bbbbd41a18e2eecc3a291697f719ee14b41f14b16a9dc7f"
+    },
+    "docs/releases/README.md": {
+      "role": "releases",
+      "caps": "docs/birdseye/caps/docs.releases.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "4f3d5363bf83d5e1137df817ffd37d7ddec994435539dbd6c99a48dbeffd65a7"
+    },
+    "docs/requirements.md": {
+      "role": "requirements",
+      "caps": "docs/birdseye/caps/docs.requirements.md.json",
+      "mtime": "00006",
+      "source_sha256": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a"
+    },
+    "docs/research/README.md": {
+      "role": "research",
+      "caps": "docs/birdseye/caps/docs.research.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "2adc6a24d957102e2f5cce36fd7680d691b71e9a3c2f15e8adea6884d106778a"
+    },
+    "docs/reviews/requirements-adversarial-2026-09-10.md": {
+      "role": "reviews",
+      "caps": "docs/birdseye/caps/docs.reviews.requirements-adversarial-2026-09-10.md.json",
+      "mtime": "00006",
+      "source_sha256": "d4b468f2f8aff0c369363b471aa8a530a4e9102593d125f94d9dc3d96194e261"
+    },
+    "docs/reviews/requirements-quality-2026-09-10.md": {
+      "role": "reviews",
+      "caps": "docs/birdseye/caps/docs.reviews.requirements-quality-2026-09-10.md.json",
+      "mtime": "00006",
+      "source_sha256": "a57c680bfc314e31902fbcddce108b58983c18a50b716c9e289cc2aa73319668"
+    },
+    "docs/security/SAC.md": {
+      "role": "security",
+      "caps": "docs/birdseye/caps/docs.security.SAC.md.json",
+      "mtime": "00006",
+      "source_sha256": "404977782c8ee6c10b184f9dbe2daa012aa55f16c93f2a4f0480722ce596982b"
+    },
+    "docs/security/Security_Review_Checklist.md": {
+      "role": "security",
+      "caps": "docs/birdseye/caps/docs.security.Security_Review_Checklist.md.json",
+      "mtime": "00006",
+      "source_sha256": "f1109ea1b0e12b565ce9281d5cbb42b984130708ce000e98b897b1da6603e983"
+    },
+    "docs/spec.md": {
+      "role": "spec",
+      "caps": "docs/birdseye/caps/docs.spec.md.json",
+      "mtime": "00006",
+      "source_sha256": "cafaa1ab428cbc922bde5637da90bb49721d4e0d5cabad782cf34b4db7d6167a"
+    },
+    "docs/tasks/README.md": {
+      "role": "tasks",
+      "caps": "docs/birdseye/caps/docs.tasks.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "469c77034506b3ceb286d4922ab51173ceca0e734cfb310ed3b2bf6c8b0c5d8d"
+    },
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md": {
+      "role": "tasks",
+      "caps": "docs/birdseye/caps/docs.tasks.TASK.requirements-adversarial-09-10-2026.md.json",
+      "mtime": "00006",
+      "source_sha256": "de6bfdffa1a2a8fb9ff957840ce0ae5ffb8c6302800d21cd43c6c3d7d001bb9d"
+    },
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md": {
+      "role": "tasks",
+      "caps": "docs/birdseye/caps/docs.tasks.TASK.requirements-quality-09-10-2026.md.json",
+      "mtime": "00006",
+      "source_sha256": "34be131bddb7cac5a953d7789ffa0950888a89d65e812306879eed248397646a"
+    },
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md": {
+      "role": "tasks",
+      "caps": "docs/birdseye/caps/docs.tasks.TASK.workflow-cookbook-adoption-09-09-2026.md.json",
+      "mtime": "00006",
+      "source_sha256": "9f37f4a6ed8624b11c13b894d1a819f220db0bd4ad311770218a4d2e0b4a0622"
+    },
+    "docs/TASKS.md": {
+      "role": "TASKS",
+      "caps": "docs/birdseye/caps/docs.TASKS.md.json",
+      "mtime": "00006",
+      "source_sha256": "88c239a61897e2117c36edd953061baa57f39a3b417b91cb6c8aa2fd7edd9415"
+    },
+    "docs/UPSTREAM.md": {
+      "role": "UPSTREAM",
+      "caps": "docs/birdseye/caps/docs.UPSTREAM.md.json",
+      "mtime": "00006",
+      "source_sha256": "bf6ba3e69c458fe8fdb5c428c4fd68437204b43ed214323fcde4d83fc92f8805"
+    },
+    "EVALUATION.md": {
+      "role": "EVALUATION",
+      "caps": "docs/birdseye/caps/EVALUATION.md.json",
+      "mtime": "00006",
+      "source_sha256": "eac6ad1afd18604843e9fc3dc991942371732d7a277ab04cdd7d5c598bb936f8"
+    },
+    "examples/README.md": {
+      "role": "examples",
+      "caps": "docs/birdseye/caps/examples.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "9a9f967b747b228ae009ec621525e952af568d6327084028dd6b79f59a916540"
+    },
+    "fixtures/README.md": {
+      "role": "fixtures",
+      "caps": "docs/birdseye/caps/fixtures.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "da0a7b31f53b6e8fe0945e37fa3b9457a5435d79a68b25daa24b5c889f84de4a"
+    },
+    "GUARDRAILS.md": {
+      "role": "GUARDRAILS",
+      "caps": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "mtime": "00006",
+      "source_sha256": "a272f23e9a5e006201ae92f273f3cb43651b074768b9412ff767b16ab026e1dc"
+    },
+    "HUB.codex.md": {
+      "role": "HUB.codex",
+      "caps": "docs/birdseye/caps/HUB.codex.md.json",
+      "mtime": "00006",
+      "source_sha256": "4c3970c6b3f644e9f4c0b2dfc683502dbf288b7f6783ab6ec229904c96b823a1"
+    },
+    "orchestration/m0-development.md": {
+      "role": "orchestration",
+      "caps": "docs/birdseye/caps/orchestration.m0-development.md.json",
+      "mtime": "00006",
+      "source_sha256": "3dee0a5b0a75da1c8ebc99109a09ed17402a7b1c37d868d505e6e7272fa324b8"
+    },
+    "README.md": {
+      "role": "README",
+      "caps": "docs/birdseye/caps/README.md.json",
+      "mtime": "00006",
+      "source_sha256": "85ea00da5bfcbc52d72eadb5be83d8ea017b5823fdbbbe05422e72fa28fbec14"
+    },
+    "RUNBOOK.md": {
+      "role": "RUNBOOK",
+      "caps": "docs/birdseye/caps/RUNBOOK.md.json",
+      "mtime": "00006",
+      "source_sha256": "91876556fa04a9bd5757248da1db1d1bcd2473290fed754db56a165c52997791"
+    },
+    "schemas/README.md": {
+      "role": "schemas",
+      "caps": "docs/birdseye/caps/schemas.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "714a55a5e74b1df54075ff72be2f3d7301ab3cf6becde0ebe3792ace5a50da36"
+    },
+    "SECURITY.md": {
+      "role": "SECURITY",
+      "caps": "docs/birdseye/caps/SECURITY.md.json",
+      "mtime": "00006",
+      "source_sha256": "664b1b38b092fc22165ad05a96f4a0211b676656d24c56538fd2baf6431584ca"
+    },
+    "src/README.md": {
+      "role": "src",
+      "caps": "docs/birdseye/caps/src.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "25ca5768fac7c92e34fa091722f82a552d800c5a83e18be0d2b9607a7123b2d1"
+    },
+    "TASK.codex.md": {
+      "role": "TASK.codex",
+      "caps": "docs/birdseye/caps/TASK.codex.md.json",
+      "mtime": "00006",
+      "source_sha256": "e0d3b8e7940e7448e602ba991cc48b17422f669a9e3b158cb2bf4e210493cc1a"
+    },
+    "tests/README.md": {
+      "role": "tests",
+      "caps": "docs/birdseye/caps/tests.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "f9e792b374750c9744c2c3497aa14f37dd5d9783b16e8615744eccd6857bb54a"
+    },
+    "tools/README.md": {
+      "role": "tools",
+      "caps": "docs/birdseye/caps/tools.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "15cf021f97144fd579286fe1a9688b4dd670804d9090bda4c7678a956523280a"
+    },
+    "tools/review/README.md": {
+      "role": "tools",
+      "caps": "docs/birdseye/caps/tools.review.README.md.json",
+      "mtime": "00006",
+      "source_sha256": "c5cd86d0a138764791bf09d67a32e83af684f26cc460cce92240b527875f1d1e"
+    }
+  },
+  "edges": [
+    [
+      "AGENTS.md",
+      "EVALUATION.md"
+    ],
+    [
+      "AGENTS.md",
+      "GUARDRAILS.md"
+    ],
+    [
+      "AGENTS.md",
+      "HUB.codex.md"
+    ],
+    [
+      "AGENTS.md",
+      "TASK.codex.md"
+    ],
+    [
+      "AGENTS.md",
+      "docs/requirements.md"
+    ],
+    [
+      "BLUEPRINT.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "BLUEPRINT.md",
+      "docs/ADR/README.md"
+    ],
+    [
+      "BLUEPRINT.md",
+      "docs/requirements.md"
+    ],
+    [
+      "BLUEPRINT.md",
+      "docs/spec.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/acceptance/AC-20260910-01.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/acceptance/AC-20260910-02.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/reviews/requirements-quality-2026-09-10.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+    ],
+    [
+      "CHANGELOG.md",
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+    ],
+    [
+      "CHECKLISTS.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "CHECKLISTS.md",
+      "docs/releases/README.md"
+    ],
+    [
+      "CHECKLISTS.md",
+      "docs/requirements.md"
+    ],
+    [
+      "CHECKLISTS.md",
+      "docs/security/Security_Review_Checklist.md"
+    ],
+    [
+      "CONTRIBUTING.md",
+      "EVALUATION.md"
+    ],
+    [
+      "CONTRIBUTING.md",
+      "HUB.codex.md"
+    ],
+    [
+      "CONTRIBUTING.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "CONTRIBUTING.md",
+      "TASK.codex.md"
+    ],
+    [
+      "CONTRIBUTING.md",
+      "docs/UPSTREAM.md"
+    ],
+    [
+      "EVALUATION.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "EVALUATION.md",
+      "docs/requirements.md"
+    ],
+    [
+      "EVALUATION.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "GUARDRAILS.md",
+      "HUB.codex.md"
+    ],
+    [
+      "GUARDRAILS.md",
+      "README.md"
+    ],
+    [
+      "GUARDRAILS.md",
+      "docs/BIRDSEYE.md"
+    ],
+    [
+      "GUARDRAILS.md",
+      "docs/requirements.md"
+    ],
+    [
+      "HUB.codex.md",
+      "BLUEPRINT.md"
+    ],
+    [
+      "HUB.codex.md",
+      "EVALUATION.md"
+    ],
+    [
+      "HUB.codex.md",
+      "GUARDRAILS.md"
+    ],
+    [
+      "HUB.codex.md",
+      "README.md"
+    ],
+    [
+      "HUB.codex.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "HUB.codex.md",
+      "SECURITY.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/TASKS.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/UPSTREAM.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/acceptance/INDEX.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/ci-config.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/contracts/README.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/design.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/requirements.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/security/SAC.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/spec.md"
+    ],
+    [
+      "HUB.codex.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "HUB.codex.md",
+      "orchestration/m0-development.md"
+    ],
+    [
+      "README.md",
+      "BLUEPRINT.md"
+    ],
+    [
+      "README.md",
+      "EVALUATION.md"
+    ],
+    [
+      "README.md",
+      "HUB.codex.md"
+    ],
+    [
+      "README.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "README.md",
+      "SECURITY.md"
+    ],
+    [
+      "README.md",
+      "docs/ADR/0001-workflow-cookbook-adoption.md"
+    ],
+    [
+      "README.md",
+      "docs/BIRDSEYE.md"
+    ],
+    [
+      "README.md",
+      "docs/UPSTREAM.md"
+    ],
+    [
+      "README.md",
+      "docs/acceptance/INDEX.md"
+    ],
+    [
+      "README.md",
+      "docs/ci-config.md"
+    ],
+    [
+      "README.md",
+      "docs/requirements.md"
+    ],
+    [
+      "README.md",
+      "docs/security/SAC.md"
+    ],
+    [
+      "README.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "RUNBOOK.md",
+      "docs/acceptance/README.md"
+    ],
+    [
+      "RUNBOOK.md",
+      "docs/ci-config.md"
+    ],
+    [
+      "RUNBOOK.md",
+      "docs/evidence/README.md"
+    ],
+    [
+      "RUNBOOK.md",
+      "docs/research/README.md"
+    ],
+    [
+      "SECURITY.md",
+      "docs/requirements.md"
+    ],
+    [
+      "SECURITY.md",
+      "docs/security/SAC.md"
+    ],
+    [
+      "TASK.codex.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "datasets/README.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/ADR/0001-workflow-cookbook-adoption.md",
+      "docs/UPSTREAM.md"
+    ],
+    [
+      "docs/ADR/0001-workflow-cookbook-adoption.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "docs/ADR/0001-workflow-cookbook-adoption.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/ADR/0001-workflow-cookbook-adoption.md",
+      "docs/research/README.md"
+    ],
+    [
+      "docs/ADR/0001-workflow-cookbook-adoption.md",
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+    ],
+    [
+      "docs/ADR/README.md",
+      "docs/ADR/0001-workflow-cookbook-adoption.md"
+    ],
+    [
+      "docs/BIRDSEYE.md",
+      "HUB.codex.md"
+    ],
+    [
+      "docs/BIRDSEYE.md",
+      "docs/birdseye/README.md"
+    ],
+    [
+      "docs/BIRDSEYE.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "docs/TASKS.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "docs/TASKS.md",
+      "TASK.codex.md"
+    ],
+    [
+      "docs/TASKS.md",
+      "docs/acceptance/README.md"
+    ],
+    [
+      "docs/TASKS.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "docs/TASKS.md",
+      "orchestration/m0-development.md"
+    ],
+    [
+      "docs/UPSTREAM.md",
+      "docs/ADR/0001-workflow-cookbook-adoption.md"
+    ],
+    [
+      "docs/acceptance/AC-20260909-01.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "docs/acceptance/AC-20260909-01.md",
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+    ],
+    [
+      "docs/acceptance/AC-20260910-01.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "docs/acceptance/AC-20260910-01.md",
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+    ],
+    [
+      "docs/acceptance/AC-20260910-02.md",
+      "docs/reviews/requirements-quality-2026-09-10.md"
+    ],
+    [
+      "docs/acceptance/AC-20260910-02.md",
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+    ],
+    [
+      "docs/acceptance/INDEX.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "docs/acceptance/INDEX.md",
+      "docs/acceptance/AC-20260910-01.md"
+    ],
+    [
+      "docs/acceptance/INDEX.md",
+      "docs/acceptance/AC-20260910-02.md"
+    ],
+    [
+      "docs/acceptance/INDEX.md",
+      "docs/acceptance/README.md"
+    ],
+    [
+      "docs/acceptance/README.md",
+      "docs/acceptance/INDEX.md"
+    ],
+    [
+      "docs/acceptance/README.md",
+      "docs/tasks/README.md"
+    ],
+    [
+      "docs/birdseye/README.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "docs/birdseye/README.md",
+      "docs/BIRDSEYE.md"
+    ],
+    [
+      "docs/ci-config.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "docs/contracts/README.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/contracts/README.md",
+      "fixtures/README.md"
+    ],
+    [
+      "docs/contracts/README.md",
+      "schemas/README.md"
+    ],
+    [
+      "docs/design.md",
+      "docs/ADR/README.md"
+    ],
+    [
+      "docs/design.md",
+      "docs/TASKS.md"
+    ],
+    [
+      "docs/design.md",
+      "docs/contracts/README.md"
+    ],
+    [
+      "docs/design.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/evidence/README.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "docs/releases/README.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "docs/research/README.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/research/README.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "docs/reviews/requirements-adversarial-2026-09-10.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "docs/reviews/requirements-adversarial-2026-09-10.md",
+      "docs/acceptance/AC-20260910-01.md"
+    ],
+    [
+      "docs/reviews/requirements-adversarial-2026-09-10.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/reviews/requirements-adversarial-2026-09-10.md",
+      "docs/research/README.md"
+    ],
+    [
+      "docs/reviews/requirements-adversarial-2026-09-10.md",
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+    ],
+    [
+      "docs/reviews/requirements-quality-2026-09-10.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "docs/reviews/requirements-quality-2026-09-10.md",
+      "docs/acceptance/AC-20260910-02.md"
+    ],
+    [
+      "docs/reviews/requirements-quality-2026-09-10.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/reviews/requirements-quality-2026-09-10.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "docs/reviews/requirements-quality-2026-09-10.md",
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+    ],
+    [
+      "docs/security/SAC.md",
+      "SECURITY.md"
+    ],
+    [
+      "docs/security/SAC.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/security/SAC.md",
+      "docs/security/Security_Review_Checklist.md"
+    ],
+    [
+      "docs/security/Security_Review_Checklist.md",
+      "docs/security/SAC.md"
+    ],
+    [
+      "docs/spec.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "docs/spec.md",
+      "docs/contracts/README.md"
+    ],
+    [
+      "docs/spec.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/spec.md",
+      "docs/security/SAC.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "TASK.codex.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/TASKS.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/acceptance/AC-20260910-01.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/acceptance/AC-20260910-02.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+    ],
+    [
+      "docs/tasks/README.md",
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+      "docs/acceptance/AC-20260910-01.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+      "EVALUATION.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+      "docs/acceptance/AC-20260910-02.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+      "docs/reviews/requirements-quality-2026-09-10.md"
+    ],
+    [
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+      "CHANGELOG.md"
+    ],
+    [
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+      "EVALUATION.md"
+    ],
+    [
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+      "docs/ADR/0001-workflow-cookbook-adoption.md"
+    ],
+    [
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+      "docs/requirements.md"
+    ],
+    [
+      "examples/README.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "fixtures/README.md",
+      "docs/contracts/README.md"
+    ],
+    [
+      "orchestration/m0-development.md",
+      "TASK.codex.md"
+    ],
+    [
+      "orchestration/m0-development.md",
+      "docs/acceptance/AC-20260909-01.md"
+    ],
+    [
+      "orchestration/m0-development.md",
+      "docs/requirements.md"
+    ],
+    [
+      "schemas/README.md",
+      "docs/contracts/README.md"
+    ],
+    [
+      "src/README.md",
+      "docs/design.md"
+    ],
+    [
+      "src/README.md",
+      "orchestration/m0-development.md"
+    ],
+    [
+      "tools/README.md",
+      "RUNBOOK.md"
+    ],
+    [
+      "tools/README.md",
+      "docs/UPSTREAM.md"
+    ],
+    [
+      "tools/review/README.md",
+      "docs/reviews/requirements-adversarial-2026-09-10.md"
+    ]
+  ]
+}

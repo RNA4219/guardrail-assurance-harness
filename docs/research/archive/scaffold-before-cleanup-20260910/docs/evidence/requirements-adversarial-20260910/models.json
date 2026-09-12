@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "executed_at": "2026-09-09T17:02:44+00:00",
+  "scope": "finite counterexample models for requirements review",
+  "status": "counterexamples_reproduced",
+  "case_count": 10,
+  "product_validation": "not_run",
+  "limitation": "意図的に単純化した不適切な判断モデル。製品実装の脆弱性・不具合の実証ではない。",
+  "runner_sha256_lf": "74014df60cc11e3fe9b82872aca5656dd0f5e703bda1926ae5fdb9404050ffe8",
+  "cases": [
+    {
+      "case_id": "AR-01",
+      "requirement": "EVAL-02",
+      "counterexample": "正解1件を99回、誤り1件、未回収gold1件",
+      "observation": {
+        "naive_precision": 0.99,
+        "semantic_precision": 0.5,
+        "semantic_recall": 0.5,
+        "duplicate_predictions": 98
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-02",
+      "requirement": "EVAL-03",
+      "counterexample": "解析入力に評価用goldを含める",
+      "observation": {
+        "input_oracle_overlap": [
+          "evaluation/gold.json"
+        ]
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-03",
+      "requirement": "RUN-02",
+      "counterexample": "A開始→Bを選択して開始→B完了→A完了",
+      "observation": {
+        "traces": [
+          {
+            "completion_order": [
+              "run-a",
+              "run-b"
+            ],
+            "last_finisher_selection": "run-b",
+            "selection_pinned_to_request": "run-b"
+          },
+          {
+            "completion_order": [
+              "run-b",
+              "run-a"
+            ],
+            "last_finisher_selection": "run-a",
+            "selection_pinned_to_request": "run-b"
+          }
+        ],
+        "bad_completion_orders": 1
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-04",
+      "requirement": "RETENTION-02",
+      "counterexample": "AとBがEvidenceを共有し、A削除中に古いworkerが完了",
+      "observation": {
+        "naive_broken_B_refs": [
+          "shared-evidence"
+        ],
+        "unreferenced_only_deletion": [
+          "a-only"
+        ],
+        "stale_writer_epoch": 4,
+        "current_deletion_epoch": 5
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-05",
+      "requirement": "POLICY-01",
+      "counterexample": "v1で開始したrunの途中でv1を失効させる",
+      "observation": {
+        "checkpoint_matches_run": true,
+        "policy_currently_admitted": false
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-06",
+      "requirement": "METADATA-01",
+      "counterexample": "本文だけ秘匿化し、合成markerをpathに残す",
+      "observation": {
+        "marker_in_body": false,
+        "marker_in_metadata": true
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-07",
+      "requirement": "IDENTITY-01",
+      "counterexample": "異なるrootへ同じrepository_idを設定",
+      "observation": {
+        "input_repositories": 2,
+        "dictionary_entries": 1
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-08",
+      "requirement": "BUDGET-01",
+      "counterexample": "各workerが512MiB以内でも32workerで総量超過",
+      "observation": {
+        "per_worker_mib": 512,
+        "workers": 32,
+        "aggregate_mib": 16384,
+        "aggregate_limit_mib": 8192
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-09",
+      "requirement": "RUN-03",
+      "counterexample": "全10資産を会計したが、必須解析は0件",
+      "observation": {
+        "accounted": 10,
+        "parsed": 0,
+        "purpose": "FULL_STATIC",
+        "required_parsed_by_model_policy": 1
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    },
+    {
+      "case_id": "AR-10",
+      "requirement": "OUTPUT-02",
+      "counterexample": "policyでEvidenceを省いたexportを元snapshotと同一視",
+      "observation": {
+        "origin_hash_equals_projection_hash": false,
+        "dangling_references": [
+          "e1"
+        ]
+      },
+      "unsafe_assumption_reproduced": true,
+      "proposed_guard_rejects_example": true
+    }
+  ]
+}

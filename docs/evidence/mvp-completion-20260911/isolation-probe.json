@@ -1,0 +1,10 @@
+{
+  "checked_on": "2026-09-11",
+  "command": "docker version --format '{{json .Server}}'",
+  "sandbox_attempt": {"exit_code": 1, "reason": "NAMED_PIPE_PERMISSION_DENIED"},
+  "authorized_read_attempt": {"exit_code": 0, "server_version": "29.0.1", "os": "linux", "architecture": "amd64", "desktop_version": "4.53.0"},
+  "engine_available": true,
+  "isolation_acceptance": "NOT_RUN",
+  "container_execution": "NOT_RUN",
+  "full_mvp_acceptance": "NOT_RUN"
+}

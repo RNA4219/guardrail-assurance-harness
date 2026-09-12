@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-07.md",
+  "role": "acceptance",
+  "title": "Acceptance: 初期運用方針の文書反映",
+  "summary": "[Task](../tasks/TASK.operating-decisions-09-10-2026.md)の文書改訂。CI成功方針・初期値・AI管理・OSS転用方針の整合を確認する。製品の実行検証やコード/データ転用の検収ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/operating-decisions-20260910.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/operating-decisions-20260910.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "d368345e89ff995192af2fde265ba47f05f713e6e4582136677c8213803d01b1"
+}

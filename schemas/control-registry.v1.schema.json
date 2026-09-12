@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Guardrail Assurance Harness Control Registry v1",
+  "$comment": "Schemaで表現しにくいControl/obligation全体ID一意性、依存参照閉包・循環、canonical UTF-8 1MiB上限はruntime validatorで必ず検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "registry_id", "controls"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1, "minimum": 0, "maximum": 9007199254740991},
+    "kind": {"type": "string", "const": "control_registry"},
+    "registry_id": {"$ref": "#/$defs/id"},
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1000,
+      "items": {"$ref": "#/$defs/control"}
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}(?![\\s\\S])"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!.*[\\u0000-\\u001F]).*\\S.*$"
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "digest"],
+      "properties": {
+        "kind": {"$ref": "#/$defs/id"},
+        "id": {"$ref": "#/$defs/id"},
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+        }
+      }
+    },
+    "obligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["obligation_id", "kind", "required", "event_policy", "evaluator_ref"],
+      "properties": {
+        "obligation_id": {"$ref": "#/$defs/id"},
+        "kind": {"enum": ["constraint", "mutation", "llm_metric"]},
+        "required": {"type": "boolean"},
+        "event_policy": {"enum": ["forbidden", "aggregate", "none"]},
+        "evaluator_ref": {"$ref": "#/$defs/ref"}
+      }
+    },
+    "mutation_applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason"],
+      "oneOf": [
+        {
+          "properties": {
+            "status": {"const": "applicable"},
+            "reason": {"type": "null"}
+          }
+        },
+        {
+          "properties": {
+            "status": {"const": "not_applicable"},
+            "reason": {"$ref": "#/$defs/text"}
+          }
+        }
+      ]
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_id", "owner", "invariant", "criticality", "target_ref",
+        "dependencies", "obligations", "mutation_applicability"
+      ],
+      "properties": {
+        "control_id": {"$ref": "#/$defs/id"},
+        "owner": {"$ref": "#/$defs/text"},
+        "invariant": {"$ref": "#/$defs/text"},
+        "criticality": {"enum": ["critical", "noncritical"]},
+        "target_ref": {"$ref": "#/$defs/ref"},
+        "dependencies": {
+          "type": "array",
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "obligations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {"$ref": "#/$defs/obligation"}
+        },
+        "mutation_applicability": {"$ref": "#/$defs/mutation_applicability"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"criticality": {"const": "critical"}}},
+          "then": {
+            "properties": {
+              "obligations": {
+                "items": {"properties": {"required": {"const": true}}}
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"mutation_applicability": {"properties": {"status": {"const": "applicable"}}}}},
+          "then": {
+            "properties": {
+              "obligations": {"contains": {"properties": {"kind": {"const": "mutation"}}}}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"mutation_applicability": {"properties": {"status": {"const": "not_applicable"}}}}},
+          "then": {
+            "properties": {
+              "obligations": {"not": {"contains": {"properties": {"kind": {"const": "mutation"}}}}}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

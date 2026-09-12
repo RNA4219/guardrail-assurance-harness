@@ -1,0 +1,162 @@
+{
+  "generated_at": "00006",
+  "nodes": [
+    {
+      "id": "README.md",
+      "role": "README",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/README.md.json",
+      "edges": [
+        "BLUEPRINT.md",
+        "EVALUATION.md",
+        "HUB.codex.md",
+        "RUNBOOK.md",
+        "SECURITY.md",
+        "docs/ADR/0001-workflow-cookbook-adoption.md",
+        "docs/BIRDSEYE.md",
+        "docs/UPSTREAM.md",
+        "docs/acceptance/INDEX.md",
+        "docs/ci-config.md",
+        "docs/requirements.md",
+        "docs/security/SAC.md",
+        "docs/tasks/README.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "HUB.codex.md",
+      "role": "HUB.codex",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/HUB.codex.md.json",
+      "edges": [
+        "BLUEPRINT.md",
+        "EVALUATION.md",
+        "GUARDRAILS.md",
+        "README.md",
+        "RUNBOOK.md",
+        "SECURITY.md",
+        "docs/TASKS.md",
+        "docs/UPSTREAM.md",
+        "docs/acceptance/INDEX.md",
+        "docs/ci-config.md",
+        "docs/contracts/README.md",
+        "docs/design.md",
+        "docs/requirements.md",
+        "docs/security/SAC.md",
+        "docs/spec.md",
+        "docs/tasks/README.md",
+        "orchestration/m0-development.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "BLUEPRINT.md",
+      "role": "BLUEPRINT",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "edges": [
+        "RUNBOOK.md",
+        "docs/ADR/README.md",
+        "docs/requirements.md",
+        "docs/spec.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "GUARDRAILS.md",
+      "role": "GUARDRAILS",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "edges": [
+        "HUB.codex.md",
+        "README.md",
+        "docs/BIRDSEYE.md",
+        "docs/requirements.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "RUNBOOK.md",
+      "role": "RUNBOOK",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/RUNBOOK.md.json",
+      "edges": [
+        "docs/acceptance/README.md",
+        "docs/ci-config.md",
+        "docs/evidence/README.md",
+        "docs/research/README.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "EVALUATION.md",
+      "role": "EVALUATION",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/EVALUATION.md.json",
+      "edges": [
+        "RUNBOOK.md",
+        "docs/requirements.md",
+        "docs/tasks/README.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "docs/requirements.md",
+      "role": "requirements",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/docs.requirements.md.json",
+      "edges": [
+        "docs/reviews/requirements-adversarial-2026-09-10.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "docs/tasks/README.md",
+      "role": "tasks",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/docs.tasks.README.md.json",
+      "edges": [
+        "TASK.codex.md",
+        "docs/TASKS.md",
+        "docs/acceptance/AC-20260909-01.md",
+        "docs/acceptance/AC-20260910-01.md",
+        "docs/acceptance/AC-20260910-02.md",
+        "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+        "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+        "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    },
+    {
+      "id": "docs/acceptance/INDEX.md",
+      "role": "acceptance",
+      "reason": "標準の作業入口",
+      "caps": "docs/birdseye/caps/docs.acceptance.INDEX.md.json",
+      "edges": [
+        "docs/acceptance/AC-20260909-01.md",
+        "docs/acceptance/AC-20260910-01.md",
+        "docs/acceptance/AC-20260910-02.md",
+        "docs/acceptance/README.md"
+      ],
+      "last_verified_at": "2026-09-09T17:27:22+00:00",
+      "index_snapshot": "docs/birdseye/index.json",
+      "refresh_command": "python -m tools.workflow generate"
+    }
+  ]
+}

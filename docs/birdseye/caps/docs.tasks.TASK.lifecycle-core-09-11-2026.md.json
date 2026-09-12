@@ -1,0 +1,28 @@
+{
+  "id": "docs/tasks/TASK.lifecycle-core-09-11-2026.md",
+  "role": "tasks",
+  "title": "Task: 期限後回収と取消し・終了の永続化",
+  "summary": "DGX QwenとLunaを監督し、元deadlineを延長せず費用を回収し、取消しと不変の終了記録を保存する部品を実装する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/reference-boundary.md",
+    "docs/reviews/lifecycle-core-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0004-lifecycle-recovery.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/reviews/lifecycle-core-20260911.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "0cbd917c5fd873e2b4597538dcf3e970288ea3fdd171e0d476ae03f86e30c365"
+}

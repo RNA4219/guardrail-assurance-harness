@@ -1,0 +1,31 @@
+{
+  "id": "docs/adapter-spec.md",
+  "role": "adapter-spec",
+  "title": "Adapter接続仕様 v0.1",
+  "summary": "本書は、固定した合成fixtureを実行し、外部評価器の観測をGAHの正規化結果へ渡す境界を定める。対象はgeneric command adapterとPromptfoo adapter、およびそれらを起動する実行監督・管理AI・隔離providerである。[実行監督の詳細仕様](execution-detail-spec.md)の範囲でDocker固定fixtureとgeneric正規化、§4でPromptfoo通常evalの単一行mappingを実装した。管理主体のOS認証は[管理境界](auth-adoption-detail-spec.md)を参照する。adapter registryの採択とモデル送信・全体の管理接続は未完了で、部品受入を全MVP受入や実運用性能の証明とは扱わない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/auth-adoption-detail-spec.md",
+    "docs/execution-detail-spec.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2602dfdf7b16252b3703c778089cb45057808d7daba2ee9b90266381345eea04"
+}

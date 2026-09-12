@@ -1,0 +1,20 @@
+{
+  "id": "tools/README.md",
+  "role": "tools",
+  "title": "ワークフロー補助",
+  "summary": "[workflow.py](workflow.py) が文書索引・Birdseyeの生成と統合検証を提供する。ci配下の8検証器は [固定したCookbook](../docs/UPSTREAM.md) 由来。Python 3.11以上の標準ライブラリで動作する。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/UPSTREAM.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "15cf021f97144fd579286fe1a9688b4dd670804d9090bda4c7678a956523280a"
+}

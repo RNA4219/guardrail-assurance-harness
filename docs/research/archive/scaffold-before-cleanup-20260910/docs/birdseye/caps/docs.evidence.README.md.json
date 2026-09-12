@@ -1,0 +1,21 @@
+{
+  "id": "docs/evidence/README.md",
+  "role": "evidence",
+  "title": "検証証跡",
+  "summary": "コマンド、対象、日時、実行環境、終了状態、未実施範囲を記録する。単発出力は.gitignore対象の.gaに置き、検収に採択する結果だけここへ保存する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260909-01.md"
+  ],
+  "deps_in": [
+    "RUNBOOK.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "166c0453f25987414bbbbd41a18e2eecc3a291697f719ee14b41f14b16a9dc7f"
+}

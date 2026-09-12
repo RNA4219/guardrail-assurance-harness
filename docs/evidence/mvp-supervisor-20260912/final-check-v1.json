@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T10:08:49.642848+00:00",
+  "passed": true,
+  "checks": {
+    "32_partial_requirements_tracked": true,
+    "mapping_sources_match": true,
+    "evidence_hashes_match": true,
+    "current_sources_match": true,
+    "seven_protected_sources_match": true,
+    "workflow_passed": true,
+    "birdseye_sources_match": true,
+    "privacy_coverage_completed": true,
+    "verification_scope_preserved": true,
+    "task_and_acceptance_not_completed": true
+  },
+  "verification_sha256": "a8388853b9b846f34b6da17fc21506ea4e6e01c6c2fc754749b149f977876533",
+  "artifact_sha256": {
+    "final-checker-v1.py": "1469c907e2c17e95d9b0bbaaa94da28415fd4cc617de9c931e9bc3b6854f8c40",
+    "acceptance-mapper.py": "b51f782593962abb67ae1a286bfa5cca4442bbb104878dd320f9381dd61b7adf",
+    "privacy-latest-primary-v1.json": "d2677f1c4d8b6e40e3388b4e024bc740915bc071edb768f4bc87cc1876c6634e",
+    "privacy-latest-supplement-v1.json": "4b06898b92949b7495bb7e7bb5c887be18238e9dc6905a2108acde0a851bf9f2",
+    "privacy-latest-checker-v1.py": "da49d42cb1cafa1da7242d8342e7600859fca69a4d37214e76bb8e9f4aaeba9f",
+    "privacy-latest-supplement-checker-v1.py": "f3591ad829e917046dc77f7e8756d709e072b4ff779b63ebd3b30ff59b28896c",
+    "parent-review.txt": "bdcffda5b5134fecbe6cd310d702c845424123e803aaed8dc2b3786ab414d426",
+    "supervised-run-spec.txt": "9b04956270b5c9d3d965efefdbb37b340975734bb356da211a85ff6d0cfaa1c5",
+    "acceptance-map.json": "ada2bfd2cf342390332952351397d493f8c12da88f57f18dee9a2037846fa832",
+    "workflow-final-v1.json": "0ab4cb54425f0147c6a92759a404d96d9aac21e57205041c67c214ac83e4af5b"
+  },
+  "document_sha256": {
+    "README.md": "675099a74bf70d61a286988dea74daaeb9ca503fef6d4ee009a9add786f1b4e6",
+    "HUB.codex.md": "21f32701c6b7d1395b1712f8293f882e24cca1b9097a3c0ab9dfb10ac2b659ab",
+    "AGENTS.md": "95d09560696c1bbc588f9a39fe4f15893177fcf0cd00c341d8abd86e4f2a37c1",
+    "CHANGELOG.md": "ac8ce8e478500011b7de4db7dda6d299f7344f34ba95a12951b9557e9e72a857",
+    "tools/README.md": "394290608a2f9a9d625e284d3e8b5ec58dc5a8144008ae2e66242c273a123ec0",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md": "5b38d9de79164cdcba46177591282daefd9b916bca7e0ac317d99a39d53171b9",
+    "docs/acceptance/AC-20260911-05.md": "07e88eb4d61b821d042cde06d17071f169a4c227450a5f93d38af43a48cc96f2",
+    "docs/mvp-completion-audit.md": "eccb22c6c0031c2198fc6d585d778abf93f9645f34575bcb38f82d2d04ad5eb3",
+    "docs/supervised-run-detail-spec.md": "9b04956270b5c9d3d965efefdbb37b340975734bb356da211a85ff6d0cfaa1c5",
+    "docs/evidence/README.md": "f4b1feda127a964a76ab876f8b26341f63afa3455522c7e3b878b484566f4c92",
+    "docs/evidence/mvp-supervisor-20260912/README.md": "57d90a923b92aed170acd6b1ed079e45a7222a4e6ed08b4ee9ce2d70083f95ed",
+    "docs/reviews/mvp-supervisor-20260912.md": "bdcffda5b5134fecbe6cd310d702c845424123e803aaed8dc2b3786ab414d426"
+  },
+  "birdseye_generation": "00060",
+  "birdseye_nodes": 145,
+  "privacy_remaining_matches": 0,
+  "privacy_remaining_read_errors": 0,
+  "parent_review_completed": true,
+  "external_model_review_performed_this_stage": false,
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "release_gate": "no_go"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "docs/evidence/mvp-supervisor-20260912/README.md",
+  "role": "evidence",
+  "title": "製品監督の工程証跡",
+  "summary": "固定UC-CIの製品CLI、操作状態照会、不変checkpoint、baseline更新版DB移行を接続した。[仕様](../../supervised-run-detail-spec.md) / [親レビュー](../../reviews/mvp-supervisor-20260912.md)。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-supervisor-20260912.md",
+    "docs/supervised-run-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/evidence/README.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-supervisor-20260912.md",
+    "docs/supervised-run-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c487b339fd08f8dc0eea084cb26d9d209912d57e392e1c7401d389fac812b8ad"
+}

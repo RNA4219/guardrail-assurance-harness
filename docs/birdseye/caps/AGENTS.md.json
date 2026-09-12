@@ -1,0 +1,51 @@
+{
+  "id": "AGENTS.md",
+  "role": "AGENTS",
+  "title": "GAHでの作業",
+  "summary": "日本語で記載する。",
+  "public_api": [],
+  "deps_out": [
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "HUB.codex.md",
+    "TASK.codex.md",
+    "datasets/synthetic-policy-v1/README.md",
+    "docs/assurance-authority-detail-spec.md",
+    "docs/auth-adoption-detail-spec.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/evidence/mvp-adoption-20260911/README.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-recovery-20260912/README.md",
+    "docs/evidence/mvp-regression-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/execution-detail-spec.md",
+    "docs/mvp-completion-audit.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/regression-ci-detail-spec.md",
+    "docs/remediation-detail-spec.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/reviews/mvp-regression-20260912.md",
+    "docs/reviews/mvp-supervisor-20260912.md",
+    "docs/run-cancellation-detail-spec.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/run-evidence-detail-spec.md",
+    "docs/run-recovery-detail-spec.md",
+    "docs/run-report-detail-spec.md",
+    "docs/supervised-run-detail-spec.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "447840b489ed1b156bdb5b6d8b8e97638401ae23123d6b0d7a2bef031703bfb4"
+}

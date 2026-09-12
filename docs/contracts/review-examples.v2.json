@@ -1,0 +1,327 @@
+{
+  "artifact_kind": "design_review_examples",
+  "version": "0.2",
+  "status": "product_tests_not_run",
+  "scope": "設計に必要な事実から期待値を照合する例。製品runtime・正式Schemaの試験ではない。",
+  "previous_examples": "docs/contracts/decision-examples.v1.json",
+  "finalization_examples": [
+    {
+      "id": "S01",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86401,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": false
+    },
+    {
+      "id": "S02",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": true
+    },
+    {
+      "id": "S03",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 5,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": false
+    },
+    {
+      "id": "S04",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": false,
+      "live_children": 0,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": false
+    },
+    {
+      "id": "S05",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 1,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": false
+    },
+    {
+      "id": "S06",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1201,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": false
+    },
+    {
+      "id": "S07",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1200,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": false,
+      "success_allowed": true
+    },
+    {
+      "id": "S08",
+      "observed_at_seconds": 0,
+      "assessed_at_seconds": 86399,
+      "finalized_at_seconds": 86400,
+      "max_age_seconds": 86400,
+      "checked_epoch": 4,
+      "commit_epoch": 4,
+      "budget_closed": true,
+      "live_children": 0,
+      "run_elapsed_seconds": 1199,
+      "run_limit_seconds": 1200,
+      "boundary_exceeded": true,
+      "success_allowed": false
+    }
+  ],
+  "reuse_examples": [
+    {
+      "id": "R01",
+      "reuse_allowed": true,
+      "source_fresh": true,
+      "target_conditions_match": false,
+      "fresh_independent_trials_required": false,
+      "source_observation_ids": [
+        "o1"
+      ],
+      "required_trials": 1,
+      "obligation_satisfied": false,
+      "new_observations": 0
+    },
+    {
+      "id": "R02",
+      "reuse_allowed": true,
+      "source_fresh": true,
+      "target_conditions_match": true,
+      "fresh_independent_trials_required": true,
+      "source_observation_ids": [
+        "o1",
+        "o1"
+      ],
+      "required_trials": 2,
+      "obligation_satisfied": false,
+      "new_observations": 0
+    },
+    {
+      "id": "R03",
+      "reuse_allowed": true,
+      "source_fresh": true,
+      "target_conditions_match": true,
+      "fresh_independent_trials_required": false,
+      "source_observation_ids": [
+        "o1"
+      ],
+      "required_trials": 1,
+      "obligation_satisfied": true,
+      "new_observations": 0
+    },
+    {
+      "id": "R04",
+      "reuse_allowed": false,
+      "source_fresh": true,
+      "target_conditions_match": true,
+      "fresh_independent_trials_required": false,
+      "source_observation_ids": [
+        "o1"
+      ],
+      "required_trials": 1,
+      "obligation_satisfied": false,
+      "new_observations": 0
+    }
+  ],
+  "retry_examples": [
+    {
+      "id": "Y01",
+      "original_ended": true,
+      "original_outcome": "ERROR",
+      "stage_state_restored": false,
+      "prior_retries": 0,
+      "budget_available": true,
+      "retry_allowed": false
+    },
+    {
+      "id": "Y02",
+      "original_ended": true,
+      "original_outcome": "FAIL",
+      "stage_state_restored": true,
+      "prior_retries": 0,
+      "budget_available": true,
+      "retry_allowed": false
+    },
+    {
+      "id": "Y03",
+      "original_ended": true,
+      "original_outcome": "ERROR",
+      "stage_state_restored": true,
+      "prior_retries": 0,
+      "budget_available": true,
+      "retry_allowed": true
+    },
+    {
+      "id": "Y04",
+      "original_ended": false,
+      "original_outcome": "UNKNOWN",
+      "stage_state_restored": true,
+      "prior_retries": 0,
+      "budget_available": true,
+      "retry_allowed": false
+    }
+  ],
+  "session_examples": [
+    {
+      "id": "G01",
+      "expected_label": "positive",
+      "detection_by_required_stage": [
+        false,
+        true
+      ],
+      "classification": "TP",
+      "count_in_confusion_matrix": 1,
+      "scored_stage_index": 1
+    },
+    {
+      "id": "G02",
+      "expected_label": "negative",
+      "detection_by_required_stage": [
+        false,
+        false
+      ],
+      "classification": "TN",
+      "count_in_confusion_matrix": 1,
+      "scored_stage_index": 1
+    },
+    {
+      "id": "G03",
+      "expected_label": "positive",
+      "detection_by_required_stage": [
+        true,
+        null
+      ],
+      "classification": "UNRESOLVED",
+      "count_in_confusion_matrix": 0,
+      "scored_stage_index": 1
+    },
+    {
+      "id": "G04",
+      "expected_label": "positive",
+      "detection_by_required_stage": [
+        true,
+        false
+      ],
+      "scored_stage_index": 1,
+      "classification": "FN",
+      "count_in_confusion_matrix": 1
+    }
+  ],
+  "resource_examples": [
+    {
+      "id": "D01",
+      "kind": "elapsed",
+      "intervals": [
+        [
+          0,
+          600
+        ],
+        [
+          0,
+          600
+        ]
+      ],
+      "run_start": 0,
+      "final_time": 600,
+      "limit": 1200,
+      "used": 600,
+      "within_limit": true
+    },
+    {
+      "id": "D02",
+      "kind": "concurrency",
+      "active": 1,
+      "reserved": 1,
+      "new": 1,
+      "finished_calls": 0,
+      "limit": 2,
+      "start_allowed": false
+    },
+    {
+      "id": "D03",
+      "kind": "concurrency",
+      "active": 0,
+      "reserved": 0,
+      "new": 1,
+      "finished_calls": 3000,
+      "limit": 2,
+      "start_allowed": true
+    },
+    {
+      "id": "D04",
+      "kind": "cumulative",
+      "settled": 950000,
+      "reserved": 49000,
+      "new": 1000,
+      "limit": 1000000,
+      "start_allowed": true
+    },
+    {
+      "id": "D05",
+      "kind": "cumulative",
+      "settled": 950000,
+      "reserved": 49000,
+      "new": 1001,
+      "limit": 1000000,
+      "start_allowed": false
+    }
+  ]
+}

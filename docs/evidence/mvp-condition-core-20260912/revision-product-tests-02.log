@@ -1,0 +1,14 @@
+test_changed_policy_cannot_reuse_same_adopted_generation (test_contract_revision_rules.RevisionRulesTests.test_changed_policy_cannot_reuse_same_adopted_generation) ... ok
+test_critical_cannot_be_downgraded (test_contract_revision_rules.RevisionRulesTests.test_critical_cannot_be_downgraded) ... ok
+test_declared_axes_cannot_hide_effective_budget_change (test_contract_revision_rules.RevisionRulesTests.test_declared_axes_cannot_hide_effective_budget_change) ... ok
+test_following_generation_is_only_a_structural_candidate (test_contract_revision_rules.RevisionRulesTests.test_following_generation_is_only_a_structural_candidate) ... ok
+test_forbidden_event_cannot_be_weakened (test_contract_revision_rules.RevisionRulesTests.test_forbidden_event_cannot_be_weakened) ... ok
+test_generation_skip_and_id_reuse_are_rejected (test_contract_revision_rules.RevisionRulesTests.test_generation_skip_and_id_reuse_are_rejected) ... ok
+test_required_control_cannot_be_removed (test_contract_revision_rules.RevisionRulesTests.test_required_control_cannot_be_removed) ... ok
+test_required_obligation_cannot_be_made_optional (test_contract_revision_rules.RevisionRulesTests.test_required_obligation_cannot_be_made_optional) ... ok
+test_target_content_change_and_name_only_change_are_distinct (test_contract_revision_rules.RevisionRulesTests.test_target_content_change_and_name_only_change_are_distinct) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.121s
+
+OK

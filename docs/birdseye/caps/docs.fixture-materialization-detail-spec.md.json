@@ -1,0 +1,20 @@
+{
+  "id": "docs/fixture-materialization-detail-spec.md",
+  "role": "fixture-materialization-detail-spec",
+  "title": "固定fixture materialization 詳細仕様 v1",
+  "summary": "固定workerの実入力、期待観測、実行scenarioを、既存のrun bindingへ決定的に結び付ける。 輸送用の400件参照や表示用データを実評価・性能根拠・全MVP受入・baseline採択へ読み替えない。 Docker実行、外部通信、任意command・外部target、OS認証、Evidence保存、CI合格は対象外である。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "docs/assurance-authority-detail-spec.md",
+    "docs/spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a2a87c7a8648ca43e2e9c9f5a741bdb9e28d03f830335c418c0a6285b6ab98bc"
+}

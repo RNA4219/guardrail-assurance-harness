@@ -1,0 +1,23 @@
+{
+  "id": "AGENTS.md",
+  "role": "AGENTS",
+  "title": "Spec Reconstructorでの作業",
+  "summary": "日本語で記載する。",
+  "public_api": [],
+  "deps_out": [
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "HUB.codex.md",
+    "TASK.codex.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "3dd8d64d4aca84e3073392dfcc17448bec0323a009b2516bc5509b6e858e4745"
+}

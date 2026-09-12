@@ -1,0 +1,37 @@
+{
+  "id": "docs/evidence/README.md",
+  "role": "evidence",
+  "title": "検証証跡",
+  "summary": "[条件比較部品](mvp-condition-core-20260912/README.md)は新規30件と既存21件のfocused試験を記録する。後続契約の採択・実行は未接続である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/evidence/mvp-adoption-20260911/README.md",
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-candidate-20260911/README.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/evidence/mvp-contract-adoption-20260912/README.md",
+    "docs/evidence/mvp-recovery-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/evidence/mvp-transition-20260911/README.md",
+    "docs/research/README.md"
+  ],
+  "deps_in": [
+    "README.md",
+    "RUNBOOK.md",
+    "docs/oss-publication.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "d444933af68b53e9e12a67514963186c99c4411472394acd5edc598f476ed772"
+}

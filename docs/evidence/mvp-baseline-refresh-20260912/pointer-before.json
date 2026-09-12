@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "scope": "local synthetic store consistency",
+  "observations": [
+    {
+      "stage": "propose",
+      "corrupt_pointer_result": "accepted"
+    },
+    {
+      "stage": "validate",
+      "corrupt_pointer_result": "accepted"
+    },
+    {
+      "stage": "adopt",
+      "corrupt_pointer_result": "accepted"
+    }
+  ],
+  "all_stages_reject": false,
+  "ci_eligible": false
+}

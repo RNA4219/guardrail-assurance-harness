@@ -1,0 +1,58 @@
+{
+  "scope": "要求文書の構造・対応・来歴。製品の振る舞いの自動検証ではない",
+  "checked_at": "2026-09-10T01:16:13.924486+00:00",
+  "status": "pass",
+  "checks": {
+    "requirements_32_unique_complete": true,
+    "acceptance_32_one_to_one": true,
+    "original_17_functional_ids_preserved": true,
+    "original_14_mvp_items_preserved": true,
+    "traceability_requirement_ids_resolve": true,
+    "observations_11_mapped_to_cases_and_trace": true,
+    "extensions_7_unique": true,
+    "D01_confirmed_D02_D05_pending": true,
+    "original_12_questions_preserved": true,
+    "snapshot_14_hashes_match": true,
+    "current_source_manifest_matches": true,
+    "original_archive_unchanged": true,
+    "first_qwen_input_matches_v02_archive": true,
+    "two_qwen_responses_complete": true,
+    "normative_documents_remain_draft": true,
+    "risk_scores_and_priorities_consistent": true,
+    "case_effort_sum_consistent": true,
+    "product_code_schema_not_added": true
+  },
+  "counts": {
+    "requirements": 32,
+    "acceptance_criteria": 32,
+    "observations": 11,
+    "planned_manual_cases": 11,
+    "extensions": 7,
+    "archived_files": 14
+  },
+  "source_sha256_raw": {
+    "README.md": "33d22cb689774849b9253743af0cef12dd3a70808f6be6b245f05492f4c6d52a",
+    "BLUEPRINT.md": "8a3f091740aad05e8349252dce97d7d8607da7439d67286d2a0d83eac686fcf0",
+    "HUB.codex.md": "239e03d58f4d6fcd5220b9f23eca4f9830bcb4139ac90e7d46b4c475d61a8475",
+    "CHANGELOG.md": "96c0ea4a037a53049018967c7b79d9c59c186546980baaa9f6c81e8a82f51eee",
+    "datasets/README.md": "ac4bb55cfe9c613efeec715b8f04a0be91ada94f8d12312f39f68c404b69aed2",
+    "docs/requirements.md": "52b3abfcd3298cc53dab6a403a0969914fcaf917ed1677221d14498a92ec2903",
+    "docs/acceptance-criteria.md": "aee1b0520102a37a5b4b03a50c584ff045c0419873be80db0bd55a7923a46343",
+    "docs/requirements-traceability.md": "21c0fe3db9c2984a29304f145c4bcf2d8808c7567b3ba785e7c9e6e0379980ef",
+    "docs/open-questions.md": "749e510b23a5690d2cd535d4ba30c558d41b67b4c9f0a0ad7fb750d3db162b80",
+    "docs/research/README.md": "172dac51a770deb73ef518d7b8bf6382e51a03df3347fd9c8255b1f927f67f3b",
+    "docs/research/source-manifest.json": "7fb3d5ad369800ecc72b89b46baae80a0904c24f7e56e63335aaf7c9687b9cd6",
+    "docs/tasks/README.md": "2afc0ab109849da464db4504069f1bc1b57063f714e6acdaff2743157530c7b4",
+    "orchestration/development-plan.md": "9a076441542255c41194100e0ac6b1528667e9e1ddab31c9e63b3f452324d2d7",
+    "docs/contracts/README.md": "e89e2dd0806c70ebdb554d188adc16f6ae8d0164821e37120fdee64cdd5da597",
+    "docs/reviews/requirements-adversarial-20260910.md": "a78a54ce2eca1cf80184bbc224d95409432b6d50513bad457beefa6f1d6726f9",
+    "docs/extension-roadmap.md": "a20d2d2baa6e4a4c33a3f67adace5e05d24c729b7cc497b5a782dc082a3c50fe"
+  },
+  "semantic_review": "Codexによる文書上の反例照合。根拠・処遇はレビュー記録を参照",
+  "product_tests": "not_run",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "docs/acceptance/INDEX.md",
+  "role": "acceptance",
+  "title": "Acceptance Index",
+  "summary": "自動生成。各記録のfrontmatterを正本とする。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/acceptance/AC-20260910-05.md",
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/acceptance/AC-20260910-08.md",
+    "docs/acceptance/AC-20260910-09.md",
+    "docs/acceptance/AC-20260910-10.md",
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/acceptance/README.md"
+  ],
+  "deps_in": [
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "docs/acceptance/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a45f74d2b985c82de345e999ace66dd8b2b5d7787ced336cf2baf3b06aee9d46"
+}

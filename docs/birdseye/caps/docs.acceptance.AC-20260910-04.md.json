@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-04.md",
+  "role": "acceptance",
+  "title": "Acceptance: GAH要求の明確化文書",
+  "summary": "[Task](../tasks/TASK.requirements-clarification-09-10-2026.md)の文書改訂。要求案の全面承認・設計凍結・製品受入ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-clarification-20260910.md",
+    "docs/tasks/TASK.requirements-clarification-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/requirements-clarification-20260910.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.requirements-clarification-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "e539ee5f248ef925c3206867dcb7a160623b8fba658af534a3be8b00adef8156"
+}

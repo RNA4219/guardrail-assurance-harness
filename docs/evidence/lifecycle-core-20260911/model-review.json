@@ -1,0 +1,81 @@
+{
+  "product_validation": false,
+  "consultations": [
+    {
+      "receipt": {
+        "requested_at": "2026-09-11T02:57:11.783835+00:00",
+        "stage": "spec",
+        "sources": {
+          "docs/lifecycle-detail-spec.md": {
+            "sha256": "b9e8fcc8dcf826e42628d0ad2e3e821943a96226946cbcc931092b8b8cf1314c",
+            "bytes": 7084
+          }
+        },
+        "source_snapshots": true,
+        "product_validation": false,
+        "status": "complete",
+        "model": "qwen3.8-flash-next",
+        "usage": {
+          "prompt_tokens": 1858,
+          "total_tokens": 2428,
+          "completion_tokens": 570,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "finish_reason": "stop",
+        "response_sha256": "5da9cfd2006e72b8cf17b6e306c55308576231a5ca1ac54c857e628f0bac9813",
+        "elapsed_seconds": 24.781,
+        "completed_at": "2026-09-11T02:57:36.573539+00:00"
+      },
+      "source_snapshots_verified": true,
+      "response_verified": true
+    },
+    {
+      "receipt": {
+        "requested_at": "2026-09-11T03:18:39.794728+00:00",
+        "stage": "code",
+        "sources": {
+          "src/gah/ledger.py": {
+            "sha256": "8bbebea1d18c67b0766f32c73633c576865cc40f9232ca9a04872b5e8c281b9b",
+            "bytes": 54733
+          },
+          "src/gah/termination.py": {
+            "sha256": "db3932d2cd150c626749fb20472dd354dd16dfe6ce0d27ebfb582c7485414fff",
+            "bytes": 3194
+          }
+        },
+        "source_snapshots": true,
+        "product_validation": false,
+        "status": "unavailable",
+        "error_type": "TimeoutError",
+        "elapsed_seconds": 55.032,
+        "completed_at": "2026-09-11T03:19:34.823860+00:00"
+      },
+      "source_snapshots_verified": true,
+      "response_verified": false
+    },
+    {
+      "receipt": {
+        "requested_at": "2026-09-11T03:21:30.058804+00:00",
+        "stage": "focused",
+        "sources": {
+          ".ga/lifecycle-core-20260911/lease-review.txt": {
+            "sha256": "5f3437b502914bfb829f163b3aed5f28207d6a99041cced9926034f079470395",
+            "bytes": 7827
+          }
+        },
+        "source_snapshots": true,
+        "product_validation": false,
+        "status": "unavailable",
+        "error_type": "TimeoutError",
+        "elapsed_seconds": 55.062,
+        "completed_at": "2026-09-11T03:22:25.114851+00:00"
+      },
+      "source_snapshots_verified": true,
+      "response_verified": false
+    }
+  ],
+  "dispositions": "docs/reviews/lifecycle-core-20260911.md"
+}

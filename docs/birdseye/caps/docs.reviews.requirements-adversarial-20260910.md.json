@@ -1,0 +1,32 @@
+{
+  "id": "docs/reviews/requirements-adversarial-20260910.md",
+  "role": "reviews",
+  "title": "要求定義の敵対的検証と反映記録",
+  "summary": "対象は[v0.2保存稿](../research/archive/before-adversarial-20260910/docs/requirements.md)と[当時の受入条件](../research/archive/before-adversarial-20260910/docs/acceptance-criteria.md)。coding agentの開発・CIとLLMガードレール評価について、誤合格・誤不合格・比較不能・実行境界・修復確認を文書上の反例で検討した。[要求v0.3](../requirements.md)と[受入条件](../acceptance-criteria.md)へ反映済み。製品コードの脆弱性発見や実行による再現ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/extension-roadmap.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/acceptance-criteria.md",
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/extension-roadmap.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a78a54ce2eca1cf80184bbc224d95409432b6d50513bad457beefa6f1d6726f9"
+}

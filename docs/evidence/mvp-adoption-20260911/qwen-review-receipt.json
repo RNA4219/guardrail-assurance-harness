@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "request_count": 1,
+  "started_at": "2026-09-11T10:10:24.484210+00:00",
+  "source_sha256": {
+    "docs/baseline-adoption-detail-spec.md": "5a0fddc80afe4c41fe006700e156813023bf1948681106f398fb7e54daf9a60a",
+    "docs/assurance-authority-detail-spec.md": "8fd0dbb9d1c540c0b7c38053d23d6bd31f025eb4dda0a784bbd685df9d682223"
+  },
+  "submitted_sha256": "d6ef8fd4cfe3f899fe5b9546adfc570d3040bf88cac6707de6623354fbdb549d",
+  "request_sha256": "821034d80de83334870315386e4995baeec4e307c618a601b067a1ba8c2e0c1d",
+  "model": "qwen3.8-flash-next",
+  "timeout_seconds": 50,
+  "max_tokens": 1600,
+  "authority_evidence": false,
+  "ci_eligible": false,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 6570,
+    "total_tokens": 7013,
+    "completion_tokens": 443,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "response_sha256": "cfc82063c4605d7e2530bbae0ada2464866506fc746a1215bdc89cc4c7e1a69a",
+  "response_text_sha256": "c809c1c7ec8809523955af1c0c553f1105d39d065ab0c5b0904553f817425ac3",
+  "elapsed_seconds": 16.625
+}

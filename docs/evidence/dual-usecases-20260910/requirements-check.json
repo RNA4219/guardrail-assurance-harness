@@ -1,0 +1,47 @@
+{
+  "scope": "要求文書の構造と来歴。製品受入試験ではない",
+  "checked_at": "2026-09-10T00:18:15.095161+00:00",
+  "status": "pass",
+  "checks": {
+    "requirements_unique_complete": true,
+    "acceptance_one_to_one": true,
+    "original_17_functions_retained": true,
+    "original_14_mvp_items_retained": true,
+    "traceability_ids_resolve": true,
+    "original_12_questions_retained": true,
+    "D01_confirmed_D02_D04_pending": true,
+    "both_scenarios_in_acceptance": true,
+    "requirements_remain_draft": true,
+    "archive_12_files_match": true,
+    "current_provenance_matches_saved_version": true,
+    "product_code_and_schema_not_added": true
+  },
+  "counts": {
+    "requirements": 24,
+    "acceptance_criteria": 24,
+    "source_functions": 17,
+    "source_mvp_items": 14,
+    "archived_files": 12
+  },
+  "source_sha256_raw": {
+    "README.md": "1a5407040e38514a0f000b8b67b697a8e7caf0941b74e24d440de49f4fca0415",
+    "BLUEPRINT.md": "669c651c8518fe9ab128795275e8df30924fad18dbb6cd880ef3509af3359fc3",
+    "HUB.codex.md": "db0f04ca0db189254d1a934fca22d1938b72143f458c08cfdeeb485e9c3c5d0c",
+    "CHANGELOG.md": "4e690133cd51587f69697c0713f362c14e44175cc1ac021c2db4258ed3b6331e",
+    "datasets/README.md": "c182f37857da5caf3ff428fa47b0747f56d9b2b7efe0babf6b2d012313198efb",
+    "docs/requirements.md": "6996c482cb6d3851ace9904aa8de15b8cf0a5f178f6fe5345ae166996c2541de",
+    "docs/acceptance-criteria.md": "9c5ffcbf76b11f0057eee29f787322c5ea09f3939d41aa988ef7aeb6986995c2",
+    "docs/requirements-traceability.md": "0c28e6ea6ab639953d3f28dc0fdaec53493515fdd3e084d21cf40fb33aea0b14",
+    "docs/open-questions.md": "f63b89bee7c491e552a7a385998cdc1d99c7ab6c2f4ad33ac949ea68e169f7e4",
+    "docs/research/README.md": "dae06c2c2b04d5e73b8be0371ed0173f4aab5eae91648ebbb1c2b9cfcce7fade",
+    "docs/research/source-manifest.json": "1bb18fd18f5714c6dcf4518ea8101ebdd532c51b0fde21b8f0ec7f786eefcaba",
+    "docs/tasks/README.md": "93188d9857468e65b4b064658151c58391276d9df921061066025de13bb2e0e8"
+  },
+  "semantic_review": "Codexによる本文と受入シナリオの照合。独立第三者承認ではない",
+  "product_tests": "not_run",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

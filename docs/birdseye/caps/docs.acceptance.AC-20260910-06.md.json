@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-06.md",
+  "role": "acceptance",
+  "title": "Acceptance: 要求定義の敵対的検証文書",
+  "summary": "[Task](../tasks/TASK.requirements-adversarial-09-10-2026.md)における要求文書の検討と改訂。製品の脆弱性検証・実測・受入・要求の全面承認ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2d11fa91736432c561814289a5626f8052377b2f44ab30eb743bdc66c2db92b1"
+}

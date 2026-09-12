@@ -1,0 +1,13 @@
+test_checkpoint_identity_and_role_input_cannot_be_replaced (test_supervised_run.SupervisedRunTests.test_checkpoint_identity_and_role_input_cannot_be_replaced) ... ok
+test_dispatch_ack_loss_resolves_without_duplicate_send (test_supervised_run.SupervisedRunTests.test_dispatch_ack_loss_resolves_without_duplicate_send) ... ok
+test_missing_journal_keeps_stop_unconfirmed (test_supervised_run.SupervisedRunTests.test_missing_journal_keeps_stop_unconfirmed) ... ok
+test_normal_run_resume_status_do_not_repeat_executions (test_supervised_run.SupervisedRunTests.test_normal_run_resume_status_do_not_repeat_executions) ... ok
+test_revocation_after_observation_prevents_new_dispatch (test_supervised_run.SupervisedRunTests.test_revocation_after_observation_prevents_new_dispatch) ... ok
+test_run_lock_rejects_second_supervisor (test_supervised_run.SupervisedRunTests.test_run_lock_rejects_second_supervisor) ... ok
+test_runner_return_without_end_timestamp_cancels_without_rerun (test_supervised_run.SupervisedRunTests.test_runner_return_without_end_timestamp_cancels_without_rerun) ... ok
+test_unknown_trigger_is_not_treated_as_full_run (test_supervised_run.SupervisedRunTests.test_unknown_trigger_is_not_treated_as_full_run) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 624.760s
+
+OK

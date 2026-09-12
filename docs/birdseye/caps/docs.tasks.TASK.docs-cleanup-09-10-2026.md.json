@@ -1,0 +1,26 @@
+{
+  "id": "docs/tasks/TASK.docs-cleanup-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: GAHの要求段階に合わせた文書整理",
+  "summary": "コピー元の案件とGAHの現行要求を分離し、現在地と読む順序がわかる文書群に整理する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/requirements.md",
+    "docs/reviews/docs-cleanup-20260910.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2096f5068cff2160a30b6afe790be2c01f0543326e7ef0a397a0532a9eec51f7"
+}

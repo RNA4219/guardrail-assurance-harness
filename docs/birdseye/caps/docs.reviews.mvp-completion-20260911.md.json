@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/mvp-completion-20260911.md",
+  "role": "reviews",
+  "title": "全MVPへの実装・監督記録",
+  "summary": "[全体Task](../tasks/TASK.mvp-completion-09-11-2026.md)の目標は全MVP完成であり、部品の合格へ縮めない。[32要求の監査](../mvp-completion-audit.md)で不足と必要証拠を追跡する。以下は進捗であり、全MVP受入は未完了。",
+  "public_api": [],
+  "deps_out": [
+    "docs/mvp-completion-audit.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "29804cd91f3fe6ca93fcd3fd84719352172d7f491bb42fc262570f42d97126fa"
+}

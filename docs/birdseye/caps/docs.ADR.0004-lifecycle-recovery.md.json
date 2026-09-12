@@ -1,0 +1,22 @@
+{
+  "id": "docs/ADR/0004-lifecycle-recovery.md",
+  "role": "ADR",
+  "title": "ADR 0004: 回収専用leaseと不変の終了記録",
+  "summary": "v1ではexecution leaseが元deadlineで切れるため、期限後に判明した費用を既存operationへ精算できなかった。取消し受付と停止確認、終了記録もまだ保存していなかった。[Task](../tasks/TASK.lifecycle-core-09-11-2026.md)でLC03/LC04/LC06の部品実装を進める。",
+  "public_api": [],
+  "deps_out": [
+    "docs/lifecycle-detail-spec.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "docs/ADR/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "9a3b3a63c750b7b734926608a8e8ac4f679aa634b67dba5770c01d6c5f889228"
+}

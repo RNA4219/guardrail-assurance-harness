@@ -1,0 +1,24 @@
+{
+  "id": "docs/BIRDSEYE.md",
+  "role": "BIRDSEYE",
+  "title": "Birdseyeの読み方",
+  "summary": "[index.json](birdseye/index.json) のnodesから対象pathを見つける。edgesを±2 hopまで辿り、各nodeのcapsで要約・依存・source hashを確認する。[hot.json](birdseye/hot.json) は作業入口の集合。",
+  "public_api": [],
+  "deps_out": [
+    "HUB.codex.md",
+    "docs/birdseye/README.md",
+    "docs/tasks/README.md"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/birdseye/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "67cb046b51e22d9e55a09bfdcf035403d2161a461d1dd108ae224cdf21c9a822"
+}

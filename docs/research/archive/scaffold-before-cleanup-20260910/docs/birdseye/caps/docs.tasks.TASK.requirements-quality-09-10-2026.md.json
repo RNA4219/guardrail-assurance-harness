@@ -1,0 +1,27 @@
+{
+  "id": "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 要件定義v0.3自体の品質評価",
+  "summary": "要件定義を目的・網羅性・一貫性・明確さ・検証可能性・実現性等から評価し、次工程へ進める条件を示す。",
+  "public_api": [],
+  "deps_out": [
+    "EVALUATION.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-quality-2026-09-10.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "34be131bddb7cac5a953d7789ffa0950888a89d65e812306879eed248397646a"
+}

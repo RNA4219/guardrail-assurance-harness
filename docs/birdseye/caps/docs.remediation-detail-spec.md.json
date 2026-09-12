@@ -1,0 +1,24 @@
+{
+  "id": "docs/remediation-detail-spec.md",
+  "role": "remediation-detail-spec",
+  "title": "Finding と修復計画の詳細仕様 v1",
+  "summary": "評価の決定結果から、追跡可能な Finding と、実行しない構造化 Plan を生成する 部品仕様である。評価・ライフサイクル契約の補足として扱い、この部品単独では 保存、OS 認証、採択、外部操作、修復の完了、CI 成功を提供しない。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "docs/open-questions.md",
+    "docs/retention-revalidation-detail-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "32f0743e3df9dc2e908055974069ea934e03401d91f9b75088a73497b601e4a5"
+}

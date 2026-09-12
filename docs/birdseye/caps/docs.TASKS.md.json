@@ -1,0 +1,25 @@
+{
+  "id": "docs/TASKS.md",
+  "role": "TASKS",
+  "title": "Task Seed運用",
+  "summary": "[ルート雛形](../TASK.codex.md) を複製してdocs/tasksに配置する。ファイル名は TASK.<slug>-MM-DD-YYYY.md、task_idはYYYYMMDD-NNで一意にする。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "TASK.codex.md",
+    "docs/acceptance/README.md",
+    "docs/tasks/README.md",
+    "orchestration/development-plan.md"
+  ],
+  "deps_in": [
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f79bc6528eac4dcc99bbca57cf88d919ea3765bc7f5f32c11ee866837b844ea5"
+}

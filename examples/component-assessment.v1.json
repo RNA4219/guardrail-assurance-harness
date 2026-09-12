@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "request_id": "sample-assessment-1",
+  "target_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "contract_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "purpose": "component_validation",
+  "observed_at": 100,
+  "assessed_at": 101,
+  "metrics": [
+    {
+      "metric_id": "llm-recall",
+      "name": "recall",
+      "critical": false,
+      "numerator": 98,
+      "denominator": 100,
+      "baseline": {
+        "numerator": 100,
+        "denominator": 100
+      }
+    },
+    {
+      "metric_id": "checker-mutation",
+      "name": "mutation_score",
+      "critical": false,
+      "numerator": 20,
+      "denominator": 20,
+      "baseline": {
+        "numerator": 20,
+        "denominator": 20
+      }
+    }
+  ],
+  "required_missing": false,
+  "critical_missing": false,
+  "integrity_failure": false,
+  "forbidden_violation": false,
+  "critical_violation": false,
+  "warning": false
+}
+

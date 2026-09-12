@@ -1,0 +1,40 @@
+{
+  "id": "EVALUATION.md",
+  "role": "EVALUATION",
+  "title": "Evaluation",
+  "summary": "baseline generation 1→2の工程は[仕様](docs/baseline-refresh-detail-spec.md)と[証跡](docs/evidence/mvp-baseline-refresh-20260912/README.md)へ結ぶ。全MVP受入とは区別する。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "RUNBOOK.md",
+    "docs/acceptance-criteria.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/acceptance/INDEX.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-recovery-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/requirements.md",
+    "docs/run-recovery-detail-spec.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "CONTRIBUTING.md",
+    "HUB.codex.md",
+    "README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "dace265fbb340554b21d643644d26afc63bddd93472b8c53e8f330dc2e80a3f7"
+}

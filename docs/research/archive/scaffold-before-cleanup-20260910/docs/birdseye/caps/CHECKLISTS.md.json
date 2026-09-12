@@ -1,0 +1,22 @@
+{
+  "id": "CHECKLISTS.md",
+  "role": "CHECKLISTS",
+  "title": "Checklists",
+  "summary": "- [ ] HUB、Guardrails、関連capsを確認した。 - [ ] TaskのObjective / Scope / Requirements / Commandsを記録した。 - [ ] 要件正本と未実装部分を確認した。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "docs/releases/README.md",
+    "docs/requirements.md",
+    "docs/security/Security_Review_Checklist.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "612671d5d602ea267fd8a2f18ade141d0409386418daf441e8d8776171152280"
+}

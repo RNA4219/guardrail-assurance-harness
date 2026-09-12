@@ -1,0 +1,29 @@
+{
+  "id": "docs/tasks/TASK.runtime-core-09-11-2026.md",
+  "role": "tasks",
+  "title": "Task: 詳細仕様と製品コアの初期実装",
+  "summary": "DGX QwenとLunaを監督し、詳細仕様、判定・保存・予算の実装、コードレビュー、実動作の証跡を作る。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/adapter-spec.md",
+    "docs/detail-spec.md",
+    "docs/reference-boundary.md",
+    "docs/reviews/runtime-core-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0003-runtime-core.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "5ad7ba29fe8ed5a62d2d4442e28288b2ae3c1e3d89fa429b9031006c51d986ee"
+}

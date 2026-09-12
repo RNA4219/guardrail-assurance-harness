@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T12:44:10.851789+00:00",
+  "status": "passed",
+  "checks": {
+    "evidence_hashes_match": true,
+    "tested_sources_match": true,
+    "seven_preserved_sources_match": true,
+    "workflow_check_passed": true,
+    "index_and_sources_match": true,
+    "privacy_check_passed": true,
+    "limited_scope_preserved": true
+  },
+  "verification_sha256": "bf62c426911115d77833b80227da746a827b5dca3f08cac867fa859175dc5d87",
+  "final_artifact_sha256": {
+    "privacy-final.json": "e4903a4f98ba9109e7f7a54375a1a852ac17fe1ab26e86eb8555dd0b297d5269",
+    "workflow-final.json": "98b5bed678e105abe960ec81fd8fe0e0000227e91db4745475a93e17f81eb832",
+    "final-checker.py": "a17ac3042837280c910ea3269db357a306cddc1afbfe98d50340b9a3a930e370"
+  },
+  "birdseye_generation": "00044",
+  "birdseye_index_sha256": "76dca0be800094d7b553d6deccb1ae74083016d22ec5631860916710f0cd14cb",
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

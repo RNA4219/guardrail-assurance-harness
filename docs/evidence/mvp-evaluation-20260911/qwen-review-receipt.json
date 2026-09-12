@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "request_count": 1,
+  "started_at": "2026-09-11T07:40:21.050544+00:00",
+  "model": "qwen3.8-flash-next",
+  "source_path": "docs/evaluation-detail-spec.md",
+  "source_sha256": "c317b1a24d341b7d0759ac1c93e450b882eecd1b7c539c465b5f597a270bb889",
+  "submitted_sha256": "63c0a425eacd8fd2541c7ad7f14ad764925ce347c083cf04d0110518797ac028",
+  "request_sha256": "3247af3e25f7b1f3520a3fabed774290ff2d7fb6dd0cca6dd406c7003a93e951",
+  "max_tokens": 1200,
+  "timeout_seconds": 50,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1552,
+    "total_tokens": 1837,
+    "completion_tokens": 285,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "response_sha256": "7dd477e848f16af01ed16b2eadef735c6ed5abcc14cb00292a3c00309a63c241",
+  "response_model": "qwen3.8-flash-next",
+  "elapsed_seconds": 10.125
+}

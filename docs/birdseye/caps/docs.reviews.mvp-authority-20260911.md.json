@@ -1,0 +1,26 @@
+{
+  "id": "docs/reviews/mvp-authority-20260911.md",
+  "role": "reviews",
+  "title": "管理主体の認証・方針採択の監督記録",
+  "summary": "[全MVP Task](../tasks/TASK.mvp-completion-09-11-2026.md)の途中工程として、[管理境界の詳細仕様](../auth-adoption-detail-spec.md)を実装した。PolicyProfileに範囲を固定し、EvaluationContract/baselineや全資源台帳の接続まで完了したことにはしない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/auth-adoption-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "03f145a3c2baa81cc4c28a4a269aa93ef70b83f2c42ac0bd7b7ca43dba67e191"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "README.md",
+  "role": "README",
+  "title": "Spec Reconstructor",
+  "summary": "既存システムの構造と振る舞いを、根拠付きの仕様へ再構成するOSS。識別子は `spec-reconstructor`。",
+  "public_api": [],
+  "deps_out": [
+    "BLUEPRINT.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "RUNBOOK.md",
+    "SECURITY.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/BIRDSEYE.md",
+    "docs/UPSTREAM.md",
+    "docs/acceptance/INDEX.md",
+    "docs/ci-config.md",
+    "docs/requirements.md",
+    "docs/security/SAC.md",
+    "docs/tasks/README.md"
+  ],
+  "deps_in": [
+    "GUARDRAILS.md",
+    "HUB.codex.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "85ea00da5bfcbc52d72eadb5be83d8ea017b5823fdbbbe05422e72fa28fbec14"
+}

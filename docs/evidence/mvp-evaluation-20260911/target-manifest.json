@@ -1,0 +1,24 @@
+{
+  "case_timeout_seconds": 120,
+  "ci_eligible": false,
+  "endpoint": "http://127.0.0.1:18000/v1/chat/completions",
+  "evaluator_calibration_ref": "3f0fc74f22846c2652ef4943f567f85cf475b857d41eab990ac2729abdbf287e",
+  "evaluator_profile_ref": {
+    "digest": "4343737874da78c1e03d08f8a9f242132b42d51c4cbbef4df75ff183453e5b90",
+    "id": "gah.llm_evaluator.normalizer-v1",
+    "kind": "evaluator_profile"
+  },
+  "kind": "synthetic_llm_run_manifest",
+  "max_calls": 20000,
+  "max_cases": 10000,
+  "max_tokens": 10000000,
+  "max_workers": 4,
+  "pack_digest": "a7697f4036c59e158b1c48b6d1a8cb618ae7a2f58ecb88ae1836b74acf9c3a2e",
+  "planned_reserved_tokens": 19737600,
+  "provider_model": "qwen3.8-flash-next",
+  "provider_role": "target",
+  "purpose": "acceptance",
+  "reserved_tokens_per_stage": 32896,
+  "run_timeout_seconds": 5400,
+  "schema_version": 1
+}

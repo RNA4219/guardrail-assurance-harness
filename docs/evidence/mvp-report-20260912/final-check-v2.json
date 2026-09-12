@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T05:50:18.506169+00:00",
+  "passed": true,
+  "checks": {
+    "artifact_hashes_match": true,
+    "current_sources_match": true,
+    "protected_seven_match": true,
+    "prior_verification_preserved": true,
+    "workflow_and_privacy_passed": true,
+    "scope_consistent": true,
+    "regression-runtime_raw_preserved": true,
+    "regression-runtime_human_same_json_grounding": true,
+    "regression-runtime_wrapper_preserves_body": true,
+    "cancellation-runtime_raw_preserved": true,
+    "cancellation-runtime_human_same_json_grounding": true,
+    "cancellation-runtime_wrapper_preserves_body": true
+  },
+  "verification_sha256": "1157f92d66b31ddfb0f4294e1114cb225999d987b7f0212ff3e7139422f2b548",
+  "preceding_final_check_sha256": "095f9119e59aa6516b4213c951a734bdac93f58b578ad1dfeab7eff36adde583",
+  "birdseye_generation": "00050",
+  "birdseye_nodes": 133,
+  "test_counts": {
+    "total": 541,
+    "previous_full_regression": 534,
+    "additional_focused": 7
+  },
+  "parent_review_completed": true,
+  "full_mvp_accepted": false,
+  "release_gate": "no_go",
+  "ci_eligible": false,
+  "checker_sha256": "844e1e09f2ace70ad8ac6cb94ad980ec2347e23feebc9f951844881b0a1443be",
+  "prior_failed_final_check_sha256": "45a98212991dd33745c2c603df904ea04c751c518a2fef7e6f705bcc048a2a41",
+  "render_comparison_newline_normalization": "CRLF_to_LF_only; raw bytes preserved"
+}

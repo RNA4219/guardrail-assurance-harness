@@ -1,0 +1,19 @@
+{
+  "id": "tools/review/README.md",
+  "role": "tools",
+  "title": "レビュー補助の予定領域",
+  "summary": "GAH向けの要求評価・反例モデルは未作成。コピー元の反例runnerと結果は[資料来歴](../../docs/research/README.md)の整理前構成に保存した。現行の実行可能コマンドには含めない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/research/README.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "1634cfd95c262326265f62776af5317cc237df10faa40034cb8f44f5e1e5463e"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "schemas/README.md",
+  "role": "schemas",
+  "title": "Schema",
+  "summary": "機械可読な入出力Schemaの実装予定領域。[契約](../docs/contracts/README.md) を参照し、Schema versionと互換性方針を固定してから実装する。現在配布可能なSchemaはない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/README.md"
+  ],
+  "deps_in": [
+    "docs/contracts/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "714a55a5e74b1df54075ff72be2f3d7301ab3cf6becde0ebe3792ace5a50da36"
+}

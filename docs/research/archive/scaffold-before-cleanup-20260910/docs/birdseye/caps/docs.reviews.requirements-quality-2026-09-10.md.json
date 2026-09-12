@@ -1,0 +1,27 @@
+{
+  "id": "docs/reviews/requirements-quality-2026-09-10.md",
+  "role": "reviews",
+  "title": "要件定義v0.3の品質評価",
+  "summary": "**仕様化の基礎としては良好。利用者・要求単位・実現性の確認を条件に、仕様化へ進める。全面的な実装契約としての凍結は保留。**",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "a57c680bfc314e31902fbcddce108b58983c18a50b716c9e289cc2aa73319668"
+}

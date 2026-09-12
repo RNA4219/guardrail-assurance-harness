@@ -1,0 +1,18 @@
+test_close_requires_accounting_and_blocks_all_new_starts (test_resources.ResourceBookTests.test_close_requires_accounting_and_blocks_all_new_starts) ... ok
+test_closed_run_can_record_late_conflict_and_drop_budget_closure (test_resources.ResourceBookTests.test_closed_run_can_record_late_conflict_and_drop_budget_closure) ... ok
+test_deadline_equality_cancellation_and_clock_rollback_block_starts (test_resources.ResourceBookTests.test_deadline_equality_cancellation_and_clock_rollback_block_starts) ... ok
+test_dispatch_intent_is_immutable_and_redelivery_cannot_resend (test_resources.ResourceBookTests.test_dispatch_intent_is_immutable_and_redelivery_cannot_resend) ... ok
+test_event_id_reuse_across_operations_and_runs_holds_both_runs (test_resources.ResourceBookTests.test_event_id_reuse_across_operations_and_runs_holds_both_runs) ... ok
+test_independent_connections_serialize_reservations (test_resources.ResourceBookTests.test_independent_connections_serialize_reservations) ... ok
+test_micro_fee_rounds_up_and_conflicting_fee_preserves_exposure (test_resources.ResourceBookTests.test_micro_fee_rounds_up_and_conflicting_fee_preserves_exposure) ... ok
+test_observation_after_deadline_is_recorded_as_overrun (test_resources.ResourceBookTests.test_observation_after_deadline_is_recorded_as_overrun) ... ok
+test_old_unsettled_reservation_remains_in_global_window (test_resources.ResourceBookTests.test_old_unsettled_reservation_remains_in_global_window) ... ok
+test_recovery_claim_is_allowed_only_for_closed_run_and_cannot_start_work (test_resources.ResourceBookTests.test_recovery_claim_is_allowed_only_for_closed_run_and_cannot_start_work) ... ok
+test_reservation_validates_all_dimensions_before_insert (test_resources.ResourceBookTests.test_reservation_validates_all_dimensions_before_insert) ... ok
+test_stopped_without_usage_then_usage_and_usage_then_stopped (test_resources.ResourceBookTests.test_stopped_without_usage_then_usage_and_usage_then_stopped) ... ok
+test_takeover_rejects_old_owner_but_observer_settles_original_operation_once (test_resources.ResourceBookTests.test_takeover_rejects_old_owner_but_observer_settles_original_operation_once) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.306s
+
+OK

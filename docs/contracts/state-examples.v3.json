@@ -1,0 +1,1127 @@
+{
+  "artifact_kind": "lifecycle_design_examples",
+  "version": "0.3",
+  "status": "product_tests_not_run",
+  "scope": "既存68例に加える32例。正式Schema・実装・製品試験ではない。",
+  "cases": [
+    {
+      "id": "B01",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": true,
+        "adopted": false,
+        "purpose": "initial_calibration",
+        "prerequisites": true
+      },
+      "expected": {
+        "allowed": true
+      }
+    },
+    {
+      "id": "B02",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": false,
+        "adopted": false,
+        "purpose": "initial_calibration",
+        "prerequisites": true
+      },
+      "expected": {
+        "allowed": false
+      }
+    },
+    {
+      "id": "B03",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": true,
+        "adopted": false,
+        "purpose": "regression",
+        "prerequisites": true
+      },
+      "expected": {
+        "allowed": false
+      }
+    },
+    {
+      "id": "B04",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": true,
+        "adopted": true,
+        "purpose": "initial_calibration",
+        "prerequisites": true
+      },
+      "expected": {
+        "allowed": false
+      }
+    },
+    {
+      "id": "B05",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": true,
+        "adopted": false,
+        "purpose": "initial_contract_validation",
+        "prerequisites": false
+      },
+      "expected": {
+        "allowed": false
+      }
+    },
+    {
+      "id": "B06",
+      "observation_id": "SR01",
+      "kind": "bootstrap",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R25",
+        "docs/requirements.md#GAH-R23"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC01"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "root_present": true,
+        "adopted": false,
+        "purpose": "initial_baseline_candidate",
+        "prerequisites": true
+      },
+      "expected": {
+        "allowed": true
+      }
+    },
+    {
+      "id": "A01",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": true,
+        "generation_matches": true,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": true,
+        "latest_epoch_known": true,
+        "replay": false
+      },
+      "expected": {
+        "action": "adopt"
+      }
+    },
+    {
+      "id": "A02",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": false,
+        "generation_matches": true,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": true,
+        "latest_epoch_known": true,
+        "replay": false
+      },
+      "expected": {
+        "action": "reject_keep_current"
+      }
+    },
+    {
+      "id": "A03",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": true,
+        "generation_matches": true,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": false,
+        "latest_epoch_known": true,
+        "replay": false
+      },
+      "expected": {
+        "action": "reject_keep_current"
+      }
+    },
+    {
+      "id": "A04",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": true,
+        "generation_matches": true,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": true,
+        "latest_epoch_known": false,
+        "replay": false
+      },
+      "expected": {
+        "action": "reject_keep_current"
+      }
+    },
+    {
+      "id": "A05",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": true,
+        "generation_matches": false,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": true,
+        "latest_epoch_known": true,
+        "replay": false
+      },
+      "expected": {
+        "action": "reject_keep_current"
+      }
+    },
+    {
+      "id": "A06",
+      "observation_id": "SR02",
+      "kind": "adoption",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R13",
+        "docs/requirements.md#GAH-R22",
+        "docs/requirements.md#GAH-R25"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC02"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "replayは同じ要求ID・同じ内容で、認証と履歴閲覧権限が確認済みの再配送。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "authorized": true,
+        "generation_matches": false,
+        "proposal_matches": true,
+        "policy_valid": true,
+        "evidence_current": false,
+        "latest_epoch_known": true,
+        "replay": true
+      },
+      "expected": {
+        "action": "historical_receipt_only"
+      }
+    },
+    {
+      "id": "R01",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 3,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unsent_proven",
+        "saved_elapsed": 100,
+        "downtime": 10,
+        "new_elapsed": 2,
+        "limit": 1200,
+        "time_trusted": true,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": false,
+        "reservation_retained": true,
+        "elapsed": 112
+      }
+    },
+    {
+      "id": "R02",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 4,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unsent_proven",
+        "saved_elapsed": 100,
+        "downtime": 10,
+        "new_elapsed": 2,
+        "limit": 1200,
+        "time_trusted": true,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": true,
+        "reservation_retained": true,
+        "elapsed": 112
+      }
+    },
+    {
+      "id": "R03",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 4,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unknown",
+        "saved_elapsed": 100,
+        "downtime": 10,
+        "new_elapsed": 2,
+        "limit": 1200,
+        "time_trusted": true,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": false,
+        "reservation_retained": true,
+        "elapsed": 112
+      }
+    },
+    {
+      "id": "R04",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 4,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unsent_proven",
+        "saved_elapsed": 1190,
+        "downtime": 9,
+        "new_elapsed": 0,
+        "limit": 1200,
+        "time_trusted": true,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": true,
+        "reservation_retained": true,
+        "elapsed": 1199
+      }
+    },
+    {
+      "id": "R05",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 4,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unsent_proven",
+        "saved_elapsed": 1190,
+        "downtime": 10,
+        "new_elapsed": 0,
+        "limit": 1200,
+        "time_trusted": true,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": false,
+        "reservation_retained": true,
+        "elapsed": 1200
+      }
+    },
+    {
+      "id": "R06",
+      "observation_id": "SR03",
+      "kind": "resume",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R18",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC03"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "経過秒は信頼する監督が示す互いに重ならない区間の上界。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "owner_epoch": 4,
+        "current_epoch": 4,
+        "lease_valid": true,
+        "dispatch": "unsent_proven",
+        "saved_elapsed": 100,
+        "downtime": null,
+        "new_elapsed": 2,
+        "limit": 1200,
+        "time_trusted": false,
+        "unsettled": true
+      },
+      "expected": {
+        "new_operation_allowed": false,
+        "reservation_retained": true,
+        "elapsed": null
+      }
+    },
+    {
+      "id": "C01",
+      "observation_id": "SR04",
+      "kind": "cost",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC04"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "usd": "0",
+        "nonbilling_proven": true,
+        "remaining_micros": 2
+      },
+      "expected": {
+        "accounting_upper_micros": 0,
+        "start_allowed": true
+      }
+    },
+    {
+      "id": "C02",
+      "observation_id": "SR04",
+      "kind": "cost",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC04"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "usd": "0.0000004",
+        "nonbilling_proven": false,
+        "remaining_micros": 2
+      },
+      "expected": {
+        "accounting_upper_micros": 1,
+        "start_allowed": true
+      }
+    },
+    {
+      "id": "C03",
+      "observation_id": "SR04",
+      "kind": "cost",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC04"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "usd": "0.000002",
+        "nonbilling_proven": false,
+        "remaining_micros": 2
+      },
+      "expected": {
+        "accounting_upper_micros": 2,
+        "start_allowed": true
+      }
+    },
+    {
+      "id": "C04",
+      "observation_id": "SR04",
+      "kind": "cost",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC04"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "usd": "0.00000201",
+        "nonbilling_proven": false,
+        "remaining_micros": 2
+      },
+      "expected": {
+        "accounting_upper_micros": 3,
+        "start_allowed": false
+      }
+    },
+    {
+      "id": "D01",
+      "observation_id": "SR05",
+      "kind": "data_boundary",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R21",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R31"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC05"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "decision": "allow",
+        "trusted_origin": true,
+        "sink_allowed": true,
+        "payload_claims_safe": true
+      },
+      "expected": {
+        "forward_or_persist_payload": true,
+        "metadata_only": false
+      }
+    },
+    {
+      "id": "D02",
+      "observation_id": "SR05",
+      "kind": "data_boundary",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R21",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R31"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC05"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "decision": "deny",
+        "trusted_origin": true,
+        "sink_allowed": true,
+        "payload_claims_safe": true
+      },
+      "expected": {
+        "forward_or_persist_payload": false,
+        "metadata_only": true
+      }
+    },
+    {
+      "id": "D03",
+      "observation_id": "SR05",
+      "kind": "data_boundary",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R21",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R31"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC05"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "decision": "unknown",
+        "trusted_origin": true,
+        "sink_allowed": true,
+        "payload_claims_safe": true
+      },
+      "expected": {
+        "forward_or_persist_payload": false,
+        "metadata_only": true
+      }
+    },
+    {
+      "id": "D04",
+      "observation_id": "SR05",
+      "kind": "data_boundary",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R21",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R31"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC05"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "decision": "allow",
+        "trusted_origin": false,
+        "sink_allowed": true,
+        "payload_claims_safe": true
+      },
+      "expected": {
+        "forward_or_persist_payload": false,
+        "metadata_only": true
+      }
+    },
+    {
+      "id": "T01",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected": {
+        "terminal": true,
+        "execution_status": "CANCELLED",
+        "exit_code": 3,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "id": "T02",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": false,
+        "processing_failure": true,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": true,
+        "otherwise_ci_success": true
+      },
+      "expected": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "HOLD"
+      }
+    },
+    {
+      "id": "T03",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected": {
+        "terminal": false,
+        "execution_status": null,
+        "exit_code": null,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "id": "T04",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": false,
+        "deadline_reached": true,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected": {
+        "terminal": true,
+        "execution_status": "FAILED",
+        "exit_code": 2,
+        "assurance": "UNKNOWN"
+      }
+    },
+    {
+      "id": "T05",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": false,
+        "processing_failure": false,
+        "cancel_accepted": false,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true
+      },
+      "expected": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING"
+      }
+    },
+    {
+      "id": "T06",
+      "observation_id": "SR06",
+      "kind": "terminal",
+      "status": "NOT_RUN",
+      "source_refs": [
+        "docs/requirements.md#GAH-R04",
+        "docs/requirements.md#GAH-R19",
+        "docs/requirements.md#GAH-R23",
+        "docs/requirements.md#GAH-R26"
+      ],
+      "oracle": {
+        "type": "specification",
+        "refs": [
+          "docs/contracts/lifecycle-contract.md#LC06"
+        ]
+      },
+      "assumptions": [
+        "記載した条件以外の目的・binding・必要根拠・予算・出力は成立する。",
+        "モデルや製品ではなく設計入力と期待値の照合用。",
+        "取消し・失敗による必須不足はUNKNOWN。既知Critical違反はHOLD。他の必須違反はない。",
+        "通常完了の注意理由はWARNING。確定済みreceiptは履歴として維持する。"
+      ],
+      "confidence": "設計oracleへの対応は高、製品の実行挙動は未確認。",
+      "input": {
+        "committed": true,
+        "processing_failure": false,
+        "cancel_accepted": true,
+        "children_stopped": true,
+        "deadline_reached": false,
+        "critical_violation": false,
+        "otherwise_ci_success": true,
+        "historical_status": "COMPLETED",
+        "historical_exit": 0,
+        "historical_assurance": "WARNING"
+      },
+      "expected": {
+        "terminal": true,
+        "execution_status": "COMPLETED",
+        "exit_code": 0,
+        "assurance": "WARNING",
+        "cancel_response": "already_terminal"
+      }
+    }
+  ]
+}
+

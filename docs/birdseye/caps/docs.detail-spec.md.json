@@ -1,0 +1,53 @@
+{
+  "id": "docs/detail-spec.md",
+  "role": "detail-spec",
+  "title": "詳細仕様 v1: 判定と永続化コア",
+  "summary": "通常runに基づくbaseline更新と保存世代の現在利用は[baseline更新仕様](baseline-refresh-detail-spec.md)へ結ぶ。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/adapter-spec.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/contract-revision-detail-spec.md",
+    "docs/design.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/llm-authority-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/regression-ci-detail-spec.md",
+    "docs/requirements.md",
+    "docs/retention-revalidation-detail-spec.md",
+    "docs/run-cancellation-detail-spec.md",
+    "docs/run-recovery-detail-spec.md",
+    "docs/run-report-detail-spec.md",
+    "docs/supervised-run-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "README.md",
+    "RUNBOOK.md",
+    "docs/ADR/0003-runtime-core.md",
+    "docs/contracts/README.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/design.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md",
+    "examples/README.md",
+    "orchestration/development-plan.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2488929256442fa11099bacc85b76329c4a82723579c46085da8bdf77b1b6c49"
+}

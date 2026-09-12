@@ -1,0 +1,20 @@
+{
+  "id": "examples/README.md",
+  "role": "examples",
+  "title": "利用例",
+  "summary": "[component-assessment.v1.json](component-assessment.v1.json)は診断CLI用の合成集計値。98/100のrecallと20/20のmutation_scoreを初期方針で診断する。実モデルの評価集合や最低ケース数の受入例ではない。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/detail-spec.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "2ab252a6a42c522b99a745deb91fb75b82ceb9a5756308e6d8cf3257dcf0041a"
+}

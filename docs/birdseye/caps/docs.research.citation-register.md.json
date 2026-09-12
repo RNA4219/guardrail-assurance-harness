@@ -1,0 +1,23 @@
+{
+  "id": "docs/research/citation-register.md",
+  "role": "research",
+  "title": "出典台帳（未復元）",
+  "summary": "要求原稿にはチャットの引用識別子だけが残っており、対応するURL・添付ファイル・該当版をこのフォルダだけでは復元できない。下表は参照の在庫であり、根拠の正しさや最新性を検証した記録ではない。旧参照を保持し、元資料を入手した後にURL・版・該当箇所・確認日を追記する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/research/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "0fb3253cf44891b95363b84d88c99b0978eb94fcb1ea23f7a9cf714f93d7b504"
+}

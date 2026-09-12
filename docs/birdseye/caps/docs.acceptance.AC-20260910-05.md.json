@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-05.md",
+  "role": "acceptance",
+  "title": "Acceptance: 二つの初期利用場面の文書反映",
+  "summary": "[Task](../tasks/TASK.dual-usecases-09-10-2026.md)の文書改訂。利用者確認の範囲はGAH-D01の二つの初期対象であり、技術検収は要求案の全面承認や製品受入ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/dual-usecases-20260910.md",
+    "docs/tasks/TASK.dual-usecases-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/dual-usecases-20260910.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.dual-usecases-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "c833fcee37c973dcd1b9dcc05a28dfd9d92533e39a6063607df2c4faa58e0179"
+}

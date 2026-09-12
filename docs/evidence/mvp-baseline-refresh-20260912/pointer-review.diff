@@ -1,0 +1,83 @@
+--- before/src/gah/baseline_generations.py
++++ src/gah/baseline_generations.py
+@@ -57,6 +57,18 @@
+     return row, record
+ 
+ 
++def current_predecessor(db, proposal):
++    previous, record = predecessor(db, proposal)
++    current = db.execute("SELECT * FROM baseline_current WHERE series_id=?", (proposal["series_id"],)).fetchone()
++    if (current is None or current["generation"] != 1
++            or current["adoption_id"] != previous["adoption_id"]):
++        raise AdoptionError("GENERATION_CONFLICT")
++    _, current_record, _ = base._history(db, current)
++    if current_record != record:
++        raise AdoptionError("STORAGE_CORRUPT")
++    return previous, current
++
++
+ def bind_candidate(db, proposal, source, now):
+     from . import run_evidence, assurance_authority
+     if db is None or source["bound"]["manifest"]["purpose"] != "regression":
+@@ -95,10 +107,7 @@
+     proposal = {"schema_version": 1, "kind": KIND, "proposal_id": request["proposal_id"],
+         "series_id": request["series_id"], "run_id": request["run_id"], "expected_generation": 1,
+         "contract_generation": 2, **candidate, "binding_digest": base._trusted_binding(source["bound"]), "created_at": now}
+-    previous, _ = predecessor(db, proposal)
+-    current = db.execute("SELECT adoption_id FROM baseline_current WHERE series_id=?", (request["series_id"],)).fetchone()
+-    if current[0] != previous["adoption_id"]:
+-        raise AdoptionError("GENERATION_CONFLICT")
++    current_predecessor(db, proposal)
+     bind_candidate(db, proposal, source, now)
+     raw, digest = base._pack(proposal)
+     existing = db.execute("SELECT proposal_digest FROM baseline_proposals WHERE proposal_id=?", (request["proposal_id"],)).fetchone()
+@@ -132,8 +141,7 @@
+ 
+ 
+ def adopt(db, request, proposal, actor, context, now, validation):
+-    previous, _ = predecessor(db, proposal)
+-    current = db.execute("SELECT * FROM baseline_current WHERE series_id=?", (proposal["series_id"],)).fetchone()
++    previous, current = current_predecessor(db, proposal)
+     if (request["expected_generation"] != 1 or current is None or current["generation"] != 1
+             or current["adoption_id"] != previous["adoption_id"]):
+         raise AdoptionError("GENERATION_CONFLICT")
+--- before/src/gah/baseline_authority.py
++++ src/gah/baseline_authority.py
+@@ -605,8 +605,11 @@
+ def _execute_validate(store: Any, db: sqlite3.Connection, request: dict[str, Any], actor: str, context: str, now: int, resolve_source: Callable[..., Any]) -> dict[str, Any]:
+     row = db.execute("SELECT * FROM baseline_proposals WHERE proposal_id=?", (request["proposal_id"],)).fetchone()
+     proposal = _validate_proposal_row(row)
+-    if proposal["expected_generation"] != 0 and _current_generation(db, proposal["series_id"]) != proposal["expected_generation"]:
+-        raise _error("PREREQUISITE_UNAVAILABLE")
++    if proposal["expected_generation"] != 0:
++        if _current_generation(db, proposal["series_id"]) != proposal["expected_generation"]:
++            raise _error("PREREQUISITE_UNAVAILABLE")
++        from .baseline_generations import current_predecessor
++        current_predecessor(db, proposal)
+     source = _ready_source(_source_from_resolver(resolve_source, proposal["run_id"]), proposal["run_id"], now, store, purpose="regression" if proposal["expected_generation"] else "baseline_candidate")
+     _bind_candidate(proposal, source, now, db=db)
+     permission = _permission_generation(store, db)
+--- before/tests/test_baseline_refresh.py
++++ tests/test_baseline_refresh.py
+@@ -130,6 +130,21 @@
+             "SELECT payload_json FROM authority_artifacts WHERE run_id='negative-refresh' AND kind='findings_report'").fetchone()[0])["items"])
+         self.gate(prepared, 1)
+ 
++    def test_corrupt_current_pointer_cannot_be_hidden_by_refresh(self):
++        for stage in ("propose", "validate", "adopt"):
++            with self.subTest(stage=stage):
++                self.source()
++                if stage in {"validate", "adopt"}:
++                    self.propose()
++                if stage == "adopt":
++                    self.validate()
++                self.store._db.execute("UPDATE baseline_current SET baseline_digest=?", ("0" * 64,))
++                tables = ("baseline_proposals", "baseline_validations", "baseline_adoptions", "baseline_current", "idempotency")
++                before = {name: tuple(self.store._db.execute("SELECT * FROM " + name + " ORDER BY rowid")) for name in tables}
++                with self.assertRaisesRegex(AdoptionError, "^STORAGE_CORRUPT$"):
++                    getattr(self, stage)()
++                self.assertEqual({name: tuple(self.store._db.execute("SELECT * FROM " + name + " ORDER BY rowid")) for name in tables}, before)
++
+     def test_update_failure_rolls_back_pointer_history_and_receipt(self):
+         self.source(); self.propose(); self.validate()
+         self.store._db.execute("CREATE TRIGGER fail_refresh BEFORE UPDATE OF generation ON baseline_current WHEN NEW.generation=2 BEGIN SELECT RAISE(ABORT,'test'); END")

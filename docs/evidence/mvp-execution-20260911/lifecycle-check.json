@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "fixture_only": true,
+  "full_mvp_accepted": false,
+  "passed": true,
+  "checks": {
+    "cancel_child_observed": true,
+    "live_owner_recovery_refused": true,
+    "cancel_stopped_and_removed": true,
+    "interrupted_child_observed": true,
+    "interrupted_stopped_and_removed": true,
+    "recovery_replay_immutable": true,
+    "run_replay_immutable": true,
+    "expired_never_created": true,
+    "pre-cancelled_never_created": true,
+    "no_pending_operations": true,
+    "no_ci_eligibility": true
+  },
+  "image_id": "sha256:0d976e4fc7e42ad0db3e5f0e4e8523113d4510eded42ded0970b887f7afa8816",
+  "source_sha256": {
+    "src/gah/docker_runner.py": "9aa82169200c7f4ef9a0551bb1e76d72884cb5c210386147402670533c4eb870",
+    "src/gah/execution_journal.py": "8b7eeb2ab0998bb4466603813dca9721b5097b631c9fd35cc21afb47eaabf9f0",
+    "src/gah/normalized.py": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+    "fixtures/runtime/fixture_worker.py": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+    "config/fixture-runtime.lock.json": "740845f15dbf01fe29716451e157383547771d414ef0d24c0dc9251e255443b9",
+    "tools/verify_fixture_lifecycle.py": "d9e79708954aea25a153cf424f862239518b6d44b3f03279fd73fac0e6be5f5d"
+  }
+}

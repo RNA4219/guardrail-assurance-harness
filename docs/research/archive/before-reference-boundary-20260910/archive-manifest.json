@@ -1,0 +1,85 @@
+{
+  "task_id": "20260910-09",
+  "saved_at": "2026-09-10",
+  "mutable": false,
+  "reason": "外部参照元はクローズド資産で直接使わないという利用者の訂正前の文書。旧移植方針は現行指示ではない",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256_raw": "e64f1bc3e46e26a56d56c1dcbe5168f87a65de768e49826bbf5581a1369cb7db"
+    },
+    {
+      "path": "GUARDRAILS.md",
+      "sha256_raw": "5d4bfee9935356c55db1297605d58c534e343ad438e50457893e34dec209b5dc"
+    },
+    {
+      "path": "README.md",
+      "sha256_raw": "eff5d7f8ae4702648c143c0a67588d01d4e4f8f71e37856eb512cbcd0beee52e"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "2a1e4a3307b88a1b0647f3a26bb05459dd4b83649f5de1893182f27feb932dc9"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "c8e9023fe937d6204ecfad3278d1817eac295d0b1544cc9f56d99156967afb44"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "9d1f25b78c38bbc0af01dc521e0aaef26631b8c337d90063e7970460f226c847"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "9632642da34b79f37b52f8ef9006ef610595df6500e1309cd9c889e9a1130e1e"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "d2bc523f8f7bf03a876352f40e56863101dd26f1fd8618b2ed4fbdbe755e7739"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "801acb221ee1038ac1d83f9760080a214ea32164db0cb607d074a5f261f30842"
+    },
+    {
+      "path": "docs/operating-policy.md",
+      "sha256_raw": "8909ded14c3ec72cd9a066cfd597b5c5a890d24b123e4b11a2cde773fd0dcf05"
+    },
+    {
+      "path": "docs/reference-boundary.md",
+      "sha256_raw": "87c0a8f1c25e623e1fb06713bef4003fa44f70251de5270558d4cf31db554e2e"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "54a51ddbf5ced45188684421b098d1464faea49a753af4ed079e1ac1aac4bbb1"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "3aaebf562088a6946ed24f651a5165f8087ff82169a8a53d3e2aebc6c2620b15"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "3c332e5ef173557af5d53fc374fa37fbdebb100e3cbe566eaa5457b92faf7e33"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "bd6c3af0b2f7cc81a81cb66f5a56f798f29b499c0a9420ff1cdc2fe6d9e705a2"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "42f75f654a882e09f14cdc3e8a0189d89f29b379b9958f9c6005e0b5f6cb292f"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "f213455a743706c07520bb5ba58895a8b3e7865dda9a1e9405422ff6479535a0"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "fde77fc95005f7168ae60b87e06609fac762999d776a69e320b444ef293d418e"
+    }
+  ],
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

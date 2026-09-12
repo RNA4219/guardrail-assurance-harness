@@ -1,0 +1,7 @@
+**1. 箇所:** `src/gah/transition_authority.py` の `load_candidate` 関数内、`maps` の比較ロジック（約108行目付近）。
+**条件:** `transition_runs` テーブルの `SELECT ... ORDER BY side` による結果と、期待値リスト `[(new_id, ...), (old_id, ...)]` の順序が一致しない。
+**最小修正:** `ORDER BY side` は文字列順で `'new'` < `'old'` となるため、期待値リストの順序を `[(new_id, candidate_id, "new"), (old_id, candidate_id, "old")]` に修正する。
+
+**2. 箇所:** `src/gah/transition_authority.py` の `prepare` 関数内、`_build` 呼び出し直前（約135行目付近）。
+**条件:** `check_transition(request)` の返却値 `checked` が、`_build` が要求する `previous_contract`, `next_contract`, `baseline_record` などのキーを含まない場合、`KeyError` が発生し `AdoptionError("INVALID_REQUEST")` として処理される。
+**最小修正:** `check_transition` の返却構造が `_build` の引数と整合しているか確認し、必要に応じて `checked` から必要なサブオブジェクトを明示的に抽出して `_build` に渡す、または `_build` 内で `checked` の構造に合わせたアクセスを行う。

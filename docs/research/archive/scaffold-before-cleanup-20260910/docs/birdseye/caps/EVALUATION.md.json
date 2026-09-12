@@ -1,0 +1,28 @@
+{
+  "id": "EVALUATION.md",
+  "role": "EVALUATION",
+  "title": "Evaluation",
+  "summary": "この段階の判定対象はWorkflow-Cookbook Tier 3基盤の維持と要件・文書変更の技術検収である。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/requirements.md",
+    "docs/tasks/README.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "eac6ad1afd18604843e9fc3dc991942371732d7a277ab04cdd7d5c598bb936f8"
+}

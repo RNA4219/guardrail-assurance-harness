@@ -1,0 +1,23 @@
+{
+  "status": "unavailable",
+  "started_at": "2026-09-11T05:33:35.384629+00:00",
+  "endpoint": "http://127.0.0.1:18000/v1/chat/completions",
+  "model": "qwen3.8-flash-next",
+  "thinking": false,
+  "max_tokens": 900,
+  "timeout_seconds": 55,
+  "request_count": 1,
+  "submitted_spec": {
+    "path": "docs/auth-adoption-detail-spec.md",
+    "bytes": 7411,
+    "sha256": "1221db19a7961c1a4f6817ec9cb54b84b2b7f4a9350906eca2c5de64430022e2"
+  },
+  "request": {
+    "bytes": 8974,
+    "sha256": "34a61a170273d83f976ce8aac6ef8fb1f5eb3f53a74fc802c9cd427ef0c59a3b"
+  },
+  "completion_reason": "request_failed",
+  "error_type": "TimeoutError",
+  "elapsed_seconds": 55.031,
+  "completed_at": "2026-09-11T05:34:30.408654+00:00"
+}

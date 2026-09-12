@@ -1,0 +1,35 @@
+{
+  "id": "orchestration/development-plan.md",
+  "role": "orchestration",
+  "title": "開発順序案",
+  "summary": "現在は[契約・評価設計v0.3](../docs/design.md)から[コア詳細仕様v1](../docs/detail-spec.md)へ進み、判定・永続化・費用台帳・診断CLIを実装した。[監督レビュー](../docs/reviews/runtime-core-20260911.md)にDGX Qwen/Lunaの処遇と部品検証を記録する。次は全オブジェクト/採択と回収の状態契約、管理AI認証・隔離provider、固定fixtureとadapterを段階的に接続する。以下は全体の着手順であり、全MVPの完了記録ではない。",
+  "public_api": [],
+  "deps_out": [
+    "TASK.codex.md",
+    "docs/acceptance-criteria.md",
+    "docs/design.md",
+    "docs/detail-spec.md",
+    "docs/extension-roadmap.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/requirements.md",
+    "docs/reviews/runtime-core-20260911.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/TASKS.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "ad5608dfb9380d8e9d2bb6661e6f17d1cda84a128a586a8d733186e25b6198dd"
+}

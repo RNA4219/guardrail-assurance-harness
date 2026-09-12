@@ -1,0 +1,28 @@
+{
+  "id": "docs/acceptance/AC-20260909-01.md",
+  "role": "acceptance",
+  "title": "Acceptance: Workflow-Cookbook Full構成",
+  "summary": "[導入Task](../tasks/TASK.workflow-cookbook-adoption-09-09-2026.md) に対するローカル技術検収。Codexによる自己検査であり、利用者による承認やGitHub上の実行を意味しない。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/acceptance/INDEX.md",
+    "docs/evidence/README.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+    "orchestration/m0-development.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "aee401bb18232de648c369b27185367c0ea44e2d9ab5083f0e7722f406e1e9d7"
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scope": "all_product_documents_evidence_and_local_artifacts_with_hash_classified_public_dependencies",
+  "initial_full_scan": {
+    "files": 83693,
+    "utf8_files": 82298,
+    "binary_files": 1395,
+    "path_matches": 0,
+    "content_matches": 26,
+    "read_errors": 0,
+    "scope": "all_repo_paths_and_utf8_content_including_local_dependencies",
+    "elapsed_seconds": 668.172,
+    "passed": false
+  },
+  "current_product_scan": {
+    "files": 3873,
+    "binary_files": 270,
+    "path_matches": 0,
+    "content_matches": 0,
+    "read_errors": 1
+  },
+  "incidental_public_dependency_matches": [
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/@linear/sdk/dist/index-BtsNqLmC.d.cts.map",
+      "sha256": "bc4ce6944ed07c37bfe9d06cc24d88be019d2ad9263afcb14d95594c4318c9fe",
+      "matches": 1,
+      "classification": "source_map_vlq"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/npm-cache/_cacache/content-v2/sha512/68/0f/098e12cef01e46372ca272302f5532b6a795cc605fdfa01b2e05451facd75a6599d915e2c6fe0a1e61484c718185141bc6658e14229ab2c7e21fcd3a126f",
+      "sha256": "7f5b315e500bf2364e0adea65d74a2ef0cda09ea41d1cdb19c7ededc63f59ba7",
+      "matches": 1,
+      "classification": "public_npm_integrity"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/r50k_base.js",
+      "sha256": "1895031f2ae2257e4e0c7df144cf381b8643001e9957794e4905dba93dec0969",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/r50k_base.cjs",
+      "sha256": "b80484921a6dcc6cf499609ee8f2d7ec5db3281ab0a3b7ec2a2abda21a4a1bcc",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/p50k_edit.js",
+      "sha256": "62c89f2c8d0d7a249d09e5580dd651a88e09d13c9ea0855eadca0531c1a7fd9a",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/p50k_edit.cjs",
+      "sha256": "a2ed9cd7cb1aae23f76fdff6f0b33ffccef119130d55d6455b03a3f905fd6c09",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/p50k_base.js",
+      "sha256": "197f696fd9bac22cc36abd75a1a4b4dc9c30c687d1865d82cce40371f8f42185",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/p50k_base.cjs",
+      "sha256": "645a9f1937f10e285b30947ef1e64af7876a63cf1256d9b5dc6b85445a66050b",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/o200k_base.js",
+      "sha256": "a9e8a0c1f332c58f1a9cef2f8d7be59b31bb4b42531a3a0a64d9ad3b3d19033b",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/o200k_base.cjs",
+      "sha256": "d2a4d9f263b2de045dcd98f347c50e38d71104141948918b6c30a92fb2411f42",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/gpt2.js",
+      "sha256": "1895031f2ae2257e4e0c7df144cf381b8643001e9957794e4905dba93dec0969",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/gpt2.cjs",
+      "sha256": "b80484921a6dcc6cf499609ee8f2d7ec5db3281ab0a3b7ec2a2abda21a4a1bcc",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/cl100k_base.js",
+      "sha256": "0e301a9c7f82e2353bc484be0149b2fb8a6db85d516620a34d06e587efe090bd",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/ranks/cl100k_base.cjs",
+      "sha256": "f0a4af744f6bcdbe1d9748e0054543d180300785f063dd1b20c43fc99d93c67f",
+      "matches": 1,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/index.cjs",
+      "sha256": "9ca95aad3c36db42d478b237d70a49a2b8693785a050d00407d3d586fde7c7a8",
+      "matches": 6,
+      "classification": "tokenizer_base64"
+    },
+    {
+      "path": ".ga/mvp-evaluation-20260911/promptfoo-runtime/node_modules/js-tiktoken/dist/index.js",
+      "sha256": "e0f5359f32d5cf67c4b6d9ac20d4a27e2c7dc8d124b1f0599faf6fe620095943",
+      "matches": 6,
+      "classification": "tokenizer_base64"
+    }
+  ],
+  "private_reference_matches": 0,
+  "unreadable_paths": [
+    ".ga/authority-images/a3117c1630933eb7-xa1d5cpf"
+  ],
+  "passed": false,
+  "elapsed_seconds": 6.125
+}

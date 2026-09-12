@@ -1,0 +1,29 @@
+{
+  "id": "docs/acceptance/AC-20260911-03.md",
+  "role": "acceptance",
+  "title": "Acceptance: 詳細仕様と判定・永続化・診断コア",
+  "summary": "[Task](../tasks/TASK.runtime-core-09-11-2026.md)の詳細仕様、部品実装、監督・コードレビューと実動作試験。全MVPの実行監督、管理AI認証、OS隔離、外部adapter、実モデルの性能、公開・本番CIは含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "docs/acceptance/INDEX.md",
+    "docs/evidence/README.md",
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md",
+    "tests/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "bd0108df542cf54a857b24a5a9d25c5cb62d27dc4b82700c59755aeb30c17640"
+}

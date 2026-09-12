@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "project": "guardrail-assurance-harness",
+  "organized_at": "2026-09-10",
+  "current": {
+    "path": "docs/requirements.md",
+    "stage": "requirements_clarification_draft_v0.4",
+    "mutable": true,
+    "edit_scope": "user operating decisions and 外部参照元 source confirmation with pinned implementation reuse mapping"
+  },
+  "archive": {
+    "path": "docs/research/archive/gah-requirements-original-20260910.md",
+    "original_name": "docs/requirements.md (before documentation cleanup)",
+    "sha256_raw": "3070d72b290135eb1d1135213ec459aa640989798613401689cd99dc1ed8051c",
+    "mutable": false
+  },
+  "copied_scaffold": {
+    "path": "docs/research/archive/scaffold-before-cleanup-20260910",
+    "manifest": "archive-manifest.json",
+    "file_count": 148,
+    "assurance_for_gah": false
+  },
+  "body_preservation": {
+    "method": "Reverse the explicit presentation transforms; compare all nonblank source lines including fenced examples",
+    "equal": true,
+    "scope": "20260910-03 documentation formatting only; see before-clarification saved version"
+  },
+  "citations": {
+    "register": "docs/research/citation-register.md",
+    "status": "unresolved_unverified",
+    "unique_references": 52
+  },
+  "clarification": {
+    "task_id": "20260910-04",
+    "saved_before": "docs/research/archive/before-clarification-20260910/docs/requirements.md",
+    "sha256_raw": "fc0cfcc824a498e3e55ca77180fb720d525cf83aad0910baeb359b2c2bdac9f5",
+    "traceability": "docs/requirements-traceability.md",
+    "acceptance_criteria": "docs/acceptance-criteria.md",
+    "requirements_count": 24,
+    "status": "draft_not_product_approval",
+    "source_manifest": "docs/research/archive/before-clarification-20260910/archive-manifest.json"
+  },
+  "scope_confirmation": {
+    "task_id": "20260910-05",
+    "confirmed_at": "2026-09-10",
+    "confirmed_by": "user",
+    "use_cases": [
+      "coding agentの開発・CI",
+      "LLMガードレール評価"
+    ],
+    "supersedes": "v0.1 assumption A01",
+    "saved_before": "docs/research/archive/before-dual-usecases-20260910/docs/requirements.md",
+    "sha256_raw": "f4a155b35516ab14b3decb038fedc44ebf89e49120af67c91eae1eec8388bf64",
+    "source_manifest": "docs/research/archive/before-dual-usecases-20260910/archive-manifest.json",
+    "requirements_count": 24,
+    "status": "use_cases_confirmed_requirements_remain_draft"
+  },
+  "adversarial_review": {
+    "task_id": "20260910-06",
+    "saved_before": "docs/research/archive/before-adversarial-20260910/docs/requirements.md",
+    "sha256_raw": "6996c482cb6d3851ace9904aa8de15b8cf0a5f178f6fe5345ae166996c2541de",
+    "source_manifest": "docs/research/archive/before-adversarial-20260910/archive-manifest.json",
+    "review": "docs/reviews/requirements-adversarial-20260910.md",
+    "extensions": "docs/extension-roadmap.md",
+    "requirements_count": 32,
+    "review_observations": 11,
+    "status": "requirements_draft_not_product_validation"
+  },
+  "operating_decisions": {
+    "task_id": "20260910-07",
+    "saved_before": "docs/research/archive/before-operating-decisions-20260910/docs/requirements.md",
+    "sha256_raw": "52b3abfcd3298cc53dab6a403a0969914fcaf917ed1677221d14498a92ec2903",
+    "source_manifest": "docs/research/archive/before-operating-decisions-20260910/archive-manifest.json",
+    "policy": "docs/operating-policy.md",
+    "review": "docs/reviews/operating-decisions-20260910.md",
+    "requirements_count": 32,
+    "ci_warning_allowed": true,
+    "thresholds_and_budgets_selected_by": "Codex under user delegation",
+    "management_authority": "generative AI with separated identity and deterministic authorization checks",
+    "evaluation_reuse": "user-specified ops OSS; exact repository pending identification; no code or data imported",
+    "status": "operating_direction_decided_not_product_validation"
+  },
+  "reference_source_confirmation": {
+    "task_id": "20260910-08",
+    "confirmed_by": "user-provided repository URL",
+    "repository": "[参照先非掲載]",
+    "commit": "nonpublic-revision",
+    "package_version": "0.1.0",
+    "saved_before": "docs/research/archive/before-reference-confirmation-20260910/docs/requirements.md",
+    "sha256_raw": "de15ed5cd84f5606ffa6ccbaadca71b6a8406175411ad14d388887dc47656332",
+    "source_manifest": "docs/research/archive/before-reference-confirmation-20260910/archive-manifest.json",
+    "reuse_mapping": "docs/reference-boundary.md",
+    "inspection": "docs/evidence/reference-confirmation-20260910/source-inspection.json",
+    "reuse_scope": "evaluation operations skeleton; metrics, labeled guardrail datasets and evaluator calibration require GAH additions",
+    "license_metadata": "Proprietary; no tracked LICENSE file at inspected commit",
+    "requirements_count": 32,
+    "status": "source_identified_static_review_complete_product_import_not_run"
+  },
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

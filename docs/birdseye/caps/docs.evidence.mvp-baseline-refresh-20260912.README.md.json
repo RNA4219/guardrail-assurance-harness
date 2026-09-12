@@ -1,0 +1,31 @@
+{
+  "id": "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+  "role": "evidence",
+  "title": "baseline更新の工程証跡",
+  "summary": "[仕様](../../baseline-refresh-detail-spec.md) / [親レビュー](../../reviews/mvp-baseline-refresh-20260912.md)。親が実装・レビュー・検証を担当し、この工程の外部モデル委任は行っていない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/reviews/mvp-baseline-refresh-20260912.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/evidence/README.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/reviews/mvp-baseline-refresh-20260912.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a8e164737802700d6943e0baad872272b0ccfc65b2a7821807ca5a7e73df4fff"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/docs-cleanup-20260910.md",
+  "role": "reviews",
+  "title": "GAHの文書整理記録",
+  "summary": "対象は2026-09-10時点の要求草案とコピー混在の文書基盤。利用者の指示に従い、要求レベルを維持して導線・体裁・来歴を整理した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-03.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "e30524191dbea62eb9665b38aeada594df590b1d345e893a7718b2ca186cccc3"
+}

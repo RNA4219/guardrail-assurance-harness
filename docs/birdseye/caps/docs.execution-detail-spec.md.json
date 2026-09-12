@@ -1,0 +1,31 @@
+{
+  "id": "docs/execution-detail-spec.md",
+  "role": "execution-detail-spec",
+  "title": "固定fixtureの実行監督・正規化",
+  "summary": "[全MVP Task](tasks/TASK.mvp-completion-09-11-2026.md)の実行部を具体化する。対象は自作の無害な固定fixtureであり、任意コードの自動変異や第三者への攻撃を実装しない。管理主体の採択、全資源台帳、全MVP受入への接続を本部品だけで完了にしない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/mvp-execution-20260911.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "RUNBOOK.md",
+    "docs/adapter-spec.md",
+    "docs/open-questions.md",
+    "docs/oss-publication.md",
+    "docs/reviews/mvp-execution-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "a72cebba604b065f2183d6bc5db33c84946875d3a9c09a59d75d260dd56a7a34"
+}

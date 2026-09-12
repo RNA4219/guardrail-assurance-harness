@@ -1,0 +1,24 @@
+{
+  "id": "docs/acceptance/AC-20260910-10.md",
+  "role": "acceptance",
+  "title": "Acceptance: 参照元情報の匿名化",
+  "summary": "[Task](../tasks/TASK.reference-anonymization-09-10-2026.md)における本文・配置・履歴・生成索引の非掲載対応。製品の受入や過去の会話の削除ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/tasks/TASK.reference-anonymization-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.reference-anonymization-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "bc65f638845db263f5597466db6410a92a09ab8bd6447c4f0cdf035d0f4b673f"
+}

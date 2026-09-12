@@ -1,0 +1,19 @@
+{
+  "id": "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md",
+  "role": "evidence",
+  "title": "GAH実行結果",
+  "summary": "[製品CLIの出力原文](cancellation-runtime-report.raw.txt)を保持し、以下に同じ本文を表示する。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "docs/evidence/mvp-report-20260912/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "51db3a5b0c827e6b7a0ca9044cb1a15aabf061a8fa59b7721c2a3e32ef43fbcf"
+}

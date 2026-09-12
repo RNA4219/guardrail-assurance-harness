@@ -1,0 +1,15 @@
+test_acceptance_index_detects_changed_status (test_workflow.WorkflowTests.test_acceptance_index_detects_changed_status) ... ok
+test_branch_mapping_requires_docs_gate (test_workflow.WorkflowTests.test_branch_mapping_requires_docs_gate) ... ok
+test_done_task_requires_approved_acceptance (test_workflow.WorkflowTests.test_done_task_requires_approved_acceptance) ... ok
+test_duplicate_task_and_mismatched_intent_fail (test_workflow.WorkflowTests.test_duplicate_task_and_mismatched_intent_fail) ... ok
+test_fenced_examples_do_not_create_document_links (test_workflow.WorkflowTests.test_fenced_examples_do_not_create_document_links) ... ok
+test_generation_is_idempotent_and_contains_real_edges (test_workflow.WorkflowTests.test_generation_is_idempotent_and_contains_real_edges) ... ok
+test_missing_link_and_outside_link_fail (test_workflow.WorkflowTests.test_missing_link_and_outside_link_fail) ... ok
+test_mixed_generation_and_tampered_caps_fail (test_workflow.WorkflowTests.test_mixed_generation_and_tampered_caps_fail) ... ok
+test_removed_document_caps_are_detected_and_cleaned (test_workflow.WorkflowTests.test_removed_document_caps_are_detected_and_cleaned) ... ok
+test_source_change_is_stale_then_regenerated (test_workflow.WorkflowTests.test_source_change_is_stale_then_regenerated) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.581s
+
+OK

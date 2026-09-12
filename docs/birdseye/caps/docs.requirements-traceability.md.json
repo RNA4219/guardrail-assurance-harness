@@ -1,0 +1,35 @@
+{
+  "id": "docs/requirements-traceability.md",
+  "role": "requirements-traceability",
+  "title": "要求の来歴と処遇",
+  "summary": "[明確化前の要求本文](research/archive/before-clarification-20260910/docs/requirements.md)と、[現行要求](requirements.md)の対応を記録する。継承は原稿の意図を明文化したもの、補強は今回の要求案、後期は削除ではなくMVP対象外への分離を意味する。外部出典の正しさや全面採択を示す表ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/extension-roadmap.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/dual-usecases-20260910.md",
+    "docs/reviews/operating-decisions-20260910.md",
+    "docs/reviews/requirements-adversarial-20260910.md",
+    "docs/tasks/TASK.reference-boundary-09-10-2026.md",
+    "docs/tasks/TASK.reference-confirmation-09-10-2026.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/reviews/requirements-clarification-20260910.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "af505aab9d372859205803ac7850fddfa2dc67dd006b3e1d30beb2afe978d024"
+}

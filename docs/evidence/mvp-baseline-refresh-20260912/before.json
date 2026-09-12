@@ -1,0 +1,39 @@
+{
+  "extension_digest": "c1a2c8656cd691e54e1deac71417b7a6cf656417351033bdebea7a6bd834367d",
+  "source_sha256": {
+    "src/gah/baseline_authority.py": "0c945f8450b545589fbab5dd424fb1460a8fcf6ab561a1df4f6106e224dbc00a",
+    "src/gah/evaluation_authority.py": "3265a4877454302766632231a90fbceeeec45985a3e17dd2cd3b404816436188",
+    "src/gah/adoption_migrations.py": "3f83da89e68f77fbc72a2957cfda7fd9779696127a76c9db67c843e813513e96",
+    "tools/prepare_authority_runtime.py": "a022507c686e18b31b3ee4022c2c1dc27e3c23b5997484565b051aa6fe0e0f49"
+  },
+  "preserved": {
+    "docs/requirements.md": {
+      "previous_sha256": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98",
+      "actual_sha256": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
+    },
+    "docs/acceptance-criteria.md": {
+      "previous_sha256": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa",
+      "actual_sha256": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa"
+    },
+    "docs/operating-policy.md": {
+      "previous_sha256": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025",
+      "actual_sha256": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025"
+    },
+    "docs/contracts/initial-policy.v1.json": {
+      "previous_sha256": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+      "actual_sha256": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba"
+    },
+    "docs/contracts/decision-examples.v1.json": {
+      "previous_sha256": "5e4a0849d13939245ac2a6cd6abd5b655b9cf2f0a223c9c692fe730f742e9642",
+      "actual_sha256": "5e4a0849d13939245ac2a6cd6abd5b655b9cf2f0a223c9c692fe730f742e9642"
+    },
+    "docs/contracts/review-examples.v2.json": {
+      "previous_sha256": "85591a676583d0732e71759a676258b67254072bc44702fb1697f506564c583c",
+      "actual_sha256": "85591a676583d0732e71759a676258b67254072bc44702fb1697f506564c583c"
+    },
+    "docs/contracts/state-examples.v3.json": {
+      "previous_sha256": "2857e6688e9bfb425a2a4d01fb9a9a65de0ba250419f0b7c68f8b4c054fb1539",
+      "actual_sha256": "2857e6688e9bfb425a2a4d01fb9a9a65de0ba250419f0b7c68f8b4c054fb1539"
+    }
+  }
+}

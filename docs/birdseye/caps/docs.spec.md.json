@@ -1,0 +1,50 @@
+{
+  "id": "docs/spec.md",
+  "role": "spec",
+  "title": "基本仕様と詳細仕様の構成",
+  "summary": "通常runの人間向け/機械向け表示は[要約仕様](run-report-detail-spec.md)と[検証記録](evidence/mvp-report-20260912/README.md)へ結ぶ。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/adapter-spec.md",
+    "docs/assurance-authority-detail-spec.md",
+    "docs/auth-adoption-detail-spec.md",
+    "docs/baseline-adoption-detail-spec.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/design.md",
+    "docs/detail-spec.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/evidence/mvp-cancellation-20260912/README.md",
+    "docs/evidence/mvp-report-20260912/README.md",
+    "docs/execution-detail-spec.md",
+    "docs/fixture-materialization-detail-spec.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/regression-ci-detail-spec.md",
+    "docs/remediation-detail-spec.md",
+    "docs/requirements.md",
+    "docs/reviews/runtime-core-20260911.md",
+    "docs/run-cancellation-detail-spec.md",
+    "docs/run-contract-detail-spec.md",
+    "docs/run-evidence-detail-spec.md",
+    "docs/run-report-detail-spec.md",
+    "docs/runtime-contract-spec.md",
+    "docs/security/SAC.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/design.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "be749a1ae39d33f1255227bdaf84f01e582808a1145a3e18ead85e597205a20d"
+}

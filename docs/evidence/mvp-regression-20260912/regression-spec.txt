@@ -1,0 +1,107 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-12
+next_review_due: 2026-10-12
+---
+
+# 固定UC-CIの通常run・成果物・CI利用仕様
+
+## 1. 対象
+
+[比較契約](contract-transition-detail-spec.md)で採択したgeneration 2から、新しい通常runを作成する。
+対象は自作の固定10制約と5種類の検査系劣化に限る。baseline側15件とcandidate側15件を
+それぞれ再実行し、全30件の実入力、条件、観測、資源精算、Evidenceを同じrunへ結ぶ。
+これは固定UC-CIの経路である。UC-LLM、条件変更を含む契約・baseline更新、常設管理、
+Findingの修復確認と全32要求の受入は[完了監査](mvp-completion-audit.md)で別途管理する。
+
+## 2. APIと主体
+
+全APIはOS peer credentialによる[管理境界](auth-adoption-detail-spec.md)を通す。
+本文の役割名、モデルの提案、保存JSONの成功フラグは権限として使用しない。
+
+| action | 主体 | 固有入力 | 結果 |
+|---|---|---|---|
+| run_prepare | operator | run_id、contract_series_id、expected_contract_ref | 固定したbound_run、baseline_context、materialization |
+| run_begin | operator | 採択済み契約系列、prepareに一致するmanifestとplan | runと資源台帳の原子的作成 |
+| run_outputs | manager / validator / operator | run_id | 保存した必須成果物の完全参照 |
+| run_artifact | manager / validator / operator | run_id、artifact_ref | 検証したrunが参照する成果物本文 |
+| ci_check | operator | run_idと期待するmanifest、contract、baseline、target、use_casesの完全参照 | 現在時点の利用可否と終了コード |
+
+全入力にschema_version=1、action、request_idが必要。未知field、boolを整数として渡す入力、
+空の対象・用途、重複、参照kind違いを拒否する。prepareのrun_idは64文字以内とし、初回source、
+旧・新候補、既存run、予約済み候補IDと衝突させない。
+
+prepareは不変履歴から条件を生成して保存応答を返す。実行権限の予約ではない。
+beginと資源dispatchは現在の契約・方針・校正・採択根拠を再検査する。prepare後に根拠が
+撤回された場合、同じ保存応答を持っていても新しい実行を許さない。
+
+## 3. 保存と再開
+
+通常runのpurposeはregressionで固定する。候補runのIDやpurposeを通常runへ読み替えない。
+manifest、plan、入力実体化は採択済み候補の不変参照から再生成し、保存した内容と完全一致を
+検査する。runの開始時刻・期限・operator context・plan ID・入力manifest IDは新runへ結ぶ。
+
+停止済み観測の保存は、当時の契約と条件を解決して行う。現在の失効は新しい開始とCI利用で
+再照合し、過去のreceiptや採択世代を書き換えない。再起動後も同じDBから条件を復元する。
+
+## 4. Finding・Planと必須成果物
+
+evidence_finalizeはDecision、Evidence、run receiptに加え、Finding reportとPlan reportを
+同じtransactionで保存する。途中の保存失敗ではterminal、成果物、authority receipt、
+成功応答をまとめてrollbackし、既に精算した資源の記録を保持する。
+
+問題がない場合は、検査したControlを明記した空のFinding/Plan reportを保存する。
+問題がある場合は実際のDecisionとEvidenceを参照し、指標のControl・obligation範囲を照合する。
+run全体の理由は全体の影響として扱い、個別原因の特定済みと表示しない。原因候補がなければ
+UNKNOWNを保持し、Planは不足情報、元条件での再検証、権限、復旧対象を持つNOT_EXECUTEDとする。
+
+Findingの状態付きsnapshotと、Planが参照する状態非依存の識別用投影を両方保存する。
+run_outputsは全成果物を再生成し、kind・ID・digest・run所有・本文を保存実体へ照合する。
+保存時点の成果物参照と現在のCI利用可否は別の値である。
+本文はrun_artifactで参照ごとに取得する。別runや参照鎖外のIDを指定して任意の保存データを読めない。
+
+## 5. 現在のCI利用
+
+ci_checkは再配送でも過去の応答を再生せず、同じtransactionで現在状態を再計算する。
+期待する対象・用途・manifest・契約・baseline、契約current、採択履歴、校正、根拠Evidence、
+停止・精算、全必須成果物を照合する。HEALTHYまたはWARNINGで全条件が成立するときだけ
+use=true、ci_eligible=true、終了0を返す。候補・診断・過去のreceiptはci_eligible=falseのままとする。
+
+任意extensionの成功宣言は受け入れない。固定EvaluationExtension、保存設定digest、fresh actionの
+一致を確認し、組込み検査を直接呼ぶ。サブクラスや別extensionはこの成功経路へ入れない。
+
+| 終了値 | 意味 |
+|---|---|
+| 0 | 必須照合を満たした現在のCI利用 |
+| 1 | 完了した否定結果、別目的・対象不一致・現在の失効等 |
+| 2 | 入力、保存、成果物、実行未完了、参照整合性、通信、出力の障害 |
+
+通常authority runの取消しterminalはこの接続段階では未完了。取消しを正常完了や終了0にしない。
+[終了契約](contracts/lifecycle-contract.md)の終了3と、課金未確定時を含む全体の接続は残る。
+
+## 6. CI consumer
+
+既存authorityのdeployment.jsonと、対象の完全参照を指定したci_check JSONを用意する。
+
+```sh
+python -m tools.gah_ci --runtime .ga/existing-authority --request .ga/ci-request.json
+```
+
+consumerはoperatorとしてbrokerへ毎回問い合わせる。保存JSONだけから成功を返さない。
+応答の型、要求ID、run ID、manifest参照、成果物参照、Assurance、理由、終了状態を検査し、
+JSONの書込みとflushが成功した後に終了値を返す。入力・通信・出力の失敗は終了2とする。
+これは外部CIの設定やbranch protectionを作成するコマンドではない。
+
+## 7. 互換性と検証
+
+DBの列形式はv4を維持する。既知の候補実行版とgen2採択版の実装digestだけを明示移行の対象とし、
+設定・全履歴・候補factory・保存参照を確認してextension digestを更新する。
+gen2採択版はgen1とgen2の履歴を保持できるが、旧版に存在しない通常gen2 runを含むDBは拒否する。
+未知の実装digestを推測で受け付けず、通常起動による自動更新は行わない。
+
+統合試験は新runの30件、否定結果、再起動、撤回、保存故障、成果物欠落、ID・型・役割、
+既知版移行を検査する。実Dockerの確認は`python -m tools.verify_baseline_runtime --regression
+--output <repo内の新規ディレクトリ>`で初回15件・候補45件・通常30件を接続する。
+単体試験や検証CLI自体の成功を全MVPの完成へ換算しない。

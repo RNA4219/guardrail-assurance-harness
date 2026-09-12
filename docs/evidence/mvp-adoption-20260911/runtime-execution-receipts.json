@@ -1,0 +1,63 @@
+[
+  {
+    "binding": {
+      "adapter_digest": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+      "case_id": "acceptance-0",
+      "contract_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+      "evaluator_digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+      "fixture_digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+      "isolation_digest": "e48f7c551aa2dd6ac98a7de6ce5ee1b071d22865a976875fef18e1705bf5e9f6",
+      "obligation_id": "fixed-obligation",
+      "operation_id": "connected-operation",
+      "owner_epoch": 1,
+      "policy_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+      "run_id": "connected-fixture-run",
+      "stage_id": "fixture-acceptance",
+      "target_digest": "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f",
+      "trial_id": "trial-1"
+    },
+    "ci_eligible": false,
+    "cleanup_confirmed": true,
+    "container_id": "5f5ba0777c4ef72eef3a5b1a8f6dc247b928cfb6e390baba3d1d0602b5561a24",
+    "elapsed_millis": 1343,
+    "execution_status": "COMPLETED",
+    "exit_code": 0,
+    "image_id": "sha256:0d976e4fc7e42ad0db3e5f0e4e8523113d4510eded42ded0970b887f7afa8816",
+    "isolation_config_verified": true,
+    "kind": "fixture_execution",
+    "normalized_result": {
+      "binding": {
+        "adapter_digest": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+        "case_id": "acceptance-0",
+        "contract_digest": "d9de323fd0eac66afdbc18cd05e4dc7ede01a836b8dfef47ae4deac2cc7c368d",
+        "evaluator_digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+        "fixture_digest": "bbefbd7dc55e7eade941fec66cf9a5d408daafffce31ddf18018c0039d530cd4",
+        "isolation_digest": "e48f7c551aa2dd6ac98a7de6ce5ee1b071d22865a976875fef18e1705bf5e9f6",
+        "obligation_id": "fixed-obligation",
+        "operation_id": "connected-operation",
+        "owner_epoch": 1,
+        "policy_digest": "7311fbb7327517ed67c5583c0577ff2db366297532218097e1e257b245a19c2e",
+        "run_id": "connected-fixture-run",
+        "stage_id": "fixture-acceptance",
+        "target_digest": "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f",
+        "trial_id": "trial-1"
+      },
+      "detection": null,
+      "deviation": null,
+      "error_class": null,
+      "kind": "normalized_result",
+      "mode": "constraint",
+      "mutation_outcome": null,
+      "observation": "PASS",
+      "raw_digest": "5cacdb4579a5a2f0e0845f22f57e1eb0b05fb51d12600d9144e861ccd9e6036c",
+      "schema_version": 1
+    },
+    "output_disposition": "ADMITTED",
+    "probe_result": null,
+    "reason": null,
+    "recovered": false,
+    "scenario": "constraint:C01:good",
+    "schema_version": 1,
+    "stop_confirmed": true
+  }
+]

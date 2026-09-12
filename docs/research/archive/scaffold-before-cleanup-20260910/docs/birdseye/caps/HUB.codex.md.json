@@ -1,0 +1,41 @@
+{
+  "id": "HUB.codex.md",
+  "role": "HUB.codex",
+  "title": "Agent Hub",
+  "summary": "Spec Reconstructorの作業入口を集約する。共通様式の導入元は [UPSTREAM](docs/UPSTREAM.md) に固定し、製品の責務はこのrepo内で管理する。",
+  "public_api": [],
+  "deps_out": [
+    "BLUEPRINT.md",
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "README.md",
+    "RUNBOOK.md",
+    "SECURITY.md",
+    "docs/TASKS.md",
+    "docs/UPSTREAM.md",
+    "docs/acceptance/INDEX.md",
+    "docs/ci-config.md",
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/requirements.md",
+    "docs/security/SAC.md",
+    "docs/spec.md",
+    "docs/tasks/README.md",
+    "orchestration/m0-development.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "GUARDRAILS.md",
+    "README.md",
+    "docs/BIRDSEYE.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "4c3970c6b3f644e9f4c0b2dfc683502dbf288b7f6783ab6ec229904c96b823a1"
+}

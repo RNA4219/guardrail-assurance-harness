@@ -1,0 +1,19 @@
+{
+  "id": "datasets/README.md",
+  "role": "datasets",
+  "title": "評価データ",
+  "summary": "性能・精度評価の入力manifest、由来、使用条件、snapshot hash、分割、正解の作成方法を管理する。開発fixtureと評価holdoutを区別し、第三者データの権利・秘密の扱いを確認する。現時点で評価データと実測結果はない。[要件定義](../docs/requirements.md) の評価契約に従う。",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "fa3d42c16c691b493398e57c303acc821f93e9208cb58567b87a453f986f7c00"
+}

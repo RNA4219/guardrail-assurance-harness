@@ -1,0 +1,26 @@
+{
+  "id": "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 要求定義の敵対的検証と改訂",
+  "summary": "二つの利用場面を対象に、誤合格・誤不合格・評価不能・境界違反・修復未確認の反例を検討し、必要な改修案と拡張を要求・受入条件へ反映する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/open-questions.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-20260910.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b79f7b14b139b3f62f5273e81b652fdadaf423864f725cd64e475aa0e7a056a9"
+}

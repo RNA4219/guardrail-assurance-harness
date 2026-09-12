@@ -1,0 +1,22 @@
+{
+  "id": "docs/birdseye/README.md",
+  "role": "birdseye",
+  "title": "Birdseye生成契約",
+  "summary": "`python -m tools.workflow generate` はAcceptance索引を先に作り、現行Markdownのタイトル・本文要約・ローカルリンクからindex/hot/capsを生成する。archive、テンプレート、Evidence JSON、vendorはsource集合に含めない。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/BIRDSEYE.md"
+  ],
+  "deps_in": [
+    "docs/BIRDSEYE.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "276aa215a33493d727b56b8aa8ba58f09bb3a28f85e645f54c65c172865816a0"
+}

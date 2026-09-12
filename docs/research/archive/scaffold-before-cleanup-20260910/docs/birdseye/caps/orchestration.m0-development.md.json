@@ -1,0 +1,25 @@
+{
+  "id": "orchestration/m0-development.md",
+  "role": "orchestration",
+  "title": "開発順序",
+  "summary": "| 順序 | 成果物 | 開始・終了条件 | |---|---|---| | 基盤 | Cookbook Full文書と検証 | [導入Acceptance](../docs/acceptance/AC-20260909-01.md) | | M0契約 | snapshot / scope / Evidence / 診断のSchemaとfixture | 要件に追跡でき、正常・異常例を検査できる | | M0 adapter | 要件で限定した言語・frameworkのsource-first解析 | 対応構文・対象外・失敗を列挙しfixture検証 | | M0再構成 | 根拠付き仕様候補、矛盾・unknown | 根拠の参照、決定性、欠損表示を検査 | | M0評価 | 隔離した評価入力・正解・結果 | 入力hashと条件を固定し製品の受入閾値を測定 | | M1/M2 | 要件に定義した拡張 | M0の受入後、個別Task",
+  "public_api": [],
+  "deps_out": [
+    "TASK.codex.md",
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/TASKS.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "3dee0a5b0a75da1c8ebc99109a09ed17402a7b1c37d868d505e6e7272fa324b8"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "docs/design.md",
+  "role": "design",
+  "title": "設計の入口",
+  "summary": "詳細な設計制約の正本は [要件定義](requirements.md)。ここは実装に伴う設計判断への入口とする。現時点で製品実装はない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/README.md",
+    "docs/TASKS.md",
+    "docs/contracts/README.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "eda2d0cf2b48161f17b742585525108d45053f6e5b3cc933422be94b6ea30ff3"
+}

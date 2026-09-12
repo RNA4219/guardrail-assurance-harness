@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "desired_configuration",
+  "remote_verified": false,
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [
+      "governance",
+      "unit",
+      "docs-gate"
+    ]
+  },
+  "required_pull_request_reviews": {
+    "required_approving_review_count": 1
+  },
+  "enforce_admins": true,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}
+

@@ -1,0 +1,95 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-12
+next_review_due: 2026-10-12
+---
+
+[製品CLIの出力原文](regression-runtime-report.raw.txt)を保持し、以下に同じ本文を表示する。
+
+# GAH実行結果
+
+run: "regression-runtime"
+実行状態: COMPLETED
+CI照会のAssurance: HEALTHY
+保存時のAssurance: HEALTHY
+現在のCI利用: 不可 / 終了値 1
+
+用途: ["UC-CI"]
+プロファイル: "full"
+評価範囲Control: ["fixture-C01", "fixture-C02", "fixture-C03", "fixture-C04", "fixture-C05", "fixture-C06", "fixture-C07", "fixture-C08", "fixture-C09", "fixture-C10", "fixture-F01", "fixture-F02", "fixture-F03", "fixture-F04", "fixture-F05"]
+
+| 時刻（UTC） | 値 |
+|---|---|
+| 基準時刻 | 2026-09-12T05:19:26+00:00 (epoch 1789190366) |
+| 観測時刻 | 2026-09-12T04:46:59+00:00 (epoch 1789188419) |
+| Evidence有効期限 | 2026-09-13T04:46:59+00:00 (epoch 1789274819) |
+
+## 指標・差分
+
+値は分数で表示する。比較不能な値を0に補完しない。
+
+| 指標 | 現在値 | baseline | 差分 | 比較 | 対象範囲 |
+|---|---|---|---|---|---|
+| "mutation_score" / "m-35e3dc32cb38f1e933b30803" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": null, "scope": "category"} |
+| "mutation_score" / "m-6101c52dc03169bd71cbdbf0" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": "fixture-F01", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-b2ee0c1a3a671afc83927fa8" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": "fixture-F02", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-beb124110007363c2a6e5062" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": "fixture-F03", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-d5d9e2ded5042e8aeab6bb29" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": "fixture-F04", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-b2d71ddc2eb72c1e8715a9ca" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": "fixture-F05", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-81e96c3e8d882a16807db700" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": "fixture-F01", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-28c94fc61710743c089ac632" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": "fixture-F02", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-7f535a20b0606c7fa70f95c8" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": "fixture-F03", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-d852cf4d69258ebfbcd6336e" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": "fixture-F04", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-3a2ef4b694f3fbc28028df21" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": "fixture-F05", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-d416295491f63494489d4c5f" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F01", "scope": "obligation"} |
+| "mutation_score" / "m-092c004b7f789acacd788dd4" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F02", "scope": "obligation"} |
+| "mutation_score" / "m-efa6328366c7c882efb907f0" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F03", "scope": "obligation"} |
+| "mutation_score" / "m-db95eeaf57da7183e53ff259" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F04", "scope": "obligation"} |
+| "mutation_score" / "m-d166fb9af6b37f1830b34287" | 1/1 | 1/1 | 0/1 | 可能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F05", "scope": "obligation"} |
+| "mutation_score" / "m-69751e7e444d5696119265a6" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F01", "scope": "obligation_category"} |
+| "mutation_score" / "m-2dbbca3da2a605488dc3f946" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F02", "scope": "obligation_category"} |
+| "mutation_score" / "m-ddb73fcfc0e8f790fb6d8540" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F03", "scope": "obligation_category"} |
+| "mutation_score" / "m-a78f70d9a4ec741cd508c2f4" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F04", "scope": "obligation_category"} |
+| "mutation_score" / "m-79149c2c5fd9e9927189d4cf" | 1/1 | 1/1 | 0/1 | 可能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F05", "scope": "obligation_category"} |
+
+## 判定理由・欠損
+
+| 種別 | 理由 |
+|---|---|
+| 現在のCI利用 | "PREREQUISITE_UNAVAILABLE" |
+
+## Finding・Plan参照
+
+Finding 0件 / Plan 0件
+
+| 種別 | ID | digest |
+|---|---|---|
+
+## 対象と保存根拠
+
+| 種別 | ID | digest |
+|---|---|---|
+| "target" | "fixture-target-constraint-C01-good" | "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f" |
+| "target" | "fixture-target-constraint-C02-good" | "f82b7db9d2c8312b5ce01f3ba623005c84540a7c22981eef6e8bc5c6e6e27b32" |
+| "target" | "fixture-target-constraint-C03-good" | "fb37d9d9a0b4a22f4ecd2b90f4fe1566549d640d8335b65dfa54d35c01f0249b" |
+| "target" | "fixture-target-constraint-C04-good" | "8b59fcaae84f4e9098c803a85bcacb5935194ee0b5eda00cb03d04b41e268eeb" |
+| "target" | "fixture-target-constraint-C05-good" | "712fd48b73ae7230ea2ce774ac73706b44a1f2430416ba3b1eecb298557a4b1d" |
+| "target" | "fixture-target-constraint-C06-good" | "ad38008ffc0ae64d4f1a123abe21beeceb115b7a4fa0aea8c70495fa23d8e7af" |
+| "target" | "fixture-target-constraint-C07-good" | "5c91c4ef797213ffb422cc95028c6c1c44a2e273ae7910165df38c20465bb337" |
+| "target" | "fixture-target-constraint-C08-good" | "6fcfee71f8f6656617adfb08da848348a1620cfda481e534ababaa13b2e807f1" |
+| "target" | "fixture-target-constraint-C09-good" | "9aaab17a8fb6a254905ba4d433b1465b3f9d205947558579eb9eb10a45e76576" |
+| "target" | "fixture-target-constraint-C10-good" | "9f197568cb9dfff72c4b1add90cd271e664f8d1a4c73ecb527754130d7421198" |
+| "target" | "fixture-target-mutation-F01-healthy" | "d2cb1f526fad23e5119a36c3193530dad24a77536ddb90925de143441327ad01" |
+| "target" | "fixture-target-mutation-F02-healthy" | "27e92803256aeb055d7a9440b6a2a70bc0537bed0f703937c064485194b028ed" |
+| "target" | "fixture-target-mutation-F03-healthy" | "8004e3095cb78e6e5acc90e58148ff327c6127a87da7e8808dd0aab3f38d1e93" |
+| "target" | "fixture-target-mutation-F04-healthy" | "4c872a58d256ce6513896261bd13ea1f2570f075d2644eea45e2cdd0c53994db" |
+| "target" | "fixture-target-mutation-F05-healthy" | "a0778fc8fac026967d8a39401c9a261a06f092b483ab58929ac7faecf6d7b839" |
+| "run_outputs" | "regression-runtime" | "108a5909eeba8d11f2be9b806d88129f49e8aff5a9c0b4f2bb5ba1172f1ee9b2" |
+| "run_decision" | "regression-runtime" | "9bb48d9cce22f782dd46201be42e6ef56433e0674c47bd42ea357da13eeb84e1" |
+| "evidence" | "regression-runtime" | "d834a068ebf6e8f2c731d4d6c083da11c38327731731aa7f740d549b33cba4f4" |
+| "findings_report" | "regression-runtime" | "537ee38c33d2538a14231437ca561c25165f98ef0fc7d4b7e5000f6336e7810e" |
+| "run_manifest" | "regression-runtime" | "4570185f0502e4e0225a3ae3833b698015c32d8ee810385d79c05ee8e77456ee" |
+| "plans_report" | "regression-runtime" | "b27f14a63305615935512cc7002cba5db6fd23154c96874b8cae2d8648b8a1e6" |
+| "authority_run_receipt" | "regression-runtime" | "c4acaad257e84e446465022267d5c449692db59b5b5a1938ad18ea7f5a522a73" |

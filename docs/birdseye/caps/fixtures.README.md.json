@@ -1,0 +1,21 @@
+{
+  "id": "fixtures/README.md",
+  "role": "fixtures",
+  "title": "Fixtureの予定領域",
+  "summary": "Control、Manifest、adapter出力、Mutation結果、証拠不足や期限切れなどの合成入力と期待結果を今後配置する。実credentialや本番データは使用しない。[契約の入口](../docs/contracts/README.md)に対応する製品fixtureは未作成。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/README.md"
+  ],
+  "deps_in": [
+    "docs/contracts/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "4a1b12d22bfdfc8035413041519746c37c5967d0d34a05c82519601cfcdab875"
+}

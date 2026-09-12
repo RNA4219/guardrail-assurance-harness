@@ -1,0 +1,24 @@
+{
+  "id": "docs/research/README.md",
+  "role": "research",
+  "title": "資料来歴",
+  "summary": "| 資料 | 現在の場所 | 扱い | |---|---|---| | 改訂済み要件 deep-research-report (12).md | [requirements](../requirements.md) | 要件の正本。移設時はfrontmatterのみ追加 | | 改訂前バックアップ | [archive](archive/requirements-before-review-2026-09-09.md) | 原本byteを保持、編集しない | | 敵対的レビュー前のv0.2 | [2026-09-10保存稿](archive/requirements-before-adversarial-2026-09-10.md) | frontmatterを含む全文byteを保持、編集しない |",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md"
+  ],
+  "deps_in": [
+    "RUNBOOK.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "2adc6a24d957102e2f5cce36fd7680d691b71e9a3c2f15e8adea6884d106778a"
+}

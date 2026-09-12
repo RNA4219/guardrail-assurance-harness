@@ -1,0 +1,32 @@
+{
+  "id": "docs/lifecycle-detail-spec.md",
+  "role": "lifecycle-detail-spec",
+  "title": "期限後回収と取消し・終了の詳細仕様",
+  "summary": "[コアv1](detail-spec.md)の台帳をSchema v2へ拡張し、[LC03〜LC06](contracts/lifecycle-contract.md)の一部を部品APIとして具体化する。診断目的とci_eligible=falseを維持する。実hostの認証、外部課金・停止の確認、全資源監督は未接続である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/lifecycle-contract.md",
+    "docs/detail-spec.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "RUNBOOK.md",
+    "docs/ADR/0004-lifecycle-recovery.md",
+    "docs/detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/lifecycle-core-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md",
+    "orchestration/development-plan.md",
+    "src/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "3063f2fd6af98fd6efe8b3aeeb5e64f2f15cc2de427b5dc4d4aebbcf0f26eb43"
+}

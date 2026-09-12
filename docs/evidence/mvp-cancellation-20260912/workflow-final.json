@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T05:29:16+00:00",
+  "scope": "local workflow adoption",
+  "python": "3.12.14",
+  "status": "fail",
+  "checks": {
+    "adoption_tier_3": {
+      "status": "pass",
+      "errors": []
+    },
+    "downstream_onboarding": {
+      "status": "pass",
+      "errors": []
+    },
+    "documents": {
+      "status": "fail",
+      "errors": [
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: metadata欠落: intent_id",
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: metadata欠落: owner",
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: metadata欠落: status",
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: metadata欠落: last_reviewed_at",
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: metadata欠落: next_review_due",
+        "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md: review日付が不正",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: metadata欠落: intent_id",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: metadata欠落: owner",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: metadata欠落: status",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: metadata欠落: last_reviewed_at",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: metadata欠落: next_review_due",
+        "docs/evidence/mvp-report-20260912/regression-runtime-report.md: review日付が不正"
+      ]
+    },
+    "acceptance_format": {
+      "status": "pass",
+      "errors": []
+    },
+    "task_acceptance": {
+      "status": "pass",
+      "errors": []
+    },
+    "generated_artifacts": {
+      "status": "pass",
+      "errors": []
+    },
+    "birdseye_freshness": {
+      "status": "pass",
+      "errors": []
+    },
+    "ci_gate_matrix": {
+      "status": "pass",
+      "errors": []
+    },
+    "checker_stages": {
+      "status": "pass",
+      "errors": []
+    },
+    "branch_desired_configuration": {
+      "status": "pass",
+      "errors": []
+    },
+    "local_security_posture": {
+      "status": "pass",
+      "errors": []
+    },
+    "source_provenance": {
+      "status": "pass",
+      "errors": []
+    }
+  },
+  "remote_validation": "not_run",
+  "product_acceptance": "not_run"
+}

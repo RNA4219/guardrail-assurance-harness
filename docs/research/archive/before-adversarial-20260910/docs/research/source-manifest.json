@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "project": "guardrail-assurance-harness",
+  "organized_at": "2026-09-10",
+  "current": {
+    "path": "docs/requirements.md",
+    "stage": "requirements_clarification_draft_v0.2",
+    "mutable": true,
+    "edit_scope": "confirmed dual use cases, purpose-specific metrics and acceptance, shared verdict rules and source disposition"
+  },
+  "archive": {
+    "path": "docs/research/archive/gah-requirements-original-20260910.md",
+    "original_name": "docs/requirements.md (before documentation cleanup)",
+    "sha256_raw": "3070d72b290135eb1d1135213ec459aa640989798613401689cd99dc1ed8051c",
+    "mutable": false
+  },
+  "copied_scaffold": {
+    "path": "docs/research/archive/scaffold-before-cleanup-20260910",
+    "manifest": "archive-manifest.json",
+    "file_count": 148,
+    "assurance_for_gah": false
+  },
+  "body_preservation": {
+    "method": "Reverse the explicit presentation transforms; compare all nonblank source lines including fenced examples",
+    "equal": true,
+    "scope": "20260910-03 documentation formatting only; see before-clarification saved version"
+  },
+  "citations": {
+    "register": "docs/research/citation-register.md",
+    "status": "unresolved_unverified",
+    "unique_references": 52
+  },
+  "clarification": {
+    "task_id": "20260910-04",
+    "saved_before": "docs/research/archive/before-clarification-20260910/docs/requirements.md",
+    "sha256_raw": "fc0cfcc824a498e3e55ca77180fb720d525cf83aad0910baeb359b2c2bdac9f5",
+    "traceability": "docs/requirements-traceability.md",
+    "acceptance_criteria": "docs/acceptance-criteria.md",
+    "requirements_count": 24,
+    "status": "draft_not_product_approval",
+    "source_manifest": "docs/research/archive/before-clarification-20260910/archive-manifest.json"
+  },
+  "scope_confirmation": {
+    "task_id": "20260910-05",
+    "confirmed_at": "2026-09-10",
+    "confirmed_by": "user",
+    "use_cases": [
+      "coding agentの開発・CI",
+      "LLMガードレール評価"
+    ],
+    "supersedes": "v0.1 assumption A01",
+    "saved_before": "docs/research/archive/before-dual-usecases-20260910/docs/requirements.md",
+    "sha256_raw": "f4a155b35516ab14b3decb038fedc44ebf89e49120af67c91eae1eec8388bf64",
+    "source_manifest": "docs/research/archive/before-dual-usecases-20260910/archive-manifest.json",
+    "requirements_count": 24,
+    "status": "use_cases_confirmed_requirements_remain_draft"
+  },
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

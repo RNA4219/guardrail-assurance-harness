@@ -1,0 +1,18 @@
+test_corrupt_refresh_history_cannot_migrate (test_operation_integration.OperationIntegrationTests.test_corrupt_refresh_history_cannot_migrate) ... ok
+test_migration_preserves_both_generations_and_outputs (test_operation_integration.OperationIntegrationTests.test_migration_preserves_both_generations_and_outputs) ... ok
+test_migration_preserves_revocation_without_refreshing_evidence (test_operation_integration.OperationIntegrationTests.test_migration_preserves_revocation_without_refreshing_evidence) ... ok
+test_revoked_start_basis_does_not_hide_saved_operation (test_operation_integration.OperationIntegrationTests.test_revoked_start_basis_does_not_hide_saved_operation) ... ok
+test_roles_same_request_is_fresh_and_stop_not_usage (test_operation_integration.OperationIntegrationTests.test_roles_same_request_is_fresh_and_stop_not_usage) ... ok
+test_wrong_reference_and_saved_binding_are_rejected (test_operation_integration.OperationIntegrationTests.test_wrong_reference_and_saved_binding_are_rejected) ... ok
+test_cancel_releases_only_unsent_and_read_does_not_need_owner (test_resource_operation.OperationCandidateTests.test_cancel_releases_only_unsent_and_read_does_not_need_owner) ... ok
+test_corrupt_usage_and_flags_fail_without_accounting_change (test_resource_operation.OperationCandidateTests.test_corrupt_usage_and_flags_fail_without_accounting_change) ... ok
+test_reserved_status_is_not_send_permission (test_resource_operation.OperationCandidateTests.test_reserved_status_is_not_send_permission) ... ok
+test_return_mutation_and_unknown_inputs_cannot_change_state (test_resource_operation.OperationCandidateTests.test_return_mutation_and_unknown_inputs_cannot_change_state) ... ok
+test_stop_and_usage_remain_separate_and_read_recomputes (test_resource_operation.OperationCandidateTests.test_stop_and_usage_remain_separate_and_read_recomputes) ... ok
+test_transaction_and_clock_are_required (test_resource_operation.OperationCandidateTests.test_transaction_and_clock_are_required) ... ok
+test_wrong_reference_and_cross_run_fail (test_resource_operation.OperationCandidateTests.test_wrong_reference_and_cross_run_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 262.496s
+
+OK

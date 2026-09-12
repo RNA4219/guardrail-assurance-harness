@@ -1,0 +1,38 @@
+---
+intent_id: INT-REPLACE
+owner: your-handle
+status: active
+last_reviewed_at: YYYY-MM-DD
+next_review_due: YYYY-MM-DD
+template_version: 1.0.0
+---
+
+# Evaluation
+
+## Acceptance Criteria
+
+- The documented behavior matches the current implementation.
+- The minimum local and CI checks pass.
+- User-facing changes include release or changelog notes when needed.
+
+## KPIs
+
+| Metric | Purpose | Target |
+| --- | --- | --- |
+| lead_time | Track delivery speed | Define target |
+| reopen_rate | Track quality after completion | Define target |
+
+## Test Outline
+
+- Unit:
+  - List unit tests.
+- Integration:
+  - List integration checks.
+- Smoke:
+  - List CLI or packaging smoke tests.
+
+## Verification Checklist
+
+- [ ] Requirements and design docs are aligned
+- [ ] Tests passed and evidence is available
+- [ ] Known risks and follow-ups are recorded

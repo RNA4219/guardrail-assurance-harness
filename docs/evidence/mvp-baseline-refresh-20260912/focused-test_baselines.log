@@ -1,0 +1,12 @@
+test_core_rebind_and_authority_refs_cannot_be_self_declared (test_baselines.BaselineTests.test_core_rebind_and_authority_refs_cannot_be_self_declared) ... ok
+test_diagnostic_decision_is_structural_only (test_baselines.BaselineTests.test_diagnostic_decision_is_structural_only) ... ok
+test_evidence_freshness_and_binding_failures_are_rejected (test_baselines.BaselineTests.test_evidence_freshness_and_binding_failures_are_rejected) ... ok
+test_initial_cycle_and_content_ref_mismatch_are_rejected (test_baselines.BaselineTests.test_initial_cycle_and_content_ref_mismatch_are_rejected) ... ok
+test_initial_record_binds_without_authority_claim (test_baselines.BaselineTests.test_initial_record_binds_without_authority_claim) ... ok
+test_separate_decision_closure_and_state_identity_are_required (test_baselines.BaselineTests.test_separate_decision_closure_and_state_identity_are_required) ... ok
+test_validators_are_strict_and_non_mutating (test_baselines.BaselineTests.test_validators_are_strict_and_non_mutating) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.013s
+
+OK

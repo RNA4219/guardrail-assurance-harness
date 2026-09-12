@@ -1,0 +1,25 @@
+{
+  "id": "docs/baseline-adoption-detail-spec.md",
+  "role": "baseline-adoption-detail-spec",
+  "title": "baseline採択と更新の詳細仕様 v1",
+  "summary": "[初回baselineから比較契約への移行](contract-transition-detail-spec.md)で、 旧条件を保つ事前検査と、採択前の候補専用run・原子的採択の接続順序を定める。 事前検査はgeneration 2の採択または通常回帰CIの成功を意味しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-transition-detail-spec.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/reviews/mvp-evaluation-20260911.md",
+    "docs/spec.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "943c91f27cf71b48d8cf73e5b79b12b3a64c86f5d38714d57f031633894cce79"
+}

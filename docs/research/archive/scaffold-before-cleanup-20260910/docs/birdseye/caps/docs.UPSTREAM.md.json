@@ -1,0 +1,25 @@
+{
+  "id": "docs/UPSTREAM.md",
+  "role": "UPSTREAM",
+  "title": "Workflow-Cookbook導入元",
+  "summary": "導入元: RNA4219/workflow-cookbook、version 1.2.0。ローカル正本のcommitを固定: `db3b2141c1fef0f4835170dd82f85aabc6000fc3`。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/0001-workflow-cookbook-adoption.md"
+  ],
+  "deps_in": [
+    "CONTRIBUTING.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "bf6ba3e69c458fe8fdb5c428c4fd68437204b43ed214323fcde4d83fc92f8805"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "docs/design.md",
+  "role": "design",
+  "title": "契約・評価設計 v0.3",
+  "summary": "[要求v0.4](requirements.md)の32要求と[初期運用方針v1](operating-policy.md)から、MVPの論理構成と境界を具体化した。基本設計v0.3を保ち、判定・永続化・診断CLIは[詳細仕様v1](detail-spec.md)で初期実装した。全MVPの正式Schema、外部adapter、管理AI認証・隔離は未接続。[仕様](spec.md)、[契約](contracts/evaluation-contract.md)、[評価設計](contracts/evaluation-design.md)を合わせて読む。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/contracts/lifecycle-contract.md",
+    "docs/detail-spec.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/spec.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/detail-spec.md",
+    "docs/open-questions.md",
+    "docs/reviews/design-review-20260911.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "5d629fd2b6fdfcc22b411af448d2d734a3c5051dba00bd3766e5e17fc8533f90"
+}

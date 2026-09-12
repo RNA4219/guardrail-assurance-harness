@@ -1,0 +1,24 @@
+{
+  "id": "SECURITY.md",
+  "role": "SECURITY",
+  "title": "Security",
+  "summary": "このrepoは現時点で製品runtimeを公開していない。支援対象は現在の文書とワークフロー検証ツール。 製品の信頼境界は [要件定義](docs/requirements.md)、開発上の確認は [SAC](docs/security/SAC.md) に記載する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/requirements.md",
+    "docs/security/SAC.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/security/SAC.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "664b1b38b092fc22165ad05a96f4a0211b676656d24c56538fd2baf6431584ca"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "docs/tasks/README.md",
+  "role": "tasks",
+  "title": "Task一覧",
+  "summary": "運用規約は [Taskガイド](../TASKS.md)。変更単位に [Task Seed](../../TASK.codex.md) を使用する。",
+  "public_api": [],
+  "deps_out": [
+    "TASK.codex.md",
+    "docs/TASKS.md",
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/acceptance/AC-20260910-02.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md"
+  ],
+  "deps_in": [
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/BIRDSEYE.md",
+    "docs/TASKS.md",
+    "docs/acceptance/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "469c77034506b3ceb286d4922ab51173ceca0e734cfb310ed3b2bf6c8b0c5d8d"
+}

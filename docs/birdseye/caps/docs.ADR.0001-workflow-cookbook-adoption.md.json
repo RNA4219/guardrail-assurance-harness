@@ -1,0 +1,25 @@
+{
+  "id": "docs/ADR/0001-workflow-cookbook-adoption.md",
+  "role": "ADR",
+  "title": "ADR-0001: コピーした文書運用基盤をGAHへ整理する",
+  "summary": "状態: accepted（今回の文書整理における運用判断）。日付: 2026-09-10。製品設計や要求全体の承認ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/UPSTREAM.md",
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/research/README.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md"
+  ],
+  "deps_in": [
+    "docs/ADR/README.md",
+    "docs/UPSTREAM.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "140de21f9222d25bbdb2ec7b206d41b25577874c45b8700beae33a456dcd291c"
+}

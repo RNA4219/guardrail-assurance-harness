@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "applied_at": "2026-09-10T08:54:40.691583+00:00",
+  "scope": "参照元を特定する名称・URL・版識別子の匿名化。元の識別子はこの記録へ保存しない",
+  "anonymized_snapshot_files": 18,
+  "old_empty_directories_removed": 4,
+  "historical_evidence_records_annotated": 20,
+  "archive_manifests_rebased": 8,
+  "new_unredacted_backup_created": false,
+  "generated_artifacts": "regenerated_and_checked",
+  "remaining_content_files": 0,
+  "remaining_paths": 0
+}

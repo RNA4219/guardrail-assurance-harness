@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260911-02.md",
+  "role": "acceptance",
+  "title": "Acceptance: 初回・再開・複合条件の設計補正",
+  "summary": "[Task](../tasks/TASK.state-review-09-11-2026.md)の6指摘の設計反映と手動確認計画、既存68例と追加32例の静的・算術照合。製品動作・性能・正式Schemaの受入は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/state-review-20260911.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/state-review-20260911.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "4e240d991eb76ba84bed0e66ced19fa7e0cce3997163d83be01403f79b56ab2a"
+}

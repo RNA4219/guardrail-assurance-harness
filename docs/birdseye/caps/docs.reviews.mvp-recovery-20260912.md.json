@@ -1,0 +1,21 @@
+{
+  "id": "docs/reviews/mvp-recovery-20260912.md",
+  "role": "reviews",
+  "title": "所有権期限切れ後の取消し取得の親レビュー",
+  "summary": "最新の利用者指示に従い、親が実装・レビュー・検証を担当した。追加のモデル委任は行っていない。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/evidence/mvp-recovery-20260912/README.md",
+    "docs/run-recovery-detail-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f86b93349d3395cdab5ac68fe93650684066e5fa683cb99856ad188fdb091fbc"
+}

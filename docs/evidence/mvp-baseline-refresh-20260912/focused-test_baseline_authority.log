@@ -1,0 +1,8 @@
+test_materialization_incomplete_source_is_structural_proposal_only (test_baseline_authority.BaselineAuthorityTests.test_materialization_incomplete_source_is_structural_proposal_only) ... ok
+test_schema_requires_transaction_and_request_is_strict (test_baseline_authority.BaselineAuthorityTests.test_schema_requires_transaction_and_request_is_strict) ... ok
+test_self_claimed_success_with_incomplete_evidence_cannot_validate (test_baseline_authority.BaselineAuthorityTests.test_self_claimed_success_with_incomplete_evidence_cannot_validate) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.069s
+
+OK

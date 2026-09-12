@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-01.md",
+  "role": "acceptance",
+  "title": "Acceptance: 要件定義の敵対的レビュー",
+  "summary": "[Task](../tasks/TASK.requirements-adversarial-09-10-2026.md) の要件・文書変更に対する技術検収。製品受入ではなく、Codexによる自己検査。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "0a4430ae9fdbb07629e73a34ab12e4f7a6bc8c8faa965eeef4408c8fe80bf62b"
+}

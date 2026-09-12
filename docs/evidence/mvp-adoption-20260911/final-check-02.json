@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T12:04:44.175902+00:00",
+  "status": "passed",
+  "scope": "initial_baseline_milestone_final_artifact_check",
+  "checks": {
+    "evidence_file_hashes": true,
+    "tested_source_hashes": true,
+    "requirements_policy_examples_preserved": true,
+    "workflow_check_passed": true,
+    "generated_index_current": true,
+    "privacy_passed": true,
+    "milestone_and_limitations_preserved": true
+  },
+  "verification_sha256": "8cf8cc577964560fbdf274985fff0ead61cef598404fbc72b0fc25aa78a14d6e",
+  "privacy_sha256": "01e47c3e9d1c30d80438bee7cef91dce0057a4327dfe1afe604cdfd7363ac220",
+  "workflow_sha256": "93bb3424356fb36af496425c01a64cc565e70d93dfb91ed30750dc80aec06049",
+  "birdseye_generation": "00043",
+  "birdseye_index_sha256": "69e8d03b629b33daf90f99393408271e46fbc6e1089f380c4a0d40f152d43ac3",
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "prior_check_sha256": "3ba6830282109e425d215d3fa12db36b031c1b0aa7cabc4c69f3b5ba1428fe49",
+  "correction": "初回checkerはBirdseyeの改行正規化済みテキストdigestへraw bytes digestを比較した。tools/workflow.pyのshaと同じUTF-8 read_textによるdigestで再照合。成果物は変更せず、初回結果を保持。"
+}

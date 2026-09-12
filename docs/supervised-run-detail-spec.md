@@ -1,0 +1,68 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-12
+next_review_due: 2026-10-12
+---
+
+# 製品の実行監督・再開・対象限定の仕様
+
+固定UC-CIの製品入口tools.gah_runと操作状態照会を接続した。[工程証跡](evidence/mvp-supervisor-20260912/README.md)で実Dockerとレビュー補正後の試験を区別する。以下で現在の接続範囲と未完了の拡張を区別する。全MVP受入は未完了である。
+
+MVPの定期評価はCIスケジュールから製品CLIを呼ぶ接続とする。常駐サービスの新設や即時検知の時間保証は完了条件へ追加しない。詳細は[要求の証拠有効期間](requirements.md#8-証拠の有効期間と計画の成立条件)を正本とする。
+
+## 製品入口と表示
+
+CLIはpython -m tools.gah_runで、run、resume、cancel、statusの各subcommandを持つ。--runtimeに既存deployment、--requestにschema_version=1、run_id、contract_series_id、expected_contract_ref、triggerのJSONを指定する。triggerはmanual / change / scheduled_fullに限定し、未知field・role自己申告・任意shell文を拒否する。現時点は固定contract 2の全30件だけを実行する。changeも影響が未確定のため全体実行へ拡大し、UNKNOWN_IMPACT_FULL_FALLBACKと表示する。scheduler自体や対象限定実行の完成とはしない。
+
+CLIは既存brokerを認証したoperatorとして操作する。managerの提案・採択やvalidatorの観測は固定された独立主体へ分け、任意のUIDを入力から選ばせない。期待契約と異なるcurrentを黙って使わない。
+
+最終表示はrun ID、実施範囲、未実施範囲、時刻、資源状態、保存時Assurance、現在CIと根拠参照を示す。終了コードは既存CIの0/1/2/3を保持し、保存JSONだけで0にしない。
+
+## 操作状態のfreshな照会
+
+resource_operationはoperator/validatorがrun_id、operation_id、expected_manifest_refを指定して照会する。予約のdigest、元owner epoch、送信・停止・精算・解放・競合の状態、既知usageまたはnull、完全な保存entry/scenarioを返す。現在の開始許可や再送許可は返さない。
+
+同じrequest_idでも状態を再読取りし、現在の契約根拠が失効していても保存planとの結合を照合する。unknown usageを0へ変換しない。保存予約・usageのdigest、型、時刻順序、費用、元planとの一致が壊れていれば拒否する。
+
+既知のbaseline更新版からの明示migrationは世代1・2の履歴、元通常runの実体、validation/current/撤回を照合する。移行でEvidenceの寿命や撤回状態を変更しない。以前の版に世代2形式を混入したDBは引き続き拒否する。
+
+## durable checkpointと二重実行の防止
+
+run専用のcanonical directoryはdeployment/supervised/SHA256(run_id)に固定する。requestとsource lock、送信意図、応答、開始・終了、receiptを個別の不変記録へ保存する。OS lockで同一runを排他し、CLI同士の共有deployment transportも直列化する。brokerのowner_id/epochも別に検査し、ローカルlockだけでauthorityの所有権を得ない。symlink/reparse pointを保存先にしない。
+
+checkpointにはschema版、run/manifest/plan/契約の完全参照、source lock、開始要求ID、現在owner/epoch、予定entry、operation ID、段階、実行receipt参照を保存する。ネットワーク送信・Docker開始前に意図をfsyncとatomic replaceで記録する。本文checksumは破損検知であり、authority認証の代わりではない。
+
+各操作のrequest_idと本文を固定する。通信結果が曖昧なら同じ要求を照会し、異なるoperation IDで再送しない。baseline/契約/current/現在CIはfreshな問い合わせを行い、冪等な過去応答と混同しない。
+
+## 再開と取消しの状態表
+
+| 観測できた状態 | 再開処理 |
+|---|---|
+| 準備要求のみ・開始登録前 | resumeは同じ契約・run IDで準備とrun_beginを再照合し、開始登録を完了する |
+| 未予約の予定entry | 現在開始条件とownerを検査して予約できる |
+| 予約済み・送信前 | 保存要求とbrokerを照合。取消し時は予約を解放 |
+| dispatch済み・実行中 | 同じ実行journalと子処理を照合し、新規実行せず停止/回収へ進める |
+| 実行完了・停止確認済み | 同じreceiptから観測・精算を続行。結果を再取得するための再実行は行わない |
+| 実行時刻・停止・usageの根拠欠落 | 不足を保持し、正常完了や0費用を作らない |
+| terminal保存済み | 不変成果物を読み、現在CIを照会。履歴を書き換えない |
+| owner期限切れかつ開始根拠失効 | resource_cancel_claimで取消し取得へ進める |
+
+再開前にbrokerのrun_statusと保存manifest/planを照合する。正常な継続では現在の採択根拠も確認する。根拠失効で新規dispatchができなくても、停止・精算・保存読取りへの経路は維持する。
+
+Ctrl+C、プロセス強制終了、ディスク障害、曖昧な送信結果を中断原因として扱う。既知の違反は取消しDecisionへ残す。停止未確認では終了2、停止済み取消しでは3とし、後日の精算で0へ変えない。共有brokerや他runの子処理は削除しない。
+
+## 変更影響と定期全体実行の残る接続
+
+changeでは、変更対象の完全参照とRegistry依存閉包からControl集合を決定する。入力が未知・欠落・不整合なら影響なしとせず、fullへ拡大するか不足で止める。依存先を取り除いた小さな集合へ縮めない。
+
+manifestへ要求された範囲、導出した範囲、実施範囲、除外理由、未知範囲、trigger参照を固定する。範囲限定の結果はその範囲だけのCI利用に限る。consumerの期待対象・用途と一致しなければ終了0を返さない。
+
+scheduled_fullは全Control・全必須caseを対象とする。schedulerは決まった時刻に製品入口を呼ぶtransportであり、採択・成功の権限を持たない。重複起動はrun IDとOS lock・owner/epochで検査し、前runのreceiptを今回の成功に使わない。
+
+## 接続完了の証拠
+
+通常終了と否定結果、全checkpoint境界での中断、二重監督、通信再試行、owner期限、根拠撤回、停止不明・遅延精算、既知違反保持、範囲限定・未知影響・定期全体を実行する。source lock・実operation数・停止/精算・現在CIと再起動を照合する。合成runnerの部品試験と実Docker/providerの受入を分ける。
+
+現行CLIではsource lockやdeployment/fixture版が変わったcheckpointをそのまま再開しない。版を跨ぐ自動回収は未接続で、既存authorityの停止・精算APIと該当版の証跡を用いる。raw出力やcredentialをcheckpointへ保存しない。

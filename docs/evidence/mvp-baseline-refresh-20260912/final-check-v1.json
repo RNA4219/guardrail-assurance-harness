@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T08:50:52.839020+00:00",
+  "passed": true,
+  "checks": {
+    "all_32_requirements_tracked_without_acceptance_claim": true,
+    "evidence_hashes_match": true,
+    "current_sources_match": true,
+    "seven_protected_sources_match": true,
+    "workflow_passed": true,
+    "birdseye_hashes_match": true,
+    "privacy_coverage_completed": true,
+    "scope_consistent": true
+  },
+  "verification_sha256": "c64c9b846670e340de4d928fb4fe91fdd0d665c47bc6fd6d3bb1eeedf5a2f9a0",
+  "final_artifact_sha256": {
+    "final-checker-v1.py": "3674f4bf6406c9c311b700a9ed000bb2a36aba931f4a334295d551e5503b6938",
+    "acceptance-mapper.py": "2574abfe0bdf1102f0e7a034f17809dbf2f5fc05aec301992700b927db3e3678",
+    "contract-revision-spec.txt": "dd1f178d774df4f72d4232b32b241d9d14b72b02d67d6e25b978df327dfd3725",
+    "llm-authority-spec.txt": "2f70751846e5d2d012f1764112700e4752d89d84468867a6dfb1cf2219a16d16",
+    "supervised-run-spec.txt": "6b4ee914f2d83440063087499d7de7c0a35ad48c81a63ea8246c595f9e435a82",
+    "retention-revalidation-spec.txt": "7b884e7c25c3da4f17b87a06a3edb1078148df44d0343b6b42b735e875d7e8b5",
+    "privacy-latest-primary-v1.json": "62f807c0a259e2bda4ac12f0a4516e9d32163a3d8a4f7c1f7da690970fc00a66",
+    "privacy-latest-supplement-v1.json": "3edb8937ab8760bfe3a9379c28dacff551b6b64d2211395227ed2668ced0c21f",
+    "privacy-latest-checker-v1.py": "da49d42cb1cafa1da7242d8342e7600859fca69a4d37214e76bb8e9f4aaeba9f",
+    "privacy-latest-supplement-checker-v1.py": "f3591ad829e917046dc77f7e8756d709e072b4ff779b63ebd3b30ff59b28896c",
+    "workflow-final-v1.json": "4b2847c33721cd91fef8b2c95f6680b65eeb47ad052d2c1f316c4ab7e6a3ecf0",
+    "acceptance-map.json": "d7003f1355d53bafd1a6ed311858d900d36cbfbf691df23041c42ca4da8585b9"
+  },
+  "birdseye_generation": "00058",
+  "birdseye_nodes": 143,
+  "parent_review_completed": true,
+  "external_model_review_performed_this_stage": false,
+  "privacy_remaining_matches": 0,
+  "privacy_remaining_read_errors": 0,
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

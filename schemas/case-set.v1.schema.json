@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GAH CaseSet v1",
+  "$comment": "このschema単独ではcase_idの集合内一意性、各Caseのstage_id一意性、scored_stage_idの実在性、scored stageとexpected_labelの対応、case.categoryとrequired_categoriesの参照関係、ref.idやstage_idの改名を除いたkind+digest基準のsample fingerprint重複を完全には表現できない。登録前にruntimeのvalidate_case_setで検査し、重複・用途間重複はruntimeのcorpus_reportで確認すること。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "case_set_id",
+    "purpose",
+    "required_categories",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "case_set"
+    },
+    "case_set_id": {
+      "$ref": "#/$defs/id"
+    },
+    "purpose": {
+      "enum": [
+        "development",
+        "calibration",
+        "acceptance"
+      ]
+    },
+    "required_categories": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}(?![\\s\\S])"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id",
+        "digest"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/id"
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage_id",
+        "input_ref",
+        "expected_detection",
+        "event_policy"
+      ],
+      "properties": {
+        "stage_id": {
+          "$ref": "#/$defs/id"
+        },
+        "input_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "expected_detection": {
+          "enum": [
+            "detect",
+            "allow",
+            "indeterminate"
+          ]
+        },
+        "event_policy": {
+          "enum": [
+            "forbidden",
+            "aggregate",
+            "none"
+          ]
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "lineage_group",
+        "category",
+        "expected_label",
+        "oracle_ref",
+        "initial_state_ref",
+        "session_steps",
+        "scored_stage_id"
+      ],
+      "properties": {
+        "case_id": {
+          "$ref": "#/$defs/id"
+        },
+        "lineage_group": {
+          "$ref": "#/$defs/id"
+        },
+        "category": {
+          "$ref": "#/$defs/id"
+        },
+        "expected_label": {
+          "enum": [
+            "positive",
+            "negative",
+            "indeterminate"
+          ]
+        },
+        "oracle_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "initial_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "session_steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/stage"
+          }
+        },
+        "scored_stage_id": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    }
+  }
+}

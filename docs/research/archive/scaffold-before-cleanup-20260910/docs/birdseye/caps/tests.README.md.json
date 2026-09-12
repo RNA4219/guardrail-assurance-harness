@@ -1,0 +1,17 @@
+{
+  "id": "tests/README.md",
+  "role": "tests",
+  "title": "回帰検証",
+  "summary": "文書生成の冪等性、古いsource、壊れた世代、参照欠落、検収欠落・ID重複を検出する。テストは一時ディレクトリの小さなfixtureを変更し、現行要件の内容を正解として固定しない。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "f9e792b374750c9744c2c3497aa14f37dd5d9783b16e8615744eccd6857bb54a"
+}

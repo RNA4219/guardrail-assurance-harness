@@ -1,0 +1,26 @@
+{
+  "id": "docs/security/SAC.md",
+  "role": "security",
+  "title": "Security Acceptance Criteria",
+  "summary": "現在は文書基盤と判定・永続化・診断コアの初期実装がある。ローカルsecurity posture checkerは必要な開発文書・設定の存在と整合を確認する。[製品のセキュリティ要件](../requirements.md)の機能検証や脆弱性スキャンの代替にはしない。",
+  "public_api": [],
+  "deps_out": [
+    "SECURITY.md",
+    "docs/requirements.md",
+    "docs/security/Security_Review_Checklist.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "SECURITY.md",
+    "docs/security/Security_Review_Checklist.md",
+    "docs/spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "6b6545b403f423c59f630657e174fb44e8373273372214ed4b8046f8a2b5731b"
+}

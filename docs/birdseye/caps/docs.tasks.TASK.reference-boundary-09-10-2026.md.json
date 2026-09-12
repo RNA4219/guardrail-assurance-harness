@@ -1,0 +1,26 @@
+{
+  "id": "docs/tasks/TASK.reference-boundary-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 外部参照元クローズド資産の参照境界への訂正",
+  "summary": "> この履歴は利用者の非掲載指示に従って匿名化済み。引用中の参照元表記も一般化した表示であり、過去の検証結果は当時の記録として扱う。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-09.md",
+    "docs/reference-boundary.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-09.md",
+    "docs/reference-boundary.md",
+    "docs/requirements-traceability.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "0515028b56f77bf711939750f0685fd442b8b956b512baa9edb3cc116102e514"
+}

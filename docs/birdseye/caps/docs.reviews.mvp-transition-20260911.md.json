@@ -1,0 +1,23 @@
+{
+  "id": "docs/reviews/mvp-transition-20260911.md",
+  "role": "reviews",
+  "title": "契約移行の事前検査と監督レビュー",
+  "summary": "[初回採択の最終照合](../evidence/mvp-adoption-20260911/final-check-02.json)を終え、 [比較契約への移行仕様](../contract-transition-detail-spec.md)に沿って事前検査を追加した。 全MVPの目標は維持する。generation 2の候補実行・旧条件回帰・採択、baseline更新、 UC-LLMの認証と資源管理、Finding/Plan、通常CIの接続は残る。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-transition-detail-spec.md",
+    "docs/evidence/mvp-transition-20260911/README.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/evidence/mvp-transition-20260911/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "49aa2007d4005da1a46f698f93139c3643d593fc56f83bc5ee1086c0df5a0ec4"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "docs/run-evidence-detail-spec.md",
+  "role": "run-evidence-detail-spec",
+  "title": "Run Evidence Store v1",
+  "summary": "これは実行監督と管理authorityの間に置く、保存と決定的な再計算の部品契約である。OS認証、resource closure、Artifact/Evidenceの実体認証、baseline/contractの採択はこの部品の責務外である。未接続状態では全ての返却に`ci_eligible=false`を付け、通常CIの成功へ読み替えない。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "docs/assurance-authority-detail-spec.md",
+    "docs/open-questions.md",
+    "docs/retention-revalidation-detail-spec.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "d15015e243dda5fa3f9cffe053a94af3118f4e25e674725b460a0c121bd2edc7"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "purpose": "要求明確化前の文書保存",
+  "archived_at": "2026-09-10",
+  "files": [
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "bf0836e21e0437e9530521a05e20c9adf6a275f37ea9bb20d01e566f9f15f567"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "4f85f0962c2bf5b234c780a815177ec288463c2e422134fb9821da5ade2b92ca"
+    },
+    {
+      "path": "README.md",
+      "sha256_raw": "8be173bb9b06eb16aa18c342e3279da6fa0e161ee234cac6d31bb86a2512d9da"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "903b1b40f0680beb468ffa12f1c00e65772690e887539371029451586cde6c1e"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "0964a88ee5d0375a17d1a98a7470bdf3abdb06717b987abb36547d63ca67bc39"
+    },
+    {
+      "path": "EVALUATION.md",
+      "sha256_raw": "c64c21d3accc8b128277d612788c886185b01d1557d066d82c87fe57b99094d0"
+    },
+    {
+      "path": "docs/design.md",
+      "sha256_raw": "ca846f6fdee4db3d536a9ce847ccb0afed472f531cfd0777021e1b6f11f56175"
+    },
+    {
+      "path": "docs/spec.md",
+      "sha256_raw": "3ab562af1a4103f7aeceb61a16bd8e4721d88f785bde72f7b9f810f2a2408a7e"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "1a39e7024f66de190463d494aabda96bdede89c4a3e788a94642b3870d1cb82f"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "5917e1c94e6fdbc4c4f7c3c9119d263aca8d7e1ff8f02afb1a907dc596d89117"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "be4a241e16bcd669d03aab58fee88d6ca979ee66863e98615e34b7f4de1f9083"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "4d3bce24d421dfc1465d598d560276cc248b0b3e0c4a9dfbfc731d6388cf550f"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "e2df2650e3e84dc8e3258646969a33543b331836f0a31a1d48c03deffab6d6b6"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "760667253ffe7beb56cd3d9ad33f72cb608f3108ca1019d6a54fd89e9719edd1"
+    },
+    {
+      "path": "docs/reviews/README.md",
+      "sha256_raw": "80ce674aec91e91dc0337895cec4824f58f3e43c7d2757b2fb82403e4764a298"
+    }
+  ],
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

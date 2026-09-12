@@ -1,0 +1,25 @@
+{
+  "id": "docs/spec.md",
+  "role": "spec",
+  "title": "仕様の入口",
+  "summary": "[詳細要件](requirements.md) を規範とする。以下は実装着手時の確認導線であり、製品の実装完了を示さない。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/contracts/README.md",
+    "docs/requirements.md",
+    "docs/security/SAC.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "HUB.codex.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "cafaa1ab428cbc922bde5637da90bb49721d4e0d5cabad782cf34b4db7d6167a"
+}

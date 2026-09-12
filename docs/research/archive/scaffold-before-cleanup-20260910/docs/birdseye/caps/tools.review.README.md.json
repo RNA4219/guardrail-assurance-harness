@@ -1,0 +1,19 @@
+{
+  "id": "tools/review/README.md",
+  "role": "tools",
+  "title": "要件レビュー用の反例モデル",
+  "summary": "[requirements_adversarial.py](requirements_adversarial.py) は要件レビューの計算・集合・イベント順序の反例を再現する。外部通信、対象システム操作、負荷投入、実データの解析は行わない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-adversarial-2026-09-10.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "c5cd86d0a138764791bf09d67a32e83af684f26cc460cce92240b527875f1d1e"
+}

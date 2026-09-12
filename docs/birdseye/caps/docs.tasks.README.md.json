@@ -1,0 +1,55 @@
+{
+  "id": "docs/tasks/README.md",
+  "role": "tasks",
+  "title": "Task一覧",
+  "summary": "[Taskガイド](../TASKS.md)と[Task Seed](../../TASK.codex.md)に従ってGAHの作業を記録する。",
+  "public_api": [],
+  "deps_out": [
+    "TASK.codex.md",
+    "docs/TASKS.md",
+    "docs/acceptance/AC-20260910-03.md",
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/acceptance/AC-20260910-05.md",
+    "docs/acceptance/AC-20260910-06.md",
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/acceptance/AC-20260910-08.md",
+    "docs/acceptance/AC-20260910-09.md",
+    "docs/acceptance/AC-20260910-10.md",
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/acceptance/AC-20260911-02.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/research/README.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md",
+    "docs/tasks/TASK.dual-usecases-09-10-2026.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md",
+    "docs/tasks/TASK.reference-anonymization-09-10-2026.md",
+    "docs/tasks/TASK.reference-boundary-09-10-2026.md",
+    "docs/tasks/TASK.reference-confirmation-09-10-2026.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-clarification-09-10-2026.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md",
+    "docs/tasks/TASK.state-review-09-11-2026.md"
+  ],
+  "deps_in": [
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "docs/BIRDSEYE.md",
+    "docs/TASKS.md",
+    "docs/acceptance/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "dcb505d31afc9295ea5ad04f2a2d36d401ffa98e1c91802d626aff79b5d42c3c"
+}

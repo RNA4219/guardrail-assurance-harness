@@ -1,0 +1,28 @@
+{
+  "id": "docs/acceptance/AC-20260910-03.md",
+  "role": "acceptance",
+  "title": "Acceptance: GAHの文書整理",
+  "summary": "[Task](../tasks/TASK.docs-cleanup-09-10-2026.md)の文書整理と開発ワークフローの技術検収。要求全体・製品設計・製品releaseの承認ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/docs-cleanup-20260910.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/acceptance/INDEX.md",
+    "docs/evidence/README.md",
+    "docs/reviews/docs-cleanup-20260910.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.docs-cleanup-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "56e27f66fe77dc8d7bf9000dcb19882d02032aeca237dfbd43292d14dcf6b3b9"
+}

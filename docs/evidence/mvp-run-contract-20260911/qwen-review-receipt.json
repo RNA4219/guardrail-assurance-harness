@@ -1,0 +1,48 @@
+{
+  "status": "partial",
+  "started_at": "2026-09-11T06:24:58.763891+00:00",
+  "endpoint": "http://127.0.0.1:18000/v1/chat/completions",
+  "model": "qwen3.8-flash-next",
+  "thinking": false,
+  "max_tokens": 650,
+  "timeout_seconds": 50,
+  "request_count": 1,
+  "source_original": [
+    {
+      "path": "docs/run-contract-detail-spec.md",
+      "bytes": 8192,
+      "sha256": "67ed2bc2c98e97f91f7d3423e8a3556795fe3e8bbaa3b3c37354d183db41976a"
+    },
+    {
+      "path": "docs/contracts/lifecycle-contract.md",
+      "bytes": 10722,
+      "sha256": "dfd7d2b14c2b0728f20cb162370c25510d835c1eddb8670d15b8d8416b1020e2"
+    }
+  ],
+  "submitted_spec": {
+    "path": "qwen-spec/submitted-spec.md",
+    "bytes": 9370,
+    "sha256": "169436dbff6f5317ff0b6bd532db8dc2d5a32778e050c8410ce54352a3f816c0"
+  },
+  "request": {
+    "bytes": 10589,
+    "sha256": "85be37f9519933b7e6b39aaba6d82e9ff59bf7116c8ac8e58e90ff2b328059f3"
+  },
+  "finish_reason": "length",
+  "usage": {
+    "prompt_tokens": 2254,
+    "total_tokens": 2904,
+    "completion_tokens": 650,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "response": {
+    "path": "qwen-spec/response.md",
+    "bytes": 2809,
+    "sha256": "77f56b0a967dc55edf771748ffdaaef2d9a41af686513dab8625a5e5e47a2584"
+  },
+  "elapsed_seconds": 24.141,
+  "completed_at": "2026-09-11T06:25:22.895211+00:00"
+}

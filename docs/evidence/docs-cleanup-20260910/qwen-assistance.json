@@ -1,0 +1,65 @@
+{
+  "requested_by": "user",
+  "model": "qwen3.8-flash-next",
+  "execution_host": "user-designated DGX via existing tunnel",
+  "calls": [
+    {
+      "model": "qwen3.8-flash-next",
+      "purpose": "GAH documentation drafts",
+      "requirements_sha256_raw": "3070d72b290135eb1d1135213ec459aa640989798613401689cd99dc1ed8051c",
+      "elapsed_seconds": 100.01,
+      "usage": {
+        "prompt_tokens": 13437,
+        "total_tokens": 16031,
+        "completion_tokens": 2594,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "draft_paths": [
+        "README.md",
+        "BLUEPRINT.md",
+        "docs/design.md",
+        "docs/spec.md",
+        "orchestration/m0-development.md",
+        "docs/open-questions.md"
+      ],
+      "authority": "draft_only; final edits and validation by Codex"
+    },
+    {
+      "model": "qwen3.8-flash-next",
+      "usage": {
+        "prompt_tokens": 316,
+        "total_tokens": 669,
+        "completion_tokens": 353,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "used_for": [
+    "entry-document outlines",
+    "MVP/status/archive editorial checklist",
+    "open-question categories"
+  ],
+  "rejected_or_corrected": [
+    "English-only first draft",
+    "unimplemented gah/jsonschema/pytest commands",
+    "Critical NOT_RUN warning proposal",
+    "unsupported threshold and license choices",
+    "duplicate conceptual schemas and false completion language"
+  ],
+  "final_author_and_validator": "Codex",
+  "independent_review": false,
+  "product_acceptance": "not_run",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

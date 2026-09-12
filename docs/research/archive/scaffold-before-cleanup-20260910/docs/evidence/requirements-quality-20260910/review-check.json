@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-09T17:26:43.962161+00:00",
+  "scope": "assessment record consistency and input preservation; not semantic proof or product acceptance",
+  "status": "pass",
+  "checks": {
+    "requirements_raw_hash": "pass",
+    "requirements_spec_design_unchanged": "pass",
+    "input_version": "pass",
+    "line_count": "pass",
+    "core_inventory": "pass",
+    "core_unique": "pass",
+    "contract_inventory": "pass",
+    "contract_unique": "pass",
+    "acceptance_inventory": "pass",
+    "id_mapping": "pass",
+    "criteria_alignment": "pass",
+    "priority_alignment": "pass",
+    "assessment_limits": "pass",
+    "report_input_hash": "pass"
+  },
+  "actual_counts": {
+    "core": 14,
+    "contracts": 28,
+    "acceptance_rows": 28
+  },
+  "actual_sha256_lf": {
+    "docs/requirements.md": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a",
+    "docs/spec.md": "cafaa1ab428cbc922bde5637da90bb49721d4e0d5cabad782cf34b4db7d6167a",
+    "docs/design.md": "eda2d0cf2b48161f17b742585525108d45053f6e5b3cc933422be94b6ea30ff3"
+  },
+  "extraction_rule": {
+    "contract_definition_regex": "\\*\\*([A-Z][A-Z0-9]*-\\d{2})(?:\\s*/[^*\\n]+)?:\\*\\*",
+    "note": "Includes unphased and inline bold definitions; corrected a preliminary line-anchored phase-only matcher."
+  }
+}

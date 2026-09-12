@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "request_count": 1,
+  "started_at": "2026-09-11T09:06:41.585228+00:00",
+  "source_sha256": {
+    "docs/remediation-detail-spec.md": "32f0743e3df9dc2e908055974069ea934e03401d91f9b75088a73497b601e4a5",
+    "docs/run-evidence-detail-spec.md": "f9b553a518740ede188b0dcaf874a9ce43f896c53b57b4973b91d760ee841aea"
+  },
+  "submitted_sha256": "c87898863dee70ae12a8e3843cbc1038af2f25d4a32ce0b4ee83f648b24781ef",
+  "request_sha256": "9dc3d8e3760d4692a038ee5a25bee60f8bd98d9a2bf5d6311772ca543ff2bef0",
+  "model": "qwen3.8-flash-next",
+  "timeout_seconds": 50,
+  "max_tokens": 1200,
+  "authority_evidence": false,
+  "ci_eligible": false,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 2929,
+    "total_tokens": 3209,
+    "completion_tokens": 280,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "response_sha256": "9e72409fdd8ef3fd525f5348c2d82cc1256e02148fbea4cdb88ca6271f991bb7",
+  "response_text_sha256": "7c358ec7f9719e27c94929829ad7e34efe4acb2c265e6ad87c9f95697dfd21a0",
+  "elapsed_seconds": 18.406
+}

@@ -1,0 +1,30 @@
+{
+  "id": "docs/tasks/TASK.contract-design-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 契約・評価設計の具体化",
+  "summary": "確認済みの32要求と初期運用値を、独立した契約・判定・評価設計の初版へ接続する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/open-questions.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/reviews/contract-design-20260910.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/acceptance/AC-20260910-11.md",
+    "docs/reviews/contract-design-20260910.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "d20bb2130c72cbfd1469a68640694deb34f083dd7fdf3c277159eaf17a28d6af"
+}

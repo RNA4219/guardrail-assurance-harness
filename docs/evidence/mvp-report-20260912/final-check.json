@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T05:42:38.983083+00:00",
+  "passed": false,
+  "checks": {
+    "artifact_hashes_match": true,
+    "current_sources_match": true,
+    "protected_seven_match": true,
+    "prior_verification_preserved": true,
+    "workflow_and_privacy_passed": true,
+    "scope_consistent": true,
+    "regression-runtime_raw_preserved": true,
+    "regression-runtime_human_same_json_grounding": false,
+    "regression-runtime_wrapper_preserves_body": true,
+    "cancellation-runtime_raw_preserved": true,
+    "cancellation-runtime_human_same_json_grounding": false,
+    "cancellation-runtime_wrapper_preserves_body": true
+  },
+  "verification_sha256": "1157f92d66b31ddfb0f4294e1114cb225999d987b7f0212ff3e7139422f2b548",
+  "preceding_final_check_sha256": "095f9119e59aa6516b4213c951a734bdac93f58b578ad1dfeab7eff36adde583",
+  "birdseye_generation": "00050",
+  "birdseye_nodes": 133,
+  "test_counts": {
+    "total": 541,
+    "previous_full_regression": 534,
+    "additional_focused": 7
+  },
+  "parent_review_completed": true,
+  "full_mvp_accepted": false,
+  "release_gate": "no_go",
+  "ci_eligible": false,
+  "checker_sha256": "335b553ab9dff140d412d2228310ac7a2dbfebd7ff2df5ffd55f7cb23e2dc44c"
+}

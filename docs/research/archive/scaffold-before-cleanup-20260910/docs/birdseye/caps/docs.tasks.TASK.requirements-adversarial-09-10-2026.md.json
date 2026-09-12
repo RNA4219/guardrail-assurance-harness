@@ -1,0 +1,26 @@
+{
+  "id": "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 要件定義の敵対的レビュー",
+  "summary": "仕様書の執筆前に要件を悪条件で検証し、実装・評価で異なる判断ができる穴を補強する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/requirements.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "de6bfdffa1a2a8fb9ff957840ce0ae5ffb8c6302800d21cd43c6c3d7d001bb9d"
+}

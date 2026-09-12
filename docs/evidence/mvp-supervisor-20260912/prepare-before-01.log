@@ -1,0 +1,6 @@
+test_interrupted_prepare_cannot_resume_before_correction (__main__.PrepareResumeBeforeTests.test_interrupted_prepare_cannot_resume_before_correction) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 85.078s
+
+OK

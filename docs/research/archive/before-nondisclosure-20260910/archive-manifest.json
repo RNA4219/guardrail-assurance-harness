@@ -1,0 +1,84 @@
+{
+  "task_id": "20260910-10",
+  "saved_at": "2026-09-10",
+  "mutable": false,
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  },
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256_raw": "60a8ebd9ce1d23893f424b43d56ab13f69217c4c2f69a3d8c009316e41398ab6"
+    },
+    {
+      "path": "GUARDRAILS.md",
+      "sha256_raw": "5e1ca9565a15d5287799429bf5211e104b05cc415b50bd23c1aa47204d7544e8"
+    },
+    {
+      "path": "README.md",
+      "sha256_raw": "74fa87f8cee0daff2554a8079d3d1c2278b8ca3669d17fc9ff7e917b4393bd4d"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "85b8f76e3530a2589f6c988dca7bb0fefeec4310fa8cfe3eac3f09680bbab6b7"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "f560139e7d6f5bbe302b707b7fb774e2cba150d14c9923a0e3d213c28435adbd"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "2b24321a887208c61ed8b96275574f835298fce7da26227e91e766de509ac8c8"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "c968bab3002b2c4befb8fe9e33dffc625cdd722d0f9bfa4e3957556d1367cf96"
+    },
+    {
+      "path": "docs/operating-policy.md",
+      "sha256_raw": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025"
+    },
+    {
+      "path": "docs/reference-boundary.md",
+      "sha256_raw": "4e4279269881ff6bd1a5b75c4b700b8ca3fb44b4807a644df0bf52d267ded840"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "af505aab9d372859205803ac7850fddfa2dc67dd006b3e1d30beb2afe978d024"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "56cef056b3a6a00ce62f6304bb5db684feb9caacb5c6caa1e6ed7d62ea0ceaf1"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "2844568c9ae47b1a7768a97f077ed0a46c4870efd8e3de91b819df103b192c84"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "e747fe30357816ae3ec9a679a8412793bedd1e7df876a210a5e8a6317281217f"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "441f2c20992dd702bc438d12f67b69e65403311a08092a06b3cb150759938a29"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "2a057405ffc7bdf62d1b19f969e324c8c05883e63dd1046b066df512ac175b11"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "54b50fc939318a479889ae0ee064b81d8e35d5440b11461f4a5a4051c47ef690"
+    }
+  ]
+}

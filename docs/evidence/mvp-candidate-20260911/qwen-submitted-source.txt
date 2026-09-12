@@ -1,0 +1,271 @@
+src/gah/transition_authority.py
+"""固定fixtureの契約移行候補を保存する。同一transactionの内部境界。"""
+from copy import deepcopy
+
+from . import fixture_admission, resources, transition_materialization
+from .adoption import AdoptionError
+from .contracts import ContractError, MAX_INTEGER, require_id, require_object, require_ref
+from .run_contracts import content_ref
+
+PURPOSES = {"contract_old_regression", "contract_candidate"}
+TABLES = {
+    "transition_candidates": {"candidate_id", "proposal_id", "proposal_digest", "baseline_series_id",
+        "payload_json", "digest", "created_at", "permission_generation", "actor_id", "context"},
+    "transition_runs": {"run_id", "candidate_id", "side"},
+}
+ACTIONS = {"contract_candidate_prepare": {"validator"}, "contract_candidate_begin": {"operator"}}
+_BASE = {"schema_version", "action", "request_id"}
+_PRECONDITIONS = {"proposal_id", "baseline_series_id", "expected_contract_ref", "expected_baseline_ref"}
+FIELDS = {
+    "contract_candidate_prepare": _BASE | _PRECONDITIONS | {"candidate_id", "old_run_id", "new_run_id"},
+    "contract_candidate_begin": _BASE | {"candidate_id", "side"},
+}
+
+
+def create_schema(db):
+    if not db.in_transaction:
+        raise AdoptionError("TRANSACTION_REQUIRED")
+    db.execute("CREATE TABLE transition_candidates(candidate_id TEXT PRIMARY KEY, proposal_id TEXT NOT NULL, "
+        "proposal_digest TEXT NOT NULL, baseline_series_id TEXT NOT NULL, payload_json TEXT NOT NULL, "
+        "digest TEXT NOT NULL, created_at INTEGER NOT NULL, permission_generation INTEGER NOT NULL, "
+        "actor_id TEXT NOT NULL, context TEXT NOT NULL)")
+    db.execute("CREATE TABLE transition_runs(run_id TEXT PRIMARY KEY, candidate_id TEXT NOT NULL "
+        "REFERENCES transition_candidates(candidate_id), side TEXT NOT NULL CHECK(side IN ('old','new')), "
+        "UNIQUE(candidate_id,side))")
+
+
+def validate_request(request):
+    try:
+        require_object(request, FIELDS[request["action"]])
+        if type(request["schema_version"]) is not int or request["schema_version"] != 1:
+            raise ContractError()
+        for field in ("request_id", "candidate_id"):
+            require_id(request[field])
+        if request["action"] == "contract_candidate_prepare":
+            for field in ("proposal_id", "baseline_series_id", "old_run_id", "new_run_id"):
+                require_id(request[field])
+            for field, kind in (("expected_contract_ref", "evaluation_contract"), ("expected_baseline_ref", "baseline")):
+                require_ref(request[field])
+                if request[field]["kind"] != kind:
+                    raise ContractError()
+            if request["old_run_id"] == request["new_run_id"]:
+                raise ContractError()
+        elif type(request["side"]) is not str or request["side"] not in {"old", "new"}:
+            raise ContractError()
+    except (ContractError, KeyError, TypeError):
+        raise AdoptionError("INVALID_REQUEST") from None
+    return deepcopy(request)
+
+
+def _source_prepared(db, source_id, now):
+    row = db.execute("SELECT * FROM fixture_admissions WHERE run_id=?", (source_id,)).fetchone()
+    if row is None:
+        raise AdoptionError("FIXTURE_ADMISSION_INVALID")
+    return fixture_admission._verify(row, now)["prepared"]
+
+
+def _build(db, transition, old_id, new_id, created_at, now):
+    source = _source_prepared(db, transition["source_run_ref"]["id"], now)
+    worker, lock, profile = fixture_admission.execution_context()
+    return transition_materialization.build_transition_runs(
+        transition["previous_contract"], transition["next_contract"],
+        baseline_record=transition["baseline_record"], source_prepared=source,
+        worker_source=worker, runtime_lock=lock, execution_profile=profile,
+        now=created_at, old_run_id=old_id, new_run_id=new_id)
+
+
+def load_candidate(db, candidate_id, now):
+    """保存時の構造を再検査する。期限・現在pointerはfresh検査へ分ける。"""
+    row = db.execute("SELECT * FROM transition_candidates WHERE candidate_id=?", (candidate_id,)).fetchone()
+    if row is None:
+        raise AdoptionError("CANDIDATE_MISSING")
+    try:
+        value = resources._unpack(row["payload_json"], row["digest"])
+        require_object(value, _PRECONDITIONS | {"candidate_id", "proposal_digest", "runs"})
+        if (value["candidate_id"] != candidate_id or row["actor_id"] != "validator"
+                or row["context"] != "validator-context"
+                or type(row["created_at"]) is not int or not 0 <= row["created_at"] <= now <= MAX_INTEGER
+                or type(row["permission_generation"]) is not int or not 0 <= row["permission_generation"] <= MAX_INTEGER
+                or any(row[key] != value[key] for key in ("proposal_id", "proposal_digest", "baseline_series_id"))):
+            raise ContractError()
+        proposal = db.execute("SELECT * FROM eval_proposals WHERE id=?", (row["proposal_id"],)).fetchone()
+        transition = value["runs"]["transition"]
+        contract = transition["next_contract"]
+        if (proposal is None or proposal["digest"] != row["proposal_digest"]
+                or resources._unpack(proposal["payload_json"], proposal["digest"]) != contract
+                or proposal["actor_id"] != "manager" or proposal["context"] != "manager-context"
+                or type(proposal["generation"]) is not int or proposal["generation"] != contract["generation"]):
+            raise ContractError()
+        old = transition["previous_contract"]
+        history = db.execute("SELECT * FROM eval_adoptions WHERE series_id=? AND generation=?",
+            (proposal["series_id"], old["generation"])).fetchone()
+        if history is None or resources._unpack(history["payload_json"], history["digest"]) != old:
+            raise ContractError()
+        if (value["expected_contract_ref"] != content_ref("evaluation_contract", old["contract_id"], old)
+                or value["expected_baseline_ref"] != transition["baseline_ref"]
+                or value["baseline_series_id"] != transition["baseline_record"]["baseline_series_id"]):
+            raise ContractError()
+        old_id = value["runs"]["old"]["bound_run"]["manifest"]["run_id"]
+        new_id = value["runs"]["new"]["bound_run"]["manifest"]["run_id"]
+        maps = [tuple(item) for item in db.execute(
+            "SELECT run_id,candidate_id,side FROM transition_runs WHERE candidate_id=? ORDER BY side", (candidate_id,))]
+        if maps != [(new_id, candidate_id, "new"), (old_id, candidate_id, "old")]:
+            raise ContractError()
+        expected = _build(db, transition, old_id, new_id, row["created_at"], now)
+        if value["runs"] != expected:
+            raise ContractError()
+    except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError, OSError):
+        raise AdoptionError("CANDIDATE_INVALID") from None
+    return row, value
+
+
+def fresh_candidate(store, db, candidate_id, now, check_transition):
+    row, value = load_candidate(db, candidate_id, now)
+    if (row["permission_generation"] != store._permission_generation(db)
+            or store._actor_revoked(db, "validator") or store._actor_revoked(db, "manager")):
+        raise AdoptionError("CANDIDATE_EXPIRED")
+    checked = check_transition({**{key: value[key] for key in _PRECONDITIONS},
+        "schema_version": 1, "action": "contract_preflight", "request_id": candidate_id})
+    if checked["transition"] != value["runs"]["transition"]:
+        raise AdoptionError("CANDIDATE_INVALID")
+    return row, value
+
+
+def prepare(store, db, request, now, actor_id, context, check_transition):
+    checked = check_transition(request)
+    if db.execute("SELECT 1 FROM transition_candidates WHERE candidate_id=?", (request["candidate_id"],)).fetchone():
+        raise AdoptionError("CANDIDATE_CONFLICT")
+    for identifier in (request["old_run_id"], request["new_run_id"]):
+        if (db.execute("SELECT 1 FROM eval_runs WHERE run_id=?", (identifier,)).fetchone()
+                or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (identifier,)).fetchone()):
+            raise AdoptionError("RUN_CONFLICT")
+    runs = _build(db, checked["transition"], request["old_run_id"], request["new_run_id"], now, now)
+    value = {key: deepcopy(request[key]) for key in _PRECONDITIONS | {"candidate_id"}}
+    value.update(proposal_digest=checked["proposal_digest"], runs=runs)
+    raw, digest = resources._packed(value)
+    db.execute("INSERT INTO transition_candidates VALUES(?,?,?,?,?,?,?,?,?,?)",
+        (request["candidate_id"], request["proposal_id"], checked["proposal_digest"], request["baseline_series_id"],
+         raw, digest, now, store._permission_generation(db), actor_id, context))
+    for side in ("old", "new"):
+        db.execute("INSERT INTO transition_runs VALUES(?,?,?)", (request[side + "_run_id"], request["candidate_id"], side))
+    _, saved = load_candidate(db, request["candidate_id"], now)
+    return {"candidate_id": request["candidate_id"],
+        "candidate_ref": content_ref("contract_candidate", request["candidate_id"], saved),
+        "runs": saved["runs"], "adoption_verified": False}
+
+
+def candidate_run(db, bound_row, now):
+    """採択後も候補の版へ固定し、通常runへ読み替えない。"""
+    mapping = db.execute("SELECT * FROM transition_runs WHERE run_id=?", (bound_row["run_id"],)).fetchone()
+    if mapping is None:
+        raise AdoptionError("CANDIDATE_MISSING")
+    _, value = load_candidate(db, mapping["candidate_id"], now)
+    result = value["runs"][mapping["side"]]
+    bound = result["bound_run"]
+    proposal = db.execute("SELECT series_id FROM eval_proposals WHERE id=?", (value["proposal_id"],)).fetchone()
+    if (bound_row["contract_series_id"] != proposal[0]
+            or bound_row["contract_generation"] != bound["contract"]["generation"]
+            or resources._unpack(bound_row["manifest_json"], bound_row["manifest_digest"]) != bound["manifest"]
+            or resources._unpack(bound_row["plan_json"], bound_row["plan_digest"]) != bound["plan"]):
+        raise AdoptionError("CANDIDATE_INVALID")
+    return mapping, bound, result["baseline_context"]
+
+
+def materialized_run(db, bound, now):
+    row = db.execute("SELECT * FROM eval_runs WHERE run_id=?", (bound["manifest"]["run_id"],)).fetchone()
+    if row is None or candidate_run(db, row, now)[1] != bound:
+        raise AdoptionError("CANDIDATE_INVALID")
+    return True
+
+
+docs/contract-transition-detail-spec.md
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-11
+next_review_due: 2026-10-11
+---
+
+# 初回baselineから比較契約への移行詳細仕様
+
+[採択・更新仕様](baseline-adoption-detail-spec.md)の初回後の接続を具体化する。
+[要求](requirements.md)と[初回・採択契約](contracts/lifecycle-contract.md)を変更せず、
+旧条件を固定したまま比較必須の契約を検証する。現在の実装対象は条件の事前検査であり、
+generation 2の採択・通常回帰・通常CIは、この検査の成功では成立しない。
+
+## 1. 循環を避ける実行順序
+
+1. 初回契約generation 1と、完了した初回candidateに基づくbaseline generation 1を採択する。
+2. managerは別ID・generation 2の契約をproposalへ保存する。旧契約の方針、Registry、
+   CaseSet、校正集合、evaluator、カテゴリ、必要出力を維持し、比較だけを
+   `required`、採択済みbaselineの完全参照、`reason=null`、`changed_axes=[]`へ変更する。
+3. validatorは保存済みのproposal、旧契約と履歴、baselineと全根拠を同じtransactionで
+   検査する。ここで返すpreflightは候補実行の前提確認であり、採択validationではない。
+4. 次の接続工程で、proposalの版へ固定した候補専用runを作る。候補には旧条件での回帰と
+   新条件の受入を実行し、別々の目的・binding・Evidence・closureを保存する。
+   候補runを採択済み契約に基づく通常runやCI成功へ読み替えない。
+5. 全根拠を再検査したvalidationを使い、managerが旧・新契約とbaselineの期待世代を
+   同じ確定点で検査してから採択する。現行pointerと不変履歴の更新は同一transactionとする。
+
+手順4〜5は未接続である。preflightを保存済みvalidationの代用品にしない。
+契約の値を緩める改訂、baseline自体の更新、target等の条件差は別の更新検証を必要とし、
+この限定した初回移行へ通さない。初回契約の比較非適用を通常回帰の免除に使わない。
+
+## 2. 純粋な条件検査
+
+`bind_contract_transition(previous_contract, next_contract, baseline_record=..., baseline_source_bound=...)`
+は厳密な構造検査と実体からの参照再計算を行う。source bundleは既存runの8個のcore fieldを
+持ち、再bindingした値と完全一致する必要がある。余剰fieldや入力の書換えを許さない。
+
+旧契約とsource契約、baselineのsource run・TrialPlan・方針・Registry・CaseSet・target・
+evaluator・oracle・反復条件を照合し、次契約のgenerationが1から2へ一つ進むこと、
+別contract IDであること、比較以外の条件が変わらないことを確認する。
+baselineと旧契約の完全参照はkind・ID・digestの全てで一致させる。
+
+この関数にはDB、認証、時計を渡さない。返す構造検査結果からEvidenceの存在、期限、
+採択、実行完了、現在利用を推測しない。`ci_eligible`、`authority_connected`、
+`adoption_verified`は全てfalseである。
+
+## 3. authorityの事前検査
+
+`contract_preflight`はOS認証されたvalidatorだけが呼べる。要求は次の項目に限定する。
+
+| 項目 | 内容 |
+|---|---|
+| schema_version / action / request_id | 1 / contract_preflight / 要求ID |
+| proposal_id | managerが保存した次契約proposal |
+| baseline_series_id | 現行baseline系列 |
+| expected_contract_ref | 旧契約の完全参照 |
+| expected_baseline_ref | 採択済みbaselineの完全参照 |
+
+同一transactionで次を実行する。
+
+- proposalの本文digestと列の世代・manager/contextを照合する。
+- 契約currentと不変履歴が完全一致すること、旧契約のvalidation、方針・校正が現在も有効なことを確認する。
+- baselineのcurrent・不変採択・proposal・validationを再検査し、Evidence、実入力、Decision、精算を確認する。
+- baseline recordの`source_run_ref`から完了済み初回candidateの保存bundleを解決し、
+  `baseline_source_bound`へ渡す。次契約proposalを`next_contract`、現行旧契約を
+  `previous_contract`へ渡した`bind_contract_transition`の結果を`transition`へ含める。
+  まだ存在しない移行候補runのEvidenceをpreflightの前提へ循環させない。
+
+成功結果は`preflight_ready=true`、`candidate_run_required=true`、`adoption_verified=false`、
+`ci_eligible=false`を返す。検査時刻とpermission generationはその照会時の値であり、
+後続実行の許可証ではない。新しいvalidation、run、operation、adoptionを作らない。
+AdoptionStoreの単調時計・認証の管理情報は通常どおり更新できる。
+
+このactionはfresh照会であり、同一request IDでも撤回・期限・permissionと最新pointerを
+再計算する。旧preflightの表示や終了コードを再利用して採択しない。
+現行`contract_validate`/`contract_adopt`は候補run未接続のgeneration 2を拒否し続ける。
+後続の候補実行開始と採択の各適用時点では、LC02の権限・世代・現行方針・必要証拠・
+最新失効状態を再照合する。preflightの成功を持参したことによって、この再検査を省略しない。
+
+## 4. 履歴と今後の受入
+
+旧runの実行・Evidence解決は保存された契約世代から行う。現行実装の`_check_start`は
+`eval_adoptions`をrunの保存世代で解決しているため、最新pointerへの読み替えは加えない。
+実行継続には当時の条件の現在有効性を再検査し、停止済み観測の保存とは分ける。
+
+現在の受入対象は、初回移行の構造・現在前提・主体分離・再照会時の撤回・不変履歴の
+保持までである。候補runの実行、両世代のCAS、旧条件回帰の実測、更新後の新旧run、
+契約とbaselineの片側保存障害を含むrollbackは、接続後に別の実行証跡で確認する。

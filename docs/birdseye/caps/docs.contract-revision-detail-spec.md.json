@@ -1,0 +1,25 @@
+{
+  "id": "docs/contract-revision-detail-spec.md",
+  "role": "contract-revision-detail-spec",
+  "title": "条件変更と後続契約の接続仕様",
+  "summary": "差分導出と禁止変更の[比較部品](semantic-conditions-detail-spec.md)を実装した。[51件の試験](evidence/mvp-condition-core-20260912/README.md)は成功したが、以下の一般世代の採択・実行は未接続である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/evidence/mvp-condition-core-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/semantic-conditions-detail-spec.md"
+  ],
+  "deps_in": [
+    "docs/detail-spec.md",
+    "docs/semantic-conditions-detail-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "420dd368c3966bec1d620f75cc68c386c111abd95c2d4cd6bec2fce91a46ae54"
+}

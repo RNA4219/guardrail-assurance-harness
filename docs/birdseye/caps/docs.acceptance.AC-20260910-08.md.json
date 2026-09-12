@@ -1,0 +1,25 @@
+{
+  "id": "docs/acceptance/AC-20260910-08.md",
+  "role": "acceptance",
+  "title": "Acceptance: 外部参照元転用元の確定文書",
+  "summary": "> この履歴は利用者の非掲載指示に従って匿名化済み。引用中の参照元表記も一般化した表示であり、過去の検証結果は当時の記録として扱う。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reference-boundary.md",
+    "docs/tasks/TASK.reference-confirmation-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.reference-confirmation-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "679abbb981a97002749ab78730d10512e991acef4ec4e92f327e06873a01b093"
+}

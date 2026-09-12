@@ -1,0 +1,23 @@
+{
+  "id": "docs/reviews/requirements-clarification-20260910.md",
+  "role": "reviews",
+  "title": "要求明確化の記録",
+  "summary": "対象は[明確化前の保存稿](../research/archive/before-clarification-20260910/docs/requirements.md)。利用者の要求明確化依頼に基づき、要求案v0.1へ改訂した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/requirements-traceability.md"
+  ],
+  "deps_in": [
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/reviews/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "50f9203827aa696cf6ce04d86d527de3ef0799b972b8f5407ab217f7cb9b7c6d"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "docs/reviews/mvp-execution-20260911.md",
+  "role": "reviews",
+  "title": "固定fixture実行部の監督・レビュー",
+  "summary": "[全MVP Task](../tasks/TASK.mvp-completion-09-11-2026.md)の実行部分を進めた記録である。[詳細仕様](../execution-detail-spec.md)と実装を照合し、全MVP受入の不足は[監査](../mvp-completion-audit.md)へ残す。",
+  "public_api": [],
+  "deps_out": [
+    "docs/execution-detail-spec.md",
+    "docs/mvp-completion-audit.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/execution-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "75859c6871ff8efb745715a589b6da3a605b6b7b199c1a58a516ef9932c8ecdc"
+}

@@ -1,0 +1,11 @@
+test_closed_run_keeps_late_observation_and_drops_budget_closure (test_resource_authority.ResourceAuthorityTests.test_closed_run_keeps_late_observation_and_drops_budget_closure) ... ok
+test_every_action_is_fresh_and_duplicate_reserve_has_no_new_row (test_resource_authority.ResourceAuthorityTests.test_every_action_is_fresh_and_duplicate_reserve_has_no_new_row) ... ok
+test_fixed_fixture_billing_and_plan_binding_are_used (test_resource_authority.ResourceAuthorityTests.test_fixed_fixture_billing_and_plan_binding_are_used) ... ok
+test_observe_rejects_operation_without_authority_binding (test_resource_authority.ResourceAuthorityTests.test_observe_rejects_operation_without_authority_binding) ... ok
+test_plan_entry_and_operation_are_immutable_across_reuse (test_resource_authority.ResourceAuthorityTests.test_plan_entry_and_operation_are_immutable_across_reuse) ... ok
+test_scenario_allowlist_rejects_unknown_and_two_stage_plan (test_resource_authority.ResourceAuthorityTests.test_scenario_allowlist_rejects_unknown_and_two_stage_plan) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.098s
+
+OK

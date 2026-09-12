@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T08:13:34.757504+00:00",
+  "purpose": "calibration",
+  "passed": true,
+  "checks": {
+    "all_cases_complete": true,
+    "all_stages_observed": true,
+    "usage_known": true,
+    "no_unsettled_reservations": true,
+    "sources_unchanged": true,
+    "diagnostic_not_ci": true,
+    "all_calibration_labels_match": true
+  },
+  "summary": {
+    "schema_version": 1,
+    "kind": "synthetic_llm_summary",
+    "purpose": "calibration",
+    "pack_digest": "c5295f92cd8d4ef8e9792fc21a39d9b8725d61eb06afc50a76765b1bc19cdc8c",
+    "case_count": 18,
+    "expected_call_count": 26,
+    "complete_case_count": 18,
+    "missing_case_count": 0,
+    "expected_stage_count": 26,
+    "observed_stage_count": 26,
+    "stage_mismatch_count": 0,
+    "metrics": {
+      "TP": 6,
+      "FN": 0,
+      "FP": 0,
+      "TN": 6,
+      "indeterminate_expected": 6,
+      "indeterminate_match": 6,
+      "indeterminate_mismatch": 0
+    },
+    "usage": {
+      "prompt_tokens": 7210,
+      "completion_tokens": 305,
+      "total_tokens": 7515
+    },
+    "usage_known": true,
+    "reserved_tokens_remaining": 0,
+    "provider_model": "qwen3.8-flash-next",
+    "model_weights_revision_verified": false,
+    "configured_local_cost_zero_is_not_billing_measurement": true,
+    "authority_connected": false,
+    "resource_ledger_connected": false,
+    "ci_eligible": false,
+    "calibration_passed": true,
+    "status": "COMPLETE",
+    "started_at": 1789114396,
+    "finished_at": 1789114414,
+    "run_timeout_seconds": 5400
+  },
+  "source_sha256": {
+    "src/gah/evaluation_data.py": "5f5985722aa061dc62c1fad444510ca927a28d8d48f96508ef26e17078ca3c63",
+    "src/gah/llm_evaluator.py": "ff783a386411f91a5c5890cc534a680355da9abe74f605e5031ab6b25af87fc0",
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "83b9f7925f7176d81db5e4fe3d85b5169f66f900de84f67b5ebb1f59958537da",
+    "tools/synthetic_llm_provider.py": "d37e32d37e51c37030a1107da808093d3f24b3cde4c329986780d8464e0a8420",
+    "tools/verify_synthetic_llm.py": "fc16414b799645098a13cfb5b7db83d91f1e310f6b0a0b3a7bab8bae3c44c7a3",
+    "datasets/synthetic-policy-v1/pack.json": "6008a0ea789b7e391d9e136d202b4ddc79d919573ec800500d5724cd5d573432"
+  },
+  "elapsed_seconds": 18.343,
+  "ci_eligible": false,
+  "full_mvp_acceptance": "NOT_RUN",
+  "evidence_sha256": {
+    "manifest.json": "776ddf4121101030a3a71a0f45d43e36a235042256e880497dc6548173c667b9",
+    "records.json": "d6e38eba64996f04f0785f4b5b3cb5e20d0d5f0f930c4a2cdd2dbb3679ebe549",
+    "summary.json": "14df5461759a71fa20941b05af351f4a97ef4bdf3ec65a7f018ec19523c98b92"
+  }
+}

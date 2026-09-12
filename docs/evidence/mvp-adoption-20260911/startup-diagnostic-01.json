@@ -1,0 +1,145 @@
+[
+  {
+    "phase": "before_read",
+    "index": 0,
+    "broker_state": {
+      "Running": true,
+      "ExitCode": 0,
+      "Status": "running"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 0,
+    "response": {
+      "action": "current",
+      "adopted": false,
+      "adopted_at": null,
+      "ci_eligible": false,
+      "generation": 0,
+      "kind": "policy_adoption_result",
+      "policy": null,
+      "policy_digest": null,
+      "proposal_id": null,
+      "request_id": "startup-read-0",
+      "schema_version": 1,
+      "series_id": "startup-read",
+      "valid": false,
+      "validation_id": null
+    }
+  },
+  {
+    "phase": "before_read",
+    "index": 1,
+    "broker_state": {
+      "Running": true,
+      "ExitCode": 0,
+      "Status": "running"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 1,
+    "response": {
+      "action": "current",
+      "adopted": false,
+      "adopted_at": null,
+      "ci_eligible": false,
+      "generation": 0,
+      "kind": "policy_adoption_result",
+      "policy": null,
+      "policy_digest": null,
+      "proposal_id": null,
+      "request_id": "startup-read-1",
+      "schema_version": 1,
+      "series_id": "startup-read",
+      "valid": false,
+      "validation_id": null
+    }
+  },
+  {
+    "phase": "before_read",
+    "index": 2,
+    "broker_state": {
+      "Running": true,
+      "ExitCode": 0,
+      "Status": "running"
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "phase": "read_result",
+    "index": 2,
+    "response": {
+      "action": "current",
+      "adopted": false,
+      "adopted_at": null,
+      "ci_eligible": false,
+      "generation": 0,
+      "kind": "policy_adoption_result",
+      "policy": null,
+      "policy_digest": null,
+      "proposal_id": null,
+      "request_id": "startup-read-2",
+      "schema_version": 1,
+      "series_id": "startup-read",
+      "valid": false,
+      "validation_id": null
+    }
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  },
+  {
+    "operation": [
+      "container",
+      "inspect"
+    ],
+    "exit_code": 1,
+    "reason": null
+  }
+]

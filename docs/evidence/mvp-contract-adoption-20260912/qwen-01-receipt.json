@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "error",
+  "request_count": 1,
+  "started_at": "2026-09-11T19:30:03.909813+00:00",
+  "source_sha256": {
+    "src/gah/transition_acceptance.py": "83a1267ed6112d6c7bdf39cc62c06922ccf91cc897ab7019ccc0491ded64a072",
+    "src/gah/evaluation_authority.py": "6cb08bef6e14228f7af1cea67f16bbfc8c35d73899322c6f57f7b353a2e2bef2"
+  },
+  "submitted_sha256": "985378e7a110a5f0c98a09c0ff974cbd6b2a1122e01b7dc29b38ba7879d91f03",
+  "request_sha256": "07cfb3765f3ec2c46cce960aa09940c71a8c62dedc0545166e247d0c37cc1da1",
+  "model": "qwen3.8-flash-next",
+  "timeout_seconds": 50,
+  "max_tokens": 1600,
+  "authority_evidence": false,
+  "ci_eligible": false,
+  "error_type": "TimeoutError",
+  "elapsed_seconds": 50.032
+}

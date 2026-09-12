@@ -1,0 +1,25 @@
+{
+  "id": "BLUEPRINT.md",
+  "role": "BLUEPRINT",
+  "title": "Blueprint",
+  "summary": "既存システムのコード・設定・運用資料が分散し、振る舞いとその根拠を追いにくい。 決定論的に抽出したFactとEvidenceからBehavior仕様を作り、人間が確定・推論・矛盾・不明を区別できるようにする。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/ADR/README.md",
+    "docs/requirements.md",
+    "docs/spec.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "858e78db70e806a5c39ae5c0328033409d7334ad9a291513825ac97fde9f91dd"
+}

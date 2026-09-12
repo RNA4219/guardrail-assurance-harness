@@ -1,0 +1,44 @@
+---
+intent_id: INT-REPLACE
+owner: your-handle
+status: active
+last_reviewed_at: YYYY-MM-DD
+next_review_due: YYYY-MM-DD
+template_version: 1.0.0
+---
+
+# Blueprint
+
+## 1. Problem Statement
+
+State the problem this repository solves and why the current approach is needed.
+
+## 2. Scope
+
+- In:
+  - Primary workflows, modules, or documents owned by this repo.
+- Out:
+  - Explicitly excluded systems or responsibilities.
+
+## 3. Constraints / Assumptions
+
+- Keep public interfaces backward compatible unless a migration is documented.
+- Record risky changes in a task or acceptance record before release.
+
+## 4. I/O Contract
+
+- Input:
+  - Documents, configs, datasets, or APIs consumed by the repo.
+- Output:
+  - Artifacts, reports, packages, or operational state produced by the repo.
+
+## 5. Interfaces
+
+- CLI:
+  - List supported commands.
+- Files:
+  - List key documents or generated artifacts.
+
+## 6. Verification
+
+- List the minimum local commands that prove this blueprint remains true.

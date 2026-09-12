@@ -1,0 +1,25 @@
+{
+  "id": "TASK.codex.md",
+  "role": "TASK.codex",
+  "title": "Task Seed Template",
+  "summary": "雛形を `docs/tasks/TASK.<slug>-MM-DD-YYYY.md` に複製し、値を埋める。 本文は日本語、互換性のため見出しは以下を維持する。 次のmetadataをコードフェンスから出してファイル先頭のfrontmatterに移す。 複製先からの相対リンクへ修正する（例: RUNBOOKへのリンクは `../../RUNBOOK.md`）。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "docs/TASKS.md",
+    "docs/tasks/README.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "4afa97012dc1203d9cc01161c45842fe96e65275e9ead172f309ee75a5b0f8c0"
+}

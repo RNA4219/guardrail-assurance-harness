@@ -1,0 +1,26 @@
+{
+  "id": "GUARDRAILS.md",
+  "role": "GUARDRAILS",
+  "title": "Guardrails",
+  "summary": "要求・構想・決定事項・実装・検証結果を区別する。現行要求の正本は[要求草案](docs/requirements.md)。未決定事項を文書整理の過程で暗黙に確定しない。変更は追跡可能にし、他作業の変更を保持する。",
+  "public_api": [],
+  "deps_out": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "49a52797157d9990589a1e89d757cfbcd807cddb33c299b27cc28334af9f4f8e"
+}

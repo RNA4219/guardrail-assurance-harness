@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-09T16:46:54+00:00",
+  "scope": "local workflow adoption",
+  "python": "3.12.14",
+  "status": "pass",
+  "checks": {
+    "adoption_tier_3": {
+      "status": "pass",
+      "errors": []
+    },
+    "downstream_onboarding": {
+      "status": "pass",
+      "errors": []
+    },
+    "documents": {
+      "status": "pass",
+      "errors": []
+    },
+    "acceptance_format": {
+      "status": "pass",
+      "errors": []
+    },
+    "task_acceptance": {
+      "status": "pass",
+      "errors": []
+    },
+    "generated_artifacts": {
+      "status": "pass",
+      "errors": []
+    },
+    "birdseye_freshness": {
+      "status": "pass",
+      "errors": []
+    },
+    "ci_gate_matrix": {
+      "status": "pass",
+      "errors": []
+    },
+    "checker_stages": {
+      "status": "pass",
+      "errors": []
+    },
+    "branch_desired_configuration": {
+      "status": "pass",
+      "errors": []
+    },
+    "local_security_posture": {
+      "status": "pass",
+      "errors": []
+    },
+    "source_provenance": {
+      "status": "pass",
+      "errors": []
+    }
+  },
+  "remote_validation": "not_run",
+  "product_acceptance": "not_run",
+  "recorded_by": "Codex (local technical self-review)",
+  "local_date": "2026-09-10 Asia/Tokyo",
+  "platform": "Windows",
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "status": "pass",
+    "tests_run": 10,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "duration_seconds": 0.599
+  },
+  "generation": {
+    "command": "python -m tools.workflow generate",
+    "serial": "00002",
+    "nodes": 41,
+    "repeat_changed": false,
+    "exit_code": 0
+  },
+  "individual_cli_checks": {
+    "python -m tools.workflow check-branch-protection": 0,
+    "python tools/ci/check_ci_gate_matrix.py": 0,
+    "python tools/ci/check_security_posture.py --check": 0
+  },
+  "supplemental_yaml_review": {
+    "status": "pass",
+    "parser": "PyYAML 6.0.3 from existing Workflow-Cookbook environment",
+    "workflow_files": 4,
+    "other_yaml_files": 2,
+    "checks": ["syntax", "workflow triggers", "contents read permission", "40-character action commit pins"],
+    "runtime_dependency_added": false
+  },
+  "verified_sources_sha256_lf": {
+    "tools/workflow.py": "84713ff983c1af976e264563394cf290e49be44f9c521a6c90cbd16686acfb51",
+    "tests/test_workflow.py": "d9d5c100add3c930f1e684efd4d54576993f4ad664152d34e2c1b99723bc743e",
+    "governance/policy.yaml": "40af99483dba97dcddc80bae522e98533c969e2582ee29a8e21128db2e2d8266",
+    ".github/workflows/governance-gate.yml": "fbf71238b629327850129c9984533ac89470b985394893bc7106b06d4614c6ac",
+    ".github/workflows/test.yml": "83848ad9f341bc9ee0e670c66739f81b89d11204b50185f107fe44bee60c754a",
+    ".github/workflows/markdown.yml": "0d636d97043d7cbe9c78a658e84f2953ea029bbb90e08a4f0e9be16fd79ddad8",
+    ".github/workflows/security.yml": "2c1edf991596442f2f60860055c7ba5d21575eacc63e6ae259dbd035e6921e27"
+  }
+}

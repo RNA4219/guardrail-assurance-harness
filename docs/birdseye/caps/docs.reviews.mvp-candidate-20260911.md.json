@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/mvp-candidate-20260911.md",
+  "role": "reviews",
+  "title": "契約候補runの接続・監督レビュー",
+  "summary": "[移行詳細仕様](../contract-transition-detail-spec.md)に沿って、旧条件15件と新条件30件を 別runとして保存・実行・精算し、別Evidenceへ結ぶ経路を追加した。 全494テストと実Docker133項目・60件が成功し、前工程463テスト・52項目を保持した。[統合証跡](../evidence/mvp-candidate-20260911/verification.json)へ 最終ソース、実Docker、補助レビューと検証範囲を記録する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/evidence/mvp-candidate-20260911/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "5367e9abd9581e3611447be1fe3547e6eed0f3d8b16f6ae02bb9bd1101ddd1dc"
+}

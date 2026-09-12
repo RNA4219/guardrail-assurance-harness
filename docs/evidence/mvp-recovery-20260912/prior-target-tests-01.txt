@@ -1,0 +1,15 @@
+test_closed_but_unfinalized_can_be_cancelled_after_expiry (test_cancel_claim.CancelClaimIntegrationTests.test_closed_but_unfinalized_can_be_cancelled_after_expiry) ... ok
+test_completed_and_cancelled_receipts_cannot_be_replaced (test_cancel_claim.CancelClaimIntegrationTests.test_completed_and_cancelled_receipts_cannot_be_replaced) ... ok
+test_lost_history_and_expired_owner_still_allow_stop_and_accounting (test_cancel_claim.CancelClaimIntegrationTests.test_lost_history_and_expired_owner_still_allow_stop_and_accounting) ... ok
+test_previous_cancellation_store_migrates_without_rewriting_history (test_cancel_claim.CancelClaimIntegrationTests.test_previous_cancellation_store_migrates_without_rewriting_history) ... ok
+test_revoked_source_and_expired_owner_keep_current_ci_cancelled (test_cancel_claim.CancelClaimIntegrationTests.test_revoked_source_and_expired_owner_keep_current_ci_cancelled) ... ok
+test_roles_shape_and_active_owner_do_not_change_state (test_cancel_claim.CancelClaimIntegrationTests.test_roles_shape_and_active_owner_do_not_change_state) ... ok
+test_cancel_failure_rolls_back_ownership_and_clock (test_cancel_claim.CancelClaimResourceTests.test_cancel_failure_rolls_back_ownership_and_clock) ... ok
+test_current_owner_can_cancel_but_cannot_manufacture_stop (test_cancel_claim.CancelClaimResourceTests.test_current_owner_can_cancel_but_cannot_manufacture_stop) ... ok
+test_expiry_boundary_fences_owner_and_keeps_dispatched_reservation (test_cancel_claim.CancelClaimResourceTests.test_expiry_boundary_fences_owner_and_keeps_dispatched_reservation) ... ok
+test_generation_exhaustion_does_not_cancel (test_cancel_claim.CancelClaimResourceTests.test_generation_exhaustion_does_not_cancel) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 291.423s
+
+OK

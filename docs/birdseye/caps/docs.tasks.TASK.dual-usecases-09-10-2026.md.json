@@ -1,0 +1,25 @@
+{
+  "id": "docs/tasks/TASK.dual-usecases-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 二つの初期利用場面の反映",
+  "summary": "利用者が確認したcoding agentの開発・CIとLLMガードレール評価の両方を要求へ反映し、それぞれの指標・比較条件・受入を明確にする。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-05.md",
+    "docs/open-questions.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-05.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "faa56033cfd0554cb60cb755e5d3ba097d2e0b07d4a2902538d4899b4a1d2d03"
+}

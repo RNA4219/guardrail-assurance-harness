@@ -1,0 +1,21 @@
+{
+  "id": "fixtures/README.md",
+  "role": "fixtures",
+  "title": "Fixture",
+  "summary": "adapterと契約の合成入力・期待結果を置く領域。正常、境界、未対応、矛盾、中断、部分結果を対象にする。実データや秘密を持ち込まない。fixtureごとに適用要件・生成条件を記録する。[契約](../docs/contracts/README.md) を参照。現在製品fixtureは未作成。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/README.md"
+  ],
+  "deps_in": [
+    "docs/contracts/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "da0a7b31f53b6e8fe0945e37fa3b9457a5435d79a68b25daa24b5c889f84de4a"
+}

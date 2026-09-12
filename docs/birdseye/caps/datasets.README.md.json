@@ -1,0 +1,24 @@
+{
+  "id": "datasets/README.md",
+  "role": "datasets",
+  "title": "評価データ",
+  "summary": "[synthetic-policy-v1](synthetic-policy-v1/README.md)に受入400件・校正18件・開発12件の合成入力とoracleを配置した。[評価詳細仕様](../docs/evaluation-detail-spec.md)に意味差、用途分離、段階数、生成器から独立した照合を定める。配布データの生成と実モデルの校正・受入は別に記録する。",
+  "public_api": [],
+  "deps_out": [
+    "datasets/synthetic-policy-v1/README.md",
+    "docs/acceptance-criteria.md",
+    "docs/evaluation-detail-spec.md",
+    "docs/operating-policy.md",
+    "docs/reference-boundary.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "4377935812c57e06ce7705c90f3a0623fb5ea589e42fc3501bf03505144583e8"
+}

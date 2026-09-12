@@ -1,0 +1,43 @@
+{
+  "receipt": {
+    "model": "qwen3.8-flash-next",
+    "purpose": "requirements ambiguity review",
+    "usage": {
+      "prompt_tokens": 467,
+      "total_tokens": 1116,
+      "completion_tokens": 649,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "finish_reason": "stop",
+    "independent_approval": false
+  },
+  "scope": "Japanese ambiguity review on a bounded draft summary",
+  "review_text": "| 観点 | 曖昧さ | 明確化の提案 |\n| :--- | :--- | :--- |\n| **1. 評価器の同一性** | 「同じ対象/suite/budget/evaluator/policy」の一致判定基準が不明。バージョン違いやパラメータ微差の許容範囲が未定義。 | 一致判定は「文字列完全一致」か「意味的等価」かを指定。差分検知用ハッシュの生成規則を定義。 |\n| **2. 0分母の扱い** | 「0分母は評価不能」とあるが、ERRORとUNKNOWNの優先順位や、両方混在時の集約方法が不明。 | 優先順位を定義（例: ERROR > UNKNOWN > WARNING）。集約は「最も悪い状態」を反映する旨を明記。 |\n| **3. 証拠の鮮度定義** | 「証拠の鮮度」の時間単位（秒/分）と、期限切れ判定の基準時刻（実行開始/終了）が未定義。 | 鮮度は「実行終了時刻からの経過秒数」とし、期限切れは「設定値超過」で判定する旨を明記。 |\n| **4. 修復計画の粒度** | 「定型案/不足項目」の出力形式が不明。JSON/テキスト/表形式のいずれか、および階層構造の有無が未定義。 | 出力形式を「キー・バリューのフラットなJSON」等に固定し、階層は1階層までとする等の制約を付与。 |\n| **5. 非必須欠落の定義** | 「非必須欠落」の「必須/非必須」の区別基準が不明。どの検査が必須かの一覧が未提示。 | 必須検査を「Mutation成立」「意図した失敗」「元状態成功」の3点とし、他を非必須と定義。 |\n| **6. 閾値の適用範囲** | 「実行前の設定必須」だが、閾値が未設定時のデフォルト値の有無と、設定場所（ファイル/環境変数）が不明。 | 閾値未設定時は「評価不能(ERROR)」とし、設定は「環境変数GAH_THRESHOLD」のみとする旨を明記。 |\n| **7. 本番停止との関係** | 「既存本番を直接停止しない」とあるが、CIの不合格結果が本番デプロイに与える影響（ブロック/非ブロック）が不明。 | CI不合格時は「デプロイをブロック」し、合格時のみデプロイを許可する旨を明記。 |\n| **8. 後期項目の扱い** | 「後期」とあるが、MVPでの実装対象か、単なる参考情報かの区別が不明。 | 後期項目は「MVPでは実装せず、仕様書に注記のみ」とし、実装対象外とする旨を明記。 |\n",
+  "adopted_topics": [
+    "comparison conditions",
+    "denominator-zero ambiguity",
+    "freshness clock",
+    "plan completeness",
+    "required vs optional",
+    "threshold configuration",
+    "CI responsibility",
+    "MVP vs later"
+  ],
+  "not_adopted": [
+    "freshness reset at run completion",
+    "arbitrary flat JSON plan",
+    "three evidence items as the only required checks",
+    "invented environment variable",
+    "automatic production enforcement",
+    "HOLD stopping all diagnostic evaluation"
+  ],
+  "authority": "draft assistance only; final requirements and checks by Codex",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

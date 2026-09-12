@@ -1,0 +1,13 @@
+# 読み取りレビュー
+
+## 1. 循環回避の境界定義と実装状態の対応
+
+**節**: `docs/contract-transition-detail-spec.md` §1, §3
+**具体状態**: 手順4〜5が未実装である一方、§3の`contract_preflight`は「保存sourceを解決して純粋な条件検査を行う」と記述される。この「保存source」が手順2で保存されたproposal・旧契約・baselineの参照のみを指すのか、手順4で生成される候補runのEvidenceまで含むのかの境界が、本文の「preflightは採択許可ではない」「candidate_run_required=true」の記述から推定されるが、§2の`bind_contract_transition`の引数定義（`baseline_record`, `baseline_source_bound`）と§3の照合項目の対応関係が明示的に紐付けられていない。
+**最小修正**: §3の照合項目リストに、§2で定義された`bind_contract_transition`の返却値（構造検査結果）が、§3の「保存sourceを解決して純粋な条件検査を行う」の具体的根拠であることを、引数名または返却値のキー名で明示的に対応付ける。
+
+## 2. 権限・世代の照合時点と不変性の適用範囲
+
+**節**: `docs/contract-transition-detail-spec.md` §3, `docs/contracts/lifecycle-contract.md` LC02
+**具体状態**: §3では`contract_preflight`が「同一transactionで次を実行する」とし、その中で「契約currentと不変履歴が完全一致すること」を確認するとある。一方、LC02では「検査と可変参照の更新との間に、これらの世代が変われば再検査する」と、検査と適用の間での世代変動への対応が規定されている。preflightは「採択許可ではない」とされるため、LC02の「適用の一つの原子的な確定点」の適用対象外と解されるが、preflight返却後の「candidate_run_required=true」に基づく候補実行（手順4）と、その後の採択（手順5）の間で、preflightで確認した「現在も有効な」条件（§3の照合項目）が、LC02の「現在も当該対象・操作への権限がある」等の条件と同一の照合時点で再確認される必要があるか否かの、preflight返却値とLC02適用の接続関係が明示されていない。
+**最小修正**: §3の末尾または§4の冒頭に、preflight返却後の候補実行・採択工程では、LC02の規定に従い、preflightで確認した項目を含む全条件を「適用時点」で再照合する必要がある旨、およびpreflight返却値がその再照合の「前提確認」としてのみ機能する旨を、LC02の項目番号を引用して明記する。

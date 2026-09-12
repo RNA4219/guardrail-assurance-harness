@@ -1,0 +1,19 @@
+{
+  "id": "tests/README.md",
+  "role": "tests",
+  "title": "回帰検証",
+  "summary": "`python -m unittest discover -s tests -v`で部品と文書の回帰試験を実行する。追加パッケージやモデル接続は不要。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-03.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b994a5adbd95bb56d93db36d1d01bcc779f9aa61de6ef783f1b26a6a88d55af5"
+}

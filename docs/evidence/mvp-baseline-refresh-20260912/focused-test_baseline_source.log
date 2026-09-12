@@ -1,0 +1,9 @@
+test_case_set_and_repeat_plan_replacements_are_rejected (test_baseline_source.BaselineSourceTests.test_case_set_and_repeat_plan_replacements_are_rejected) ... ok
+test_evidence_content_digest_mismatch_is_rejected_without_store_change (test_baseline_source.BaselineSourceTests.test_evidence_content_digest_mismatch_is_rejected_without_store_change) ... ok
+test_real_store_source_and_core_baseline_binding_are_diagnostic_only (test_baseline_source.BaselineSourceTests.test_real_store_source_and_core_baseline_binding_are_diagnostic_only) ... ok
+test_validator_revocation_blocks_current_use_and_preserves_receipt (test_baseline_source.BaselineSourceTests.test_validator_revocation_blocks_current_use_and_preserves_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 7.679s
+
+OK

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12T05:42:11.426218+00:00",
+  "passed": true,
+  "checks": {
+    "evidence_hashes_match": true,
+    "current_sources_match": true,
+    "seven_protected_sources_match": true,
+    "workflow_passed": true,
+    "birdseye_hashes_match": true,
+    "privacy_coverage_completed": true,
+    "scope_consistent": true
+  },
+  "verification_sha256": "7d9cd35591f52bd4c49bff7942807c41794cc54c5997669bd5da53006e144bca",
+  "final_artifact_sha256": {
+    "final-checker-v2.py": "ec6ae2e29ab300cf5fbc935dcd66bacc1c1794dd288fa58930655827928316c4",
+    "privacy-latest-primary-v2.json": "54f7bb57a51d7ca00917d83431260b252c85277a43901eb918c40d1386372d9d",
+    "privacy-latest-supplement-v2.json": "5cd4c92e8bd29109cc0db681c91fc1e189498a9ca90725f283fa478ced9d7cd2",
+    "privacy-latest-checker-v2.py": "7f31ab330778e8ebffbfb5264bb361f13ecfe78bf9da39823d6dc2b2dc0c0f83",
+    "privacy-latest-supplement-checker-v2.py": "58c890e2fd423ed6c60fb9bac7c21b5e24079170a94006c8193970c65f50bd8d",
+    "workflow-final-v2.json": "038b30554a717d57a2354e6892f14141d59226083a7d03a739c714132835fd48"
+  },
+  "birdseye_generation": "00050",
+  "birdseye_nodes": 133,
+  "parent_review_completed": true,
+  "external_model_review_performed_this_stage": false,
+  "privacy_remaining_matches": 0,
+  "privacy_remaining_read_errors": 0,
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

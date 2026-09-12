@@ -1,0 +1,13 @@
+test_closed_before_terminal_can_cancel_but_finalized_cannot_change (test_run_cancellation.CancellationIntegrationTests.test_closed_before_terminal_can_cancel_but_finalized_cannot_change) ... ok
+test_empty_cancellation_has_outputs_and_cannot_become_success (test_run_cancellation.CancellationIntegrationTests.test_empty_cancellation_has_outputs_and_cannot_become_success) ... ok
+test_finalize_roles_and_shape_cannot_mutate (test_run_cancellation.CancellationIntegrationTests.test_finalize_roles_and_shape_cannot_mutate) ... ok
+test_known_negative_remains_in_cancelled_decision_and_reports (test_run_cancellation.CancellationIntegrationTests.test_known_negative_remains_in_cancelled_decision_and_reports) ... ok
+test_previous_normal_store_migrates_with_history_and_rejects_future_cancel (test_run_cancellation.CancellationIntegrationTests.test_previous_normal_store_migrates_with_history_and_rejects_future_cancel) ... ok
+test_report_failure_rolls_back_terminal_but_retains_cancellation (test_run_cancellation.CancellationIntegrationTests.test_report_failure_rolls_back_terminal_but_retains_cancellation) ... ok
+test_stopping_and_late_settlement_keep_reservation_and_receipt (test_run_cancellation.CancellationIntegrationTests.test_stopping_and_late_settlement_keep_reservation_and_receipt) ... ok
+test_wrong_target_and_missing_outputs_are_not_cancellation_proof (test_run_cancellation.CancellationIntegrationTests.test_wrong_target_and_missing_outputs_are_not_cancellation_proof) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 396.602s
+
+OK

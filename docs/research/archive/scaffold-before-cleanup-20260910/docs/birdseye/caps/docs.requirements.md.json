@@ -1,0 +1,41 @@
+{
+  "id": "docs/requirements.md",
+  "role": "requirements",
+  "title": "Spec Reconstructor — 既存システム逆仕様化OSS 要件定義・調査報告書",
+  "summary": "> 改訂: 2026-09-10 / 要件レビュー v0.3。v0.2の目的・範囲を維持し、敵対的レビューで識別子・metadata、並行処理、完了判定、policy失効、総量予算、削除、export、評価の判断規則を補強した。規範要件とrelease gateを採否の基準とし、技術候補・スコア係数・工数は設計上の仮説として扱う。本書のSchemaコードブロックは型を示す概念記法であり、実装時には機械検証可能なSchemaと適合fixtureへ落とし込む。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/requirements-adversarial-2026-09-10.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "BLUEPRINT.md",
+    "CHECKLISTS.md",
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "HUB.codex.md",
+    "README.md",
+    "SECURITY.md",
+    "datasets/README.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/contracts/README.md",
+    "docs/design.md",
+    "docs/research/README.md",
+    "docs/reviews/requirements-adversarial-2026-09-10.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/security/SAC.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "docs/tasks/TASK.requirements-quality-09-10-2026.md",
+    "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+    "orchestration/m0-development.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a"
+}

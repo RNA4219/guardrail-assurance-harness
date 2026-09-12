@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "record_kind": "requirements_quality_assessment",
+  "assessed_on": "2026-09-10",
+  "timezone": "Asia/Tokyo",
+  "assessor": "Codex",
+  "independent_review": false,
+  "input_document": "docs/requirements.md",
+  "input_version": "0.3",
+  "structural_inventory": {
+    "requirements_sha256_raw": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a",
+    "line_count": 2558,
+    "core_requirement_ids": [
+      "CORE-HUMAN",
+      "SCOPE-ALL",
+      "SOURCE-FIRST",
+      "CONFLICT-PRESERVE",
+      "COVERAGE-VISIBLE",
+      "SECRET-GATE",
+      "UI-SURFACE",
+      "DYNAMIC-INFER",
+      "SNAPSHOT",
+      "INCREMENTAL",
+      "TRACEABILITY",
+      "NO-AUTHORITY-LLM",
+      "NO-AUTO-DESIGN",
+      "NO-AUTO-WRITE"
+    ],
+    "core_count": 14,
+    "contract_ids": [
+      "MODEL-01",
+      "PROOF-01",
+      "FLOW-01",
+      "INPUT-01",
+      "LINK-01",
+      "ENV-01",
+      "SNAP-01",
+      "ADAPTER-01",
+      "RUN-01",
+      "LLM-01",
+      "OUTPUT-01",
+      "REVIEW-01",
+      "RETENTION-01",
+      "NFR-01",
+      "METADATA-01",
+      "IDENTITY-01",
+      "RUN-02",
+      "RUN-03",
+      "POLICY-01",
+      "BUDGET-01",
+      "RETENTION-02",
+      "OUTPUT-02",
+      "EVAL-02",
+      "EVAL-03",
+      "SANITIZE-01",
+      "RUNTIME-01",
+      "EVAL-01",
+      "MVP-01"
+    ],
+    "contract_count": 28,
+    "unique_contract_count": 28,
+    "acceptance_contract_ids": [
+      "INPUT-01",
+      "MODEL-01",
+      "PROOF-01",
+      "FLOW-01",
+      "LINK-01",
+      "ENV-01",
+      "SNAP-01",
+      "ADAPTER-01",
+      "RUN-01",
+      "LLM-01",
+      "OUTPUT-01",
+      "REVIEW-01",
+      "RETENTION-01",
+      "NFR-01",
+      "SANITIZE-01",
+      "RUNTIME-01",
+      "EVAL-01",
+      "METADATA-01",
+      "IDENTITY-01",
+      "RUN-02",
+      "RUN-03",
+      "POLICY-01",
+      "BUDGET-01",
+      "RETENTION-02",
+      "OUTPUT-02",
+      "EVAL-02",
+      "EVAL-03",
+      "MVP-01"
+    ],
+    "acceptance_row_count": 28,
+    "unmapped_contracts": [],
+    "orphan_acceptance_rows": [],
+    "interpretation": "ID-level coverage only; not atomic obligation coverage or product validation"
+  },
+  "overall_judgment": "仕様化の基礎として良好。利用者・要求単位・実現性の確認を条件とし、全面的な実装契約の凍結は保留。",
+  "quantitative_quality_score": null,
+  "criteria": [
+    {
+      "criterion": "目的・境界",
+      "judgment": "良好",
+      "basis": [
+        "CORE-HUMAN",
+        "NO-AUTO-DESIGN",
+        "NO-AUTO-WRITE"
+      ]
+    },
+    {
+      "criterion": "利用者・価値の妥当性",
+      "judgment": "補強必要",
+      "basis": [
+        "CORE-HUMAN",
+        "UX理解評価"
+      ],
+      "gap": "主要利用者、主要作業、評価参加者の代表性、既存手順との比較基準"
+    },
+    {
+      "criterion": "宣言範囲の網羅性",
+      "judgment": "良好",
+      "basis": [
+        "INPUT-01",
+        "MODEL-01",
+        "PROOF-01",
+        "OUTPUT-01",
+        "RETENTION-02",
+        "EVAL-03"
+      ],
+      "limitation": "任意システムへの完全性を意味しない"
+    },
+    {
+      "criterion": "明確さ・原子性",
+      "judgment": "要整理",
+      "basis": [
+        "RUN-03",
+        "RETENTION-02"
+      ],
+      "gap": "独立した義務と合否判定への分割"
+    },
+    {
+      "criterion": "一貫性",
+      "judgment": "概ね良好",
+      "basis": [
+        "SNAP-01",
+        "ENV-01",
+        "RUN-03",
+        "EVAL-01"
+      ],
+      "limitation": "全Schema組合せの形式検証は未実施"
+    },
+    {
+      "criterion": "検証可能性",
+      "judgment": "方法は明確・準備未了",
+      "basis": [
+        "EVAL-01",
+        "EVAL-02",
+        "EVAL-03",
+        "NFR-01"
+      ],
+      "gap": "形式Schema、判定器、固定gold、評価者、実行環境"
+    },
+    {
+      "criterion": "実現可能性",
+      "judgment": "未実証・要確認",
+      "basis": [
+        "MVP-01",
+        "NFR-01",
+        "実装着手・公開前に確定する事項"
+      ],
+      "gap": "全M0能力の実測と資源・工程の見積り"
+    },
+    {
+      "criterion": "追跡・変更管理",
+      "judgment": "基礎は良好・細分化必要",
+      "basis": [
+        "28契約と28受入対応行",
+        "文書の規範と仮説の区分"
+      ],
+      "gap": "義務→仕様→fixture→結果の連鎖"
+    }
+  ],
+  "priorities": [
+    {
+      "id": "QE-01",
+      "action": "主要利用者と主要作業を固定",
+      "decision_point": "仕様ベースライン凍結前",
+      "classification": "要件の妥当性"
+    },
+    {
+      "id": "QE-02",
+      "action": "契約を独立して判定できる義務へ分割",
+      "decision_point": "仕様化の初期",
+      "classification": "明確さ・追跡可能性"
+    },
+    {
+      "id": "QE-03",
+      "action": "価値実証と全M0公開受入の段階を分離",
+      "decision_point": "全面実装の見積り・確約前",
+      "classification": "実現性・計画"
+    },
+    {
+      "id": "QE-04",
+      "action": "評価定義を運用可能なcorpus・判定器・体制へ接続",
+      "decision_point": "capability対応宣言前",
+      "classification": "受入準備"
+    },
+    {
+      "id": "QE-05",
+      "action": "規範・調査・設計候補の保守単位を整理",
+      "decision_point": "仕様化と同時",
+      "classification": "変更管理"
+    }
+  ],
+  "readiness": {
+    "specification": "conditional",
+    "bounded_feasibility_study": "ready_with_fixed_scope",
+    "full_m0_implementation_commitment": "hold",
+    "product_release": "not_evaluable"
+  },
+  "unchanged_artifacts_sha256_lf": {
+    "docs/requirements.md": "a2cbe58ffffbe458eed5888c075076b7fdab1528f95d62313de6ab289ccf448a",
+    "docs/spec.md": "cafaa1ab428cbc922bde5637da90bb49721d4e0d5cabad782cf34b4db7d6167a",
+    "docs/design.md": "eda2d0cf2b48161f17b742585525108d45053f6e5b3cc933422be94b6ea30ff3"
+  },
+  "limitations": [
+    "同一改訂者による文書評価",
+    "ID対応は義務単位の試験網羅率ではない",
+    "外部資料の最新性・市場価値は再検証していない",
+    "実機試験・利用者試験は未実施",
+    "準備状態の評価は実装や公開の実行承認ではない"
+  ],
+  "product_validation": "not_run",
+  "specification_writing": "paused"
+}

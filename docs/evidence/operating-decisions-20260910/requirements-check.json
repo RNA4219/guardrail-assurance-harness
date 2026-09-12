@@ -1,0 +1,57 @@
+{
+  "scope": "要求文書の構造・対応・算術・来歴。製品の判定実装の検証ではない",
+  "checked_at": "2026-09-10T01:51:28.390375+00:00",
+  "status": "pass",
+  "checks": {
+    "requirements_32_unique_complete": true,
+    "acceptance_32_one_to_one": true,
+    "original_17_functional_ids_preserved": true,
+    "original_14_mvp_items_preserved": true,
+    "traceability_requirement_ids_resolve": true,
+    "D01_D05_decisions_recorded": true,
+    "original_12_questions_preserved": true,
+    "extensions_7_preserved": true,
+    "snapshot_15_hashes_match": true,
+    "source_manifest_matches_saved_v03": true,
+    "original_archive_unchanged": true,
+    "warning_ci_success_consistent": true,
+    "management_ai_authority_and_separation": true,
+    "reuse_source_pending_no_import_claim": true,
+    "initial_thresholds_and_profiles_selected": true,
+    "finite_corpus_and_inference_scope_explicit": true,
+    "UC_LLM_counts_and_arithmetic_consistent": true,
+    "absolute_vs_delta_example_consistent": true,
+    "rounding_and_window_boundaries_explicit": true,
+    "qwen_response_complete_all_four_dispositions": true,
+    "product_code_schema_not_added": true
+  },
+  "counts": {
+    "requirements": 32,
+    "acceptance_criteria": 32,
+    "archived_files": 15
+  },
+  "source_sha256_raw": {
+    "README.md": "60464155a3ecb2c0debd995fb8c37b3cb3b9733c063c69e31b320eba8d0a485e",
+    "BLUEPRINT.md": "e9c1faf535bcf1722c889aebb7b5a91cfda04663b3535a32c04f964cab09f4bf",
+    "HUB.codex.md": "8d73ed58e228b3e166c5d9cd10d17c0bea16b5dd673033aaf95b30355f4ab3d2",
+    "CHANGELOG.md": "8b7cff3465a4f0c62c45c8878fe1da4644cdd2100c6ae7d7e45e84057bbcb498",
+    "docs/requirements.md": "de15ed5cd84f5606ffa6ccbaadca71b6a8406175411ad14d388887dc47656332",
+    "docs/acceptance-criteria.md": "667b8bc5ab26a7a394d7b166da4f0c4c4d107b0e79f33f7e1d5ae485d7dce427",
+    "docs/open-questions.md": "3e23983170d4883f3ae51307b55e72bdecce71bdcdd91d75ad06e9cf2a465bcb",
+    "docs/requirements-traceability.md": "7155530bd3b3ddcb2b3880a72767dced8a344f714f617782d616093fdea60ac7",
+    "docs/research/README.md": "3a1ace771ebb4c1cfef6a4d23658a7d37d5ab8ce06e8533ed79aca15a9e1fc23",
+    "docs/research/source-manifest.json": "c9ac312a4cd6ebad1277c009b3c06b96059348f3f7643a3d5cf0260e8dc2b21b",
+    "docs/tasks/README.md": "9545557aa6b91bf643065f3a5140b79ddc8b4db941fd858e289624fc5613031e",
+    "docs/contracts/README.md": "c2b139015394ae50db93c9d579c312ec370a718bcbd6cdd0801c37dbc40f0915",
+    "orchestration/development-plan.md": "3196f52234dc8481261b9742c68d9b2213da6948b573c6dccd87e582881c7ed4",
+    "datasets/README.md": "e45a73aef9b3dbdf06c3c4a5259202e4ba5fc235ffe5d539267dc6ca4d722beb",
+    "docs/extension-roadmap.md": "b407c45772b25765479d779d8b40af99f26b8f227d5ee719361b8b070e8ca3b3",
+    "docs/operating-policy.md": "7bb99643967b48d54e96323f41584188618b6a0126e9a6100e2cfe6f3d676da5",
+    "docs/reviews/operating-decisions-20260910.md": "cc8aa6c9f6786bf4990b0e966ff6995f68b6b234bd33ef2ea100a4dc06ba3146"
+  },
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

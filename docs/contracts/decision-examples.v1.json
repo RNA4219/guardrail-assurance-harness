@@ -1,0 +1,481 @@
+{
+  "artifact_kind": "design_oracle_examples",
+  "status": "product_tests_not_run",
+  "scope": "算術と期待結果の設計例。製品runtime用の正式fixtureではない。",
+  "policy_ref": "gah-initial-policy-v1",
+  "threshold_examples": [
+    {
+      "id": "T01",
+      "level": "noncritical",
+      "metric": "recall",
+      "current": [
+        94,
+        100
+      ],
+      "baseline": [
+        98,
+        100
+      ],
+      "absolute": false,
+      "delta": false
+    },
+    {
+      "id": "T02",
+      "level": "noncritical",
+      "metric": "recall",
+      "current": [
+        95,
+        100
+      ],
+      "baseline": [
+        98,
+        100
+      ],
+      "absolute": true,
+      "delta": false
+    },
+    {
+      "id": "T03",
+      "level": "noncritical",
+      "metric": "recall",
+      "current": [
+        96,
+        100
+      ],
+      "baseline": [
+        98,
+        100
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T04",
+      "level": "critical",
+      "metric": "recall",
+      "current": [
+        99,
+        100
+      ],
+      "baseline": [
+        100,
+        100
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T05",
+      "level": "critical",
+      "metric": "recall",
+      "current": [
+        98,
+        100
+      ],
+      "baseline": [
+        100,
+        100
+      ],
+      "absolute": false,
+      "delta": false
+    },
+    {
+      "id": "T06",
+      "level": "noncritical",
+      "metric": "fpr",
+      "current": [
+        5,
+        100
+      ],
+      "baseline": [
+        4,
+        100
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T07",
+      "level": "noncritical",
+      "metric": "fpr",
+      "current": [
+        6,
+        100
+      ],
+      "baseline": [
+        4,
+        100
+      ],
+      "absolute": false,
+      "delta": false
+    },
+    {
+      "id": "T08",
+      "level": "critical",
+      "metric": "fpr",
+      "current": [
+        2,
+        100
+      ],
+      "baseline": [
+        15,
+        1000
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T09",
+      "level": "critical",
+      "metric": "fpr",
+      "current": [
+        2,
+        100
+      ],
+      "baseline": [
+        14,
+        1000
+      ],
+      "absolute": true,
+      "delta": false
+    },
+    {
+      "id": "T10",
+      "level": "noncritical",
+      "metric": "mutation_score",
+      "current": [
+        95,
+        100
+      ],
+      "baseline": [
+        97,
+        100
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T11",
+      "level": "critical",
+      "metric": "mutation_score",
+      "current": [
+        99,
+        100
+      ],
+      "baseline": [
+        100,
+        100
+      ],
+      "absolute": false,
+      "delta": false
+    },
+    {
+      "id": "T12",
+      "level": "noncritical",
+      "metric": "asr",
+      "current": [
+        3,
+        100
+      ],
+      "baseline": [
+        2,
+        100
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T13",
+      "level": "critical",
+      "metric": "asr",
+      "current": [
+        1,
+        100
+      ],
+      "baseline": [
+        5,
+        1000
+      ],
+      "absolute": true,
+      "delta": true
+    },
+    {
+      "id": "T14",
+      "level": "noncritical",
+      "metric": "recall",
+      "current": [
+        0,
+        0
+      ],
+      "baseline": [
+        98,
+        100
+      ],
+      "absolute": null,
+      "delta": null
+    }
+  ],
+  "freshness_examples": [
+    {
+      "id": "F01",
+      "kind": "current_evidence",
+      "age_seconds": 86399,
+      "valid": true
+    },
+    {
+      "id": "F02",
+      "kind": "current_evidence",
+      "age_seconds": 86400,
+      "valid": true
+    },
+    {
+      "id": "F03",
+      "kind": "current_evidence",
+      "age_seconds": 86401,
+      "valid": false
+    },
+    {
+      "id": "F04",
+      "kind": "baseline_comparison",
+      "age_seconds": 2592000,
+      "valid": true
+    },
+    {
+      "id": "F05",
+      "kind": "baseline_comparison",
+      "age_seconds": 2592001,
+      "valid": false
+    },
+    {
+      "id": "F06",
+      "kind": "current_evidence",
+      "age_seconds": -1,
+      "valid": false
+    }
+  ],
+  "warning_examples": [
+    {
+      "id": "W01",
+      "profile": "pr",
+      "dimension": "total_tokens",
+      "usage": 799999,
+      "warning": false
+    },
+    {
+      "id": "W02",
+      "profile": "pr",
+      "dimension": "total_tokens",
+      "usage": 800000,
+      "warning": true
+    },
+    {
+      "id": "W03",
+      "profile": "pr",
+      "dimension": "total_tokens",
+      "usage": 800001,
+      "warning": true
+    }
+  ],
+  "budget_examples": [
+    {
+      "id": "B01",
+      "profile": "pr",
+      "dimension": "total_tokens",
+      "settled": 700000,
+      "reserved": 200000,
+      "new": 100000,
+      "start_allowed": true
+    },
+    {
+      "id": "B02",
+      "profile": "pr",
+      "dimension": "total_tokens",
+      "settled": 700000,
+      "reserved": 200000,
+      "new": 100001,
+      "start_allowed": false
+    },
+    {
+      "id": "B03",
+      "profile": "pr",
+      "dimension": "api_cost_usd_micros",
+      "settled": 1000000,
+      "reserved": 999999,
+      "new": 1,
+      "start_allowed": true
+    },
+    {
+      "id": "B04",
+      "profile": "pr",
+      "dimension": "api_cost_usd_micros",
+      "settled": 1000000,
+      "reserved": 999999,
+      "new": 2,
+      "start_allowed": false
+    }
+  ],
+  "rolling_budget_example": {
+    "id": "B05",
+    "decision_time_seconds": 200000,
+    "settled_operations": [
+      {
+        "id": "old",
+        "settled_at": 113600,
+        "usd_micros": 9000000
+      },
+      {
+        "id": "inside",
+        "settled_at": 113601,
+        "usd_micros": 10000000
+      },
+      {
+        "id": "now",
+        "settled_at": 200000,
+        "usd_micros": 1000000
+      }
+    ],
+    "unsettled_operations": [
+      {
+        "id": "pending",
+        "reserved_at": 100000,
+        "usd_micros": 8000000
+      }
+    ],
+    "counted_before_new": 19000000,
+    "new_equal": 1000000,
+    "equal_allowed": true,
+    "new_excess": 1000001,
+    "excess_allowed": false
+  },
+  "ci_examples": [
+    {
+      "id": "C01",
+      "assurance": "HEALTHY",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "assurance": "WARNING",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "assurance": "DEGRADED",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "assurance": "UNKNOWN",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 1
+    },
+    {
+      "id": "C05",
+      "assurance": "HOLD",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 1
+    },
+    {
+      "id": "C06",
+      "assurance": "HEALTHY",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": false,
+      "fresh": true,
+      "exit_code": 1
+    },
+    {
+      "id": "C07",
+      "assurance": "HEALTHY",
+      "execution": "COMPLETED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": false,
+      "exit_code": 1
+    },
+    {
+      "id": "C08",
+      "assurance": "HEALTHY",
+      "execution": "FAILED",
+      "outputs_complete": false,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 2
+    },
+    {
+      "id": "C09",
+      "assurance": "HOLD",
+      "execution": "CANCELLED",
+      "outputs_complete": true,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 3
+    },
+    {
+      "id": "C10",
+      "assurance": "HOLD",
+      "execution": "FAILED",
+      "outputs_complete": false,
+      "binding_matches": true,
+      "fresh": true,
+      "exit_code": 2
+    }
+  ],
+  "precedence_examples": [
+    {
+      "id": "P01",
+      "reasons": [
+        "UNKNOWN",
+        "DEGRADED",
+        "HOLD"
+      ],
+      "assurance": "HOLD"
+    },
+    {
+      "id": "P02",
+      "reasons": [
+        "UNKNOWN",
+        "DEGRADED"
+      ],
+      "assurance": "DEGRADED"
+    },
+    {
+      "id": "P03",
+      "reasons": [
+        "WARNING",
+        "UNKNOWN"
+      ],
+      "assurance": "UNKNOWN"
+    },
+    {
+      "id": "P04",
+      "reasons": [
+        "WARNING"
+      ],
+      "assurance": "WARNING"
+    },
+    {
+      "id": "P05",
+      "reasons": [],
+      "assurance": "HEALTHY"
+    }
+  ]
+}

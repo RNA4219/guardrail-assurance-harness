@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checks": {
+    "regression-runtime_product_cli_exit": true,
+    "regression-runtime_report_shape": true,
+    "regression-runtime_scope_binding": true,
+    "regression-runtime_time_and_refs": true,
+    "regression-runtime_execution_status": true,
+    "regression-runtime_human_same_grounding": true,
+    "cancellation-runtime_product_cli_exit": true,
+    "cancellation-runtime_report_shape": true,
+    "cancellation-runtime_scope_binding": true,
+    "cancellation-runtime_time_and_refs": true,
+    "cancellation-runtime_execution_status": true,
+    "cancellation-runtime_human_same_grounding": true,
+    "authority_cleanup_rechecked": true,
+    "sources_unchanged": true,
+    "original_deployment_unchanged": true
+  },
+  "failure": null,
+  "source_sha256": {
+    "tools/gah_report.py": "04412be878aded366f824a8baf4f4654d3228ba32d05301d2ddcb27e6c3b617a",
+    "tools/gah_ci.py": "8a48e64e9ff2606ab86cb7e1072ecb4f1619ddf3011d9c56cbfa92f075884d8d",
+    "tools/authority_runtime.py": "b208c660ec4b76e8bb1fd2c64ffb9770f266dc8566cc366a72e0f31485572a8d",
+    "tests/test_run_report.py": "7a9627e0026f66a1871bf3fd209e61e53732508d58c6d4d45554250b6bb9d8da",
+    "config/authority-runtime.lock.json": "b4cbfd45424ad5bc6bc73ebee23285820941d84c99d9cfe179598f33f34c12e9"
+  },
+  "original_deployment_sha256": "0ab8ad8b0bb896d5c7b95ae2675d8d18de988f78a0163328c9aac8ea6ab22498",
+  "image_id": "sha256:3cbb1b129352b73be11e1c6b3e99d19f7d0376a6027a51c68e7025cf097870fb",
+  "report_exit_codes": [
+    1,
+    3
+  ],
+  "fixed_uc_ci_only": true,
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

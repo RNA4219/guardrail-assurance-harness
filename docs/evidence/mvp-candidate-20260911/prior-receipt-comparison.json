@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "extra_envelope_fields": [
+    "action",
+    "request_id"
+  ],
+  "receipt_body_equal": true,
+  "outer_response": {
+    "action": "evidence_finalize",
+    "adoption_verified": false,
+    "assurance": "HEALTHY",
+    "authority_connected": true,
+    "bundle_ref": {
+      "digest": "54f16ab946fc95221ecfcdd2a3a8c54a6a0336f18cf5b68a76681722ea788028",
+      "id": "candidate-old-runtime",
+      "kind": "bound_bundle"
+    },
+    "ci_eligible": false,
+    "closure_ref": {
+      "digest": "974d96e014f55091dc8099fd0edc386d45ae4d3cfb3247d455fc1093bcfa1234",
+      "id": "candidate-old-runtime",
+      "kind": "resource_closure"
+    },
+    "created_at": 1789133668,
+    "decision_ref": {
+      "digest": "966ebf22ff35f111240df41660c5bb49ad178ed50e924a0d04f9ac39c85f4313",
+      "id": "candidate-old-runtime",
+      "kind": "run_decision"
+    },
+    "evidence_ref": {
+      "digest": "c51b39d4bc8a3eb15cdcd21a3addf7f91d493d81f24cffa9215af40b4861774c",
+      "id": "candidate-old-runtime",
+      "kind": "evidence"
+    },
+    "input_materialization_verified": true,
+    "kind": "authority_run_receipt",
+    "manifest_ref": {
+      "digest": "58962830763cc227bd50a822be49e58e7f5349b8c64bbf443930f343edde5e02",
+      "id": "candidate-old-runtime",
+      "kind": "run_manifest"
+    },
+    "permission_generation": 0,
+    "purpose": "contract_old_regression",
+    "request_id": "candidate-finalize-old",
+    "resource_closure_verified": true,
+    "run_id": "candidate-old-runtime",
+    "schema_version": 1
+  },
+  "stored_receipt": {
+    "adoption_verified": false,
+    "assurance": "HEALTHY",
+    "authority_connected": true,
+    "bundle_ref": {
+      "digest": "54f16ab946fc95221ecfcdd2a3a8c54a6a0336f18cf5b68a76681722ea788028",
+      "id": "candidate-old-runtime",
+      "kind": "bound_bundle"
+    },
+    "ci_eligible": false,
+    "closure_ref": {
+      "digest": "974d96e014f55091dc8099fd0edc386d45ae4d3cfb3247d455fc1093bcfa1234",
+      "id": "candidate-old-runtime",
+      "kind": "resource_closure"
+    },
+    "created_at": 1789133668,
+    "decision_ref": {
+      "digest": "966ebf22ff35f111240df41660c5bb49ad178ed50e924a0d04f9ac39c85f4313",
+      "id": "candidate-old-runtime",
+      "kind": "run_decision"
+    },
+    "evidence_ref": {
+      "digest": "c51b39d4bc8a3eb15cdcd21a3addf7f91d493d81f24cffa9215af40b4861774c",
+      "id": "candidate-old-runtime",
+      "kind": "evidence"
+    },
+    "input_materialization_verified": true,
+    "kind": "authority_run_receipt",
+    "manifest_ref": {
+      "digest": "58962830763cc227bd50a822be49e58e7f5349b8c64bbf443930f343edde5e02",
+      "id": "candidate-old-runtime",
+      "kind": "run_manifest"
+    },
+    "permission_generation": 0,
+    "purpose": "contract_old_regression",
+    "resource_closure_verified": true,
+    "run_id": "candidate-old-runtime",
+    "schema_version": 1
+  },
+  "product_defect_confirmed": false,
+  "verifier_correction": "compare stored receipt body after removing action and request_id"
+}

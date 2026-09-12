@@ -1,0 +1,25 @@
+{
+  "id": "docs/tasks/TASK.requirements-clarification-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: GAH要求の明確化",
+  "summary": "要求原稿の目的・範囲・振る舞い・受入条件を分離し、何を作り、何をもって確認するかを明確にする。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/open-questions.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-04.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b374dac1346399610bc42a2cde7c2cb9951b69b87ae36ae41f1ed91c7656b62f"
+}

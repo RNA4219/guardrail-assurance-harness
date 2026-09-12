@@ -1,0 +1,73 @@
+{
+  "task_id": "20260910-08",
+  "saved_at": "2026-09-10",
+  "mutable": false,
+  "reason": "利用者による外部参照元のURL提示を反映する前のv0.4",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256_raw": "60464155a3ecb2c0debd995fb8c37b3cb3b9733c063c69e31b320eba8d0a485e"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "abf3fed0a35e5046ecbe2ad29ab278c713894bc79dfeed7021a9d6d1c04ee229"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "8d73ed58e228b3e166c5d9cd10d17c0bea16b5dd673033aaf95b30355f4ab3d2"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "8b7cff3465a4f0c62c45c8878fe1da4644cdd2100c6ae7d7e45e84057bbcb498"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "92a51e135cbe3b4b10484af9d0264fd2846cd802f845820fe3ddb73775430e1c"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "667b8bc5ab26a7a394d7b166da4f0c4c4d107b0e79f33f7e1d5ae485d7dce427"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "328fd73ec2d453a85993a557ce63900b3e3a7e87f05b00b6abd1aa6d9eb4e5e8"
+    },
+    {
+      "path": "docs/operating-policy.md",
+      "sha256_raw": "7bb99643967b48d54e96323f41584188618b6a0126e9a6100e2cfe6f3d676da5"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "95e7a8dabef1392f5e3e2a713664879d45aba7912d905d39eb3a2a97c9699600"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "86bd0f3f629e409743f2caac98ede6e80a176a4f4ae2cd6bad69fa0bd3789ee1"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "5cefe8ccfe0af15090834434203e9f7578e7699cd7ccc3ff4020518888b49fdf"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "9545557aa6b91bf643065f3a5140b79ddc8b4db941fd858e289624fc5613031e"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "c2b139015394ae50db93c9d579c312ec370a718bcbd6cdd0801c37dbc40f0915"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "df5eec73b53cace074c622bab298949375e6a73f65decbd2e3f58d07e53731bd"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "e45a73aef9b3dbdf06c3c4a5259202e4ba5fc235ffe5d539267dc6ca4d722beb"
+    }
+  ],
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "docs/acceptance/AC-20260910-11.md",
+  "role": "acceptance",
+  "title": "Acceptance: 契約・評価設計初版",
+  "summary": "[Task](../tasks/TASK.contract-design-09-10-2026.md)の設計文書、初期値JSON、43件の期待例、32要求の対応と入口整合。正式Schema・製品実装・製品試験・設計凍結は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/contract-design-20260910.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.contract-design-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "8f74ee4652555a81c164baa550c95e09135a109a0ce70f892b53081ac06609f2"
+}

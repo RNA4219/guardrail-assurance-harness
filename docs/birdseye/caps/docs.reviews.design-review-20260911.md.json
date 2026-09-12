@@ -1,0 +1,32 @@
+{
+  "id": "docs/reviews/design-review-20260911.md",
+  "role": "reviews",
+  "title": "設計v0.1の見直し",
+  "summary": "要求v0.4・初期運用方針v1と設計初版を照合し、次の6件をv0.2へ修正した。要求IDと閾値・予算を増減していない。P1は誤った成功または利用目的の欠落につながる設計問題、P2は実装解釈の分岐を生む問題を示し、製品の脆弱性を実証した分類ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/contracts/evaluation-contract.md",
+    "docs/contracts/evaluation-design.md",
+    "docs/design.md",
+    "docs/open-questions.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0002-contract-boundaries.md",
+    "docs/acceptance/AC-20260911-01.md",
+    "docs/design.md",
+    "docs/open-questions.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.design-review-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "6a200e7572683dacba1d92623f7f33b7e07dfb58b2199f04eb5c29d9a4446bfe"
+}

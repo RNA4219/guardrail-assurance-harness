@@ -1,0 +1,22 @@
+{
+  "id": "docs/ADR/README.md",
+  "role": "ADR",
+  "title": "Architecture Decision Records",
+  "summary": "決定を連番のMarkdownに記録する。背景、選択、代替案、影響、状態、関係するTask・要件を残す。廃止時も過去の判断は削除せず後続ADRへ接続する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/ADR/0001-workflow-cookbook-adoption.md"
+  ],
+  "deps_in": [
+    "BLUEPRINT.md",
+    "docs/design.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "4b4757076c02c821c9822d3461604901ad9776f03823f0ba0132c1c28925b530"
+}

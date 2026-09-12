@@ -1,0 +1,27 @@
+{
+  "id": "docs/tasks/TASK.operating-decisions-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 初期運用方針の決定と要求への反映",
+  "summary": "利用者が回答したCI・閾値/予算の委任・評価資産転用・生成AI管理を具体化し、要求整理を契約・評価設計へ渡せる状態にする。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/operating-policy.md",
+    "docs/requirements.md",
+    "docs/reviews/operating-decisions-20260910.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/reviews/operating-decisions-20260910.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b553fe34d94fb0d4b25c07015507a15de027bc693bc274779a0f8ddb0dad70ef"
+}

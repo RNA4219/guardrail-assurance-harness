@@ -1,0 +1,26 @@
+{
+  "id": "docs/reviews/mvp-contract-adoption-20260912.md",
+  "role": "reviews",
+  "title": "契約世代2の採択・現在有効性の監督レビュー",
+  "summary": "[移行仕様](../contract-transition-detail-spec.md)の手順5を実装した。 旧条件15件と新条件30件の保存Evidenceを再検査し、初回baseline generation 1を保持したまま EvaluationContractをgeneration 2へ更新する。通常gen2 run・通常CIと全MVP受入は残る。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contract-transition-detail-spec.md",
+    "docs/evidence/mvp-contract-adoption-20260912/README.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/evidence/mvp-contract-adoption-20260912/README.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "8e83137890dc7a49c304b2c115368bada7b7ab2382938e886f59ccf60ba6477e"
+}

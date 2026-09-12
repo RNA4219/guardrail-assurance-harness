@@ -1,0 +1,31 @@
+{
+  "scope": "GAH documentation cleanup; not product assurance",
+  "checked_at": "2026-09-09T18:08:03.439491+00:00",
+  "status": "pass",
+  "checks": {
+    "original_raw_hash": true,
+    "all_scaffold_hashes": true,
+    "requirements_body_preserved": true,
+    "retired_paths_absent": true,
+    "retired_records_preserved": true,
+    "current_tasks_only_gah_cleanup": true,
+    "current_acceptance_only_gah_cleanup": true,
+    "product_source_and_schemas_unimplemented": true,
+    "current_citation_markers_resolved_to_register": true,
+    "requirements_stage_draft": true
+  },
+  "archived_files": 148,
+  "original_requirements_sha256_raw": "3070d72b290135eb1d1135213ec459aa640989798613401689cd99dc1ed8051c",
+  "canonical_body_sha256": "06611f017fb1fe6a8ba99ad5f09683cc027a6a29585f8f2938a1119c544847be",
+  "body_comparison": "Reversed only explicit display transforms; compared every nonblank line including fenced examples",
+  "formatted_tables": 18,
+  "section_headings": 47,
+  "unresolved_citations": 52,
+  "product_tests": "not_run",
+  "external_sources_verified": false,
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

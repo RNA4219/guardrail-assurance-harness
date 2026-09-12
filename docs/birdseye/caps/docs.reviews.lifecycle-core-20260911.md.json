@@ -1,0 +1,27 @@
+{
+  "id": "docs/reviews/lifecycle-core-20260911.md",
+  "role": "reviews",
+  "title": "終了・回収コアの監督レビュー",
+  "summary": "[Task 20260911-04](../tasks/TASK.lifecycle-core-09-11-2026.md)として、[詳細仕様](../lifecycle-detail-spec.md)と0.2.0の台帳Schema v2、明示的移行、回収lease、取消し・停止確認、終了判定、診断CLIを確認した。全MVPの検収ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/lifecycle-detail-spec.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-04.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.lifecycle-core-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "8b264b9c0520d854bb21779ebd1cee84f9a11ee4a8405d5bdf82d725d170fbd1"
+}

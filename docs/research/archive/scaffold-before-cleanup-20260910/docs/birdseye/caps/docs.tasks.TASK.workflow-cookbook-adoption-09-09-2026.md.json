@@ -1,0 +1,28 @@
+{
+  "id": "docs/tasks/TASK.workflow-cookbook-adoption-09-09-2026.md",
+  "role": "tasks",
+  "title": "Task: Workflow-Cookbook Fullの構成導入",
+  "summary": "spec-reconstructorをWorkflow-Cookbook Tier 3: Fullの様式・構成に整え、単体で更新と検証ができる状態にする。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ADR/0001-workflow-cookbook-adoption.md",
+    "docs/acceptance/AC-20260909-01.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "9f37f4a6ed8624b11c13b894d1a819f220db0bd4ad311770218a4d2e0b4a0622"
+}

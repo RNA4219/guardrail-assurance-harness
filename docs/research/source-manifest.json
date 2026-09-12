@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "project": "guardrail-assurance-harness",
+  "organized_at": "2026-09-10",
+  "current": {
+    "path": "docs/requirements.md",
+    "stage": "requirements_clarification_draft_v0.4",
+    "mutable": true,
+    "edit_scope": "user correction: 外部参照元 is a closed asset; conceptual reference only and independent GAH design",
+    "reference_asset_policy": "no_copy_port_dependency_or_bundling",
+    "reference_boundary": "docs/reference-boundary.md"
+  },
+  "archive": {
+    "path": "docs/research/archive/gah-requirements-original-20260910.md",
+    "original_name": "docs/requirements.md (before documentation cleanup)",
+    "sha256_raw": "4584f1e59099084e275845a8fc5876a492be12d5671166d4925870386c6293a3",
+    "mutable": false,
+    "hash_scope": "anonymized_current_bytes",
+    "original_byte_identity_preserved": false
+  },
+  "copied_scaffold": {
+    "path": "docs/research/archive/scaffold-before-cleanup-20260910",
+    "manifest": "archive-manifest.json",
+    "file_count": 148,
+    "assurance_for_gah": false
+  },
+  "body_preservation": {
+    "method": "Reverse the explicit presentation transforms; compare all nonblank source lines including fenced examples",
+    "equal": true,
+    "scope": "20260910-03 documentation formatting only; see before-clarification saved version"
+  },
+  "citations": {
+    "register": "docs/research/citation-register.md",
+    "status": "unresolved_unverified",
+    "unique_references": 52
+  },
+  "clarification": {
+    "task_id": "20260910-04",
+    "saved_before": "docs/research/archive/before-clarification-20260910/docs/requirements.md",
+    "sha256_raw": "bf0836e21e0437e9530521a05e20c9adf6a275f37ea9bb20d01e566f9f15f567",
+    "traceability": "docs/requirements-traceability.md",
+    "acceptance_criteria": "docs/acceptance-criteria.md",
+    "requirements_count": 24,
+    "status": "draft_not_product_approval",
+    "source_manifest": "docs/research/archive/before-clarification-20260910/archive-manifest.json"
+  },
+  "scope_confirmation": {
+    "task_id": "20260910-05",
+    "confirmed_at": "2026-09-10",
+    "confirmed_by": "user",
+    "use_cases": [
+      "coding agentの開発・CI",
+      "LLMガードレール評価"
+    ],
+    "supersedes": "v0.1 assumption A01",
+    "saved_before": "docs/research/archive/before-dual-usecases-20260910/docs/requirements.md",
+    "sha256_raw": "b44dd81837f7060a6c1de3611e638743dafab5a524d893e49981570fa6e927ad",
+    "source_manifest": "docs/research/archive/before-dual-usecases-20260910/archive-manifest.json",
+    "requirements_count": 24,
+    "status": "use_cases_confirmed_requirements_remain_draft"
+  },
+  "adversarial_review": {
+    "task_id": "20260910-06",
+    "saved_before": "docs/research/archive/before-adversarial-20260910/docs/requirements.md",
+    "sha256_raw": "378ed82c8a0e13faafd6713394b837671d0333ea45e04dd9b5cb874a6d5078db",
+    "source_manifest": "docs/research/archive/before-adversarial-20260910/archive-manifest.json",
+    "review": "docs/reviews/requirements-adversarial-20260910.md",
+    "extensions": "docs/extension-roadmap.md",
+    "requirements_count": 32,
+    "review_observations": 11,
+    "status": "requirements_draft_not_product_validation"
+  },
+  "operating_decisions": {
+    "task_id": "20260910-07",
+    "saved_before": "docs/research/archive/before-operating-decisions-20260910/docs/requirements.md",
+    "sha256_raw": "c10223a237f5d8ef044689d939761515ad3fe21d9b36b32c3fc2a817bff0f0c2",
+    "source_manifest": "docs/research/archive/before-operating-decisions-20260910/archive-manifest.json",
+    "policy": "docs/operating-policy.md",
+    "review": "docs/reviews/operating-decisions-20260910.md",
+    "requirements_count": 32,
+    "ci_warning_allowed": true,
+    "thresholds_and_budgets_selected_by": "Codex under user delegation",
+    "management_authority": "generative AI with separated identity and deterministic authorization checks",
+    "evaluation_reuse": "user-specified ops OSS; exact repository pending identification; no code or data imported",
+    "status": "operating_direction_decided_not_product_validation"
+  },
+  "reference_source_confirmation": {
+    "task_id": "20260910-08",
+    "confirmed_by": "user-provided repository URL",
+    "repository": "[参照先非掲載]",
+    "commit": "nonpublic-revision",
+    "package_version": "0.1.0",
+    "saved_before": "docs/research/archive/before-reference-confirmation-20260910/docs/requirements.md",
+    "sha256_raw": "92a51e135cbe3b4b10484af9d0264fd2846cd802f845820fe3ddb73775430e1c",
+    "source_manifest": "docs/research/archive/before-reference-confirmation-20260910/archive-manifest.json",
+    "reuse_mapping": "docs/reference-boundary.md",
+    "inspection": "docs/evidence/reference-confirmation-20260910/source-inspection.json",
+    "reuse_scope": "evaluation operations skeleton; metrics, labeled guardrail datasets and evaluator calibration require GAH additions",
+    "license_metadata": "Proprietary; no tracked LICENSE file at inspected commit",
+    "requirements_count": 32,
+    "status": "source_identified_static_review_complete_product_import_not_run"
+  },
+  "reference_reference_boundary": {
+    "task_id": "20260910-09",
+    "decided_by": "user",
+    "instruction": "外部参照元自体はクローズド資産なんでそのまま使わないでね。",
+    "supersedes": [
+      "operating_decisions.evaluation_reuse",
+      "reference_source_confirmation.reuse_scope"
+    ],
+    "policy": "general operating concepts only; independently derive GAH specs, contracts, tests and implementation from GAH requirements",
+    "prohibited": [
+      "copy",
+      "port",
+      "rename-only adaptation",
+      "dependency",
+      "bundling"
+    ],
+    "assets": [
+      "外部参照元 code",
+      "schemas",
+      "tests",
+      "documents",
+      "data"
+    ],
+    "saved_before": "docs/research/archive/before-reference-boundary-20260910/docs/requirements.md",
+    "sha256_raw": "9632642da34b79f37b52f8ef9006ef610595df6500e1309cd9c889e9a1130e1e",
+    "source_manifest": "docs/research/archive/before-reference-boundary-20260910/archive-manifest.json",
+    "boundary_document": "docs/reference-boundary.md",
+    "temporary_checkout": ".ga/reference-source-private-revision",
+    "temporary_checkout_status": "removed_after_matching_commit_and_clean_worktree_check",
+    "外部参照元_original_repository_modified": false,
+    "GAH_product_import_performed": false,
+    "status": "closed_asset_boundary_applied"
+  },
+  "nondisclosure": {
+    "task_id": "20260910-10",
+    "requested_by": "user",
+    "scope": "参照元の名称・略称・URL・版識別子を本文・ファイル名・保存稿・証跡・生成索引に掲載しない",
+    "current_policy": "docs/reference-boundary.md",
+    "snapshot": "docs/research/archive/before-nondisclosure-20260910/archive-manifest.json",
+    "historical_checks": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。",
+    "new_unredacted_backup_created": false
+  }
+}

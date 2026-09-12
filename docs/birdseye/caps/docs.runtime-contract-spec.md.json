@@ -1,0 +1,26 @@
+{
+  "id": "docs/runtime-contract-spec.md",
+  "role": "runtime-contract-spec",
+  "title": "MVP登録・ケース・証拠の実装契約",
+  "summary": "全MVP完成へ向け、[評価契約](contracts/evaluation-contract.md)のControl、CaseDefinition、Evidenceを具体化する。実装中であり、これらの部品だけで管理AIの認証・隔離・全要求の受入を証明しない。[全体Task](tasks/TASK.mvp-completion-09-11-2026.md)に残る接続を記録する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/contracts/evaluation-contract.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "schemas/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "226f2d21847af06e45f7753ecd803606329ca55378066284a7c9fa96c746dfea"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "docs/baseline-refresh-detail-spec.md",
+  "role": "baseline-refresh-detail-spec",
+  "title": "通常runに基づくbaseline更新",
+  "summary": "固定UC-CIのcontract generation 2による完全な通常runを、baseline generation 1から2への更新候補にする。既存の要求・初期閾値・予算は維持する。契約が固定したbaselineは更新後も同じ完全参照で照合し、current pointerの移動によって既存CIの比較条件を変えない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-baseline-refresh-20260912.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/contract-revision-detail-spec.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/detail-spec.md",
+    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
+    "docs/open-questions.md",
+    "docs/regression-ci-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "26e72a15e43b88b29c19892551e3bb1a7daa3a4f5dd995246463b4b7f59145b4"
+}

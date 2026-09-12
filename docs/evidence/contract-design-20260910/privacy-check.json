@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-09-10T10:05:53.678035+00:00",
+  "scope": "名称・略称・URL内の名称を、本文・配置・保存稿・証跡・補助ファイル・生成物で検査。対象文字列は非保存。",
+  "scanned_files": 553,
+  "remaining_content_files": 0,
+  "remaining_paths": 0,
+  "status": "pass",
+  "generation": "00026"
+}

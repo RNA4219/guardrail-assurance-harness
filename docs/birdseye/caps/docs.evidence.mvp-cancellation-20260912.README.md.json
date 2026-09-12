@@ -1,0 +1,33 @@
+{
+  "id": "docs/evidence/mvp-cancellation-20260912/README.md",
+  "role": "evidence",
+  "title": "固定UC-CI通常run取消しの証跡",
+  "summary": "[verification.json](verification.json)に、全体回帰534テスト（従来523件を保持、新規11件）と 実Docker219項目（従来198項目を保持）の成功を記録した。初回15件・旧条件15件・新条件30件・ 通常30件・取消し確認用1件の計91件を実行し、停止・精算・cleanupと回収再確認を完了した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/mvp-cancellation-20260912.md",
+    "docs/run-cancellation-detail-spec.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "EVALUATION.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/detail-spec.md",
+    "docs/evidence/README.md",
+    "docs/open-questions.md",
+    "docs/reviews/mvp-cancellation-20260912.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "7ff2688f671c93fda8a36290c745fe4287c6f653a2c8721a1594e8d124b5f5e7"
+}

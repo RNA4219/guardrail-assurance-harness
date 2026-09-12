@@ -1,0 +1,31 @@
+{
+  "id": "docs/reviews/requirements-adversarial-2026-09-10.md",
+  "role": "reviews",
+  "title": "要件定義の敵対的レビュー",
+  "summary": "対象は [要件定義](../requirements.md) v0.2。比較用に [変更前全文](../research/archive/requirements-before-adversarial-2026-09-10.md) をbyte単位で保存した。変更前SHA-256は `940c93624ec2c4ddb4f68b1798eac3490fb5a34e29382a7d37e229649d9fb67b`。",
+  "public_api": [],
+  "deps_out": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-01.md",
+    "docs/requirements.md",
+    "docs/research/README.md",
+    "docs/reviews/requirements-quality-2026-09-10.md",
+    "docs/tasks/TASK.requirements-adversarial-09-10-2026.md",
+    "tools/review/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00006",
+  "source_sha256": "d4b468f2f8aff0c369363b471aa8a530a4e9102593d125f94d9dc3d96194e261"
+}

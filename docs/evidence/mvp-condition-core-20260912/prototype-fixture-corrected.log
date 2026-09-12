@@ -1,0 +1,23 @@
+test_additional_trials_change_measurement (__main__.SemanticTests.test_additional_trials_change_measurement) ... ok
+test_baseline_revision_keeps_measurement_but_changes_evaluation (__main__.SemanticTests.test_baseline_revision_keeps_measurement_but_changes_evaluation) ... ok
+test_baseline_target_substitution_cannot_hide_behind_same_reference (__main__.SemanticTests.test_baseline_target_substitution_cannot_hide_behind_same_reference) ... ok
+test_candidate_target_revision_keeps_original_baseline_targets (__main__.SemanticTests.test_candidate_target_revision_keeps_original_baseline_targets) ... ok
+test_declared_axes_do_not_override_derived_differences (__main__.SemanticTests.test_declared_axes_do_not_override_derived_differences) ... ok
+test_dependencies_and_requiredness_are_not_ignored (__main__.SemanticTests.test_dependencies_and_requiredness_are_not_ignored) ... ok
+test_duration_budget_is_not_hidden_by_time_projection (__main__.SemanticTests.test_duration_budget_is_not_hidden_by_time_projection) ... ok
+test_environment_is_a_condition (__main__.SemanticTests.test_environment_is_a_condition) ... ok
+test_equivalent_rational_threshold_is_same_condition (__main__.SemanticTests.test_equivalent_rational_threshold_is_same_condition) ... ok
+test_evaluator_revision_is_derived_from_real_bindings (__main__.SemanticTests.test_evaluator_revision_is_derived_from_real_bindings) ... ok
+test_independent_entry_order_is_not_stage_order (__main__.SemanticTests.test_independent_entry_order_is_not_stage_order) ... ok
+test_legal_stage_order_change_remains_a_measurement_change (__main__.SemanticTests.test_legal_stage_order_change_remains_a_measurement_change) ... ok
+test_missing_baseline_context_and_broken_refs_fail (__main__.SemanticTests.test_missing_baseline_context_and_broken_refs_fail) ... ok
+test_oracle_and_label_change_is_corpus_change (__main__.SemanticTests.test_oracle_and_label_change_is_corpus_change) ... ok
+test_return_values_do_not_grant_authority_or_alias_inputs (__main__.SemanticTests.test_return_values_do_not_grant_authority_or_alias_inputs) ... ok
+test_run_plan_contract_identity_and_time_shift_are_not_conditions (__main__.SemanticTests.test_run_plan_contract_identity_and_time_shift_are_not_conditions) ... ok
+test_stricter_threshold_is_policy_change (__main__.SemanticTests.test_stricter_threshold_is_policy_change) ... ok
+test_target_version_is_separate_from_measurement (__main__.SemanticTests.test_target_version_is_separate_from_measurement) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.204s
+
+OK

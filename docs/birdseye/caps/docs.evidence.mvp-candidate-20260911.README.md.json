@@ -1,0 +1,22 @@
+{
+  "id": "docs/evidence/mvp-candidate-20260911/README.md",
+  "role": "evidence",
+  "title": "契約候補runの接続証跡",
+  "summary": "[統合検証](verification.json)は全8条件が成功した。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/mvp-candidate-20260911.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/evidence/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "907d3595f62a8c848ec1c577b07622f4204066e84ac765e296b6ed8eb2c46fcb"
+}

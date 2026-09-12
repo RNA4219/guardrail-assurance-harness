@@ -1,0 +1,69 @@
+{
+  "reason": "要求の敵対的検証による改訂前v0.2を保存",
+  "task_id": "20260910-06",
+  "saved_at": "2026-09-10",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256_raw": "1a5407040e38514a0f000b8b67b697a8e7caf0941b74e24d440de49f4fca0415"
+    },
+    {
+      "path": "BLUEPRINT.md",
+      "sha256_raw": "81f8860c877b208e63754abe4ed0f2679e4cc95cc7010d0cb7196271f710dcbb"
+    },
+    {
+      "path": "HUB.codex.md",
+      "sha256_raw": "db0f04ca0db189254d1a934fca22d1938b72143f458c08cfdeeb485e9c3c5d0c"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256_raw": "4e690133cd51587f69697c0713f362c14e44175cc1ac021c2db4258ed3b6331e"
+    },
+    {
+      "path": "datasets/README.md",
+      "sha256_raw": "c182f37857da5caf3ff428fa47b0747f56d9b2b7efe0babf6b2d012313198efb"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256_raw": "378ed82c8a0e13faafd6713394b837671d0333ea45e04dd9b5cb874a6d5078db"
+    },
+    {
+      "path": "docs/acceptance-criteria.md",
+      "sha256_raw": "9c5ffcbf76b11f0057eee29f787322c5ea09f3939d41aa988ef7aeb6986995c2"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "sha256_raw": "9b10f8770caea70b7aa0225494f0bfa8ea6ad1ae2f4b790b7f8f79fb4eb6d1eb"
+    },
+    {
+      "path": "docs/open-questions.md",
+      "sha256_raw": "dfeb1337799d3bdbe879d0c2e5fef0492a23ff373a948f058d7b07610d2ffb8d"
+    },
+    {
+      "path": "docs/research/README.md",
+      "sha256_raw": "4a6681444e31c153df43e57d9a9381a1be46dc91796daa669b1f654dd793da66"
+    },
+    {
+      "path": "docs/research/source-manifest.json",
+      "sha256_raw": "f7099c4123751c6f662bd9c1ddf9e1440b84d1219fdaf09434411ba8836ddf16"
+    },
+    {
+      "path": "docs/tasks/README.md",
+      "sha256_raw": "93188d9857468e65b4b064658151c58391276d9df921061066025de13bb2e0e8"
+    },
+    {
+      "path": "orchestration/development-plan.md",
+      "sha256_raw": "a378f08f26b3e89ade2da49cf1c1081ca3e1563def50b8fabea1a12621e511d0"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256_raw": "15b33c185d4e9ce57e5551f548c3e5c7163cbdb270a0774f4c97279036b636bc"
+    }
+  ],
+  "mutable": false,
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "hash_scope": "匿名化した保存版の現在のbytes。非匿名化原本との一致は示さない"
+  }
+}

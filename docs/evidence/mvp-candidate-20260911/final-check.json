@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-11T14:02:18.821009+00:00",
+  "status": "failed",
+  "checks": {
+    "evidence_hashes_match": true,
+    "tested_sources_match": true,
+    "seven_preserved_sources_match": true,
+    "workflow_check_passed": false,
+    "index_and_sources_match": true,
+    "privacy_check_passed": false,
+    "limited_scope_preserved": true
+  },
+  "privacy_limitation": {
+    "uninspected_directory": ".ga/authority-images/a3117c1630933eb7-xa1d5cpf",
+    "directory_enumeration_failed": true,
+    "elevated_read_also_failed": true,
+    "acl_or_ownership_changed": false,
+    "previous_walk_checks_prove_directory_coverage": false
+  },
+  "verification_sha256": "f42b56a7e6c4b5a8dba5f51fe9c57950eac3dd1bda160254b2ec48b06964a85b",
+  "final_artifact_sha256": {
+    "privacy-final.json": "ec00bbb766d72faa34d0a4797ce62500b810fd5917d2413cd86f8106543476fd",
+    "workflow-final.json": "c1ca73fece9582f2fc345e58705af7d72522f2ea81d48602a009a6d26997efe5",
+    "final-checker.py": "8a119d9478c0fb66601036243c70b77a7c81d7ef7f33fe67bf6cdd6c5d59e650"
+  },
+  "birdseye_generation": "00046",
+  "birdseye_index_sha256": "42c4b2f6c54dc6c2177a9ebda94081e071b4155433f058606383061b5696b9c9",
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

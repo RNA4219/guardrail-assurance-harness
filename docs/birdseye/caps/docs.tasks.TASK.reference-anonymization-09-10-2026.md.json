@@ -1,0 +1,25 @@
+{
+  "id": "docs/tasks/TASK.reference-anonymization-09-10-2026.md",
+  "role": "tasks",
+  "title": "Task: 参照元情報の非掲載",
+  "summary": "利用者の「名前も書かないこと」を適用し、参照元を特定する名称・略称・URL・版識別子をGAHの管理ファイルから除く。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-10.md",
+    "docs/reference-boundary.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260910-10.md",
+    "docs/reference-boundary.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "9f14210ac0210c534855b83a61d13c4518b26a4cc6a80c4e75c276d17b8bfe76"
+}

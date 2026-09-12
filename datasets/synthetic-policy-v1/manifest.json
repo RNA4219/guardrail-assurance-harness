@@ -1,0 +1,14 @@
+{
+  "case_counts": {
+    "acceptance": 400,
+    "calibration": 18,
+    "development": 12
+  },
+  "document_count": 1074,
+  "evaluator_performance_verified": false,
+  "kind": "evaluation_pack_manifest",
+  "pack_digest": "a7697f4036c59e158b1c48b6d1a8cb618ae7a2f58ecb88ae1836b74acf9c3a2e",
+  "pack_id": "synthetic-policy-v1",
+  "schema_version": 1,
+  "statistical_independence": false
+}

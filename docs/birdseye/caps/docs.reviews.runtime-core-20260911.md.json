@@ -1,0 +1,30 @@
+{
+  "id": "docs/reviews/runtime-core-20260911.md",
+  "role": "reviews",
+  "title": "詳細仕様と製品コアの監督レビュー",
+  "summary": "[Task 20260911-03](../tasks/TASK.runtime-core-09-11-2026.md)で、[コア詳細仕様v1](../detail-spec.md)、[adapter接続仕様](../adapter-spec.md)、判定・SQLite保存・費用台帳・診断CLIを作成した。以下はこの部品範囲のレビューであり、全MVPの製品受入ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/adapter-spec.md",
+    "docs/detail-spec.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260911-03.md",
+    "docs/reviews/README.md",
+    "docs/spec.md",
+    "docs/tasks/TASK.runtime-core-09-11-2026.md",
+    "orchestration/development-plan.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "f17201180d07afffeb952ac15ba7ceaa6a69ac3fb6ee818551ed561c037e0afa"
+}

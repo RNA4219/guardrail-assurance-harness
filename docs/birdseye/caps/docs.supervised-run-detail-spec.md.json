@@ -1,0 +1,28 @@
+{
+  "id": "docs/supervised-run-detail-spec.md",
+  "role": "supervised-run-detail-spec",
+  "title": "製品の実行監督・再開・対象限定の仕様",
+  "summary": "固定UC-CIの製品入口tools.gah_runと操作状態照会を接続した。[工程証跡](evidence/mvp-supervisor-20260912/README.md)で実Dockerとレビュー補正後の試験を区別する。以下で現在の接続範囲と未完了の拡張を区別する。全MVP受入は未完了である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "AGENTS.md",
+    "HUB.codex.md",
+    "docs/detail-spec.md",
+    "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-supervisor-20260912.md",
+    "tools/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "67dd4fd2341f621960f6183631345da392205a6229159c4c7aa7aac57e7ddedc"
+}

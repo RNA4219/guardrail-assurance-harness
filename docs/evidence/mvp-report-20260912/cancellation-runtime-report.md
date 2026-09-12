@@ -1,0 +1,218 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-12
+next_review_due: 2026-10-12
+---
+
+[製品CLIの出力原文](cancellation-runtime-report.raw.txt)を保持し、以下に同じ本文を表示する。
+
+# GAH実行結果
+
+run: "cancellation-runtime"
+実行状態: CANCELLED
+CI照会のAssurance: UNKNOWN
+保存時のAssurance: UNKNOWN
+現在のCI利用: 不可 / 終了値 3
+
+用途: ["UC-CI"]
+プロファイル: "full"
+評価範囲Control: ["fixture-C01", "fixture-C02", "fixture-C03", "fixture-C04", "fixture-C05", "fixture-C06", "fixture-C07", "fixture-C08", "fixture-C09", "fixture-C10", "fixture-F01", "fixture-F02", "fixture-F03", "fixture-F04", "fixture-F05"]
+
+| 時刻（UTC） | 値 |
+|---|---|
+| 基準時刻 | 2026-09-12T05:19:47+00:00 (epoch 1789190387) |
+| 観測時刻 | 2026-09-12T05:00:22+00:00 (epoch 1789189222) |
+| Evidence有効期限 | 2026-09-13T05:00:22+00:00 (epoch 1789275622) |
+
+## 指標・差分
+
+値は分数で表示する。比較不能な値を0に補完しない。
+
+| 指標 | 現在値 | baseline | 差分 | 比較 | 対象範囲 |
+|---|---|---|---|---|---|
+| "mutation_score" / "m-35e3dc32cb38f1e933b30803" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": null, "scope": "category"} |
+| "mutation_score" / "m-6101c52dc03169bd71cbdbf0" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": "fixture-F01", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-b2ee0c1a3a671afc83927fa8" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": "fixture-F02", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-beb124110007363c2a6e5062" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": "fixture-F03", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-d5d9e2ded5042e8aeab6bb29" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": "fixture-F04", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-b2d71ddc2eb72c1e8715a9ca" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": "fixture-F05", "obligation_id": null, "scope": "control"} |
+| "mutation_score" / "m-81e96c3e8d882a16807db700" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": "fixture-F01", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-28c94fc61710743c089ac632" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": "fixture-F02", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-7f535a20b0606c7fa70f95c8" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": "fixture-F03", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-d852cf4d69258ebfbcd6336e" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": "fixture-F04", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-3a2ef4b694f3fbc28028df21" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": "fixture-F05", "obligation_id": null, "scope": "control_category"} |
+| "mutation_score" / "m-d416295491f63494489d4c5f" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F01", "scope": "obligation"} |
+| "mutation_score" / "m-092c004b7f789acacd788dd4" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F02", "scope": "obligation"} |
+| "mutation_score" / "m-efa6328366c7c882efb907f0" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F03", "scope": "obligation"} |
+| "mutation_score" / "m-db95eeaf57da7183e53ff259" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F04", "scope": "obligation"} |
+| "mutation_score" / "m-d166fb9af6b37f1830b34287" | 不明 | 不明 | 不明 | 不能 | {"category": null, "control_id": null, "obligation_id": "fixture-obligation-F05", "scope": "obligation"} |
+| "mutation_score" / "m-69751e7e444d5696119265a6" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F01", "scope": "obligation_category"} |
+| "mutation_score" / "m-2dbbca3da2a605488dc3f946" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F02", "scope": "obligation_category"} |
+| "mutation_score" / "m-ddb73fcfc0e8f790fb6d8540" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F03", "scope": "obligation_category"} |
+| "mutation_score" / "m-a78f70d9a4ec741cd508c2f4" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F04", "scope": "obligation_category"} |
+| "mutation_score" / "m-79149c2c5fd9e9927189d4cf" | 不明 | 不明 | 不明 | 不能 | {"category": "fixture-mutation", "control_id": null, "obligation_id": "fixture-obligation-F05", "scope": "obligation_category"} |
+
+## 判定理由・欠損
+
+| 種別 | 理由 |
+|---|---|
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-092c004b7f789acacd788dd4", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-28c94fc61710743c089ac632", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-2dbbca3da2a605488dc3f946", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-35e3dc32cb38f1e933b30803", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-3a2ef4b694f3fbc28028df21", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-6101c52dc03169bd71cbdbf0", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-69751e7e444d5696119265a6", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-79149c2c5fd9e9927189d4cf", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-7f535a20b0606c7fa70f95c8", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-81e96c3e8d882a16807db700", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-a78f70d9a4ec741cd508c2f4", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-b2d71ddc2eb72c1e8715a9ca", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-b2ee0c1a3a671afc83927fa8", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-beb124110007363c2a6e5062", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-d166fb9af6b37f1830b34287", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-d416295491f63494489d4c5f", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-d5d9e2ded5042e8aeab6bb29", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-d852cf4d69258ebfbcd6336e", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-db95eeaf57da7183e53ff259", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-ddb73fcfc0e8f790fb6d8540", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "metric_missing", "metric_id": "m-efa6328366c7c882efb907f0", "state": "UNKNOWN"} |
+| 保存された判定 | {"code": "required_missing", "metric_id": null, "state": "UNKNOWN"} |
+| 現在のCI利用 | "CANCEL_REQUESTED" |
+| 現在のCI利用 | "ASSURANCE_NOT_ALLOWED" |
+
+## Finding・Plan参照
+
+Finding 50件 / Plan 50件
+
+| 種別 | ID | digest |
+|---|---|---|
+| "finding" | "finding-c99a2c0b5641ebfdd02bf6d29578f001" | "ae494481165d134db2b49c8a90a2c85f6b4fe6bdfc374e48a9fd638b1a0b283a" |
+| "finding" | "finding-f1425ca229ebbb8f5da00919a40f13b2" | "b869944a9aa675d6fa6d26473f90e15a431150a80610c2363df083ab383fef4d" |
+| "finding" | "finding-d29737fc36513de3db14f2d33e9844f5" | "6cb4e0f6b97a388547e484334dae68e4eab2113f5d38fe863d9197606811d3ce" |
+| "finding" | "finding-5802f717a5d2c19a20edcca5b06e3d68" | "d9913cef574e359b9946865d479eff7bcfe7bea981940136a61036c3d08d48af" |
+| "finding" | "finding-158c03febdbab3532d6c08bbdfd7ca50" | "78f0f584a452d4f7a00261496a84acdc20a3a20ee037624c3aa5e47590832f31" |
+| "finding" | "finding-39afe7b7f50ad8e2372a6bba48d6afe8" | "f651ac0f6af7e92e9963354538e355fe84b2ed559805901ee77a0c97c460823e" |
+| "finding" | "finding-7a78550073385479ec7e587a52a75e87" | "08f76be54fe0475cec2d067716d9d8a3e474bd8fc33a52f6be49929958f16ed0" |
+| "finding" | "finding-0eb5daf89601617c6179fd3361ba9351" | "a03c8deb7d6ee9e81ddcd7a9688257896bdb54aa75676bef4df8bb711e6d8439" |
+| "finding" | "finding-6be6ba86e7c65a373bf71bfed6ffc4f3" | "4861372bd0c0175aaf08738015519eaba8fbf4382658aaa7a2621560b8ddfee9" |
+| "finding" | "finding-bd4e7bb3ae771c443c54b8c10491f3c1" | "a1101fb26d5fea030566f1e320730692d0bf203bab0ba8c396c9af4a916be258" |
+| "finding" | "finding-21539380627e3c2d80fd834aebcd953f" | "64f888ce36d408d9973f240c8c8e2226f612c399f332601917c2bf2d56b1e753" |
+| "finding" | "finding-184e8a5d58bb221e062e05f3c563da6b" | "1919d736f0f38af4ea2489fe32ab406aafc6276b55980d529cb02303da60515b" |
+| "finding" | "finding-f703273f6f3fbb6224ffc93bed19fd67" | "d0cb94f2167e9b5605fe66096e48ed15b707621ef7eba15f11aa96d6635db6b8" |
+| "finding" | "finding-c4709bc890e1900701ce5859f23a79ff" | "ad7e3af85e0ff426c815b37fd23584cc9d3dde1182875fdd6493677936c8c7e0" |
+| "finding" | "finding-1c8e3f67ab77032140bf103f32b29168" | "060995d794799f41e5b96e62c2b69bd5382e50e0fcc26e917ecd8cd2f688d3fa" |
+| "finding" | "finding-b3db3fc594d9a0c903608a4b576ade06" | "e95b5d2a42e8d6b66fa7d80e7e41f652715e1df97b841af28e6ba377135127c0" |
+| "finding" | "finding-f427b7388329b941b8f80a45af0737bf" | "0548e83a4354ccd8a6441127d932aa9d41f0fa3c1baec9d6511927cb260e4e3c" |
+| "finding" | "finding-1aa4746d154a83ad0eae494bcf2842f4" | "1d1246b84a54a2ce40e555df73ba76a5246bdd6eff064b67fd3ddd488a973b0e" |
+| "finding" | "finding-0d4bc2fa83c64707655a69c6fe0adfcf" | "4324a98102a8629e690a95bdc811a4538eb86a6eda5147f3538f4c315702ef5d" |
+| "finding" | "finding-1e0975eacedeeb8b5d5151f884287ac5" | "b252df95dd71a8b60737b08e6e3c6a60ec4b806c52acef2238c858f4fab1d216" |
+| "finding" | "finding-712ca625d4ab3330e2943b234b5edb44" | "113a1393b926288330b9eb0d601fb6f9ab110e8839dc92427e650a257dd865f6" |
+| "finding" | "finding-74ca32895c1e183d10f15b98e2facae3" | "563fc5235d1a4d3919293c3a4b3114763732195e3007df1138c006666a63fbb2" |
+| "finding" | "finding-3996652d17c40171f4dfa037e1eafeea" | "ec77556d006784297dce09057a7001de2eb9215e8d7fd7370cdb090999492eeb" |
+| "finding" | "finding-72e58ae1b1e858af920cda66f8aa601f" | "d998065a0bd62a065375fcfb8f090fe4f2c3c11374ef6b5e540200e916304543" |
+| "finding" | "finding-4f7405cee82ab3435acea622b90b1188" | "de0236811a92e3501f808b2958debad3e318339d2fcd97140bb3a81902ba224f" |
+| "finding" | "finding-129369e9fba462a6b73ef5b4e4971279" | "051a7cad66260f95c8589ec1313d2f301c4a39e1df8254574ed9f5697e8fb1b6" |
+| "finding" | "finding-8bbed5fe36837bb9a0562c733a71afb2" | "f9e306ed80286ba68c184d35aa4b5f46dde9aa66e8e50f053921afcafe804524" |
+| "finding" | "finding-f5014b10c6c1e1ffdc3f14cb59401a56" | "6a6b96586132abe973c0e2afeced72c20ef2958d38c1273fbb8c8ae089d531ed" |
+| "finding" | "finding-8bc1c0eb1836562805a888159d3c4fd8" | "cd089804c04c709bc3c9555d509a40e10378ebf86e967bd237ea9d7a559f6648" |
+| "finding" | "finding-3afc956677fe64d50cbd08e6ce1e9c4e" | "90e8de7a3dc6730d66a2b50923e6a22ec6d77fefa26217df46cfc98ae306f9a1" |
+| "finding" | "finding-0f0c20d15a9b14db31284a3f857bf6ac" | "d5bd452fc50fe21a9af84c4fd63c4dcc39792f9e1b89eb1dd01bd5954abb1cb9" |
+| "finding" | "finding-504932d2b465c7ae4fea4dcde06db863" | "5d2a62b55d47aa75cd0956a0f0973817c29c570954dd11ecdc2445c568135af9" |
+| "finding" | "finding-4d3b0afcf5675b90af256b9092e6223b" | "bc5e695ccdd40209e4be720960b94f36591ed1925030d4ef3e2b250c82984429" |
+| "finding" | "finding-9b5af5db86067e05d497abc8d7eaabf5" | "e264aaa22922cefe1f1439a3a684868de466727fdfd13a170507b9cc4c27298c" |
+| "finding" | "finding-48f2e82a77ffb125ad2e8474d963bfca" | "a453ed71ae4f964108ee0844625ea9d8e2ed2f6c33793658c4539415bce6618b" |
+| "finding" | "finding-e601e394b966d403628de51bec5a3d53" | "c77c6abf4d05696e17c4d50dbb80951a7b868f10388809a1df4fae7f7fbe38ca" |
+| "finding" | "finding-dcf6bd69c3a235fe61294a4b4c43f818" | "35599d6d99612b3c0f8b2510d20fc494e6603b4362d9b473d30226062a057cb1" |
+| "finding" | "finding-8c7dd78b0db52bee9757b980b8cabc85" | "b5f2e1fc0944b7bd3e4a6a97c30cb150b6d81d624925f51ebb23a3a3713a82d6" |
+| "finding" | "finding-9bba053e6356da7c9eb18326073862b2" | "9b4a853c6f0dabdc0b101d877856f7ab8afd5c7df848fcac0713407abc24dc7e" |
+| "finding" | "finding-19e6617027b6592577c3029c6eb6a097" | "91b9a20c41ac401ecd93f8415bfd08f0fcdc77318cc15bca283cde7b5a6ed329" |
+| "finding" | "finding-3f9d5caaea2c04509f6f5318ba0fd700" | "c13b51aa2df031df4330f0004d11c03281b12f9be58356b274afadfba1dc70d4" |
+| "finding" | "finding-e319612162463c82a6ece432904892d7" | "3e85c5f2c984dc1d2dfb4868a7f6c49557a196611cb910743312f021715ae606" |
+| "finding" | "finding-101c774e15f2209afd777098f928cb62" | "29cc4cfd42804cb284fc10a1b73ab12273dd8f76b5499501461a8ab849ec488c" |
+| "finding" | "finding-b4cfa37d5c7156855481c98751b48345" | "51bb1c8c38ed5fc309280652127245c230476ccb99e9bd5675cfdca5e26731f7" |
+| "finding" | "finding-4baab88d893b0426cd6dfac65c851b34" | "687862b191a0248d18050e40bdd916752891856b7b8aa6ba35c4370115d80c83" |
+| "finding" | "finding-eeed443339067cdfcc2e14692b22d466" | "56fbeef8d8fbab8bc5eee6bba5189df640c7051479b84f3ca43af085e1cf9ed8" |
+| "finding" | "finding-41a96101ac55d58b6df51c990f4a7479" | "afbbf217b98ac93dc1231cd00e69751ed0e5d876c15e4cfb9f75292625e9ece4" |
+| "finding" | "finding-47d6efd9ac9336bf0ebaf6a688a24c72" | "54e190eaba02814d200a299b42aa0a7d14a017a33fc52c2019f90ffc6c786fd9" |
+| "finding" | "finding-6b83d6ddee2f819d6983205ab5d95a6a" | "eb1b17860332d67b29ef3a719c60ec7b4f882ac678171ea5d386e52a012036a2" |
+| "finding" | "finding-304b822bee7539ccfeedc51f8f6ffc80" | "77c663e4379e5693a10913d24fa1267766e59f149997e84a5085bb8b4dd6e6d9" |
+| "remediation_plan" | "plan-a4776cc170444c2cb059b7500b7289fb" | "046edc6474b1e1e000f65b7b7d025596bf49e86f71016dda77b9f37e16669a12" |
+| "remediation_plan" | "plan-d616635378b8481ae45a37521ec75d12" | "aa009e3a9736fb09de7b1ef2c3762cce9df3ef1d9ed721326458e5980fd92d96" |
+| "remediation_plan" | "plan-cf930afafb381df2a8570649e60eafd0" | "8408b175c8cec2e8d840178849678b0e8ef9c57f994299a8dc3a4cb4fe22e470" |
+| "remediation_plan" | "plan-9932e95b494af28122b52f40b7f2c6a3" | "bd83155dcac5dcc9902664f7519c5d3a087bfb7f16ec242a7b5e27ce16994076" |
+| "remediation_plan" | "plan-6b2125e95438335cd264108cd2d5da2c" | "4dd15f11893923a55bf5d7220aaa57dc0b636a89de20a41d1fb71d573bca3140" |
+| "remediation_plan" | "plan-d93ac5e54e74c8cf136f8ca18273c64a" | "9c21e18a3aed2d40e6a00fb919058d3fbd3fe80fcc2606ee2d3c069285aed65a" |
+| "remediation_plan" | "plan-ccafb77ed0c0c029b29f1851b2006a74" | "f8a22f148b3b716627d9548d41abca9d8d60fa6ce41cc9986144a43db31ee29d" |
+| "remediation_plan" | "plan-9c7580677633893aee3f89796865f636" | "f0b3e02e8b5990d2ac9296774c5f9692e9f36a67254b1a3b65a23982a09219a8" |
+| "remediation_plan" | "plan-5405f2cf0f77e37df3098cdc1edda6b5" | "069d9edd691f2d6ecc17cb5e9aaf33b2d3d9b45248b2f98da820f1a12e7491c0" |
+| "remediation_plan" | "plan-c31d6b4a26a9de4b70e2d821409ad6e6" | "af8c075e230dc931b0937c86af6d167e6e5cf770946aac4aad715b8a65be126c" |
+| "remediation_plan" | "plan-c596cb41b53d76f274244173483d3a8d" | "733813c82d3aa73accd19a2bd03d5cccac0c60752b1f7b1e4cd1a25ffc841707" |
+| "remediation_plan" | "plan-b7cb81c9590ae45dbf007e28223894e1" | "2d666f2d9921cd2617c930ea4c95825d0c9e4017612ee10c2550685af0170ec3" |
+| "remediation_plan" | "plan-ca1bf3e6f68451086190e143b878358a" | "d3fc7dcc4633b9f1f8fb269c6acb250569f9ac83b50e58c7f35a9c28d1d5eab6" |
+| "remediation_plan" | "plan-7172b36b03ace857dd80e430a2d5b10e" | "818dda4338fce820ca3b0433ccad035cde7fbc58573812a8885269664de0c022" |
+| "remediation_plan" | "plan-af1ca6671d0242774aa37c258351b172" | "4c007c2f0a0373c69bb4b474c3f614238622d911815ec2ee15ac15ccbbdad48b" |
+| "remediation_plan" | "plan-0a461c8986194792d910c164f6b5d3be" | "cf3f50c299a7a04d3dfd3b19af932232c6b5b0b02aec8d61b7320ab350628456" |
+| "remediation_plan" | "plan-076d355be41f8842129f13f2bf584fa2" | "076fb154c9b6ec9fd2daaed1d2d7b28aa1d68b7e55c4e02e687ca666f5e55e62" |
+| "remediation_plan" | "plan-916b2f79fbff86f9a1d75693ae360036" | "7770027f434f191056b9bab8e880744dfb31c33e015082322fbe9beda487848e" |
+| "remediation_plan" | "plan-60ec34d535a65f72d6939ac9afc13808" | "0a077f5465642525c04272ac7d50b33045997003cc9e6330fa8a43ef4504bd8e" |
+| "remediation_plan" | "plan-8920b6ce6eb4dd59d0f70e6082fd3302" | "58fe278378c4ea9329b19467dae22b68e11f85374158812f9c723dfcd16132c1" |
+| "remediation_plan" | "plan-b861fb423d88633c260498de7987002b" | "97176720298851b403527800343862adf737b948bf3f57f45d484e38b7da64f3" |
+| "remediation_plan" | "plan-2a22fdf9d680296e5240ad42c4e098b8" | "fdf05745ce9e88df2e2e95bc1729ef1cedb93d76e46519e67576eeaf2864847c" |
+| "remediation_plan" | "plan-48b0e592dde21d24b6e4dc0e557bc7cc" | "b52682c95706320f0e7316917ac5a3e9afffa9cc8e07f959310d07d10c931673" |
+| "remediation_plan" | "plan-1726c8968271f4274487204766cd3c0b" | "4b0ae66c0ecbbabb7dc30e4401dc0364ab59693e61bebb06c06a6bdbb1dc1e34" |
+| "remediation_plan" | "plan-a47f893f7bd2b04ccfeba39ae52e033a" | "93b780ec139916dae5df385bf4d749e7ed0211e9c728372f30cdf78cafd25a16" |
+| "remediation_plan" | "plan-06e9f9ad5cb34ffc63d9b08613eb0d14" | "565efddd386ce087120a6326e2c3d56911ecd0e5764d603ffb8ec8c3056f609b" |
+| "remediation_plan" | "plan-6396e93eb332270bef24afa1aebc9e54" | "3b243a87df03a4ff68c750da4c4db543148dec08a82fc1bbca6a7f0b1d930cf3" |
+| "remediation_plan" | "plan-72e1b1819efae4324ba613d100773ac2" | "e6c195713fcad1455e6cc858d19313f81e1bb9d61d50adadf1f410780dac3020" |
+| "remediation_plan" | "plan-182c2451c2c974320e12406c6da73f3c" | "dd9faed12a63d2f833c37430124e2e536a9a9665418b895aaa2eb07808badf5a" |
+| "remediation_plan" | "plan-1e61b7cc4b647beeb47dbb4b319df44c" | "22f2872f27ce62d9cbedd7ae830d4a42b8169bbe27d1faca3917f72cb50c8ed7" |
+| "remediation_plan" | "plan-a79e9f4ff226cea38ed5b61a88bfbfc0" | "194d9ab60a607f344adc5caf8f6bbccbc8d5fa0d7dd4a334ae8eb638f612de75" |
+| "remediation_plan" | "plan-5f0b8d155089b82d162ebdd9a5232760" | "df2505f610fc5eb23000ed467d5fe9214d3bfb3c65a05d3d6ec60748fad48cd1" |
+| "remediation_plan" | "plan-b21184176bd4e934b4b24578aea07e7f" | "5dd38abc4cc729a30da028731aabadae438a21bcbee7612b2b84e886021e5b2d" |
+| "remediation_plan" | "plan-e0ebcce908410d36ea97ce9f08176ebd" | "dd8b149bf0fdc5887dcaedc1dc7c6760d80bd3091c481062be72a14ef6c8cc24" |
+| "remediation_plan" | "plan-937f08ef962bf8720fef88117f78bda0" | "8db1aec18a1c7e8cd71ef5446603b4c21d12956a6ffd7ec36e1811cc8071afa7" |
+| "remediation_plan" | "plan-37fa4fb13f3f1e95d9b3609204b7b0db" | "1b2122727a35445236426967648896a5d5e9c07b535d725d66ff11bd2aad2c54" |
+| "remediation_plan" | "plan-5bb9cde39f6f5e13362daf1e179c3a0d" | "69322c689f667e643622f897bc5249b91b499162b4cd136af90a77e524721fe3" |
+| "remediation_plan" | "plan-20c5ebf0059388030abbfa80dc7996ac" | "0c84d7d60f0fdf05d90063630d61e10fd95a217c350d7e1a4b62a1d917531480" |
+| "remediation_plan" | "plan-39f17e1223e04bc4120d92213e100366" | "a2067941a419ec3782947f3b7aecfe27c301cedcdc7022f5ac701119d0360bfa" |
+| "remediation_plan" | "plan-d64deefbd2b927045ee9611b083a0641" | "ceb82ea7ec3aba657b37a8c22e0dbd89f0191f3cb87a440c1029c59808861740" |
+| "remediation_plan" | "plan-2ca39afa7a627e882666ba13036043b4" | "b9a76e6006296bbedd80f47b40c90a87112f6875f58223ba2b9382c93979cc3a" |
+| "remediation_plan" | "plan-796c8375e347f9e4361561a835beb46d" | "5b0df3a7120ae2b9e53c3dfd6665310e8020c9d0756dafb2b14d7e7265d16de6" |
+| "remediation_plan" | "plan-14bb4124e957ace7159185ade494b1bc" | "019f2269d4dff3b069a6490fa6ad4f198443a2f9f16df61eb4a626a47041ffc3" |
+| "remediation_plan" | "plan-8ac72989e9229f4ef3eab0b61db63278" | "90d80b3f9adba4096b95abf6a0f4a6bcdde0da878ba02e1ec97dc38b4fad01d4" |
+| "remediation_plan" | "plan-f91e9b4e39b4723eec21fdf54567dc39" | "617eb69ee6a7d193183087db5cde86f61070042b7f456b76ae1bbc01173962b2" |
+| "remediation_plan" | "plan-0c25ccef195300d7d15f297ee3c9afaa" | "81544c10df0eddcd2d4a887e947f0b51337a3b8e0f25772c7b95fa55d5334d7a" |
+| "remediation_plan" | "plan-3d412b9c0643c5c4f94de8cfd9b037a4" | "73d87cf30a7f421c7b1284cca3f7b64ce5d4d6852cf5c3461b0f15fb067099a7" |
+| "remediation_plan" | "plan-94fdf189d99a4e3f5056055732b95f1d" | "bc54c9b54b81b98b3792e9f069bec60b19139e1a567298d002af94c20cfce40b" |
+| "remediation_plan" | "plan-ad83ec09e07c3eab6c870832b8cad153" | "a602d739982b9501b987cbd876b152c586c6d350965fed8511752c74cec20ab6" |
+| "remediation_plan" | "plan-2301b7c29a66a3d1bc1863c944a03158" | "a57a8884cd4790d737dc509f55af35b91404c2b0626d4803f04d91751cc0b724" |
+
+## 対象と保存根拠
+
+| 種別 | ID | digest |
+|---|---|---|
+| "target" | "fixture-target-constraint-C01-good" | "3f1e2fd714c2c870484c55dfd255e09b9868fa68a931336bf5bb34b25c9e6f2f" |
+| "target" | "fixture-target-constraint-C02-good" | "f82b7db9d2c8312b5ce01f3ba623005c84540a7c22981eef6e8bc5c6e6e27b32" |
+| "target" | "fixture-target-constraint-C03-good" | "fb37d9d9a0b4a22f4ecd2b90f4fe1566549d640d8335b65dfa54d35c01f0249b" |
+| "target" | "fixture-target-constraint-C04-good" | "8b59fcaae84f4e9098c803a85bcacb5935194ee0b5eda00cb03d04b41e268eeb" |
+| "target" | "fixture-target-constraint-C05-good" | "712fd48b73ae7230ea2ce774ac73706b44a1f2430416ba3b1eecb298557a4b1d" |
+| "target" | "fixture-target-constraint-C06-good" | "ad38008ffc0ae64d4f1a123abe21beeceb115b7a4fa0aea8c70495fa23d8e7af" |
+| "target" | "fixture-target-constraint-C07-good" | "5c91c4ef797213ffb422cc95028c6c1c44a2e273ae7910165df38c20465bb337" |
+| "target" | "fixture-target-constraint-C08-good" | "6fcfee71f8f6656617adfb08da848348a1620cfda481e534ababaa13b2e807f1" |
+| "target" | "fixture-target-constraint-C09-good" | "9aaab17a8fb6a254905ba4d433b1465b3f9d205947558579eb9eb10a45e76576" |
+| "target" | "fixture-target-constraint-C10-good" | "9f197568cb9dfff72c4b1add90cd271e664f8d1a4c73ecb527754130d7421198" |
+| "target" | "fixture-target-mutation-F01-healthy" | "d2cb1f526fad23e5119a36c3193530dad24a77536ddb90925de143441327ad01" |
+| "target" | "fixture-target-mutation-F02-healthy" | "27e92803256aeb055d7a9440b6a2a70bc0537bed0f703937c064485194b028ed" |
+| "target" | "fixture-target-mutation-F03-healthy" | "8004e3095cb78e6e5acc90e58148ff327c6127a87da7e8808dd0aab3f38d1e93" |
+| "target" | "fixture-target-mutation-F04-healthy" | "4c872a58d256ce6513896261bd13ea1f2570f075d2644eea45e2cdd0c53994db" |
+| "target" | "fixture-target-mutation-F05-healthy" | "a0778fc8fac026967d8a39401c9a261a06f092b483ab58929ac7faecf6d7b839" |
+| "run_outputs" | "cancellation-runtime" | "445cbcd226c8e7a771c4b6b1098c289847a14ca39e162076abdd924707b239a7" |
+| "run_decision" | "cancellation-runtime" | "88df9308ac7a14fe8b928a6834e5f1cf005942d69c83b6d6246156a7cabd066e" |
+| "evidence" | "cancellation-runtime" | "5cded076379106198f1aa3c7ca6b6c19f73eb306190b4a5b23e3e1c4f0243670" |
+| "findings_report" | "cancellation-runtime" | "1e70967b793cdbae8bab88798edac20113d9b6c112fa518a528d9af69da2125a" |
+| "run_manifest" | "cancellation-runtime" | "63c78b2ca90d4050bed4450b74afa02f3103ac636d2834f90572822c79890de0" |
+| "plans_report" | "cancellation-runtime" | "1936c528e4aaec242eb1e548476060f118094b6c4d7600e18544de8fb8b0c3ac" |
+| "authority_cancel_receipt" | "cancellation-runtime" | "cc7267b02b283ec929eca51d91f2d734c72839d6b90e24af3bac210920a31c22" |

@@ -1,0 +1,38 @@
+{
+  "scope": "requirements document traceability, not product verification",
+  "checked_at": "2026-09-09T23:46:39.468698+00:00",
+  "status": "pass",
+  "checks": {
+    "requirements_unique_complete": true,
+    "acceptance_one_to_one": true,
+    "all_source_functional_requirements_disposed": true,
+    "all_source_mvp_items_disposed": true,
+    "traceability_ids_resolve": true,
+    "saved_15_files_match": true,
+    "clarification_source_hash_matches": true,
+    "original_gah_raw_unchanged": true,
+    "previous_12_questions_retained": true,
+    "decision_questions_explicit": true,
+    "requirements_and_acceptance_marked_draft": true,
+    "product_code_and_schema_not_added": true
+  },
+  "counts": {
+    "requirements": 24,
+    "acceptance_criteria": 24,
+    "source_functional_requirements": 17,
+    "source_mvp_items": 14
+  },
+  "source_sha256_raw": {
+    "docs/requirements.md": "f4a155b35516ab14b3decb038fedc44ebf89e49120af67c91eae1eec8388bf64",
+    "docs/acceptance-criteria.md": "49e524f885bef59477651d5ee44a763a1f70c7028f413e904ddc7986a07bac55",
+    "docs/requirements-traceability.md": "5936c1f6cbde0a2f1fcb6b97c42cf64caf8a98715332b3554f927310b5855190",
+    "docs/open-questions.md": "e8a1afdf007984d14e396ff1fdefc69a2d7629f4d0c6b6f65aaa1ae6f860c3ac"
+  },
+  "semantics_review": "Codex manual review; not an independent approval",
+  "product_tests": "not_run",
+  "privacy_transform": {
+    "applied_at": "2026-09-10",
+    "task_id": "20260910-10",
+    "note": "利用者の非掲載指示により参照元の名称・URL・識別子を匿名化した履歴。過去の検証結果とhashは当時の記録であり、現在の非匿名化原本の存在や再検証を示さない。保存版の現在hashは各archive-manifestを参照する。"
+  }
+}

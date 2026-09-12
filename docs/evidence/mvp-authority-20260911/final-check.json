@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "checks": {
+    "verified_tests_203": true,
+    "tested_runtime_and_test_sources_unchanged": true,
+    "only_declared_spec_amendment": true,
+    "saved_evidence_unchanged": true,
+    "workflow_passed": true,
+    "nonpublication_boundary_passed": true
+  },
+  "documentation_amendment": {
+    "path": "docs/auth-adoption-detail-spec.md",
+    "previous_sha256": "9fca38017e08e2e93421e4b7d667b3f7a850f67a67eb6c0c2570833575a50e21",
+    "actual_sha256": "fe0649d0d09e005f39b7cb01219123f4af91d94161d0c4209f54d87030c70a49",
+    "reason": "validation_scope_clarification"
+  },
+  "checked_at": "2026-09-11T06:16:33.834367+00:00",
+  "verification_sha256": "d1511f92aefa79600b945e55748afb658f105070142ee265ae8605d5841a15db",
+  "workflow_sha256": "e48b3ed400f8de580cd87048927226bb1cd4d0edf19e0f31237ce73883e6c804",
+  "privacy_sha256": "516f01e8dc218c1d30d468f1e661fe0f92bf2311b12d15c8b94125c7cdb7b266",
+  "checker_sha256": "08ffdb63bf68e9cc413d2f9cd41f77bfcc0b953138369deb67208c9920949b48"
+}

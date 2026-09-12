@@ -1,0 +1,40 @@
+test_additional_trials_change_measurement (__main__.SemanticTests.test_additional_trials_change_measurement) ... ok
+test_baseline_revision_keeps_measurement_but_changes_evaluation (__main__.SemanticTests.test_baseline_revision_keeps_measurement_but_changes_evaluation) ... ok
+test_declared_axes_do_not_override_derived_differences (__main__.SemanticTests.test_declared_axes_do_not_override_derived_differences) ... ok
+test_dependencies_and_requiredness_are_not_ignored (__main__.SemanticTests.test_dependencies_and_requiredness_are_not_ignored) ... ERROR
+test_duration_budget_is_not_hidden_by_time_projection (__main__.SemanticTests.test_duration_budget_is_not_hidden_by_time_projection) ... ok
+test_environment_is_a_condition (__main__.SemanticTests.test_environment_is_a_condition) ... ok
+test_evaluator_revision_is_derived_from_real_bindings (__main__.SemanticTests.test_evaluator_revision_is_derived_from_real_bindings) ... ok
+test_independent_entry_order_is_not_stage_order (__main__.SemanticTests.test_independent_entry_order_is_not_stage_order) ... ok
+test_legal_stage_order_change_remains_a_measurement_change (__main__.SemanticTests.test_legal_stage_order_change_remains_a_measurement_change) ... ok
+test_missing_baseline_context_and_broken_refs_fail (__main__.SemanticTests.test_missing_baseline_context_and_broken_refs_fail) ... ok
+test_oracle_and_label_change_is_corpus_change (__main__.SemanticTests.test_oracle_and_label_change_is_corpus_change) ... ok
+test_return_values_do_not_grant_authority_or_alias_inputs (__main__.SemanticTests.test_return_values_do_not_grant_authority_or_alias_inputs) ... ok
+test_run_plan_contract_identity_and_time_shift_are_not_conditions (__main__.SemanticTests.test_run_plan_contract_identity_and_time_shift_are_not_conditions) ... ok
+test_stricter_threshold_is_policy_change (__main__.SemanticTests.test_stricter_threshold_is_policy_change) ... ok
+test_target_version_is_separate_from_measurement (__main__.SemanticTests.test_target_version_is_separate_from_measurement) ... ok
+
+======================================================================
+ERROR: test_dependencies_and_requiredness_are_not_ignored (__main__.SemanticTests.test_dependencies_and_requiredness_are_not_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\.ga\mvp-contract-revision-20260912\test_semantic_conditions_candidate.py", line 106, in test_dependencies_and_requiredness_are_not_ignored
+    value=self.compare(lambda f,p,m:f['registry']['controls'][1].update(dependencies=[]))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\.ga\mvp-contract-revision-20260912\test_semantic_conditions_candidate.py", line 39, in compare
+    a,ac=make(required=required);b,bc=make(mutate,required=required)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\.ga\mvp-contract-revision-20260912\test_semantic_conditions_candidate.py", line 33, in make
+    bound=bind_run_manifest(m,c,p,f['policy'],f['registry'],f['case_set'],baseline_context=context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\src\gah\run_contracts.py", line 522, in bind_run_manifest
+    bound_plan = bind_trial_plan(p, c, registry_value, case_value, m["control_ids"], m["target_refs"], baseline_context=baseline_context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ryo-n\Codex_dev\guardrail-assurance-harness\src\gah\run_contracts.py", line 384, in bind_trial_plan
+    raise _invalid("UNKNOWN_REFERENCE")
+gah.contracts.ContractError: UNKNOWN_REFERENCE
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.189s
+
+FAILED (errors=1)

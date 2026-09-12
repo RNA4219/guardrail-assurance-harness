@@ -1,0 +1,25 @@
+{
+  "id": "docs/reviews/operating-decisions-20260910.md",
+  "role": "reviews",
+  "title": "運用方針の決定と要求v0.4への反映",
+  "summary": "利用者の回答「CIで許す」「閾値と予算はおまかせ」「評価周りはopsのOSSから転用」「管理主体は生成AI」に基づく文書改訂。[v0.3保存稿](../research/archive/before-operating-decisions-20260910/docs/requirements.md)から、32要求と32受入条件のIDを維持して[初期運用方針](../operating-policy.md)を加えた。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/operating-policy.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md"
+  ],
+  "deps_in": [
+    "docs/acceptance/AC-20260910-07.md",
+    "docs/requirements-traceability.md",
+    "docs/tasks/TASK.operating-decisions-09-10-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "1e88f85136b530b4b20d4ce71d32dc5ba1a9e89e6b4391112602ead9aabef8cf"
+}

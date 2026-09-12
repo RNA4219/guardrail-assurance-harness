@@ -1,0 +1,55 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: draft
+last_reviewed_at: 2026-09-12
+next_review_due: 2026-10-12
+---
+
+# 製品の実行監督・再開・対象限定の仕様
+
+通常runの予約・実行・保存・現在CIを一つの製品入口へ接続する設計である。現在のtools.verify_baseline_runtimeは明示的な固定fixture検証器であり、製品監督入口や定期実行サービスの完成を意味しない。本書の入口は未実装として追跡する。
+
+## 製品入口と表示
+
+計画するCLIはgah_runで、run、resume、cancel、statusの各subcommandを持つ。runtime deployment、run ID、契約系列、期待する契約完全参照、実行triggerを入力する。triggerはmanual / change / scheduled_fullのいずれかとし、未知field・role自己申告・任意shell文を拒否する。
+
+CLIは既存brokerを認証したoperatorとして操作する。managerの提案・採択やvalidatorの観測は固定された独立主体へ分け、任意のUIDを入力から選ばせない。期待契約と異なるcurrentを黙って使わない。
+
+最終表示はrun ID、実施範囲、未実施範囲、時刻、資源状態、保存時Assurance、現在CIと根拠参照を示す。終了コードは既存CIの0/1/2/3を保持し、保存JSONだけで0にしない。
+
+## durable checkpointと二重実行の防止
+
+run専用のcanonical directoryを一つに固定し、OS lockで生存中の監督を排他する。brokerのowner_id/epochによる権限も別に検査する。ローカルlockだけでauthorityの所有権を得ない。
+
+checkpointにはschema版、run/manifest/plan/契約の完全参照、source lock、開始要求ID、現在owner/epoch、予定entry、operation ID、段階、実行receipt参照を保存する。ネットワーク送信・Docker開始前に意図をfsyncとatomic replaceで記録する。本文checksumは破損検知であり、authority認証の代わりではない。
+
+各操作のrequest_idと本文を固定する。通信結果が曖昧なら同じ要求を照会し、異なるoperation IDで再送しない。baseline/契約/current/現在CIはfreshな問い合わせを行い、冪等な過去応答と混同しない。
+
+## 再開と取消しの状態表
+
+| 観測できた状態 | 再開処理 |
+|---|---|
+| 未予約の予定entry | 現在開始条件とownerを検査して予約できる |
+| 予約済み・送信前 | 保存要求とbrokerを照合。取消し時は予約を解放 |
+| dispatch済み・実行中 | 同じ実行journalと子処理を照合し、新規実行せず停止/回収へ進める |
+| 実行完了・停止確認済み | 同じreceiptから観測・精算を続行。結果を再取得するための再実行は行わない |
+| 実行時刻・停止・usageの根拠欠落 | 不足を保持し、正常完了や0費用を作らない |
+| terminal保存済み | 不変成果物を読み、現在CIを照会。履歴を書き換えない |
+| owner期限切れかつ開始根拠失効 | resource_cancel_claimで取消し取得へ進める |
+
+再開前にbrokerのrun_statusと保存manifest/planを照合する。正常な継続では現在の採択根拠も確認する。根拠失効で新規dispatchができなくても、停止・精算・保存読取りへの経路は維持する。
+
+Ctrl+C、プロセス強制終了、ディスク障害、曖昧な送信結果を中断原因として扱う。既知の違反は取消しDecisionへ残す。停止未確認では終了2、停止済み取消しでは3とし、後日の精算で0へ変えない。共有brokerや他runの子処理は削除しない。
+
+## 変更影響と定期全体実行
+
+changeでは、変更対象の完全参照とRegistry依存閉包からControl集合を決定する。入力が未知・欠落・不整合なら影響なしとせず、fullへ拡大するか不足で止める。依存先を取り除いた小さな集合へ縮めない。
+
+manifestへ要求された範囲、導出した範囲、実施範囲、除外理由、未知範囲、trigger参照を固定する。範囲限定の結果はその範囲だけのCI利用に限る。consumerの期待対象・用途と一致しなければ終了0を返さない。
+
+scheduled_fullは全Control・全必須caseを対象とする。schedulerは決まった時刻に製品入口を呼ぶtransportであり、採択・成功の権限を持たない。重複起動はrun IDとOS lock・owner/epochで検査し、前runのreceiptを今回の成功に使わない。
+
+## 接続完了の証拠
+
+通常終了と否定結果、全checkpoint境界での中断、二重監督、通信再試行、owner期限、根拠撤回、停止不明・遅延精算、既知違反保持、範囲限定・未知影響・定期全体を実行する。source lock・実operation数・停止/精算・現在CIと再起動を照合する。合成runnerの部品試験と実Docker/providerの受入を分ける。

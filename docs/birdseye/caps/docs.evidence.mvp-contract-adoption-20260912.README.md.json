@@ -1,0 +1,26 @@
+{
+  "id": "docs/evidence/mvp-contract-adoption-20260912/README.md",
+  "role": "evidence",
+  "title": "契約世代2の採択と現在有効性の検証証跡",
+  "summary": "[統合検証](verification.json)は507テストと実Docker150項目が成功した。 固定UC-CIの初回15件・旧条件15件・新条件30件を実行し、保存Evidenceから契約generation 2を 採択した。baselineはgeneration 1を保持する。全MVP受入と通常CIは未完了である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/mvp-contract-adoption-20260912.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/contract-transition-detail-spec.md",
+    "docs/evidence/README.md",
+    "docs/reviews/mvp-contract-adoption-20260912.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00066",
+  "source_sha256": "b6b2343b8d76f8646430f9054a98b5f07a59363d174d78b8eb409c0d90672b2b"
+}
