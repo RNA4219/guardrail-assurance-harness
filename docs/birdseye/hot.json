@@ -1,5 +1,5 @@
 {
-  "generated_at": "00066",
+  "generated_at": "00067",
   "nodes": [
     {
       "id": "README.md",
@@ -45,7 +45,7 @@
         "docs/tasks/TASK.mvp-completion-09-11-2026.md",
         "orchestration/development-plan.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -125,7 +125,7 @@
         "docs/tasks/TASK.mvp-completion-09-11-2026.md",
         "orchestration/development-plan.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -147,7 +147,7 @@
         "docs/reference-boundary.md",
         "docs/requirements.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -163,7 +163,7 @@
         "docs/requirements.md",
         "docs/tasks/TASK.mvp-completion-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -183,7 +183,7 @@
         "docs/research/README.md",
         "docs/run-contract-detail-spec.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -210,7 +210,7 @@
         "docs/tasks/README.md",
         "docs/tasks/TASK.mvp-completion-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -228,7 +228,7 @@
         "docs/research/README.md",
         "docs/reviews/requirements-adversarial-20260910.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -270,7 +270,7 @@
         "docs/tasks/TASK.runtime-core-09-11-2026.md",
         "docs/tasks/TASK.state-review-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -296,7 +296,7 @@
         "docs/acceptance/AC-20260911-05.md",
         "docs/acceptance/README.md"
       ],
-      "last_verified_at": "2026-09-12T16:49:37+00:00",
+      "last_verified_at": "2026-09-12T17:09:17+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     }

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "scope": "OS-independent document index ordering",
+  "regression_before": 1,
+  "workflow_tests_after": 11,
+  "after_exit_code": 0,
+  "initial_publication_commit": "82d6677bd434e9e5af5deffab23398b678cc9bd2",
+  "source_sha256": {
+    "tools/workflow.py": "2732723ccd5babaee02fa781e37e2afd7b3eb64eba71a17bab8587f71eb829d9",
+    "tests/test_workflow.py": "980db58b57932876c7f65c8a99b18f7b930e1ca9653502f75054ca2170bb91e8"
+  }
+}

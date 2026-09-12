@@ -23,6 +23,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00066",
+  "generated_at": "00067",
   "source_sha256": "1f284cb77d92c973d28396e314c683a283d06fe17d912fdc7e677224156875bc"
 }

@@ -13,6 +13,8 @@ GAHで実施した変更を記録する。コピー元の履歴は[整理前構�
 
 ## [Unreleased]
 
+- 0031: GitHub初回公開時に判明したWindows/Linux間の文書索引の順序差を補正。repo相対POSIX文字列で生成順を固定し、混在文字種の再現試験と既存の文書運用試験を検証した。
+
 - 0030: MIT Licenseを採用してソース公開を準備。公開範囲・初回取得・現行版の検証限界を[公開記録](docs/oss-publication.md)に明記し、作業用状態を除外する。過去の証跡のbyteをGitで保持し、全unittestのCI上限を60分へ更新。MVPの未受入状態は維持する。
 
 - 0029: 意味的条件比較と後続契約の禁止変更検査を追加。実行ID・対象内容・baseline対象・測定条件を分離し、Critical格下げや必須検査の除去を拒否する。新規30件と既存21件の[試験](docs/evidence/mvp-condition-core-20260912/README.md)が成功。authorityの後続採択・実行は未接続。

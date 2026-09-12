@@ -41,6 +41,17 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("README.md", cap["deps_in"])
         self.assertEqual([], w.artifact_errors(self.root))
 
+    def test_index_node_order_is_portable_across_path_flavours(self):
+        self.put("ZETA.md", w.FM + "# Zeta\n")
+        self.put("docs/Alpha.md", w.FM + "# Alpha\n")
+        w.generate(self.root)
+        index = json.loads(w.read(self.root / w.INDEX))
+        self.assertEqual(list(index["nodes"]), [
+            "README.md", "ZETA.md", "docs/Alpha.md",
+            "docs/acceptance/INDEX.md", "docs/acceptance/README.md", "docs/guide.md",
+        ])
+        self.assertEqual([], w.artifact_errors(self.root))
+
     def test_source_change_is_stale_then_regenerated(self):
         w.generate(self.root)
         self.put("docs/guide.md", w.read(self.root / "docs/guide.md") + "\n変更内容。\n")

@@ -57,8 +57,11 @@ def source_paths(root: Path) -> list[Path]:
     paths = list(root.glob("*.md"))
     for directory in DOC_DIRS:
         paths.extend((root / directory).rglob("*.md"))
-    return sorted(p for p in paths if "archive" not in p.relative_to(root).parts
-                  and "TEMPLATE" not in p.name)
+    return sorted(
+        (p for p in paths if "archive" not in p.relative_to(root).parts
+         and "TEMPLATE" not in p.name),
+        key=lambda p: p.relative_to(root).as_posix(),
+    )
 
 
 def prose(content: str) -> str:

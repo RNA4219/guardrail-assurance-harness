@@ -28,6 +28,8 @@ next_review_due: 2026-10-13
 
 ## 公開時の検査
 
+初回公開commit `82d6677` はGitHub上でpublic・MITと確認した。初回の文書CIではWindowsとLinuxのPathソート順の差により索引整合が失敗したため、repo相対POSIX文字列で順序を固定した。再現試験の失敗を確認した後、補正後の文書運用11試験が成功。過去のローカル成功記録はその条件のまま保持する。
+
 配布状態の[最終検証](evidence/oss-publication-20260913/portable-validation.json)では、Gitから書き出した全ファイルのbyte一致、文書整合と関連117試験の成功を確認した。先の93件に、作業フォルダへの依存を除いた旧版移行24件を含む。非掲載情報・credential形式・除外対象の残存は0件。全MVPの受入や全suiteの完了は含まない。
 
 [公開準備の検証記録](evidence/oss-publication-20260913/validation.json)では、関連83試験と文書運用10試験の計93件が成功した。文書・CI対応・branch設定の予定値・ローカルsecurity postureも成功し、保護対象7文書は変更していない。全体回帰やリモートCIの成功件数には含めない。
