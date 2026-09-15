@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "measurement_classification_recheck",
+  "source_snapshot": 74,
+  "full_mvp_accepted": false,
+  "before": {
+    "tests_run": 2,
+    "failures": 1,
+    "passed": false,
+    "reason": "Mutation failures counted in error but omitted from mutation_error"
+  },
+  "after": {
+    "tests_run": 38,
+    "seconds": 28.597,
+    "passed": true
+  },
+  "minimum_counts": {
+    "tp": 8,
+    "fn": 2,
+    "fp": 1,
+    "tn": 9,
+    "killed": 8,
+    "survived": 1,
+    "no_coverage": 1,
+    "mutation_error": 10
+  },
+  "minimum_metrics": {
+    "recall": [
+      8,
+      10
+    ],
+    "fnr": [
+      2,
+      10
+    ],
+    "fpr": [
+      1,
+      10
+    ],
+    "mutation_score": [
+      8,
+      10
+    ]
+  },
+  "verified_boundaries": [
+    "indeterminate and missing labels retain missing obligations",
+    "recovered retry retains fault history without double-counting a Mutation ERROR",
+    "two failed stages count one failed Mutation trial"
+  ],
+  "remaining": "Justified mutation exclusions are not implemented; GAH-R07/R09 acceptance remains incomplete.",
+  "private_sha256": {
+    "measurement-minimal-74.log": "90ea5815d9ad66d520dfcd430e9735d88566422c4ffc81c2b1e1cd8502b0af07",
+    "measurement-fixed-74.log": "103ecacc5f286de755b35a7a8772a00a30a8152b478924c3cdb24365a5ba34a2",
+    "acceptance-source-74.json": "6bccebb1281f5eff8d58e6b8f89a27873e1a5f9f37dfa9c6f87af9e34af5a3b6"
+  }
+}

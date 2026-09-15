@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "llm_following_generations_verification",
+  "source_snapshot": 73,
+  "full_mvp_accepted": false,
+  "synthetic_runner": true,
+  "os_runtime_acceptance": false,
+  "base_test_passed": true,
+  "following": {
+    "contract_generation": 3,
+    "baseline_generation": 3,
+    "normal_trial_count": 800,
+    "original_receipts_unchanged": true
+  },
+  "passed": true,
+  "elapsed_seconds": 28004.010927900003,
+  "scope": "実SQLiteと合成runnerによる通常800・CI・再開・取消し・後続旧800/新800・契約3/基準3。OS隔離・実wall予算の証拠とは分ける。",
+  "private_evidence_sha256": {
+    "llm-supervision-integration-73.json": "2eeb1f1db7baf47381963825da9285e313361b6f4395076bf63f108a49017eb9",
+    "llm-supervision-integration-73.log": "01c27741c41e2493924cf120cf96cafdcc4f2d485c2613d209495e116a6c6fd8",
+    "llm-generations-final-73.sqlite": "b804d31ab3d6d85f7f9c184ca2b55d5897b30db078f3d8e1fc22baf76fd801db"
+  }
+}

@@ -85,13 +85,52 @@ def _validate_source(source: Any) -> tuple[dict[str, Any], ...]:
     return manifest, contract, plan, policy, registry, case_set
 
 
-def bind_contract_transition(
+def bind_contract_transition(previous_contract, next_contract, *, baseline_record,
+                             baseline_source_bound, source_baseline_context=None,
+                             following_registry=None):
+    """純粋な全入力の構造検査を再利用する。現在の採択・Evidence検査は呼出側で行う。"""
+    import json
+    from .cache_inputs import plain, encode_result
+    values = [previous_contract, next_contract, baseline_record, baseline_source_bound,
+              source_baseline_context, following_registry]
+    try:
+        cases = baseline_source_bound['case_set']['cases']
+        eligible = type(cases) is list and 400 <= len(cases) <= 415
+    except (KeyError, TypeError):
+        eligible = False
+    if eligible and plain(values):
+        try:
+            payload = encode_result(values)
+        except (TypeError, ValueError, UnicodeError, RecursionError):
+            payload = None
+        if payload is not None and len(payload.encode('utf8')) <= 3 * 1024 * 1024:
+            from .evaluation_authority import _source_digest
+            return json.loads(_checked_transition(_source_digest(), _bind_contract_transition, payload))
+    return _bind_contract_transition(previous_contract, next_contract,
+        baseline_record=baseline_record, baseline_source_bound=baseline_source_bound,
+        source_baseline_context=source_baseline_context, following_registry=following_registry)
+
+
+from functools import lru_cache
+
+
+@lru_cache(maxsize=4)
+def _checked_transition(source_digest, implementation, payload):
+    import json
+    from .cache_inputs import encode_result
+    previous, following, baseline, source, context, registry = json.loads(payload)
+    return encode_result(implementation(previous, following, baseline_record=baseline,
+        baseline_source_bound=source, source_baseline_context=context, following_registry=registry))
+
+
+def _bind_contract_transition(
     previous_contract: Any,
     next_contract: Any,
     *,
     baseline_record: Any,
     baseline_source_bound: Any,
     source_baseline_context: Any = None,
+    following_registry: Any = None,
 ) -> dict[str, Any]:
     """初回baselineを保持した契約更新の構造bindingを返す。
 
@@ -102,6 +141,8 @@ def bind_contract_transition(
     try:
         previous = validate_evaluation_contract(previous_contract)
         if previous['generation'] >= 2:
+            if following_registry is not None:
+                raise _bad('UNSUPPORTED_REGISTRY_REVISION')
             from .following_contracts import bind_following_transition
             return bind_following_transition(previous, next_contract, baseline_record=baseline_record,
                 baseline_source_bound=baseline_source_bound, source_baseline_context=source_baseline_context)
@@ -137,18 +178,32 @@ def bind_contract_transition(
             raise _bad("CONTRACT_ID_REUSED")
         if following["generation"] != 2:
             raise _bad("GENERATION_MISMATCH")
+        changed_registry = None
+        if following_registry is not None and following_registry != registry:
+            candidate_registry = validate_registry(following_registry)
+            if previous["use_cases"] != ["UC-LLM"] or following["use_cases"] != ["UC-LLM"]:
+                raise _bad("UNSUPPORTED_REGISTRY_REVISION")
+            _ref(following["registry_ref"],"control_registry",candidate_registry["registry_id"],candidate_registry)
+            old_controls,new_controls=registry["controls"],candidate_registry["controls"]
+            if (len(old_controls)!=len(new_controls) or any(
+                    _same_without(old,{"target_ref"}) != _same_without(new,{"target_ref"})
+                    for old,new in zip(old_controls,new_controls))
+                    or not any(old["target_ref"]["digest"] != new["target_ref"]["digest"] for old,new in zip(old_controls,new_controls))):
+                raise _bad("UNDECLARED_CONTRACT_CHANGE")
+            changed_registry=candidate_registry
+        elif following_registry is not None:
+            _ref(following["registry_ref"],"control_registry",registry["registry_id"],registry)
         expected_baseline = content_ref("baseline", baseline["baseline_id"], baseline)
         expected_comparison = {
             "mode": "required",
             "baseline_ref": expected_baseline,
-            "changed_axes": [],
+            "changed_axes": ["target"] if changed_registry is not None else [],
             "reason": None,
         }
         if following["comparison"] != expected_comparison:
             raise _bad("COMPARISON_MISMATCH")
-        if _same_without(following, {"contract_id", "generation", "comparison"}) != _same_without(
-            previous, {"contract_id", "generation", "comparison"}
-        ):
+        mutable = {"contract_id", "generation", "comparison"} | ({"registry_ref"} if changed_registry is not None else set())
+        if _same_without(following, mutable) != _same_without(previous, mutable):
             raise _bad("UNDECLARED_CONTRACT_CHANGE")
         _ref(baseline["contract_ref"], "evaluation_contract",
              previous["contract_id"], previous)
@@ -198,8 +253,9 @@ def bind_contract_transition(
         return {
             "schema_version": 1,
             "kind": "contract_transition_binding",
-            "previous_contract": deepcopy(previous),
-            "next_contract": deepcopy(following),
+            # validatorとbinderが生成した独立値の所有権を返却結果へ移す。
+            "previous_contract": previous,
+            "next_contract": following,
             "previous_contract_ref": content_ref(
                 "evaluation_contract", previous["contract_id"], previous
             ),
@@ -208,11 +264,12 @@ def bind_contract_transition(
             ),
             "source_run_ref": deepcopy(baseline["source_run_ref"]),
             "baseline_ref": deepcopy(expected_baseline),
-            "baseline_record": deepcopy(baseline),
+            "baseline_record": baseline,
             "source_bound": {
-                field: deepcopy(rebound[field]) for field in _CORE_FIELDS
+                field: rebound[field] for field in _CORE_FIELDS
             },
             "comparison": deepcopy(expected_comparison),
+            **({"following_registry":deepcopy(changed_registry)} if changed_registry is not None else {}),
             "structurally_bound": True,
             "authority_connected": False,
             "adoption_verified": False,

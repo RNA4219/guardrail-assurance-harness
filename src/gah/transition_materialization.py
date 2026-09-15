@@ -19,6 +19,8 @@ from .run_contracts import bind_run_manifest, content_ref, validate_evaluation_c
 from .contract_updates import bind_contract_transition
 
 
+
+from .cache_inputs import bind_run_manifest
 _CORE_FIELDS = ("manifest", "contract", "plan", "policy", "registry", "case_set",
                 "selected_controls", "ci_eligible")
 _PREPARED_FIELDS = {"pack", "pack_ref", "bound_run", "calibration_case_set",

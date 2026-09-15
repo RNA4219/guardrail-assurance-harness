@@ -44,11 +44,18 @@ def isolation_probe():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("broker", "client", "probe"))
+    parser.add_argument("mode", choices=("broker", "client", "probe", "client-host"))
     args = parser.parse_args()
     if args.mode == "broker":
         serve(SOCKET, DATABASE)
         return 0
+    if args.mode == "client-host":
+        # 固定clientだけを起動するコンテナを維持する。要求処理は毎回別プロセス。
+        import signal
+        if not sys.platform.startswith("linux") or os.geteuid() not in {12001, 12002, 12003, 12004}:
+            raise AuthorityError("CLIENT_IDENTITY_MISMATCH")
+        while True:
+            signal.pause()
     if args.mode == "probe":
         result = isolation_probe()
     else:

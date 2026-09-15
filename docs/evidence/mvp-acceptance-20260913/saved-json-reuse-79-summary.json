@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "saved_json_reuse_validation",
+  "source_snapshot": 79,
+  "tests_run": 45,
+  "seconds": 40.911,
+  "result": "passed",
+  "changes": [
+    "資源の小さな平坦JSONだけを本文全体・digest・解析器のidentityに束縛し、最大64件保持。返却値は毎回独立したdict。現在の費用・停止・精算は全行を毎回読み直す。",
+    "Evidence本文は毎回サイズとSHAを検査。厳格解析済みの同一本文について構造検査だけを再利用し、最大128件のmarkerを保持。本文や返却オブジェクトを共有しない。"
+  ],
+  "limitation": "通常800件のCPU時間・実wall予算内完走は別の実Docker検証が完了するまで未確認。",
+  "private_evidence_sha256": {
+    "saved-json-reuse-79.log": "7211400e1f64bc690e70b764fbaa7dd726c24863d04c4a29324b66ebbd7d618d",
+    "acceptance-source-79.json": "887a3a5458ecccc9252297ef28423d0470b302febe3441cd5e94d9c8c5ef5d19"
+  },
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

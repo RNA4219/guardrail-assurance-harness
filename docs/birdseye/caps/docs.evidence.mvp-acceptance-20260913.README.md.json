@@ -1,0 +1,22 @@
+{
+  "id": "docs/evidence/mvp-acceptance-20260913/README.md",
+  "role": "evidence",
+  "title": "後続世代と受入の継続証跡",
+  "summary": "全32条件のMVP技術検収が完了し、release_gate=goとなった。[最終証跡](mvp-final-20260915-summary.json)と[要件別対応表](acceptance-map.json)を参照する。実Dockerの初回400ケース・600段階、旧400/新800比較・独立採択、通常CLI800試行、freshなCI、JSON/Markdown、再起動後不変、全精算・回収を確認し、時計同期設定を復元した。全898試験と追加CI分割9試験が成功し、907件を12ジョブへ割当済み。GitHubでの実行と短縮時間は未確認。",
+  "public_api": [],
+  "deps_out": [
+    "docs/mvp-completion-audit.md",
+    "docs/reviews/mvp-acceptance-20260913.md"
+  ],
+  "deps_in": [
+    "docs/reviews/mvp-acceptance-20260913.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "a4ec709e4e2cc07cb9a9af4fcabd7dc62f35f2d273f3ce87190f8a549d9e42b6"
+}

@@ -9,7 +9,8 @@
     "docs/mvp-completion-audit.md"
   ],
   "deps_in": [
-    "docs/detail-spec.md"
+    "docs/detail-spec.md",
+    "docs/synthetic-guardrail-runtime-detail-spec.md"
   ],
   "risks": [
     "文書の要約であり、製品の実装・受入を保証しない"
@@ -17,6 +18,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "955b69c4e537b7442569503ab17b2e0bad45e5c41c0a2bccb1ab48271d6b8e28"
 }

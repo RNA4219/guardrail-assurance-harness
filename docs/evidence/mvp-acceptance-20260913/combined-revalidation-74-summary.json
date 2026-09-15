@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "source_snapshot": 74,
+  "tests_run": 4,
+  "errors": 0,
+  "failures": 0,
+  "passed": true,
+  "seconds": 6008.359,
+  "synthetic_runner": true,
+  "full_mvp_accepted": false,
+  "private_backups": [
+    {
+      "name": "combined-prepared-74.sqlite",
+      "sha256": "27110df63c8b25edb86a7ebb7b232e149171d8028dcb7f8f6e23309d0b82311b",
+      "bytes": 27881472
+    },
+    {
+      "name": "combined-74-test_both_uses_complete_with_one_manifest_reports_and_fresh_revocation.sqlite",
+      "sha256": "3be3bd33379198507c8e2f7c0ccdc2c7fa8ca7acb21a14c398439001df22401b",
+      "bytes": 40026112
+    },
+    {
+      "name": "combined-74-test_missing_second_use_is_not_success_and_cancel_keeps_completed_first_use.sqlite",
+      "sha256": "e96c28c261515f0fcad8ef54282cb8c9e48d2370b0b20b12b7a5b5039c4d841f",
+      "bytes": 29372416
+    },
+    {
+      "name": "combined-74-test_prepare_storage_failure_rolls_back_parent_and_reserved_children.sqlite",
+      "sha256": "ce9721b586a68cd6ccb77f6a85f93f311d89d3dc4ff2df72a7c4fb55f000098e",
+      "bytes": 27889664
+    },
+    {
+      "name": "combined-74-test_roles_ids_original_contract_series_and_origin_are_checked.sqlite",
+      "sha256": "e0a0286841fe17f3b4b5c92f48d9cb42b1c6d6b8ee34fd1115fa86995cf5e8a7",
+      "bytes": 27893760
+    }
+  ],
+  "log_sha256": "8b12b0b06c90f2c8815152c841d578cc75b2797271321386999bedec5f6ab605",
+  "kind": "combined_revalidation_evidence",
+  "scope": "UC-CI30件とUC-LLM800件、両用途表示、fresh CI、失効・削除、片側欠損・取消し、役割・起源・rollback。",
+  "raw_databases_published": false,
+  "historical_failed_source_snapshot": 71
+}

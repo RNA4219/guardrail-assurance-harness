@@ -33,6 +33,9 @@ def execution_context():
 def _verify(row, now):
     try:
         value = resources._unpack(row["payload_json"], row["digest"])
+        if value.get("kind") == "synthetic_guardrail_admission":
+            from .llm_admission import verify
+            return verify(row, now)
         require_object(value, {"prepared", "materialization", "calibration"})
         prepared = value["prepared"]
         bound = prepared["bound_run"]
@@ -109,13 +112,14 @@ def materialized_run(db, bound, now):
     from . import transition_authority, regression_runs
     if bound["manifest"]["purpose"] in transition_authority.PURPOSES:
         return transition_authority.materialized_run(db, bound, now)
-    if bound["manifest"]["purpose"] == "regression" and bound["contract"]["generation"] == 2:
+    if bound["manifest"]["purpose"] == "regression" and bound["contract"]["generation"] >= 2:
         return regression_runs.materialized_run(db, bound, now)
     row = db.execute("SELECT * FROM fixture_admissions WHERE run_id=?", (bound["manifest"]["run_id"],)).fetchone()
     if row is None:
         return False
     value = _verify(row, now)
-    expected_bound = {key: deepcopy(value["prepared"]["bound_run"][key]) for key in (
+    # 比較だけに使い、保存内容も呼出し元のboundも変更しない。
+    expected_bound = {key: value["prepared"]["bound_run"][key] for key in (
         "manifest", "contract", "plan", "policy", "registry", "case_set", "selected_controls", "ci_eligible")}
     if bound != expected_bound:
         raise AdoptionError("FIXTURE_RUN_MISMATCH")

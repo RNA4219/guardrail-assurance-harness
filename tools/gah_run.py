@@ -1,4 +1,4 @@
-"""固定UC-CIの通常runを開始・再開・取消し・照会する。"""
+"""固定UC-CI / UC-LLMの通常runを開始・再開・取消し・照会する。"""
 import argparse
 import hashlib
 import json
@@ -11,6 +11,7 @@ from gah.contracts import MAX_DOCUMENT_BYTES, decode_document
 from gah.docker_runner import DockerRunner, operation_lock
 from gah.supervisor_checkpoint import Checkpoint, _plain_directory
 from gah.supervised_run import Supervisor, validate_input
+from gah.llm_supervised_run import LlmSupervisor
 from tools.authority_runtime import AuthorityRuntime
 
 
@@ -22,8 +23,10 @@ def execute(runtime, runner, folder, request, mode, *, clock=None, hook=None):
     with operation_lock(folder/'execution.sqlite', request['run_id'], 'supervisor'):
         checkpoint.put('source-lock', {'sha256': {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
             for name in ('tools/gah_run.py', 'src/gah/supervised_run.py', 'src/gah/supervisor_checkpoint.py',
-                         'src/gah/docker_runner.py', 'src/gah/execution_journal.py')}})
-        return Supervisor(runtime, runner, checkpoint, request, hook=hook, **kwargs).execute(mode)
+                         'src/gah/docker_runner.py', 'src/gah/execution_journal.py', 'src/gah/run_scope.py',
+                         'src/gah/llm_supervised_run.py', 'src/gah/guardrail_runner.py', 'src/gah/guardrail_results.py')}})
+        supervisor = LlmSupervisor if getattr(runner, 'execution_kind', None) == 'guardrail' else Supervisor
+        return supervisor(runtime, runner, checkpoint, request, hook=hook, **kwargs).execute(mode)
 
 
 def main():
@@ -31,6 +34,7 @@ def main():
     parser.add_argument('mode', choices=('run','resume','cancel','status'))
     parser.add_argument('--runtime', required=True, help='既存deployment.jsonのあるrepo内ディレクトリ')
     parser.add_argument('--request', required=True, help='契約完全参照とrun IDを指定するJSON')
+    parser.add_argument('--runner', choices=('fixture', 'guardrail'), default='fixture', help='採択済み契約に対応する固定実行器')
     args = parser.parse_args()
     try:
         folder = _plain_directory(Path(args.runtime))
@@ -43,9 +47,16 @@ def main():
             raise ValueError('CHECKPOINT_REQUIRED')
         run_folder.mkdir(parents=True, exist_ok=True)
         with operation_lock(folder/'supervised-transport', 'deployment', 'supervisor'):
-            runtime = AuthorityRuntime(folder)
-            runner = DockerRunner(ROOT/'config/fixture-runtime.lock.json', run_folder/'execution.sqlite')
-            result = execute(runtime, runner, run_folder, request, args.mode)
+            runtime = AuthorityRuntime(folder, reuse_clients=True, keep_clients_running=True)
+            try:
+                if args.runner == 'guardrail':
+                    from gah.guardrail_runner import GuardrailRunner
+                    runner = GuardrailRunner(run_folder/'execution.sqlite')
+                else:
+                    runner = DockerRunner(ROOT/'config/fixture-runtime.lock.json', run_folder/'execution.sqlite')
+                result = execute(runtime, runner, run_folder, request, args.mode)
+            finally:
+                runtime.close_clients()
         sys.stdout.write(json.dumps(result,ensure_ascii=False,sort_keys=True,allow_nan=False)+'\n')
         sys.stdout.flush()
         return result['exit_code']

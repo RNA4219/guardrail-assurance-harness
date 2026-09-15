@@ -74,6 +74,10 @@ def _build(db, bound, receipt):
         "manifest_ref": receipt["manifest_ref"], "decision": receipt["decision_ref"],
         "evidence": receipt["evidence_ref"], "run_receipt": content_ref(receipt["kind"], run_id, receipt),
         **reports, "created_at": receipt["created_at"], "ci_eligible": False}
+    omitted = sorted({c["control_id"] for c in bound["registry"]["controls"]} - set(bound["selected_controls"]))
+    if omitted:
+        value["scope"] = {"executed_scope": "targeted", "control_ids": sorted(bound["selected_controls"]),
+            "unexecuted_control_ids": omitted, "registry_ref": deepcopy(bound["contract"]["registry_ref"])}
     if set(bound["contract"]["required_outputs"]) != {"decision", "evidence", "findings", "plans", "run_receipt"}:
         raise AdoptionError("RUN_OUTPUTS_INVALID")
     ref = put("run_outputs", run_id, value)
@@ -115,6 +119,21 @@ def fetch(db, bound, receipt, ref):
             return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(value), "ci_eligible": False}
     if ref == content_ref(receipt["kind"], bound["manifest"]["run_id"], receipt):
         return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(receipt), "ci_eligible": False}
+    if type(ref) is dict and ref.get("kind") == "aggregation":
+        decision = assurance_authority._artifact(db, receipt["decision_ref"], bound["manifest"]["run_id"])
+        expected = {"kind":"aggregation", "id":bound["manifest"]["run_id"], "digest":decision["aggregate_digest"]}
+        if ref != expected:
+            raise AdoptionError("RUN_ARTIFACT_MISSING")
+        row = db.execute("SELECT aggregate_json,aggregate_digest FROM aggregates WHERE run_id=? AND aggregate_digest=?",
+            (expected["id"], expected["digest"])).fetchone()
+        if row is None:
+            raise AdoptionError("RUN_OUTPUTS_MISSING")
+        value = resources._unpack(row[0], row[1])
+        if (value.get("kind") != "aggregation" or value.get("run_id") != expected["id"]
+                or value.get("contract_digest") != bound["manifest"]["contract_ref"]["digest"]
+                or content_ref("aggregation", expected["id"], value) != expected):
+            raise AdoptionError("RUN_OUTPUTS_INVALID")
+        return {"artifact_ref":deepcopy(ref), "artifact":value, "ci_eligible":False}
     for field in ("manifest_ref", "bundle_ref", "decision_ref", "evidence_ref", "closure_ref"):
         if ref == receipt[field]:
             value = assurance_authority._artifact(db, ref, bound["manifest"]["run_id"])

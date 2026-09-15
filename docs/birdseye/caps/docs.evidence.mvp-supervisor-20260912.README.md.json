@@ -14,11 +14,9 @@
     "AGENTS.md",
     "CHANGELOG.md",
     "HUB.codex.md",
-    "README.md",
     "docs/acceptance/AC-20260911-05.md",
     "docs/evidence/README.md",
     "docs/evidence/mvp-condition-core-20260912/README.md",
-    "docs/mvp-completion-audit.md",
     "docs/reviews/mvp-supervisor-20260912.md",
     "docs/supervised-run-detail-spec.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md"
@@ -29,6 +27,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "c487b339fd08f8dc0eea084cb26d9d209912d57e392e1c7401d389fac812b8ad"
 }

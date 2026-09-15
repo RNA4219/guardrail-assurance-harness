@@ -2,7 +2,7 @@
   "id": "AGENTS.md",
   "role": "AGENTS",
   "title": "GAHでの作業",
-  "summary": "日本語で記載する。",
+  "summary": "2026-09-15現在: [32条件のMVP技術検収](docs/mvp-completion-audit.md)は完了し、[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)を正本とする。以下の工程別進捗にある未完了は当時の記録で、現在の判定は完了監査へ従う。設計凍結、人間の追加承認、GitHub上の実行・公開反映を意味しない。",
   "public_api": [],
   "deps_out": [
     "EVALUATION.md",
@@ -46,6 +46,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "447840b489ed1b156bdb5b6d8b8e97638401ae23123d6b0d7a2bef031703bfb4"
+  "generated_at": "00111",
+  "source_sha256": "1d9b189dd4f4835991c9c6477e92595763572bf70789a5880f3ac21efa9c5d9d"
 }

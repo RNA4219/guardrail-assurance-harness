@@ -19,9 +19,13 @@ def exists(db, run_id):
 
 def _book(db, bound, baseline, now, *, create=False):
     run_id = bound["manifest"]["run_id"]
-    digest = run_evidence.bound_bundle_digest(bound)
+    digest = run_evidence.bound_bundle_digest(bound, baseline)
     book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
-    profile = assurance_authority.fixed_profile()
+    if bound["manifest"]["use_cases"] == ["UC-LLM"]:
+        from .llm_admission import execution_profile
+        profile = execution_profile(db, bound, now)
+    else:
+        profile = assurance_authority.fixed_profile()
     if bound["manifest"]["environment_ref"]["digest"] != profile["isolation_digest"]:
         raise AdoptionError("EXECUTION_PROFILE_MISMATCH")
     if create:

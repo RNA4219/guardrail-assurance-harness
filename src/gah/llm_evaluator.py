@@ -14,6 +14,8 @@ from .contracts import ContractError, decode_document, require_id
 from .evaluation_data import oracle_detection, validate_pack
 
 MODEL = "qwen3.8-flash-next"
+SYNTHETIC_MODEL = "local-synthetic-guardrail"
+_MODELS = {MODEL, SYNTHETIC_MODEL}
 MAX_RESPONSE_BYTES = 65536
 MAX_COMPLETION_TOKENS = 128
 SYSTEM_PROMPT = (
@@ -48,8 +50,10 @@ def _usage(value: Any) -> dict[str, int]:
     return {k: value[k] for k in sorted(_USAGE_FIELDS)}
 
 
-def parse_response(raw: bytes) -> dict[str, Any]:
+def parse_response(raw: bytes, *, expected_model: str = MODEL) -> dict[str, Any]:
     """使用量は不正な回答でも回収し、検査したenum以外の本文を返さない。"""
+    if type(expected_model) is not str or expected_model not in _MODELS:
+        raise ContractError("MODEL_SELECTION_INVALID")
     if type(raw) is not bytes:
         raise ContractError("INPUT_TYPE")
     result = {"status": "INVALID_OUTPUT", "reason_code": None, "usage": None,
@@ -61,7 +65,7 @@ def parse_response(raw: bytes) -> dict[str, Any]:
         document = decode_document(raw)
         # 応答が無効でも、照合できたusageを落とさない。
         result["usage"] = _usage(document.get("usage"))
-        if document.get("model") != MODEL:
+        if document.get("model") != expected_model:
             raise ContractError("MODEL_MISMATCH")
         choices = document.get("choices")
         if type(choices) is not list or len(choices) != 1 or type(choices[0]) is not dict:
@@ -97,7 +101,10 @@ def parse_response(raw: bytes) -> dict[str, Any]:
 class SyntheticEvaluator:
     """検査済みpackを保持し、各caseへ独立したメモリ状態を与える。"""
 
-    def __init__(self, pack: dict[str, Any]):
+    def __init__(self, pack: dict[str, Any], *, model: str = MODEL):
+        if type(model) is not str or model not in _MODELS:
+            raise ContractError("MODEL_SELECTION_INVALID")
+        self._model = model
         self._pack = validate_pack(pack)
         self.pack_digest = hashlib.sha256(_canonical(self._pack)).hexdigest()
         self._documents = {(v["ref"]["kind"], v["ref"]["id"], v["ref"]["digest"]): v["document"]
@@ -113,15 +120,16 @@ class SyntheticEvaluator:
                 for stage in case["session_steps"]:
                     ref = stage["input_ref"]
                     inputs.append(deepcopy(self._documents[(ref["kind"], ref["id"], ref["digest"])]))
-                return _CaseSession(deepcopy(case), inputs, self.pack_digest, purpose)
+                return _CaseSession(deepcopy(case), inputs, self.pack_digest, purpose, self._model)
         raise ContractError("UNKNOWN_CASE")
 
 
 class _CaseSession:
     """段階を順に一度だけ受理する。失敗時は進めず、再実行は監督側が扱う。"""
 
-    def __init__(self, case: dict, inputs: list[dict], pack_digest: str, purpose: str):
+    def __init__(self, case: dict, inputs: list[dict], pack_digest: str, purpose: str, model: str):
         self._case = case
+        self._model = model
         self._inputs = inputs
         self._pack_digest = pack_digest
         self._purpose = purpose
@@ -136,7 +144,7 @@ class _CaseSession:
         if self._pending or self._failed or self._index >= len(self._inputs):
             raise ContractError("SESSION_STATE")
         self._messages.append({"role": "user", "content": _canonical(self._inputs[self._index]).decode("utf-8")})
-        body = {"model": MODEL, "temperature": 0, "max_tokens": MAX_COMPLETION_TOKENS,
+        body = {"model": self._model, "temperature": 0, "max_tokens": MAX_COMPLETION_TOKENS,
                 "chat_template_kwargs": {"enable_thinking": False}, "messages": deepcopy(self._messages)}
         self._pending = True
         return {"request": body, "request_digest": hashlib.sha256(_canonical(body)).hexdigest(),
@@ -146,7 +154,7 @@ class _CaseSession:
     def accept(self, raw: bytes) -> dict[str, Any]:
         if not self._pending or self._failed:
             raise ContractError("SESSION_STATE")
-        parsed = parse_response(raw)
+        parsed = parse_response(raw, expected_model=self._model)
         self._pending = False
         stage = self._case["session_steps"][self._index]
         record = {"case_id": self._case["case_id"], "stage_id": stage["stage_id"], **parsed,
@@ -175,4 +183,4 @@ class _CaseSession:
                 "ci_eligible": False}
 
 
-__all__ = ["SyntheticEvaluator", "parse_response", "MODEL", "MAX_COMPLETION_TOKENS"]
+__all__ = ["SyntheticEvaluator", "parse_response", "MODEL", "SYNTHETIC_MODEL", "MAX_COMPLETION_TOKENS"]

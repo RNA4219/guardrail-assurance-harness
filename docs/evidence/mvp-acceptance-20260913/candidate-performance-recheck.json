@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "kind": "candidate_performance_recheck",
+  "observed_at": "2026-09-13T18:07:50.202181+00:00",
+  "measurement": "同じ初回DBをコピーして同条件候補を生成。各版で4回の候補照会を測定。CPU時間は通常計測、deepcopy回数は別のprofile計測で再帰を含む。",
+  "comparisons": [
+    {
+      "source_snapshot": 50,
+      "samples": [
+        {
+          "wall_seconds": 2.711074,
+          "cpu_seconds": 2.65625
+        },
+        {
+          "wall_seconds": 3.17502,
+          "cpu_seconds": 3.015625
+        },
+        {
+          "wall_seconds": 2.936719,
+          "cpu_seconds": 2.84375
+        },
+        {
+          "wall_seconds": 3.019546,
+          "cpu_seconds": 2.90625
+        }
+      ],
+      "cpu_median_seconds": 2.875,
+      "deepcopy_recursive_calls": 1907350,
+      "deepcopy_nonrecursive_calls": 52735,
+      "profile_copy_cumulative_seconds": 4.0945328000000005
+    },
+    {
+      "source_snapshot": 57,
+      "samples": [
+        {
+          "wall_seconds": 1.749664,
+          "cpu_seconds": 1.703125
+        },
+        {
+          "wall_seconds": 1.999473,
+          "cpu_seconds": 1.953125
+        },
+        {
+          "wall_seconds": 1.882335,
+          "cpu_seconds": 1.8125
+        },
+        {
+          "wall_seconds": 1.725331,
+          "cpu_seconds": 1.71875
+        }
+      ],
+      "cpu_median_seconds": 1.765625,
+      "deepcopy_recursive_calls": 289982,
+      "deepcopy_nonrecursive_calls": 3302,
+      "profile_copy_cumulative_seconds": 0.6427766
+    },
+    {
+      "source_snapshot": 64,
+      "samples": [
+        {
+          "wall_seconds": 1.749567,
+          "cpu_seconds": 1.703125
+        },
+        {
+          "wall_seconds": 1.873128,
+          "cpu_seconds": 1.875
+        },
+        {
+          "wall_seconds": 1.840194,
+          "cpu_seconds": 1.734375
+        },
+        {
+          "wall_seconds": 1.974161,
+          "cpu_seconds": 1.875
+        }
+      ],
+      "cpu_median_seconds": 1.8046875,
+      "deepcopy_recursive_calls": 125130,
+      "deepcopy_nonrecursive_calls": 3268,
+      "profile_copy_cumulative_seconds": 0.2871185
+    },
+    {
+      "source_snapshot": 65,
+      "samples": [
+        {
+          "wall_seconds": 1.627585,
+          "cpu_seconds": 1.546875
+        },
+        {
+          "wall_seconds": 1.346488,
+          "cpu_seconds": 1.34375
+        },
+        {
+          "wall_seconds": 1.346864,
+          "cpu_seconds": 1.34375
+        },
+        {
+          "wall_seconds": 1.411003,
+          "cpu_seconds": 1.390625
+        }
+      ],
+      "cpu_median_seconds": 1.3671875,
+      "deepcopy_recursive_calls": 74190,
+      "deepcopy_nonrecursive_calls": 862,
+      "profile_copy_cumulative_seconds": 0.1835256
+    },
+    {
+      "source_snapshot": 67,
+      "samples": [
+        {
+          "wall_seconds": 1.312048,
+          "cpu_seconds": 1.3125
+        },
+        {
+          "wall_seconds": 1.178519,
+          "cpu_seconds": 1.15625
+        },
+        {
+          "wall_seconds": 1.346136,
+          "cpu_seconds": 1.28125
+        },
+        {
+          "wall_seconds": 1.413317,
+          "cpu_seconds": 1.359375
+        }
+      ],
+      "cpu_median_seconds": 1.296875,
+      "deepcopy_recursive_calls": 74190,
+      "deepcopy_nonrecursive_calls": 862,
+      "profile_copy_cumulative_seconds": 0.1527346
+    },
+    {
+      "source_snapshot": 68,
+      "samples": [
+        {
+          "wall_seconds": 1.256633,
+          "cpu_seconds": 1.25
+        },
+        {
+          "wall_seconds": 1.202228,
+          "cpu_seconds": 1.203125
+        },
+        {
+          "wall_seconds": 1.14585,
+          "cpu_seconds": 1.09375
+        },
+        {
+          "wall_seconds": 1.301069,
+          "cpu_seconds": 1.25
+        }
+      ],
+      "cpu_median_seconds": 1.2265625,
+      "deepcopy_recursive_calls": 74190,
+      "deepcopy_nonrecursive_calls": 862,
+      "profile_copy_cumulative_seconds": 0.15474290000000002
+    },
+    {
+      "source_snapshot": 70,
+      "samples": [
+        {
+          "wall_seconds": 1.087028,
+          "cpu_seconds": 1.0625
+        },
+        {
+          "wall_seconds": 1.107928,
+          "cpu_seconds": 1.09375
+        },
+        {
+          "wall_seconds": 1.116733,
+          "cpu_seconds": 1.078125
+        },
+        {
+          "wall_seconds": 1.32298,
+          "cpu_seconds": 1.265625
+        }
+      ],
+      "cpu_median_seconds": 1.0859375,
+      "deepcopy_recursive_calls": 74190,
+      "deepcopy_nonrecursive_calls": 862,
+      "profile_copy_cumulative_seconds": 0.14041040000000002
+    },
+    {
+      "source_snapshot": 73,
+      "samples": [
+        {
+          "wall_seconds": 1.116149,
+          "cpu_seconds": 1.109375
+        },
+        {
+          "wall_seconds": 1.248523,
+          "cpu_seconds": 1.21875
+        },
+        {
+          "wall_seconds": 1.274447,
+          "cpu_seconds": 1.265625
+        },
+        {
+          "wall_seconds": 1.220861,
+          "cpu_seconds": 1.1875
+        }
+      ],
+      "cpu_median_seconds": 1.203125,
+      "deepcopy_recursive_calls": 74190,
+      "deepcopy_nonrecursive_calls": 862,
+      "profile_copy_cumulative_seconds": 0.1494261
+    }
+  ],
+  "cpu_reduction_from_50_to_65": 0.5244565217391304,
+  "changes": [
+    "fixtureのmaterialization照合は比較用の独立rootだけを作り、本文を複製しない。",
+    "管理側の契約・集合検査は全資料と実装ソースが同じ場合だけ再利用。保存資料と現在の採択・権限・校正は毎回照合する。",
+    "完了runの構造検査はbound/stateと6関連tableの全行・全列・型・本文を毎回読み直して同一性を確認。成功markerは4件まで、読取4MiB/10000行を超えた場合は元の検査へ戻る。",
+    "権限・失効・期限・対象照合はcache外で毎回実行。保存時刻より過去の検査や改変行を成功結果へ置換しない。",
+    "source70: 二つの再束縛cacheを共有16MiB・32件に制限し、長いJSONの全内容を可逆圧縮して保存。完了runのmarkerは32件。現在検査は維持。"
+  ],
+  "validation": [
+    {
+      "source_snapshot": 63,
+      "tests_run": 63,
+      "errors": 6,
+      "result": "failed",
+      "reason": "評価worker共有ソース変更が固定lockと不一致。2ファイルの変更を戻し、管理側だけの修正へ限定。移行測定も失敗として保持。"
+    },
+    {
+      "source_snapshot": 64,
+      "tests_run": 69,
+      "seconds": 756.845,
+      "result": "passed"
+    },
+    {
+      "source_snapshot": 65,
+      "result": "passed",
+      "scope": "全保存行の改変・削除・metadata改変・失効・期限・時計・ソース変更・cache容量上限。",
+      "tests_run": 107,
+      "seconds": 886.178
+    },
+    {
+      "source_snapshot": 65,
+      "result": "passed",
+      "runtime_migration_checks": 6,
+      "scope": "全40table保持の移行、空runtime取込み、現在の基準利用、再起動、不変receipt、client回収。"
+    },
+    {
+      "source_snapshot": 47,
+      "tests_run": 0,
+      "setup_errors": 1,
+      "seconds": 10402.159,
+      "result": "failed",
+      "scope": "初回400・劣化対象800・修復対象800を保存した後、finding_confirmが終了2。確認成功・再発の受入は未完了。"
+    },
+    {
+      "source_snapshot": 66,
+      "result": "passed",
+      "tests_run": 9,
+      "seconds": 60.223,
+      "scope": "保存JSON rootの型不正もSTORAGE_CORRUPTで拒否。既存cache境界6件と契約・集合検査3件。"
+    },
+    {
+      "source_snapshot": 67,
+      "result": "passed",
+      "seconds": 895.839,
+      "scope": "要求前後のソース照合、変更・読取失敗時rollback、以後の再利用拒否。",
+      "tests_run": 114
+    },
+    {
+      "source_snapshot": 62,
+      "result": "cancelled_as_superseded",
+      "owned_containers_removed": true,
+      "scope": "旧版との同時Docker実行を解消するため、正規resource_cancel_claimで取消し。元driverが停止・回収。予算到達とは分類しない。"
+    },
+    {
+      "source_snapshot": 43,
+      "result": "timed_out",
+      "timeout_seconds": 14000,
+      "scope": "初回400・旧400・新800保存後の複合通常runで終了結果を得られなかった。受入未完了。"
+    },
+    {
+      "source_snapshot": 68,
+      "result": "passed",
+      "seconds": 814.439,
+      "scope": "全本文を検証した後の保存root参照。大小候補の参照一致と本文・digest・ID改変拒否。",
+      "tests_run": 33
+    },
+    {
+      "source_snapshot": 70,
+      "result": "failed_then_fixed",
+      "tests_run": 15,
+      "failures": 1,
+      "scope": "初回の保持容量試験で4run×2経路が16MiBに収まらず、再計算を検出。完全JSONの可逆圧縮で修正。"
+    },
+    {
+      "source_snapshot": 70,
+      "result": "passed",
+      "tests_run": 16,
+      "seconds": 8.33,
+      "scope": "4runの反復・共有容量・完全入力・独立出力・例外・clear競合・Unicode圧縮・marker容量。影響全回帰は継続中。"
+    },
+    {
+      "source_snapshot": 65,
+      "result": "failed",
+      "tests_run": 0,
+      "setup_errors": 1,
+      "seconds": 4837.348,
+      "reason": "SOURCE_NOT_READY",
+      "scope": "修復確認直前のDBを保存。現在条件の再照合で役割未引継ぎによりAUTHORITY_INVALIDとなることをDBコピーで確認。"
+    },
+    {
+      "source_snapshot": 65,
+      "result": "failed",
+      "reason": "TIMEOUT",
+      "old_completed_trials": 400,
+      "new_last_logged_trials": 720,
+      "owned_containers_removed": true,
+      "scope": "新側の全800件・採択・通常CLI未完了。720は最後の進捗表示で、実行総数ではない。"
+    },
+    {
+      "source_snapshot": 71,
+      "result": "passed",
+      "tests_run": 12,
+      "seconds": 132.942,
+      "scope": "認証済み呼出元を内部source照合へ引き継ぐ修正、役割欠損・現在失効の拒否、Finding既存境界。全件統合は継続中。"
+    },
+    {
+      "source_snapshot": 71,
+      "result": "passed",
+      "runtime_migration_checks": 6,
+      "scope": "初回40tableを保持する正規移行後、空runtimeへの取込み、現在利用、再起動、不変receipt、現在契約、client回収。"
+    },
+    {
+      "source_snapshot": 70,
+      "result": "passed",
+      "tests_run": 55,
+      "seconds": 842.455,
+      "scope": "候補採択・保存参照・source前後照合・4run反復・共有cache容量・完全保存行の改変/失効/期限の影響回帰。"
+    },
+    {
+      "source_snapshot": 73,
+      "result": "passed",
+      "tests_run": 70,
+      "seconds": 1222.036,
+      "scope": "後続800件候補の分割保存・候補採択・履歴・参照・改変拒否・source前後照合・共有cache・完全保存行の影響回帰。"
+    }
+  ],
+  "still_open": [
+    "source71の実Docker旧400・新800と通常CLI800の予算内完走。",
+    "source62・69の通常監督、source71の修復確認・再発。複合runは旧source43のtimeout後、再検証が必要。",
+    "source69の後続世代統合、source72の全回帰と32条件の最終対応。"
+  ],
+  "protected_documents_unchanged": true,
+  "raw_database_published": false,
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "candidate-benchmark-64.json": "1a1b09cd1fdf77b08263c59ec575ece1ab050a2cefb83f53017bdb8cfeebc0f9",
+    "candidate-benchmark-65.json": "cb62db152bb620e0d9509dbf6ef145db9140a72411afd3ec5b15ed1a3429fc23",
+    "acceptance-source-64.json": "5395565c702ed54eac4d21f09564907243810795af6eac06a771c4338d357d32",
+    "acceptance-source-65.json": "561353366eb11f78fcb259522e87bdc22363d88a3c3d64b6d4200f0b4d760b32",
+    "copy-regression-63.log": "5d9791eedd952bac8022be89730f0aa761b24ffafe475145266809dc4eed1ec5",
+    "copy-regression-64.log": "b552a997e730368763021e139a0c1e826e9a469d242b5874bfc5ce3ba0ea22c6",
+    "llm-migration-65.json": "44d93ff4d2baae6d8ce04c35064b71596ce8760d154e4e6cfc83005dfe96933d",
+    "llm-runtime-migration-65.json": "a052896820cc4c01a2fdaf6c86456e156a0e8621d7306aa22d2ae89b59f0df1d",
+    "finding-revalidation-integration-47.log": "5b0d2e5ec4943c79bb15838090c758401588ed1ee30069ea022a13a3423571f9",
+    "candidate-benchmark-67.json": "9958fd317ba2c1d500fbe244f25b74a14507bc5242ab772d3d2440efacc80da5",
+    "acceptance-source-67.json": "329b97b08c32b5ec001fa88c28b641290c171f013d1983fcd5dfe3d48c7434cd",
+    "copy-regression-65.log": "0e7579646e4d1ea2ca671c9266b84a9aec00627835e80b9d3fd6df433c9f4bda",
+    "copy-boundary-66.log": "fb5a485b7998cb02a500712f098c8e5d5800c90f7f200f6db475accb033ef50e",
+    "superseded-runtime-62-cancel.json": "a280327bc7ea437e07fd737b7b4219970dbb70f4eb79a63ce6a228fdb7893ccc",
+    "llm-product-runtime-62.json": "f6fd6a376808ea782cca51dd13e6911edc63d4145b48ad1bedc6d89afc876c71",
+    "combined-integration-43.log": "0ccca8fe8f9a2838c55f16b61d2787c32b966884c8f1b35eced00916bf6c3e0f",
+    "copy-regression-67.log": "c293f03aa0c6354632048d2ca399f81ef1dada3410aab939d8a7e58196bb4090",
+    "candidate-benchmark-68.json": "869357f1a14f775863966e4258a679ff92005772d921fe18a0de077f49ffbd0e",
+    "acceptance-source-68.json": "93739b68cd98eb1e2a4df53120d84a9e59031e80a7b27c679ed52b5332c132ed",
+    "acceptance-source-69.json": "a8207786aae80a8e99724401cf63a95b1c6d0c2025f891f3252a49430205d251",
+    "following-focused-69.log": "0fc558370bc90c1a983660a870dcc8e56f5868538115ad34e8b248ce3976f945",
+    "following-boundary-69.log": "02b6f62214751f14fb6de9391aeed78e35d40c384e5dc3a0a02df161ad938580",
+    "copy-regression-68.log": "47e4e50e05096aaf863066c2e6e0b841176f0b9363f5109d83c924b3f8db9914",
+    "acceptance-source-70.json": "e42035281ec265a24018fe61931cd94ce6ee7c31542e75ad65bab20690b0fa9f",
+    "acceptance-source-71.json": "06fb2b170b431a46348b560bf06a4b9682aa020ff2d854739069630a26836251",
+    "candidate-benchmark-70.json": "27d8dc392201544b0ec54f527530773fbdd851fc6b0df6fe39b8efa779607bf6",
+    "candidate-70.pstats": "080e3463f21088ffd8dc5f5e1968383d6cb1b52b4f4c63455235656c91b0c40e",
+    "cache-capacity-70.log": "848d196ccc207c355821d5bfa98f09982d29377212e5fcd48f6fec5854f3b135",
+    "cache-capacity-70-recheck.log": "09d7ffa6c4071e9cea326b81def8809385fad4ccfa66c25a6ea0b1c5449eee1c",
+    "finding-revalidation-integration-65.log": "0d9c535f65319481f41cc49dc2b3a19e362c449f185a52e468e0479d53194ef3",
+    "finding-source-diagnostic-65b.log": "d11de02931d3fd481a09735fc32de48f6715a564798137003200ee85089c1ea3",
+    "finding-actor-boundaries-71.log": "31195624ccf4b0e57b2e9d33cc1dabb5c208246ed91ef0be8621678c632fea45",
+    "llm-product-runtime-65.json": "2daa023668b490f8bc698633c58f109109a3a7b7dc58ef91429845dc029af4ed",
+    "llm-migration-71.json": "8c0aebc606accaa193071c92aeca7976b58fa1b246e0172f2e2523d5001b5610",
+    "llm-runtime-migration-71.json": "e6dd2ba123b375bed0c1880b2da8aa709830e0cf4d628dd6630acfd22a87cb33",
+    "copy-regression-70.log": "4904f5050ef7918b08fac94163550cfafa27ffbb8aa6631549268f12e8c86a3f",
+    "candidate-benchmark-73.json": "f1027c586db4e7436625a558f97ff00af14cd70e49fc32c2c788ad31048381e9",
+    "candidate-73.pstats": "98f2a7f52f02a25f7aa36a7c9d201a9abd959070129a56870e33ae4165a5a06f",
+    "copy-regression-73.log": "1b32a16744692623d6bca6cf29d868ad9fb14762a72a819d81303a1b3be05aa7"
+  },
+  "cpu_reduction_from_50_to_70": 0.6222826086956521
+}

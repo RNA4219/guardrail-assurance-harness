@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "llm_runtime_correction_tests",
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "oracle_seed": {
+    "cases": 400,
+    "stages": 600,
+    "baseline_adopted": true,
+    "candidate_tests": 3,
+    "candidate_errors": 3,
+    "reason": "DOCUMENT_SIZE",
+    "log_sha256": "ecea1e5f0b5c5e5ddb70f5d13e7d039f507f7eb8be7673c55d4a54b5ef784776"
+  },
+  "stage_times_and_oracle_refs": {
+    "tests": 19,
+    "seconds": 11.054,
+    "passed": true,
+    "log_sha256": "751aab8d0422e3d32d894d2b13f8b5ccc6629ef222cb6d58b4449807c0040572"
+  },
+  "candidate_root_and_contract_regression": {
+    "tests": 14,
+    "seconds": 0.202,
+    "passed": true,
+    "log_sha256": "b4566756dd23eac24fcacb109dee214a0db5124b6a65ee110cd97d3e0366413b"
+  },
+  "corrected_integration_source_sha256": "e5724e38119743c00584279dfbe81b647af0f142fe868f6a7824924777861df5",
+  "corrected_integration_status": "candidate_tests_and_runtime_passed",
+  "guardrail_runtime_lock_sha256": "685317ab5cb4c8441e0d9e27f2911fcfe3184d996886c27d917e25c987f9ad37",
+  "authority_runtime_lock_sha256": "445ec722605320026bbb3e0cfb66b6fb1eb343ccacf8e3b41dde09b3ef592844",
+  "corrected_candidate_integration": {
+    "tests": 3,
+    "seconds": 790.921,
+    "passed": true,
+    "source_manifest_sha256": "e5724e38119743c00584279dfbe81b647af0f142fe868f6a7824924777861df5",
+    "log_sha256": "7144d9139177e320633698b449accc508f944fe9f848e6de835f219d81548b1c"
+  },
+  "corrected_runtime_summary": "llm-runtime-36-summary.json"
+}

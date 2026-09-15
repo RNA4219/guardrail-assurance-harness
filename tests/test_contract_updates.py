@@ -105,6 +105,19 @@ class ContractUpdateTests(unittest.TestCase):
         self.assertEqual(record, self.record)
         self.assertEqual(source, self.source)
 
+    def test_returned_values_are_independent_of_inputs_and_next_call(self):
+        first = self.call()
+        expected = deepcopy(first)
+        for key in ('previous_contract', 'next_contract', 'baseline_record'):
+            first[key].clear()
+        first['source_bound']['case_set']['cases'].clear()
+        first['source_bound']['plan'].clear()
+        self.assertEqual(self.call(), expected)
+        self.assertEqual(self.source, expected['source_bound'])
+        self.assertEqual(self.previous, expected['previous_contract'])
+        self.assertEqual(self.next, expected['next_contract'])
+        self.assertEqual(self.record, expected['baseline_record'])
+
     def test_contract_id_reuse_and_generation_skip_are_rejected(self):
         same_id = deepcopy(self.next)
         same_id["contract_id"] = self.previous["contract_id"]

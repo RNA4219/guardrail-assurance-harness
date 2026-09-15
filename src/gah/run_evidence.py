@@ -10,13 +10,15 @@ from __future__ import annotations
 from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
+from collections import OrderedDict
+from threading import RLock
 import json
 from pathlib import Path
 import sqlite3
 import time
 from typing import Any, Callable, Iterator, Mapping
 
-from . import aggregation, decision
+from . import aggregation, decision, execution_profiles
 from .contracts import ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER, require_digest, require_id
 from .corpus import validate_case_set
 from .policy import validate_policy_profile
@@ -121,18 +123,40 @@ def _pack(value: Any) -> tuple[str, str]:
     return raw.decode("utf-8"), hashlib.sha256(raw).hexdigest()
 
 
+_LOAD_MARKERS = OrderedDict()
+_LOAD_MARKER_LOCK = RLock()
+_MAX_LOAD_MARKERS = 128
+
+
 def _load(raw: Any, digest: Any) -> Any:
     if type(raw) is not str or type(digest) is not str:
         raise _error("STORAGE_CORRUPT")
     try:
+        encoded = raw.encode("utf-8")
+        if len(encoded) > MAX_DOCUMENT_BYTES or hashlib.sha256(encoded).hexdigest() != digest:
+            raise _error("STORAGE_CORRUPT")
+        # 全本文を毎回ハッシュし、既に厳格検査した同一本文だけを再利用する。
+        # 本文や可変な結果は保持せず、呼出元へは毎回独立したJSONを返す。
+        key = (digest, len(encoded), _walk_json, _unique_pairs, _reject_number, json.loads, json.dumps, MAX_INTEGER)
+        with _LOAD_MARKER_LOCK:
+            known = key in _LOAD_MARKERS
+            if known:
+                _LOAD_MARKERS.move_to_end(key)
+        if known:
+            return json.loads(raw)
         value = json.loads(raw, object_pairs_hook=_unique_pairs, parse_float=_reject_number, parse_constant=_reject_number)
         canonical = _walk_json(value)
     except EvidenceError:
         raise _error("STORAGE_CORRUPT") from None
     except (TypeError, ValueError, UnicodeError, RecursionError):
         raise _error("STORAGE_CORRUPT") from None
-    if canonical.decode("utf-8") != raw or hashlib.sha256(canonical).hexdigest() != digest:
+    if canonical != encoded:
         raise _error("STORAGE_CORRUPT")
+    with _LOAD_MARKER_LOCK:
+        _LOAD_MARKERS[key] = None
+        _LOAD_MARKERS.move_to_end(key)
+        while len(_LOAD_MARKERS) > _MAX_LOAD_MARKERS:
+            _LOAD_MARKERS.popitem(last=False)
     return value
 
 
@@ -173,6 +197,11 @@ def _ref_digest(value: Any) -> str:
 
 
 def _profile(value: Any) -> dict[str, Any]:
+    if type(value) is dict and "schema_version" in value:
+        try:
+            return execution_profiles.validate(value)
+        except ContractError as error:
+            raise _error("DUPLICATE_REFERENCE" if error.code == "DUPLICATE_REFERENCE" else "INVALID_PROFILE") from None
     fields = {"fixture_digest", "adapter_digests", "isolation_digest"}
     if type(value) is not dict or set(value) != fields:
         raise _error("INVALID_PROFILE")
@@ -192,6 +221,36 @@ def _profile(value: Any) -> dict[str, Any]:
 
 
 def _bound(value: Any, baseline_context: Any = None) -> dict[str, Any]:
+    # 内容が完全に同じ大規模bundleだけを再利用する。保存状態や時刻を検査する関数ではない。
+    from .cache_inputs import plain
+    try:
+        cases = value['case_set']['cases']
+        eligible = type(cases) is list and 400 <= len(cases) <= 415
+    except (KeyError, TypeError):
+        eligible = False
+    if eligible and plain([value, baseline_context]):
+        try:
+            payload = json.dumps([value, baseline_context], sort_keys=True, ensure_ascii=False,
+                separators=(',', ':'), allow_nan=False)
+        except (TypeError, ValueError, UnicodeError, RecursionError):
+            payload = None
+        if payload is not None and len(payload.encode('utf-8')) <= 2 * MAX_DOCUMENT_BYTES:
+            from .evaluation_authority import _source_digest
+            return json.loads(_cached_bound(_source_digest(), _bound_uncached, payload))
+    return _bound_uncached(value, baseline_context)
+
+
+from .immutable_cache import binding_cache
+
+
+@binding_cache.memoize
+def _cached_bound(source_digest, implementation, payload):
+    value, baseline_context = json.loads(payload)
+    from .cache_inputs import encode_result
+    return encode_result(implementation(value, baseline_context))
+
+
+def _bound_uncached(value: Any, baseline_context: Any = None) -> dict[str, Any]:
     fields = {"manifest", "contract", "plan", "policy", "registry", "case_set", "selected_controls", "ci_eligible"}
     if type(value) is not dict or set(value) != fields:
         raise _error("INVALID_BOUND_RUN")
@@ -220,9 +279,9 @@ def _bound(value: Any, baseline_context: Any = None) -> dict[str, Any]:
     }
 
 
-def bound_bundle_digest(bound_run: Any) -> str:
-    """開始許可表へ登録するbound bundleのcanonical digestを返す。"""
-    return _pack(_bound(bound_run))[1]
+def bound_bundle_digest(bound_run: Any, baseline_context: Any = None) -> str:
+    """実際の比較対象を再束縛して、開始許可表のcanonical digestを返す。"""
+    return _pack(_bound(bound_run, baseline_context))[1]
 
 
 def _binding_summary(bound: dict[str, Any], profile: dict[str, Any], baseline_context: Any) -> dict[str, Any]:
@@ -339,15 +398,16 @@ def _binding_matches(bound: dict[str, Any], profile: dict[str, Any], attempt: di
             raise _error("BINDING_MISMATCH")
         if binding["policy_digest"] != manifest["policy_ref"]["digest"]:
             raise _error("BINDING_MISMATCH")
-        if binding["fixture_digest"] != profile["fixture_digest"] or binding["isolation_digest"] != profile["isolation_digest"]:
+        selected_profile = execution_profiles.expected(profile, binding["target_digest"], binding["evaluator_digest"])
+        if binding["fixture_digest"] != selected_profile["fixture_digest"] or binding["isolation_digest"] != selected_profile["isolation_digest"]:
             raise _error("BINDING_MISMATCH")
-        if binding["adapter_digest"] not in profile["adapter_digests"]:
+        if binding["adapter_digest"] not in selected_profile["adapter_digests"]:
             raise _error("BINDING_MISMATCH")
         # 正規化結果にも同じbindingを保持させ、外側の自己申告だけを信頼しない。
         result = attempt.get("result")
         if result is not None and result["binding"] != binding:
             raise _error("BINDING_MISMATCH")
-    except KeyError:
+    except (KeyError, ContractError):
         raise _error("BINDING_MISMATCH") from None
     entries = bound["plan"]["entries"]
     matched = [
@@ -466,8 +526,9 @@ class RunEvidenceStore:
         state = self._state(db, run_id)
         return {
             "schema_version": 1, "kind": "run_evidence_run", "run_id": run_id,
-            "bundle": deepcopy(bound), "bundle_digest": row["bundle_digest"],
-            "execution_profile": deepcopy(profile), "baseline_context": deepcopy(baseline),
+            # _load_runでこの呼出し専用に復号した値を返す。二度目の複製は不要。
+            "bundle": bound, "bundle_digest": row["bundle_digest"],
+            "execution_profile": profile, "baseline_context": baseline,
             "state": state["state"], "hold_reason": state["hold_reason"],
             "aggregate_digest": state["aggregate_digest"], "decision_digest": state["decision_digest"],
             "diagnostic_finalized": state["finalized_at"] is not None,
@@ -483,6 +544,7 @@ class RunEvidenceStore:
                                  state: sqlite3.Row) -> None:
         """現在利用判定の前に、run内の保存payloadと参照を再検査する。"""
         try:
+            execution_profiles.check_plan(profile, bound)
             if _bound(bound, baseline) != bound or _profile(profile) != profile:
                 raise _error("STORAGE_CORRUPT")
             if row["run_id"] != run_id or type(row["started_at"]) is not int or type(row["updated_at"]) is not int:
@@ -667,6 +729,10 @@ class RunEvidenceStore:
     def start_run(self, bound_run: Any, execution_profile: Any, baseline_context: Any = None) -> dict[str, Any]:
         profile = _profile(execution_profile)
         bound = _bound(bound_run, baseline_context)
+        try:
+            execution_profiles.check_plan(profile, bound)
+        except ContractError:
+            raise _error("INVALID_PROFILE") from None
         run_id = bound["manifest"]["run_id"]
         _, bundle_digest = _pack(bound)
         if self._allowed.get(run_id) != bundle_digest:
@@ -957,7 +1023,8 @@ class RunEvidenceStore:
             row = self._run_row(db, run_id)
             bound, profile, baseline = self._load_run(row)
             state = self._state(db, run_id)
-            self._validate_store_contents(db, run_id, now, row, bound, profile, baseline, state)
+            from .evidence_snapshot_cache import check
+            check(db, run_id, now, row, bound, profile, baseline, state, self._validate_store_contents)
             expected = _binding_summary(bound, profile, baseline)
             binding_match = expected_binding == expected
             reasons: list[str] = []

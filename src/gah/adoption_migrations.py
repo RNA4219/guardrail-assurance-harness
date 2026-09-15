@@ -16,6 +16,13 @@ from .wire import canonical_bytes
 _V2_VERSION = 2
 _V3_VERSION = 3
 _V4_VERSION = 4
+_V4_LLM_INITIAL_EXTENSION_DIGEST = "e1135e46171b39d8fe8871b0074972173c57d86c812456ac34d320529cce5e54"
+_V4_FOLLOWING_EXTENSION_DIGEST = "b2c4e845feba67f00c777b83fcba3b514a2c1f69756f393cabc6dd8c42d15f47"
+_V4_SCOPED_EXTENSION_DIGEST = "cd05dbff677409e8a8eda0d78ae779aba5be2190b8a363eaf450ec5a11ed48c7"
+_V4_RUNTIME_VALIDATOR_DIGEST = "3e951365969e6f1a1e192ae219a78e58678b13c9c13fd9c38360104f510b7f54"
+_V4_MIGRATED_SCOPE_EXTENSION_DIGEST = "1d42d22d2e0df1f3c8f5dc3b913c9fde5cea4f3d6ee205bbdef7a51cc0f2c5d5"
+_SCOPED_VERSIONS = {_V4_SCOPED_EXTENSION_DIGEST, _V4_MIGRATED_SCOPE_EXTENSION_DIGEST}
+_FOLLOWING_VERSIONS = {_V4_FOLLOWING_EXTENSION_DIGEST} | _SCOPED_VERSIONS
 _V4_PREDECESSOR_EXTENSION_DIGEST = "d07df9acab34ae3e8add8a1b43f162ae3873155e9519f1b3529ed15e4bc8c38a"
 _V4_ADOPTION_EXTENSION_DIGEST = "029327c9dd044101406b4ac9d07d4f8c1255336e96e978379d03a68b1798da2b"
 _V4_SUPERVISOR_EXTENSION_DIGEST = "2329289ebbf5585caa5f0982d3be0e5cc9aa118238521fa60027a43661e308b6"
@@ -181,7 +188,7 @@ def _verify_json_rows(db: sqlite3.Connection) -> None:
             raise _error("STORAGE_CORRUPT")
 
 
-def _verify_v3_json_rows(db: sqlite3.Connection, *, adopted: bool = False) -> None:
+def _verify_v3_json_rows(db: sqlite3.Connection, *, adopted: bool = False, following: bool = False) -> None:
     """v3で追加された保存payloadのcanonical bytes/hashだけを検査する。"""
 
     _verify_json_rows(db)
@@ -212,10 +219,10 @@ def _verify_v3_json_rows(db: sqlite3.Connection, *, adopted: bool = False) -> No
         for row in db.execute('SELECT * FROM "' + table + '"'):
             _stored_json(row[raw_column], row[digest_column], nullable=nullable)
 
-    _verify_v3_history_graph(db, adopted=adopted)
+    _verify_v3_history_graph(db, adopted=adopted, following=following)
 
 
-def _verify_v3_history_graph(db: sqlite3.Connection, *, adopted: bool = False) -> None:
+def _verify_v3_history_graph(db: sqlite3.Connection, *, adopted: bool = False, following: bool = False) -> None:
     """v3のcurrentポインタと不変履歴の参照鎖を再照合する。
 
     ここでは時刻の鮮度や現在の権限を再計算せず、保存済み行同士の結合だけを
@@ -337,6 +344,17 @@ def _verify_v3_history_graph(db: sqlite3.Connection, *, adopted: bool = False) -
         ).fetchone()
         if current is None:
             raise _error("STORAGE_CORRUPT")
+        if following and row["generation"] > 1:
+            predecessor = db.execute("SELECT 1 FROM eval_adoptions WHERE series_id=? AND generation=?",
+                (row["series_id"], row["generation"] - 1)).fetchone()
+            if predecessor is None:
+                raise _error("STORAGE_CORRUPT")
+        if following and adopted and 1 <= row["generation"] < current["generation"]:
+            previous = db.execute("SELECT 1 FROM eval_adoptions WHERE series_id=? AND generation=?",
+                (row["series_id"], row["generation"] + 1)).fetchone()
+            if previous is None:
+                raise _error("STORAGE_CORRUPT")
+            continue
         if adopted and row["generation"] == 1 and current["generation"] == 2:
             # 既知gen2採択版だけは旧gen1履歴を保持する。両世代のproposal/
             # validationとgen2の専用採択鎖を前後の検査で照合する。
@@ -352,15 +370,17 @@ def _verify_v3_history_graph(db: sqlite3.Connection, *, adopted: bool = False) -
                 raise _error("STORAGE_CORRUPT")
 
 
-def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, regression: bool = False, cancellation: bool = False) -> None:
+def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, regression: bool = False, cancellation: bool = False, following: bool = False, scoped: bool = False) -> None:
     """旧v4候補を元factoryへ再結合し、fresh失効とは分離して検査する。"""
+    if db.execute("SELECT 1 FROM authority_artifacts WHERE kind IN ('finding_management_event','target_retirement','combined_run_binding','combined_run_receipt','combined_cancel_request')").fetchone():
+        raise _error("STORAGE_CORRUPT")
     from . import transition_authority
     from .adoption import AdoptionError
 
     from . import transition_acceptance
     for table in ("eval_current", "eval_adoptions"):
         for row in db.execute('SELECT * FROM "' + table + '"'):
-            if row["generation"] == 2 and adopted:
+            if adopted and (row["generation"] == 2 or following and row["generation"] > 2):
                 try:
                     transition_acceptance.history(db, row, _stored_json(row["payload_json"], row["digest"]))
                 except (AdoptionError, ContractError):
@@ -371,7 +391,7 @@ def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, 
     for candidate in db.execute("SELECT * FROM transition_candidates"):
         try:
             _, value = transition_authority.load_candidate(db, candidate["candidate_id"], clock)
-            if value['runs']['transition']['schema_version'] != 1:
+            if value['runs']['transition']['schema_version'] not in ({1, 2} if following else {1}):
                 raise _error('STORAGE_CORRUPT')
             for side in ("old", "new"):
                 bound = value["runs"][side]["bound_run"]
@@ -397,11 +417,29 @@ def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, 
     # 取消し形式を持つ既知版だけを許可し、全rootを元の通常runへ結ぶ。
     for artifact in db.execute("SELECT run_id FROM authority_artifacts WHERE kind IN ('authority_cancel_receipt','resource_cancellation')"):
         run = db.execute("SELECT contract_generation FROM eval_runs WHERE run_id=?", (artifact[0],)).fetchone()
-        if (not cancellation or run is None or run[0] != 2
+        if (not cancellation or run is None or (run[0] < 2 if following else run[0] != 2)
                 or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (artifact[0],)).fetchone()):
             raise _error("STORAGE_CORRUPT")
     from . import regression_runs, assurance_authority, run_evidence, run_outputs, resources, run_cancellation
-    for row in db.execute("SELECT * FROM eval_runs WHERE contract_generation=2"):
+    for saved in db.execute("SELECT * FROM idempotency"):
+        response = _stored_json(saved["response_json"], saved["response_digest"], nullable=True)
+        if response is None or response.get("action") != "run_prepare_scoped":
+            continue
+        if not scoped:
+            raise _error("STORAGE_CORRUPT")
+        try:
+            manifest = response["bound_run"]["manifest"]
+            from .run_scope import request_id as scope_request_id
+            if saved["request_id"] != response["request_id"] or saved["request_id"] != scope_request_id(manifest["run_id"]):
+                raise AdoptionError("STORAGE_CORRUPT")
+            histories = db.execute("SELECT * FROM eval_adoptions WHERE digest=?", (manifest["contract_ref"]["digest"],)).fetchall()
+            if len(histories) != 1:
+                raise AdoptionError("STORAGE_CORRUPT")
+            regression_runs.build(db, histories[0], manifest["run_id"], manifest["created_at"], clock)
+        except (AdoptionError, ContractError, resources.ResourceError, KeyError, TypeError, ValueError):
+            raise _error("STORAGE_CORRUPT") from None
+    query = "SELECT * FROM eval_runs WHERE contract_generation" + (">=2" if following else "=2")
+    for row in db.execute(query):
         if db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (row["run_id"],)).fetchone():
             continue
         if not regression:
@@ -491,6 +529,23 @@ def _seed_policy_adoptions(db: sqlite3.Connection, table_columns: dict[str, set[
     for row in db.execute("SELECT operation_id FROM resource_events"):
         if db.execute("SELECT 1 FROM resource_operations WHERE operation_id=?", (row[0],)).fetchone() is None:
             raise _error("STORAGE_CORRUPT")
+
+
+def _verification_snapshot(db):
+    """読取検査の許容副作用は既存Evidence・資源時計の前進だけ。行追加は許容しない。"""
+    result = {}
+    for table in _V4_COLUMNS:
+        columns = [row[1] for row in db.execute('PRAGMA table_info("' + table + '")')]
+        records = [list(row) for row in db.execute('SELECT * FROM "' + table + '"')]
+        if table in {"run_evidence_meta", "resource_meta"}:
+            for row in records:
+                if row[columns.index("key")] == "last_clock":
+                    value = row[columns.index("value")]
+                    if type(value) is not int or value < 0:
+                        raise _error("STORAGE_CORRUPT")
+                    row[columns.index("value")] = 0
+        result[table] = sorted(records, key=repr)
+    return result
 
 
 def _trusted_extension() -> Any:
@@ -612,34 +667,53 @@ def migrate_evaluation_store(path: str | Path) -> dict[str, Any]:
             # 検査とconfig更新を完了する。
             _verify_columns(db, _V4_COLUMNS)
             config = _config(db)
+            llm_initial = config.get("extension_digest") == _V4_LLM_INITIAL_EXTENSION_DIGEST
+            following = config.get("extension_digest") in _FOLLOWING_VERSIONS
+            validators = {_V2_VALIDATOR_DIGEST, _V4_RUNTIME_VALIDATOR_DIGEST} if following or llm_initial else {_V2_VALIDATOR_DIGEST}
             if (set(config) != {"bootstrap_digest", "validator_digest", "extension_digest"}
                     or config["bootstrap_digest"] != _V2_BOOTSTRAP_DIGEST
-                    or config["validator_digest"] != _V2_VALIDATOR_DIGEST
-                    or config["extension_digest"] not in {_V4_PREDECESSOR_EXTENSION_DIGEST, _V4_ADOPTION_EXTENSION_DIGEST, _V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST}):
+                    or config["validator_digest"] not in validators
+                    or config["extension_digest"] not in {_V4_PREDECESSOR_EXTENSION_DIGEST, _V4_ADOPTION_EXTENSION_DIGEST, _V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST, _V4_LLM_INITIAL_EXTENSION_DIGEST} | _FOLLOWING_VERSIONS):
                 raise _error("CONFIG_MISMATCH")
             _meta(db, _V4_VERSION)
-            if (config["extension_digest"] not in {_V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST} and
+            if (not following and config["extension_digest"] not in {_V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST} and
                     (db.execute("SELECT 1 FROM baseline_adoptions WHERE generation!=1").fetchone()
                     or db.execute("SELECT 1 FROM baseline_proposals WHERE expected_generation!=0 OR contract_generation!=1").fetchone())):
                 raise _error("STORAGE_CORRUPT")
-            adopted = config["extension_digest"] in {_V4_ADOPTION_EXTENSION_DIGEST, _V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST}
-            _verify_v3_json_rows(db, adopted=adopted)
-            _verify_v4_candidate_rows(db, adopted=adopted,
-                regression=config["extension_digest"] in {_V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST},
-                cancellation=config["extension_digest"] in {_V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST})
-            if config["extension_digest"] in {_V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST}:
-                from .baseline_refresh_migration import verify
-                from .adoption import AdoptionError
-                try:
-                    verify(db, _meta(db, _V4_VERSION)["last_clock"])
-                except AdoptionError:
-                    raise _error("STORAGE_CORRUPT") from None
+            adopted = following or config["extension_digest"] in {_V4_ADOPTION_EXTENSION_DIGEST, _V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST}
+            before_verification = _verification_snapshot(db)
+            db.execute("SAVEPOINT gah_migration_verification")
+            try:
+                _verify_v3_json_rows(db, adopted=adopted, following=following)
+                if llm_initial:
+                    from .llm_migration import verify as verify_llm
+                    from .adoption import AdoptionError
+                    try: verify_llm(db, _meta(db, _V4_VERSION)["last_clock"])
+                    except AdoptionError: raise _error("STORAGE_CORRUPT") from None
+                else:
+                    _verify_v4_candidate_rows(db, adopted=adopted,
+                    regression=following or config["extension_digest"] in {_V4_REGRESSION_EXTENSION_DIGEST, _V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST},
+                    cancellation=following or config["extension_digest"] in {_V4_CANCELLATION_EXTENSION_DIGEST, _V4_RECOVERY_EXTENSION_DIGEST, _V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST},
+                    following=following, scoped=config["extension_digest"] in _SCOPED_VERSIONS)
+                if following or config["extension_digest"] in {_V4_REFRESH_EXTENSION_DIGEST, _V4_SUPERVISOR_EXTENSION_DIGEST}:
+                    from .baseline_refresh_migration import verify
+                    from .adoption import AdoptionError
+                    try:
+                        verify(db, _meta(db, _V4_VERSION)["last_clock"], following=following)
+                    except AdoptionError:
+                        raise _error("STORAGE_CORRUPT") from None
+                if _verification_snapshot(db) != before_verification:
+                    raise _error("STORAGE_CORRUPT")
+            finally:
+                # RunEvidenceBookの読取時計も含め、検査が起こした更新は保存しない。
+                db.execute("ROLLBACK TO gah_migration_verification")
+                db.execute("RELEASE gah_migration_verification")
             db.execute("UPDATE adoption_config SET value=? WHERE key='extension_digest'", (extension.digest,))
             predecessor = config["extension_digest"]
             db.commit()
             return {"schema_version": 4, "kind": "adoption_migration_result", "changed": True,
                     "predecessor_extension_digest": predecessor,
-                    "predecessor_validator_digest": _V2_VALIDATOR_DIGEST,
+                    "predecessor_validator_digest": config["validator_digest"],
                     "extension_digest": extension.digest, "ci_eligible": False}
         db.commit()
         return {"schema_version": 4, "kind": "adoption_migration_result", "changed": True,

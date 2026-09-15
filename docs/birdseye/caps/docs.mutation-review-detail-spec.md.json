@@ -1,0 +1,23 @@
+{
+  "id": "docs/mutation-review-detail-spec.md",
+  "role": "mutation-review-detail-spec",
+  "title": "Mutationの除外審査",
+  "summary": "[要求](requirements.md)GAH-R07/R09/R25と[受入条件](acceptance-criteria.md)へ対応する。元のERROR・予定義務・Decision・receiptを保持したまま、根拠付きの審査を別artifactへ保存する。審査の承認はCI許可や修復成功ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [
+    "docs/reviews/mvp-acceptance-20260913.md",
+    "docs/run-report-detail-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "2a459ab9ae40073b55eba6057f09c7ca6682a7630a0dcd78451c171d25c9037c"
+}

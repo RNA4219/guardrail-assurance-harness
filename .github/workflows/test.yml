@@ -6,13 +6,59 @@ on:
 permissions:
   contents: read
 jobs:
-  unit:
+  plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.partition.outputs.matrix }}
+      digest: ${{ steps.partition.outputs.digest }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
-      - name: Full unittest suite (including SQLite integration)
-        run: python -m unittest discover -s tests -v
+      - name: Partition every test without splitting modules
+        id: partition
+        run: |
+          python -m tools.test_matrix --plan > ci-plan.json
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          plan = json.loads(Path('ci-plan.json').read_text('utf-8'))
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write('matrix=' + json.dumps(plan['matrix']) + '\n')
+              output.write('digest=' + plan['plan_digest'] + '\n')
+          print(json.dumps(plan, indent=2))
+          PY
+  suite:
+    needs: plan
+    name: suite (${{ matrix.lane }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Run assigned modules including SQLite integration
+        env:
+          TEST_LANE: ${{ matrix.lane }}
+          TEST_PLAN_DIGEST: ${{ needs.plan.outputs.digest }}
+        run: python -m tools.test_matrix --lane "$TEST_LANE" --expected-plan-digest "$TEST_PLAN_DIGEST"
+  unit:
+    needs: [plan, suite]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require the complete plan and every test lane to pass
+        env:
+          PLAN_RESULT: ${{ needs.plan.result }}
+          SUITE_RESULT: ${{ needs.suite.result }}
+        run: |
+          test "$PLAN_RESULT" = success
+          test "$SUITE_RESULT" = success

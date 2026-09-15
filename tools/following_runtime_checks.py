@@ -141,9 +141,13 @@ def verify(*, success, call, denied, check, runtime, runner, receipts, active, s
     from tools.supervisor_runtime_checks import verify as verify_supervisor
     after_supervisor=verify_supervisor(runtime=runtime,call=call,check=check,contract=following,
         receipts=receipts,save_observations=save_observations)
+    from tools.baseline_refresh_runtime_checks import verify as verify_baseline_refresh
+    after_baseline=verify_baseline_refresh(success=success,call=call,denied=denied,check=check,
+        runtime=runtime,run_id='supervised-normal-runtime',expected_generation=2)
     def after_revocation():
         current=success(12004,query)
         check('following_source_revocation_invalidates_generation_three',current['generation']==3 and current['valid'] is False)
         check('following_revocation_keeps_adoption_receipt',success(12001,adopt)==adopted)
         after_supervisor()
+        after_baseline()
     return after_revocation

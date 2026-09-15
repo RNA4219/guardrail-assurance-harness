@@ -4,7 +4,7 @@ from .adoption import AdoptionError
 from .contracts import ContractError
 
 
-def verify(db, now):
+def verify(db, now, *, following=False):
     """現在の失効を解除せず、保存時の候補と元runの実体を照合する。"""
     try:
         for row in db.execute('SELECT * FROM baseline_proposals'):
@@ -13,18 +13,22 @@ def verify(db, now):
                 raise AdoptionError('STORAGE_CORRUPT')
             if value['kind'] != baseline_generations.KIND:
                 continue
+            if not following and (value['expected_generation'] != 1 or value['contract_generation'] != 2):
+                raise AdoptionError('STORAGE_CORRUPT')
             baseline_generations.predecessor(db, value)
             run = db.execute('SELECT * FROM eval_runs WHERE run_id=?', (row['run_id'],)).fetchone()
             prepared = regression_runs.for_run(db, run, now)
             bound = prepared['bound_run']
-            digest = run_evidence.bound_bundle_digest(bound)
+            digest = run_evidence.bound_bundle_digest(bound, prepared['baseline_context'])
             book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={row['run_id']: digest})
             _, receipt = assurance_authority._receipt(db, row['run_id'], bound, book)
             source = {'bound': bound, 'receipt': receipt,
                 'decision': assurance_authority._artifact(db, receipt['decision_ref'], row['run_id']),
                 'closure': assurance_authority._artifact(db, receipt['closure_ref'], row['run_id']),
                 'evidences': [assurance_authority._artifact(db, receipt['evidence_ref'], row['run_id'])]}
-            candidate = base.build_candidate(source, row['series_id'], row['proposal_id'], row['created_at'], expected_generation=1)
+            from .run_scope import require_full_source
+            require_full_source(source)
+            candidate = base.build_candidate(source, row['series_id'], row['proposal_id'], row['created_at'], expected_generation=value['expected_generation'])
             if (candidate != {'record': value['record'], 'comparison_context': value['comparison_context']}
                     or base._trusted_binding(bound) != value['binding_digest']
                     or receipt['created_at'] > row['created_at']):

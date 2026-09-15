@@ -1,7 +1,7 @@
 """固定fixtureの契約移行候補を保存する。同一transactionの内部境界。"""
 from copy import deepcopy
 
-from . import fixture_admission, resources, transition_materialization
+from . import fixture_admission, resources, transition_materialization, candidate_sections
 from .adoption import AdoptionError
 from .read_checks import checked_read
 from .contracts import ContractError, MAX_INTEGER, require_id, require_object, require_ref
@@ -9,12 +9,13 @@ from .run_contracts import content_ref
 from .transition_migrations import TABLES, create_schema
 
 PURPOSES = {"contract_old_regression", "contract_candidate"}
-ACTIONS = {"contract_candidate_prepare": {"validator"}, "contract_candidate_begin": {"operator"}}
+ACTIONS = {"contract_candidate_prepare": {"validator"}, "contract_candidate_begin": {"operator"}, "contract_candidate_read": {"operator", "validator"}}
 _BASE = {"schema_version", "action", "request_id"}
 _PRECONDITIONS = {"proposal_id", "baseline_series_id", "expected_contract_ref", "expected_baseline_ref"}
 FIELDS = {
     "contract_candidate_prepare": _BASE | _PRECONDITIONS | {"candidate_id", "old_run_id", "new_run_id"},
     "contract_candidate_begin": _BASE | {"candidate_id", "side"},
+    "contract_candidate_read": _BASE | {"candidate_id", "side"},
 }
 
 
@@ -66,9 +67,17 @@ def _build(db, transition, old_id, new_id, created_at, now):
         if row is None or row['contract_generation'] != previous['generation']:
             raise AdoptionError('CANDIDATE_INVALID')
         source = regression_runs.for_run(db, row, now)
+        if previous['use_cases'] == ['UC-LLM']:
+            from .llm_transitions import build_following
+            return build_following(previous, following, baseline_record=transition['baseline_record'],
+                source_prepared=source, now=created_at, old_run_id=old_id, new_run_id=new_id)
         return build_following_runs(previous, following, baseline_record=transition['baseline_record'],
             source_prepared=source, now=created_at, old_run_id=old_id, new_run_id=new_id)
     source = _source_prepared(db, transition["source_run_ref"]["id"], now)
+    if previous["use_cases"] == ["UC-LLM"]:
+        from .llm_transitions import build
+        return build(previous, following, baseline_record=transition["baseline_record"], source_prepared=source,
+            now=created_at, old_run_id=old_id, new_run_id=new_id, following_registry=transition.get("following_registry"))
     worker, lock, profile = fixture_admission.execution_context()
     return transition_materialization.build_transition_runs(
         transition["previous_contract"], transition["next_contract"],
@@ -93,6 +102,7 @@ def load_candidate(db, candidate_id, now):
                 or any(row[key] != value[key] for key in ("proposal_id", "proposal_digest", "baseline_series_id"))):
             raise ContractError()
         proposal = db.execute("SELECT * FROM eval_proposals WHERE id=?", (row["proposal_id"],)).fetchone()
+        value["runs"] = candidate_sections.unpack(db, candidate_id, value["runs"])
         transition = value["runs"]["transition"]
         contract = transition["next_contract"]
         if (proposal is None or proposal["digest"] != row["proposal_digest"]
@@ -156,7 +166,9 @@ def prepare(store, db, request, now, actor_id, context, check_transition):
     runs = _build(db, checked["transition"], request["old_run_id"], request["new_run_id"], now, now)
     value = {key: deepcopy(request[key]) for key in _PRECONDITIONS | {"candidate_id"}}
     value.update(proposal_digest=checked["proposal_digest"], runs=runs)
-    raw, digest = resources._packed(value)
+    stored = deepcopy(value)
+    stored["runs"] = candidate_sections.pack(db, request["candidate_id"], runs)
+    raw, digest = resources._packed(stored)
     db.execute("INSERT INTO transition_candidates VALUES(?,?,?,?,?,?,?,?,?,?)",
         (request["candidate_id"], request["proposal_id"], checked["proposal_digest"], request["baseline_series_id"],
          raw, digest, now, store._permission_generation(db), actor_id, context))
@@ -164,8 +176,8 @@ def prepare(store, db, request, now, actor_id, context, check_transition):
         db.execute("INSERT INTO transition_runs VALUES(?,?,?)", (request[side + "_run_id"], request["candidate_id"], side))
     _, saved = load_candidate(db, request["candidate_id"], now)
     return {"candidate_id": request["candidate_id"],
-        "candidate_ref": content_ref("contract_candidate", request["candidate_id"], saved),
-        "runs": saved["runs"], "adoption_verified": False}
+        "candidate_ref": candidate_sections.reference(saved),
+        "runs": stored["runs"], "adoption_verified": False}
 
 
 def candidate_run(db, bound_row, now):

@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "kind": "llm_minimum_scenario_evidence",
+  "observed_at": "2026-09-13T22:31:28.912693+00:00",
+  "source_snapshot": 71,
+  "scope": "自作の固定400ケースを正規SQLite評価経路で集計した保存記録。source71の修復確認5統合試験に属する。",
+  "source_database_sha256": "2f58f1c83ea16e89f5b52f0e17f88df1664b5b89663bd6a116a35420a0929417",
+  "source_database_bytes": 32268288,
+  "scenarios": [
+    {
+      "run_id": "llm-run",
+      "aggregate_digest": "0ba4f166a1ac47d26f2136455c78999183e816e48c39a98204b8be65ab3ef30c",
+      "receipt_digest": "314c2d850ebce95b064758a32fa2ebbf0d713acd2bbd2f9944d27d486fbc8f6a",
+      "saved_assurance": "HEALTHY",
+      "decision_ref": {
+        "digest": "036181fce3272175e9a32b08cdad8598edbdb70247c2c56c3afc5fd7a16d25aa",
+        "id": "llm-run",
+        "kind": "run_decision"
+      },
+      "variants": {
+        "candidate": {
+          "planned_stages": 600,
+          "completed_stages": 600,
+          "confusion_matrix": {
+            "tp": 196,
+            "fn": 4,
+            "fp": 4,
+            "tn": 196
+          },
+          "rates_from_saved_counts": {
+            "recall": {
+              "numerator": 196,
+              "denominator": 200
+            },
+            "fnr": {
+              "numerator": 4,
+              "denominator": 200
+            },
+            "fpr": {
+              "numerator": 4,
+              "denominator": 200
+            }
+          },
+          "evaluated_case_count": 400
+        }
+      }
+    },
+    {
+      "run_id": "delta-new",
+      "aggregate_digest": "ad1ab018753db88e598117a0e36ffab70151fcac1b4c410017b0780ea1b4b6d0",
+      "receipt_digest": "bc3a4fee803de86a6064a9a13e9bb17a125ebd0c0c577bc427641c326d0a7495",
+      "saved_assurance": "DEGRADED",
+      "decision_ref": {
+        "digest": "06aa78ccccd7a4fe1ebe037fc5e95ee76082dbc95fef9c4d85fd242e16fb2e38",
+        "id": "delta-new",
+        "kind": "run_decision"
+      },
+      "variants": {
+        "baseline": {
+          "planned_stages": 600,
+          "completed_stages": 600,
+          "confusion_matrix": {
+            "tp": 196,
+            "fn": 4,
+            "fp": 4,
+            "tn": 196
+          },
+          "rates_from_saved_counts": {
+            "recall": {
+              "numerator": 196,
+              "denominator": 200
+            },
+            "fnr": {
+              "numerator": 4,
+              "denominator": 200
+            },
+            "fpr": {
+              "numerator": 4,
+              "denominator": 200
+            }
+          },
+          "evaluated_case_count": 400
+        },
+        "candidate": {
+          "planned_stages": 600,
+          "completed_stages": 600,
+          "confusion_matrix": {
+            "tp": 184,
+            "fn": 16,
+            "fp": 2,
+            "tn": 198
+          },
+          "rates_from_saved_counts": {
+            "recall": {
+              "numerator": 184,
+              "denominator": 200
+            },
+            "fnr": {
+              "numerator": 16,
+              "denominator": 200
+            },
+            "fpr": {
+              "numerator": 2,
+              "denominator": 200
+            }
+          },
+          "evaluated_case_count": 400
+        }
+      }
+    },
+    {
+      "run_id": "repair-new",
+      "aggregate_digest": "e01ac22abc26e4116a30c7c8b98fe33103e3543247d6427bc6e8c447addb95c3",
+      "receipt_digest": "0e0b3b0a452899768d76f56fc8e0d7c266428465e53acd0fbb1cb21dcb8b18fd",
+      "saved_assurance": "HEALTHY",
+      "decision_ref": {
+        "digest": "4402b54cb3b3b0ba5cc2c72883340a076a29b834a399925fed372de62ec5cf0b",
+        "id": "repair-new",
+        "kind": "run_decision"
+      },
+      "variants": {
+        "baseline": {
+          "planned_stages": 600,
+          "completed_stages": 600,
+          "confusion_matrix": {
+            "tp": 196,
+            "fn": 4,
+            "fp": 4,
+            "tn": 196
+          },
+          "rates_from_saved_counts": {
+            "recall": {
+              "numerator": 196,
+              "denominator": 200
+            },
+            "fnr": {
+              "numerator": 4,
+              "denominator": 200
+            },
+            "fpr": {
+              "numerator": 4,
+              "denominator": 200
+            }
+          },
+          "evaluated_case_count": 400
+        },
+        "candidate": {
+          "planned_stages": 600,
+          "completed_stages": 600,
+          "confusion_matrix": {
+            "tp": 196,
+            "fn": 4,
+            "fp": 4,
+            "tn": 196
+          },
+          "rates_from_saved_counts": {
+            "recall": {
+              "numerator": 196,
+              "denominator": 200
+            },
+            "fnr": {
+              "numerator": 4,
+              "denominator": 200
+            },
+            "fpr": {
+              "numerator": 4,
+              "denominator": 200
+            }
+          },
+          "evaluated_case_count": 400
+        }
+      }
+    }
+  ],
+  "degraded_delta_percentage_points": {
+    "recall": -6,
+    "fnr": 6,
+    "fpr": -1
+  },
+  "validated": {
+    "stored_aggregate_hashes": true,
+    "stored_receipt_hashes": true,
+    "expected_counts_and_assurance": true,
+    "case_and_stage_counts_separated": true
+  },
+  "limitations": [
+    "合成fixtureの有限集合の結果であり、学習済みモデルや母集団性能の証明ではない。",
+    "このSQLite試験を実Dockerの時間・隔離証拠に数えない。",
+    "現行source76の表示接続と全回帰は別途実行中。"
+  ],
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "raw_database_published": false
+}

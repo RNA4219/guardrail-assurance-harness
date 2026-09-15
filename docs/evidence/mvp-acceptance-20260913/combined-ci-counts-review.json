@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "combined_ci_and_counts_review",
+  "full_mvp_accepted": false,
+  "combined_before": {
+    "source_snapshot": 71,
+    "tests_run": 4,
+    "errors": 1,
+    "seconds": 7009.514,
+    "passed": false,
+    "reason": "COMBINED_AUTHORITY_UNAVAILABLE"
+  },
+  "boundary_before": {
+    "tests_run": 4,
+    "errors": 4,
+    "passed": false
+  },
+  "boundary_after": {
+    "tests_run": 4,
+    "errors": 0,
+    "passed": true
+  },
+  "report_and_boundary": {
+    "tests_run": 16,
+    "seconds": 0.446,
+    "passed": true
+  },
+  "sqlite_regression": {
+    "tests_run": 39,
+    "seconds": 613.446,
+    "passed": true
+  },
+  "combined_full_recheck": {
+    "status": "running",
+    "source_snapshot": 74
+  },
+  "missing_requirement": [
+    "GAH-R07: justified mutation exclusions",
+    "GAH-R09: exclusion counts and reasons"
+  ],
+  "private_sha256": {
+    "combined-integration-71.json": "ee02be2c3c13a142e7fe9649a58e3389709d19cfffe5fc5cbefbe9535f000982",
+    "combined-integration-71.log": "a3f6bbc5fc781e96cac4cb200988c1ee2f74944bf5e8716c422decf4ccfab3e6",
+    "combined-ci-boundary-before-74.log": "34068718142335bd8ae7a4aa7024eaf860995a111a23fbb66c5586aad9ad7595",
+    "combined-ci-boundary-after-74.log": "a4afb2e553ab5f6c822757ba346d375140a6e44a4f2dc929504f8af1e1562809",
+    "report-boundary-74.log": "d7953c3a6a3717e9535af764e34f1567916f9b098a8e2a49ed1be6cc3560254e",
+    "full-regression-73-interrupted.json": "c001929ac2140e9ade0594d88bc515d6c0db079271bd2a2a35bd854f2adb338e",
+    "report-sqlite-74.log": "f7ff3632947141413bc50922d6d24f6deca28500a647b677e4add18344a8a516",
+    "combined-ci-fixed-74.log": "e5c3484e90bbb43a5fa12e9a942bb7a6dbf4c8b4fdbdd321f267ef126cdf2441",
+    "acceptance-source-74.json": "6bccebb1281f5eff8d58e6b8f89a27873e1a5f9f37dfa9c6f87af9e34af5a3b6"
+  },
+  "additional_ci_source_boundaries": {
+    "tests_run": 12,
+    "seconds": 0.231,
+    "passed": true
+  }
+}

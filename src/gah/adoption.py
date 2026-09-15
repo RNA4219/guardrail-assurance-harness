@@ -29,6 +29,8 @@ _SCHEMA_VERSION = 1
 _EXTENSION_SCHEMA_VERSION = 3
 _MAX_REQUEST_BYTES = MAX_DOCUMENT_BYTES
 _PREDECESSOR_VALIDATOR_DIGEST = "acc76f697b442719da8f9465adaf26c6edfd29e02f716bb1faa54c2ff28b1448"
+# v4の方針検証は同一。複合CIのdispatch修正前に採択された履歴だけを許容する。
+_V4_PREDECESSOR_VALIDATOR_DIGEST = "3e951365969e6f1a1e192ae219a78e58678b13c9c13fd9c38360104f510b7f54"
 _POLICY_ADOPTION_COLUMNS = (
     "series_id", "generation", "proposal_id", "validation_id", "policy_json",
     "policy_digest", "adopted_at", "actor_id", "context",
@@ -357,10 +359,8 @@ class AdoptionStore:
                 expected_config = {"bootstrap_digest", "validator_digest"}
                 if self._extension is not None:
                     expected_config.add("extension_digest")
-                validator_matches = config.get("validator_digest") == self._validator_digest
-                if (self._extension is not None and self._extension_schema_version >= 3
-                        and config.get("validator_digest") == _PREDECESSOR_VALIDATOR_DIGEST):
-                    validator_matches = True
+                validator_matches = self._validator_profile_matches(
+                    config.get("validator_digest"), allow_predecessor=True)
                 if (set(config) != expected_config
                         or config["bootstrap_digest"] != self._bootstrap_digest
                         or not validator_matches):
@@ -456,9 +456,12 @@ class AdoptionStore:
         """現行profile、または明示移行後の既知旧profileだけを照合する。"""
         if value == self._validator_digest:
             return True
-        return (allow_predecessor and self._extension is not None
-                and self._extension_schema_version >= 3
-                and value == _PREDECESSOR_VALIDATOR_DIGEST)
+        if not allow_predecessor or self._extension is None:
+            return False
+        return ((self._extension_schema_version >= 3
+                 and value == _PREDECESSOR_VALIDATOR_DIGEST)
+                or (self._extension_schema_version == 4
+                    and value == _V4_PREDECESSOR_VALIDATOR_DIGEST))
 
     @staticmethod
     def _store_result(db: sqlite3.Connection, request_id: str, request_digest: str,
@@ -561,7 +564,7 @@ class AdoptionStore:
             elif is_extension_action:
                 ci_path = False
                 try:
-                    if action == "ci_check":
+                    if action in {"ci_check", "combined_current"}:
                         # 任意extensionの成功宣言には昇格権限を与えない。
                         # 固定実装・保存設定を確認し、組込みのfresh検査を直接呼ぶ。
                         from .evaluation_authority import EvaluationExtension
@@ -570,7 +573,11 @@ class AdoptionStore:
                                 or self._extension_digest != EvaluationExtension.digest
                                 or action not in self._fresh_actions):
                             raise _error("EXTENSION_INVALID")
-                        result = ci_check(self, db, copy.deepcopy(normalized), now)
+                        if action == "ci_check":
+                            result = ci_check(self, db, copy.deepcopy(normalized), now)
+                        else:
+                            from .combined_runs import ci_check as combined_ci_check
+                            result = combined_ci_check(self, db, copy.deepcopy(normalized), now)
                         ci_path = True
                     else:
                         result = self._extension.execute(self, db, copy.deepcopy(normalized), actor_id, context, now)

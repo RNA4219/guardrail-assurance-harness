@@ -14,33 +14,21 @@
     "docs/BIRDSEYE.md",
     "docs/acceptance-criteria.md",
     "docs/adapter-spec.md",
-    "docs/baseline-refresh-detail-spec.md",
+    "docs/ci-config.md",
     "docs/contracts/README.md",
     "docs/design.md",
     "docs/detail-spec.md",
     "docs/evaluation-detail-spec.md",
-    "docs/evidence/README.md",
-    "docs/evidence/mvp-baseline-refresh-20260912/README.md",
-    "docs/evidence/mvp-condition-core-20260912/README.md",
-    "docs/evidence/mvp-supervisor-20260912/README.md",
     "docs/extension-roadmap.md",
-    "docs/lifecycle-detail-spec.md",
     "docs/mvp-completion-audit.md",
     "docs/open-questions.md",
     "docs/operating-policy.md",
     "docs/oss-publication.md",
-    "docs/reference-boundary.md",
     "docs/requirements-traceability.md",
     "docs/requirements.md",
     "docs/research/README.md",
     "docs/research/citation-register.md",
-    "docs/reviews/mvp-authority-20260911.md",
-    "docs/reviews/mvp-baseline-refresh-20260912.md",
-    "docs/reviews/mvp-evaluation-20260911.md",
     "docs/reviews/requirements-adversarial-20260910.md",
-    "docs/runtime-contract-spec.md",
-    "docs/semantic-conditions-detail-spec.md",
-    "docs/tasks/TASK.mvp-completion-09-11-2026.md",
     "orchestration/development-plan.md"
   ],
   "deps_in": [
@@ -53,6 +41,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "9a4173146f7f5326e1b15f003fb1851a2df496675ad2aa7537b4b1d9cdde8aa2"
+  "generated_at": "00111",
+  "source_sha256": "acae7a5540176b271461f1fa655bd11de17323ec1c3d6dfa2f8b3d18eea86167"
 }

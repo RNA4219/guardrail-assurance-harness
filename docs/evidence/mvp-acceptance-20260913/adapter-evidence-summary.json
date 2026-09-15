@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_adapter_evidence_integration",
+  "observed_at": "2026-09-13T18:18:10.305697+00:00",
+  "product_source_snapshot": 71,
+  "suite_snapshot": 72,
+  "result": "passed",
+  "tests_run": 25,
+  "seconds": 0.508,
+  "scope": [
+    "genericとPromptfooの固定三義務を正規化し、同じ意味・保存判定を確認。",
+    "固定raw内容digestから保存Attemptを追跡し、再起動後の不変判定を確認。",
+    "外部successでも制約違反を隠さない。未対応版と不正出力は保存せず必要証拠の不足を残す。",
+    "実行失敗は成功観測へ変換しない。"
+  ],
+  "limits": "Pythonの公開adapter APIとSQLite診断保存の接続。Promptfoo外部実行、OS主体認証、通常CIの成功証明をこの試験へ含めない。",
+  "earlier_test_failure": {
+    "tests_run": 25,
+    "errors": 1,
+    "reason": "追加試験の保存件数フィールド誤り。試験のみ修正し、製品コードは変更しない。"
+  },
+  "source_sha256": {
+    "tests/test_adapter_evidence_integration.py": "941ab1c68ac2eae28c2a2c9a959c179de8bbd537a88c576712f0f7a17d00b232",
+    "tests/test_promptfoo_adapter.py": "9c9846f06239200327d94e9a247b1c50aedd38c9ac13f67f5430f9e7695a7641",
+    "tests/test_normalized.py": "36b4c481efc095aaf2a2918143cec9efdb292dffc4a6763e22e7165f1b01ba4f",
+    "src/gah/normalized.py": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
+    "src/gah/promptfoo_adapter.py": "a30c924729aa30cc7f17e561106030c6c77913629e6fe20d34d7d67642f552e3",
+    "src/gah/run_evidence.py": "e879a54a6770b5557bd3b2f7f9e65db0165052d5d96e46f05612b6b85a5741e1"
+  },
+  "private_evidence_sha256": {
+    "adapter-evidence-71.log": "492ba1e7914bf9e28dc54916a4e81e37349fc7f89861f33dfe36c7035300e43a",
+    "adapter-evidence-71-recheck.log": "f5abb49fb3401450bfbc2b1aabaeee73911c1e48252698d3742bdaf54b9c892a"
+  },
+  "ci_eligible": false,
+  "full_mvp_accepted": false
+}

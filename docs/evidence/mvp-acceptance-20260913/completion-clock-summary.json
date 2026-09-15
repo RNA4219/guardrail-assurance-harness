@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_case_completion_and_clock_review",
+  "observed_at": "2026-09-13T16:00:08.458473+00:00",
+  "source_snapshots": [
+    60,
+    61,
+    62
+  ],
+  "implemented": [
+    "evidence_completeはvalidatorのみ。固定LLMの同一操作・同一caseの全1～2段階と、測定済みusage・停止観測を同じtransactionで保存する。",
+    "同じ束縛とbookを使用し、各段階の既存の保存検査を維持する。SQL等の例外は全体rollback。既存Attemptの矛盾を検出してHOLDを保存した場合は、その記録を保持しaccepted=falseとする。",
+    "欠損段階・逆順・別操作混入・不明usage・停止未確認・未完了を完了caseへ補完しない。",
+    "hostの開始・終了時刻には時計の種類を付ける。workerの時刻は変更せず、authority runtimeの配送意図・停止観測・現在時刻に対して検査する。"
+  ],
+  "validation": [
+    {
+      "snapshot": 60,
+      "tests": 35,
+      "elapsed_seconds": 23.905,
+      "result": "passed"
+    },
+    {
+      "snapshot": 61,
+      "tests": 67,
+      "elapsed_seconds": 26.145,
+      "result": "passed",
+      "includes": "全段階の保存と再配送、後段障害rollback、矛盾HOLD保持、未来観測拒否、host時計差、時計逆行、既存Evidenceと資源境界"
+    },
+    {
+      "snapshot": 62,
+      "checks": 6,
+      "result": "passed",
+      "scope": "実Dockerの初回DBコピー移行・現在利用・再起動・receipt不変・client回収"
+    }
+  ],
+  "failed_trials": [
+    {
+      "snapshot": 50,
+      "result": "failed",
+      "reason": "resource_claim:START_DENIED",
+      "context": "既定のrun時間予算に達して開始を拒否。所有コンテナ回収を確認。"
+    },
+    {
+      "snapshot": 59,
+      "result": "failed",
+      "reason": "STAGE_TIME_OUTSIDE_OPERATION",
+      "context": "hostとLinux runtimeのUTCを直接比較していた。旧側index39のworker時刻1789314044がhost保存時刻1789314043.996819をわずかに上回った。保存済み時刻・結果は補正せず、この実行を成功へ変更しない。",
+      "owned_containers_removed": true
+    }
+  ],
+  "running": [
+    "source62の実Docker旧400・新800と独立採択、通常CLI800",
+    "source62の実SQLite・合成runnerによる通常監督全体",
+    "source43の複合run",
+    "source47の修復確認・再発"
+  ],
+  "limits": "部品・統合試験の重複数を固有試験数に合算しない。実Dockerの全体完走と32条件の最終対応付けは未完了。",
+  "budgets_unchanged": true,
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "acceptance-source-60.json": "eb82260876f44f88c6556743c4b5e08b0e7d8bd109c0c22dae01ad4e709f628d",
+    "acceptance-source-61.json": "da9bbb7f36987b0e2d26f677ddc1b80587a567ec194a005917a548816c4cc865",
+    "acceptance-source-62.json": "aaa041396efc9563155e0a7b549112c1ee70c3f131ea6ceca3152fbcba30b080",
+    "completion-core-60.log": "d0ef60ac1c16361100a297ce232d48be50fad181c55fea1e313caf109088ac36",
+    "completion-clock-61.log": "81679e2276598ed19588289399eef792c7b8aa2b6f5484e274de5eb397723a16",
+    "llm-product-runtime-50.json": "c5303f65bce212fbdd96c50745f7df4393ae580fe0656df90e7a9258a03bfe4f",
+    "llm-product-runtime-59.json": "2a08a996644b11108ba49aae9051b63189a6be2468f6cddb56ca7fa2d9df23ed",
+    "llm-runtime-migration-62.json": "364f5b7825c267d7002e3869b00552e6f008c04e6826314254538924a4afca8e",
+    "llm-migration-62.json": "e58c699cc1cb7b33e3534b7129c04b08064fce29a0c93bf828569c097b092b11"
+  }
+}

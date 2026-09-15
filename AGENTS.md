@@ -2,9 +2,12 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-12
-next_review_due: 2026-10-12
+last_reviewed_at: 2026-09-15
+next_review_due: 2026-10-15
 ---
+
+2026-09-15現在: [32条件のMVP技術検収](docs/mvp-completion-audit.md)は完了し、[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)を正本とする。以下の工程別進捗にある未完了は当時の記録で、現在の判定は完了監査へ従う。設計凍結、人間の追加承認、GitHub上の実行・公開反映を意味しない。
+
 
 日本語で記載する。
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "00067",
+  "generated_at": "00111",
   "nodes": [
     {
       "id": "README.md",
@@ -16,36 +16,24 @@
         "docs/BIRDSEYE.md",
         "docs/acceptance-criteria.md",
         "docs/adapter-spec.md",
-        "docs/baseline-refresh-detail-spec.md",
+        "docs/ci-config.md",
         "docs/contracts/README.md",
         "docs/design.md",
         "docs/detail-spec.md",
         "docs/evaluation-detail-spec.md",
-        "docs/evidence/README.md",
-        "docs/evidence/mvp-baseline-refresh-20260912/README.md",
-        "docs/evidence/mvp-condition-core-20260912/README.md",
-        "docs/evidence/mvp-supervisor-20260912/README.md",
         "docs/extension-roadmap.md",
-        "docs/lifecycle-detail-spec.md",
         "docs/mvp-completion-audit.md",
         "docs/open-questions.md",
         "docs/operating-policy.md",
         "docs/oss-publication.md",
-        "docs/reference-boundary.md",
         "docs/requirements-traceability.md",
         "docs/requirements.md",
         "docs/research/README.md",
         "docs/research/citation-register.md",
-        "docs/reviews/mvp-authority-20260911.md",
-        "docs/reviews/mvp-baseline-refresh-20260912.md",
-        "docs/reviews/mvp-evaluation-20260911.md",
         "docs/reviews/requirements-adversarial-20260910.md",
-        "docs/runtime-contract-spec.md",
-        "docs/semantic-conditions-detail-spec.md",
-        "docs/tasks/TASK.mvp-completion-09-11-2026.md",
         "orchestration/development-plan.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -125,7 +113,7 @@
         "docs/tasks/TASK.mvp-completion-09-11-2026.md",
         "orchestration/development-plan.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -147,7 +135,7 @@
         "docs/reference-boundary.md",
         "docs/requirements.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -163,7 +151,7 @@
         "docs/requirements.md",
         "docs/tasks/TASK.mvp-completion-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -183,7 +171,7 @@
         "docs/research/README.md",
         "docs/run-contract-detail-spec.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -210,7 +198,7 @@
         "docs/tasks/README.md",
         "docs/tasks/TASK.mvp-completion-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -228,7 +216,7 @@
         "docs/research/README.md",
         "docs/reviews/requirements-adversarial-20260910.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -270,7 +258,7 @@
         "docs/tasks/TASK.runtime-core-09-11-2026.md",
         "docs/tasks/TASK.state-review-09-11-2026.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     },
@@ -296,7 +284,7 @@
         "docs/acceptance/AC-20260911-05.md",
         "docs/acceptance/README.md"
       ],
-      "last_verified_at": "2026-09-12T17:09:17+00:00",
+      "last_verified_at": "2026-09-15T03:32:00+00:00",
       "index_snapshot": "docs/birdseye/index.json",
       "refresh_command": "python -m tools.workflow generate"
     }

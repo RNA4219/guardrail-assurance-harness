@@ -170,6 +170,39 @@ class RegressionIntegrationTests(unittest.TestCase):
         self.assertEqual(self.store.dispatch(12004, 12004,
             request("evidence_finalize", "finalize-normal", run_id="normal")), receipt)
 
+    def test_saved_aggregate_is_bound_to_decision_and_content_is_verified(self):
+        prepared = self.prepare("measured"); receipt = self.complete(prepared)
+        decision = self.store.dispatch(12004, 12004, request("run_artifact", "measured-decision",
+            run_id="measured", artifact_ref=receipt["decision_ref"]))["artifact"]
+        ref = {"kind":"aggregation", "id":"measured", "digest":decision["aggregate_digest"]}
+        read = request("run_artifact", "measured-counts", run_id="measured", artifact_ref=ref)
+        result = self.store.dispatch(12004, 12004, read)
+        self.assertFalse(result["ci_eligible"])
+        self.assertEqual(content_ref("aggregation", "measured", result["artifact"]), ref)
+        for bad in ({**ref,"id":"unrelated"}, {**ref,"digest":"f"*64}):
+            with self.subTest(ref=bad), self.assertRaises(AdoptionError):
+                self.store.dispatch(12004, 12004, {**read,"request_id":"measured-wrong", "artifact_ref":bad})
+        row = self.store._db.execute("SELECT * FROM aggregates WHERE run_id='measured'").fetchone()
+        original = dict(row); changed = json.loads(original["aggregate_json"])
+        changed["counts"]["variant"]["candidate"]["tp"] += 1
+        self.store._db.execute("UPDATE aggregates SET aggregate_json=? WHERE run_id='measured'", (canonical_bytes(changed).decode(),))
+        try:
+            with self.assertRaises(AdoptionError): self.store.dispatch(12004, 12004, read)
+        finally:
+            self.store._db.execute("UPDATE aggregates SET aggregate_json=? WHERE run_id='measured'", (original["aggregate_json"],))
+        self.store._db.execute("DELETE FROM aggregates WHERE run_id='measured'")
+        try:
+            with self.assertRaises(AdoptionError): self.store.dispatch(12004, 12004, read)
+        finally:
+            columns = list(original)
+            self.store._db.execute("INSERT INTO aggregates("+",".join(columns)+") VALUES("+",".join("?" for _ in columns)+")", tuple(original.values()))
+        self.assertEqual(self.store.dispatch(12004, 12004, read), result)
+        from tests.test_supervised_run import Runtime
+        from tools.gah_report import build_report
+        report = build_report(Runtime(self.store), self.gate_request(prepared))
+        self.assertTrue(report["ci_eligible"])
+        self.assertEqual(report["measurements"]["counts"], result["artifact"]["counts"])
+
     def test_roles_shape_and_reserved_ids_reject_without_creating_runs(self):
         valid = request("run_prepare", "prepare-invalid", run_id="normal",
             contract_series_id="fixture-contract-series", expected_contract_ref=deepcopy(self.contract_ref))

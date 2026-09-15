@@ -8,9 +8,9 @@ next_review_due: 2026-10-12
 
 # 条件変更と後続契約の接続仕様
 
-差分導出と禁止変更の[比較部品](semantic-conditions-detail-spec.md)を実装した。[51件の試験](evidence/mvp-condition-core-20260912/README.md)は成功したが、以下の一般世代の採択・実行は未接続である。
+差分導出と禁止変更の[比較部品](semantic-conditions-detail-spec.md)に続き、同じ測定条件を使う後続契約とbaselineの次世代更新を接続した。契約3・基準3の統合検証と実Docker結果の範囲は[継続レビュー](reviews/mvp-acceptance-20260913.md)に記録する。条件差・対象差を伴う一般更新は継続中である。
 
-この仕様は[完了監査](mvp-completion-audit.md)の後続契約・条件変更を実装するための設計である。現在の製品はcontract 2と[baseline 1→2](baseline-refresh-detail-spec.md)までであり、本書の一般世代の接続を実装済みとはしない。要求・初期閾値・予算の正本は変更しない。
+この仕様は[完了監査](mvp-completion-audit.md)の後続契約・条件変更を実装するための設計である。現在の製品は同条件での後続契約と[baselineの次世代更新](baseline-refresh-detail-spec.md)を扱う。本書の条件差を伴う全経路の接続を実装済みとはしない。要求・初期閾値・予算の正本は変更しない。
 
 ## 契約・基準・元runの依存関係
 
@@ -55,3 +55,9 @@ next_review_due: 2026-10-12
 ## 接続完了の証拠
 
 少なくとも基準2を参照するcontract 3、旧・新条件の別実行、採択後の通常run、元根拠の撤回伝播、世代競合、参照循環・欠損、期限境界、旧Finding保持、保存失敗rollback、再起動と既知DB移行を確認する。条件を変えた対象実体の実行証拠がない場合、形だけの契約差分を条件変更の受入に数えない。
+
+## 固定LLMの後続世代
+
+通常のUC-LLM全体runを元に基準を更新した場合、後続契約の旧条件回帰は元のbaseline_contextと800試行を維持する。新条件候補は元のcandidate側400試行からbaseline/candidate各400試行を組み立て、新たに採択されたbaseline参照へ結ぶ。実入力400ケース、合計1200段階、元の実効時間上限を保持する。旧基準の比較条件を新基準で上書きせず、契約・基準世代と元runの完全参照を照合する。
+
+materializationの全資料とソース実装が同じ場合のみ純粋な構造生成を再利用し、入力は2MiB以下、結果は2件までの不変JSONで保持する。現在の採択・権限・期限・Evidence照合と独立validatorの採択は上位が毎回行う。構造生成の結果はauthority_connected=false、ci_eligible=falseであり、実行や採択の成功を意味しない。source69の構造・境界検証と統合の状況は[継続レビュー](reviews/mvp-acceptance-20260913.md)へ記録する。

@@ -69,6 +69,20 @@ class RunEvidenceBookTests(unittest.TestCase):
         finally:
             db.close()
 
+    def test_run_view_owns_decoded_values(self):
+        allowed = {'run-1': bound_bundle_digest(self.bound)}
+        db = self._connection()
+        self.addCleanup(db.close)
+        book = RunEvidenceBook(db, now=100, allowed_bindings=allowed)
+        book.start_run(self.bound, self.profile)
+        first = book.get_run('run-1')
+        first['bundle']['case_set']['cases'].clear()
+        first['execution_profile']['adapter_digests'].clear()
+        second = book.get_run('run-1')
+        self.assertEqual(second['bundle'], self.bound)
+        self.assertEqual(second['execution_profile'], self.profile)
+        db.rollback()
+
     def test_book_and_store_share_record_and_aggregate_results(self):
         allowed = {"run-1": bound_bundle_digest(self.bound)}
         attempt = attempt_for(self.fixtures, self.plan, "obligation-constraint",

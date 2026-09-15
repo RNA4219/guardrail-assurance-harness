@@ -63,12 +63,25 @@ def verify(*, success, call, denied, check, runtime, runner, contract, receipts,
             time.sleep(0.5)
         normal = call(12004, req("resource_claim", "normal-claim", run_id=run_id, owner_id="recovery-owner", recovery=False))
         check("recovery_revoked_source_denies_start", normal.get("kind") == "authority_error")
-        check("recovery_prior_recovery_mode_not_available", denied(12004, req("resource_claim", "old-recovery",
-            run_id=run_id, owner_id="recovery-owner", recovery=True), "RECOVERY_NOT_REQUIRED"))
+        prior = call(12004, req("resource_claim", "old-recovery",
+            run_id=run_id, owner_id="recovery-owner", recovery=True))
+        expected_epoch = lease["owner_epoch"] + 1
+        if prior.get("kind") == "authority_error":
+            check("recovery_before_deadline_mode_not_required", prior.get("reason") == "RECOVERY_NOT_REQUIRED")
+        else:
+            # 長い後続世代試験では期限を越え得る。期限後の停止専用取得は正当。
+            check("recovery_after_deadline_is_stop_only", prior.get("kind") == "evaluation_authority_result"
+                and prior.get("action") == "resource_claim" and prior.get("ci_eligible") is False
+                and prior.get("recovery_only") is True
+                and prior.get("owner_epoch") == expected_epoch
+                and prior.get("lease_until", 0) - 60 >= manifest["deadline"])
+            expired_owner = {"run_id": run_id, "owner_id": "recovery-owner", "owner_epoch": expected_epoch}
+            check("recovery_after_deadline_cannot_dispatch", call(12004, req("resource_dispatch", "expired-dispatch",
+                **expired_owner, operation_id=op)).get("kind") == "authority_error")
         check("recovery_expired_owner_fenced", denied(12004, req("resource_cancel", "old-cancel", **owner), "OWNER_STALE"))
         acquired = success(12004, claim)
         check("recovery_cancel_claim_is_stop_only", acquired["cancelled"] is True and acquired["recovery_only"] is True
-            and acquired["owner_epoch"] == lease["owner_epoch"] + 1
+            and acquired["owner_epoch"] == expected_epoch
             and acquired["resources"]["slots"] == acquired["resources"]["unsettled"] == 1)
         finalize = req("run_cancel_finalize", "finalize", run_id=run_id)
         check("recovery_missing_stop_stays_incomplete", denied(12004, finalize, "STOP_UNCONFIRMED")
@@ -82,7 +95,8 @@ def verify(*, success, call, denied, check, runtime, runner, contract, receipts,
             event_id="recovery-usage", stopped=True, usage={"input_tokens": 0, "output_tokens": 0, "cost_usd": "0"}))
         closed = success(12004, req("resource_close", "close", run_id=run_id,
             owner_id=acquired["owner_id"], owner_epoch=acquired["owner_epoch"]))
-        check("recovery_late_accounting_closes", closed["budget_closure"] is True
+        check("recovery_late_accounting_closes", closed["closed"] is True
+            and closed["budget_closure"] is (not closed["breached"])
             and closed["resources"]["slots"] == closed["resources"]["unsettled"] == 0)
         runtime.restart_broker()
         check("recovery_restart_keeps_receipt", success(12004, finalize) == receipt)

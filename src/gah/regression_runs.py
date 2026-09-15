@@ -4,17 +4,20 @@ from copy import deepcopy
 from .adoption import AdoptionError
 from .read_checks import checked_read, checked_action
 from .contracts import ContractError, require_id, require_object, require_ref, require_uint
-from . import resources, transition_authority, transition_acceptance
+from . import resources, transition_authority, transition_acceptance, run_scope
 from .run_contracts import bind_run_manifest, content_ref
 
 
-ACTIONS = {"run_prepare": {"operator"}, "run_outputs": {"manager", "validator", "operator"},
+
+from .cache_inputs import bind_run_manifest
+ACTIONS = {"run_prepare": {"operator"}, "run_prepare_scoped": {"operator"}, "run_outputs": {"manager", "validator", "operator"},
            "run_artifact": {"manager", "validator", "operator"},
            "run_cancel_finalize": {"operator"},
            "ci_check": {"operator"}}
 FRESH_ACTIONS = {"run_outputs", "run_artifact", "ci_check"}
 _BASE = {"schema_version", "action", "request_id", "run_id"}
 FIELDS = {"run_prepare": _BASE | {"contract_series_id", "expected_contract_ref"},
+          "run_prepare_scoped": _BASE | {"contract_series_id", "expected_contract_ref", "changed_refs"},
           "run_outputs": _BASE,
           "run_artifact": _BASE | {"artifact_ref"},
           "run_cancel_finalize": _BASE,
@@ -33,8 +36,12 @@ def validate_request(request):
         for field in ("request_id", "run_id", "contract_series_id"):
             if field in request:
                 require_id(request[field])
-        if action == "run_prepare" and len(request["run_id"]) > 64:
+        if action in {"run_prepare", "run_prepare_scoped"} and len(request["run_id"]) > 64:
             raise ContractError()
+        if action == "run_prepare_scoped":
+            run_scope.normalize_refs(request["changed_refs"])
+            if request["request_id"] != run_scope.request_id(request["run_id"]):
+                raise ContractError()
         if action == "run_artifact":
             require_ref(request["artifact_ref"])
         for field, kind in (("expected_manifest_ref", "run_manifest"),
@@ -60,10 +67,13 @@ def validate_request(request):
                 raise ContractError()
     except (ContractError, KeyError, TypeError, ValueError):
         raise AdoptionError("INVALID_REQUEST") from None
-    return deepcopy(request)
+    result = deepcopy(request)
+    if action == "run_prepare_scoped":
+        result["changed_refs"] = run_scope.normalize_refs(result["changed_refs"])
+    return result
 
 
-def build(db, history, run_id, created_at, now):
+def build(db, history, run_id, created_at, now, *, changed_refs=None):
     """不変の採択履歴から再生成する。現在の失効や開始許可は呼出側で検査する。"""
     try:
         require_id(run_id)
@@ -86,19 +96,42 @@ def build(db, history, run_id, created_at, now):
         plan = deepcopy(old_bound["plan"])
         plan["plan_id"] = "regression-plan-" + run_id
         manifest = deepcopy(old_bound["manifest"])
+        context = deepcopy(template["baseline_context"])
+        materialization = deepcopy(template["materialization"])
+        saved_scope = run_scope.load(db, history, run_id)
+        if saved_scope is not None:
+            changed_refs = saved_scope["scope"]["changed_refs"]
+        if changed_refs is not None and old_bound["manifest"]["use_cases"] == ["UC-LLM"]:
+            raise AdoptionError("LLM_SCOPE_NOT_CONNECTED")
+        scope = None if changed_refs is None else run_scope.derive(old_bound, run_id, changed_refs)
+        if scope is not None:
+            run_scope.restrict(scope, plan, manifest, context, materialization, old_bound["registry"])
         manifest.update(run_id=run_id, purpose="regression", created_at=created_at,
             deadline=created_at + old_bound["manifest"]["deadline"] - old_bound["manifest"]["created_at"],
             plan_ref=content_ref("trial_plan", plan["plan_id"], plan),
             actor_context_ref=content_ref("actor_context", "regression-operator-" + run_id,
                 {"role": "operator", "purpose": "fixed-regression"}))
-        context = deepcopy(template["baseline_context"])
+        if scope is not None:
+            manifest["actor_context_ref"] = content_ref("actor_context", "regression-operator-" + run_id,
+                {"role": "operator", "purpose": "scoped-regression", "scope": scope})
         bound = bind_run_manifest(manifest, contract, plan, old_bound["policy"], old_bound["registry"],
             old_bound["case_set"], baseline_context=context)
-        materialization = deepcopy(template["materialization"])
+        if bound["manifest"]["use_cases"] == ["UC-LLM"]:
+            if scope is not None:
+                raise AdoptionError("LLM_SCOPE_NOT_CONNECTED")
+            from .llm_transitions import rebind
+            return rebind(template, bound, context)
         material = materialization["manifest"]
         material.update(run_id=run_id, materialization_id="materialization-" + run_id, created_at=created_at)
         materialization["manifest_ref"] = content_ref("fixture_manifest", material["materialization_id"], material)
-        return {"bound_run": bound, "baseline_context": context, "materialization": materialization}
+        result = {"bound_run": bound, "baseline_context": context, "materialization": materialization}
+        if scope is not None:
+            result["scope"] = scope
+        if saved_scope is not None:
+            from .evaluation_authority import _result
+            if saved_scope != _result("run_prepare_scoped", run_scope.request_id(run_id), **result):
+                raise AdoptionError("RUN_SCOPE_INVALID")
+        return result
     except AdoptionError:
         raise
     except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError):
@@ -139,7 +172,18 @@ def prepare(store, db, request, now):
             raise AdoptionError("RUN_CONFLICT")
     _validate_state(store, db, contract, now)
     _assert_current_valid(store, db, current, contract, now)
-    return build(db, current, request["run_id"], now, now)
+    from . import combined_runs
+    grouped = combined_runs.for_child(db, request["run_id"], now)
+    if grouped is not None:
+        if "changed_refs" in request:
+            raise AdoptionError("COMBINED_BINDING_INVALID")
+        prepared = grouped[1]
+        child = next(c for c in grouped[0]["manifest"]["children"] if c["run_id"] == request["run_id"])
+        if (prepared["bound_run"]["manifest"]["contract_ref"] != request["expected_contract_ref"]
+                or child["contract_series_id"] != request["contract_series_id"]):
+            raise AdoptionError("COMBINED_BINDING_INVALID")
+        return prepared
+    return build(db, current, request["run_id"], now, now, changed_refs=request.get("changed_refs"))
 
 
 @checked_action
@@ -187,7 +231,7 @@ def ci_check(store, db, request, now):
         allowed = {"RUN_MISSING", "CI_PURPOSE_REQUIRED", "CURRENT_CONTRACT_MISMATCH", "CI_TARGET_MISMATCH",
             "CONTRACT_INVALID", "REGRESSION_BINDING_INVALID", "RUN_OUTPUTS_MISSING", "RUN_OUTPUTS_INVALID",
             "SOURCE_NOT_READY", "SOURCE_EXPIRED", "SOURCE_OPERATION_INVALID", "NOT_FINALIZED",
-            "PREREQUISITE_UNAVAILABLE", "CANDIDATE_EXPIRED"}
+            "PREREQUISITE_UNAVAILABLE", "CANDIDATE_EXPIRED", "EVIDENCE_DELETED", "EVIDENCE_RESTORED_AFTER_DELETION", "TARGET_RETIRED", "RETIREMENT_INVALID", "RETIREMENT_ORIGIN_INVALID"}
         reasons.append(error.code if error.code in allowed else "EVIDENCE_UNAVAILABLE")
     return _ci_result(request, now, reasons, assurance, outputs_ref, cancelled=cancelled)
 

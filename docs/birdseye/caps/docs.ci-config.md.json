@@ -9,6 +9,7 @@
   ],
   "deps_in": [
     "HUB.codex.md",
+    "README.md",
     "RUNBOOK.md"
   ],
   "risks": [
@@ -17,6 +18,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "f2e8a42aa44f2ce2b1ed1f6994ed271997e874f1bcf287be70df4286b6ffedeb"
+  "generated_at": "00111",
+  "source_sha256": "405a5cde2c40e2e0887e172101d84d18b350f18eabee112b1a0b57cd9ac7a9bd"
 }

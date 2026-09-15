@@ -2,12 +2,10 @@
   "id": "docs/mvp-completion-audit.md",
   "role": "mvp-completion-audit",
   "title": "GAH-R01〜R32 MVP完了監査",
-  "summary": "固定UC-CIの開始・再開・取消し・状態照会CLIを接続した。実Docker194項目・91件実行が成功し、停止・回収を確認した。追加レビューで準備直後の再開漏れを補正し、実SQLiteと合成runnerの12試験が成功した。補正前46件と合わせて50種類をfocused検証した。Dockerはこの一行補正前の結果で、現行592件の全体試験は再実行していない。 [仕様](supervised-run-detail-spec.md) / [工程証跡](evidence/mvp-supervisor-20260912/README.md)。",
+  "summary": "**全32条件のMVP技術検収が完了。release_gate=go。** [要件別の試験IDと証拠](evidence/mvp-acceptance-20260913/acceptance-map.json)を正本とする。",
   "public_api": [],
   "deps_out": [
     "docs/acceptance/AC-20260911-05.md",
-    "docs/evidence/mvp-supervisor-20260912/README.md",
-    "docs/supervised-run-detail-spec.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md"
   ],
   "deps_in": [
@@ -18,13 +16,16 @@
     "docs/acceptance/AC-20260911-05.md",
     "docs/baseline-refresh-detail-spec.md",
     "docs/contract-revision-detail-spec.md",
+    "docs/evidence/mvp-acceptance-20260913/README.md",
     "docs/evidence/mvp-adoption-20260911/README.md",
     "docs/evidence/mvp-recovery-20260912/README.md",
     "docs/evidence/mvp-supervisor-20260912/README.md",
+    "docs/following-migration-detail-spec.md",
     "docs/llm-authority-detail-spec.md",
     "docs/open-questions.md",
     "docs/oss-publication.md",
     "docs/regression-ci-detail-spec.md",
+    "docs/reviews/mvp-acceptance-20260913.md",
     "docs/reviews/mvp-cancellation-20260912.md",
     "docs/reviews/mvp-completion-20260911.md",
     "docs/reviews/mvp-condition-core-20260912.md",
@@ -34,6 +35,7 @@
     "docs/run-cancellation-detail-spec.md",
     "docs/run-recovery-detail-spec.md",
     "docs/semantic-conditions-detail-spec.md",
+    "docs/synthetic-guardrail-runtime-detail-spec.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md",
     "schemas/README.md"
   ],
@@ -43,6 +45,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "8b1349a6cecde0f86d865dff1c32c8b416695180d78100aca6c9f03453b54137"
+  "generated_at": "00111",
+  "source_sha256": "d77ee439686df8ab732d86a75fdf6ce2821eb1bcbe1a58034f34028f3c72fd6b"
 }

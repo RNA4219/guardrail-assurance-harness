@@ -102,8 +102,12 @@ def bound_operation(db, request, now, read_bound):
         raise ResourceError('STORAGE_CORRUPT')
     entry = entries[0]
     # 保存されたevaluator/targetを使い、将来のimage設定や新規開始可否に依存させない。
-    expected = hashlib.sha256(canonical_bytes({'worker_digest': entry['evaluator_ref']['digest'],
-        'scenario': row['scenario']})).hexdigest()
-    if entry['target_ref']['digest'] != expected or len(entry['stage_ids']) != 1:
-        raise ResourceError('STORAGE_CORRUPT')
+    if row['scenario'].startswith('guardrail:'):
+        from .llm_admission import check_entry
+        check_entry(db, request['run_id'], entry, row['scenario'], now)
+    else:
+        expected = hashlib.sha256(canonical_bytes({'worker_digest': entry['evaluator_ref']['digest'],
+            'scenario': row['scenario']})).hexdigest()
+        if entry['target_ref']['digest'] != expected or len(entry['stage_ids']) != 1:
+            raise ResourceError('STORAGE_CORRUPT')
     return {**value, 'entry': deepcopy(entry), 'scenario': row['scenario'], 'entry_digest': row['entry_digest']}

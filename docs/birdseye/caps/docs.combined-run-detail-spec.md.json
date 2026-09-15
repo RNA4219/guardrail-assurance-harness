@@ -1,0 +1,20 @@
+{
+  "id": "docs/combined-run-detail-spec.md",
+  "role": "combined-run-detail-spec",
+  "title": "両用途を事前固定する複合run",
+  "summary": "[要求](requirements.md) §2、GAH-R02/R04/R19/R20と[受入条件](acceptance-criteria.md)の共通シナリオに対応する。製品の複合runは、同じauthority DB上のUC-CIとUC-LLMの通常runを一つずつ持つ。親manifestと二つの子manifestを、実行前に完全参照で固定する。実装の接続中で、全MVP受入を完了としない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance-criteria.md",
+    "docs/requirements.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "5dbda99fbe781f754a1827bf4e625e5d7bc8b1f869930e36e6b3c5e71cf3ef98"
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "mutation_review_recheck",
+  "source_snapshot": 75,
+  "full_mvp_accepted": false,
+  "scope": "前提PASS・MUTATION_NOT_APPLIEDの保存根拠を独立validatorが確認しmanagerが承認。元のERROR・予定義務・判定は不変。",
+  "fixture_setup_failures": [
+    {
+      "tests_run": 7,
+      "errors": 7,
+      "reason": "Missing test binding digests"
+    },
+    {
+      "tests_run": 7,
+      "errors": 7,
+      "reason": "Test setup omitted parent Evidence run"
+    }
+  ],
+  "boundaries": {
+    "tests_run": 7,
+    "seconds": 0.551,
+    "passed": true
+  },
+  "cli_boundaries": {
+    "tests_run": 8,
+    "seconds": 0.651,
+    "passed": true
+  },
+  "report_and_measurements": {
+    "tests_run": 24,
+    "seconds": 0.821,
+    "passed": true
+  },
+  "origin_recheck": {
+    "tests_run": 20,
+    "seconds": 0.803,
+    "passed": true
+  },
+  "sqlite_integration": {
+    "tests_run": 4,
+    "seconds": 306.928,
+    "driver_seconds": 306.986,
+    "passed": true,
+    "checks": [
+      "保存ERRORと認証根拠からの独立検証・承認",
+      "元receipt・必須欠損・CI不合格の不変",
+      "レポートと再起動",
+      "根拠撤回で除外未確定",
+      "Evidence削除で再現停止",
+      "再hashした本文と不変起源の不一致拒否"
+    ]
+  },
+  "remaining": "同一runで未審査ERRORと承認済み除外が併存する追加ケースと、最終全回帰。",
+  "private_sha256": {
+    "mutation-review-boundaries-75.log": "115265007c656534b380886b062b66185c82c041cf7ce631ee60914007a516d3",
+    "mutation-review-boundaries-75b.log": "f57d7471b5e8117fdb1bd731d20c5a38ffe4c2b8cf1fd9845b96fe4d17e52ac1",
+    "mutation-review-boundaries-75c.log": "b77bdf683a96b7590c0dbf4d2f42285fbb4df68b2b160314f544093903e95d10",
+    "mutation-review-cli-75.log": "a909adc345b1391030f9a702f703adbcce53d39b8afe84ebc23649230bafd6b5",
+    "mutation-review-report-75.log": "271c9becbbab149365adaed3ff9a21e67d37a7888f1f22f48cd9c2c62a975e04",
+    "mutation-review-origin-75.log": "e8ab017b0a1296d9ea63abcc0879318516e667a4504c44b67b8d740fef7ce287",
+    "mutation-review-integration-75.log": "0ffe06876c43e2d6de7069720747de4776fa65b2ba69fcb15d17a8dbc8b946a0",
+    "mutation-review-integration-75.json": "9ffd60b1f16f7cce66629fa7cdf8c8ffdcb4d8da932d8c410c1d3f94c44e6b0f",
+    "acceptance-source-75.json": "97e96f716463252f471ae51a5c6c5b676bed26d13900b89eef28b1639705b192"
+  }
+}

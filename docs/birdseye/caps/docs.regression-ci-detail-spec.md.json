@@ -21,6 +21,7 @@
     "docs/run-cancellation-detail-spec.md",
     "docs/run-report-detail-spec.md",
     "docs/spec.md",
+    "docs/targeted-run-detail-spec.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md",
     "tools/README.md"
   ],
@@ -30,6 +31,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "05abe9b2bc788df8eb0615877079debacc540287bbeb018fc9e9ff8b97ff7d90"
 }

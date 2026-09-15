@@ -22,7 +22,6 @@
     "docs/research/README.md"
   ],
   "deps_in": [
-    "README.md",
     "RUNBOOK.md",
     "docs/oss-publication.md"
   ],
@@ -32,6 +31,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "d444933af68b53e9e12a67514963186c99c4411472394acd5edc598f476ed772"
 }

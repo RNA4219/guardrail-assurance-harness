@@ -281,7 +281,7 @@ def _build_validation(candidate_row: sqlite3.Row, candidate: dict[str, Any], old
     transition, old, new = _candidate_parts(candidate)
     contract = validate_evaluation_contract(transition["next_contract"])
     old_contract = validate_evaluation_contract(transition["previous_contract"])
-    candidate_ref = content_ref("contract_candidate", candidate["candidate_id"], candidate)
+    candidate_ref = transition_authority.candidate_sections.stored_reference(candidate_row, candidate["candidate_id"])
     baseline_ref = transition.get("baseline_ref")
     expected_old_ref = content_ref("evaluation_contract", old_contract["contract_id"], old_contract)
     _ref(baseline_ref, "baseline")
@@ -401,7 +401,7 @@ def validate_live_proof(store: Any, db: sqlite3.Connection, validation_payload: 
         raise _error("VALIDATION_EXPIRED")
     row, candidate = _candidate_value(db, payload["candidate_id"], now)
     if (row["permission_generation"] != payload["permission_generation"]
-            or content_ref("contract_candidate", payload["candidate_id"], candidate) != payload["candidate_ref"]
+            or transition_authority.candidate_sections.stored_reference(row, candidate["candidate_id"]) != payload["candidate_ref"]
             or candidate["proposal_id"] != payload["proposal_id"]
             or candidate["proposal_digest"] != payload["proposal_digest"]):
         raise _error("CANDIDATE_INVALID")
@@ -444,7 +444,7 @@ def history(db: sqlite3.Connection, current: sqlite3.Row, contract: dict[str, An
             raise _error("STORAGE_CORRUPT")
         candidate_row, candidate = _candidate_value(db, payload["candidate_id"], payload["checked_at"])
         transition, old, new = _candidate_parts(candidate)
-        if (content_ref("contract_candidate", payload["candidate_id"], candidate) != payload["candidate_ref"]
+        if (transition_authority.candidate_sections.stored_reference(candidate_row, candidate["candidate_id"]) != payload["candidate_ref"]
                 or candidate_row["permission_generation"] != payload["permission_generation"]
                 or candidate["proposal_id"] != payload["proposal_id"]
                 or candidate["proposal_digest"] != payload["proposal_digest"]

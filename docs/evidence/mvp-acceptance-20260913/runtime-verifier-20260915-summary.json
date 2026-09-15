@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_verifier_review",
+  "source_snapshot": 81,
+  "product_core_snapshot": 80,
+  "changed_path": "tools/verify_guardrail_runtime.py",
+  "changes": [
+    "開始をresource_startへ、停止・結果保存をevidence_completeへ接続",
+    "hostとworkerの壁時計を別のclock_domainで記録し、worker時刻は変更しない",
+    "worker時刻と配送・停止の順序はauthorityで検査する",
+    "検証用clientを実行中保持し、最後に所有containerを回収する"
+  ],
+  "prior_attempts": [
+    {
+      "name": "20260915",
+      "reason": "OPERATION_TIME_MISMATCH",
+      "completed_cases": 1,
+      "owned_containers_removed": true
+    },
+    {
+      "name": "20260915b",
+      "reason": "DRIVER_IMPORT_PATH",
+      "completed_cases": 0,
+      "runtime_started": false
+    },
+    {
+      "name": "20260915c",
+      "reason": "STAGE_TIME_OUTSIDE_OPERATION",
+      "owned_containers_removed": true
+    }
+  ],
+  "current_attempt": "20260915d",
+  "status": "blocked_environment",
+  "product_wall_budget_seconds": 5400,
+  "product_parallel_limit": 4,
+  "broker_memory_bytes": 134217728,
+  "broker_cpus": "0.5",
+  "private_evidence_sha256": {
+    "fresh-20260915-initial.log": "2ee5f71d49ec75539dd240b02d1e5db9e6bc0ae1566399708c646608071e6903",
+    "fresh-20260915b-initial.log": "30c62ee88e9b402ae36e9e3acd36608f8f79230102fc05bfc7513fae8784341d",
+    "fresh-20260915c-initial.log": "cf5573e31bfa28ec5412c2637bee41f02604a4f7b18420a89da464e20cd6ce16",
+    "acceptance-source-81.json": "06b0f83d0e622d304fce1b31a17e8bf4909afdc130d346adf267df286344a746"
+  },
+  "full_mvp_accepted": false,
+  "completed_cases": 184,
+  "completed_stages": 276,
+  "failure": "OPERATION_TIME_MISMATCH",
+  "clock_evidence": "runtime-clock-20260915-summary.json",
+  "failed_runs_finally_settled": true
+}

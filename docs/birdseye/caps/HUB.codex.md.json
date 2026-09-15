@@ -2,7 +2,7 @@
   "id": "HUB.codex.md",
   "role": "HUB.codex",
   "title": "Agent Hub",
-  "summary": "[条件比較部品](docs/semantic-conditions-detail-spec.md) / [親レビュー](docs/reviews/mvp-condition-core-20260912.md) / [証跡](docs/evidence/mvp-condition-core-20260912/README.md)。世代更新の採択・実行や修復成功の権限は持たない。",
+  "summary": "2026-09-15現在: [32条件のMVP技術検収](docs/mvp-completion-audit.md)は完了し、[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)を正本とする。以下の工程別進捗にある未完了は当時の記録で、現在の判定は完了監査へ従う。設計凍結、人間の追加承認、GitHub上の実行・公開反映を意味しない。",
   "public_api": [],
   "deps_out": [
     "BLUEPRINT.md",
@@ -88,6 +88,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "26136f66c36135e58dc5047ce3c1083860eae2659b6e87554fd0f2e9080234ed"
+  "generated_at": "00111",
+  "source_sha256": "d0a1281118635b0e1ea6d7d6a84bfcf7bb04bc63cb4068a5dbae0e1ad6f2370b"
 }

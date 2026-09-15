@@ -156,7 +156,7 @@ class ResourceAuthorityTests(unittest.TestCase):
 
     def test_every_action_is_fresh_and_duplicate_reserve_has_no_new_row(self):
         self.assertEqual(FRESH_ACTIONS, {
-            "resource_claim", "resource_reserve", "resource_dispatch", "resource_cancel",
+            "resource_start", "resource_claim", "resource_reserve", "resource_dispatch", "resource_cancel",
             "resource_close", "resource_observe", "resource_cancel_claim", "resource_operation",
         })
         self._execute(self._reserve_request())

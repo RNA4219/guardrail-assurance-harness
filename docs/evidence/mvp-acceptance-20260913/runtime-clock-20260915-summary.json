@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_clock_acceptance_blocker",
+  "status": "blocked_environment",
+  "source_snapshot": 81,
+  "core_source_snapshot": 80,
+  "initial_probe": [
+    {
+      "image": "sha256:922215aa846e75033e1a2f9514184b1c94096276a83050a6c03b20af7043c4ca",
+      "returncode": 0,
+      "result": {
+        "samples": 2500,
+        "api_mismatch_count": 0,
+        "backward_count": 1,
+        "clock_step_count": 1,
+        "api_examples": [],
+        "backward_examples": [
+          [
+            1789429340548074795,
+            1789429340060609564
+          ]
+        ],
+        "step_examples": [
+          [
+            -487465231,
+            10361537
+          ]
+        ]
+      }
+    },
+    {
+      "image": "sha256:d9d59ba9ef2ffe7ff3dd1f06cdd26cabe293b26cb20fc253dc7e4cd00d454486",
+      "returncode": 0,
+      "result": {
+        "samples": 2500,
+        "api_mismatch_count": 0,
+        "backward_count": 1,
+        "clock_step_count": 1,
+        "api_examples": [],
+        "backward_examples": [
+          [
+            1789429340543723491,
+            1789429340056551168
+          ]
+        ],
+        "step_examples": [
+          [
+            -487172323,
+            10655005
+          ]
+        ]
+      }
+    }
+  ],
+  "followup_probe_failures": {
+    "alternative_clocksource": [
+      2,
+      2
+    ],
+    "ntp_service_stopped": [
+      1,
+      1
+    ],
+    "both": [
+      1,
+      1
+    ]
+  },
+  "host_probe_scope": "別時間帯の1500点では逆行0。Windows側のmonotonic分解能差を時刻逆行として数えない。ホストが常に安定している証明ではない。",
+  "attempts": [
+    {
+      "attempt": "20260915",
+      "completed_cases": 1,
+      "completed_stages": 1,
+      "passed": false,
+      "failure": {
+        "detail": {
+          "action": "evidence_record",
+          "reason": "OPERATION_TIME_MISMATCH"
+        },
+        "reason": "AUTHORITY_REJECTED",
+        "type": "RuntimeError"
+      },
+      "owned_containers_removed": true,
+      "check_sha256": "0a0127fe6da996be1f1c596ef369e8e00f6515aa464d28054d61461b8c3c2e5b"
+    },
+    {
+      "attempt": "20260915c",
+      "completed_cases": 75,
+      "completed_stages": 112,
+      "passed": false,
+      "failure": {
+        "detail": null,
+        "reason": "STAGE_TIME_OUTSIDE_OPERATION",
+        "type": "RuntimeError"
+      },
+      "owned_containers_removed": true,
+      "check_sha256": "688a6500ea24b9884041048a1dbb9c4c52c65c18ef2e926e81c0086768f9a496"
+    },
+    {
+      "attempt": "20260915d",
+      "completed_cases": 184,
+      "completed_stages": 276,
+      "passed": false,
+      "failure": {
+        "detail": {
+          "action": "evidence_complete",
+          "reason": "OPERATION_TIME_MISMATCH"
+        },
+        "reason": "AUTHORITY_REJECTED",
+        "type": "RuntimeError"
+      },
+      "owned_containers_removed": true,
+      "check_sha256": "495d0f13663fe3b4783de9da17953f37655ac425881abe8063e799f79248b6f4"
+    }
+  ],
+  "temporary_environment_changes_restored": true,
+  "failed_initial_runs_stopped_settled_cancelled_closed": true,
+  "previous_timeout_run": {
+    "execution_status": "CANCELLED",
+    "all_operations_stopped": true,
+    "unknown_usage_operations": 1,
+    "budget_closure": false,
+    "ci_eligible": false,
+    "owned_containers_removed": true
+  },
+  "direct_cause": "配送・worker段階・停止観測の間でWSLの壁時計が逆行し、OPERATION_TIME_MISMATCHを検出。",
+  "underlying_platform_cause": "未特定。時計源変更・時刻同期サービス停止・両方の組合せでは解消しなかった。",
+  "next_step": "既存の他のDocker/WSL作業に影響する再起動を調整した後、時計診断に合格してから固定source81の実Docker受入を再開する。",
+  "private_evidence_sha256": {
+    "clock-domain-probe-20260915.json": "e75e00c89b91df84663da4551b6fc5c300eaae322d9cb26a6b350a92bed6c8ec",
+    "clock-domain-probe-20260915-after.json": "feac6e79f814ac1f4f30d200e10a4c8e167bc485fb623cc7d28c04fd289d449d",
+    "clock-domain-probe-20260915-service.json": "d344256bfbe2a584b8b06c52cb5d12f4765a6badb84848747e447cfa6a0f4db8",
+    "clock-domain-probe-20260915-confirm.json": "b5e91bd91e190d4cd17fac4213d73df617314f9ff7b24b96fae390c82215f09f",
+    "host-clock-probe-20260915.json": "5a030a6b75eaef8b67497bf67a314d1ce2b0387de396601dc72dbb03d7de6b1e",
+    "clock-environment-restored-20260915.json": "46c42ace705c2cccef334df129d35b5ca03c47aaec30de2611d46a705b222dde",
+    "failed-runtime-settlement-20260915.json": "509781adb3ccf0b717ccbcac96e376d0b763f41c907e177bcaea9a905a25b3ad",
+    "supervisor-cancellation-78b-final-20260915.json": "71fe1674f76a08afaa20e660197a38840c9ca383019e7f86459bbae814563694"
+  },
+  "sources": [
+    "https://docs.kernel.org/virt/hyperv/clocks.html",
+    "https://ubuntu.com/wsl/docs/stable/explanation/time-sync/"
+  ],
+  "full_mvp_accepted": false,
+  "release_gate": "no_go"
+}

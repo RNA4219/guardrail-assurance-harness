@@ -248,7 +248,7 @@ def _source_impl(source: Any, run_id: str, now: int, store: Any, *, purpose="bas
     manifest = bound["manifest"]
     if purpose not in {"baseline_candidate", "regression"} or manifest.get("run_id") != run_id or manifest.get("purpose") != purpose:
         raise _error("SOURCE_INVALID")
-    _trusted_binding(bound)
+    binding_digest = _trusted_binding(bound)
     if type(source["reasons"]) is not list or any(type(reason) is not str for reason in source["reasons"]):
         raise _error("SOURCE_INVALID")
     receipt = source["receipt"]
@@ -264,7 +264,7 @@ def _source_impl(source: Any, run_id: str, now: int, store: Any, *, purpose="bas
         raise _error("SOURCE_INVALID")
     receipt_refs = {
         "manifest_ref": content_ref("run_manifest", run_id, manifest),
-        "bundle_ref": {"kind": "bound_bundle", "id": run_id, "digest": _trusted_binding(bound)},
+        "bundle_ref": {"kind": "bound_bundle", "id": run_id, "digest": binding_digest},
         "decision_ref": content_ref("run_decision", decision.get("decision_id", run_id), decision),
         "closure_ref": content_ref("resource_closure", closure.get("closure_id", run_id), closure),
     }
@@ -341,7 +341,8 @@ def _refs_from_source(source: dict[str, Any]) -> tuple[list[dict[str, str]], lis
         if type(case) is not dict:
             raise _error("SOURCE_INVALID")
         ref = case.get("oracle_ref")
-        _ref(ref, "oracle")
+        from .baselines import oracle_ref
+        oracle_ref(ref)
         key = tuple(ref[item] for item in ("kind", "id", "digest"))
         if key not in seen:
             seen.add(key)
@@ -356,7 +357,7 @@ def _build_candidate(source: dict[str, Any], series_id: str, proposal_id: str, n
     _id(series_id)
     _id(proposal_id)
     _uint(now)
-    if type(expected_generation) is not int or expected_generation not in {0, 1}:
+    if type(expected_generation) is not int or not 0 <= expected_generation < MAX_INTEGER:
         raise _error("GENERATION_CONFLICT")
     if type(source) is not dict or type(source.get("bound")) is not dict:
         raise _error("SOURCE_INVALID")
@@ -681,7 +682,7 @@ def _revoked(db, current):
     for row in rows:
         adopted = db.execute("SELECT * FROM baseline_adoptions WHERE series_id=? AND generation=?",
             (current["series_id"], row["generation"])).fetchall()
-        if (len(adopted) != 1 or type(row["generation"]) is not int or row["generation"] not in {1, 2}
+        if (len(adopted) != 1 or type(row["generation"]) is not int or not 1 <= row["generation"] <= MAX_INTEGER
                 or type(row["observed_at"]) is not int or not adopted[0]["adopted_at"] <= row["observed_at"] <= MAX_INTEGER
                 or row["actor_id"] != "operator" or row["context"] != "operator-context"):
             raise _error("STORAGE_CORRUPT")

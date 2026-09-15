@@ -1,0 +1,34 @@
+{
+  "id": "docs/reviews/mvp-acceptance-20260913.md",
+  "role": "reviews",
+  "title": "後続世代とMVP受入の継続レビュー",
+  "summary": "親が実装・レビュー・検証を担当する。全32要求の受入範囲と保護7文書は維持し、外部モデルやsubagentへ作業を委任していない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/evidence/mvp-acceptance-20260913/README.md",
+    "docs/following-migration-detail-spec.md",
+    "docs/mutation-review-detail-spec.md",
+    "docs/mvp-completion-audit.md",
+    "docs/synthetic-guardrail-runtime-detail-spec.md",
+    "docs/targeted-run-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "deps_in": [
+    "docs/baseline-refresh-detail-spec.md",
+    "docs/contract-revision-detail-spec.md",
+    "docs/evidence/mvp-acceptance-20260913/README.md",
+    "docs/following-migration-detail-spec.md",
+    "docs/supervised-run-detail-spec.md",
+    "docs/targeted-run-detail-spec.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "2c29b4a3aee38f9423f54353f939104ccd337ced509a2acd586d9b763aa0cd97"
+}

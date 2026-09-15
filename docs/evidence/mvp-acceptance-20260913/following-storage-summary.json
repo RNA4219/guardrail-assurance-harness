@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "following_candidate_storage_recheck",
+  "source_snapshot": 73,
+  "observed_failure": {
+    "source_snapshot": 69,
+    "normal_integration_tests_run": 1,
+    "normal_integration_passed": true,
+    "normal_integration_seconds": 6663.097,
+    "following_baseline_generation": 2,
+    "candidate_prepare_reason": "DOCUMENT_SIZE"
+  },
+  "regression_before_fix": {
+    "tests_run": 7,
+    "errors": 1,
+    "failures": 0,
+    "seconds": 9.563
+  },
+  "regression_after_fix": {
+    "tests_run": 16,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 12.762,
+    "passed": true
+  },
+  "scope": [
+    "実800件ずつの後続候補の保存・復元",
+    "v1参照不変と多byte断片境界",
+    "欠損・改変・別候補・順序・サイズ・digest・未知版・余分fieldの拒否",
+    "4MiBの節上限と保存失敗のrollback"
+  ],
+  "document_max_bytes": 1048576,
+  "chunk_bytes": 262144,
+  "section_max_bytes": 4194304,
+  "section_max_chunks": 16,
+  "full_following_generation_acceptance": "running_source_73",
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "llm-supervision-integration-69.json": "64c60dc97b04cb545b0dc3266b06a655bb0d3e32f51ac472dcd6d8cb8124a484",
+    "llm-supervision-integration-69.log": "8d61b061c910636ced2e2b8a641d254cb9b29a5cb71a7466fa15daac84f892c8",
+    "following-storage-before-73.log": "c5e8c63e10b5987115a14da8c1a71eaa92c3be7e04f3705a3b16201052607a3d",
+    "following-storage-recheck-73.log": "5a92adf8325fab700dda0e504be3d0e1c35d4884a8ef1f17176163eff75fbe09",
+    "authority-build-73.log": "6ebda4420d35aab5ce8ad219a312e50f22aa1574837d6c333bef3b5d8547de7c",
+    "llm-migration-73.json": "c75478be8fb66f7d771126b429af44861418992b3d5a42ff12181bb96d3e8628",
+    "copy-regression-73.log": "1b32a16744692623d6bca6cf29d868ad9fb14762a72a819d81303a1b3be05aa7",
+    "following-section-sizes-73.json": "49c354b662de88f22a929e2429629724f9bb84fcd301ac34ea715a4932c650c2"
+  },
+  "impact_regression": {
+    "source_snapshot": 73,
+    "tests_run": 70,
+    "seconds": 1222.036,
+    "passed": true
+  },
+  "section_size_measurement": {
+    "transition": {
+      "payload_bytes": 1927788,
+      "section_bytes": 1927901
+    },
+    "old": {
+      "payload_bytes": 770057,
+      "section_bytes": 770163
+    },
+    "new": {
+      "payload_bytes": 770061,
+      "section_bytes": 770167
+    }
+  }
+}

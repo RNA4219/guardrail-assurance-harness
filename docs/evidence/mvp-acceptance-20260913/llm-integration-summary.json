@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "incremental_llm_runtime_summary",
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "finding_and_migration": {
+    "tests": 16,
+    "seconds": 179.616,
+    "log_sha256": "f5dec0c832d0cf55dc0696351761a43fbe2115131b8a42916e1cab320e92bc2a"
+  },
+  "execution_profiles": {
+    "tests": 44,
+    "seconds": 0.917,
+    "log_sha256": "e50cd2044eb6ee49b87edcaa77320c3041b48bd84c03916a6a35c61bdde2c453"
+  },
+  "llm_evaluator_and_target": {
+    "tests": 25,
+    "seconds": 19.283,
+    "log_sha256": "5fbaaa0847dcf86a6eb325f59f274c1217cf0c70aafc73eae00bac100a917a14"
+  },
+  "initial_authority_admission": {
+    "tests": 3,
+    "seconds": 5.026,
+    "log_sha256": "5e63143a9e04f3696d5bb94f8a526511cac23c31027630013eb86e87966c227c"
+  },
+  "runner_and_existing_regressions": {
+    "tests": 33,
+    "seconds": 11.484,
+    "log_sha256": "70d51ae375a9d702ee61ecadc45d1220ea9acad8d5872bfa71f44b2e2b9ff377"
+  },
+  "docker_smoke": {
+    "checks": [
+      {
+        "cleaned": true,
+        "completed": true,
+        "isolation_verified": true,
+        "normalized_stages": 1,
+        "reason": null,
+        "recovery_identical": true,
+        "replay_identical": true,
+        "stages": 1,
+        "stopped": true
+      },
+      {
+        "cleaned": true,
+        "completed": true,
+        "isolation_verified": true,
+        "normalized_stages": 2,
+        "reason": null,
+        "recovery_identical": true,
+        "replay_identical": true,
+        "stages": 2,
+        "stopped": true
+      }
+    ],
+    "ci_eligible": false,
+    "full_mvp_accepted": false,
+    "image_id": "sha256:e67e4e2bac30b70154f470250856707dcdd7fbf5efdc65df440699e72503e33f",
+    "passed": true,
+    "sources_digest": "19949f6b52a04c3b4df6ce1487ac0fc277e495aa810553e5fc3c4aca6377a8b4"
+  },
+  "docker_smoke_sha256": "88bd383520b58b4bf07fde0abd446457a771da21865573afdbae0c5431725d35",
+  "os_authority_400_case_run": "completed_with_stage_order_hold",
+  "trained_model_verified": false,
+  "authority_lock_sha256": "83cbc8a89c350d3d3c463f5092a5ec8c4bd3c1959ecf9f90f98ddce4fe895b66",
+  "guardrail_lock_sha256": "fffaacb86f7fd695e97d103dd73332b21fbb28989038c3e9971d8a12e7518d2c",
+  "followup_summary": "llm-runtime-30-summary.json"
+}

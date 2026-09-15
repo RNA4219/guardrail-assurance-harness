@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_validator_compatibility",
+  "source_snapshot": 80,
+  "original_failure": {
+    "source_snapshot": 79,
+    "migration_rows_preserved": true,
+    "default_factory_opened": false,
+    "reason": "CONFIG_MISMATCH",
+    "cause": "既知旧版と現行は方針検証ロジックが同一だが、adoption.py全体のdigestが複合CIのdispatch修正でも変化する。移行helperは既定factoryでの再起動を確認していなかった。"
+  },
+  "compatibility_boundary": [
+    "既知v4 validator digestだけをschema4の保存履歴に追加。移行後のextension digestは現行との完全一致が必要。",
+    "未採択の旧提案は新しい提案・検証を要求。保存済み採択の期限・失効・権限・起源の再照合を保持。",
+    "未知validator、古いschema、未知extension、変更された履歴を拒否。既存のvalidator値や履歴を書き換えない。"
+  ],
+  "static_comparison": {
+    "predecessor_snapshot": 73,
+    "only_changed_adoption_function_before_fix": "dispatch",
+    "policy_source_bytes_equal": true,
+    "bootstrap_source_bytes_equal": true,
+    "predecessor_validator_digest": "3e951365969e6f1a1e192ae219a78e58678b13c9c13fd9c38360104f510b7f54"
+  },
+  "validation": {
+    "tests_run": 22,
+    "seconds": 0.664,
+    "result": "passed",
+    "new_tests": 10,
+    "initial_test_failure": "新規試験の主体・未初期化時計・接続終了の誤りを補正。初回22件/5errorのログも保持。",
+    "default_factory_local_current_baseline_valid": true,
+    "official_migration": {
+      "schema_version": 1,
+      "kind": "initial_llm_migration_trial",
+      "source_snapshot": 80,
+      "result": "passed",
+      "elapsed_seconds": 3.742,
+      "tables_preserved": 40,
+      "only_extension_digest_changed": true,
+      "predecessor_extension_digest": "e1135e46171b39d8fe8871b0074972173c57d86c812456ac34d320529cce5e54",
+      "following_extension_digest": "84a0ab9ff379dcc47947de0281032c0442b6a7d7c5179dbd204bb6e9f6e42cb1",
+      "input_sha256": "6504bbddaddcad14c529ee64db8989f6835d81d0d02af8f07769fb52ffece3e9",
+      "output_sha256": "ae827d01cee178bfd59e3c2080ab1548043cce32b4cb0806f74b4ada36e20001",
+      "ci_eligible": false,
+      "current_ci_not_tested": true
+    },
+    "docker_import_restart": {
+      "authority_image_id": "sha256:922215aa846e75033e1a2f9514184b1c94096276a83050a6c03b20af7043c4ca",
+      "checks": {
+        "clients_reclaimed": true,
+        "current_contract_read": true,
+        "empty_destination_import": true,
+        "fresh_baseline_use": true,
+        "receipt_unchanged": true,
+        "restart_fresh_use": true
+      },
+      "ci_eligible": false,
+      "failure": null,
+      "full_mvp_accepted": false,
+      "passed": true,
+      "schema_version": 1,
+      "source_database_sha256": "ae827d01cee178bfd59e3c2080ab1548043cce32b4cb0806f74b4ada36e20001"
+    }
+  },
+  "runtime_evaluation": "固定source80の旧400/新800比較・独立採択・通常800を実行中。",
+  "private_evidence_sha256": {
+    "validator-compatibility-80.log": "c829947f4583d5c1eb934d17eb5fba7a16bff15094aef6d338f6ef61bb9c6faf",
+    "validator-compatibility-80b.log": "50a0cf7fd37c03521709355258e5970e371befdea78f93d0df93a8ca6b60ad43",
+    "llm-migration-79.json": "a884cbca6ac6c68b658a487828d39abbe5649e77232f7a6ac246fa274332555e",
+    "llm-runtime-migration-parallel-79.json": "b001b23749e37b126924b2c9126bd91aee4c6383931d10a70c22830b3fdc3164",
+    "llm-migration-80.json": "eca50118e6027a6054c8654e9759b596891bca9e26e4642c23a0ac98829c3862",
+    "llm-runtime-migration-parallel-80.json": "0b0213013616df073670a3dcbf4d4e811644f300f583ca2f4f869886511e06c3",
+    "acceptance-source-80.json": "9b63d303a3b82987329e1d4f185d0fb808d9414bd8737993b310e19c8ca6baa0"
+  },
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

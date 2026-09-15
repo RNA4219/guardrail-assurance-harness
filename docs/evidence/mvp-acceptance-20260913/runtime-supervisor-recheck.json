@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_supervisor_recheck",
+  "observed_at": "2026-09-14T00:14:13.884290+00:00",
+  "source_snapshots": {
+    "previous_authority": 73,
+    "current_supervisor": 78,
+    "current_packaging": 78
+  },
+  "previous_runtime": {
+    "old_trials": 400,
+    "new_trials": 800,
+    "independent_adoption_passed": true,
+    "normal_completed_stopped_settled_trials": 638,
+    "normal_deadline_seconds": 5400,
+    "normal_cli_completed": false,
+    "driver_timeout_seconds": 6500,
+    "driver_reported_cleanup": true,
+    "independently_found_remaining_clients": 2,
+    "cleanup_report_was_incomplete": true,
+    "backup_sha256": "9e09f3e908350624de2659c3d43d4878643f9759aad3477e7fd9ef739a54f1ab"
+  },
+  "corrections": [
+    "通常LLMのworkerだけを契約の並列上限1〜4以内で実行。authority・owner・checkpointの処理は呼出スレッドに保ち、完了確認後に次の枠を使う。",
+    "停止・精算済みの操作は外部実行器へ再回収を要求せず、保存済みendとjournalを照合して必要なAttempt配送を保持する。",
+    "最新deploymentの所有一覧を回収前に照合し、個別失敗でも残る操作を試みる。ラベルで残存を再確認し、残る場合は成功にしない。",
+    "mutation_reviewsとterminationをauthorityイメージへ含め、両方の内容をextension digestへ固定する。"
+  ],
+  "validation": [
+    {
+      "source_snapshot": 77,
+      "tests_run": 22,
+      "failures": 1,
+      "seconds": 384.165,
+      "result": "failed",
+      "reason": "他workerの失敗を観測する前のdispatchまで禁止した試験の順序仮定が不適切。両workerが失敗する確定的な条件へ修正。既存監督・取消し試験は成功。"
+    },
+    {
+      "source_snapshot": 77,
+      "tests_run": 8,
+      "seconds": 0.382,
+      "result": "passed",
+      "scope": "並列上限、coordinatorの処理、故障後の停止、配布依存とソース固定。"
+    },
+    {
+      "source_snapshot": 78,
+      "tests_run": 24,
+      "seconds": 0.104,
+      "result": "passed",
+      "scope": "最新所有記録の回収、改変拒否、部分失敗と再試行、残存拒否、既存clientの主体分離。"
+    },
+    {
+      "source_snapshot": 78,
+      "result": "passed",
+      "scope": "実Dockerのimportと拡張digest・除外審査3操作の一致。",
+      "image_check": {
+        "extension_digest": "6721e182c293531d16f038bc52220582c2ce15a7bf1eeb836d87a0a30a350569",
+        "review_actions": [
+          "mutation_review_approve",
+          "mutation_review_current",
+          "mutation_review_validate"
+        ],
+        "schema_version": 1,
+        "source_snapshot": 78,
+        "image_id": "sha256:b8206ed9ec0813bebc079f64b64ee698bfe82e330f58c9f3737b132f29ac67a1",
+        "passed": true,
+        "full_mvp_accepted": false
+      }
+    },
+    {
+      "source_snapshot": 78,
+      "result": "setup_failed",
+      "scope": "検証driverが存在しないstart APIを呼んだ。残存2clientの回収と最終残存0確認は成功。prepare APIに修正した別driverで再実行。"
+    },
+    {
+      "source_snapshot": 78,
+      "tests_run": 52,
+      "seconds": 1504.783,
+      "result": "passed",
+      "scope": "監督・配布・回収と独立審査。ERROR2/除外1/未審査ERROR1の併存を含む。"
+    }
+  ],
+  "running_validation": {
+    "normal_cli": "supervisor78 / authority73。採択済み契約2を保持し、新しいrun IDで800件を実行中。source lockを跨いだ自動resumeは行わない。",
+    "regression": "source76は613件成功後に未完了shard2を停止。固定source80の全898試験を実行中。",
+    "current_runtime": "source80で旧400/新800と通常800を実行中。JSON解析再利用と既知validator互換性を追加。"
+  },
+  "private_evidence_sha256": {
+    "llm-product-runtime-parallel-73b.json": "ad8d6b614abf23bb4315a1a18984baffd3f288c4121801d3453be537269a6e22",
+    "llm-runtime-ended-73b.sqlite": "9e09f3e908350624de2659c3d43d4878643f9759aad3477e7fd9ef739a54f1ab",
+    "parallel-supervision-focused-77.log": "af1f38febd7f93507eda74915e55e45f250d260f3f7f6215621edd4f08da2173",
+    "parallel-packaging-recheck-77.log": "5dca72e6e98d6691fdbde386f714502a039b2a818f6485e021cc70a9c9355521",
+    "cleanup-refresh-78.log": "07ed689e0f247262dd07420dc0e36daa57c6c09766e6027cb0f576b2f0023d50",
+    "authority-image-import-78.json": "dac948112c53bb99abfd3be09e106f2c4fb0d014d263e22e8bdf42731a8a8863",
+    "llm-parallel-supervisor-78.json": "6474648a0bdeea15e9e17e26866b3789af2c4960e5aadf579f0ce14aae64f6bd",
+    "acceptance-source-78.json": "b0bcc4946d32866048657809e27df895504efaa295220a143cb25eaab4ddfa05",
+    "acceptance-supervisor-78-on-73.json": "a76c2e57a325aa457731ec511d8112eeddc41de74f85c569cfd4e6a97595aa85",
+    "supervisor-packaging-regression-78.log": "0036ba6a6d8391c28e7356631e951c762a4903270b66377e32d2a9a345f7720e",
+    "full-regression-76.json": "d6fd85c29d26d9806e0d1b5cd9248d85ea8095e7c8c0acb16fb062c1693e1d97",
+    "full-regression-76-superseded.json": "d29278f4edba672e428ef1478d5b0a4974095060a912fcb3798fadc741d52849"
+  },
+  "raw_databases_published": false,
+  "full_mvp_accepted": false,
+  "ci_eligible": false
+}

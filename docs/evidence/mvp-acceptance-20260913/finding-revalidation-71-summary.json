@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "finding_revalidation_integration_result",
+  "source_snapshot": 71,
+  "tests_run": 5,
+  "errors": 0,
+  "failures": 0,
+  "passed": true,
+  "seconds": 5359.153,
+  "scope": [
+    "変更対象を実行した新Evidenceによる独立確認とVERIFIED",
+    "再起動後の確認状態と候補runのCI拒否表示",
+    "新Evidence撤回後の現在判定拒否と不変履歴",
+    "新Evidence削除後の現在判定拒否と不変履歴",
+    "再発800件と元Findingへの関連",
+    "確認originの差し替え拒否"
+  ],
+  "fixture": "自作の固定合成400ケース、比較時は800試行",
+  "synthetic_runner": true,
+  "os_runtime_acceptance": false,
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "finding-revalidation-integration-71.log": "7148e6e0ec0141953be788c8d6b7c6fbe624c33663c20a56d6e29c0235bac58d",
+    "finding-before-confirm-71.json": "7562fd024866bc0e10da0dbf14cff1516638a35aae80915cef31dd2d09176d4d",
+    "finding-confirm-result-71.json": "26f0730727437d6e75b17068a51dd5ea5d0875b1d78c470c79b5f2096374c8d5",
+    "finding-before-confirm-71.sqlite": "2f58f1c83ea16e89f5b52f0e17f88df1664b5b89663bd6a116a35420a0929417"
+  }
+}

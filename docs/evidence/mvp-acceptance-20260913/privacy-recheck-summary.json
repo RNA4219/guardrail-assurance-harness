@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "worktree_nonpublication_recheck",
+  "scope": "tracked and non-ignored new files",
+  "counts": {
+    "files": 1480,
+    "bytes": 34899817,
+    "prohibited_identifiers": 0,
+    "credential_patterns": 0,
+    "unreadable_files": 0,
+    "outside_paths": 0
+  },
+  "passed": true,
+  "raw_identifiers_published": false,
+  "method": "既存公開検査から純粋な3定義と5credential patternだけを再利用。元の識別子・一致本文・該当pathを出力しない。",
+  "scanner_sha256": "33f0de3bcb60917cf3c2ab431ceddaf8f6ee46c767f783c235362e720754bb7a",
+  "full_mvp_accepted": false
+}

@@ -2,7 +2,7 @@
   "id": "EVALUATION.md",
   "role": "EVALUATION",
   "title": "Evaluation",
-  "summary": "baseline generation 1→2の工程は[仕様](docs/baseline-refresh-detail-spec.md)と[証跡](docs/evidence/mvp-baseline-refresh-20260912/README.md)へ結ぶ。全MVP受入とは区別する。",
+  "summary": "2026-09-15現在: [32条件のMVP技術検収](docs/mvp-completion-audit.md)は完了し、[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)を正本とする。以下の工程別進捗にある未完了は当時の記録で、現在の判定は完了監査へ従う。設計凍結、人間の追加承認、GitHub上の実行・公開反映を意味しない。",
   "public_api": [],
   "deps_out": [
     "CHANGELOG.md",
@@ -35,6 +35,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "dace265fbb340554b21d643644d26afc63bddd93472b8c53e8f330dc2e80a3f7"
+  "generated_at": "00111",
+  "source_sha256": "73911207bee27270eea1e992576c6de19a24627832338a8c7510dcedc9ad7aa8"
 }

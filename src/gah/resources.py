@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+from functools import lru_cache
 import json
 import sqlite3
 from typing import Any
@@ -35,10 +36,29 @@ def _packed(value):
     return raw.decode("utf-8"), hashlib.sha256(raw).hexdigest()
 
 
+@lru_cache(maxsize=64)
+def _flat_unpack(raw, digest, decoder, encoder):
+    # 鍵には保存digestだけでなく本文全体と処理関数のidentityを含める。
+    value = decoder(raw)
+    encoded = encoder(value)
+    if encoded.decode("utf-8") != raw or hashlib.sha256(encoded).hexdigest() != digest:
+        raise ResourceError("STORAGE_CORRUPT")
+    if (type(value) is not dict or any(type(key) is not str for key in value)
+            or any(type(item) not in (str, int, bool, float, type(None)) for item in value.values())):
+        return None
+    return tuple(value.items())
+
+
 def _unpack(raw, digest):
     if type(raw) is not str or type(digest) is not str:
         raise ResourceError("STORAGE_CORRUPT")
     try:
+        # 予約・usageの小さなflat文書だけ。返却dictは毎回独立させる。
+        if (len(raw) <= 4096 and raw.startswith("{") and raw.count("{") == raw.count("}") == 1
+                and "[" not in raw and "]" not in raw and len(raw.encode("utf-8")) <= 4096):
+            cached = _flat_unpack(raw, digest, json.loads, canonical_bytes)
+            if cached is not None:
+                return dict(cached)
         value = json.loads(raw)
         expected, actual = _packed(value)
     except (ValueError, TypeError, UnicodeError, RecursionError):

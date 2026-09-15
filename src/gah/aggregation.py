@@ -7,11 +7,13 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from functools import lru_cache
 import hashlib
 import json
 from typing import Any
 
 from .contracts import MAX_DOCUMENT_BYTES, MAX_INTEGER, ContractError, require_digest, require_id, require_object, require_uint
+from . import execution_profiles
 from .normalized import validate_binding
 from .run_contracts import bind_run_manifest
 
@@ -79,6 +81,8 @@ def _canon(value: Any) -> bytes:
     return raw
 
 def _validate_profile(value: Any) -> dict[str, Any]:
+    if type(value) is dict and "schema_version" in value:
+        return execution_profiles.validate(value)
     require_object(value, _PROFILE_FIELDS)
     _digest(value["fixture_digest"])
     _digest(value["isolation_digest"])
@@ -133,7 +137,8 @@ def _validate_result(value: Any) -> dict[str, Any]:
     else:
         if observation is not None or mutation is not None or type(detection) is not str or detection not in _DETECTIONS or error_class is not None or raw_digest is None:
             raise _bad()
-    result = deepcopy(value)
+    # binding以外は検証済みscalar。bindingはvalidatorの独立値へ置き換える。
+    result = dict(value)
     result["binding"] = binding
     return result
 
@@ -170,7 +175,8 @@ def _validate_attempt(value: Any) -> tuple[dict[str, Any], str]:
     except ContractError:
         raise _bad("BINDING_MISMATCH") from None
     result = None if value["result"] is None else _validate_result(value["result"])
-    normalized = deepcopy(value)
+    # 入れ子二つはすでに検証・複製済みなので、もう一度複製して捨てない。
+    normalized = dict(value)
     normalized["expected_binding"] = binding
     normalized["result"] = result
     raw = _canon(normalized)
@@ -210,7 +216,36 @@ def _issue(issues: list[dict[str, Any]], code: str, item: dict[str, Any] | None 
 def _metric_id(scope: str, name: str) -> str:
     return "m-" + hashlib.sha256((scope + ":" + name).encode("utf-8")).hexdigest()[:24]
 
+@lru_cache(maxsize=4)
+def _completed_aggregate(source_digest, implementation, payload):
+    bound, attempts, profile, baseline = json.loads(payload)
+    return implementation(bound, attempts, execution_profile=profile, baseline_context=baseline)
+
+
 def aggregate(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline_context: Any = None) -> dict[str, Any]:
+    """保存済み入力の純粋な集計を再現する。現在の有効性は上位が毎回検査する。"""
+    try:
+        cases = bound_run['case_set']['cases']
+        entries = bound_run['plan']['entries']
+        complete_size = sum(len(entry['stage_ids']) for entry in entries) if type(entries) is list and len(entries)<=1500 else 1501
+        cacheable = (type(cases) is list and 400 <= len(cases) <= 415 and type(attempts) is list
+                     and complete_size <= len(attempts) <= 1500)
+    except (KeyError, TypeError):
+        cacheable = False
+    from .cache_inputs import plain
+    if cacheable and plain([bound_run, attempts, execution_profile, baseline_context]):
+        from .wire import canonical_bytes
+        from .evaluation_authority import _source_digest
+        try:
+            payload = canonical_bytes([bound_run, attempts, execution_profile, baseline_context])
+        except (TypeError, ValueError, RecursionError):
+            payload = None
+        if payload is not None and len(payload) <= 4 * MAX_DOCUMENT_BYTES:
+            return deepcopy(_completed_aggregate(_source_digest(), _aggregate_uncached, payload))
+    return _aggregate_uncached(bound_run, attempts, execution_profile=execution_profile, baseline_context=baseline_context)
+
+
+def _aggregate_uncached(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline_context: Any = None) -> dict[str, Any]:
     """Attempt records を再 binding し、未確定入力を成績へ混ぜず集計する。
 
     attempts は trusted runner が生成した構造化 record のみ受け付ける。
@@ -219,6 +254,7 @@ def aggregate(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline
     """
     bound = _rebind(bound_run, baseline_context)
     profile = _validate_profile(execution_profile)
+    execution_profiles.check_plan(profile, bound)
     if type(attempts) is not list or len(attempts) > MAX_ATTEMPTS:
         raise _bad("ATTEMPT_LIMIT")
     unique: dict[str, tuple[dict[str, Any], str, int]] = {}
@@ -277,16 +313,17 @@ def aggregate(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline
         if entry is None:
             _issue(issues, "UNPLANNED_ATTEMPT", record)
             continue
+        selected_profile = execution_profiles.expected(profile, entry["target_ref"]["digest"], entry["evaluator_ref"]["digest"])
         expected = {
             "run_id": manifest["run_id"], "contract_digest": manifest["contract_ref"]["digest"],
-            "policy_digest": manifest["policy_ref"]["digest"], "fixture_digest": profile["fixture_digest"],
+            "policy_digest": manifest["policy_ref"]["digest"], "fixture_digest": selected_profile["fixture_digest"],
             "isolation_digest": profile["isolation_digest"], "target_digest": entry["target_ref"]["digest"],
             "evaluator_digest": entry["evaluator_ref"]["digest"],
         }
         if any(b[field] != value for field, value in expected.items()):
             _issue(issues, "BINDING_MISMATCH", record)
             continue
-        if b["adapter_digest"] not in profile["adapter_digests"]:
+        if b["adapter_digest"] not in selected_profile["adapter_digests"]:
             _issue(issues, "BINDING_MISMATCH", record)
             continue
         if record["result"] is not None and record["result"]["binding"] != b:
@@ -448,6 +485,8 @@ def aggregate(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline
                 _issue(issues, "STAGE_ORDER", current)
                 stage_order_groups.add(group)
     scorable_groups.difference_update(stage_order_groups)
+    # 段階ごとのERRORとは別に、未回復のMutation試行を一度だけ数える。
+    mutation_error_groups = {key[:4] for key in fault_keys | error_keys} - scorable_groups
 
     for key, entry in planned.items():
         variant, obligation_id, case_id, trial_id, stage_id = key
@@ -467,6 +506,10 @@ def aggregate(bound_run: Any, attempts: Any, *, execution_profile: Any, baseline
         before = [dict(bucket) for bucket in buckets]
         for bucket in buckets:
             bucket["planned"] += 1
+        if (obligation["kind"] == "mutation" and stage_id == cases[case_id]["scored_stage_id"]
+                and key[:4] in mutation_error_groups):
+            for bucket in buckets:
+                bucket["mutation_error"] += 1
         records_for_key = logical.get(key, [])
         for bucket in buckets:
             bucket["attempts"] += sum(deliveries for _, deliveries in records_for_key)

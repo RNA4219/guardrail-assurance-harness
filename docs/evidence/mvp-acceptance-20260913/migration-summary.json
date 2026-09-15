@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_migration_summary",
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "copies_only": true,
+  "observations": [
+    {
+      "schema_version": 1,
+      "kind": "actual_runtime_migration_observation",
+      "source_sha256": "d346b93c1647dc7c49d75d4fb353c405883a6d7d1bf62a81fd58c5b105a028f6",
+      "result": {
+        "schema_version": 4,
+        "kind": "adoption_migration_result",
+        "changed": true,
+        "predecessor_extension_digest": "b2c4e845feba67f00c777b83fcba3b514a2c1f69756f393cabc6dd8c42d15f47",
+        "predecessor_validator_digest": "3e951365969e6f1a1e192ae219a78e58678b13c9c13fd9c38360104f510b7f54",
+        "extension_digest": "cb4dc5ab861d91c94dd27da1648fd8d409f7acf3d56e04d65a12dc739fb95330",
+        "ci_eligible": false
+      },
+      "all_nonconfig_tables_and_schema_unchanged": true,
+      "changed_config_keys": [
+        "extension_digest"
+      ],
+      "production_state_modified": false,
+      "full_mvp_accepted": false,
+      "ci_eligible": false
+    },
+    {
+      "schema_version": 1,
+      "kind": "actual_runtime_migration_observation",
+      "source_sha256": "af66dbcd9af45c1b5bad37be5f62c3d20be41c157532e000d6a63ea93a5ebf3b",
+      "result": {
+        "schema_version": 4,
+        "kind": "adoption_migration_result",
+        "changed": true,
+        "predecessor_extension_digest": "cd05dbff677409e8a8eda0d78ae779aba5be2190b8a363eaf450ec5a11ed48c7",
+        "predecessor_validator_digest": "3e951365969e6f1a1e192ae219a78e58678b13c9c13fd9c38360104f510b7f54",
+        "extension_digest": "1d42d22d2e0df1f3c8f5dc3b913c9fde5cea4f3d6ee205bbdef7a51cc0f2c5d5",
+        "ci_eligible": false
+      },
+      "all_nonconfig_tables_and_schema_unchanged": true,
+      "changed_config_keys": [
+        "extension_digest"
+      ],
+      "production_state_modified": false,
+      "full_mvp_accepted": false,
+      "ci_eligible": false
+    }
+  ],
+  "state_comparison": {
+    "schema_version": 1,
+    "kind": "offline_runtime_migration_state_comparison",
+    "same_before_after": true,
+    "observed_state": {
+      "baseline_current": {
+        "adopted": true,
+        "generation": 2,
+        "valid": true
+      },
+      "basis_time": 1789288947,
+      "contract_current": {
+        "adopted": true,
+        "generation": 3,
+        "valid": true
+      },
+      "incomplete_ci": {
+        "assurance": "UNKNOWN",
+        "ci_eligible": false,
+        "exit_code": 2,
+        "reasons": [
+          "NOT_FINALIZED",
+          "ASSURANCE_NOT_ALLOWED"
+        ]
+      }
+    },
+    "clock_source": "saved_snapshot_time",
+    "production_state_modified": false,
+    "current_live_ci_claim": false
+  },
+  "tests": {
+    "old_and_scoped": {
+      "count": 31,
+      "seconds": 145.324,
+      "log_sha256": "4e9b0cbd7025f4eebfb6dd33f2fa3c4aab1483cc47ed9ec7e31ceff3877095b3"
+    },
+    "scoped_and_c3_b3": {
+      "count": 6,
+      "seconds": 1167.523,
+      "log_sha256": "625d3dd2836d054581a73a6ccc37fd567b19fdd66a10204acfd37558c52b114d"
+    }
+  },
+  "resource_clock_fix_retest": {
+    "passed": true,
+    "tests": 7,
+    "seconds": 84.148,
+    "log_sha256": "c965319f4821889191bc11f805ea0de27ccdb243b28cbb2b07e9ae71dbafde9b"
+  }
+}

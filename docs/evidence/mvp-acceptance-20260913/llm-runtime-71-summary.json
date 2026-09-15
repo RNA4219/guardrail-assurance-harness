@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "llm_runtime_comparison_attempt",
+  "source_snapshot": 71,
+  "passed": false,
+  "failure_reason": "resource_start:START_DENIED",
+  "deadline_reached": true,
+  "candidate_trials": {
+    "old_completed": 400,
+    "new_dispatched_stopped_settled": 744,
+    "new_required": 800
+  },
+  "owned_containers_removed": true,
+  "pending_operations": 0,
+  "normal_cli_started": false,
+  "next_attempt": "source73_three_workers_within_full_limit_four",
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "llm-product-runtime-71.json": "ad6a23c0df9ec04a39ed56f3d3cef8e26bfa9747a4b88c0abfca3ffe42369722",
+    "llm-product-runtime-71.log": "77ea3fa5dc21a5849152e794f824975a23f51e32b574340dbcf2b09dc2184eab",
+    "llm-runtime-ended-71.sqlite": "94802180bda427496555c4f4b964b6d3640062ff1ddc1cc08fbdb8cb37955173",
+    "llm-runtime-ended-71-ledger.json": "312f9b8e9e389142eb3a8591fe543021fe3177c9e8352e19cd2eeecf245cdd0e"
+  }
+}

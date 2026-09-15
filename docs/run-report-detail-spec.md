@@ -52,3 +52,13 @@ MarkdownはUTC日時と元のepoch秒、指標と差分の表、欠損/判定理
 [証跡](evidence/mvp-report-20260912/README.md)と[親レビュー](reviews/mvp-report-20260912.md)に、
 専用7テストと実DBを使った製品CLIの15項目を記録する。全体回帰534件は直前の取消し工程の証拠であり、
 その実行後に追加した要約7件は別の対象検証として区別する。全MVP受入は継続中である。
+
+## 保存した件数の表示
+
+Decisionの`aggregate_digest`に一致する同一runの集計を、既存の`run_artifact`または`candidate_artifact`で取得する。元の出力集合・Decision・Evidenceの照合を通した後で、そのDecisionが参照する集計だけを許す。別run・別digest・欠損・本文改変・削除済みEvidenceを拒否する。過去のreceiptと出力集合の保存形式・digestは変更しない。
+
+JSONの`measurements`に元のcounts、用途/対象範囲/版ごとのcount_rows、issues、集計の完全参照を保持する。MarkdownにもTP/FP/TN/FN、検出判定欠損、ERROR、未確定、完了/予定段階、再試行、重複配信、Mutation分類を示す。約分した率から件数を逆算せず、段階・再試行・重複を独立標本へ読み替えない。取得不能を0件に補完しない。
+
+[除外審査](mutation-review-detail-spec.md)は、前提が成立しMutationが未適用だった保存根拠を独立validatorが検証し、managerが承認する。元のERROR・必須欠損・Decisionは保持し、現在有効な除外、未確定除外、審査後に残るERRORを別計数する。表示だけでCI利用や全MVP受入を許可しない。
+
+未回復のMutation ERRORは採点段階で一試行につき一度だけ計数する。段階ごとの総ERRORとは単位を区別し、正規の再試行で回復した試行にMutation ERRORを重ねて加算しない。元のfault_countとretry_countは保持する。

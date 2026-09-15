@@ -103,6 +103,19 @@ class RemediationTests(unittest.TestCase):
         self.assertEqual(first[0]["cause_candidates"][0]["confidence"], "UNKNOWN")
         self.assertFalse(first[0]["ci_eligible"])
 
+    def test_constraint_only_assessment_needs_no_numeric_metric(self):
+        value = _assessment(reasons=[])
+        value.update(metrics=[], assurance="HEALTHY")
+        self.assertEqual(generate_findings(value, context=_context()), [])
+        value.update(assurance="HOLD", reasons=[{"code": "critical_violation", "state": "HOLD", "metric_id": None}])
+        findings = generate_findings(value, context=_context())
+        self.assertEqual(len(findings), 1)
+        self.assertIsNone(findings[0]["metric_id"])
+        self.assertFalse(findings[0]["ci_eligible"])
+        value["reasons"][0]["metric_id"] = "absent-metric"
+        with self.assertRaisesRegex(ContractError, "UNKNOWN_REFERENCE"):
+            generate_findings(value, context=_context())
+
     def test_reasonless_assessment_has_no_finding(self):
         self.assertEqual(generate_findings(_assessment(reasons=[]), context=_context()), [])
 

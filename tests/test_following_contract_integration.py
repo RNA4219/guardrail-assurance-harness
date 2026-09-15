@@ -17,6 +17,7 @@ seed=importlib.util.module_from_spec(spec);spec.loader.exec_module(seed)
 reg=seed.seed.seed
 from gah.adoption import AdoptionError
 from gah import adoption_migrations as migrations
+from gah import fixture_admission
 from gah.run_contracts import content_ref
 request=seed.request
 
@@ -97,13 +98,82 @@ class FollowingContractIntegrationTests(unittest.TestCase):
         self.assertTrue(self.current()['valid'])
         self.assertEqual(tuple(self.store._db.execute('SELECT * FROM authority_run_receipts ORDER BY run_id')),before)
         prepared=self.prepare('following-normal');self.complete(prepared);self.gate(prepared,0)
+        receipt=json.loads(self.store._db.execute(
+            "SELECT payload_json FROM authority_run_receipts WHERE run_id='following-normal'").fetchone()[0])
+        self.assertTrue(receipt['input_materialization_verified'])
+        altered=deepcopy(prepared['bound_run'])
+        altered['plan']['entries'][0]['target_ref']['digest']='0'*64
+        with self.assertRaises(AdoptionError) as error:
+            fixture_admission.materialized_run(self.store._db,altered,self.clock.value)
+        self.assertEqual(error.exception.code,'REGRESSION_BINDING_INVALID')
         outputs=tuple(self.store._db.execute("SELECT * FROM authority_artifacts WHERE run_id='following-normal' ORDER BY kind,id,digest"))
         self.store.close();self.store=self.open()
         self.assertTrue(self.current()['valid']);self.gate(prepared,0)
         self.assertEqual(tuple(self.store._db.execute("SELECT * FROM authority_artifacts WHERE run_id='following-normal' ORDER BY kind,id,digest")),outputs)
+        self._check_following_baseline(prepared)
         self.store.dispatch(12004,12004,request('evidence_revoke','following-revoke-source',run_id='completed'))
         self.assertFalse(self.current()['valid']);self.gate(prepared,1)
         self.assertEqual(tuple(self.store._db.execute("SELECT * FROM authority_artifacts WHERE run_id='following-normal' ORDER BY kind,id,digest")),outputs)
+
+    def _check_following_baseline(self, prepared):
+        series='fixture-baseline-series'
+        artifacts=tuple(self.store._db.execute('SELECT * FROM authority_artifacts ORDER BY kind,id,digest'))
+        prior=json.loads(self.store._db.execute('SELECT baseline_json FROM baseline_current').fetchone()[0])
+        proposed=request('baseline_propose','following-baseline-propose',proposal_id='following-baseline',
+            series_id=series,run_id='following-normal',expected_generation=2)
+        self.assertEqual(self.store.dispatch(12001,12001,proposed)['generation'],3)
+        validation=request('baseline_validate','following-baseline-validate',
+            proposal_id='following-baseline',validation_id='following-baseline-validation')
+        with self.assertRaises(AdoptionError):self.store.dispatch(12001,12001,validation)
+        self.assertTrue(self.store.dispatch(12003,12003,validation)['passed'])
+        adoption=request('baseline_adopt','following-baseline-adopt',proposal_id='following-baseline',
+            validation_id='following-baseline-validation',expected_generation=2)
+        with self.assertRaises(AdoptionError):
+            self.store.dispatch(12001,12001,{**adoption,'request_id':'following-baseline-stale','expected_generation':1})
+        self.store._db.execute("CREATE TRIGGER fail_following_baseline BEFORE UPDATE ON baseline_current WHEN NEW.generation=3 BEGIN SELECT RAISE(ABORT,'test'); END")
+        with self.assertRaises(AdoptionError):self.store.dispatch(12001,12001,adoption)
+        self.assertEqual(self.store._db.execute('SELECT generation FROM baseline_current').fetchone()[0],2)
+        self.assertIsNone(self.store._db.execute('SELECT 1 FROM baseline_adoptions WHERE generation=3').fetchone())
+        self.assertIsNone(self.store._db.execute("SELECT 1 FROM idempotency WHERE request_id='following-baseline-adopt'").fetchone())
+        self.store._db.execute('DROP TRIGGER fail_following_baseline')
+        self.assertEqual(self.store.dispatch(12001,12001,adoption)['generation'],3)
+        def current():
+            return self.store.dispatch(12004,12004,request('baseline_current','following-baseline-current',series_id=series))
+        value=current();self.assertTrue(value['valid'],value);self.assertEqual(value['generation'],3)
+        latest=value['baseline']
+        def pinned(record,action='baseline_resolve'):
+            return self.store.dispatch(12004,12004,request(action,action+'-'+record['baseline_id'],series_id=series,
+                expected_baseline_ref=content_ref('baseline',record['baseline_id'],record),expected_contract_ref=record['contract_ref']))
+        self.assertTrue(pinned(prior)['use']);self.assertTrue(pinned(latest)['use'])
+        self.assertEqual(prepared['bound_run']['manifest']['baseline_ref'],content_ref('baseline',prior['baseline_id'],prior))
+        self.assertEqual(tuple(self.store._db.execute('SELECT * FROM authority_artifacts ORDER BY kind,id,digest')),artifacts)
+        self.gate(prepared,0)
+        self.store.close();self.store=self.open()
+        self.assertTrue(current()['valid']);self.assertEqual(self.store.dispatch(12001,12001,adoption)['generation'],3)
+        # 合成fixtureの旧版識別子。実旧runtimeの移行証拠とは区別する。
+        from tests.test_following_migrations import rows as stored_rows
+        before_migration=stored_rows(self.store._db)
+        self.store._db.execute("UPDATE adoption_config SET value=? WHERE key='extension_digest'",
+            (migrations._V4_FOLLOWING_EXTENSION_DIGEST,))
+        self.store.close()
+        migrated=migrations.migrate_evaluation_store(self.path)
+        self.assertFalse(migrated['ci_eligible'])
+        self.assertEqual(migrated['predecessor_extension_digest'],migrations._V4_FOLLOWING_EXTENSION_DIGEST)
+        self.store=self.open()
+        self.assertEqual(stored_rows(self.store._db),before_migration)
+        self.gate(prepared,0)
+        pinned(latest,'baseline_revoke_ref')
+        self.assertFalse(current()['valid']);self.assertTrue(pinned(prior)['use']);self.gate(prepared,0)
+        pinned(prior,'baseline_revoke_ref')
+        self.assertFalse(self.current()['valid']);self.gate(prepared,1)
+        self.assertEqual(tuple(self.store._db.execute('SELECT * FROM authority_artifacts ORDER BY kind,id,digest')),artifacts)
+
+    def test_refresh_rejects_source_using_a_different_baseline(self):
+        with self.assertRaises(AdoptionError) as error:
+            self.store.dispatch(12001,12001,request('baseline_propose','following-baseline-wrong-source',
+                proposal_id='wrong-source',series_id='fixture-baseline-series',run_id='completed',expected_generation=2))
+        self.assertEqual(error.exception.code,'GENERATION_CONFLICT')
+        self.assertIsNone(self.store._db.execute("SELECT 1 FROM baseline_proposals WHERE proposal_id='wrong-source'").fetchone())
 
     def test_wrong_roles_and_expected_generations_do_not_advance(self):
         self.validate()

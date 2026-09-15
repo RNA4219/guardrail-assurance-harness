@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "initial_llm_migration_acceptance",
+  "migration": {
+    "schema_version": 1,
+    "kind": "initial_llm_migration_trial",
+    "source_snapshot": 49,
+    "result": "passed",
+    "elapsed_seconds": 3.676,
+    "tables_preserved": 40,
+    "only_extension_digest_changed": true,
+    "predecessor_extension_digest": "e1135e46171b39d8fe8871b0074972173c57d86c812456ac34d320529cce5e54",
+    "following_extension_digest": "e38423fbf4db4a35c0d41a934f61cc6dc0bc55eb4128ebdfbef8347795006e6b",
+    "input_sha256": "6504bbddaddcad14c529ee64db8989f6835d81d0d02af8f07769fb52ffece3e9",
+    "output_sha256": "09c90db25911edb869d6ff51ad70ec7f1a9d99d5daf308a6ad38a7e17a05e172",
+    "ci_eligible": false,
+    "current_ci_not_tested": true
+  },
+  "runtime_verification": {
+    "authority_image_id": "sha256:36aeff08df07b8f9ffe7b7d781efc42b768fce323c1b7ef0023bd0d623bf589e",
+    "checks": {
+      "clients_reclaimed": true,
+      "current_contract_read": true,
+      "fresh_baseline_use": true,
+      "receipt_unchanged": true,
+      "restart_fresh_use": true
+    },
+    "ci_eligible": false,
+    "failure": null,
+    "full_mvp_accepted": false,
+    "passed": true,
+    "schema_version": 1
+  },
+  "negative_checks": [
+    {
+      "all_rows_preserved": true,
+      "case": "unknown_version",
+      "elapsed_seconds": 0.11,
+      "reason": "CONFIG_MISMATCH",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "wrong_origin",
+      "elapsed_seconds": 3.765,
+      "reason": "STORAGE_CORRUPT",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "changed_attempt",
+      "elapsed_seconds": 0.19,
+      "reason": "STORAGE_CORRUPT",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "rehashed_receipt",
+      "elapsed_seconds": 0.732,
+      "reason": "STORAGE_CORRUPT",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "active_operation",
+      "elapsed_seconds": 0.576,
+      "reason": "STORAGE_CORRUPT",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "unsupported_artifact",
+      "elapsed_seconds": 0.281,
+      "reason": "STORAGE_CORRUPT",
+      "rejected": true
+    },
+    {
+      "all_rows_preserved": true,
+      "case": "late_failure",
+      "elapsed_seconds": 3.86,
+      "reason": "MIGRATION_FAILED",
+      "rejected": true
+    }
+  ],
+  "intermediate_driver_failures": [
+    {
+      "stage": "50",
+      "reason": "起動確認の冪等記録も空DB条件で拒否。取込み前に停止。"
+    },
+    {
+      "stage": "50b",
+      "reason": "別request_idの応答外枠を比較したdriver assertion。同一要求の再配送を50cで確認。"
+    }
+  ],
+  "private_record_sha256": {
+    "llm-migration-49.json": "53a5a248b3c9f975ca9623dba2c4fe7f63780214a4e8b36e2f7bc777a8dce3f0",
+    "llm-runtime-migration-50.json": "7740f5f18f05f22d8cca220f8fb4c7fba3b72f206f89eecbbf9cab75860f90a7",
+    "llm-runtime-migration-50b.json": "27b8ddf1cfe2d30b56a7f225e3e6bcb9c86b405072fe837fec027cb554a3f66e",
+    "llm-runtime-migration-50c.json": "7a632465760cc9c23261a17f8f839325fdbe886e1306c5baa213920c1b28a94b",
+    "llm-migration-negatives-50.json": "01a7ed84fe496978b95280f6bb8dd91318f94579228ef785ecedea9783def047"
+  },
+  "source_manifests_sha256": {
+    "49": "cd2455e24b4af3b45e5da46322ddfd2568daa87d2e7759eafc4e968057294c22",
+    "50": "f38693412cfd0fa2e5b7913939bbcdf6b345421fee4350721d03428ce23418bc"
+  },
+  "limits": {
+    "broker_memory_bytes": 134217728,
+    "broker_cpus": "0.5"
+  },
+  "limitations": [
+    "既知の初回合成LLM形式のみ。後続候補・通常・複合・Finding管理形式の移行受入ではない。",
+    "初回候補の保存成功を通常CI成功に流用しない。",
+    "DB本文と環境metadataは公開証跡へ含めない。"
+  ],
+  "ci_eligible": false,
+  "full_mvp_accepted": false
+}

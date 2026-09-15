@@ -11,7 +11,7 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gah.contracts import ContractError, decode_document, require_object
+from gah.contracts import ContractError, MAX_DOCUMENT_BYTES, decode_document, require_object
 from gah.docker_runner import capture_bounded
 from gah.wire import canonical_bytes
 from tools.prepare_authority_runtime import ENTRYPOINT
@@ -96,7 +96,15 @@ class AuthorityRuntime:
             return
         raise AuthorityRuntimeError("CLEANUP_FAILED")
 
-    def __init__(self, folder):
+    def __init__(self, folder, *, reuse_clients=False, keep_clients_running=False):
+        import threading
+        if type(reuse_clients) is not bool or type(keep_clients_running) is not bool or (keep_clients_running and not reuse_clients):
+            raise AuthorityRuntimeError("INVALID_RUNTIME_MODE")
+        self.reuse_clients = reuse_clients
+        self.keep_clients_running = keep_clients_running
+        self._running_clients = {}
+        self._reusable_clients = {}
+        self._client_mutex = threading.RLock()
         self.folder = Path(folder).resolve()
         self.folder.mkdir(parents=True, exist_ok=True)
         self.lock = decode_document((ROOT / "config/authority-runtime.lock.json").read_bytes())
@@ -286,6 +294,46 @@ class AuthorityRuntime:
             return
 
     def client(self, uid, request=None, *, probe=False):
+        """時計逆行の拒否を保存し、同じ要求を2秒後に一度だけ再照会する。"""
+        if type(uid) is not int or uid not in {12001, 12002, 12003, 12004}:
+            raise AuthorityRuntimeError("IDENTITY_NOT_CONFIGURED")
+        if probe:
+            return self._client_once(uid, request, probe=True)
+        raw = canonical_bytes(request)
+        for attempt in range(2):
+            result = self._client_once(uid, decode_document(raw))
+            if (type(result) is not dict
+                    or set(result) != {"schema_version", "kind", "reason", "ci_eligible"}
+                    or type(result["schema_version"]) is not int or result["schema_version"] != 1
+                    or result["kind"] != "authority_error" or result["reason"] != "CLOCK_ROLLBACK"
+                    or result["ci_eligible"] is not False):
+                return result
+            # この応答ではauthorityのtransaction全体がrollbackしている。
+            # 時刻や成功応答を補正せず、再照会も全てのfresh検査を通す。
+            self._record_clock_rejection(uid, raw, retry_scheduled=attempt == 0)
+            if attempt == 0:
+                time.sleep(2)
+        return result
+
+    def _record_clock_rejection(self, uid, raw, *, retry_scheduled):
+        event = {"schema_version": 1, "kind": "authority_clock_rejection",
+            "uid": uid, "request_digest": hashlib.sha256(raw).hexdigest(),
+            "reason": "CLOCK_ROLLBACK", "retry_scheduled": retry_scheduled}
+        try:
+            folder = self.folder / "clock-rejections"
+            folder.mkdir(exist_ok=True)
+            with (folder / (uuid.uuid4().hex + ".json")).open("xb") as stream:
+                stream.write(canonical_bytes(event))
+                stream.flush()
+                os.fsync(stream.fileno())
+        except OSError:
+            raise AuthorityRuntimeError("CLOCK_RECOVERY_UNAVAILABLE") from None
+
+    def _client_once(self, uid, request=None, *, probe=False):
+        if getattr(self, "keep_clients_running", False) and not probe:
+            return self._running_client_once(uid, request)
+        if getattr(self, "reuse_clients", False):
+            return self._reused_client_once(uid, request, probe=probe)
         if type(uid) is not int or uid not in {12001, 12002, 12003, 12004}:
             raise AuthorityRuntimeError("IDENTITY_NOT_CONFIGURED")
         name = self.prefix + "-client-" + uuid.uuid4().hex
@@ -303,6 +351,99 @@ class AuthorityRuntime:
                 raise AuthorityRuntimeError("CLIENT_RESPONSE_INVALID") from None
         finally:
             self.remove_container(name)
+
+    def _reused_client_once(self, uid, request=None, *, probe=False):
+        """固定UIDの停止済みclientを再起動する。各要求は新しいプロセスで処理する。"""
+        if type(uid) is not int or uid not in {12001, 12002, 12003, 12004}:
+            raise AuthorityRuntimeError("IDENTITY_NOT_CONFIGURED")
+        mode = "probe" if probe else "client"
+        key = (uid, mode)
+        with self._client_mutex:
+            name = self._reusable_clients.get(key)
+            if name is None:
+                name = self.prefix + "-client-" + uuid.uuid4().hex
+                self._create(name, uid, mode)
+                self._reusable_clients[key] = name
+            try:
+                before = self.inspect(name)
+                self._verify_config(before, uid, mode)
+                if (before["State"]["Running"] or before["State"]["Pid"] != 0
+                        or before["State"]["Status"] not in {"created", "exited"}):
+                    raise AuthorityRuntimeError("CLIENT_ACTIVE")
+                raw = self.command(["container", "start", "--attach", "--interactive", name],
+                    input_bytes=None if probe else canonical_bytes(request), timeout=45)
+                after = self.inspect(name)
+                self._verify_config(after, uid, mode)
+                if (after["Id"] != before["Id"] or after["State"]["Running"]
+                        or after["State"]["Pid"] != 0 or after["State"]["ExitCode"] != 0):
+                    raise AuthorityRuntimeError("CLIENT_FAILED")
+                try:
+                    return decode_document(raw)
+                except ContractError:
+                    raise AuthorityRuntimeError("CLIENT_RESPONSE_INVALID") from None
+            except BaseException:
+                self._reusable_clients.pop(key, None)
+                self.remove_container(name)
+                raise
+
+    def _running_client_once(self, uid, request):
+        """役割別の固定container上で、新しい固定clientプロセスを起動する。"""
+        if type(uid) is not int or uid not in {12001,12002,12003,12004}:
+            raise AuthorityRuntimeError("IDENTITY_NOT_CONFIGURED")
+        mode = "client-host"
+        with self._client_mutex:
+            name = self._running_clients.get(uid)
+            created = name is None
+            if created:
+                name = self.prefix + "-client-" + uuid.uuid4().hex
+                self._running_clients[uid] = name
+            try:
+                if created:
+                    self._create(name, uid, mode)
+                    self.command(["container", "start", name])
+                before = self.inspect(name)
+                self._verify_config(before, uid, mode)
+                if (before["State"]["Running"] is not True or before["State"]["Pid"] <= 0
+                        or before["State"]["Status"] != "running" or before["State"].get("OOMKilled") is not False
+                        or before.get("RestartCount") != 0):
+                    raise AuthorityRuntimeError("CLIENT_FAILED")
+                # 外部指定のcommandは受け取らない。UID・絶対path・引数はこの固定列だけ。
+                raw = self.command(["container", "exec", "--interactive", "--user", f"{uid}:{uid}", name,
+                    "/usr/local/bin/python", "-I", "-B", "/opt/gah/tools/authority_entry.py", "client"],
+                    input_bytes=canonical_bytes(request), timeout=45)
+                after = self.inspect(name)
+                self._verify_config(after, uid, mode)
+                if (after["Id"] != before["Id"] or after["State"]["Running"] is not True
+                        or after["State"]["Pid"] != before["State"]["Pid"]
+                        or after["State"]["StartedAt"] != before["State"]["StartedAt"]
+                        or after["State"]["Status"] != "running" or after["State"].get("OOMKilled") is not False
+                        or after.get("RestartCount") != 0):
+                    raise AuthorityRuntimeError("CLIENT_FAILED")
+                try:
+                    return decode_document(raw)
+                except ContractError:
+                    raise AuthorityRuntimeError("CLIENT_RESPONSE_INVALID") from None
+            except BaseException:
+                # 回収に失敗した場合も所有記録を残し、close_clientsで再試行できるようにする。
+                self.remove_container(name)
+                del self._running_clients[uid]
+                raise
+
+    def close_clients(self):
+        """このインスタンスが再利用したclientだけを回収し、brokerと保存volumeは保持する。"""
+        failed = None
+        with self._client_mutex:
+            for clients in (getattr(self, "_running_clients", {}), self._reusable_clients):
+                for key, name in list(clients.items()):
+                    try:
+                        self.remove_container(name)
+                    except BaseException as error:
+                        if failed is None:
+                            failed = error
+                    else:
+                        del clients[key]
+        if failed is not None:
+            raise failed
 
     def remove_container(self, name):
         if not self._owned_container_name(self.prefix, name):
@@ -338,8 +479,37 @@ class AuthorityRuntime:
         self._wait_ready()
 
     def cleanup(self, *, remove_state=False):
-        for name in self.state["containers"]:
-            self.remove_container(name)
+        # 別のCLIが同じdeploymentへ追加した所有記録も、回収直前に照合する。
+        try:
+            with (self.folder / "deployment.json").open("rb") as stream:
+                current = decode_document(stream.read(MAX_DOCUMENT_BYTES + 1))
+            require_object(current, {"prefix", "image_id", "containers"})
+            names = current["containers"]
+            if (current["prefix"] != self.prefix or current["image_id"] != self.lock["image_id"]
+                    or type(names) is not list or any(type(name) is not str for name in names)
+                    or len(set(names)) != len(names)
+                    or any(not self._owned_container_name(self.prefix, name) for name in names)):
+                raise AuthorityRuntimeError("DEPLOYMENT_CONFLICT")
+            names = list(dict.fromkeys(self.state["containers"] + names))
+            if any(not self._owned_container_name(self.prefix, name) for name in names):
+                raise AuthorityRuntimeError("DEPLOYMENT_CONFLICT")
+        except (OSError, ContractError, KeyError, TypeError):
+            raise AuthorityRuntimeError("DEPLOYMENT_CONFLICT") from None
+        self.state["containers"] = names
+        self._save()
+        failure = None
+        for name in names:
+            try:
+                self.remove_container(name)
+            except Exception as error:
+                if failure is None:
+                    failure = error
+        if failure is not None:
+            raise failure
+        remaining = self.command(["container", "ls", "--all", "--filter",
+            "label=org.gah.authority.instance=" + self.prefix, "--format", "{{.Names}}"])
+        if remaining.strip():
+            raise AuthorityRuntimeError("CLEANUP_INCOMPLETE")
         if remove_state:
             for role in ("ipc", "state"):
                 name = self.prefix + "-" + role

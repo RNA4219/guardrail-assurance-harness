@@ -25,6 +25,7 @@
     "SECURITY.md",
     "datasets/README.md",
     "docs/acceptance-criteria.md",
+    "docs/combined-run-detail-spec.md",
     "docs/contract-transition-detail-spec.md",
     "docs/contracts/README.md",
     "docs/contracts/evaluation-contract.md",
@@ -32,6 +33,7 @@
     "docs/detail-spec.md",
     "docs/evaluation-detail-spec.md",
     "docs/extension-roadmap.md",
+    "docs/mutation-review-detail-spec.md",
     "docs/reference-boundary.md",
     "docs/requirements-traceability.md",
     "docs/research/README.md",
@@ -58,6 +60,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
 }

@@ -2,12 +2,24 @@
 task_id: 20260911-05
 intent_id: INT-GAH-001
 owner: RNA4219
-status: in_progress
-last_reviewed_at: 2026-09-12
-next_review_due: 2026-10-12
+status: done
+last_reviewed_at: 2026-09-15
+next_review_due: 2026-10-15
 ---
 
 # Task: 全MVPの実装・接続・受入
+
+2026-09-15最終技術検収: 全32条件を受入済み、release_gate=go。全898試験と追加CI分割9試験、実Docker初回400ケース・600段階、旧400/新800比較・採択、通常CLI800試行、freshなCI、表示、再起動後不変、全精算・回収と環境復元を確認した。[最終証跡](../evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)と[32条件対応表](../evidence/mvp-acceptance-20260913/acceptance-map.json)を正本とする。GitHub実行・公開反映と学習モデル一般の性能保証は含まない。親による技術検収である。
+
+## 工程履歴
+
+以下の未完了・draft・no_goは各工程当時の判定である。
+
+2026-09-15再開: Docker/WSL再起動と時刻同期の一時調整後、120秒の時計検証に合格した。固定source81の初回・比較・通常CLIを新規実行中。終了時に元の設定へ復元する。21/32条件とno_goは完走まで維持する。
+
+2026-09-15: 固定source80全898試験と後続契約3・基準3の統合検証が完了した。32条件中21条件を受入済み、実Docker通常runに依存する11条件を継続する。[最新監査](../mvp-completion-audit.md)と[対応表](../evidence/mvp-acceptance-20260913/acceptance-map.json)に試験ID・証拠・未完了範囲を記録する。[今回の親レビュー](../reviews/mvp-acceptance-20260915.md)に、時計逆行による保留と回収結果を記録した。以下は各工程時点の履歴である。
+
+[2026-09-13の継続レビュー](../reviews/mvp-acceptance-20260913.md)で、契約3の入力照合修正・通常CIと、基準3への更新を統合検証した。固定ソースの全691試験が成功した。対象限定runの実Docker93実行・203項目、後続世代の追加回収、実DBコピー移行を確認した。合成UC-LLMの初回採択・二段階保存とDocker小規模検証を接続し、400ケースの認証付き実行を進めている。全MVPの未完了範囲と受入条件を維持する。
 
 [条件比較部品](../semantic-conditions-detail-spec.md)の新規30件・既存21件を[検証](../evidence/mvp-condition-core-20260912/README.md)した。後続契約の実体化・旧新別実行・採択を継続し、全MVPのin_progressを維持する。
 
@@ -144,3 +156,11 @@ python -m tools.workflow check
 管理境界の進捗: `PolicyProfile`、固定UIDとSO_PEERCRED、原子的採択・現在状態・不変receiptを実装した。実Dockerの22項目、DGX Qwenの提案から採択まで7項目が成功した。[管理境界の統合証跡](../evidence/mvp-authority-20260911/verification.json)と[レビュー処遇](../reviews/mvp-authority-20260911.md)へ結ぶ。Qwenの仕様レビュー時間切れと、モデル接続初回の受理失敗も履歴として保持する。全MVPのTaskはin_progressを維持し、次は全評価契約と実行・台帳の接続を進める。
 
 利用者の最新指示に従い、残件は親が実装・レビュー・検証を担当する。過去のモデル出力を採択・製品成功の証拠に直接使わない。全MVPという目標を保持する。
+
+2026-09-13追記: 修正版の400ケース・600段階の認証実Docker実行と初回baseline採択・再起動・回収の16項目が成功した。保持/削除と影響表示の13試験、分割したLLM候補の3統合試験も成功。対象版差と通常LLM監督はsource39で再検証中。両用途の複合run・修復確認・最終32条件の対応付けを継続する。
+
+## 2026-09-13追加: 処遇・修復管理と表示
+
+source45の19試験で、採択済みbaselineへの改訂処遇、managerによる対象廃止、権限、再起動、保存失敗のrollbackが成功した。source46の52試験で管理CLI・Evidence・純粋再束縛cache等を確認した。通常LLM/対象版差、複合run、修復確認/再発の固定コピー試験を継続する。全32条件と最終製品受入は未完了のまま保持する。
+
+source76の全回帰はshard0/1/3の613件が成功した。旧版の未完了shard2は所有プロセスを確認して停止し、停止理由・部分結果を保存した。source80で全898試験を4分割して実行する。製品の並列上限とCPU・メモリ・full5400秒は変更しない。

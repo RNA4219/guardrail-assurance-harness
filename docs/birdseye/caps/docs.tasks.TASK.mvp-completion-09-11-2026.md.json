@@ -2,7 +2,7 @@
   "id": "docs/tasks/TASK.mvp-completion-09-11-2026.md",
   "role": "tasks",
   "title": "Task: 全MVPの実装・接続・受入",
-  "summary": "[条件比較部品](../semantic-conditions-detail-spec.md)の新規30件・既存21件を[検証](../evidence/mvp-condition-core-20260912/README.md)した。後続契約の実体化・旧新別実行・採択を継続し、全MVPのin_progressを維持する。",
+  "summary": "2026-09-15最終技術検収: 全32条件を受入済み、release_gate=go。全898試験と追加CI分割9試験、実Docker初回400ケース・600段階、旧400/新800比較・採択、通常CLI800試行、freshなCI、表示、再起動後不変、全精算・回収と環境復元を確認した。[最終証跡](../evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)と[32条件対応表](../evidence/mvp-acceptance-20260913/acceptance-map.json)を正本とする。GitHub実行・公開反映と学習モデル一般の性能保証は含まない。親による技術検収である。",
   "public_api": [],
   "deps_out": [
     "docs/acceptance-criteria.md",
@@ -29,6 +29,8 @@
     "docs/regression-ci-detail-spec.md",
     "docs/remediation-detail-spec.md",
     "docs/requirements.md",
+    "docs/reviews/mvp-acceptance-20260913.md",
+    "docs/reviews/mvp-acceptance-20260915.md",
     "docs/reviews/mvp-adoption-20260911.md",
     "docs/reviews/mvp-authority-20260911.md",
     "docs/reviews/mvp-cancellation-20260912.md",
@@ -53,7 +55,6 @@
     "EVALUATION.md",
     "GUARDRAILS.md",
     "HUB.codex.md",
-    "README.md",
     "docs/acceptance/AC-20260911-05.md",
     "docs/auth-adoption-detail-spec.md",
     "docs/evaluation-detail-spec.md",
@@ -61,6 +62,7 @@
     "docs/execution-detail-spec.md",
     "docs/mvp-completion-audit.md",
     "docs/oss-publication.md",
+    "docs/reviews/mvp-acceptance-20260913.md",
     "docs/reviews/mvp-authority-20260911.md",
     "docs/reviews/mvp-candidate-20260911.md",
     "docs/reviews/mvp-completion-20260911.md",
@@ -77,6 +79,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "139675d8e705f7898a8e53f43eb0fb7a8fc732e858196e16b7754285726ff7be"
+  "generated_at": "00111",
+  "source_sha256": "e4bb8ddad621feb40b5e67a79a002662790a511c69b0a00704dd594753a689f7"
 }

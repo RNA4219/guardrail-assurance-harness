@@ -10,7 +10,6 @@
   ],
   "deps_in": [
     "HUB.codex.md",
-    "README.md",
     "docs/spec.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md",
     "schemas/README.md"
@@ -21,6 +20,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "226f2d21847af06e45f7753ecd803606329ca55378066284a7c9fa96c746dfea"
 }

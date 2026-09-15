@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "kind": "mvp_acceptance_stage_summary",
+  "acceptance": "in_progress",
+  "ci_eligible": false,
+  "scope": [
+    "authenticated_target_retirement",
+    "adopted_baseline_revision_disposition",
+    "finding_state_report",
+    "candidate_run_report",
+    "pure_binding_cache"
+  ],
+  "limitations": [
+    "No Docker runtime was executed in these suites.",
+    "Test counts overlap and must not be added as unique coverage.",
+    "Successful revalidation and recurrence are still under integration testing.",
+    "These results do not establish all 32 MVP acceptance criteria."
+  ],
+  "suites": [
+    {
+      "suite": "candidate_report_and_finding_regression",
+      "source_snapshot": 44,
+      "tests": 15,
+      "elapsed_seconds": 144.986,
+      "result": "passed",
+      "log_sha256": "7e61a6cc096eb81175ada615611af1759ecf6ffcf6cec876b0c55714b2b951b4",
+      "source_manifest_sha256": "835161d941a492d77d667409f115de5266d4227e14c4fca045039fee375dce48",
+      "source_sha256": {
+        "src/gah/aggregation.py": "ca14b22c55270545ea1bdbfab3a4890843803b4afb646e5a02df515259c57a52",
+        "src/gah/finding_lifecycle.py": "181e925d79dcb9d363046e272d5352b2368b344d76006c740d26640989242ba4",
+        "src/gah/run_evidence.py": "5c2a02d5a1c009a5d0e110909d6a8f66fc67cba272bc83076840779403d289d5",
+        "tests/test_aggregation_cache.py": "fa65282248b0426bfd30c0461872d2e7cca00140df2a15296e1ac8bca78db65f",
+        "tests/test_candidate_report.py": "0bd87c976a2294a73fd3eab2c3b5b0bec6e956a44382e8ebb1cbcaf83aaa4476",
+        "tests/test_finding_lifecycle.py": "3f324645a27e82a668a0917830b8df4fa8d20a2beb4218623b5bc769f20d2d3f",
+        "tests/test_run_report.py": "7a9627e0026f66a1871bf3fd209e61e53732508d58c6d4d45554250b6bb9d8da",
+        "tools/gah_finding.py": "0e3095ea46c3e01a4b0585b775ac5e389caa9529117102f7ab65339d958733aa",
+        "tools/gah_report.py": "27876bc81e4334026465e0da39c9148a013a6c4ed468508a82473e219f5549ce"
+      }
+    },
+    {
+      "suite": "authenticated_dispositions_and_report",
+      "source_snapshot": 45,
+      "tests": 19,
+      "elapsed_seconds": 328.068,
+      "result": "passed",
+      "log_sha256": "8be59b746f873844cc683f649f360d28380cc75ccbde1f5324d9038a1972c61e",
+      "source_manifest_sha256": "6f9c9d2ae5628fb65068543bdd8f44b9071b7cdf61a2a8dad2ed01386f4f685f",
+      "source_sha256": {
+        "src/gah/aggregation.py": "ca14b22c55270545ea1bdbfab3a4890843803b4afb646e5a02df515259c57a52",
+        "src/gah/finding_dispositions.py": "c71311d650522e14da761dc86ea49c3ea733f1efce81b30dbb156ea7eb8cb4a9",
+        "src/gah/finding_lifecycle.py": "bb669a28c4a7055e44b202bbc6978ec74b5ebd8cfdd07f73a473aeaff3555d46",
+        "src/gah/run_evidence.py": "5c2a02d5a1c009a5d0e110909d6a8f66fc67cba272bc83076840779403d289d5",
+        "src/gah/target_retirement.py": "a589d6a3b1fe2435ecfd3f034f5d297811c9507638225bdcab26bceda173e582",
+        "tests/test_aggregation_cache.py": "fa65282248b0426bfd30c0461872d2e7cca00140df2a15296e1ac8bca78db65f",
+        "tests/test_candidate_report.py": "0bd87c976a2294a73fd3eab2c3b5b0bec6e956a44382e8ebb1cbcaf83aaa4476",
+        "tests/test_finding_dispositions.py": "d5927dbc838af2faefd41496f658bf32a03639c8401a2e58f771e50d6924e99a",
+        "tests/test_finding_lifecycle.py": "3f324645a27e82a668a0917830b8df4fa8d20a2beb4218623b5bc769f20d2d3f",
+        "tests/test_run_report.py": "7a9627e0026f66a1871bf3fd209e61e53732508d58c6d4d45554250b6bb9d8da",
+        "tools/gah_finding.py": "93e115ab05e6cb02b201255d3fd021fc3ac5677001a5389978909a435f847dd2",
+        "tools/gah_report.py": "53cd80734bb4f159806c25f052de0391c626edff18a516551a9e9005355786a6"
+      }
+    },
+    {
+      "suite": "binding_cache_evidence_and_management_cli",
+      "source_snapshot": 46,
+      "tests": 52,
+      "elapsed_seconds": 231.534,
+      "result": "passed",
+      "log_sha256": "3208011bf91b3f183747dcd76032f9843d7d62f19924d8fc0dbbf4c0d0398a00",
+      "source_manifest_sha256": "c8937654ea2f7162bee539dab4835e5e39b98243a71250448b0af964242fd24e",
+      "source_sha256": {
+        "src/gah/aggregation.py": "ca14b22c55270545ea1bdbfab3a4890843803b4afb646e5a02df515259c57a52",
+        "src/gah/finding_dispositions.py": "c71311d650522e14da761dc86ea49c3ea733f1efce81b30dbb156ea7eb8cb4a9",
+        "src/gah/finding_lifecycle.py": "663c442f0bf34b283e30f02347ea50466840e00b9fcea3bc187b88bd9ceb3aa2",
+        "src/gah/run_evidence.py": "afac0e17874b5e2c220123a2490b4cdc9cc8db350f50a2fb1ec006fd806f0d37",
+        "src/gah/target_retirement.py": "a589d6a3b1fe2435ecfd3f034f5d297811c9507638225bdcab26bceda173e582",
+        "tests/test_aggregation_cache.py": "fa65282248b0426bfd30c0461872d2e7cca00140df2a15296e1ac8bca78db65f",
+        "tests/test_bound_cache.py": "962cd2dc99965576c32014a323073e10c67158a13ff866072e76a966a7018ce5",
+        "tests/test_candidate_report.py": "0bd87c976a2294a73fd3eab2c3b5b0bec6e956a44382e8ebb1cbcaf83aaa4476",
+        "tests/test_finding_dispositions.py": "869df92923fbb4d13aa68af3d89c6b53d31ae26eebbf9c6c048239f8bc4c9357",
+        "tests/test_finding_lifecycle.py": "3f324645a27e82a668a0917830b8df4fa8d20a2beb4218623b5bc769f20d2d3f",
+        "tests/test_run_report.py": "7a9627e0026f66a1871bf3fd209e61e53732508d58c6d4d45554250b6bb9d8da",
+        "tools/gah_finding.py": "93e115ab05e6cb02b201255d3fd021fc3ac5677001a5389978909a435f847dd2",
+        "tools/gah_report.py": "53cd80734bb4f159806c25f052de0391c626edff18a516551a9e9005355786a6",
+        "tools/gah_target.py": "57019412e58527f063d64dc64d04cd2439e17334c5170a8b40deea86602d15d8"
+      }
+    }
+  ],
+  "microbenchmark": {
+    "source_snapshot": 46,
+    "component": "pure_bound_validation",
+    "repetitions": 5,
+    "uncached_seconds": 0.785142,
+    "cached_seconds": 0.208029,
+    "authority_freshness_checks_measured": false
+  }
+}

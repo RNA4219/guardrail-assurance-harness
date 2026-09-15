@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
 SOURCES = ["src/gah/__init__.py", "src/gah/contracts.py", "src/gah/wire.py", "src/gah/policy.py",
            "src/gah/adoption.py", "src/gah/authority.py", "src/gah/registry.py", "src/gah/corpus.py",
-           "src/gah/run_contracts.py", "src/gah/resources.py", "src/gah/resource_authority.py", "src/gah/ledger.py", "src/gah/evaluation_authority.py",
+           "src/gah/run_contracts.py", "src/gah/resources.py", "src/gah/resource_authority.py", "src/gah/ledger.py", "src/gah/termination.py", "src/gah/mutation_reviews.py", "src/gah/evaluation_authority.py",
            "src/gah/adoption_migrations.py", "src/gah/run_evidence.py", "src/gah/aggregation.py", "src/gah/decision.py",
            "src/gah/normalized.py", "src/gah/docker_runner.py", "src/gah/execution_journal.py",
            "src/gah/assurance_authority.py", "src/gah/baselines.py", "src/gah/contract_updates.py",
@@ -20,7 +20,11 @@ SOURCES = ["src/gah/__init__.py", "src/gah/contracts.py", "src/gah/wire.py", "sr
            "src/gah/following_contracts.py", "src/gah/semantic_conditions.py", "src/gah/contract_revision_rules.py", "src/gah/read_checks.py", "src/gah/fixture_admission.py", "src/gah/fixture_calibration.py",
            "src/gah/fixture_materialization.py", "src/gah/transition_materialization.py",
            "src/gah/transition_authority.py", "src/gah/transition_migrations.py", "src/gah/transition_acceptance.py",
-           "src/gah/regression_runs.py", "src/gah/run_outputs.py", "src/gah/run_cancellation.py", "src/gah/remediation.py", "fixtures/runtime/fixture_worker.py",
+           "src/gah/regression_runs.py", "src/gah/run_scope.py", "src/gah/finding_lifecycle.py", "src/gah/execution_profiles.py", "src/gah/run_outputs.py", "src/gah/run_cancellation.py", "src/gah/remediation.py", "fixtures/runtime/fixture_worker.py",
+           "src/gah/guardrail_runtime.py", "src/gah/llm_materialization.py", "src/gah/llm_admission.py",
+           "src/gah/evaluation_data.py", "src/gah/llm_evaluator.py", "src/gah/measurement_calibration.py",
+           "src/gah/guardrail_results.py", "src/gah/guardrail_runner.py", "src/gah/candidate_sections.py", "src/gah/llm_transitions.py", "src/gah/evidence_retention.py", "src/gah/candidate_outputs.py", "src/gah/combined_runs.py", "src/gah/cache_inputs.py", "src/gah/evidence_snapshot_cache.py", "src/gah/immutable_cache.py", "src/gah/target_retirement.py", "src/gah/finding_dispositions.py", "src/gah/llm_migration.py",
+           "fixtures/llm/guardrail_target.py", "fixtures/llm/guardrail_worker.py", "config/guardrail-runtime.lock.json",
            "config/bootstrap-policy.v1.json", "config/fixture-runtime.lock.json", "tools/authority_entry.py"]
 ENTRYPOINT = ["/usr/local/bin/python", "-I", "-B", "/opt/gah/tools/authority_entry.py"]
 

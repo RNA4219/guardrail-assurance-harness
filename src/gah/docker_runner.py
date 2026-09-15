@@ -287,6 +287,9 @@ class DockerRunner:
             raise RunnerError("CONFIG_MISMATCH") from None
 
     def _verify_config(self, container: dict, scenario: str) -> None:
+        self._verify_container_config(container, ENTRYPOINT, ["--scenario", scenario])
+
+    def _verify_container_config(self, container: dict, entrypoint: list, command: list) -> None:
         try:
             host, config = container["HostConfig"], container["Config"]
             valid = (host["NetworkMode"] == "none" and host["ReadonlyRootfs"] is True and host["Privileged"] is False
@@ -296,8 +299,8 @@ class DockerRunner:
                 and not host["PidMode"] and not host.get("Binds") and not host.get("Devices") and not host.get("DeviceRequests")
                 and not host.get("VolumesFrom") and not host.get("PortBindings") and not host.get("ExtraHosts")
                 and host["Tmpfs"] == TMPFS and host["LogConfig"]["Type"] == "none" and host["RestartPolicy"]["Name"] == "no"
-                and config["User"] == "65532:65532" and config["WorkingDir"] == "/work" and config["Entrypoint"] == ENTRYPOINT
-                and config["Cmd"] == ["--scenario", scenario] and config["Env"] == self.lock["environment"]
+                and config["User"] == "65532:65532" and config["WorkingDir"] == "/work" and config["Entrypoint"] == entrypoint
+                and (config.get("Cmd") or []) == command and config["Env"] == self.lock["environment"]
                 and not config.get("Volumes") and not config.get("ExposedPorts") and config["OpenStdin"] is True
                 and config["Tty"] is False and all(mount["Type"] == "tmpfs" and mount["Destination"] in TMPFS for mount in container["Mounts"]))
         except (KeyError, TypeError):
@@ -353,6 +356,10 @@ class DockerRunner:
                 or binding["adapter_digest"] != self.adapter_digest or binding["isolation_digest"] != self.isolation_digest
                 or binding["target_digest"] != self.target_digest(scenario)):
             raise RunnerError("IMAGE_MISMATCH")
+        return self._run_fixed(scenario, binding, canonical_bytes(binding), None, run_deadline=run_deadline,
+            timeout_seconds=timeout_seconds, cancel_event=cancel_event)
+
+    def _run_fixed(self, scenario, binding, input_bytes, normalize_output, *, run_deadline, timeout_seconds=120, cancel_event=None):
         with operation_lock(self.journal_path, binding["run_id"], binding["operation_id"]), ExecutionJournal(self.journal_path) as journal:
             record = journal.begin(binding, scenario, self.lock["image_id"], run_deadline=run_deadline, timeout_seconds=timeout_seconds)
             if not record["new"]:
@@ -397,7 +404,7 @@ class DockerRunner:
                 verified = True
                 record = journal.advance(binding["run_id"], binding["operation_id"], record["owner_token"], "STARTING", container_id=container_id)
                 captured = self._capture(["container", "start", "--attach", "--interactive", record["container_name"]],
-                    timeout=remaining(), input_bytes=canonical_bytes(binding), cancel_event=cancel_event, limit=STREAM_LIMIT)
+                    timeout=remaining(), input_bytes=input_bytes, cancel_event=cancel_event, limit=STREAM_LIMIT)
                 container = self._inspect(record)
                 if container is not None and container["State"].get("StartedAt", "0001").startswith("0001") is False:
                     record = journal.advance(binding["run_id"], binding["operation_id"], record["owner_token"], "RUNNING", container_id=container_id)
@@ -410,7 +417,9 @@ class DockerRunner:
                 if captured.stderr:
                     raise RunnerError("OUTPUT_REJECTED")
                 try:
-                    if scenario == "probe:isolation":
+                    if normalize_output is not None:
+                        normalized = normalize_output(captured.stdout)
+                    elif scenario == "probe:isolation":
                         probe = validate_probe(captured.stdout, binding)
                         if not all(probe["checks"].values()):
                             raise RunnerError("CONFIG_MISMATCH")

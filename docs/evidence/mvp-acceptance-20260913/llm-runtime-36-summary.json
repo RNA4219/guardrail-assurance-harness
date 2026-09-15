@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "llm_runtime_acceptance_stage",
+  "status": "passed",
+  "full_mvp_accepted": false,
+  "scope": "固定合成guardrailの400ケース実行・初回baseline採択・再起動・回収",
+  "executed_cases": 400,
+  "executed_stages": 600,
+  "trained_model": false,
+  "calibration_vectors": 165,
+  "counts": {
+    "FN": 4,
+    "FP": 4,
+    "TN": 196,
+    "TP": 196
+  },
+  "checks": {
+    "baseline_adopted": true,
+    "candidate_cannot_prepare": true,
+    "finite_baseline_counts": true,
+    "fresh_baseline_use": true,
+    "full_400_inputs_600_stages": true,
+    "independent_165_calibration": true,
+    "initial_limited_healthy": true,
+    "owned_containers_removed": true,
+    "peer_identity_12001": true,
+    "peer_identity_12002": true,
+    "peer_identity_12003": true,
+    "peer_identity_12004": true,
+    "resource_closed": true,
+    "restart_fresh_use": true,
+    "restart_keeps_adoption": true,
+    "source_unchanged": true
+  },
+  "check_count": 16,
+  "assurance": "HEALTHY",
+  "purpose": "baseline_candidate",
+  "ci_eligible": false,
+  "resource_closure": {
+    "slots": 0,
+    "unsettled": 0,
+    "budget_closure": true
+  },
+  "authority_calls": 2219,
+  "authority_image_id": "sha256:501b87953606d059703d475dfa6c2bb7f1462169ec71dffad1c36b82bb9f5ea0",
+  "guardrail_image_id": "sha256:d9d59ba9ef2ffe7ff3dd1f06cdd26cabe293b26cb20fc253dc7e4cd00d454486",
+  "evidence_sha256": {
+    "check": "d4e38cca6b00d7b0fb374dac12e062d82edc090ed52add6d053afe41b9679ffd",
+    "source_manifest": "e5724e38119743c00584279dfbe81b647af0f142fe868f6a7824924777861df5",
+    "log": "ed74ba1b3900c1500420e5599cfa72d544e476fb77b8e26f9a926b521cdc7a1f",
+    "retained_authority_state": "6504bbddaddcad14c529ee64db8989f6835d81d0d02af8f07769fb52ffece3e9"
+  },
+  "previous_failed_stage": "llm-runtime-30-summary.json",
+  "previous_failure_preserved": true,
+  "limitations": [
+    "固定合成対象であり学習済みLLMの性能証明ではない",
+    "初回採択目的の成功を通常CIへ流用しない",
+    "後続の通常監督・対象版差・複合runの変更はこの固定版に含まない"
+  ]
+}

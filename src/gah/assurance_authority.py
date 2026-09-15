@@ -25,12 +25,13 @@ _BASE = {"schema_version", "action", "request_id", "run_id"}
 FIELDS = {
     "evidence_open": _BASE,
     "evidence_record": _BASE | {"attempt"},
+    "evidence_complete": _BASE | {"operation_id", "event_id", "usage", "attempts"},
     "evidence_finalize": _BASE,
     "evidence_current": _BASE | {"expected_bundle_digest"},
     "evidence_revoke": _BASE,
 }
 ACTIONS = {
-    "evidence_open": {"operator"}, "evidence_record": {"validator"},
+    "evidence_open": {"operator"}, "evidence_record": {"validator"}, "evidence_complete": {"validator"},
     "evidence_finalize": {"operator"}, "evidence_current": {"manager", "validator", "operator"},
     "evidence_revoke": {"operator"},
 }
@@ -55,13 +56,66 @@ def validate_request(request):
             run_evidence._attempt(request["attempt"])
             if request["attempt"]["expected_binding"]["run_id"] != request["run_id"]:
                 raise _error("BINDING_MISMATCH")
+        if action == "evidence_complete":
+            _case_observation(request)
         if action == "evidence_current":
             run_evidence._digest(request["expected_bundle_digest"])
-    except (ContractError, run_evidence.EvidenceError, KeyError, TypeError, ValueError) as error:
+    except (ContractError, run_evidence.EvidenceError, resources.ResourceError, KeyError, TypeError, ValueError) as error:
         if isinstance(error, AdoptionError):
             raise
         raise _error("INVALID_REQUEST") from None
     return deepcopy(request)
+
+
+def _case_observation(request):
+    """固定LLMの完了caseだけをまとめる。欠けた段階や不明usageは補完しない。"""
+    observation = {"schema_version":1, "action":"resource_observe", "request_id":request["request_id"],
+        "run_id":request["run_id"], "operation_id":request["operation_id"], "event_id":request["event_id"],
+        "stopped":True, "usage":request["usage"]}
+    resource_authority.validate_request(observation)
+    if request["usage"] is None:
+        raise _error("USAGE_REQUIRED")
+    attempts = request["attempts"]
+    if type(attempts) is not list or not 1 <= len(attempts) <= 2:
+        raise _error("CASE_STAGES_MISMATCH")
+    common = None
+    identifiers = set()
+    previous_finish = None
+    for attempt in attempts:
+        run_evidence._attempt(attempt)
+        binding = attempt["expected_binding"]
+        actual = {k:v for k,v in binding.items() if k != "stage_id"}
+        actual["variant"] = attempt["variant"]
+        if (binding["run_id"] != request["run_id"] or binding["operation_id"] != request["operation_id"]
+                or common is not None and actual != common or attempt["attempt_id"] in identifiers
+                or attempt["stop_confirmed"] is not True or attempt["state_restored"] is not True
+                or attempt["execution_status"] != "COMPLETED" or attempt["retry_of"] is not None
+                or type(attempt["result"]) is not dict or attempt["result"].get("mode") != "llm"
+                or attempt["finished_at"] is None
+                or previous_finish is not None and attempt["started_at"] < previous_finish):
+            raise _error("CASE_BINDING_MISMATCH")
+        identifiers.add(attempt["attempt_id"])
+        common = actual
+        previous_finish = attempt["finished_at"]
+    return observation
+
+
+def _record_attempt(db, book, bound, attempt, actor_id, context, permission_generation, now):
+    joined = _operation(db, attempt, now)
+    binding = attempt["expected_binding"]
+    entries = [entry for entry in bound["plan"]["entries"] if all(entry[k] == binding[k]
+        for k in ("obligation_id", "case_id", "trial_id")) and entry["variant"] == attempt["variant"]]
+    if (len(entries) != 1 or content_ref("trial_entry", "entry", entries[0])["digest"] != joined["entry_digest"]):
+        raise _error("ENTRY_NOT_PLANNED")
+    receipt = book.record_attempt(attempt)
+    if receipt["accepted"]:
+        attempt_digest = run_evidence._attempt(attempt)[1]
+        previous = db.execute("SELECT * FROM authority_attempt_origins WHERE attempt_id=?", (attempt["attempt_id"],)).fetchone()
+        if previous is not None and previous["attempt_digest"] != attempt_digest:
+            raise _error("STORAGE_CORRUPT")
+        db.execute("INSERT OR IGNORE INTO authority_attempt_origins VALUES(?,?,?,?,?,?)",
+            (attempt["attempt_id"], attempt_digest, actor_id, context, permission_generation, now))
+    return {**receipt, "authority_connected": True, "ci_eligible": False}
 
 
 def create_schema(db):
@@ -97,6 +151,8 @@ def _save(db, run_id, kind, identifier, payload):
 
 
 def _artifact(db, ref, run_id):
+    from .evidence_retention import assert_available
+    assert_available(db, run_id, ref)
     row = db.execute("SELECT * FROM authority_artifacts WHERE kind=? AND id=? AND digest=?",
         (ref["kind"], ref["id"], ref["digest"])).fetchone()
     if row is None or row["run_id"] != run_id:
@@ -227,6 +283,10 @@ def _receipt(db, run_id, bound, book):
                     or event != {"kind": "evidence_revocation", "run_id": run_id,
                         "receipt_digest": row["digest"], "revoked_at": row["revoked_at"]}):
                 raise _error("STORAGE_CORRUPT")
+    except AdoptionError as error:
+        if error.code in {"EVIDENCE_DELETED", "EVIDENCE_RESTORED_AFTER_DELETION"}:
+            raise
+        raise _error("STORAGE_CORRUPT") from None
     except (ContractError, run_evidence.EvidenceError, resources.ResourceError, KeyError, TypeError, ValueError):
         raise _error("STORAGE_CORRUPT") from None
     return row, value
@@ -249,9 +309,13 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
     """固定extensionから呼ぶ。resolve_boundは同DBの保存実体だけを読む。"""
     action, run_id = request["action"], request["run_id"]
     bound, baseline = resolve_bound(run_id)
-    digest = run_evidence.bound_bundle_digest(bound)
+    digest = run_evidence.bound_bundle_digest(bound, baseline)
     book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
-    profile = fixed_profile()
+    if bound["manifest"]["use_cases"] == ["UC-LLM"]:
+        from .llm_admission import execution_profile
+        profile = execution_profile(db, bound, now)
+    else:
+        profile = fixed_profile()
     if bound["manifest"]["environment_ref"]["digest"] != profile["isolation_digest"]:
         raise _error("EXECUTION_PROFILE_MISMATCH")
     _resource_binding(db, bound)
@@ -262,22 +326,26 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
     if view["bundle_digest"] != digest or view["execution_profile"] != profile:
         raise _error("BINDING_MISMATCH")
     if action == "evidence_record":
-        attempt = request["attempt"]
-        joined = _operation(db, attempt, now)
-        binding = attempt["expected_binding"]
-        entries = [entry for entry in bound["plan"]["entries"] if all(entry[k] == binding[k]
-            for k in ("obligation_id", "case_id", "trial_id")) and entry["variant"] == attempt["variant"]]
-        if (len(entries) != 1 or content_ref("trial_entry", "entry", entries[0])["digest"] != joined["entry_digest"]):
-            raise _error("ENTRY_NOT_PLANNED")
-        receipt = book.record_attempt(attempt)
-        if receipt["accepted"]:
-            attempt_digest = run_evidence._attempt(attempt)[1]
-            previous = db.execute("SELECT * FROM authority_attempt_origins WHERE attempt_id=?", (attempt["attempt_id"],)).fetchone()
-            if previous is not None and previous["attempt_digest"] != attempt_digest:
-                raise _error("STORAGE_CORRUPT")
-            db.execute("INSERT OR IGNORE INTO authority_attempt_origins VALUES(?,?,?,?,?,?)",
-                (attempt["attempt_id"], attempt_digest, actor_id, context, permission_generation, now))
-        return {**receipt, "authority_connected": True, "ci_eligible": False}
+        return _record_attempt(db, book, bound, request["attempt"], actor_id, context, permission_generation, now)
+    if action == "evidence_complete":
+        observation = _case_observation(request)
+        attempts = request["attempts"]
+        first = attempts[0]
+        binding = first["expected_binding"]
+        entries = [entry for entry in bound["plan"]["entries"]
+            if entry["variant"] == first["variant"] and all(entry[k] == binding[k]
+                for k in ("obligation_id", "case_id", "trial_id"))]
+        if (bound["manifest"]["use_cases"] != ["UC-LLM"] or len(entries) != 1
+                or [attempt["expected_binding"]["stage_id"] for attempt in attempts] != entries[0]["stage_ids"]):
+            raise _error("CASE_STAGES_MISMATCH")
+        observed = resource_authority.execute(db, observation, now, None)
+        if observed.get("accepted") is not True or observed.get("conflict") is not False:
+            return {"accepted":False, "observation":observed, "records":[], "authority_connected":True, "ci_eligible":False}
+        receipts = [_record_attempt(db, book, bound, attempt, actor_id, context, permission_generation, now)
+            for attempt in attempts]
+        # 矛盾が保存されHOLDとなった結果は、その記録を保持して失敗を返す。
+        return {"accepted":all(receipt.get("accepted") is True for receipt in receipts),
+            "observation":observed, "records":receipts, "authority_connected":True, "ci_eligible":False}
     if action == "evidence_finalize":
         previous = db.execute("SELECT 1 FROM authority_run_receipts WHERE run_id=?", (run_id,)).fetchone()
         if previous is not None:
@@ -354,9 +422,9 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
 
 def baseline_source(store, db, run_id, now, resolve_bound):
     """採択serviceへ、同transactionで再検査した保存実体だけを渡す。"""
-    bound, _ = resolve_bound(run_id)
+    bound, baseline = resolve_bound(run_id)
     current = execute(store, db, {"action": "evidence_current", "run_id": run_id,
-        "expected_bundle_digest": run_evidence.bound_bundle_digest(bound)},
+        "expected_bundle_digest": run_evidence.bound_bundle_digest(bound, baseline)},
         "manager", "manager-context", now, resolve_bound)
     receipt = current["receipt"]
     evidence = _artifact(db, receipt["evidence_ref"], run_id)

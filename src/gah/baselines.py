@@ -22,6 +22,8 @@ from .contracts import (
 from .run_contracts import bind_run_manifest, content_ref
 
 
+
+from .cache_inputs import bind_run_manifest
 _RECORD_FIELDS = {
     "schema_version", "kind", "baseline_id", "baseline_series_id", "generation",
     "contract_ref", "policy_ref", "registry_ref", "case_set_ref",
@@ -86,12 +88,19 @@ def _ref(value: Any, kind: str) -> None:
         raise _bad("REFERENCE_KIND")
 
 
+def oracle_ref(value: Any) -> None:
+    """既存oracleと固定合成policy oracleを、元のkindを保って検査する。"""
+    require_ref(value)
+    if value["kind"] not in {"oracle", "synthetic_policy_oracle"}:
+        raise _bad("REFERENCE_KIND")
+
+
 def _refs(value: Any, kind: str, *, minimum: int = 1) -> list[dict[str, str]]:
     if type(value) is not list or not minimum <= len(value) <= _MAX_REFS:
         raise _bad("INVALID_REFERENCE_LIST")
     seen: set[str] = set()
     for item in value:
-        _ref(item, kind)
+        oracle_ref(item) if kind == "oracle" else _ref(item, kind)
         if item["id"] in seen:
             raise _bad("DUPLICATE_REFERENCE")
         seen.add(item["id"])
@@ -276,7 +285,7 @@ def _unique_refs_in_cases(case_set: dict[str, Any]) -> list[dict[str, str]]:
     for case in cases:
         if type(case) is not dict or "oracle_ref" not in case:
             raise _bad("BINDING_INPUT_INVALID")
-        _ref(case["oracle_ref"], "oracle")
+        oracle_ref(case["oracle_ref"])
         key = tuple(case["oracle_ref"][item] for item in ("kind", "id", "digest"))
         if key not in seen:
             seen.add(key)
@@ -321,7 +330,8 @@ def bind_baseline_record(record: Any, *, bound_run: Any, decision: Any,
                        "case_set", "selected_controls", "ci_eligible")
         if any(bound_run.get(field) != rebound[field] for field in core_fields):
             raise _bad("BINDING_MISMATCH")
-        core_bound = {field: deepcopy(rebound[field]) for field in core_fields}
+        # reboundはこの呼出しで生成した独立値。hash計算は本文を変更しない。
+        core_bound = {field: rebound[field] for field in core_fields}
         bound_bundle_ref = _canonical_ref("bound_bundle", manifest["run_id"], core_bound)
         _check_ref_content(bound_record["contract_ref"], "evaluation_contract", contract["contract_id"], contract)
         _check_ref_content(bound_record["policy_ref"], "policy_profile", policy["policy_id"], policy)

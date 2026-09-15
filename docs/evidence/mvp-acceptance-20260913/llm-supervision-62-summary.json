@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "llm_supervision_integration",
+  "source_snapshot": 62,
+  "result": "passed",
+  "tests_run": 1,
+  "seconds": 8807.747,
+  "scope": [
+    "初回400と旧400・新800の独立採択。",
+    "製品監督の通常800件、CI判定、保存報告、再開・状態照会・取消しで保存結果を保持。",
+    "中断境界からの回収。"
+  ],
+  "limits": "実SQLiteと自作合成runnerの統合。OS認証・Docker予算内完走と、後続の製品コード変更の受入は別途検証。",
+  "private_evidence_sha256": {
+    "llm-supervision-integration-62.log": "b2366fcfcad2dc6f862fec2d3d8251dffab8c77372948c79a709e308ec147427",
+    "acceptance-source-62.json": "aaa041396efc9563155e0a7b549112c1ee70c3f131ea6ceca3152fbcba30b080"
+  },
+  "full_mvp_accepted": false
+}

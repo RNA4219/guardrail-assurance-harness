@@ -6,6 +6,7 @@
   "public_api": [],
   "deps_out": [
     "docs/evidence/mvp-report-20260912/README.md",
+    "docs/mutation-review-detail-spec.md",
     "docs/regression-ci-detail-spec.md",
     "docs/reviews/mvp-report-20260912.md",
     "docs/run-cancellation-detail-spec.md"
@@ -26,6 +27,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
-  "source_sha256": "c5c9bfb459295c9b6fc84d4a000d1e87b617cd96eb296153a7bdefcec3c4a956"
+  "generated_at": "00111",
+  "source_sha256": "c972f7b59d8b845c289bb61a9ebdc875a2fbb91ccdabef0210da1ca574b81a18"
 }

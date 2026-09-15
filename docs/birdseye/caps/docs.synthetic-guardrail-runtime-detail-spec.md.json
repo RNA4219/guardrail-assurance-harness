@@ -1,0 +1,22 @@
+{
+  "id": "docs/synthetic-guardrail-runtime-detail-spec.md",
+  "role": "synthetic-guardrail-runtime-detail-spec",
+  "title": "固定合成ガードレールの認証付き実行",
+  "summary": "[LLM接続仕様](llm-authority-detail-spec.md)のうち、自作の有限ガードレールによる実入力・正規化・資源・保存の接続を定める。対象は学習済みLLMではない。今回のMVP受入には固定合成400ケースと対象2版を用いる。学習済みモデル一般の性能保証や任意providerの自動起動を追加の必須条件にしない。generic command/Promptfooの取込み・正規化・raw追跡はGAH-AC08で扱い、[受入範囲](mvp-completion-audit.md)と区別する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/llm-authority-detail-spec.md",
+    "docs/mvp-completion-audit.md"
+  ],
+  "deps_in": [
+    "docs/reviews/mvp-acceptance-20260913.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "64c03f18a99d43dcc01d8cf98a416a9dd0ff4483406ed11906486db8d05aa41d"
+}

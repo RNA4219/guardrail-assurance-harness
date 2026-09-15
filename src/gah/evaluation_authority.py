@@ -16,6 +16,7 @@ from pathlib import Path
 import sqlite3
 from typing import Any
 
+from . import finding_lifecycle, llm_admission, llm_materialization, evidence_retention, candidate_outputs
 from . import corpus, registry, resources, resource_authority, run_evidence, assurance_authority, baseline_authority, fixture_admission, contract_updates, transition_authority, transition_acceptance, regression_runs, run_outputs, run_cancellation
 from .adoption import AdoptionError
 from .contracts import ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER, require_id, require_ref, require_uint
@@ -30,8 +31,11 @@ from .run_contracts import (
     validate_trial_plan,
 )
 from .wire import canonical_bytes
+from . import combined_runs, target_retirement, mutation_reviews
 
 
+
+from .cache_inputs import bind_run_manifest
 VALIDATION_TTL = 86400
 _SCHEMA_VERSION = 1
 _KIND = "evaluation_authority_result"
@@ -39,7 +43,7 @@ _ROLES = {"manager", "validator", "operator"}
 _ACTIONS = {
     "object_register", "calibration_record", "contract_propose",
     "contract_validate", "contract_adopt", "contract_current",
-    "run_begin", "run_status", "fixture_prepare", "contract_preflight",
+    "run_begin", "run_status", "fixture_prepare", "guardrail_prepare", "contract_preflight",
 }
 _ACTION_ROLES = {
     "object_register": {"manager"},
@@ -51,6 +55,7 @@ _ACTION_ROLES = {
     "run_begin": {"operator"},
     "run_status": _ROLES,
     "fixture_prepare": {"manager"},
+    "guardrail_prepare": {"manager"},
     "contract_preflight": {"validator"},
 }
 _FRESH_ACTIONS = {"contract_current", "run_status", "contract_preflight"}
@@ -64,6 +69,7 @@ _ACTION_FIELDS = {
     "run_begin": {"schema_version", "action", "request_id", "manifest", "plan", "contract_series_id"},
     "run_status": {"schema_version", "action", "request_id", "run_id"},
     "fixture_prepare": {"schema_version", "action", "request_id", "run_id", "policy_series_id"},
+    "guardrail_prepare": {"schema_version", "action", "request_id", "run_id", "policy_series_id", "target_version"},
     "contract_preflight": {"schema_version", "action", "request_id", "proposal_id", "baseline_series_id", "expected_contract_ref", "expected_baseline_ref"},
 }
 
@@ -121,8 +127,20 @@ def _validate_request(request: Any) -> dict[str, Any]:
     if type(request) is not dict:
         raise _invalid()
     action = request.get("action")
-    if type(action) is not str or action not in (set(_ACTION_FIELDS) | set(resource_authority.FIELDS) | set(assurance_authority.FIELDS) | set(baseline_authority.FIELDS) | set(transition_authority.FIELDS) | set(transition_acceptance.FIELDS) | set(regression_runs.FIELDS)):
+    if type(action) is not str or action not in (set(_ACTION_FIELDS) | set(resource_authority.FIELDS) | set(assurance_authority.FIELDS) | set(baseline_authority.FIELDS) | set(transition_authority.FIELDS) | set(transition_acceptance.FIELDS) | set(regression_runs.FIELDS) | set(finding_lifecycle.FIELDS) | set(evidence_retention.FIELDS) | set(candidate_outputs.FIELDS) | set(combined_runs.FIELDS) | set(target_retirement.FIELDS) | set(mutation_reviews.FIELDS)):
         raise _error("INVALID_ACTION")
+    if action in mutation_reviews.FIELDS:
+        return mutation_reviews.validate_request(request)
+    if action in combined_runs.FIELDS:
+        return combined_runs.validate_request(request)
+    if action in candidate_outputs.FIELDS:
+        return candidate_outputs.validate_request(request)
+    if action in evidence_retention.FIELDS:
+        return evidence_retention.validate_request(request)
+    if action in target_retirement.FIELDS:
+        return target_retirement.validate_request(request)
+    if action in finding_lifecycle.FIELDS:
+        return finding_lifecycle.validate_request(request)
     if action in regression_runs.FIELDS:
         return regression_runs.validate_request(request)
     if action in transition_acceptance.FIELDS:
@@ -186,7 +204,9 @@ def _validate_request(request: Any) -> dict[str, Any]:
             require_id(normalized["contract_series_id"])
         elif action == "run_status":
             require_id(normalized["run_id"])
-        elif action == "fixture_prepare":
+        elif action in {"fixture_prepare", "guardrail_prepare"}:
+            if action == "guardrail_prepare" and (type(normalized["target_version"]) is not str or normalized["target_version"] not in llm_materialization.VERSIONS):
+                raise _invalid()
             require_id(normalized["run_id"])
             require_id(normalized["policy_series_id"])
     except (ContractError, TypeError, ValueError, KeyError, RecursionError):
@@ -195,6 +215,12 @@ def _validate_request(request: Any) -> dict[str, Any]:
 
 
 def _source_digest() -> str:
+    from .read_checks import source_digest_in_scope
+    cached = source_digest_in_scope()
+    return _compute_source_digest() if cached is None else cached
+
+
+def _compute_source_digest() -> str:
     """拡張の動作を決めるソース群から固定digestを作る。"""
     digest = hashlib.sha256()
     paths = (
@@ -206,14 +232,18 @@ def _source_digest() -> str:
         Path(__file__).with_name("registry.py"),
         Path(__file__).with_name("corpus.py"),
         *(Path(__file__).with_name(name + ".py") for name in (
-            "adoption", "wire", "contracts", "policy", "run_evidence", "aggregation",
+            "adoption", "wire", "contracts", "policy", "run_evidence", "aggregation", "mutation_reviews", "termination",
             "decision", "normalized", "docker_runner", "execution_journal", "assurance_authority",
             "adoption_migrations", "baselines", "baseline_authority", "fixture_admission",
             "fixture_materialization", "fixture_calibration", "contract_updates",
             "transition_authority", "transition_materialization", "transition_migrations", "transition_acceptance",
             "regression_runs", "run_outputs", "remediation", "run_cancellation", "baseline_generations",
             "resource_operation", "baseline_refresh_migration", "following_contracts",
-            "semantic_conditions", "contract_revision_rules", "read_checks")),
+            "semantic_conditions", "contract_revision_rules", "read_checks", "run_scope", "finding_lifecycle", "execution_profiles", "guardrail_runtime", "llm_materialization", "llm_admission",
+            "evaluation_data", "llm_evaluator", "measurement_calibration", "guardrail_results", "guardrail_runner", "candidate_sections", "llm_transitions", "evidence_retention", "candidate_outputs", "combined_runs", "cache_inputs", "target_retirement", "finding_dispositions", "llm_migration", "evidence_snapshot_cache", "immutable_cache")),
+        Path(__file__).resolve().parents[2] / "fixtures/llm/guardrail_target.py",
+        Path(__file__).resolve().parents[2] / "fixtures/llm/guardrail_worker.py",
+        Path(__file__).resolve().parents[2] / "config/guardrail-runtime.lock.json",
         Path(__file__).resolve().parents[2] / "fixtures" / "runtime" / "fixture_worker.py",
         Path(__file__).resolve().parents[2] / "config" / "fixture-runtime.lock.json",
     )
@@ -382,10 +412,11 @@ def _validate_state(store: Any, db: sqlite3.Connection, contract: dict[str, Any]
     acceptance = _object(db, contract["case_set_ref"])
     calibration = _object(db, contract["calibration_case_set_ref"])
     try:
-        bound = bind_evaluation_contract(contract, policy, registry_value, acceptance, calibration)
         other_rows = db.execute("SELECT * FROM eval_objects WHERE kind='case_set' AND id<>? ORDER BY id", (acceptance["case_set_id"],)).fetchall()
         other_sets = tuple(_load_json(row, "payload_json", "digest") for row in other_rows)
-        report = corpus.corpus_report(acceptance, other_sets=other_sets)
+        from .cache_inputs import evaluation_inputs
+        checked = evaluation_inputs(contract, policy, registry_value, acceptance, calibration, other_sets)
+        report = checked["corpus_report"]
     except (ContractError, AdoptionError, TypeError, ValueError, KeyError, RecursionError):
         raise _error("CONTRACT_INVALID") from None
     requirements = report.get("structural_requirements", {})
@@ -396,13 +427,13 @@ def _validate_state(store: Any, db: sqlite3.Connection, contract: dict[str, Any]
         raise _error("ACCEPTANCE_PREREQUISITE_UNAVAILABLE")
     calibration_status: list[dict[str, Any]] = []
     for evaluator_ref in contract["evaluator_refs"]:
-        passed = (admission["calibration"]["passed"] if fixed_ci else
+        passed = (admission["calibration"]["passed"] if admission is not None else
             _calibration_rows(db, contract["calibration_case_set_ref"], evaluator_ref, now, permission_generation))
         calibration_status.append({"evaluator_ref": copy.deepcopy(evaluator_ref), "passed": passed})
         if not passed:
             raise _error("CALIBRATION_UNAVAILABLE")
     payload = {
-        "contract": copy.deepcopy(bound["contract"]),
+        "contract": checked["contract"],
         "policy_ref": policy_ref,
         "registry_ref": copy.deepcopy(contract["registry_ref"]),
         "case_set_ref": copy.deepcopy(contract["case_set_ref"]),
@@ -525,7 +556,8 @@ def _validate_transition_state(store, db, contract, now, *, policy_state=None):
     record = baseline["baseline"]
     transition = contract_updates.bind_contract_transition(previous, contract,
         baseline_record=record, baseline_source_bound=sources[record["source_run_ref"]["id"]]["bound"],
-        source_baseline_context=_transition_source_context(db, previous, record, now))
+        source_baseline_context=_transition_source_context(db, previous, record, now),
+        following_registry=_object(db,contract["registry_ref"]) if previous["use_cases"]==["UC-LLM"] and previous["registry_ref"]!=contract["registry_ref"] else None)
     if transition != candidate["runs"]["transition"]:
         raise _error("CANDIDATE_INVALID")
     transition_acceptance.validate_live_proof(store, db, payload, now,
@@ -546,8 +578,8 @@ class EvaluationExtension:
 
     tables = TABLES
     schema_version = 4
-    actions = {**_ACTION_ROLES, **resource_authority.ACTIONS, **assurance_authority.ACTIONS, **baseline_authority.ACTIONS, **transition_authority.ACTIONS, **transition_acceptance.ACTIONS, **regression_runs.ACTIONS}
-    fresh_actions = _FRESH_ACTIONS | resource_authority.FRESH_ACTIONS | assurance_authority.FRESH_ACTIONS | baseline_authority.FRESH_ACTIONS | regression_runs.FRESH_ACTIONS
+    actions = {**_ACTION_ROLES, **resource_authority.ACTIONS, **assurance_authority.ACTIONS, **baseline_authority.ACTIONS, **transition_authority.ACTIONS, **transition_acceptance.ACTIONS, **regression_runs.ACTIONS, **finding_lifecycle.ACTIONS, **evidence_retention.ACTIONS, **candidate_outputs.ACTIONS, **combined_runs.ACTIONS, **target_retirement.ACTIONS, **mutation_reviews.ACTIONS}
+    fresh_actions = {"contract_candidate_read"} | _FRESH_ACTIONS | resource_authority.FRESH_ACTIONS | assurance_authority.FRESH_ACTIONS | baseline_authority.FRESH_ACTIONS | regression_runs.FRESH_ACTIONS | finding_lifecycle.FRESH_ACTIONS | evidence_retention.FRESH_ACTIONS | candidate_outputs.FRESH_ACTIONS | combined_runs.FRESH_ACTIONS | mutation_reviews.FRESH_ACTIONS
     digest = _source_digest()
 
     def create_schema(self, db: sqlite3.Connection) -> None:
@@ -576,6 +608,7 @@ class EvaluationExtension:
         if row is None:
             raise _error("RUN_MISSING")
         manifest = _load_json(row, "manifest_json", "manifest_digest")
+        target_retirement.check_targets(db, manifest["target_refs"], now)
         plan = _load_json(row, "plan_json", "plan_digest")
         if (manifest["purpose"] in transition_authority.PURPOSES
                 or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (run_id,)).fetchone()):
@@ -642,11 +675,11 @@ class EvaluationExtension:
             _object(db, contract["registry_ref"]), _object(db, contract["case_set_ref"]))
         return bound, None
 
-    def _baseline_source(self, store, db, run_id, now):
+    def _baseline_source(self, store, db, run_id, now, *, actor_id=None, context=None):
         source = assurance_authority.baseline_source(store, db, run_id, now,
             lambda identifier: self._bound_evidence_run(store, db, identifier, now))
         try:
-            self._check_start(store, db, run_id, now)
+            self._check_start(store, db, run_id, now, actor_id=actor_id, context=context)
         except (AdoptionError, ContractError):
             source["reasons"].append("ADOPTED_CONDITIONS_UNAVAILABLE")
         return source
@@ -680,7 +713,7 @@ class EvaluationExtension:
         resolved_sources = {}
 
         def resolve_source(run_id):
-            source = self._baseline_source(store, db, run_id, now)
+            source = self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context)
             resolved_sources[run_id] = source
             return source
 
@@ -699,18 +732,49 @@ class EvaluationExtension:
             source = resolved_sources[baseline["source_run_ref"]["id"]]
             transition = contract_updates.bind_contract_transition(previous, next_contract,
                 baseline_record=baseline, baseline_source_bound=source["bound"],
-                source_baseline_context=_transition_source_context(db, previous, baseline, now))
+                source_baseline_context=_transition_source_context(db, previous, baseline, now),
+                following_registry=_object(db,next_contract["registry_ref"]) if previous["use_cases"]==["UC-LLM"] and previous["registry_ref"]!=next_contract["registry_ref"] else None)
         except (ContractError, run_evidence.EvidenceError, resources.ResourceError) as error:
             raise _error(error.code) from None
         return _result(action, request_id, proposal_id=proposal["id"], proposal_digest=proposal["digest"],
             preflight_ready=True, candidate_run_required=True, adoption_verified=False,
             checked_at=now, permission_generation=store._permission_generation(db), transition=transition)
 
-    @checked_action
     def execute(self, store: Any, db: sqlite3.Connection, request: dict[str, Any], actor_id: str, context: str, now: int) -> dict[str, Any]:
+        # 認証後の同一transactionで時計を先に照合する。Evidenceの観測時刻や期限は更新しない。
+        # 読取照合の途中の時計書込みで、同じrequest内の再検査まで無効化しない。
+        try:
+            resources.ResourceBook(db)._touch(now)
+            run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={})._now(db)
+        except (resources.ResourceError, run_evidence.EvidenceError) as error:
+            raise _error(error.code) from None
+        return self._execute(store, db, request, actor_id, context, now)
+
+    @checked_action
+    def _execute(self, store: Any, db: sqlite3.Connection, request: dict[str, Any], actor_id: str, context: str, now: int) -> dict[str, Any]:
         action = request["action"]
         request_id = request["request_id"]
-        if action == "run_prepare":
+        if action in mutation_reviews.FIELDS:
+            fields = mutation_reviews.execute(store, db, request, actor_id, context, now,
+                lambda run_id: self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context))
+            return _result(action, request_id, **fields)
+        if action in combined_runs.FIELDS:
+            return _result(action, request_id, **combined_runs.execute(store, db, request, now))
+        if action in candidate_outputs.FIELDS:
+            return _result(action, request_id, **candidate_outputs.execute(store, db, request, now,
+                lambda run_id: self._bound_evidence_run(store, db, run_id, now)))
+        if action in evidence_retention.FIELDS:
+            fields = evidence_retention.execute(store, db, request, actor_id, context, now,
+                lambda run_id: self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context))
+            return _result(action, request_id, **fields)
+        if action in target_retirement.FIELDS:
+            return _result(action, request_id, **target_retirement.execute(store, db, request, actor_id, context, now))
+        if action in finding_lifecycle.FIELDS:
+            fields = finding_lifecycle.execute(store, db, request, actor_id, context, now,
+                lambda run_id: self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context),
+                lambda run_id: self._bound_evidence_run(store, db, run_id, now))
+            return _result(action, request_id, **fields)
+        if action in {"run_prepare", "run_prepare_scoped"}:
             return _result(action, request_id, **regression_runs.prepare(store, db, request, now))
         if action == "run_cancel_finalize":
             bound, baseline = self._bound_evidence_run(store, db, request["run_id"], now)
@@ -745,6 +809,11 @@ class EvaluationExtension:
                 check = lambda value: self._transition_preflight(store, db, value, actor_id, context, now)
                 if action == "contract_candidate_prepare":
                     fields = transition_authority.prepare(store, db, request, now, actor_id, context, check)
+                elif action == "contract_candidate_read":
+                    candidate_row, value = transition_authority.fresh_candidate(store, db, request["candidate_id"], now, check)
+                    fields = {"candidate_id": request["candidate_id"], "side": request["side"],
+                        "candidate_ref": transition_authority.candidate_sections.stored_reference(candidate_row, request["candidate_id"]),
+                        "prepared": value["runs"][request["side"]], "adoption_verified": False}
                 else:
                     _, value = transition_authority.fresh_candidate(store, db, request["candidate_id"], now, check)
                     bound = value["runs"][request["side"]]["bound_run"]
@@ -766,13 +835,17 @@ class EvaluationExtension:
             except (ContractError, resources.ResourceError) as error:
                 raise _error(error.code) from None
             return _result(action, request_id, **fields)
-        if action == "fixture_prepare":
+        if action in {"fixture_prepare", "guardrail_prepare"}:
             if db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (request["run_id"],)).fetchone():
                 raise _error("RUN_CONFLICT")
             policy, _, generation = _policy(store, db, request["policy_series_id"], now)
             try:
-                value = fixture_admission.prepare(db, policy, generation, request["run_id"], now,
-                    store._permission_generation(db))
+                if action == "guardrail_prepare":
+                    value = llm_admission.prepare(db, policy, generation, request["run_id"], now,
+                        store._permission_generation(db), request["target_version"])
+                else:
+                    value = fixture_admission.prepare(db, policy, generation, request["run_id"], now,
+                        store._permission_generation(db))
                 prepared = value["prepared"]
                 bound = prepared["bound_run"]
                 for document in (bound["registry"], bound["case_set"], prepared["calibration_case_set"]):
@@ -786,7 +859,7 @@ class EvaluationExtension:
         if action in baseline_authority.FIELDS:
             try:
                 fields = baseline_authority.execute(store, db, request, actor_id, context, now,
-                    lambda run_id: self._baseline_source(store, db, run_id, now))
+                    lambda run_id: self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context))
             except (ContractError, run_evidence.EvidenceError, resources.ResourceError) as error:
                 raise _error(error.code) from None
             return fields
@@ -798,7 +871,7 @@ class EvaluationExtension:
                     lambda run_id: self._bound_evidence_run(store, db, run_id, now))
                 if action == "evidence_finalize":
                     bound, _ = self._bound_evidence_run(store, db, request["run_id"], now)
-                    if bound["manifest"]["purpose"] == "regression":
+                    if bound["manifest"]["purpose"] in {"regression", "contract_candidate", "contract_old_regression"}:
                         run_outputs.save(db, bound, fields)
                 if action == "evidence_current":
                     try:
@@ -982,6 +1055,8 @@ class EvaluationExtension:
             return _result(action, request_id, series_id=request["series_id"], adopted=True, valid=valid, generation=row["generation"], contract=contract, proposal_id=row["proposal_id"], validation_id=row["validation_id"])
 
         if action == "run_begin":
+            target_retirement.check_targets(db, request["manifest"]["target_refs"], now)
+            combined_runs.check_binding(db, request["manifest"], request["plan"], now, request["contract_series_id"])
             if (request["manifest"]["purpose"] in transition_authority.PURPOSES
                     or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (request["manifest"]["run_id"],)).fetchone()):
                 raise _error("CANDIDATE_ENTRY_REQUIRED")
@@ -1006,6 +1081,7 @@ class EvaluationExtension:
             else:
                 bound = bind_run_manifest(request["manifest"], contract, request["plan"], policy, registry_value, acceptance)
             manifest = bound["manifest"]
+            target_retirement.check_targets(db, manifest["target_refs"], now)
             if not manifest["created_at"] <= now < manifest["deadline"]:
                 raise _error("RUN_TIME_INVALID")
             manifest_raw, manifest_digest = _packed(manifest)

@@ -95,7 +95,14 @@ def build_following_runs(previous, following, *, baseline_record, source_prepare
     """保存sourceの旧比較を維持し、新比較はcandidate側だけから再構成する。"""
     from .transition_materialization import _bind, _materialize, _plan
     try:
-        require_object(source_prepared, {'bound_run', 'baseline_context', 'materialization'})
+        has_scope = type(source_prepared) is dict and 'scope' in source_prepared
+        require_object(source_prepared, {'bound_run', 'baseline_context', 'materialization'} | ({'scope'} if has_scope else set()))
+        if has_scope:
+            from .run_scope import derive
+            bound = source_prepared['bound_run']
+            scope = derive(bound, bound['manifest']['run_id'], source_prepared['scope']['changed_refs'])
+            if scope != source_prepared['scope'] or scope['executed_scope'] != 'full':
+                raise ContractError('FULL_SCOPE_REQUIRED')
         require_uint(now)
         for identifier in (old_run_id, new_run_id):
             require_id(identifier)

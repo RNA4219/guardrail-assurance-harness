@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "storage_acceptance_boundary",
+  "supported_initial_runtime_migration": "runtime-compatibility-80-summary.json",
+  "rejected_development_databases": 4,
+  "rejection_reason": "CONFIG_MISMATCH",
+  "rejected_copies_unchanged": true,
+  "scope": "許可済みの初回DB移行と既定factory再起動は成功。独自validatorまたは非対応の開発途中digestは公式移行から拒否する。全開発snapshotの移行互換性は提供しない。",
+  "current_tests_cover": [
+    "test_following_migrations",
+    "test_validator_compatibility",
+    "test_combined_integration",
+    "test_finding_revalidation_integration",
+    "test_evidence_retention"
+  ],
+  "private_evidence_sha256": {
+    "final-migrations-20260915.json": "3634a56eaff931618ab31eff7bed9d8a0483897430427a0759b83a11a61c3f99",
+    "runtime-migrations-20260915.json": "7edd1957ed1e80e17128edbe232c1e18051981c30b7309f0a1c61e5173e7ea53"
+  },
+  "full_mvp_accepted": false
+}

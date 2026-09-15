@@ -1,0 +1,20 @@
+{
+  "id": "docs/reviews/mvp-acceptance-20260915.md",
+  "role": "reviews",
+  "title": "MVP受入の親レビュー",
+  "summary": "全32条件の技術検収が完了し、release_gate=goとする。[最終証跡](../evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)で通常CLI800件、freshなCI、出力、再起動後不変、全精算・回収と環境復元を確認した。以下の失敗は履歴として保持する。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "docs/acceptance/AC-20260911-05.md",
+    "docs/tasks/TASK.mvp-completion-09-11-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00111",
+  "source_sha256": "536155b085130eeb6401977b2bcabf6d1ce5facad51978ae612320c9d24bf564"
+}

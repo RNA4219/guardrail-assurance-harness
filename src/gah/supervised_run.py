@@ -5,6 +5,7 @@ import time
 
 from gah.contracts import require_object, require_id, require_ref, require_uint
 from gah.run_contracts import content_ref
+from gah import run_scope
 from gah.wire import canonical_bytes
 
 ENTRY_KEYS = ('obligation_id', 'case_id', 'trial_id', 'variant')
@@ -18,7 +19,9 @@ class SupervisorError(ValueError):
 
 
 def validate_input(value):
-    require_object(value, {'schema_version', 'run_id', 'contract_series_id', 'expected_contract_ref', 'trigger'})
+    fields = {'schema_version', 'run_id', 'contract_series_id', 'expected_contract_ref', 'trigger'}
+    scoped = type(value) is dict and 'changed_refs' in value
+    require_object(value, fields | ({'changed_refs'} if scoped else set()))
     if type(value['schema_version']) is not int or value['schema_version'] != 1:
         raise SupervisorError('INVALID_REQUEST')
     for key in ('run_id', 'contract_series_id'):
@@ -27,7 +30,12 @@ def validate_input(value):
     if (len(value['run_id']) > 64 or value['expected_contract_ref']['kind'] != 'evaluation_contract'
             or value['trigger'] not in ('manual', 'change', 'scheduled_full')):
         raise SupervisorError('INVALID_REQUEST')
-    return deepcopy(value)
+    result = deepcopy(value)
+    if scoped:
+        if value['trigger'] != 'change':
+            raise SupervisorError('INVALID_REQUEST')
+        result['changed_refs'] = run_scope.normalize_refs(value['changed_refs'])
+    return result
 
 
 class Supervisor:
@@ -70,7 +78,9 @@ class Supervisor:
         return value
 
     def prepare(self):
-        value = self.call(OPERATOR, 'run_prepare', 'prepare', durable=True,
+        scoped = 'changed_refs' in self.request
+        extra = {'changed_refs': self.request['changed_refs'], 'request_id': run_scope.request_id(self.run_id)} if scoped else {}
+        value = self.call(OPERATOR, 'run_prepare_scoped' if scoped else 'run_prepare', 'prepare', durable=True, **extra,
             run_id=self.run_id, contract_series_id=self.request['contract_series_id'],
             expected_contract_ref=self.request['expected_contract_ref'])
         bound = value['bound_run']
@@ -83,7 +93,15 @@ class Supervisor:
         entries = bound['plan']['entries']
         material = value['materialization']
         records = material['manifest']['records']
-        if (len(entries) != 30 or len(records) != len(entries)
+        self.scope = None
+        expected_count = 30
+        if scoped:
+            self.scope = run_scope.derive(bound, self.run_id, self.request['changed_refs'])
+            if value.get('scope') != self.scope or manifest['control_ids'] != self.scope['selected_control_ids']:
+                raise SupervisorError('SCOPE_MISMATCH')
+            expected_count = 2 * sum(len(c['obligations']) for c in bound['registry']['controls']
+                if c['control_id'] in manifest['control_ids'])
+        if (len(entries) != expected_count or len(records) != len(entries)
                 or material['manifest_ref'] != content_ref('fixture_manifest', material['manifest']['materialization_id'], material['manifest'])):
             raise SupervisorError('PLAN_MISMATCH')
         joined = []
@@ -138,8 +156,10 @@ class Supervisor:
         value = self.runtime.client(OPERATOR, request)
         code = response_exit_code(request, value)
         return {'schema_version': 1, 'kind': 'supervised_run_result', 'run_id': self.run_id,
-            'trigger': self.request['trigger'], 'executed_scope': 'full',
-            'scope_reason': 'UNKNOWN_IMPACT_FULL_FALLBACK' if self.request['trigger'] == 'change' else 'FULL_REQUESTED',
+            'trigger': self.request['trigger'], 'executed_scope': self.scope['executed_scope'] if self.scope else 'full',
+            'scope_reason': self.scope['reason'] if self.scope else (
+                'UNKNOWN_IMPACT_FULL_FALLBACK' if self.request['trigger'] == 'change' else 'FULL_REQUESTED'),
+            'unexecuted_control_ids': self.scope['unexecuted_control_ids'] if self.scope else [],
             'control_ids': self.manifest['control_ids'], 'gate': value,
             'ci_eligible': value['ci_eligible'], 'exit_code': code}
 
@@ -181,6 +201,21 @@ class Supervisor:
         if value.get('accepted') is not True:
             raise SupervisorError('ATTEMPT_NOT_ACCEPTED')
 
+    def completion_timing(self, started, finished, receipt):
+        return {'started_at':started, 'finished_at':finished, 'receipt':receipt}
+
+    def record_completion(self, op, entry, receipt, timing):
+        self.observe(op, receipt)
+        self.record_attempt(op, entry, receipt, timing)
+
+    def execute_runner(self, op, entry, record, epoch):
+        return self.runner.run(record['scenario'], self.binding(op, entry, epoch),
+            run_deadline=self.manifest['deadline'], timeout_seconds=120)
+
+    def begin_operation(self, op, entry, record):
+        self.claim()
+        self.one(op, entry, record)
+
     def one(self, op, entry, record):
         reserve_key = 'request-' + op + '-reserve'
         if self.checkpoint.get(reserve_key) is None:
@@ -199,13 +234,23 @@ class Supervisor:
                 self.call(OPERATOR, 'resource_reserve', op + '-reserve', durable=True,
                     **self.owner, operation_id=op, entry={k: entry[k] for k in ENTRY_KEYS}, scenario=record['scenario'])
         status = self.operation(op)
+        return self.complete_operation(op, entry, record, status)
+
+    def complete_operation(self, op, entry, record, status):
+        started = self.prepare_operation(op, entry, record, status)
+        if started is None:
+            return
+        epoch = status['owner_epoch']
+        receipt = self.execute_runner(op, entry, record, epoch)
+        self.finish_operation(op, entry, record, epoch, started, receipt)
+
+    def prepare_operation(self, op, entry, record, status):
         if status['entry'] != entry or status['scenario'] != record['scenario'] or status['conflicted'] or status['released']:
             raise SupervisorError('OPERATION_CONFLICT')
         end = self.checkpoint.get('end-' + op)
         if end is not None:
             receipt = self.checked_receipt(op, entry, record, end['receipt'], status['owner_epoch'])
-            self.observe(op, receipt)
-            self.record_attempt(op, entry, receipt, end)
+            self.record_completion(op, entry, receipt, end)
             return
         if status['owner_epoch'] != self.owner['owner_epoch']:
             raise SupervisorError('OWNER_STALE')
@@ -222,18 +267,18 @@ class Supervisor:
         started = self.now()
         self.checkpoint.put('start-' + op, {'started_at': started, 'binding': self.binding(op, entry, status['owner_epoch'])})
         self.hook('start-' + op)
-        receipt = self.runner.run(record['scenario'], self.binding(op, entry, status['owner_epoch']),
-            run_deadline=self.manifest['deadline'], timeout_seconds=120)
+        return started
+
+    def finish_operation(self, op, entry, record, epoch, started, receipt, *, finished=None):
         self.hook('runner-returned-' + op)
-        finished = self.now()
+        finished = self.now() if finished is None else finished
         if finished < started:
             raise SupervisorError('CLOCK_FAILURE')
-        self.checked_receipt(op, entry, record, receipt, status['owner_epoch'])
-        end = {'started_at': started, 'finished_at': finished, 'receipt': receipt}
+        self.checked_receipt(op, entry, record, receipt, epoch)
+        end = self.completion_timing(started, finished, receipt)
         self.checkpoint.put('end-' + op, end)
         self.hook('end-' + op)
-        self.observe(op, receipt)
-        self.record_attempt(op, entry, receipt, end)
+        self.record_completion(op, entry, receipt, end)
         if receipt['execution_status'] != 'COMPLETED':
             raise SupervisorError('EXECUTION_INCOMPLETE')
 
@@ -274,6 +319,14 @@ class Supervisor:
             if not status['dispatch_intended']:
                 continue
             try:
+                # 正規validatorが停止と精算を確定済みなら、外部実行器を再回収しない。
+                # endが残る場合のAttempt配送は従来どおり照合して保持する。
+                if status['stopped'] and status['settled']:
+                    end = self.checkpoint.get('end-' + op)
+                    if end is not None:
+                        receipt = self.checked_receipt(op, entry, record, end['receipt'], status['owner_epoch'])
+                        self.record_attempt(op, entry, receipt, end)
+                    continue
                 receipt = self.runner.recover(self.run_id, op)
                 self.checked_receipt(op, entry, record, receipt, status['owner_epoch'])
                 self.observe(op, receipt)
@@ -293,6 +346,10 @@ class Supervisor:
         result['interruption_reason'] = self.checkpoint.get('cancel-requested')['reason']
         result['unresolved_operations'] = pending
         return result
+
+    def run_entries(self):
+        for op, entry, record in self.entries:
+            self.begin_operation(op, entry, record)
 
     def execute(self, mode):
         if mode not in ('run', 'resume', 'cancel', 'status'):
@@ -317,9 +374,7 @@ class Supervisor:
         try:
             self.call(OPERATOR, 'evidence_open', 'open', durable=True, run_id=self.run_id)
             if not snapshot['closed']:
-                for op, entry, record in self.entries:
-                    self.claim()
-                    self.one(op, entry, record)
+                self.run_entries()
                 self.claim()
                 self.call(OPERATOR, 'resource_close', 'close', durable=True, **self.owner)
             self.call(OPERATOR, 'evidence_finalize', 'finalize', durable=True, run_id=self.run_id)

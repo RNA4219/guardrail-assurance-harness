@@ -9,7 +9,6 @@
   ],
   "deps_in": [
     "HUB.codex.md",
-    "README.md",
     "docs/baseline-refresh-detail-spec.md",
     "docs/evidence/mvp-baseline-refresh-20260912/README.md"
   ],
@@ -19,6 +18,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00067",
+  "generated_at": "00111",
   "source_sha256": "734fbba5a92369ba07d72fb5b02983d8348e112e3db1018e67f71fb266c4c8f8"
 }

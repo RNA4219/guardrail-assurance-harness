@@ -2,11 +2,19 @@
 from gah.run_contracts import content_ref
 
 
-def verify(*, success, call, denied, check, runtime):
-    run_id = "regression-runtime"
+def verify(*, success, call, denied, check, runtime, run_id="regression-runtime", expected_generation=1):
+    if type(expected_generation) is not int or expected_generation not in (1, 2):
+        raise ValueError("UNSUPPORTED_RUNTIME_GENERATION")
+    tag = "baseline-refresh" if expected_generation == 1 else "baseline-following-refresh"
+    if expected_generation != 1:
+        original_check = check
+        def following_check(name, value):
+            name = name.replace("baseline_refresh_", "baseline_following_refresh_")
+            original_check(name.replace("generation_two", "generation_three"), value)
+        check = following_check
     series = "fixture-baseline-series"
     def request(action, suffix, **fields):
-        return {"schema_version": 1, "action": action, "request_id": "baseline-refresh-" + suffix, **fields}
+        return {"schema_version": 1, "action": action, "request_id": tag + "-" + suffix, **fields}
     current_request = request("baseline_current", "current", series_id=series)
     old = success(12004, current_request)["baseline"]
     old_ref = content_ref("baseline", old["baseline_id"], old)
@@ -31,27 +39,27 @@ def verify(*, success, call, denied, check, runtime):
             and result.get("outputs_ref") == outputs["outputs_ref"]
             and type(result.get("exit_code")) is int and result["exit_code"] == code
             and result.get("use") is (code == 0) and result.get("ci_eligible") is (code == 0))
-    proposal = request("baseline_propose", "propose", proposal_id="baseline-refresh-runtime",
-        series_id=series, run_id=run_id, expected_generation=1)
+    proposal = request("baseline_propose", "propose", proposal_id=tag + "-runtime",
+        series_id=series, run_id=run_id, expected_generation=expected_generation)
     for uid in (12002, 12003, 12004):
         check(f"baseline_refresh_propose_role_{uid}_rejected", denied(uid, proposal, "AUTHORITY_DENIED"))
     success(12001, proposal)
-    validation = request("baseline_validate", "validate", proposal_id="baseline-refresh-runtime",
-        validation_id="baseline-refresh-validation")
+    validation = request("baseline_validate", "validate", proposal_id=tag + "-runtime",
+        validation_id=tag + "-validation")
     check("baseline_refresh_proposer_cannot_validate", denied(12001, validation, "AUTHORITY_DENIED"))
     success(12003, validation)
-    adopted = success(12001, request("baseline_adopt", "adopt", proposal_id="baseline-refresh-runtime",
-        validation_id="baseline-refresh-validation", expected_generation=1))
+    adopted = success(12001, request("baseline_adopt", "adopt", proposal_id=tag + "-runtime",
+        validation_id=tag + "-validation", expected_generation=expected_generation))
     current = success(12004, current_request)
-    check("baseline_refresh_generation_two_adopted", adopted.get("generation") == 2
-        and current.get("valid") is True and current.get("generation") == 2)
+    check("baseline_refresh_generation_two_adopted", adopted.get("generation") == expected_generation + 1
+        and current.get("valid") is True and current.get("generation") == expected_generation + 1)
     new = current["baseline"]
     check("baseline_refresh_source_and_ttl_bound", new["source_run_ref"] == outputs["outputs"]["manifest_ref"]
         and new["contract_ref"] == manifest["contract_ref"] and new["valid_until"] == evidence["valid_until"])
     check("baseline_refresh_old_reference_remains_usable", success(12004, old_request).get("use") is True
         and manifest["baseline_ref"] == old_ref)
     check("baseline_refresh_latest_use_rejects_old_reference", denied(12004,
-        {**old_request, "action": "baseline_use", "request_id": "baseline-refresh-latest-old"}, "BINDING_MISMATCH"))
+        {**old_request, "action": "baseline_use", "request_id": tag + "-latest-old"}, "BINDING_MISMATCH"))
     check("baseline_refresh_keeps_historical_outputs", success(12004, outputs_request) == outputs
         and success(12004, final_request) == receipt)
     check("baseline_refresh_existing_ci_remains_successful", ci(0))
@@ -66,8 +74,8 @@ def verify(*, success, call, denied, check, runtime):
     def after_revocation():
         current = success(12004, current_request)
         pinned = success(12004, new_request)
-        check("baseline_refresh_dependency_revocation_propagates", current["baseline"] == new
-            and current.get("valid") is False and current.get("reason") != "BASELINE_REVOKED"
+        check("baseline_refresh_dependency_revocation_propagates", pinned["baseline"] == new
+            and current.get("valid") is False and pinned.get("reason") != "BASELINE_REVOKED"
             and pinned.get("use") is False and pinned.get("valid") is False)
         check("baseline_refresh_dependency_revocation_blocks_source_ci", ci(1))
         check("baseline_refresh_revocation_keeps_historical_outputs", success(12004, outputs_request) == outputs

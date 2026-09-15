@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "kind": "planned_test_coverage",
+  "source_snapshot": 78,
+  "planned_tests": 879,
+  "retained_previous_tests": 865,
+  "added_tests": 14,
+  "inventory_sha256": "bf01552c3b0c58c0798c5da69ed50aedba172bd32bb606319767c608d824bcb4",
+  "meaning": "予定試験一覧。実行成功の証拠ではない。",
+  "full_mvp_accepted": false
+}

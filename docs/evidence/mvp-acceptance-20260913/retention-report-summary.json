@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "retention_report_integration_observation",
+  "full_mvp_accepted": false,
+  "ci_eligible": false,
+  "tests": 13,
+  "seconds": 159.885,
+  "passed": true,
+  "source_manifest_sha256": "e28751422ca6103e4b95cf2a96af18540b8ec76377aeceba9a443c54c2a8754f",
+  "log_sha256": "4887f4a530f5d154a50d6f3c9269e6bd5adc4597309759ff52f8d42cf997afb0",
+  "checks": [
+    "managerの計画とoperatorの適用",
+    "保留とCAS",
+    "保持期限と計画期限",
+    "削除失敗の原子的rollback",
+    "同要求再配送",
+    "削除後のCI拒否と再生成拒否",
+    "再起動",
+    "tombstone起源改変と本文復活拒否",
+    "固定UID CLI",
+    "影響Controlと再現不能のJSON/Markdown表示"
+  ],
+  "deletion_scope": "authority DBの指定Evidence本文。外部コピーや物理媒体の消去確認は含めない。"
+}

@@ -110,7 +110,12 @@ def main() -> int:
                 or result.get("kind") != expected_kind
                 or result.get("action") != request["action"] or result.get("request_id") != request["request_id"]
                 or result.get("ci_eligible") is not False):
-            raise AssertionError("INVALID_AUTHORITY_RESPONSE")
+            error = AssertionError("INVALID_AUTHORITY_RESPONSE")
+            reason = result.get("reason")
+            if (result.get("kind") == "authority_error" and type(reason) is str
+                    and re.fullmatch(r"[A-Z][A-Z0-9_]{0,63}", reason)):
+                error.detail = {"reason": reason, "operation": request["action"]}
+            raise error
         return result
 
     def denied(uid: int, request: dict[str, Any], reason: str) -> bool:
@@ -487,8 +492,11 @@ def main() -> int:
     except Exception as error:
         failure = type(error).__name__
         detail = getattr(error, "detail", None)
-        if isinstance(error, AuthorityRuntimeError) and type(detail) is dict:
+        if isinstance(error, (AuthorityRuntimeError, AssertionError)) and type(detail) is dict:
             failure_detail = {k: detail[k] for k in ("operation", "exit_code", "reason", "client_reason") if k in detail}
+        elif isinstance(error, AssertionError):
+            reason = str(error)
+            failure_detail = {"reason": reason if re.fullmatch(r"[A-Za-z0-9_:-]{1,96}", reason) else "CHECK_FAILED"}
     finally:
         if runner is not None:
             recovery_results: list[bool] = []
@@ -533,7 +541,8 @@ def main() -> int:
         "source_sha256": source_hashes,
         "image_id": runtime.lock["image_id"] if runtime is not None else None,
         "fixture_image_id": runner.lock["image_id"] if runner is not None else None,
-        "entry_count": 183 if args.following_contract else 91 if args.supervisor else 92 if args.recovery else (91 if args.cancellation else (90 if args.regression else (60 if args.candidate_runs else 15))),
+        "entry_count": len(receipts),
+        "planned_entry_count": 185 if args.following_contract else 93 if args.supervisor else 92 if args.recovery else (91 if args.cancellation else (90 if args.regression else (60 if args.candidate_runs else 15))),
         "baseline_entry_count": 15,
         "candidate_entry_counts": {"old": 15, "new": 30} if args.candidate_runs else {},
         "candidate_runs_enabled": args.candidate_runs,

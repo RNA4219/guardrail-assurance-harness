@@ -29,6 +29,7 @@ _ADVANCE = {state: index for index, state in enumerate(_STATES[:-1])}
 _SCENARIO = re.compile(
     r"(?:constraint:C(?:0[1-9]|10):(?:good|bad)|"
     r"mutation:F(?:0[1-5]):(?:healthy|decayed)|"
+    r"guardrail:[0-9a-f]{64}|"
     r"probe:(?:isolation|child_timeout|oversized|malformed|rejected_marker|crash))\Z"
 )
 _IMAGE = re.compile(r"sha256:[0-9a-f]{64}\Z")
@@ -236,11 +237,12 @@ def _validate_begin(binding: Any, scenario: Any, image_id: Any,
 def _validate_receipt(value: Any, *, binding: dict[str, Any], scenario: str,
                       image_id: str, container_id: str | None) -> tuple[dict[str, Any], bytes, str]:
     receipt, payload = _canonical_object(value, maximum=MAX_RECEIPT_BYTES)
-    if set(receipt) != _RECEIPT_FIELDS:
+    guardrail = scenario.startswith("guardrail:")
+    if set(receipt) != (_RECEIPT_FIELDS | {"case_result"} if guardrail else _RECEIPT_FIELDS):
         raise _invalid("INVALID_RECEIPT")
     if type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1:
         raise _invalid("UNSUPPORTED_VERSION")
-    if receipt["kind"] != "fixture_execution" or receipt["ci_eligible"] is not False:
+    if receipt["kind"] != ("guardrail_execution" if guardrail else "fixture_execution") or receipt["ci_eligible"] is not False:
         raise _invalid("INVALID_RECEIPT")
     try:
         receipt_binding = validate_binding(receipt["binding"])
@@ -274,6 +276,19 @@ def _validate_receipt(value: Any, *, binding: dict[str, Any], scenario: str,
     for field in ("cleanup_confirmed", "recovered"):
         if type(receipt[field]) is not bool:
             raise _invalid("INVALID_RECEIPT")
+    if guardrail:
+        if receipt["normalized_result"] is not None or receipt["probe_result"] is not None:
+            raise _invalid("INVALID_RECEIPT")
+        if receipt["case_result"] is not None:
+            from .guardrail_results import validate_bundle
+            try:
+                validate_bundle(receipt["case_result"])
+                request = receipt["case_result"]["request"]
+                if ("guardrail:" + hashlib.sha256(canonical_bytes(request)).hexdigest() != scenario
+                        or request["stages"][0]["binding"] != binding or request["target"]["runtime_image_id"] != image_id):
+                    raise ContractError()
+            except (ContractError, KeyError, TypeError, ValueError):
+                raise _invalid("INVALID_RECEIPT") from None
     if receipt["normalized_result"] is not None:
         _validate_normalized(receipt["normalized_result"], binding)
     if receipt["probe_result"] is not None:
@@ -290,16 +305,16 @@ def _validate_receipt(value: Any, *, binding: dict[str, Any], scenario: str,
                 or receipt["recovered"] or receipt["output_disposition"] != "ADMITTED"):
             raise _invalid("INVALID_RECEIPT")
         wants_probe = scenario == "probe:isolation"
-        if (wants_probe and (probe is None or normalized is not None)) or (
-                not wants_probe and (normalized is None or probe is not None)):
+        if (guardrail and receipt["case_result"] is None) or (not guardrail and ((wants_probe and (probe is None or normalized is not None)) or (
+                not wants_probe and (normalized is None or probe is not None)))):
             raise _invalid("INVALID_RECEIPT")
         if wants_probe:
             if not all(probe["checks"].values()):
                 raise _invalid("INVALID_RECEIPT")
-        elif scenario.startswith("probe:") or normalized["mode"] != scenario.split(":", 1)[0]:
+        elif not guardrail and (scenario.startswith("probe:") or normalized["mode"] != scenario.split(":", 1)[0]):
             raise _invalid("INVALID_RECEIPT")
     else:
-        if (normalized is not None or probe is not None
+        if (normalized is not None or probe is not None or guardrail and receipt["case_result"] is not None
                 or receipt["output_disposition"] == "ADMITTED"):
             raise _invalid("INVALID_RECEIPT")
         if status == "CANCELLED":

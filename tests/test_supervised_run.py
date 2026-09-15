@@ -112,6 +112,22 @@ class SupervisedRunTests(unittest.TestCase):
         self.assertEqual({uid for uid,req in self.runtime.calls if req['action']=='evidence_record'},{12003})
         self.assertEqual({uid for uid,req in self.runtime.calls if req['action']=='resource_dispatch'},{12004})
 
+    def test_cancel_does_not_recover_already_stopped_and_settled_operation(self):
+        def hook(stage):
+            if stage.startswith('response-') and stage.endswith('-record'):
+                raise Interrupted(stage)
+        with self.assertRaises(Interrupted):
+            self.run_mode(hook=hook)
+        self.assertEqual(self.count(), 1)
+        before = tuple(self.store._db.execute("SELECT * FROM attempts WHERE run_id='supervised-run'"))
+        result = self.run_mode('cancel')
+        self.assertEqual(result['exit_code'], 3, result)
+        self.assertEqual(result['unresolved_operations'], [])
+        self.assertEqual(self.runner.recovered, [])
+        self.assertEqual(self.count(), 1)
+        self.assertEqual(tuple(self.store._db.execute("SELECT * FROM attempts WHERE run_id='supervised-run'")), before)
+        self.assertEqual(self.run_mode('status')['resources']['resources']['slots'], 0)
+
     def test_dispatch_ack_loss_resolves_without_duplicate_send(self):
         self.runtime.drop_action='resource_dispatch'
         with self.assertRaises(TransportLost):self.run_mode()

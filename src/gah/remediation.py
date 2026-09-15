@@ -170,7 +170,8 @@ def _validate_assessment(value: Any) -> dict[str, Any]:
     if value["ci_eligible"] is not False:
         raise _bad("CI_INELIGIBLE")
     metrics = value["metrics"]
-    if type(metrics) is not list or not metrics or len(metrics) > 100:
+    # 制約のみのDecisionは数値metricを持たない。違反理由とEvidenceは別途保持する。
+    if type(metrics) is not list or len(metrics) > 100:
         raise _bad()
     for metric in metrics:
         require_object(metric, _ASSESSMENT_METRIC_FIELDS)

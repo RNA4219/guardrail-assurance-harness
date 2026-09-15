@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "targeted_run_stage_evidence",
+  "status": "pass",
+  "tests": 8,
+  "duration_seconds": "105.098",
+  "log_sha256": "70fe1e5523e6c256f7e0cc0ecba4496574649a4dd23e05ec1da53ecdc63bde9d",
+  "tested_files": {
+    "src/gah/run_scope.py": "bca2cb37d77ff3453b8b0a86b1895c94adbb374ab11425cf53cf5cc25f1c0675",
+    "src/gah/regression_runs.py": "29b50745ae872d1b87dcbf2c454fcb1a87c7875873ac7c5be692ca2c1e4531ab",
+    "src/gah/supervised_run.py": "803f73dffd93523b9f5195021311a0142cf7c76c31394b345ce4c0af46a46f67",
+    "src/gah/baseline_generations.py": "234d5a454dd29a134de957e4447895f52c6df46004763c06c9889afdf5be3ca4",
+    "src/gah/following_contracts.py": "6ccc9a07e84f276de2806ea8a62e4a6b3f6960c3d48858e352cf3a55bc5ba48b",
+    "src/gah/run_outputs.py": "ce70ea7c2eff8a78b0aa852cf7f8ed054428edd1e32f20bd714faaa879416304",
+    "src/gah/remediation.py": "cef7d5892f373efc2c6f05ccfb7cf675c1e1af9bb073bc8cb4c8d38e34cd05c7",
+    "src/gah/evaluation_authority.py": "4b3597e56264280af851dc7da9002ca05f0e5cd67679e5792fa54ad94ba45d7f",
+    "tools/gah_run.py": "33e2648e01aa8b926c501049fb363e63cecd5c4ea83c87aafd308c0f875737f0",
+    "tools/gah_report.py": "e99b0983f1fa987890b0327d958fa5ab1fc2a1421b7ff2b8e813def1980c1da4",
+    "tools/prepare_authority_runtime.py": "06e0815cd73c2c50f6e641774434f414541e9da027d1a6cf7da08784057c95e3",
+    "tests/test_run_scope.py": "0eb28e0ab59f3553e85c53f975b04661ab51c22dca036c5a0b96ac30751fb802"
+  },
+  "checks": [
+    "dependency_closure",
+    "unknown_reference_full_fallback",
+    "authenticated_scope_storage",
+    "storage_rollback",
+    "scope_tamper_rejection",
+    "two_real_sqlite_bound_fixture_executions",
+    "resume_without_reexecution",
+    "human_and_machine_scope_report",
+    "full_ci_target_mismatch_exit_1",
+    "partial_source_baseline_rejection"
+  ],
+  "execution_environment": "SQLite and fixed synthetic runner; Docker not used",
+  "runtime_acceptance": "in_progress",
+  "full_mvp_accepted": false,
+  "release_gate": "no_go"
+}

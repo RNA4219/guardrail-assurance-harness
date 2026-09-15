@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "ci_parallelization_verification",
+  "reviewed_at": "2026-09-15",
+  "reviewer": "Codex",
+  "previous_full_suite": {
+    "source_snapshot": 80,
+    "tests": 898,
+    "passed": true,
+    "shards": 4,
+    "longest_seconds": 7508.395,
+    "shortest_seconds": 1935.799
+  },
+  "parallel_jobs": 12,
+  "dedicated_integration_jobs": 6,
+  "remaining_shards": 6,
+  "timeout_minutes": 180,
+  "required_check": "unit",
+  "plan": {
+    "matrix": {
+      "include": [
+        {
+          "lane": "llm-supervision",
+          "tests": 1
+        },
+        {
+          "lane": "llm-revision",
+          "tests": 1
+        },
+        {
+          "lane": "combined",
+          "tests": 4
+        },
+        {
+          "lane": "finding-revalidation",
+          "tests": 5
+        },
+        {
+          "lane": "following-contract",
+          "tests": 6
+        },
+        {
+          "lane": "mutation-review",
+          "tests": 5
+        },
+        {
+          "lane": "regression-0",
+          "tests": 148
+        },
+        {
+          "lane": "regression-1",
+          "tests": 147
+        },
+        {
+          "lane": "regression-2",
+          "tests": 147
+        },
+        {
+          "lane": "regression-3",
+          "tests": 147
+        },
+        {
+          "lane": "regression-4",
+          "tests": 148
+        },
+        {
+          "lane": "regression-5",
+          "tests": 148
+        }
+      ]
+    },
+    "plan_digest": "f22183a56d4d067e8a45ca242d95290d62dc067a73f11d847ff54eab2aff5754",
+    "total_tests": 907
+  },
+  "original_tests_preserved": 898,
+  "new_tests": 9,
+  "focused_tests": 11,
+  "focused_passed": true,
+  "focused_log_sha256": "0e6ba326d99604477a1c873269cf2f19056ac826145109a006f2c679be55eab1",
+  "source_sha256": {
+    ".github/workflows/test.yml": "1440ea71361609ddb9ecd3fac3558e01e28fd2c5712bf146a0b10c3e39467eb1",
+    "tools/test_matrix.py": "fc00b85f24f28a62a61de29d87a8f78804839a7b3b9cd155fb16d97b221280bd",
+    "tests/test_test_matrix.py": "a9ec19b95d6ce73968606c17d8118ecf8407d02bee3c4f2e651f6056b72448aa"
+  },
+  "github_execution_verified": false,
+  "speedup_measured": false,
+  "running_acceptance_source_snapshot": 81,
+  "runtime_source_modified": false,
+  "full_mvp_accepted": false,
+  "scope": "CI分割機構の検証。既存製品試験898件の実行結果はsource80、実Docker受入は固定source81で継続する。",
+  "aggregate_gate_result_combinations": {
+    "success/success": 0,
+    "success/failure": 1,
+    "success/cancelled": 1,
+    "success/skipped": 1,
+    "failure/success": 1,
+    "failure/failure": 1,
+    "failure/cancelled": 1,
+    "failure/skipped": 1,
+    "cancelled/success": 1,
+    "cancelled/failure": 1,
+    "cancelled/cancelled": 1,
+    "cancelled/skipped": 1,
+    "skipped/success": 1,
+    "skipped/failure": 1,
+    "skipped/cancelled": 1,
+    "skipped/skipped": 1
+  },
+  "plan_workflow_output_passed": true,
+  "yaml_full_parser_used": false
+}

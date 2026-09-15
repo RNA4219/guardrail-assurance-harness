@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_environment_restart_followup",
+  "status": "acceptance_completed",
+  "source_snapshot": 81,
+  "core_source_snapshot": 80,
+  "attempt": "20260915e",
+  "docker_wsl_restarted": true,
+  "restart_alone_resolved": false,
+  "probes": [
+    {
+      "tag": "restart",
+      "samples_per_image": 4000,
+      "backward_counts": [
+        2,
+        2
+      ],
+      "clock_step_counts": [
+        2,
+        2
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "28bbbd41231cbd43f171cfaca53ab4d0ff64c7594dd1b5b42eac3b9c10f89a6f"
+    },
+    {
+      "tag": "restart-confirm",
+      "samples_per_image": 4000,
+      "backward_counts": [
+        4,
+        4
+      ],
+      "clock_step_counts": [
+        4,
+        4
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "689f34655bc59415b39aba811819cdffcc5338779c9092d70b1d2a768864bcfc"
+    },
+    {
+      "tag": "both-off",
+      "samples_per_image": 4000,
+      "backward_counts": [
+        1,
+        1
+      ],
+      "clock_step_counts": [
+        1,
+        1
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "88def468c4909833c201f7798480d8513f565aa201ed37604004be48702d60fa"
+    },
+    {
+      "tag": "device-detached",
+      "samples_per_image": 4000,
+      "backward_counts": [
+        0,
+        0
+      ],
+      "clock_step_counts": [
+        0,
+        0
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "631ad1f0e6de9333f9ad41f405611288d35127d2f54d10668bd40e78e454dbd8"
+    },
+    {
+      "tag": "ntp-only",
+      "samples_per_image": 4000,
+      "backward_counts": [
+        3,
+        3
+      ],
+      "clock_step_counts": [
+        5,
+        5
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "20075ad6163c59567a72d499e954248c4f263e2d3987d637f68099e2adc0b75c"
+    },
+    {
+      "tag": "stable-120s",
+      "samples_per_image": 12000,
+      "backward_counts": [
+        0,
+        0
+      ],
+      "clock_step_counts": [
+        1,
+        1
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "90a543beece0ac5432ba32a67fb483748c3e65ee277fbc1c5a42e12c8c312147"
+    },
+    {
+      "tag": "stable-confirm-120s",
+      "samples_per_image": 12000,
+      "backward_counts": [
+        0,
+        0
+      ],
+      "clock_step_counts": [
+        0,
+        0
+      ],
+      "api_mismatch_counts": [
+        0,
+        0
+      ],
+      "sha256": "d4230b7645243035d789abc55212dea6c540d3870877e8a49f217fd15fcb3661"
+    }
+  ],
+  "temporary_environment": {
+    "clocksource": "tsc",
+    "hyperv_time_sync_device_detached": true,
+    "timesync_implicit": false,
+    "ntp_service_running": false,
+    "persistent_configuration_changed": false,
+    "restoration_status": "restored_after_bulk_and_post_verification"
+  },
+  "host_utc_observation": "二時点で、コマンド往復時間を含むoffset区間は約-42〜+55ms。時計の停止・値の上書きはしていない。",
+  "interpretation": "時刻同期専用デバイス切離しとNTP停止後、120秒・各12000点で二つのimageの逆行・時刻飛び・API不一致が0。基盤側の恒久修正を証明するものではない。",
+  "acceptance_sequence": {
+    "initial_cases": 400,
+    "comparison_old_trials": 400,
+    "comparison_new_trials": 800,
+    "normal_cli_trials": 800
+  },
+  "policy_budget_timestamp_checks_unchanged": true,
+  "existing_failure_evidence_preserved": true,
+  "full_mvp_accepted": false,
+  "initial_result": {
+    "passed": true,
+    "executed_cases": 400,
+    "stages": 600,
+    "checks": {
+      "baseline_adopted": true,
+      "candidate_cannot_prepare": true,
+      "finite_baseline_counts": true,
+      "fresh_baseline_use": true,
+      "full_400_inputs_600_stages": true,
+      "independent_165_calibration": true,
+      "initial_limited_healthy": true,
+      "owned_containers_removed": true,
+      "peer_identity_12001": true,
+      "peer_identity_12002": true,
+      "peer_identity_12003": true,
+      "peer_identity_12004": true,
+      "resource_closed": true,
+      "restart_fresh_use": true,
+      "restart_keeps_adoption": true,
+      "source_unchanged": true
+    },
+    "check_sha256": "5e0330c52c780ed4ed8838552d14c78c6c8850c39b226e9ee44b0757e5f39200"
+  },
+  "acceptance_attempt_passed": true,
+  "bulk_restoration": {
+    "device_bind_returncode": 0,
+    "device_bound": true,
+    "implicit_sync": "Y",
+    "ntp_service": "active",
+    "restored": true
+  },
+  "post_restoration": {
+    "device_bound": true,
+    "implicit_sync": "Y",
+    "ntp_service": "active",
+    "restored": true
+  },
+  "final_decision_ref": "mvp-final-20260915-summary.json",
+  "decision_scope": "環境調整単独の証跡。全MVP判定はfinal summaryとacceptance-mapを参照。"
+}

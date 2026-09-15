@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "kind": "candidate_copy_performance_review",
+  "observed_at": "2026-09-13T15:36:28.547802+00:00",
+  "finding": "候補参照のhash生成、validatorが生成した値の返却、入れ子の再検証で、不要な深いコピーが重複していた性能不具合。",
+  "measurement": "同じ初回DBのコピーから同条件候補を生成し、候補照会を4回測定。profile回数は再帰呼出しを含む。profile中の時間と通常計測のCPU時間は別の指標。",
+  "comparisons": [
+    {
+      "source_snapshot": 50,
+      "candidate_read_cpu_seconds_median": 2.875,
+      "samples": [
+        {
+          "wall_seconds": 2.711074,
+          "cpu_seconds": 2.65625
+        },
+        {
+          "wall_seconds": 3.17502,
+          "cpu_seconds": 3.015625
+        },
+        {
+          "wall_seconds": 2.936719,
+          "cpu_seconds": 2.84375
+        },
+        {
+          "wall_seconds": 3.019546,
+          "cpu_seconds": 2.90625
+        }
+      ],
+      "profile_deepcopy_nonrecursive_calls": 52735,
+      "profile_deepcopy_recursive_calls": 1907350,
+      "profile_deepcopy_cumulative_seconds": 4.0945328000000005
+    },
+    {
+      "source_snapshot": 54,
+      "candidate_read_cpu_seconds_median": 2.3046875,
+      "samples": [
+        {
+          "wall_seconds": 2.352203,
+          "cpu_seconds": 2.3125
+        },
+        {
+          "wall_seconds": 2.862803,
+          "cpu_seconds": 2.6875
+        },
+        {
+          "wall_seconds": 2.278724,
+          "cpu_seconds": 2.265625
+        },
+        {
+          "wall_seconds": 2.308654,
+          "cpu_seconds": 2.296875
+        }
+      ],
+      "profile_deepcopy_nonrecursive_calls": 52627,
+      "profile_deepcopy_recursive_calls": 877392,
+      "profile_deepcopy_cumulative_seconds": 1.7892290000000002
+    },
+    {
+      "source_snapshot": 56,
+      "candidate_read_cpu_seconds_median": 1.765625,
+      "samples": [
+        {
+          "wall_seconds": 1.803077,
+          "cpu_seconds": 1.765625
+        },
+        {
+          "wall_seconds": 1.639472,
+          "cpu_seconds": 1.640625
+        },
+        {
+          "wall_seconds": 1.770533,
+          "cpu_seconds": 1.765625
+        },
+        {
+          "wall_seconds": 1.980564,
+          "cpu_seconds": 1.921875
+        }
+      ],
+      "profile_deepcopy_nonrecursive_calls": 4971,
+      "profile_deepcopy_recursive_calls": 558600,
+      "profile_deepcopy_cumulative_seconds": 0.9672828000000001
+    },
+    {
+      "source_snapshot": 57,
+      "candidate_read_cpu_seconds_median": 1.765625,
+      "samples": [
+        {
+          "wall_seconds": 1.749664,
+          "cpu_seconds": 1.703125
+        },
+        {
+          "wall_seconds": 1.999473,
+          "cpu_seconds": 1.953125
+        },
+        {
+          "wall_seconds": 1.882335,
+          "cpu_seconds": 1.8125
+        },
+        {
+          "wall_seconds": 1.725331,
+          "cpu_seconds": 1.71875
+        }
+      ],
+      "profile_deepcopy_nonrecursive_calls": 3302,
+      "profile_deepcopy_recursive_calls": 289982,
+      "profile_deepcopy_cumulative_seconds": 0.6427766
+    }
+  ],
+  "changes": [
+    "参照hash生成に使うrootだけを浅くコピー",
+    "検証・復号で生成した独立値の所有権を返却値へ移す",
+    "複製済みの入れ子を再度コピーして上書きする処理を削除",
+    "全入力・正確な型・実装版を鍵にした純粋な契約検査の再利用"
+  ],
+  "validation": [
+    {
+      "snapshot": 56,
+      "tests": 50,
+      "result": "passed"
+    },
+    {
+      "snapshot": 57,
+      "tests": 112,
+      "passed": 109,
+      "errors": 3,
+      "cause": "追加した試験のargsメソッドがfixtureの同名属性と衝突。製品検査へ到達する前の試験エラー。"
+    },
+    {
+      "record": "transition-cache-59b.log",
+      "tests": 3,
+      "result": "passed",
+      "change": "試験helperをargumentsへ改名。"
+    },
+    {
+      "snapshot": 58,
+      "tests": 60,
+      "result": "passed",
+      "suites": [
+        "start-core",
+        "start-supervisor"
+      ]
+    },
+    {
+      "snapshot": 59,
+      "tests": 19,
+      "result": "passed",
+      "scope": "固定client lifecycle・既存runtime設定照合。console結果。"
+    },
+    {
+      "snapshot": 59,
+      "checks": 6,
+      "result": "passed",
+      "scope": "実Dockerへの初回DBコピー配置・現在利用・再起動・receipt不変・client回収"
+    }
+  ],
+  "runtime_changes": [
+    "resource_startがoperatorの新規操作について現在条件照合・開始権・固定予約・配送意図を同一transactionで行う。停止観測とEvidence保存はvalidatorに分離。",
+    "CLIは役割別client-host上で毎回固定clientプロセスを起動する。各要求の前後で設定・container同一性・起動状態を確認し、使用後に回収する。"
+  ],
+  "still_open": [
+    "source50は既定予算でSTART_DENIED、source59は時計範囲の比較で停止。保存結果を成功へ変更しない。",
+    "source62の修正版で実Docker旧新比較・通常CLIと実SQLite全体試験を継続。completion-clock-summary.json参照。",
+    "source43の複合runとsource47の修復確認・再発は継続中。",
+    "時間予算内の全体完走と32条件の最終対応付けは未完了。"
+  ],
+  "protected_documents_unchanged": true,
+  "raw_database_published": false,
+  "ci_eligible": false,
+  "full_mvp_accepted": false,
+  "private_evidence_sha256": {
+    "acceptance-source-50.json": "f38693412cfd0fa2e5b7913939bbcdf6b345421fee4350721d03428ce23418bc",
+    "acceptance-source-54.json": "ecee0f8e7aa33c1d468fcad6b427bcbc403fd8bf4917f0fc5cddff1be2376bad",
+    "acceptance-source-56.json": "2fe637b5729e65b259225ac92afc1a8735742f8a73ba5c034fdca8aaa05dc746",
+    "acceptance-source-57.json": "2cc6f334c61b547be740204f9c8e169f86bd97bc0815e3a2530847922cc8b906",
+    "acceptance-source-58.json": "dc7e87b8db8af97159c984a4354683fd02ca1db569aba5a56a31fe70ba265574",
+    "acceptance-source-59.json": "59387c70f8bcc0e65972e993e340f8f29c2a4ba7b53c143855adc8d345053893",
+    "copy-regression-56.log": "6dda0553ce291b5a361f20f2118e6bdf35df32e06d61cfe5ae8e85b1509cd6d7",
+    "copy-regression-57.log": "6aba2d7e8ece89d42bd68a55498e471e77cd2b820b40ee357683d31f7afcbcf0",
+    "transition-cache-59b.log": "fe2b6cccc627ef24bed9b56e32a5d245eb5e178a25596ea55a7f1403dfaa5a1e",
+    "start-core-58.log": "00b0421e50cf0941eaa574279aa1fd2b251179cc7d078ee5f1326925e39bbbc0",
+    "start-supervisor-58.log": "d75ac907346b008aba3e137408e045effc01ac6db433963ffca1fa4cf355f6ea",
+    "llm-runtime-migration-59.json": "ed1fea583124cad579e5d75db3b5726933b1b6205bd4e079ea507b490d9e48a1",
+    "llm-migration-59.json": "71e5ee8b5c88e1708472776a9382b2031afa4501a6aa1e99408642975f87d235"
+  }
+}

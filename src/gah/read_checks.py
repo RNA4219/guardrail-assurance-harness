@@ -37,6 +37,8 @@ def _copy(value):
         return [_copy(item) for item in value]
     if type(value) is tuple:
         return tuple(_copy(item) for item in value)
+    if type(value) in (str, int, bool, float, bytes, type(None)):
+        return value  # 不変のscalarを再帰的にdeepcopyへ渡す必要はない。
     return deepcopy(value)
 
 
@@ -88,11 +90,49 @@ def checked_read(function):
     return wrapped
 
 
+_source_context = ContextVar('gah_source_context', default=None)
+_source_invalid = False
+
+
+def source_digest_in_scope():
+    if _source_invalid:
+        raise _error('EXTENSION_INVALID')
+    return _source_context.get()
+
+
+@contextmanager
+def source_scope():
+    """要求内のソース照合をまとめ、完了前に再確認する。変更検出後は再起動を要する。"""
+    from .evaluation_authority import _compute_source_digest
+    active = source_digest_in_scope()
+    if active is not None:
+        yield
+        return
+    before = _compute_source_digest()
+    token = _source_context.set(before)
+    global _source_invalid
+    try:
+        try:
+            yield
+        finally:
+            try:
+                if _source_invalid or _compute_source_digest() != before:
+                    raise _error('EXTENSION_INVALID')
+            except BaseException as error:
+                # 途中で作られた計算cacheを、その後の要求で再利用しない。
+                _source_invalid = True
+                if isinstance(error, Exception):
+                    raise _error('EXTENSION_INVALID') from None
+                raise
+    finally:
+        _source_context.reset(token)
+
+
 def checked_action(function):
     parameters = signature(function)
     @wraps(function)
     def wrapped(*args, **kwargs):
         db = parameters.bind(*args, **kwargs).arguments['db']
-        with scope(db):
+        with scope(db), source_scope():
             return function(*args, **kwargs)
     return wrapped

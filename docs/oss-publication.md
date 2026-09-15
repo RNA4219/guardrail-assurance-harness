@@ -2,13 +2,21 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-13
-next_review_due: 2026-10-13
+last_reviewed_at: 2026-09-15
+next_review_due: 2026-10-15
 ---
 
 # MITでのソース公開
 
 2026-09-13の利用者指示に基づき、[Guardrail Assurance Harness](https://github.com/RNA4219/guardrail-assurance-harness)をMITで公開する。正式リリースや製品受入を宣言する工程ではない。
+
+## 2026-09-15 MVP受入後の更新
+
+利用者の反映指示に基づき、全32条件のMVP技術検収結果とCIの12ジョブ並列化を公開更新に含める。[最終証跡](evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)と[受入対応表](evidence/mvp-acceptance-20260913/acceptance-map.json)を現在の判定の正本とする。Taskはdone、技術検収はapproved、release_gate=goである。
+
+固定製品ソースの全898試験と追加CI分割9試験、実Docker通常800試行、現在CI・表示・再起動後不変・全精算・回収を確認済み。利用者の指示により、今回のpush後はGitHub Actionsの完了を待たない。CIの起動・必須チェックは維持し、リモート結果を未確認のまま成功扱いしない。
+
+以下の2026-09-13の成熟度・検査記録は初回公開当時の履歴であり、現在のMVP受入状態を表すものではない。
 
 ## 公開物とライセンス
 
@@ -18,7 +26,7 @@ next_review_due: 2026-10-13
 
 実行環境に依存していた旧版移行テストは、公開した空v2 schemaから一時DBを生成する。保存稿内のGit属性は本文を変えず`.gitattributes.archived`へ移し、manifestに元の名前を残す。これにより保存された属性が公開ツリーの改行を変換しない。
 
-## 公開時の成熟度
+## 初回公開時の成熟度（2026-09-13）
 
 [全MVP Task](tasks/TASK.mvp-completion-09-11-2026.md)は`in_progress`、[技術検収](acceptance/AC-20260911-05.md)は`draft`、全体の`release_gate=no_go`を維持する。未完了範囲は[32要求の監査](mvp-completion-audit.md)で追跡する。
 

@@ -1,0 +1,38 @@
+name: Assurance runtime
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 4 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: assurance-runtime
+  cancel-in-progress: false
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Build fixed fixture runtime
+        run: python -m tools.prepare_fixture_runtime
+      - name: Build fixed authority runtime
+        run: python -m tools.prepare_authority_runtime
+      - name: Full and targeted product supervision
+        run: python -m tools.verify_baseline_runtime --output .ga/scheduled-assurance --supervisor
+      - name: Retain result in workflow log
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          path = Path('.ga/scheduled-assurance/check.json')
+          if path.is_file():
+              result = json.loads(path.read_text('utf-8'))
+              print(json.dumps(result, ensure_ascii=False, indent=2))
+          else:
+              print(json.dumps({'passed': False, 'reason': 'RUNTIME_RESULT_MISSING'}))
+          PY
