@@ -1,0 +1,87 @@
+{
+  "artifact_bytes": 105115208,
+  "ci_eligible": false,
+  "cleanup": {
+    "cleanup_confirmed": true,
+    "post_remove_lookup": "SUCCEEDED_EMPTY",
+    "rm_returncode": 0,
+    "state": "REMOVED"
+  },
+  "cleanup_confirmed": true,
+  "container_exit_code": 0,
+  "container_id": "e2b106fdac7e0860ddc2cb0e0be589ddca5407eece5af869785f8a5c4ffe62b9",
+  "container_name": "gah-normal-seed-v10-0e3a3b4f2349496b",
+  "expected_manifest_sha256": "a0cf0b2126f609e660d73d7793a4a78d36d6115709efdc4d9f7a62fd252f5600",
+  "full_file_count": 11,
+  "full_inventory_sha256": "7f81ba07dd9dc25e24a0e17059acb72b92d5184f79e69781611a63306f8b5636",
+  "full_pac_acceptance": false,
+  "host_source_unchanged": true,
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "kind": "normal_llm_v10_seed_result",
+  "manifest_unchanged": true,
+  "run_id": "0e3a3b4f2349496b",
+  "runtime_locks_unchanged": true,
+  "schema_version": 1,
+  "snapshots": [
+    {
+      "bytes": 25710592,
+      "file": "candidate-adopted.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-adopted.receipt.json",
+      "sha256": "ded29ad01df99938a7b3a05152e87a3f1572132597ed1e3f3a6aef5c22e1e46a"
+    },
+    {
+      "bytes": 25702400,
+      "file": "candidate-new-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-new-complete.receipt.json",
+      "sha256": "25be79846e4b1f1db1cab253205d0ea32be449126ee8992ce6b971ec18c193bf"
+    },
+    {
+      "bytes": 15466496,
+      "file": "candidate-old-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-old-complete.receipt.json",
+      "sha256": "6dd2da00f66457936c9572a54e57e44ba6a77d4f76c05891e2a5476de0a85167"
+    },
+    {
+      "bytes": 7766016,
+      "file": "initial-seed.sqlite",
+      "integrity": "ok",
+      "receipt_file": "initial-seed.receipt.json",
+      "sha256": "d9f50a4a720c24112b10ffefeaa233c305ee3f336d2766ab2d23cc7a725beada"
+    },
+    {
+      "bytes": 28434432,
+      "file": "normal-before-first-op.sqlite",
+      "integrity": "ok",
+      "receipt_file": "normal-before-first-op.receipt.json",
+      "sha256": "7d7861741821849c233a559ad4d0593f3adcf8937b13eb9b9715ba543dd99aca"
+    }
+  ],
+  "source_file_count": 1758,
+  "status": "COMPLETE",
+  "parent_verified_at": "2026-09-19T23:06:41.227825+00:00",
+  "parent_snapshot_integrity_and_counts": true,
+  "parent_source_hashes_match": true,
+  "parent_full_tree_hashes_match": true,
+  "ready_sha256": "37f16d209b9d1c2154e403476e4ff0fae6d914099b5fb83b5030780c89d8303b",
+  "ready_full_file_count": 12,
+  "normal_plan_entries": 800,
+  "normal_request": {
+    "contract_series_id": "llm-series",
+    "expected_contract_ref": {
+      "digest": "8783461dfa0f2912ad1c5ed6b33de4c945a2fda08eed8182a4b91621df4ddc19",
+      "id": "llm-comparison-v2",
+      "kind": "evaluation_contract"
+    },
+    "run_id": "llm-normal",
+    "schema_version": 1,
+    "trigger": "scheduled_full"
+  },
+  "normal_manifest_sha256": "2d8b601fb3850693d8476c36b2ebbefa8c36e767a8b1ed807781a7952c839d03",
+  "normal_plan_sha256": "3b677308c2c013461ebe460cad3a38c245c2b655ffd5221f850c26ca22534967",
+  "fixture_observations_only": true,
+  "real_guardrail_worker_acceptance": false,
+  "acceptance_pass": false
+}

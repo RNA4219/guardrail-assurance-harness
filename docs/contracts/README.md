@@ -8,6 +8,8 @@ next_review_due: 2026-10-11
 
 # データ契約の入口
 
+[拡張仕様の設計ケース](productization-spec-cases.v1.json)は36件の入力断片と期待値で、正式Schemaや実行済み製品証拠ではない。[統合仕様](../productization-spec.md)と合わせて読む。
+
 要求v0.4から独立に作成した基本設計を置く。判定・保存・診断CLIは[コア詳細仕様](../detail-spec.md)へ具体化し、部品入力Schemaと実装を追加した。全MVPの正式Schema・実行監督・外部adapterは未完成。
 
 | 資料 | 内容 |

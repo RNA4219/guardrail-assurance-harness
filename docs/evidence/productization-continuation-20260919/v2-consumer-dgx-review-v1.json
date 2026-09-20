@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_design_review",
+  "model": "qwen3.8-flash-next",
+  "scope": "自作の無害な固定fixture1件、明示v6診断consumer。任意targetや実行コードの追加は扱わない。",
+  "first_attempt": {
+    "error_type": "TimeoutError",
+    "elapsed_seconds": 45.09400000004098
+  },
+  "retry": {
+    "elapsed_seconds": 38.21899999998277,
+    "finish_reason": "stop",
+    "request_sha256": "6b344cad3affff7f78a76ee3ae52986c4f954a6b7ac06151ac15282e463b4996",
+    "response_sha256": "ba5722312e1ea74500e8097288d4f48e4f6d6318c1e81d9b70357899a9e67fdf"
+  },
+  "parent_disposition": [
+    {
+      "topic": "停止と回収の実確認",
+      "decision": "既存DockerRunnerのinspect/kill/rm/不存在確認と所有journal照合を維持。提案された二重実装は追加しない。"
+    },
+    {
+      "topic": "CPU/RSS/IO欠測",
+      "decision": "未知をゼロにしない方針を保持。Attempt schema外へのnull/N/A field追加は不採用。既存metrics sidecarに実観測がある場合のみ使用。"
+    },
+    {
+      "topic": "クラッシュ後の段階復元",
+      "decision": "懸念を採用。既存CheckpointとExecutionJournalの確定要求/receiptを照合し再送を設計・試験する。最大step_indexのみを信用する提案は不採用。"
+    }
+  ],
+  "code_validation": false,
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

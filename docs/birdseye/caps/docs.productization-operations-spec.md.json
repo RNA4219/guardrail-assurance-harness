@@ -1,0 +1,26 @@
+{
+  "id": "docs/productization-operations-spec.md",
+  "role": "productization-operations-spec",
+  "title": "製品化運用詳細仕様（GAH-PR09〜12/14）",
+  "summary": "本書は [拡張要件](productization-requirements.md) の初回導入、診断、判定説明、 中断・保持・移行、管理AIの採択を操作仕様へ落とす設計稿である。実装・性能測定・ 実案件受入はまだ開始しておらず、GAH-PR09〜12/14 と対応する受入条件は NOT_RUN とする。拡張14条件（GAH-PAC01〜14）はすべて初期NOT_RUNであり、既存MVPの要求7文書、受入証拠、32条件の判定は変更しない。 共通の型・reason code・参照・終了値は [共通契約](productization-spec.md) に集約し、 本書では現行のcanonical digestを再利用する。非掲載指定の資産は取得・記載しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/assurance-authority-detail-spec.md",
+    "docs/productization-implementation-spec.md",
+    "docs/productization-performance-spec.md",
+    "docs/productization-requirements.md",
+    "docs/productization-spec.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "docs/productization-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "4cb954558933d0b74deaae429699b7585c24ec9f8d8f519da356c8c3970787bc"
+}

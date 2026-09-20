@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from gah import evaluation_data
 from gah.contracts import ContractError
 from gah.evaluation_data import (
     build_pack,
@@ -85,6 +86,36 @@ class EvaluationDataTests(unittest.TestCase):
                     "approved_source": True,
                 },
             })
+
+    def test_oracle_validation_borrows_read_only_input_and_preserves_public_copy(self):
+        case = self.pack["case_sets"]["acceptance"]["cases"][0]
+        input_ref = case["session_steps"][-1]["input_ref"]
+        oracle_ref = case["oracle_ref"]
+        documents = {
+            (item["ref"]["kind"], item["ref"]["id"]): item["document"]
+            for item in self.pack["documents"]
+        }
+        document = copy.deepcopy(documents[(input_ref["kind"], input_ref["id"])])
+        before = copy.deepcopy(document)
+        expected = documents[(oracle_ref["kind"], oracle_ref["id"])]["expected_detection"]
+        with patch.object(evaluation_data.copy, "deepcopy", wraps=copy.deepcopy) as copies:
+            self.assertEqual(oracle_detection(document), expected)
+        copies.assert_not_called()
+        self.assertEqual(document, before)
+
+        public_document = input_document(self.pack, input_ref)
+        public_before = copy.deepcopy(public_document)
+        self.assertEqual(oracle_detection(public_document), expected)
+        self.assertEqual(public_document, public_before)
+        public_document["observed"][public_document["required"][0]] = not public_document["observed"][public_document["required"][0]]
+        self.assertNotEqual(public_document, documents[(input_ref["kind"], input_ref["id"])])
+
+        invalid = copy.deepcopy(document)
+        invalid["observed"][invalid["required"][0]] = 1
+        invalid_before = copy.deepcopy(invalid)
+        with self.assertRaises(ContractError):
+            oracle_detection(invalid)
+        self.assertEqual(invalid, invalid_before)
 
     def test_oracle_detects_false_before_indeterminate(self):
         document = input_document(

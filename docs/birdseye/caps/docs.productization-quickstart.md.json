@@ -1,0 +1,23 @@
+{
+  "id": "docs/productization-quickstart.md",
+  "role": "productization-quickstart",
+  "title": "固定sampleの導入手順",
+  "summary": "repo rootで実行する。Python 3.11以上、対応するDocker Linux engine、固定lockに対応するimageが必要。固定imageの新規取得・構築には `python -m tools.gah_images prepare --destination <新規配布先>` を使い、完了後に配布先へ移動する。公開済み製品imageの配信は未実施で、新規OSでの5コマンド/30分受入は未完了。[実装Task](tasks/TASK.productization-implementation-09-15-2026.md)に検証範囲を記録する。既存環境の初期化や時計設定の変更は不要で、不成立時には理由を返して停止する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/productization-status.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "1d3b42e018e4d4422fb170736965c918de5b7bab72753bb951f0a4964e070da6"
+}

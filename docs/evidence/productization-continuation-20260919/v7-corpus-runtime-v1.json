@@ -1,0 +1,105 @@
+{
+  "adoption_verified": false,
+  "all_artifacts_restored": true,
+  "authority_connected": false,
+  "baseline_freshness_verified": false,
+  "candidate_read_denied": true,
+  "ci_eligible": false,
+  "corpora": [
+    {
+      "artifact_read_count": 4,
+      "case_count": 400,
+      "case_set_ref": {
+        "digest": "b794c4ead243346bb29fb5503adf01e695e3d2dcb6053b2dc4a6e56ec3fb6224",
+        "id": "qs1-acceptance-400",
+        "kind": "case_set"
+      },
+      "corpus_ref": {
+        "digest": "8085b7b8ada5857de1bf5cf667e9ee5fe09d607baf3c4682833a81dfd81eba2b",
+        "id": "gah-query-scale-v1-400",
+        "kind": "query_scale_corpus_index"
+      },
+      "reconstructed_bytes": 597766,
+      "reconstructed_digest": "206df1bccd7c836732302d6b2a8843f92718c58fedd4970858b221c2ec2e8ad4"
+    },
+    {
+      "artifact_read_count": 4,
+      "case_count": 800,
+      "case_set_ref": {
+        "digest": "e47ef08e72867ce0101b5589f0157217c882e8589b641d720c2db404cebd2e81",
+        "id": "qs1-acceptance-800",
+        "kind": "case_set"
+      },
+      "corpus_ref": {
+        "digest": "368f880c5a9eb182d57fae5bbe75c404bb5488d88eaf46570ae99d3cd1514321",
+        "id": "gah-query-scale-v1-800",
+        "kind": "query_scale_corpus_index"
+      },
+      "reconstructed_bytes": 1205246,
+      "reconstructed_digest": "3d6a1006c4c894c9e0201783554cf92553c3ef94cbbf66da90e81b43d78ef777"
+    },
+    {
+      "artifact_read_count": 6,
+      "case_count": 1600,
+      "case_set_ref": {
+        "digest": "5bd7c0d7532a1ddd6f74c34c0e819260e48c88603957df1352736c74db13262f",
+        "id": "qs1-acceptance-1600",
+        "kind": "case_set"
+      },
+      "corpus_ref": {
+        "digest": "ec028e22b9fbe1479063adfc6b649922be84157e98a51e53dc486f9266a6a699",
+        "id": "gah-query-scale-v1-1600",
+        "kind": "query_scale_corpus_index"
+      },
+      "reconstructed_bytes": 2210921,
+      "reconstructed_digest": "f4ee6e93e51512f4c9d8d761d04b30cf1d26a560a35d0ae1ab125d663218c838"
+    }
+  ],
+  "database_mode": "partitioned-v7",
+  "driver_sha256": "dbb0c237ffcedfa16ef0e7ff739d9d3ac307dab6a42a1ff2f7689e9c2672a965",
+  "elapsed_seconds": 138.843,
+  "extension_digest": "907111e1b6a07596133cec842a026ab51b75dec74262f719d3b8687ebcb7e00a",
+  "full_pac_acceptance": false,
+  "kind": "v7_corpus_runtime_result",
+  "plan_sha256": "ba2357e25fdf2dee632b54c79182665806cc3d41a6889e2bf5b1dea75b65d9d6",
+  "policy_generation": 1,
+  "policy_series_id": "gah-initial-policy-v1",
+  "restart_reads_verified": true,
+  "runtime_cleanup_confirmed": true,
+  "runtime_verified": false,
+  "schema_version": 1,
+  "slo_acceptance": false,
+  "source_manifest_sha256": "f7df1e45eb2c5cb89910d583053ac7efbc49754f573d6b8324aa5953913fa029",
+  "state_volume_retained": true,
+  "status": "PASS_PROVISIONING_DIAGNOSTIC_ONLY",
+  "host_verification": {
+    "ci_eligible": false,
+    "cleanup_confirmed": true,
+    "cleanup_errors": [],
+    "driver_unchanged": true,
+    "elapsed_seconds": 144.015,
+    "exit_code": 0,
+    "full_pac_acceptance": false,
+    "host_unchanged": true,
+    "inner_decode_error": null,
+    "inner_result_sha256": "c95211f84c9bd5fd51d1fbcc3c44925c08dab83d7aca36f56e3e42e443438576",
+    "inner_status": "PASS_PROVISIONING_DIAGNOSTIC_ONLY",
+    "kind": "v7_corpus_parent_execution",
+    "log_sha256": "2ea4490a4b538af27bae28cbec29fc85376a1c8e3245fcf5282e7f5d57791806",
+    "plan_sha256": "ba2357e25fdf2dee632b54c79182665806cc3d41a6889e2bf5b1dea75b65d9d6",
+    "plan_unchanged": true,
+    "schema_version": 1,
+    "slo_acceptance": false,
+    "source_unchanged": true,
+    "state_volume_retained": true,
+    "timed_out": false
+  },
+  "host_result_sha256": "d8a86207a7aac2d96eeeb1dc78948c726b9561fe04420cfd51148661ff8800fb",
+  "inner_result_sha256": "c95211f84c9bd5fd51d1fbcc3c44925c08dab83d7aca36f56e3e42e443438576",
+  "scope": "実schema-v7 authorityとOS peer認証で固定query-scale corpus 400/800/1600を分割保存。manager begin/put/commit/同request再送、validator読取、コンテナ再起動後operator読取、candidate拒否とowned cleanup。worker/契約/runは作成しない。",
+  "limits": [
+    "契約producer、LLM materializer/admission、baseline/gen2通常runは未接続。",
+    "新規v7 databaseだけ。既存v6からの移行は未実装。",
+    "この経路は保存診断で、SLO・実案件・全PAC受入の証拠ではない。"
+  ]
+}

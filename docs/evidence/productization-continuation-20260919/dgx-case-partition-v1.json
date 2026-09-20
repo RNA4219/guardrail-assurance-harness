@@ -1,0 +1,21 @@
+{
+  "kind": "dgx_case_partition_design_review",
+  "status": "REVIEW_RECEIVED",
+  "elapsed_seconds": 32.57799999997951,
+  "request_sha256": "b8b2445b3b77c686c5a062f3bfb952d721bc1d4241ef876c0fa0fe2e87160717",
+  "response_sha256": "c560f08c289bfa1fcd24f3df257252c49f86e7a54be18392980f978cd9121800",
+  "model": "qwen3.8-flash-next",
+  "acceptance_pass": false,
+  "finish_reason": "length",
+  "scope": "pure CaseSet transfer codec design only",
+  "full_review_completed": false,
+  "accepted_clarifications": [
+    "reconstructed digest is SHA256 of complete canonical v1 CaseSet bytes; each segment ref hashes its own complete artifact",
+    "segment position and case ordinal are both zero-based and contiguous",
+    "canonical byte counter includes header, count digits, delimiters and array brackets; finished bytes must equal prediction"
+  ],
+  "supervisor_decisions": [
+    "existing CaseSet 1MiB semantic limit remains mandatory",
+    "no database, authority, source freshness, runtime admission or PAC acceptance inferred"
+  ]
+}

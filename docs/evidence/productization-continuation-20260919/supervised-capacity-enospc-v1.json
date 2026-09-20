@@ -1,0 +1,244 @@
+{
+  "artifacts": {
+    "attempt1_plan": {
+      "bytes": 9083,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/attempt1-plan.json",
+      "sha256": "6487fd70fcec7481c87942da5c87e19bb18d2d9142e80985de852db6a2327062"
+    },
+    "attempt1_probe": {
+      "bytes": 518,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/attempt1-probe-result.json",
+      "sha256": "85b5e23f5befe6b4af8c680afd42626c8bde51bfa7240e91e421e26b871daa71"
+    },
+    "attempt1_result": {
+      "bytes": 7923,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/attempt1-result.json",
+      "sha256": "d1cfe5e7fb3194bd799e9955dcc29c8fd564c83e29bf607507923dd6a5fdf214"
+    },
+    "attempt1_run_log": {
+      "bytes": 1542,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/attempt1-docker-run.log",
+      "sha256": "b36a7c452e78dd7fcacab7d0bc10a367466776bd481efc2c34d5834d3932e1bb"
+    },
+    "plan": {
+      "bytes": 44352,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/plan.json",
+      "sha256": "ff4a05bf9884d6611e3245cd39d2e965c7d3eb374d4e8515a40ca4193de2e701"
+    },
+    "probe": {
+      "bytes": 4632,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/probe-result-attempt2.json",
+      "sha256": "a777b5551eabd1f8d513f1e49a0fb96bbab16c1f17fd18258467b9b2073c423f"
+    },
+    "result": {
+      "bytes": 81347,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/attempt2-result.json",
+      "sha256": "237f89a93bbe8acb2dd47f998529c2ae63e3ea729f45c1be026b6e3362b3121c"
+    },
+    "run_log": {
+      "bytes": 1379,
+      "path": ".ga/productization-implementation-20260919/supervised-capacity-enospc-v1/docker-run-attempt2.log",
+      "sha256": "fdd0afd2de4f349af4c08260319bbb9bc09ad7cd736120c1b04b7711def72138"
+    }
+  },
+  "attempt2_container": {
+    "artifact_mount": "writable stage bind at /artifacts",
+    "cap_drop": [
+      "ALL"
+    ],
+    "cleanup": {
+      "owned_container_verified": true,
+      "remove_exit_code": 0,
+      "removed": true
+    },
+    "cpus": 2,
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "id": "1f4b5fbc749911f8459a12b032c0315536e1e130dccf6f3b6aed3c0296535453",
+    "memory_bytes": 2147483648,
+    "name": "/gah-supervised-capacity-enospc-98c332c8d4f44803",
+    "network": "none",
+    "no_new_privileges": true,
+    "owned_label_match": true,
+    "pids_limit": 64,
+    "rootfs_read_only": true,
+    "runtime_constraints_verified": true,
+    "source_mount": "readonly /source",
+    "tmpfs": {
+      "/pressure": 33554432,
+      "/tmp": 536870912
+    },
+    "user": "65532:65532",
+    "uuid": "98c332c8d4f448039e3b0ab22e8dfe84"
+  },
+  "attempts": {
+    "attempt1": {
+      "log_owned_container_removals": 2,
+      "log_prepared_events": 2,
+      "note": "The first attempt log records two separately UUID-labelled starts and two owned removals; both were cleaned. Cause of the duplicate invocation is not asserted. This failed attempt is excluded from the successful attempt measurement.",
+      "preserved_artifacts": [
+        "attempt1_result",
+        "attempt1_probe",
+        "attempt1_run_log",
+        "attempt1_plan"
+      ],
+      "reason": "probe read the FailureSink path before gah_run.execute performed SINK_INIT; the missing path raised FileNotFoundError before ENOSPC was exercised.",
+      "status": "INCOMPLETE_BEFORE_PRESSURE"
+    },
+    "attempt2": {
+      "docker_run_exit_code": 0,
+      "elapsed_seconds": 247.359,
+      "failure_reason": null,
+      "status": "PASS_LOCAL_DIAGNOSTIC_NOT_PRODUCT_ACCEPTANCE",
+      "wall_limit_seconds": 300
+    },
+    "successful_attempt": 2
+  },
+  "checks": {
+    "count": 16,
+    "items": {
+      "authority_receipts_unchanged": true,
+      "driver_artifact_hash_binding": true,
+      "failure_sink_preallocated_size": true,
+      "failure_sink_recorded": true,
+      "first_end_checkpoint_attempted": true,
+      "first_failure_envelope_unchanged_after_cancel": true,
+      "fresh_process_reads_unknown_envelope_under_pressure": true,
+      "linux_fifo_and_symlink_tests": true,
+      "no_attempt_after_capacity_failure": true,
+      "one_finished_journal_receipt": true,
+      "one_intended_unsettled_operation": true,
+      "ordinary_cancel_invoked": true,
+      "os_capacity_errno_observed": true,
+      "run_exit_two": true,
+      "run_failure_code": true,
+      "unknown_envelope": true
+    },
+    "passed_count": 16,
+    "probe_check_count": 15
+  },
+  "created_by": "bounded local execution summary; no product/spec/source changes",
+  "driver_gates": {
+    "all_328_python_hashes_unchanged": true,
+    "container_constraints_valid": true,
+    "owned_container_removed": true,
+    "probe_host_artifact_digest_verified_before_cleanup": true,
+    "source_major_hashes_unchanged": true
+  },
+  "enospc_observation": {
+    "actual_product_boundary_result": {
+      "ci_eligible": false,
+      "exit_code": 2,
+      "failure_record": "RECORDED",
+      "kind": "supervised_run_error",
+      "reason": "CAPACITY_IO_ERROR",
+      "schema_version": 1
+    },
+    "bounded_max_bytes": 33619968,
+    "bytes_written_before_errno": 33284096,
+    "capacity_bytes": 33554432,
+    "chunk_bytes": 65536,
+    "errno": 28,
+    "errno_name": "ENOSPC",
+    "filesystem": "dedicated /pressure tmpfs",
+    "filler_path": "/pressure/filler"
+  },
+  "evidence_status": "PASS_LOCAL_DIAGNOSTIC_NOT_PRODUCT_ACCEPTANCE",
+  "kind": "supervised_capacity_enospc_local_diagnostic_evidence",
+  "limits_and_interpretation": {
+    "attempt_history": "Attempt1 failed before pressure; attempt2 is the sole passing measurement. Earlier duplicate attempt1 starts are retained transparently in the referenced log.",
+    "capacity_gate": "This single tmpfs failure path does not demonstrate the complete capacity gate, host physical quota, setup/apply path, or all receipt/reservation routes.",
+    "durability": "The fresh-process check demonstrates readback from a separate process while the same container filesystem remained mounted; it does not establish OS-crash or power-loss durability.",
+    "source_v7_image_difference": "The run used the cached Python base corresponding to source-v7, but mounted and executed the current readonly repository checkout. It was not an exact locked authority image run; the listed diagnostic deltas are scoped to the recorded fixture/source closure and do not enumerate all post-v7 repository changes."
+  },
+  "linux_failure_sink_reopen_tests": {
+    "errors": 0,
+    "failure_types": [],
+    "failures": 0,
+    "run": 2,
+    "skipped": 0
+  },
+  "schema_version": 1,
+  "scope": {
+    "capacity_gate_overall": "NOT_DEMONSTRATED",
+    "claim": "Fixed synthetic supervised-run capacity integration on one Linux tmpfs using the current readonly repository checkout and the cached source-v7 Python base.",
+    "not_claimed": [
+      "whole-product capacity acceptance",
+      "host filesystem physical quota",
+      "production authority image acceptance",
+      "OS crash durability",
+      "SLO or generalized workload acceptance",
+      "complete setup/capacity gate"
+    ]
+  },
+  "source": {
+    "all_python_file_count": 328,
+    "all_python_hash_scope": [
+      "src/gah/**/*.py",
+      "tools/**/*.py",
+      "tests/**/*.py"
+    ],
+    "all_python_hash_set_sha256": "5133d683af3b0074e5f58d0b5f7ba375c58b7f50d56f47579a544dce60aa8205",
+    "all_python_hashes_before_after_equal": true,
+    "cached_base_image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+    "diagnostic_major_delta_paths": [
+      "src/gah/supervised_capacity.py",
+      "src/gah/bounded_files.py",
+      "src/gah/storage_budget.py",
+      "src/gah/supervisor_checkpoint.py",
+      "src/gah/assurance_authority.py",
+      "tools/gah_run.py",
+      "tests/test_supervised_capacity.py"
+    ],
+    "no_raw_328_file_manifest_duplicated": true,
+    "python_base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
+    "snapshot_manifest_ref": ".ga/productization-implementation-20260919/source-v7-manifest.json",
+    "source_mode": "readonly current repository bind; this is a source-v7-base local delta diagnostic, not an exact locked authority image run",
+    "source_v7_delta_scope_note": "Only the listed diagnostic source closure; not a claim about every post-v7 repository change."
+  },
+  "state_evidence": {
+    "after_capacity_failure": {
+      "attempt_count": 0,
+      "operation": {
+        "intended": true,
+        "operation_id": "supervised-037926634e23ee6fae66d31a-op-0",
+        "settled": false,
+        "stopped": false
+      },
+      "operation_count": 1
+    },
+    "after_pressure_released_and_cancel": {
+      "attempt_count": 0,
+      "cancel_exit_code": 3,
+      "execution_status": "CANCELLED",
+      "operation": {
+        "intended": true,
+        "operation_id": "supervised-037926634e23ee6fae66d31a-op-0",
+        "settled": true,
+        "stopped": true
+      },
+      "original_failure_envelope_bytes_unchanged": true,
+      "unresolved_operations": []
+    },
+    "authority_receipts_unchanged": true,
+    "failure_envelope": {
+      "checkpoint_state": "UNKNOWN",
+      "ci_eligible": false,
+      "exit_code": 2,
+      "failure_stage": "EXECUTE",
+      "kind": "supervised_capacity_failure",
+      "reason": "CAPACITY_IO_ERROR",
+      "receipt_state": "UNKNOWN",
+      "run_id": "supervised-run",
+      "schema_version": 1,
+      "unsettled_operations": {
+        "state": "UNKNOWN"
+      }
+    },
+    "fresh_process_read_while_pressure_retained": true,
+    "journal": {
+      "receipt_present": true,
+      "row_count": 1,
+      "state": "FINISHED"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "all_productization_acceptance": false,
+  "byte_count": 39963457,
+  "copy_hashes_verified_after_runtime": true,
+  "copy_hashes_verified_before_runtime": true,
+  "file_count": 1855,
+  "kind": "verification_source_freeze",
+  "manifest_sha256": "b684d17994a7f6f6c6b8705b8059eb1eb9caa3a9358affa72de3e934d686588e",
+  "required_input_count": 4,
+  "schema_version": 1,
+  "source": "source-v16"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "REVIEW_RETURNED",
+  "wall_seconds": 6.39,
+  "request_sha256": "52f89eab8a19595b612c96e3c17cc1e6fa3cd47dc8eca9aa0439b06b6c50f1c4",
+  "response_sha256": "f5d87c79e0ecf380db0883b591cf9174bb922a35e635e0e8e2247a1330eb0d1b",
+  "scope": "bounded design critique only, no acceptance authority",
+  "ci_eligible": false,
+  "dispositions": [
+    {
+      "item": 1,
+      "decision": "boundary tests; no memory safety proof inferred"
+    },
+    {
+      "item": 2,
+      "decision": "test replay after restart with uploaded segments before commit"
+    },
+    {
+      "item": 3,
+      "decision": "test expiry cleanup cannot expose removed old data and permits new begin"
+    },
+    {
+      "item": 4,
+      "decision": "reject schema priority interpretation; preserve rows and revalidate current authority bindings"
+    }
+  ]
+}

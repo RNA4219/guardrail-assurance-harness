@@ -1,0 +1,36 @@
+{
+  "capacity_bound_verified": false,
+  "ci_eligible": false,
+  "errors": 0,
+  "failures": 0,
+  "full_pac_acceptance": false,
+  "id": "storage-probe-parent-review-v1",
+  "kind": "local_validation_observation",
+  "local_source_artifact_sha256": "e5ae565a41f6a9d7aba14b91418803dc8d4f849bcf6c8c741b59012d88af3e1d",
+  "partial_file_write_incident": {
+    "atomic_replacement_readback": true,
+    "final_syntax_verified": true,
+    "original_failure": "doctor-storage-intermediate-v1.json",
+    "restored": true
+  },
+  "review_fixes": [
+    "unhashable status rejected as ContractError",
+    "validated nested values isolated from caller",
+    "zero statvfs allocation unit rejected",
+    "missing inode stays null while byte observation remains",
+    "generic removed-client exception preserves other resource scopes"
+  ],
+  "schema_version": 1,
+  "seconds": 4.009,
+  "source_sha256": {
+    "src/gah/operations.py": "7ad1d4608aa64e69fd62deef71eabe805a59f6af515c5d3275983e550e804793",
+    "src/gah/storage_observation.py": "fadb1ef89e7eff270e018f8eaa5c54cd4dc1823b8dc2db98ab10e28eb87a4f99",
+    "tests/test_authority_resource_probe.py": "dd044f0b1a019d665b30e4990539e131cdd2fcb1cf2f6573effd48aba28d8fe7",
+    "tests/test_authority_storage_probe.py": "1f14c70b0ec34c332794911e1c2a1f12fe5197c1e41843f214d67131ac6015fe",
+    "tests/test_doctor_storage_connection.py": "b57ae3a95458cb9ab0233223783d0f545374d5ede7d4537fc6722f8c6fd6c76a",
+    "tools/authority_resource_probe.py": "ed11fc5a6c1151b1a593542a4fc1c04d0a2fc2641eab2b1b45e24b0ca24d3040",
+    "tools/authority_storage_probe.py": "caac11f057b857488bf294e987dde6bf665a3930ae8746891aab5d9f1433f991",
+    "tools/gah_ops.py": "ae86e929e9d6892c38d567acb4871660e61c462f7015e13edc4180836672dfb6"
+  },
+  "tests_run": 67
+}

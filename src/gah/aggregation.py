@@ -253,6 +253,11 @@ def _aggregate_uncached(bound_run: Any, attempts: Any, *, execution_profile: Any
     常に false であり、ここでは認証・基準採択・通常CI判定を行わない。
     """
     bound = _rebind(bound_run, baseline_context)
+    return _aggregate_validated(bound, attempts, execution_profile=execution_profile)
+
+
+def _aggregate_validated(bound: dict[str, Any], attempts: Any, *, execution_profile: Any) -> dict[str, Any]:
+    """集計入力binding済みのprivate core。呼出元がfresh bindingを保証する。"""
     profile = _validate_profile(execution_profile)
     execution_profiles.check_plan(profile, bound)
     if type(attempts) is not list or len(attempts) > MAX_ATTEMPTS:

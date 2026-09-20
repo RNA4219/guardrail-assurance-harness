@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "local_implementation_review",
+  "id": "query-slo-parent-review-v1",
+  "scope": "point query SLO comparison and plain test lane success gate",
+  "changes": [
+    {
+      "issue": "point query pooled cold/warm samples could claim the full query SLO",
+      "resolution": "retain arithmetic and failures; point query result requires INCONCLUSIVE and slo_evidence=false; independently confirmed boolean cannot substitute for full query matrix"
+    },
+    {
+      "issue": "plain test lane accepted skip and expected failure while timing lane rejected them",
+      "resolution": "share the same all-planned-tests-success rule and expose failure/error/skip/expected-failure/unexpected-success counts"
+    },
+    {
+      "issue": "three Fraction helpers had identical shadowed definitions",
+      "resolution": "remove the duplicates only after exact AST body comparison"
+    }
+  ],
+  "verification": {
+    "test_count": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 0.8130000000237487,
+    "source_hashes": {
+      "src/gah/benchmark.py": "74f35cb0a33ead164f5b114907e126df2304c9bed4170faab064028cbb46635b",
+      "tests/test_benchmark.py": "ee29b8c7cde6438d723a4246eb33937342f5a67434815c09558ffb905edb9e8f",
+      "tests/test_benchmark_review.py": "1fd5f15f035483969867b1e4a795ca7e475c0c0b134fde06078a3a39d220b3e6",
+      "tools/test_matrix.py": "680703c38e62029b4b83722c8825a1fb0d0bbaa2f4bf360b37f7499cfeed274e",
+      "tests/test_test_matrix.py": "3a711a84091b469940877901218da5053ef21ffcff92853009836036b5903097",
+      "tests/test_ci_history.py": "5e746f881a5f3a4e42418899a6b2e87b844bc10ec462a62dbc594624fc30037b"
+    },
+    "source_unchanged": true,
+    "full_regression": false,
+    "full_pac_acceptance": false
+  },
+  "model_review": {
+    "model": "qwen3.8-flash-next",
+    "request_sha256": "d9dc1704ed1ca7f7935f55109c41494be6160443921110a86d145fca2611ffdf",
+    "first_attempt": "NO_ANSWER_LENGTH_LIMIT",
+    "second_attempt": "RECEIVED",
+    "disposition": [
+      {
+        "point": "cell observations and ordered reference integrity within document size cap",
+        "decision": "accepted as review/test requirement"
+      },
+      {
+        "point": "separate persistence/cleanup failures and SLO-ineligibility reasons",
+        "decision": "accepted as review/test requirement"
+      },
+      {
+        "point": "full 27-cell inventory and warmup exclusion",
+        "decision": "accepted; exclude warmup only, not samples beyond p95"
+      }
+    ]
+  },
+  "limits": [
+    "new query series runtime lifecycle not yet proven",
+    "full regression not completed",
+    "synthetic unit observations are not performance evidence"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

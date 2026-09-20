@@ -1,0 +1,436 @@
+[
+  {
+    "acceptance_id": "GAH-PAC01",
+    "checked_at": 1789475925,
+    "evidence_refs": [],
+    "id": "productization-pac-01-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR01",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC02",
+    "checked_at": 1789475925,
+    "evidence_refs": [],
+    "id": "productization-pac-02-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR02",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC03",
+    "checked_at": 1789475925,
+    "evidence_refs": [],
+    "id": "productization-pac-03-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR03",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC04",
+    "checked_at": 1789475925,
+    "evidence_refs": [],
+    "id": "productization-pac-04-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR04",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC05",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "3fde37654d66d4a8cfd2eaebafc045a08e7a7ac19f51b989868c2df61ad9188a",
+        "id": "setup-copy-profile-v5",
+        "kind": "local_profile_comparison"
+      }
+    ],
+    "id": "productization-pac-05-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR05",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC06",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "3fde37654d66d4a8cfd2eaebafc045a08e7a7ac19f51b989868c2df61ad9188a",
+        "id": "setup-copy-profile-v5",
+        "kind": "local_profile_comparison"
+      }
+    ],
+    "id": "productization-pac-06-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR06",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC07",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-07-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR07",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC08",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "12d489c6e1c91f101355fbfd6e0961f9215a9c3142f65687ceeb213a469502bc",
+        "id": "test-inventory-v5",
+        "kind": "test_inventory_observation"
+      }
+    ],
+    "id": "productization-pac-08-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR08",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC09",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-09-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR09",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC10",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-10-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR10",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC11",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-11-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR11",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC12",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-12-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR12",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC13",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-13-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR13",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC14",
+    "checked_at": 1789475925,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "12d489c6e1c91f101355fbfd6e0961f9215a9c3142f65687ceeb213a469502bc",
+        "id": "test-inventory-v5",
+        "kind": "test_inventory_observation"
+      }
+    ],
+    "id": "productization-pac-14-v6",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "b4d3b7fa04f0b022585307a41d88f7549a4abd37cfc87aaec8f19d782f50da75",
+      "id": "productization-local-verification-v5",
+      "kind": "productization_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR14",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+      "id": "final-source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  }
+]

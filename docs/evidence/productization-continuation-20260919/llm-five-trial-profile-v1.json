@@ -1,0 +1,71 @@
+{
+  "id": "llm-five-trial-profile-v1",
+  "kind": "diagnostic_profile",
+  "limits": [
+    "既存helperの400予定から先頭5試行だけ計測。setupはprofile対象外。",
+    "inclusive時間のカテゴリは重なり、加算できない。400/800の性能や受入に外挿しない。"
+  ],
+  "raw_result_sha256": "8048431ef59df17125f34868eb800140b5d2a4be54068286a4f414396c6c44d4",
+  "result": {
+    "acceptance_pass": false,
+    "completed_trials": 5,
+    "elapsed_seconds": 6.01600000000326,
+    "error": null,
+    "full_plan_entries": 400,
+    "planned_trials": 5,
+    "profile_seconds": 2.9679999999934807,
+    "profile_summary": {
+      "category_totals": {
+        "canonical": {
+          "calls": 20578,
+          "cumulative_seconds": 0.7547693000000001,
+          "own_seconds": 0.18367540000000002
+        },
+        "deepcopy": {
+          "calls": 383091,
+          "cumulative_seconds": 0.7592351,
+          "own_seconds": 0.20585050000000002
+        },
+        "guardrail": {
+          "calls": 435,
+          "cumulative_seconds": 1.7904878,
+          "own_seconds": 0.0134684
+        },
+        "read_checks": {
+          "calls": 1660,
+          "cumulative_seconds": 2.2687816,
+          "own_seconds": 0.0025885
+        },
+        "source_reads": {
+          "calls": 3885,
+          "cumulative_seconds": 0.8357008,
+          "own_seconds": 0.0094805
+        }
+      },
+      "primitive_calls": 4138291,
+      "scope": "first five observe_entry calls only; setup excluded",
+      "total_calls": 4345856,
+      "total_own_seconds": 2.975381900000001
+    },
+    "profiled": true,
+    "receipt_fabricated": false,
+    "scratch_removed": true,
+    "setup_seconds": 3.0320000000065193,
+    "source_hashes": {
+      "fixtures/llm/guardrail_worker.py": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+      "src/gah/guardrail_results.py": "f52c0d28254b785c2b46227a348ec2a14bc927757e8a6a73f353d0fd0fec48e8",
+      "src/gah/guardrail_runtime.py": "2542c59462d00864b4edd2218783ff7df9854c62ea590029da54197abf24a638",
+      "src/gah/llm_admission.py": "11dbda6c7557c6a70dbfb23e4e1732cd59388a46c1f6a2aa9b2ce6d47a28c4f5",
+      "src/gah/llm_materialization.py": "6fe2e33fbd978b86e46f387b8ff13e16689bac60edc862210e02827972969e7c",
+      "src/gah/read_checks.py": "ef0a098db5b7e61c7ab1d359e88be46e2866b0cd524974a3416370d849a532be",
+      "src/gah/resource_authority.py": "2887bcca1eaa35de5e6387686b81f8495694f17d8b0e0ef476636f950166831d",
+      "src/gah/supervised_run.py": "1b42a7294e0cb25754664490d8a39bb35d8140a20603b087dcf5166ce21a02d8",
+      "tests/llm_case_helpers.py": "73d5ad8d2a7f51e9225919d990e43d0edf199a365a35c394665b1257bee8251e",
+      "tests/test_guardrail_runner.py": "9ccc38800676164461f09759de661ed215a0fc23b13c8f8c11f1013da21d4517",
+      "tests/test_llm_admission.py": "0d599e2fedf025767cbc835cdcad1ae28c23bcb1abebd9095d926185bb7ac661",
+      "tests/test_llm_transitions.py": "31be4d22baf3f5a06516d450cc58fc4e97907503a8f8ad66bb8687627db2216a"
+    },
+    "status": "PROFILED_5_TRIALS"
+  },
+  "schema_version": 1
+}

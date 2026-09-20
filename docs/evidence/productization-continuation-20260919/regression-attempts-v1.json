@@ -1,0 +1,280 @@
+{
+  "all_final_source_tests_executed": false,
+  "attempts": [
+    {
+      "attempt": "regression-v1",
+      "result": {
+        "ci_eligible": false,
+        "elapsed_ns": 3600360000000,
+        "full_pac_acceptance": false,
+        "full_regression": true,
+        "id": "regression-v1",
+        "kind": "local_validation_observation",
+        "lanes": [
+          {
+            "exit_code": 0,
+            "lane": "mutation-review",
+            "log_sha256": "ad0d866065b34c10bd05866353b028360456ad197b831b0eddf8f7951f7fd491",
+            "summary": {
+              "lane": "mutation-review",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 5,
+              "seconds": 414.514,
+              "tests_run": 5
+            }
+          },
+          {
+            "exit_code": 0,
+            "lane": "following-contract",
+            "log_sha256": "4ff2b3b6b90d75f46193a6bc0b9493b7cae647e1b2cc3853c697ddfea2c7e849",
+            "summary": {
+              "lane": "following-contract",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 6,
+              "seconds": 791.442,
+              "tests_run": 6
+            }
+          },
+          {
+            "exit_code": 0,
+            "lane": "regression-1",
+            "log_sha256": "e7d5e91bc724c74b083e15eadb0cd00d1e4fac068233ee53229feb2302ec5ffa",
+            "summary": {
+              "lane": "regression-1",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 201,
+              "seconds": 90.236,
+              "tests_run": 201
+            }
+          },
+          {
+            "exit_code": 0,
+            "lane": "llm-revision",
+            "log_sha256": "f01053cdadeac71d717af1bb22822b3a6836ddc723fa785e50302a49bbfca456",
+            "summary": {
+              "lane": "llm-revision",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 1,
+              "seconds": 1640.302,
+              "tests_run": 1
+            }
+          },
+          {
+            "exit_code": 0,
+            "lane": "regression-2",
+            "log_sha256": "5891331bac8f1dfae9b55bb3bd6bac6718cc5706b62e390372ac03467121c4a6",
+            "summary": {
+              "lane": "regression-2",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 201,
+              "seconds": 787.964,
+              "tests_run": 201
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "combined",
+            "log_sha256": "4a06bc1bd6540720215832ca3098026b007eefda141c7a21f44515e63551ca5c",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "llm-supervision",
+            "log_sha256": "715ef6ff0b45cc3c37d3a1c00d4c5d73d646f49fe9c95cfe5167b407bd51e1ee",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "finding-revalidation",
+            "log_sha256": "fa7dfb83ab1439cfd2f87bb8f7823e472acf82d67459c0ceb4ef98adea6d56d7",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          },
+          {
+            "exit_code": 0,
+            "lane": "regression-4",
+            "log_sha256": "0038c30569972b2c6abd21749809af9b987e0d376db520cf97cae184014339e4",
+            "summary": {
+              "lane": "regression-4",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 199,
+              "seconds": 438.02,
+              "tests_run": 199
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "regression-0",
+            "log_sha256": "696620a04b216888bb05a773e0e7b54595c4306727a61af6e00c2a665a453797",
+            "summary": null
+          },
+          {
+            "exit_code": 0,
+            "lane": "regression-3",
+            "log_sha256": "716b4cc3696baab0e9546ff2e0efe73e48f5f639a323f5277f15df4cf17e5fcd",
+            "summary": {
+              "lane": "regression-3",
+              "passed": true,
+              "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+              "planned_tests": 199,
+              "seconds": 808.25,
+              "tests_run": 199
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "regression-5",
+            "log_sha256": "700cdfbd67b5a51e128a173bc648df5dff3939c209dc6d1ec75fa43ef7fd5847",
+            "summary": null
+          }
+        ],
+        "passed": false,
+        "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+        "schema_version": 1,
+        "source_unchanged": true,
+        "total_tests": 1223
+      },
+      "result_file_sha256": "17e9f482d29386ab0d4ed65a7c1d1f5f96ca3818921ffabd18f621a36e3a24b9",
+      "source_id": "source-v3"
+    },
+    {
+      "attempt": "regression-timeout-retry-v1",
+      "result": {
+        "ci_eligible": false,
+        "elapsed_ns": 3600297000000,
+        "full_pac_acceptance": false,
+        "full_regression": false,
+        "id": "regression-timeout-retry-v1",
+        "kind": "local_validation_observation",
+        "lanes": [
+          {
+            "exit_code": 124,
+            "lane": "finding-revalidation",
+            "log_sha256": "cfcb1ded4ed986409ce8b78a38fe3e6e4ac45513c1ef519cd6ef5eb7ac662a1a",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "combined",
+            "log_sha256": "5944bd9b8401d627451dd4349aa81bde71393928bf5ed0cc085d412771202975",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          },
+          {
+            "exit_code": 124,
+            "lane": "llm-supervision",
+            "log_sha256": "ac7a7e47fb2329ad1e85f2bdc01489557afc038ffde3da587b311fad0dc75640",
+            "summary": {
+              "sqlite_seed_cases": 400
+            }
+          }
+        ],
+        "passed": false,
+        "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+        "previous_result": "regression-v1",
+        "retry_reason": "local verifier 1800-second timeout, not a product SLO threshold",
+        "schema_version": 1,
+        "selected_planned_tests": 10,
+        "source_unchanged": true,
+        "total_tests": 1223
+      },
+      "result_file_sha256": "56cae0c314e2a4fd301c111ad96393bc131f5f747792d9db046aad6c2de47f4b",
+      "source_id": "source-v3"
+    },
+    {
+      "attempt": "regression-general-retry-v1",
+      "result": {
+        "ci_eligible": false,
+        "elapsed_ns": 3600281000000,
+        "full_pac_acceptance": false,
+        "full_regression": false,
+        "id": "regression-general-retry-v1",
+        "kind": "local_validation_observation",
+        "lanes": [
+          {
+            "exit_code": 124,
+            "lane": "regression-0",
+            "log_sha256": "696620a04b216888bb05a773e0e7b54595c4306727a61af6e00c2a665a453797",
+            "summary": null
+          }
+        ],
+        "passed": false,
+        "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+        "previous_result": "regression-v1",
+        "retry_reason": "local verifier 1800-second timeout, not a product SLO threshold",
+        "schema_version": 1,
+        "selected_planned_tests": 201,
+        "source_unchanged": true,
+        "total_tests": 1223
+      },
+      "result_file_sha256": "4d7a95a0a57610688527dcbf1fdb43cc4c8b41a4d727cd47853ced08a1e9e282",
+      "source_id": "source-v3-testfix"
+    },
+    {
+      "attempt": "regression-5-remaining-v2",
+      "result": {
+        "ci_eligible": false,
+        "elapsed_ns": 527672000000,
+        "errors": 0,
+        "failures": 0,
+        "full_pac_acceptance": false,
+        "kind": "local_test_continuation_result",
+        "local_aggregate_only": true,
+        "original_completed_count": 185,
+        "passed": true,
+        "plan_digest": "93364557fb44c269cffacf81ca6534a3c2bdabe43e9442b0ecc8144f9b57b94c",
+        "planned_count": 200,
+        "schema_version": 1,
+        "single_final_source_full_run": false,
+        "skips": 0,
+        "source_unchanged": true,
+        "tests_run": 15
+      },
+      "result_file_sha256": "3d3d21c17a9b100fd88be7a737b4c8e35ce91a10619cdf6a0140bb59f5a0982f",
+      "source_id": "source-v3-testfix"
+    }
+  ],
+  "ci_eligible": false,
+  "final_discovered_tests": 1244,
+  "full_pac_acceptance": false,
+  "full_regression_passed": false,
+  "id": "continuation-20260919-regression",
+  "initial_completed_lanes": 7,
+  "initial_timeout_lanes": 5,
+  "kind": "local_regression_attempt_summary",
+  "latest_implementation_delta_unique_tests": 100,
+  "latest_implementation_source": "source-v5",
+  "next_diagnostic": "one final-source Linux llm-supervision lane with a separate 900-second diagnostic budget; no product SLO comparison",
+  "original_planned_tests": 1223,
+  "product_slo_threshold_changed": false,
+  "recovered_lane": "regression-5",
+  "recovered_lane_coverage": {
+    "original_completed_log_ids": 185,
+    "planned": 200,
+    "single_lane_invocation_all_passed": false,
+    "targeted_retry": 15
+  },
+  "remaining_timeout_lanes": [
+    "combined",
+    "llm-supervision",
+    "finding-revalidation",
+    "regression-0"
+  ],
+  "remaining_timeout_seconds": 3600,
+  "schema_version": 1,
+  "source_test_mapping": "source-test-coverage-v1.json"
+}

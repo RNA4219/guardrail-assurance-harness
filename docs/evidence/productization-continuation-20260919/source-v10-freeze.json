@@ -1,0 +1,24 @@
+{
+  "kind": "source_v10_parent_freeze_record",
+  "file_count": 1758,
+  "total_bytes": 39171136,
+  "python_ast_checked": 534,
+  "copy_and_source_hashes_match": true,
+  "runtime_source_locks_match": true,
+  "manifest_sha256": "a0cf0b2126f609e660d73d7793a4a78d36d6115709efdc4d9f7a62fd252f5600",
+  "required_inputs": [
+    "docs/productization-requirements.md",
+    "docs/productization-spec.md",
+    "docs/productization-performance-spec.md",
+    "docs/productization-partition-spec.md"
+  ],
+  "normal_seed_executed": false,
+  "schema_version": 1,
+  "acceptance_pass": false,
+  "source_manifest_path": "source-v10-manifest.json",
+  "runtime_record": "runtime-refresh-v1.json",
+  "related_tests_record": "partition-consumer-parent-v2.json",
+  "workflow_generation": "00139",
+  "workflow_check_status": "PASS",
+  "full_regression_executed": false
+}

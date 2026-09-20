@@ -1,0 +1,275 @@
+{
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "cleanup_confirmed": true,
+  "container_config_checks": {
+    "cap_add_setuid_setgid": true,
+    "cap_drop_all": true,
+    "cpu": true,
+    "diagnostic_label": true,
+    "id": true,
+    "image_id": true,
+    "image_reference": true,
+    "memory": true,
+    "memory_swap": true,
+    "mount_destinations": true,
+    "name": true,
+    "network_none": true,
+    "no_new_privileges": true,
+    "pids": true,
+    "readonly_root": true,
+    "results_bind_readwrite": true,
+    "run_id_label": true,
+    "source_binds_readonly": true,
+    "tmpfs_ipc": true,
+    "tmpfs_keys": true,
+    "tmpfs_mounts": true,
+    "tmpfs_state": true,
+    "tmpfs_tmp": true,
+    "tmpfs_workspace": true,
+    "user_root": true
+  },
+  "container_id": "fbaf96ff0000c26d51efe23e0db4f648b00595ef269b68a54695642bb2568461",
+  "container_inspect_path": "artifacts/container-inspect.json",
+  "container_inspect_sha256": "31ca832052992be25654c23f25a81f310dcb96095670e856d7e06d12fd6b0b8c",
+  "container_name": "gah-pa-linux-v2-50785b86fc7e419292c5",
+  "create_absence_confirmed": false,
+  "diagnostic_version": 3,
+  "docker_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "driver_sha256": "7dd44c5331da7b3238db16c1513ebf791050263255d1467a872e869abc840f7c",
+  "elapsed_ns": 9532000000,
+  "exit_code": 0,
+  "full_pac_acceptance": false,
+  "host_source_hashes_unchanged": true,
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "inside_result": {
+    "all_checks_passed": true,
+    "broker_restarted": true,
+    "broker_stderr": [
+      {
+        "pid": 7,
+        "stderr_utf8": "",
+        "truncated": false
+      },
+      {
+        "pid": 27,
+        "stderr_utf8": "",
+        "truncated": false
+      }
+    ],
+    "candidate_denied": true,
+    "case_coverage_admission_verified": false,
+    "ci_eligible": false,
+    "elapsed_ns": 8523417239,
+    "entry_count": 3200,
+    "extension_digest": "a34da008a689040a5351a6eb48250fcca9ef0d048e45f8c3349954ac9f5176ce",
+    "full_pac_acceptance": false,
+    "harness_cap_eff": "0xc0",
+    "identity_probes": {
+      "12001": {
+        "checks": {
+          "capabilities_dropped": true,
+          "database_unavailable": true,
+          "identity_not_changeable": true,
+          "no_extra_groups": true,
+          "no_new_privileges": true,
+          "nonroot": true,
+          "socket_not_replaceable": true
+        },
+        "gid": 12001,
+        "groups": [],
+        "uid": 12001
+      },
+      "12002": {
+        "checks": {
+          "capabilities_dropped": true,
+          "database_unavailable": true,
+          "identity_not_changeable": true,
+          "no_extra_groups": true,
+          "no_new_privileges": true,
+          "nonroot": true,
+          "socket_not_replaceable": true
+        },
+        "gid": 12002,
+        "groups": [],
+        "uid": 12002
+      },
+      "12003": {
+        "checks": {
+          "capabilities_dropped": true,
+          "database_unavailable": true,
+          "identity_not_changeable": true,
+          "no_extra_groups": true,
+          "no_new_privileges": true,
+          "nonroot": true,
+          "socket_not_replaceable": true
+        },
+        "gid": 12003,
+        "groups": [],
+        "uid": 12003
+      },
+      "12004": {
+        "checks": {
+          "capabilities_dropped": true,
+          "database_unavailable": true,
+          "identity_not_changeable": true,
+          "no_extra_groups": true,
+          "no_new_privileges": true,
+          "nonroot": true,
+          "socket_not_replaceable": true
+        },
+        "gid": 12004,
+        "groups": [],
+        "uid": 12004
+      }
+    },
+    "kind": "partition_authority_linux_v3_inside_result",
+    "logical_plan_bytes": 1574614,
+    "logical_plan_digest": "f99ca4447579a80b26d3495e7932ecd11bb23416dd196d7f54eb5fd205c761ca",
+    "no_new_privileges": true,
+    "operations": [
+      {
+        "action": "plan_partition_status",
+        "kind": "authority_error",
+        "reason": "UPLOAD_MISSING",
+        "request_id": "warmup",
+        "uid": 12001
+      },
+      {
+        "action": "propose",
+        "kind": "policy_adoption_result",
+        "reason": null,
+        "request_id": "policy-propose",
+        "uid": 12001
+      },
+      {
+        "action": "validate",
+        "kind": "policy_adoption_result",
+        "reason": null,
+        "request_id": "policy-validate",
+        "uid": 12003
+      },
+      {
+        "action": "adopt",
+        "kind": "policy_adoption_result",
+        "reason": null,
+        "request_id": "policy-adopt",
+        "uid": 12001
+      },
+      {
+        "action": "fixture_prepare",
+        "kind": "evaluation_authority_result",
+        "reason": null,
+        "request_id": "fixture-prepare",
+        "uid": 12001
+      },
+      {
+        "action": "contract_propose",
+        "kind": "evaluation_authority_result",
+        "reason": null,
+        "request_id": "contract-propose",
+        "uid": 12001
+      },
+      {
+        "action": "contract_validate",
+        "kind": "evaluation_authority_result",
+        "reason": null,
+        "request_id": "contract-validate",
+        "uid": 12003
+      },
+      {
+        "action": "contract_adopt",
+        "kind": "evaluation_authority_result",
+        "reason": null,
+        "request_id": "contract-adopt",
+        "uid": 12001
+      },
+      {
+        "action": "plan_partition_begin",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "plan-begin",
+        "uid": 12001
+      },
+      {
+        "action": "plan_partition_put_segment",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "plan-put-0",
+        "uid": 12001
+      },
+      {
+        "action": "plan_partition_put_segment",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "plan-put-1",
+        "uid": 12001
+      },
+      {
+        "action": "plan_partition_commit",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "plan-commit",
+        "uid": 12001
+      },
+      {
+        "action": "plan_partition_read",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "read-before-restart",
+        "uid": 12004
+      },
+      {
+        "action": "plan_partition_read",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "read-after-restart",
+        "uid": 12003
+      },
+      {
+        "action": "plan_partition_read",
+        "kind": "partitioned_plan_store_result",
+        "reason": null,
+        "request_id": "read-segment-after-restart",
+        "uid": 12004
+      },
+      {
+        "action": "plan_partition_begin",
+        "kind": "authority_error",
+        "reason": "AUTHORITY_DENIED",
+        "request_id": "candidate-denied",
+        "uid": 12002
+      }
+    ],
+    "phase": "complete",
+    "schema_version": 1,
+    "segment_bytes": [
+      899751,
+      675375
+    ],
+    "segment_count": 2,
+    "source_bytes": 1374885,
+    "source_file_count": 87,
+    "source_hashes_unchanged": true,
+    "source_manifest_sha256": "1eb6a7a9a1c00732d72b464dbd2810f7b94617565c246317e436e63897a51126",
+    "storage_fixture_only": true,
+    "tmpfs_copy_hashes_unchanged": true
+  },
+  "inside_result_sha256": "0693d41cfb19c03c1df8ecf0f7f06165afe084bcc2abed5b2b7eb07f0893dc20",
+  "kind": "partition_authority_linux_v3_host_result",
+  "labels": {
+    "org.gah.diagnostic": "partition-authority-linux-v3",
+    "org.gah.run-id": "50785b86fc7e419292c56d27e2399c00"
+  },
+  "local_host_result_sha256": "1376d2b4f2f8939b06877428cd7d04b7d570ff5ab513f4471d2752459dbab711",
+  "plan_driver_unchanged": true,
+  "plan_sha256": "9dfabb9c898e5701be2832c917dc083302dfd2ba78955d16d8a537dd2a7ab78e",
+  "reason": "RUN_COMPLETED",
+  "run_id": "50785b86fc7e419292c56d27e2399c00",
+  "runtime_run_admission_verified": false,
+  "schema_version": 1,
+  "source_bytes": 1374885,
+  "source_file_count": 87,
+  "source_manifest_sha256": "1eb6a7a9a1c00732d72b464dbd2810f7b94617565c246317e436e63897a51126",
+  "supervisor_scope": "Explicit schema-v5 diagnostic broker adapter, actual SO_PEERCRED/client entrypoints, frozen 87-file source; fixed storage load only. Default product entrypoint and v2 run admission unchanged."
+}

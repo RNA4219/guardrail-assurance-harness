@@ -1,0 +1,59 @@
+{
+  "acceptance_claimed": false,
+  "acceptance_pass": false,
+  "baseline_profile_reference": {
+    "deepcopy_calls": 5268235,
+    "deepcopy_own_seconds": 3.911,
+    "five_operations_wall_seconds": 41.30357108199678,
+    "path": ".ga/productization-implementation-20260919/normal-resume-profile-v2/normal-resume-profile-v2-result.json",
+    "prepare_wall_seconds": 0.40575635300046997,
+    "read_checks_copy_calls": 6186610,
+    "read_checks_copy_own_seconds": 6.124
+  },
+  "docker_started": false,
+  "implementation": {
+    "behavior": "Request-local checked_read cache snapshots exact plain JSON dict/list/scalar values and root tuples whose elements are plain JSON to strict UTF-8 bytes; each cache hit restores independent values and reconstructs root tuple type. Nested tuples, sqlite3.Row, custom objects, non-finite floats, invalid surrogate code units, or too-deep JSON values retain the prior _copy path.",
+    "files": {
+      "src/gah/read_checks.py": "57b7fe42fced0923b899b76f53dfe1ce18e96ee3c4ad2de9c2e13e91451c72bd",
+      "tests/test_read_checks_hotpath.py": "7f7cd23bdb672456c0a009bdffd516598156f5e882a5cdce5c272f549deeb8d9"
+    },
+    "preserved_boundaries": [
+      "No cache crosses checked_action/source_scope or DB identity.",
+      "Cache remains limited to in-transaction reads.",
+      "db.total_changes still clears cached values after a write.",
+      "Fresh currentness/source reads, request validation, permission/expiry checks, and cross-action revalidation unchanged.",
+      "Cycle, depth, node-count, and read-only storage mutation guards unchanged."
+    ],
+    "test_observation": {
+      "json_decode_calls_on_hits": 2,
+      "mutated_return_did_not_affect_later_hit": true,
+      "nested_tuple_uses_legacy_copy": true,
+      "non_ascii_and_astral_codepoints_roundtrip_exactly": true,
+      "paired_and_unpaired_surrogate_codepoints_use_legacy_copy": true,
+      "recursive_copy_calls_on_hits": 0,
+      "repeated_same_transaction_json_cache_hits": 2,
+      "root_tuple_json_elements_isolated": true
+    }
+  },
+  "kind": "normal_start_hotpath_local_change_record",
+  "limitation": "No post-change cProfile on pinned source-v7 image has been run. Unit tests establish cache-hit copy reduction for the covered JSON/root-tuple shapes and exact Unicode compatibility; they do not establish end-to-end speedup, acceptance, or workload-level performance.",
+  "parent_review": {
+    "cause": "v3 driver preparation failed; source DB only held in regression container was not exported before its cleanup",
+    "persistent_input_replacement": "normal-seed-durable-v1 in progress; a different seed will require a new matched before/after series",
+    "same_workload_after_profile": "NOT_RUN",
+    "strict_utf8_fallback_and_tuple_type_isolation_verified": true,
+    "unicode_surrogate_pair_change_corrected": true
+  },
+  "result_status": "UNIT_TESTS_PASS_PROFILE_NOT_REPEATED",
+  "schema_version": 1,
+  "source_v7_image_or_lock_updated": false,
+  "tests": {
+    "command": "python -E -B -X utf8 -m unittest -v tests.test_read_checks_hotpath tests.test_read_checks tests.test_source_check_scope tests.test_evaluation_authority tests.test_resource_start tests.test_resource_start_integration",
+    "duration_seconds": 1.769,
+    "environment": "Configured local Codex Python runtime; no Docker.",
+    "failed": 0,
+    "modules": 6,
+    "passed": 36,
+    "test_count": 36
+  }
+}

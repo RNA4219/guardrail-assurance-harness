@@ -54,6 +54,17 @@ class RunEvidenceBookTests(unittest.TestCase):
         self.assertTrue(db.in_transaction)
         db.rollback()
 
+    def test_missing_terminal_keeps_v1_not_finalized_error(self):
+        path = Path(self.temp.name) / "missing-terminal.sqlite"
+        with RunEvidenceStore(path, clock=lambda: 100, allowed_bindings={}) as store:
+            with self.assertRaisesRegex(EvidenceError, "^NOT_FINALIZED$"):
+                store.get_terminal("missing-run")
+        db = self._connection()
+        self.addCleanup(db.close)
+        book = RunEvidenceBook(db, now=100, allowed_bindings={})
+        with self.assertRaisesRegex(EvidenceError, "^NOT_FINALIZED$"):
+            book.get_terminal("missing-run")
+
     def test_book_and_store_have_same_start_result(self):
         allowed = {"run-1": bound_bundle_digest(self.bound)}
         path = Path(self.temp.name) / "store.sqlite"

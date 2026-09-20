@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "local_implementation_review",
+  "id": "query-series-parent-v1",
+  "implementation": [
+    "src/gah/query_series.py",
+    "tests/test_query_series.py",
+    "tests/test_query_series_review.py"
+  ],
+  "matrix": {
+    "surfaces": [
+      "candidate",
+      "current_ci",
+      "report"
+    ],
+    "case_counts": [
+      400,
+      800,
+      1600
+    ],
+    "history_run_counts": [
+      1,
+      10,
+      100
+    ],
+    "cells": 27,
+    "per_cell": {
+      "cold": 3,
+      "warmup": 5,
+      "warm": 100
+    },
+    "planned_observations": 2916,
+    "adjacent_ratios": 18,
+    "page_size_max": 100
+  },
+  "contracts": {
+    "common_plan_validator": true,
+    "required_requirement_id": "GAH-PR07",
+    "cell_artifact_max_bytes": 1048576,
+    "observed_max_fake_adapter_cell_bytes": 99792,
+    "warmup_in_budget_but_not_p95": true,
+    "global_result_contains_ordered_cell_refs_not_all_observations": true,
+    "missing_metrics": "null",
+    "valid_for_slo": false,
+    "ci_eligible": false
+  },
+  "parent_review_corrections": [
+    "common plan validation, expiry, requirement IDs, nested input isolation",
+    "clock rollback/unavailable retained as null measurement failure",
+    "active session finally cleanup and cleanup failure stops subsequent sessions",
+    "separate query success, stored evidence and series completeness",
+    "warm open failure does not invent attempted queries",
+    "sink mutation/receipt mismatch stops later cells",
+    "bounded result ID for maximum length input ID",
+    "stop-unconfirmed cancellation is INCOMPLETE"
+  ],
+  "verification": {
+    "test_count": 71,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 5.969000000040978,
+    "source_hashes": {
+      "src/gah/query_series.py": "877ff15d0309133ee7d94979ad980708c07c493eca030c127313b11a2f8ee3c4",
+      "tests/test_query_series.py": "cfad096b79c408f044863b7d608d72fa77d8c87a0d71d1a26e964626d1eedd44",
+      "tests/test_query_series_review.py": "dba3d7c33336bc2e07da4a930ad6573f291ab4c21bec2bb72e49d838b0d67f81",
+      "src/gah/benchmark.py": "74f35cb0a33ead164f5b114907e126df2304c9bed4170faab064028cbb46635b",
+      "tools/test_matrix.py": "680703c38e62029b4b83722c8825a1fb0d0bbaa2f4bf360b37f7499cfeed274e"
+    },
+    "modules": [
+      "tests.test_benchmark",
+      "tests.test_benchmark_review",
+      "tests.test_test_matrix",
+      "tests.test_ci_history",
+      "tests.test_query_series",
+      "tests.test_query_series_review"
+    ],
+    "source_unchanged": true,
+    "full_regression": false,
+    "full_pac_acceptance": false
+  },
+  "limits": [
+    "trusted internal adapter and sink API only; no runtime/CLI series adapter yet",
+    "case/history physical input dimensions not independently verified by a live runtime adapter",
+    "cold process/DB/cache reset and persistent warm process not proven",
+    "all child CPU/RSS/IO and other counters not implemented",
+    "fake-adapter unit runs are not product performance measurements or PAC acceptance"
+  ],
+  "full_regression": false,
+  "full_pac_acceptance": false
+}

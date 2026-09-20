@@ -1,0 +1,47 @@
+{
+  "acceptance_pass": false,
+  "artifact_summary": {},
+  "checkpoint_snapshot_unchanged": true,
+  "cleanup": {
+    "cleanup_confirmed": true,
+    "post_remove_query": "SUCCEEDED_EMPTY",
+    "rm_returncode": 0,
+    "state": "REMOVED"
+  },
+  "cleanup_confirmed": true,
+  "comparison_performed": false,
+  "completed_operations": 0,
+  "container_id": "86f0bd09498d7b8f0d405b1ec3a460e4606ea5b344674139ef2431f4dbe1b2db",
+  "container_name": "gah-normal-v8-profile-072fa83c35084787",
+  "container_state": {
+    "exit_code": 1,
+    "status": "exited"
+  },
+  "correction": "Diagnostic SOURCE_LOCK_FILES omitted supervised_capacity.py; source/seed were unchanged. v2 diagnostic adds the missing fixed file without rebinding input.",
+  "elapsed_seconds": 64.96799999999348,
+  "failure_reason": "PROFILE_CONTAINER_DID_NOT_EXIT_CLEANLY",
+  "host_log_bytes": 509,
+  "kind": "normal_v8_single_profile_result",
+  "latest_source_profile_only": true,
+  "local_result_sha256": "3766a6c04f95be25f3b59da2437b05157b95a63e716256e3a3e9ca503a771fce",
+  "plan_sha256_after": "bed1f1d317c24e656d00718d286c429517eee9e181f6ad54986ff90827e1b20c",
+  "plan_sha256_before": "bed1f1d317c24e656d00718d286c429517eee9e181f6ad54986ff90827e1b20c",
+  "profile_artifact_sha256": "0267b3a1ee860683557c4dd190930ddbd919a40882f3d2786a82d12b498f11db",
+  "profile_failure": "SOURCE_ARM_LOCK_MISMATCH",
+  "profiled": false,
+  "schema_version": 1,
+  "script_sha256_after": {
+    "container.py": "2cea598436bbde24516abab221fac0ad17edec8db2287409624bd69e489175ac",
+    "host.py": "4291c4a7403f00c9428e5d3a1cf19c2aa1e00393a4b21e4c7dbbd68c7114c4e2",
+    "profile.py": "67eb793e1dd955e206d458d6e635846e124d2a2d70e745585d41bfdebd066287"
+  },
+  "scripts_unchanged": true,
+  "seed_db_sha256": "b1e80668e37085fc552fd0df46c1a4e46a7a92a812603268d4489b625284ceea",
+  "seed_inputs_unchanged": true,
+  "seed_ready_sha256": "e1fe7a10fe36a78c8b806ef21183e0949010fd37f77d675d9b182173c52cfc6e",
+  "slo_comparison": false,
+  "source_files_after": 1709,
+  "source_files_before": 1709,
+  "source_unchanged": true,
+  "status": "PREFLIGHT_OR_RUN_FAILED"
+}

@@ -1,0 +1,82 @@
+{
+  "baseline": {
+    "counter_definition": "cProfile/pstats copy.py deepcopy total calls and primitive calls; v5 summary reports 48,748,902 total and 320,018 primitive",
+    "limitations": [
+      "profiler overhead present",
+      "concurrent validation load present",
+      "not valid for SLO",
+      "wall speed improvement not demonstrated"
+    ],
+    "pstats": ".ga/productization-implementation-20260915/setup-profile-v5.pstats",
+    "pstats_sha256": "ff484e55a6c307fef608fd6389d3db15302c9699985305118e9d15ec8de8e2b8",
+    "scope": {
+      "candidate_receipts": 2,
+      "fixed_ci_entries": 60,
+      "profiled_call": "tests/test_setup_apply.py SetupApplyCoreTests.setup_sample, once",
+      "pstats_evidence": "top frame is test_setup_apply.py:29 setup_sample; execute_contract_setup called once; supervised_run.run_entries processes 60 entries"
+    },
+    "source_id": "final-source-v5",
+    "source_manifest_sha256": "b6d48471b8f44efd168c07b506d39df3e2dceb07168d92e9a1743925ab2f81fd",
+    "summary": ".ga/productization-implementation-20260915/setup-profile-v5-summary.json",
+    "summary_sha256": "aa62295504809e8437776b959eb5dc8153eb992ba5c1640f7887f94bc1866ded"
+  },
+  "call_reduction_denominator": 48748902,
+  "call_reduction_numerator": 20700361,
+  "candidate": {
+    "ci_eligible": false,
+    "concurrent_load_recorded": "not controlled by this local profile driver",
+    "counters": {
+      "deepcopy_calls": 28048541,
+      "deepcopy_primitive_calls": 262826,
+      "definition": "pstats copy.py deepcopy total call count and primitive call count"
+    },
+    "id": "setup-copy-profile-source-v3",
+    "input_hashes": {
+      "tests/test_baseline_adoption_integration.py": "06798035f746a29b4d59bf19e6ee6be1c7570f43d1e605fe4b9f0e895f153ca0",
+      "tests/test_setup_apply.py": "05c2b5febaa0d4b8b30f9f68eb15ef8610a1011f71e1131afedfd28f35fce93a",
+      "tests/test_supervised_run.py": "fb5b14455afa6e2cf87bca03a8191344dd023caec4d5758df2fb232388d03a44",
+      "tools/setup_apply.py": "ebbe90d2e789b9f669464610c7ea6fe1f691eb49b3024b24ab27a7b5833e2890"
+    },
+    "kind": "local_profile_comparison",
+    "prior_failed_driver": "profile-copy-v1.py",
+    "profile_sha256": "e98d578f2f930429439ff479d342517f01161891c76797a208316b0cf52e0739",
+    "runtime": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "schema_version": 1,
+    "scope": {
+      "candidate_receipts": 2,
+      "fixed_ci_entries": 60,
+      "profiled_operation": "SetupApplyCoreTests.setup_sample -> execute_contract_setup once"
+    },
+    "source": {
+      "file_count": 1623,
+      "id": "source-v3",
+      "manifest_sha256": "f8c9b30dbb68c683c94d68650186b39dee43faea16da1342720547bc1fcdbac8"
+    },
+    "source_unchanged": true,
+    "valid_for_slo": false,
+    "wall_seconds_profiled": 201.0653393000248,
+    "whole_run_slo_claim": false
+  },
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "kind": "local_copy_call_comparison",
+  "prior_driver_failure": {
+    "cause": "driver expected candidate_receipts list; product returns exactly old/new keyed dict",
+    "ci_eligible": false,
+    "error": "PROFILE_SCOPE_MISMATCH",
+    "kind": "local_verification_driver_failure",
+    "original_driver_sha256": "9654511b1541b3286fd4bda7a2d6cf180309d5a731264664d8f8b4fab4f75cc2",
+    "profile_saved": false,
+    "replacement_driver": "profile-copy-v2.py",
+    "test_source_modified": false
+  },
+  "profiled_workload": "one full fixed CI setup: 60 entries, old/new candidate receipts",
+  "schema_version": 1,
+  "total_calls_after": 28048541,
+  "total_calls_before": 48748902,
+  "valid_for_slo": false,
+  "wall_comparison_controlled": false
+}

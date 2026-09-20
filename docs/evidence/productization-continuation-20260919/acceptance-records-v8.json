@@ -1,0 +1,376 @@
+[
+  {
+    "acceptance_id": "GAH-PAC01",
+    "checked_at": 1789823565,
+    "evidence_refs": [],
+    "id": "productization-pac-01-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR01",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC02",
+    "checked_at": 1789823565,
+    "evidence_refs": [],
+    "id": "productization-pac-02-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR02",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC03",
+    "checked_at": 1789823565,
+    "evidence_refs": [],
+    "id": "productization-pac-03-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR03",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC04",
+    "checked_at": 1789823565,
+    "evidence_refs": [],
+    "id": "productization-pac-04-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR04",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC05",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-05-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR05",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC06",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-06-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR06",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC07",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-07-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR07",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC08",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-08-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR08",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC09",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-09-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR09",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC10",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-10-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR10",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC11",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-11-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR11",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC12",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-12-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR12",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC13",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-13-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR13",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC14",
+    "checked_at": 1789823565,
+    "evidence_refs": [
+      {
+        "digest": "89a5a740bb37569548deae1bbf52514d01d2b085028cda24bfc7ebd8a4dbca03",
+        "id": "continuation-20260919-known-results",
+        "kind": "local_verification_summary"
+      }
+    ],
+    "id": "productization-pac-14-v8",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "5e30ee573899028a38e3a4b6d0e8f2de28fd23adff31e05fe0ce67bcd60e304d",
+      "id": "continuation-20260919-v1",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR14",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "a8a2250f9d59d2d099af0bea219d722c92080eb5085c33bc581cf08a39e34503",
+      "id": "source-v5",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  }
+]

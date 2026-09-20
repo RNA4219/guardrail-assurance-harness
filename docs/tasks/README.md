@@ -12,7 +12,10 @@ next_review_due: 2026-10-11
 
 | Task | 目的 | 検収 |
 |---|---|---|
-| [20260911-05](TASK.mvp-completion-09-11-2026.md) | 全MVP実装・接続・32要求の受入を継続中 | [AC-20260911-05](../acceptance/AC-20260911-05.md) |
+| [20260915-03](TASK.productization-implementation-09-15-2026.md) | Luna・DGXの監督、拡張仕様の実装、authority/CLI/CI結合 | 進行中、製品受入未完了 |
+| [20260915-02](TASK.productization-spec-09-15-2026.md) | 拡張仕様4冊、設計ケース、Luna分担と親監督・相互レビュー | [AC-20260915-02](../acceptance/AC-20260915-02.md) |
+| [20260915-01](TASK.productization-requirements-09-15-2026.md) | 実案件・処理速度・導入運用の拡張14要件と受入・反例 | [AC-20260915-01](../acceptance/AC-20260915-01.md) |
+| [20260911-05](TASK.mvp-completion-09-11-2026.md) | 全MVP実装・接続・32条件の技術検収完了 | [AC-20260911-05](../acceptance/AC-20260911-05.md) |
 | [20260911-04](TASK.lifecycle-core-09-11-2026.md) | 台帳v2移行、期限後回収、取消し・停止確認・終了記録と監督レビュー | [AC-20260911-04](../acceptance/AC-20260911-04.md) |
 | [20260911-03](TASK.runtime-core-09-11-2026.md) | 詳細仕様と判定・永続化・診断コア、DGX Qwen/Luna監督レビュー | [AC-20260911-03](../acceptance/AC-20260911-03.md) |
 | [20260911-02](TASK.state-review-09-11-2026.md) | 初回・採択・再開・複合障害の6件をv0.3へ反映 | [AC-20260911-02](../acceptance/AC-20260911-02.md) |

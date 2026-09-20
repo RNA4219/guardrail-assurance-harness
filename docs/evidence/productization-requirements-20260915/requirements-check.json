@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "kind": "productization_requirements_document_check",
+  "reviewed_at": "2026-09-15",
+  "reviewed_by": "Codex",
+  "scope": "文書の静的照合。製品実行・性能・有用性の受入ではない。",
+  "checks": {
+    "unique_requirement_definitions_14": true,
+    "unique_acceptance_definitions_14": true,
+    "one_to_one_requirement_acceptance": true,
+    "original_mvp_documents_and_evidence_51_unchanged": true,
+    "original_later_extension_rows_7_preserved": true,
+    "historic_pipeline_duration_labeled": true,
+    "historic_regression_duration_labeled": true,
+    "document_and_product_acceptance_separated": true,
+    "performance_values_explicitly_proposed": true,
+    "privacy_scan_passed": true
+  },
+  "static_checks_passed": true,
+  "requirement_count": 14,
+  "acceptance_count": 14,
+  "product_acceptance": [
+    {
+      "requirement_id": "GAH-PR01",
+      "acceptance_id": "GAH-PAC01",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR02",
+      "acceptance_id": "GAH-PAC02",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR03",
+      "acceptance_id": "GAH-PAC03",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR04",
+      "acceptance_id": "GAH-PAC04",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR05",
+      "acceptance_id": "GAH-PAC05",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR06",
+      "acceptance_id": "GAH-PAC06",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR07",
+      "acceptance_id": "GAH-PAC07",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR08",
+      "acceptance_id": "GAH-PAC08",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR09",
+      "acceptance_id": "GAH-PAC09",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR10",
+      "acceptance_id": "GAH-PAC10",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR11",
+      "acceptance_id": "GAH-PAC11",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR12",
+      "acceptance_id": "GAH-PAC12",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR13",
+      "acceptance_id": "GAH-PAC13",
+      "status": "NOT_RUN"
+    },
+    {
+      "requirement_id": "GAH-PR14",
+      "acceptance_id": "GAH-PAC14",
+      "status": "NOT_RUN"
+    }
+  ],
+  "preserved_files_sha256": {
+    "docs/acceptance-criteria.md": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa",
+    "docs/contracts/decision-examples.v1.json": "5e4a0849d13939245ac2a6cd6abd5b655b9cf2f0a223c9c692fe730f742e9642",
+    "docs/contracts/initial-policy.v1.json": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+    "docs/contracts/review-examples.v2.json": "85591a676583d0732e71759a676258b67254072bc44702fb1697f506564c583c",
+    "docs/contracts/state-examples.v3.json": "2857e6688e9bfb425a2a4d01fb9a9a65de0ba250419f0b7c68f8b4c054fb1539",
+    "docs/evidence/mvp-acceptance-20260913/README.md": "7dcb480daedf7b98b973b356df4e01ab2c7fe84716e0c18fd18df6ae35df2007",
+    "docs/evidence/mvp-acceptance-20260913/acceptance-map.json": "17e9f8b0ceb7f7628da3b562997a96063cd229912ccbcc991dd3e5b0bb1b6bba",
+    "docs/evidence/mvp-acceptance-20260913/adapter-evidence-summary.json": "952078f0d402a838898c55c3c7b2a9a83d27e838e3ce691ca10b4144efc56270",
+    "docs/evidence/mvp-acceptance-20260913/candidate-performance-recheck.json": "6070db544dd2866b7b973e0b937ddee363f60b591286d963f639b5c13793d53f",
+    "docs/evidence/mvp-acceptance-20260913/ci-parallelization-20260915-summary.json": "6928144a1c5461f2f38381fb3a7de2f7d766f158a6b787eb56f2fe737efebf1b",
+    "docs/evidence/mvp-acceptance-20260913/combined-ci-counts-review.json": "8974103433c43f66a2648c97ad91c09be2177e1146ca34c01bc5500060d5b2e7",
+    "docs/evidence/mvp-acceptance-20260913/combined-revalidation-74-summary.json": "aae9d030335bea8efee006e1187f1fb5bcaa04f031834d09e613e4050e048f52",
+    "docs/evidence/mvp-acceptance-20260913/completion-clock-summary.json": "10216e88e276ffe6a09394686a0265d7016080873f98f7c95034d6f50a6dc50b",
+    "docs/evidence/mvp-acceptance-20260913/copy-performance-summary.json": "921d668e3968ad500d8ec1dfdac967ec1c3d53371f0f1ea8ae7702bb5b75ec02",
+    "docs/evidence/mvp-acceptance-20260913/final-regression-80-summary.json": "6d78d11e959c21b795bb3429e1a488aeb86124b37bd9c86726a7438115988ef4",
+    "docs/evidence/mvp-acceptance-20260913/finding-management-summary.json": "9c1322b9933aa74edd4bc9ced6b513c456e7c23a4b925acd7a51a796829fb475",
+    "docs/evidence/mvp-acceptance-20260913/finding-revalidation-71-summary.json": "a58524a03b1244defce3df007e462fe85121016f1b3dc75ebf046b8fb9c55ff2",
+    "docs/evidence/mvp-acceptance-20260913/following-storage-summary.json": "1a82e54ba732178162a30922d5ee61c7385aca7f4ab417f258c73655ad43de1e",
+    "docs/evidence/mvp-acceptance-20260913/initial-llm-migration-summary.json": "8d39d8533fede60aa352d79102c4b81eaae120a5412018e50c57273a2fbf9a69",
+    "docs/evidence/mvp-acceptance-20260913/llm-corrections-summary.json": "fda91eb6c9972efce2f261df8bad1797b9b0413e58f7671977337b228a15e29b",
+    "docs/evidence/mvp-acceptance-20260913/llm-generations-73-summary.json": "a3f070de818a4a62fe51d5fcf177edaecf8e3138ef3c86866ddad361b9f7eee9",
+    "docs/evidence/mvp-acceptance-20260913/llm-integration-summary.json": "872ed9debee6ffb7d561e66bb141f0f3b40227d01a97159742f0ce857a7876cc",
+    "docs/evidence/mvp-acceptance-20260913/llm-minimum-scenario-summary.json": "987cc4c63a39304d8d8c03baa59384bddb1850334348aca8fd52b079f3fe6cc3",
+    "docs/evidence/mvp-acceptance-20260913/llm-runtime-30-summary.json": "57e79453ee2433ffc263dc767462e8f8e23077d36b04bfe0df60782651bdf4d6",
+    "docs/evidence/mvp-acceptance-20260913/llm-runtime-36-summary.json": "4cdf2833229e5c09b97edba932b6ed73711a6e40b9ddd8cbf3d5db7f2d165773",
+    "docs/evidence/mvp-acceptance-20260913/llm-runtime-71-summary.json": "f2c879fe4239c998123e6e8a571a91e9b24eb7da15ed087e34ee95994277d8d9",
+    "docs/evidence/mvp-acceptance-20260913/llm-supervision-62-summary.json": "57f19ce52f947f8fcdf8755fd2a0dd00c71a054f88c6045a09829d2ef653e556",
+    "docs/evidence/mvp-acceptance-20260913/measurement-classification-summary.json": "24d6c9798ea1f6cf41d92dabb0fe90a2b83bdaf057fb9e4b6c0a6d3b3764ed0e",
+    "docs/evidence/mvp-acceptance-20260913/migration-summary.json": "d9349029a890e07e1ad0c09523ca4a8df041fcb096c1ba26956d5808d8fad826",
+    "docs/evidence/mvp-acceptance-20260913/mutation-review-summary.json": "718c91813dcab9e06e7a25ebfe556c0b74c0765a0c70f2745f27febff66c1352",
+    "docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json": "fb8560f3ca52d4affb7cc87ac2c1b830858af4af642f51d7a2371dc2699d1f9b",
+    "docs/evidence/mvp-acceptance-20260913/planned-test-coverage-73.json": "bbee2b89a4076a5c00f04d18e79b977e876c9c4a952b18a72b87043b3abcd4dc",
+    "docs/evidence/mvp-acceptance-20260913/planned-test-coverage-76.json": "b2578ee3e50c2c049dd5a76ffa02420d896579c9b16a063db0a1c7263f401c41",
+    "docs/evidence/mvp-acceptance-20260913/planned-test-coverage-78.json": "f98d9bf6a7573d4e8f339bffc3e1bb76aff8be872993e79e2aba812f75b54077",
+    "docs/evidence/mvp-acceptance-20260913/planned-test-coverage-80.json": "8278603a7567cfab3bf162aa7cde50bfc4487de23b2889fada4f71c9eae0d752",
+    "docs/evidence/mvp-acceptance-20260913/planned-test-coverage.json": "6349924601319c525bd4795f053cd5ca8656c47c3435dc96b7a072b94b75bc72",
+    "docs/evidence/mvp-acceptance-20260913/privacy-recheck-summary.json": "5b9fc59f88e6221092ccfb116ccca5c6696d5c7bb07a341245ecadef1329bb4e",
+    "docs/evidence/mvp-acceptance-20260913/regression-691-summary.json": "ebdd996948503fbf5eaebb5ddd4bbe484530d47d5dc05bc11fd3e26b240dcaaa",
+    "docs/evidence/mvp-acceptance-20260913/regression-summary.json": "5e0a702f41f197962974d6f50e71be392fc0e44e7606cdf05611561bd56a842e",
+    "docs/evidence/mvp-acceptance-20260913/retention-report-summary.json": "6fbdbd0114ddc9c342b97c2e3b6c5039460d11d41e4478e7fb01ef111d692cc6",
+    "docs/evidence/mvp-acceptance-20260913/runtime-clock-20260915-summary.json": "461765008b13d1088a8c0f85705be30c3644bd989c9368efb9be940034815f3e",
+    "docs/evidence/mvp-acceptance-20260913/runtime-compatibility-80-summary.json": "7db7ad7e430132171148791fb6fa9de8b362b5f442a18236c2b6e2bf351c5156",
+    "docs/evidence/mvp-acceptance-20260913/runtime-restart-20260915-summary.json": "ea78dc69528c585b95ff412e6955dd5c1be8c404a22b088d508b0749c27654a6",
+    "docs/evidence/mvp-acceptance-20260913/runtime-supervisor-recheck.json": "6f43995d43d9f23d41da6c81c171aeb0ede529eaa0c01a862e72c490b2a62b14",
+    "docs/evidence/mvp-acceptance-20260913/runtime-verifier-20260915-summary.json": "d87c7d1b7223919411c76e55642f8f433f35a8641c00e9a8a7267fb5e629bd9b",
+    "docs/evidence/mvp-acceptance-20260913/saved-json-reuse-79-summary.json": "7f369f655cb36f67766969319ecd9479e4ee984a979c42e9c11e2f8bf6b2fb52",
+    "docs/evidence/mvp-acceptance-20260913/storage-boundary-20260915-summary.json": "33704caf8c313c2916cb8a8f720d9617010960f5010d9b50001bf489d0a8c2cf",
+    "docs/evidence/mvp-acceptance-20260913/targeted-runtime-summary.json": "2913c73326cf025130bea087a4bda91b536ce1d9d5c68630d1a9238c928abe9a",
+    "docs/evidence/mvp-acceptance-20260913/targeted-summary.json": "abaca9cd7a2ba22396bdb9ef0ac907fc94301a0a65ee85de33455c5d1a79d6c4",
+    "docs/operating-policy.md": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025",
+    "docs/requirements.md": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
+  },
+  "document_sources_sha256": {
+    "CHANGELOG.md": "aca671a88e076bb3ee1e9dd52bac1fda6c6ec795e9e20677b61e598a8c7436ff",
+    "HUB.codex.md": "ae55d47b5adab7343b2a1e03c20d253473057f386baa9e5a67b1151829061100",
+    "README.md": "660002873973249f12eec7ff6fba13b864cd50d65a36924b80a8248d8c4a27e3",
+    "docs/acceptance/AC-20260915-01.md": "f026fdb784ee674b233e62ac95aa3bff40527184beec567eea7a41aa6060bc8e",
+    "docs/extension-roadmap.md": "9c459b3c188fc55b0973658f026c8cbc860baea3e9c777dea0a1bb4f67ffc343",
+    "docs/open-questions.md": "1c1d788d948b30ed4ae44d424d6b7a6267bc6ca23e01ef77b104df2648a4e0b8",
+    "docs/productization-requirements.md": "37c710f92dd05510b3f1e0fd0aca60e11b715bd41c39b96ece8407f0b8d23cb4",
+    "docs/reviews/productization-requirements-20260915.md": "502b11817f6e0eecb6e60d1c173c4d7c8c2340d92fe1e3cd11f4704484fc1f7f",
+    "docs/tasks/README.md": "4f058822d43ac7b9073f6a058e450caff2c3ce52ba5a4f3c39881589cd02b427",
+    "docs/tasks/TASK.productization-requirements-09-15-2026.md": "8a8d92a0a9691bbf69dc022d49e7823c485fe886353903863477ae64984018be"
+  },
+  "privacy": {
+    "passed": true,
+    "counts": {
+      "files": 1489,
+      "bytes": 34956337,
+      "prohibited_identifiers": 0,
+      "credential_patterns": 0,
+      "unreadable_files": 0,
+      "outside_paths": 0
+    },
+    "report_sha256": "930322b0a7657a94de1c4cca9dfc983751b137ddecb0705a6037247fd1493c25"
+  },
+  "workflow": {
+    "status": "PASS",
+    "check_count": 12,
+    "checked_at": "2026-09-15T05:06:05+00:00",
+    "python": "3.12.14",
+    "checks": {
+      "adoption_tier_3": {
+        "status": "pass",
+        "errors": []
+      },
+      "downstream_onboarding": {
+        "status": "pass",
+        "errors": []
+      },
+      "documents": {
+        "status": "pass",
+        "errors": []
+      },
+      "acceptance_format": {
+        "status": "pass",
+        "errors": []
+      },
+      "task_acceptance": {
+        "status": "pass",
+        "errors": []
+      },
+      "generated_artifacts": {
+        "status": "pass",
+        "errors": []
+      },
+      "birdseye_freshness": {
+        "status": "pass",
+        "errors": []
+      },
+      "ci_gate_matrix": {
+        "status": "pass",
+        "errors": []
+      },
+      "checker_stages": {
+        "status": "pass",
+        "errors": []
+      },
+      "branch_desired_configuration": {
+        "status": "pass",
+        "errors": []
+      },
+      "local_security_posture": {
+        "status": "pass",
+        "errors": []
+      },
+      "source_provenance": {
+        "status": "pass",
+        "errors": []
+      }
+    },
+    "report_sha256": "005134b9891c19cc03d0b2d59273c5f3c653095fae5ee2b2daa1c0430c363bfb",
+    "command": "python -m tools.workflow check --report .ga/extension-requirements-20260915/workflow-check.json",
+    "exit_code": 0,
+    "remote_validation": "NOT_RUN"
+  },
+  "limits": [
+    "数値は提案目標。基準機と実案件pilotは未選定。",
+    "親Codexの要件レビュー。独立監査・外部モデル照会・製品実行は未実施。",
+    "既存MVPの受入と新規拡張14条件を区別する。"
+  ],
+  "final_scope_check": {
+    "passed": true,
+    "only_documentation_and_generated_indexes_changed": true,
+    "product_code_changed": false,
+    "protected_files_unchanged": 51,
+    "product_tests_rerun": false,
+    "reason": "製品コード変更なし。文書と索引の検査だけを実施。",
+    "git_whitespace_check_exit_code": 0
+  },
+  "document_acceptance": "PASS"
+}

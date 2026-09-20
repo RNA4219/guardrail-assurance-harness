@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "every_worker_stopped_and_cleaned": true,
+    "fresh_ci_exit_zero": false,
+    "gen2_adopted": true,
+    "normal_exit_zero": true,
+    "normal_run_30_full_entries": true,
+    "owned_containers_cleaned_state_retained": true,
+    "setup_60_full_entries": true
+  },
+  "ci_eligible": false,
+  "elapsed_milliseconds_reported": 945258,
+  "failure_reason": "setup_and_normal_prepare_manifest_mismatch",
+  "full_pac_acceptance": false,
+  "id": "docker-integration-v3",
+  "kind": "local_validation_observation",
+  "original_result_sha256": "a8aea28fada01384c8ca7d7c00c3e7a4ad87e73e9535c32c168170917ef1f6d2",
+  "reasons": [
+    "CI_TARGET_MISMATCH",
+    "REPORT_BINDING_MISMATCH"
+  ],
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "6e4b27bb5d66a032d08fa544883b79da8114688202500e526e6791626d58b8a7",
+    "id": "docker-source-v3",
+    "kind": "snapshot_manifest"
+  },
+  "status": "FAIL",
+  "superseding_observation_ref": {
+    "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+    "id": "docker-integration-v5",
+    "kind": "local_validation_observation"
+  },
+  "worker_count": 90
+}

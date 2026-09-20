@@ -1,0 +1,35 @@
+{
+  "ci_eligible": false,
+  "elapsed_ns": 10062000000,
+  "exit_code": 0,
+  "full_pac_acceptance": false,
+  "full_regression": false,
+  "id": "continuation-tests-v1",
+  "kind": "local_validation_observation",
+  "log_sha256": "a0cc68c59bfcd85936482cb68b8eae36d9c12933a0364cdea8f4c658513055ca",
+  "modules": [
+    "tests.test_image_preparation",
+    "tests.test_pilot_inputs",
+    "tests.test_pilot_import_cli",
+    "tests.test_storage_budget",
+    "tests.test_checkpoint_budget",
+    "tests.test_resource_probe",
+    "tests.test_authority_resource_probe",
+    "tests.test_benchmark_resource_connection",
+    "tests.test_benchmark",
+    "tests.test_benchmark_review",
+    "tests.test_productization",
+    "tests.test_productization_journal",
+    "tests.test_pilot_cli",
+    "tests.test_authority_source_packaging"
+  ],
+  "schema_version": 1,
+  "skipped": 2,
+  "source_ref": {
+    "digest": "5ec1bc68807d3391c4c50bf3a971438b415bd508c71eeb4f13ed24a6c5ef0db8",
+    "id": "continuation-source-v1",
+    "kind": "snapshot_manifest"
+  },
+  "source_unchanged": true,
+  "tests_run": 115
+}

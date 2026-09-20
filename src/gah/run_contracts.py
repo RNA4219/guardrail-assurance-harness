@@ -364,6 +364,15 @@ def bind_trial_plan(plan: Any, contract: Any, registry: Any, case_set: Any,
     c = validate_evaluation_contract(contract)
     r = validate_registry(registry)
     cs = validate_case_set(case_set)
+    return _bind_trial_plan_validated(
+        p, c, r, cs, selected_controls, target_refs, baseline_context=baseline_context
+    )
+
+
+def _bind_trial_plan_validated(p: dict[str, Any], c: dict[str, Any], r: dict[str, Any],
+                               cs: dict[str, Any], selected_controls: Any, target_refs: Any,
+                               *, baseline_context: Any = None) -> dict[str, Any]:
+    """検証済みの独立copyに対してTrialPlanの意味bindingを行う。"""
     try:
         _require_ref_match(p["contract_ref"], "evaluation_contract", c)
         if cs["purpose"] != "acceptance":
@@ -379,6 +388,7 @@ def bind_trial_plan(plan: Any, contract: Any, registry: Any, case_set: Any,
         obligations = _registry_obligations(r, set(closure))
         groups: dict[tuple[str, str, str], dict[str, dict]] = {}
         actual_targets: set[tuple[str, str]] = set()
+        trial_cases: dict[str, set[str]] = {}
         for entry in p["entries"]:
             if entry["obligation_id"] not in obligations or entry["case_id"] not in cases:
                 raise _invalid("UNKNOWN_REFERENCE")
@@ -397,12 +407,12 @@ def bind_trial_plan(plan: Any, contract: Any, registry: Any, case_set: Any,
                 if target_key not in expected_targets:
                     raise _invalid("TARGET_MISMATCH")
                 actual_targets.add(target_key)
+            trial_cases.setdefault(entry["trial_id"], set()).add(entry["case_id"])
             key = (entry["obligation_id"], entry["case_id"], entry["trial_id"])
             groups.setdefault(key, {})[entry["variant"]] = entry
         if actual_targets != expected_targets:
             raise _invalid("TARGET_MISMATCH")
-        if any(len({entry["case_id"] for entry in p["entries"] if entry["trial_id"] == trial}) > 1
-               for trial in {entry["trial_id"] for entry in p["entries"]}):
+        if any(len(case_ids) > 1 for case_ids in trial_cases.values()):
             raise _invalid("TRIAL_CASE_MISMATCH")
         for key, variants in groups.items():
             if "baseline" in variants and "candidate" not in variants:
@@ -432,8 +442,10 @@ def bind_trial_plan(plan: Any, contract: Any, registry: Any, case_set: Any,
                        if entry["obligation_id"] == obligation_id and entry["variant"] == "candidate"}
             if planned != case_ids:
                 raise _invalid("CASE_COVERAGE_MISSING")
-        return {"plan": deepcopy(p), "contract": deepcopy(c), "registry": deepcopy(r),
-                "case_set": deepcopy(cs), "selected_controls": deepcopy(closure),
+        # Validators return fresh trees; dependency_closure returns a fresh list.
+        # target_refs is caller-owned and has no validator copy, so keep its copy.
+        return {"plan": p, "contract": c, "registry": r,
+                "case_set": cs, "selected_controls": closure,
                 "target_refs": deepcopy(target_refs), "ci_eligible": False}
     except ContractError:
         raise
@@ -519,10 +531,15 @@ def bind_run_manifest(manifest: Any, contract: Any, plan: Any, policy: Any,
         elapsed = policy_value["profiles"][m["profile"]]["elapsed_seconds"]
         if m["deadline"] > m["created_at"] + elapsed:
             raise _invalid("DEADLINE_INVALID")
-        bound_plan = bind_trial_plan(p, c, registry_value, case_value, m["control_ids"], m["target_refs"], baseline_context=baseline_context)
-        return {"manifest": deepcopy(m), "contract": deepcopy(c), "plan": deepcopy(p),
-                "policy": deepcopy(policy_value), "registry": deepcopy(registry_value),
-                "case_set": deepcopy(case_value), "selected_controls": deepcopy(bound_plan["selected_controls"]),
+        bound_plan = _bind_trial_plan_validated(
+            p, c, registry_value, case_value, m["control_ids"], m["target_refs"],
+            baseline_context=baseline_context,
+        )
+        # 各validatorとdependency_closureは入力から独立した値を返す。
+        # それらを再deepcopyすると大きいcase_set/planで同じ木を二度走査する。
+        return {"manifest": m, "contract": c, "plan": p,
+                "policy": policy_value, "registry": registry_value,
+                "case_set": case_value, "selected_controls": bound_plan["selected_controls"],
                 "ci_eligible": False}
     except ContractError:
         raise

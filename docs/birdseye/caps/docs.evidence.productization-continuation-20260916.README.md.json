@@ -1,0 +1,25 @@
+{
+  "id": "docs/evidence/productization-continuation-20260916/README.md",
+  "role": "evidence",
+  "title": "拡張実装の継続検証",
+  "summary": "Lunaが容量、資源probe、offline入力を分担し、親がCLI/Checkpoint/whole-runへの接続、固定image準備、DGXレビューの採否、独立レビューの修正、実Dockerを担当した。現在の範囲は[実装状況](../../productization-status.md)、仕様は[共通実装仕様](../../productization-implementation-spec.md)を参照する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-implementation-spec.md",
+    "docs/productization-status.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "README.md",
+    "docs/reviews/productization-implementation-20260915.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "b5a142eb45b9e47f19051ad15beea05d022b74c4874b85a5067ea72cd6645c11"
+}

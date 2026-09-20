@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_DIAGNOSTIC_FIXTURE",
+  "db_sha256": "e72f2e16f37dad97c09abae190c845a21d2bf9b0c0ed332b99d5e59bc396c4ae",
+  "db_bytes": 851968,
+  "v5_extension_digest": "db9d06517ec4c672cb997914c32fd476f20612b030f1bebc162657b2c88eeffd",
+  "validator_digest": "10d966d46ac275fa1977049487cbcf44d5c9326e6e1f2f0ea1a70f81d1efa291",
+  "plan_ref": {
+    "kind": "trial_plan_index",
+    "id": "fixture-plan-partition-fixture",
+    "digest": "11532ec548a8d069e663a17b8001dd7632d9f4f2b45efa91066ca4f8e82499db"
+  },
+  "plan_entries": 15,
+  "rows": {
+    "adoption_config": {
+      "count": 3,
+      "rows_sha256": "b0c3274201cb7ab8dcfcd21a4684d5f2dac5574a0c48aeb95bed9bc64f23a67c"
+    },
+    "adoption_meta": {
+      "count": 3,
+      "rows_sha256": "b911e4b26dedb755e679a0d6469d376eb66f5050e3fa48223853b37cf184d6e3"
+    },
+    "aggregates": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "attempt_events": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "attempts": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "authority_artifacts": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "authority_attempt_origins": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "authority_run_events": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "authority_run_receipts": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline_adoptions": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline_current": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline_proposals": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline_revocations": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline_validations": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "bound_runs": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "current_profiles": {
+      "count": 1,
+      "rows_sha256": "c8c71a27b2ebfead9e453e242059b322bf28bc0f2256b6679c47ee6a6c303362"
+    },
+    "decisions": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "eval_adoptions": {
+      "count": 1,
+      "rows_sha256": "467c9b3a1a6a96f396d5ac212fff88857a3ce273ea9b3919afd8353429220c15"
+    },
+    "eval_calibrations": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "eval_current": {
+      "count": 1,
+      "rows_sha256": "467c9b3a1a6a96f396d5ac212fff88857a3ce273ea9b3919afd8353429220c15"
+    },
+    "eval_objects": {
+      "count": 3,
+      "rows_sha256": "5e6ff50df8b61cb9371f6ce7e36a09cef2e897aede988cc312bdae7705636834"
+    },
+    "eval_proposals": {
+      "count": 1,
+      "rows_sha256": "8229025212c21456323aa731f5a13798eba79d60b9f6f03155186414b1d9ac58"
+    },
+    "eval_runs": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "eval_validations": {
+      "count": 1,
+      "rows_sha256": "9058da213631110d26c463c58cf99bcdc1d566ace227229d705c28097e6a474d"
+    },
+    "evidence_events": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "fixture_admissions": {
+      "count": 1,
+      "rows_sha256": "13111231ea28fb13aa20344056e509f9e22341f2f01b245858907f7faa5700df"
+    },
+    "idempotency": {
+      "count": 10,
+      "rows_sha256": "9b56599c37f202d02c5914a84f4013d9beafa96cccde1220e5ceeb59f07b8ca5"
+    },
+    "partition_plan_commits": {
+      "count": 1,
+      "rows_sha256": "5c0b78f81095fd07c0ac6f6db3b9d62e0f452f6dab91cc94152157e3ce021ac7"
+    },
+    "partition_plan_segments": {
+      "count": 1,
+      "rows_sha256": "dd0f5712024ec76093e2bf79a00affb563adbbf62d01b29ae9df1ec4581a6fbf"
+    },
+    "partition_plan_upload": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "policy_adoptions": {
+      "count": 1,
+      "rows_sha256": "c8c71a27b2ebfead9e453e242059b322bf28bc0f2256b6679c47ee6a6c303362"
+    },
+    "proposals": {
+      "count": 1,
+      "rows_sha256": "2957ebe21c372dbe743b019f33cd173506a3abd86a8138d90294aff87833f15e"
+    },
+    "resource_bindings": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "resource_events": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "resource_meta": {
+      "count": 1,
+      "rows_sha256": "aa325b8cdad90380658fffb3bf09d885bfacc44767ff453ab15dfd70274057b1"
+    },
+    "resource_operations": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "resource_runs": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "revocations": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "run_evidence_meta": {
+      "count": 3,
+      "rows_sha256": "4eb6e79522d416c6874ba088c72b8aafcdc6bb22baf02298aa3efc635a82c7ee"
+    },
+    "run_state": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "terminals": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "transition_candidates": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "transition_runs": {
+      "count": 0,
+      "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "validations": {
+      "count": 1,
+      "rows_sha256": "1882eb9378ec62212ae43dde53d155a295293ea718c1319391eef3fe53e6398a"
+    }
+  },
+  "real_worker_acceptance": false,
+  "acceptance_pass": false,
+  "source_manifest_sha256": "456786b5441a1af016ede02782957d52ee7fadb8bfc5e5b9c8122ecb60da0bc8",
+  "driver_sha256": "6f46d793870b253b335c9b9dca7ebb11031982e4cfc201d87b16e8e879b3dba1",
+  "source_basis": "source-v11の既存bytesと変更前pinに一致する完成済みcore3ファイルを別領域へ複製。adoption.pyのv6編集中のbytesは含めない。",
+  "source_unchanged": true,
+  "migration_executed": false,
+  "fixed_clock": 1000,
+  "purpose": "明示v5→v6移行の変更前比較fixture。実際のv5採択・plan commit・再open/readで作成。"
+}

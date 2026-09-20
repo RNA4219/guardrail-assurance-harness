@@ -20,7 +20,18 @@ def exists(db, run_id):
 def _book(db, bound, baseline, now, *, create=False):
     run_id = bound["manifest"]["run_id"]
     digest = run_evidence.bound_bundle_digest(bound, baseline)
-    book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
+    if bound["manifest"].get("schema_version") == 2:
+        from .partitioned_normal_evidence import PartitionedNormalEvidenceBook
+        from .partitioned_llm_admission import for_run
+        def resolve_context(connection, checked_at, receipt, stored_profile):
+            if connection is not db or checked_at != now:
+                raise AdoptionError("CURRENTNESS_UNAVAILABLE")
+            prepared = for_run(connection, receipt["manifest_ref"]["id"], checked_at)["prepared"]
+            return prepared["bound_run"], prepared["execution_profile"], prepared["baseline_context"]
+        book = PartitionedNormalEvidenceBook(db, now=now, allowed_bindings={run_id: digest},
+                                            context_resolver=resolve_context)
+    else:
+        book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
     if bound["manifest"]["use_cases"] == ["UC-LLM"]:
         from .llm_admission import execution_profile
         profile = execution_profile(db, bound, now)
@@ -102,7 +113,7 @@ def load(db, bound, baseline, now):
             if receipt[field] != content_ref(kind, run_id, value):
                 raise AdoptionError("CANCELLATION_INVALID")
             objects[field] = value
-        if (objects["manifest_ref"] != bound["manifest"] or objects["bundle_ref"] != bound
+        if (objects["manifest_ref"] != bound["manifest"] or objects["bundle_ref"] != assurance_authority._stored_bound(bound, baseline)
                 or objects["decision_ref"] != terminal["decision"]
                 or receipt["assurance"] != terminal["decision"]["assurance"]):
             raise AdoptionError("CANCELLATION_INVALID")
@@ -153,7 +164,8 @@ def finalize(store, db, bound, baseline, now):
     _origins(db, run_id, generation, now)
     terminal = book.finalize(run_id)
     manifest_ref = assurance_authority._save(db, run_id, "run_manifest", run_id, bound["manifest"])
-    bundle_ref = assurance_authority._save(db, run_id, "bound_bundle", run_id, bound)
+    bundle_ref = assurance_authority._save(db, run_id, "bound_bundle", run_id,
+        assurance_authority._stored_bound(bound, baseline))
     decision_ref = assurance_authority._save(db, run_id, "run_decision", run_id, terminal["decision"])
     closure = {"schema_version": 1, "kind": "resource_cancellation", "run_id": run_id,
         "manifest_digest": manifest_ref["digest"], "cancelled_at": now, "stopped": True,

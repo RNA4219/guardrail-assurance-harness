@@ -1,0 +1,46 @@
+{
+  "ci_eligible": false,
+  "concurrent_load_present": true,
+  "fixed_ci_entries": 60,
+  "full_pac_acceptance": false,
+  "id": "setup-copy-profile-v5",
+  "kind": "local_profile_comparison",
+  "observations": [
+    {
+      "deepcopy_calls": 76157597,
+      "deepcopy_primitive_calls": 410034,
+      "profile_sha256": "af416cd257eb872abad7c5cf98f21a55c50f9d6b400927030c371aedaad90b70",
+      "source_manifest_sha256": "4bc0cacadd4d63622405ffad83718810c79d017c04864384911937d5aa5cb988",
+      "summary_sha256": "f28c28235c4d54d9cc03e13cdf9f50fcbc32b54ef48487f4a100261d60bd6ae0",
+      "version": "v2",
+      "wall_milliseconds_reported": 222349
+    },
+    {
+      "deepcopy_calls": 60243193,
+      "deepcopy_primitive_calls": 352130,
+      "profile_sha256": "144683ec7a62bc694c551d30d92295459aaf2d3b261e01595e52759ce9259787",
+      "source_manifest_sha256": "82a9489f5096956eba9fcb652d7b8e476e44fab4067d305fb220171d57c3211b",
+      "summary_sha256": "80736e5345b98e1b481d2293de96544fad46c5514e74ad4d043480f18fe5de41",
+      "version": "v3",
+      "wall_milliseconds_reported": 208431
+    },
+    {
+      "deepcopy_calls": 48748902,
+      "deepcopy_primitive_calls": 320018,
+      "profile_sha256": "ff484e55a6c307fef608fd6389d3db15302c9699985305118e9d15ec8de8e2b8",
+      "source_manifest_sha256": "b6d48471b8f44efd168c07b506d39df3e2dceb07168d92e9a1743925ab2f81fd",
+      "summary_sha256": "aa62295504809e8437776b959eb5dc8153eb992ba5c1640f7887f94bc1866ded",
+      "version": "v5",
+      "wall_milliseconds_reported": 260625
+    }
+  ],
+  "profiler_overhead_present": true,
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+    "id": "final-source-v5",
+    "kind": "snapshot_manifest"
+  },
+  "valid_for_slo": false,
+  "wall_improvement_demonstrated": false
+}

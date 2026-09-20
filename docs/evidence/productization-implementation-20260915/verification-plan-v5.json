@@ -1,0 +1,49 @@
+{
+  "created_at": 1789471458,
+  "expires_at": 1790076258,
+  "id": "productization-local-verification-v5",
+  "kind": "productization_verification_plan",
+  "payload": {
+    "ci_eligible": false,
+    "full_pac_acceptance": false,
+    "prior_verification_plan_ref": {
+      "digest": "58f3551d0078309fd9654056eb9473f8940704c94154fe5c1960d3ad95fd01ea",
+      "id": "productization-local-verification-v4",
+      "kind": "productization_verification_plan"
+    },
+    "purpose": "index_final_delta_and_prior_full_regression",
+    "source_integrity_required": true,
+    "test_plan_ref": {
+      "digest": "40285c1a7cd1ec6bd76d8fad3ef327cb78b2297c34ba3127f03e32235ff3fbd2",
+      "id": "local-regression-v4",
+      "kind": "local_regression_plan"
+    }
+  },
+  "requirement_ids": [
+    "GAH-PR01",
+    "GAH-PR02",
+    "GAH-PR03",
+    "GAH-PR04",
+    "GAH-PR05",
+    "GAH-PR06",
+    "GAH-PR07",
+    "GAH-PR08",
+    "GAH-PR09",
+    "GAH-PR10",
+    "GAH-PR11",
+    "GAH-PR12",
+    "GAH-PR13",
+    "GAH-PR14"
+  ],
+  "requirements_ref": {
+    "digest": "e3628533c716494d590d667b353831fc9ba14b9b2f79664588ab20c0173b2a43",
+    "id": "productization-requirements-v4",
+    "kind": "snapshot_manifest"
+  },
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+    "id": "final-source-v5",
+    "kind": "snapshot_manifest"
+  }
+}

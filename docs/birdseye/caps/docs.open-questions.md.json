@@ -2,7 +2,7 @@
   "id": "docs/open-questions.md",
   "role": "open-questions",
   "title": "決定事項と残る設計事項",
-  "summary": "[baseline更新](baseline-refresh-detail-spec.md)は固定contract 2・同条件で1→2まで実装した。基準2を参照する後続契約と対象・条件を変える更新は引き続き未完了である。",
+  "summary": "2026-09-15現在: MVPの32条件は[技術検収済み](mvp-completion-audit.md)。以下の旧工程の設計・実装待ちは当時の記録として読む。次の改修は[拡張要件 v1](productization-requirements.md)に分離した。",
   "public_api": [],
   "deps_out": [
     "docs/ADR/README.md",
@@ -18,6 +18,7 @@
     "docs/extension-roadmap.md",
     "docs/lifecycle-detail-spec.md",
     "docs/mvp-completion-audit.md",
+    "docs/productization-requirements.md",
     "docs/reference-boundary.md",
     "docs/remediation-detail-spec.md",
     "docs/reviews/design-review-20260911.md",
@@ -54,6 +55,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "4afbf6526645be21cca98c2862b2631df4ef701a6bbdb064a1b0fa8c08dea556"
+  "generated_at": "00161",
+  "source_sha256": "0fa2da8ad8e9732c9f833f3a4027d54bfab87aca762e2f28fac5f5e475a815da"
 }

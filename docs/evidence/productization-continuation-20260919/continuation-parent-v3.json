@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "continuation_parent_regression_v3",
+  "status": "FAIL",
+  "returncode": 1,
+  "elapsed_seconds": 49.78099999995902,
+  "modules": [
+    "tests.test_resource_unpack_cache",
+    "tests.test_resources",
+    "tests.test_start_validation_reuse",
+    "tests.test_transition_validation_reuse",
+    "tests.test_partitioned_run_evidence",
+    "tests.test_run_evidence",
+    "tests.test_run_evidence_book",
+    "tests.test_bound_digest_cache",
+    "tests.test_authority_source_packaging"
+  ],
+  "source_and_test_hashes_unchanged": true,
+  "log_sha256": "e034aff35c156828dc6d84e43657ec047db88709deba82099a761359d5cd6ca8",
+  "log_bytes": 13964,
+  "checked_at": "2026-09-19T23:47:25.781669+00:00",
+  "acceptance_pass": false,
+  "tests_run": 74,
+  "tests_passed": 73,
+  "test_harness_failure": "追加テストのfixture clock参照階層誤り（AttributeError）。",
+  "source_and_test_plan_sha256": "cdb254be6f210f23c573b175effb68a8c0c699278558d71fd1a9650d2a407eba",
+  "full_suite_pass": false
+}

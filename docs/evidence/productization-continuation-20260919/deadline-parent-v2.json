@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "authority_deadline_parent_verification",
+  "status": "PASS",
+  "tests_passed": 63,
+  "exit_code": 0,
+  "test_count": 63,
+  "test_seconds": 0.601,
+  "elapsed_seconds": 0.8910000000032596,
+  "inputs_unchanged": true,
+  "log_sha256": "74d6050387c0954a8a8910b865bdae3729ea260fce070f22440d76695642f8cf",
+  "plan_sha256": "76bdd0cc3811d43c653deda16c34355823cecfcadde90da877f9015bd51b8ada",
+  "input_sha256": {
+    "tools/authority_runtime.py": "064ba3e6c063b20b0c25c3be183bab913387a4fe49e9dd84cd45ee8b82a6d250",
+    "tests/test_authority_deadline.py": "8409dbccaaf230f70a9bd66097173ce8ea4482c4e4f2b01dc5cb0bd85f25b189",
+    "tests/test_authority_clock.py": "510e3fca77da5df2ed312f1316a54d297683bc71c4ef16ecd6223b7e59f80b45",
+    "tests/test_authority_runtime.py": "3c8029d09d23bcf7bdcddc5a7f9fcdbf3b41eeafcad375cda8012c45a323dbd8",
+    "tests/test_docker_runner.py": "4105aa6ced19ea6da124fe696846c6a3e7175625ff710085cbced4e7660ff803",
+    "tests/test_authority_client_reuse.py": "f206daed6a7ed1349f12919f9abd24cd24f89661a9096ee97d7f13b11732b73f",
+    "tests/test_authority_running_clients.py": "b546ade94935032bda9eb44593bd9763bdae3fd16321be5992ca017b9195da38",
+    "tests/test_authority_clock_recovery.py": "379641ab1c0c9f79df4cdb1376cb0f8a339854135a2229bc22ac19b40e1650f0",
+    "tests/test_authority_readiness.py": "33213bf89622d1c708e41225233ac050d3abd3d217fb8a416bd3e42b2ae3b917",
+    "tests/test_authority_cleanup_refresh.py": "a792d15f14849ca39cbad5b3f8afe096f6db4aa7a1a17fdbd586fb3b9710847b"
+  },
+  "additional_correction": "Windows TIMEOUT_MAX=4,294,967秒を超える有効なdeadlineではロック待ちを分割し、残期限を再計算する。最大許容値でのOverflowErrorを回避。",
+  "prior_record": "deadline-parent-v1.json",
+  "scope": "期限/mutex/retryと既存client互換性・子process回収の単体/結合試験。Dockerなし。",
+  "limits": [
+    "期限はdispatch/transport予算、cleanupには独立した有限待ちがある",
+    "broker transaction/workerの取消し保証なし",
+    "query-series製品adapter/CLI接続は未完了"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

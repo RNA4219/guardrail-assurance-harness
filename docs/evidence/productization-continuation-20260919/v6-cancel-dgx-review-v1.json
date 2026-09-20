@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "v6_cancel_dgx_design_review",
+  "status": "RECEIVED",
+  "finish_reason": "stop",
+  "response_sha256": "8474ec0ee2507034fe94b67f77aa39b4d85e61425eb2609d1cb12217c23cb46a",
+  "elapsed_seconds": 6.4060000000172295,
+  "request_sha256": "c90efc058da3fa232e4f58b0665b2c0aa585745035e24ba5f0b527e788c5448e",
+  "review_only": true,
+  "acceptance_evidence": false,
+  "parent_dispositions": [
+    {
+      "point": 1,
+      "decision": "CHECK_EXISTING_INVARIANT",
+      "reason": "認証済みroleとowner leaseは別検査。cancel_claimの期限切れclaim+cancel原子性を既存台帳に委ねて試験する。"
+    },
+    {
+      "point": 2,
+      "decision": "ACCEPT_AS_LIMITATION",
+      "reason": "validator欠測時には送信済み操作を未精算に保持し、回収経路を残す。取消を観測の代用にしない。"
+    },
+    {
+      "point": 3,
+      "decision": "REJECT_IMPLICIT_AUTO_SETTLEMENT",
+      "reason": "未確認なのに精算/停止を捏造してcloseする設計へ変更しない。未精算によるclose拒否は必要な動作。"
+    }
+  ],
+  "parent_review_sha256": "c8327367edbce07074a8aeaf6895f2a7e24fdec5f1f169b3ee85c40dfe71690c",
+  "ci_eligible": false
+}

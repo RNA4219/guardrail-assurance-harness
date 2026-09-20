@@ -1,0 +1,65 @@
+{
+  "baseline_metrics": {
+    "count": 3,
+    "max": 500000000,
+    "median": {
+      "denominator": 1,
+      "numerator": 500000000
+    },
+    "p95": 500000000
+  },
+  "baseline_source_ref": {
+    "digest": "961e0d4fe420fff52fd3e2e478d475547baedc8914abb5e85a7f06fbd6c289cb",
+    "id": "benchmark-example-baseline",
+    "kind": "snapshot_manifest"
+  },
+  "candidate_metrics": {
+    "count": 3,
+    "max": 100000000,
+    "median": {
+      "denominator": 1,
+      "numerator": 100000000
+    },
+    "p95": 100000000
+  },
+  "candidate_source_ref": {
+    "digest": "779fe04e699ef4732cc9179dc46eccc4b42c80b28383e407254530c1eb742948",
+    "id": "benchmark-example-candidate",
+    "kind": "snapshot_manifest"
+  },
+  "ci_eligible": false,
+  "condition_match": true,
+  "failures": [],
+  "id": "benchmark-result-cefd0655efd214e3492807a6bfcb91122bb20334",
+  "kind": "benchmark_result",
+  "measurement_surface": "query",
+  "observation_count": 6,
+  "plan_ref": {
+    "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+    "id": "benchmark-example-plan",
+    "kind": "benchmark_plan"
+  },
+  "ratios": {
+    "candidate_over_baseline": {
+      "denominator": 5,
+      "numerator": 1
+    },
+    "improvement_percent": {
+      "denominator": 1,
+      "numerator": 80
+    }
+  },
+  "reasons": [
+    "EVIDENCE_UNAVAILABLE"
+  ],
+  "schema_version": 1,
+  "slo_evidence": false,
+  "status": "INCONCLUSIVE",
+  "thresholds": {
+    "baseline_ratio": null,
+    "max_ns": 2000000000,
+    "median_ns": null,
+    "p95_ns": 1000000000
+  },
+  "valid_observation_count": 6
+}

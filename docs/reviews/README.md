@@ -2,11 +2,17 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-11
-next_review_due: 2026-10-11
+last_reviewed_at: 2026-09-19
+next_review_due: 2026-10-19
 ---
 
 # 設計・コードレビュー
+
+[9月19日の継続監督レビュー](productization-continuation-20260919.md)にLunaの実装、親の接続検査、DGX提案の採否と修正前後の証拠を記録する。
+
+[拡張実装の監督レビュー](productization-implementation-20260915.md)に、コードへの指摘、DGXの採否、結合検証と残件を記録する。
+
+[拡張仕様の監督レビュー](productization-spec-20260915.md)で、Lunaの3分冊執筆と親による契約統合・相互レビューの指摘処遇を追う。製品実行の証拠とは区別する。
 
 [全MVPへの実装・監督記録](mvp-completion-20260911.md)でRegistry・CaseSet・Evidenceの追加、相互レビュー修正と全MVPへ残る接続を追跡する。
 

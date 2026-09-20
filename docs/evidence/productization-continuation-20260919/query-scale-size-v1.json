@@ -1,0 +1,93 @@
+{
+  "claims": {
+    "ci_eligible": false,
+    "runtime_admission": false,
+    "valid_for_slo": false
+  },
+  "document_limit_bytes": 1048576,
+  "kind": "query_scale_storage_size_diagnostic",
+  "method": "Exact generated corpus and existing materializer entry fields, short fixed run id. Bundle size is a representative envelope with case_set and plan replaced, not an admitted bound run.",
+  "rows": [
+    {
+      "case_set_bytes": 259759,
+      "cases": 400,
+      "entries": 400,
+      "plan_bytes": 180240,
+      "plan_validation": "PASS_STRUCTURAL_PLAN",
+      "representative_bundle_bytes": 445570,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "candidate"
+      ]
+    },
+    {
+      "case_set_bytes": 259759,
+      "cases": 400,
+      "entries": 800,
+      "plan_bytes": 359840,
+      "plan_validation": "PASS_STRUCTURAL_PLAN",
+      "representative_bundle_bytes": 625170,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "baseline",
+        "candidate"
+      ]
+    },
+    {
+      "case_set_bytes": 519359,
+      "cases": 800,
+      "entries": 800,
+      "plan_bytes": 360240,
+      "plan_validation": "PASS_STRUCTURAL_PLAN",
+      "representative_bundle_bytes": 885170,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "candidate"
+      ]
+    },
+    {
+      "case_set_bytes": 519359,
+      "cases": 800,
+      "entries": 1600,
+      "plan_bytes": 719440,
+      "plan_validation": "PASS_STRUCTURAL_PLAN",
+      "representative_bundle_bytes": 1244370,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "baseline",
+        "candidate"
+      ]
+    },
+    {
+      "case_set_bytes": 1038560,
+      "cases": 1600,
+      "entries": 1600,
+      "plan_bytes": 720240,
+      "plan_validation": "PASS_STRUCTURAL_PLAN",
+      "representative_bundle_bytes": 1764371,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "candidate"
+      ]
+    },
+    {
+      "case_set_bytes": 1038560,
+      "cases": 1600,
+      "entries": 3200,
+      "plan_bytes": 1438640,
+      "plan_validation": "DOCUMENT_SIZE",
+      "representative_bundle_bytes": 2482771,
+      "representative_bundle_fully_bound": false,
+      "variants": [
+        "baseline",
+        "candidate"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/llm_materialization.py": "6fe2e33fbd978b86e46f387b8ff13e16689bac60edc862210e02827972969e7c",
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "src/gah/run_contracts.py": "99526bc49246b399eaab7310d0c4a1a3dc51ccefd07d27e44188b35e67f6093a"
+  }
+}

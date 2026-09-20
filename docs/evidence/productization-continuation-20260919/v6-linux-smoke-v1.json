@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_v6_linux_smoke_review",
+  "status": "PASS",
+  "date": "2026-09-20",
+  "scope": "明示schema6の診断APIを実SO_PEERCREDで検証。15件の採択済み無害plan、合成UNKNOWN Attempt 1件の保存/再送/再起動を確認。実worker・全受入の証拠にはしない。",
+  "migration_scope": "空の現行v5 DBからの明示移行。実旧版のデータ入りDB移行はv6-real-migration-v1.jsonで別検証。",
+  "source_manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "extension_digest": "8dd05698c829ac0048c1129724c1cbc560e92da72bd547c84ec41830212f638e",
+  "elapsed_seconds": 79.092999999,
+  "artifact_hashes": {
+    "driver.py": "7d059405e67e1b52de024ef0490ede67b59551c0ed9ab8f770e7f6366bf1d201",
+    "plan.json": "c06a56c93ac8ab6f001b8d3f18e1f1abf3f9f47812183b8e9b488d60d67b62a5",
+    "artifacts/host-result.json": "d11dd6f910b428b1474578dd4c5c59e2caafd44f5934bee083477826e62fe7cd",
+    "artifacts/inside-result.json": "545fb6f6e8e9d9a94169055649f0174031bc43d6b9ff42a4d1742aac03440525",
+    "artifacts/container-inspect.json": "5d709778a21e7f2cfcb1036b5444c1280d5d9f2ffa088451011ef02588b7f8d9",
+    "artifacts/docker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "container_config_checks": {
+    "cap_add_setuid_setgid": true,
+    "cap_drop_all": true,
+    "cpu": true,
+    "diagnostic_label": true,
+    "id": true,
+    "image_id": true,
+    "image_reference": true,
+    "memory": true,
+    "memory_swap": true,
+    "mount_destinations": true,
+    "name": true,
+    "network_none": true,
+    "no_new_privileges": true,
+    "pids": true,
+    "readonly_root": true,
+    "results_bind_readwrite": true,
+    "run_id_label": true,
+    "source_binds_readonly": true,
+    "tmpfs_ipc": true,
+    "tmpfs_keys": true,
+    "tmpfs_mounts": true,
+    "tmpfs_state": true,
+    "tmpfs_tmp": true,
+    "tmpfs_workspace": true,
+    "user_root": true
+  },
+  "identity_probes": {
+    "12001": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12001,
+      "groups": [],
+      "uid": 12001
+    },
+    "12002": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12002,
+      "groups": [],
+      "uid": 12002
+    },
+    "12003": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12003,
+      "groups": [],
+      "uid": 12003
+    },
+    "12004": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12004,
+      "groups": [],
+      "uid": 12004
+    }
+  },
+  "operations": [
+    {
+      "action": "plan_partition_status",
+      "kind": "authority_error",
+      "reason": "UPLOAD_MISSING",
+      "request_id": "warmup",
+      "uid": 12001
+    },
+    {
+      "action": "propose",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-propose",
+      "uid": 12001
+    },
+    {
+      "action": "validate",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-validate",
+      "uid": 12003
+    },
+    {
+      "action": "adopt",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-adopt",
+      "uid": 12001
+    },
+    {
+      "action": "fixture_prepare",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "fixture-prepare",
+      "uid": 12001
+    },
+    {
+      "action": "contract_propose",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-propose",
+      "uid": 12001
+    },
+    {
+      "action": "contract_validate",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-validate",
+      "uid": 12003
+    },
+    {
+      "action": "contract_adopt",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-adopt",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_begin",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-begin",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_put_segment",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-put-0",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_commit",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-commit",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_read",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-read-index",
+      "uid": 12004
+    },
+    {
+      "action": "plan_partition_read",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-read-segment-0",
+      "uid": 12003
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-manager-begin",
+      "uid": 12001
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-validator-begin",
+      "uid": 12003
+    },
+    {
+      "action": "plan_partition_begin",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-candidate-plan",
+      "uid": 12002
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-operator-attempt",
+      "uid": 12004
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "v6-run-begin",
+      "uid": 12004
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-first",
+      "uid": 12003
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-replay",
+      "uid": 12003
+    },
+    {
+      "action": "run_status_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "status-after-restart",
+      "uid": 12001
+    },
+    {
+      "action": "evidence_attempt_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-read-after-restart",
+      "uid": 12004
+    },
+    {
+      "action": "evidence_current_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "current-after-restart",
+      "uid": 12003
+    }
+  ],
+  "migration": {
+    "changed": true,
+    "ci_eligible": false,
+    "extension_digest": "8dd05698c829ac0048c1129724c1cbc560e92da72bd547c84ec41830212f638e",
+    "kind": "partitioned_run_migration_result",
+    "old_plan_reupload_requires_new_plan_id": true,
+    "old_plan_rows_preserved": true,
+    "predecessor_extension_digest": "71f0be360d26c2343c7cef82fc066a5601138857508c2ae7a1ccadd46baf38e7",
+    "schema_version": 6
+  },
+  "plan_entry_count": 15,
+  "attempt_first_accepted": true,
+  "attempt_redelivery_duplicate": true,
+  "attempt_delivery_count_after_restart": 2,
+  "broker_restarted": true,
+  "status_after_restart": true,
+  "current_use": false,
+  "current_ci_eligible": false,
+  "source_hashes_unchanged": true,
+  "plan_driver_unchanged": true,
+  "cleanup_confirmed": true,
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "real_worker_acceptance": false
+}

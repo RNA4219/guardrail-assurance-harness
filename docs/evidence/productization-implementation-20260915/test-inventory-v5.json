@@ -1,0 +1,26 @@
+{
+  "all_tests_on_final_source": false,
+  "ci_eligible": false,
+  "current_plan_digest": "bd2fdc301788a5217247c5f7d4c1a74cefe8a386c3b31b1be734850dfb83c14e",
+  "current_plan_file_sha256": "812f1648693f1314ed997ba90d9fd6d212acdaf440ef90d22c57793f351e9b32",
+  "discovery_is_not_execution": true,
+  "id": "test-inventory-v5",
+  "kind": "test_inventory_observation",
+  "new_test_ids": [
+    "test_benchmark.BenchmarkTests.test_compare_rejects_duplicate_warmness_iteration_with_new_labels",
+    "test_benchmark.BenchmarkTests.test_compare_requires_contiguous_indices_per_warmness",
+    "test_benchmark.BenchmarkTests.test_measure_once_rejects_unplanned_index_or_type_before_operation",
+    "test_small_manifest_cache.SmallManifestCacheTests.test_all_inputs_and_source_digest_invalidate",
+    "test_small_manifest_cache.SmallManifestCacheTests.test_non_ci_scope_size_and_nonplain_payload_fall_back",
+    "test_small_manifest_cache.SmallManifestCacheTests.test_original_implementation_error_is_preserved",
+    "test_small_manifest_cache.SmallManifestCacheTests.test_small_ci_15_and_30_cold_warm_and_isolated"
+  ],
+  "prior_full_regression_planned_tests": 1110,
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+    "id": "final-source-v5",
+    "kind": "snapshot_manifest"
+  },
+  "total_discovered_tests": 1117
+}

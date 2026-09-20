@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "linux_lane_diagnostic",
+  "id": "linux-lane-diagnostic-v1",
+  "source_manifest_sha256": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+  "source_snapshot": "source-v5",
+  "result": {
+    "ci_eligible": false,
+    "cleanup_confirmed": true,
+    "container": {
+      "container_id": "2f3603902d82159b9428ed507242792272364a16e86a8cb4227c527131f14dab",
+      "label_id": "437af256af9948a88cc907c9b707ed50",
+      "name": "gah-linux-llm-supervision-437af256af9948a88cc907c9b707ed50",
+      "state_at_end": {
+        "exit_code": 137,
+        "labels": {
+          "org.gah.linux-lane": "llm-supervision-v1",
+          "org.gah.run-id": "437af256af9948a88cc907c9b707ed50"
+        },
+        "name": "/gah-linux-llm-supervision-437af256af9948a88cc907c9b707ed50",
+        "running": false,
+        "status": "exited"
+      }
+    },
+    "exit_code": null,
+    "expected_plan_digest": "4c834d689e346942ec2c9f58cc791130a96bad69a90703d947121da7803ede5b",
+    "full_pac_acceptance": false,
+    "kind": "linux_container_lane_result",
+    "lane": "llm-supervision",
+    "linux_conditions": {
+      "api_version": "1.52",
+      "architecture": "amd64",
+      "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+      "os": "linux",
+      "repo_digests": [
+        "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
+      ],
+      "server_version": "29.0.1"
+    },
+    "log": "container.log",
+    "reason": "LANE_TIMEOUT",
+    "resource_sample": {
+      "container_id": "2f3603902d82159b9428ed507242792272364a16e86a8cb4227c527131f14dab",
+      "diagnostic_only": true,
+      "interpretation": "One docker stats sample while running; diagnostic only, not total/group accounting or an SLO measurement.",
+      "not_slo_measurement": true,
+      "not_true_group_accounting": true,
+      "observed_at_utc": "2026-09-19T13:39:50Z",
+      "sample": {
+        "BlockIO": "23.8MB / 0B",
+        "CPUPerc": "13.94%",
+        "Container": "2f3603902d82159b9428ed507242792272364a16e86a8cb4227c527131f14dab",
+        "ID": "2f3603902d82",
+        "MemPerc": "1.53%",
+        "MemUsage": "62.86MiB / 4GiB",
+        "Name": "gah-linux-llm-supervision-437af256af9948a88cc907c9b707ed50",
+        "NetIO": "0B / 0B",
+        "PIDs": "1"
+      },
+      "source": "docker stats --no-stream for owned container ID"
+    },
+    "schema_version": 1,
+    "source_hashes_after_digest": "961524a230611d59901c6b7beb08e9b72835a042a098bca95d01186dc519a4a4",
+    "source_hashes_before_digest": "961524a230611d59901c6b7beb08e9b72835a042a098bca95d01186dc519a4a4",
+    "source_hashes_match": true,
+    "status": "TIMEOUT",
+    "tests": [
+      "test_llm_supervision_integration.LlmSupervisionIntegrationTests.test_adopted_comparison_supervision_ci_report_and_checkpoint_recovery"
+    ],
+    "timed_out": true,
+    "timeout_seconds": 900
+  },
+  "initial_driver_attempt": {
+    "outcome": "container created but not started; ID regex driver error",
+    "owned_container_removed": true
+  },
+  "interpretation": [
+    "source remained a read-only Windows bind mount",
+    "temporary output and repo .ga were tmpfs",
+    "repeated lock/source hash reads still used the Windows sharing path",
+    "one instantaneous docker stats sample does not establish CPU or filesystem causality",
+    "timeout is not a passing test; exit 137 after owned timeout cleanup is not evidence of OOM"
+  ],
+  "next_diagnostic": "copy exact source to Linux tmpfs with all manifest hashes checked; run same lane within a new bounded plan",
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

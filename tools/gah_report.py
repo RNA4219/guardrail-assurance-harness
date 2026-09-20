@@ -3,6 +3,7 @@ from copy import deepcopy
 from fractions import Fraction
 from datetime import datetime, timezone
 import argparse
+import io
 import hashlib
 import json
 from pathlib import Path
@@ -12,10 +13,143 @@ from tools.gah_ci import ROOT, AuthorityRuntime, decode_document, response_exit_
 from gah.contracts import MAX_DOCUMENT_BYTES, MAX_INTEGER, require_ref
 from gah.run_contracts import content_ref
 from gah.wire import canonical_bytes
+from gah.docker_runner import operation_lock
+from gah.supervisor_checkpoint import _plain_directory
+from tools.authority_runtime import AuthorityRuntimeError
 
 
 class EvidenceDeleted(ValueError):
     pass
+
+
+class ReportArtifactsUnavailable(ValueError):
+    def __init__(self, reason="REPORT_ARTIFACT_UNAVAILABLE"):
+        self.reason = reason
+
+
+_REPORT_GUIDANCE = {
+    "STOP_UNCONFIRMED": ("python -m tools.gah_run status --runtime <runtime> --request <run-request.json>", "operator", "停止状態を照合する。停止確認までは再実行しない。"),
+    "CANCEL_REQUESTED": ("python -m tools.gah_run status --runtime <runtime> --request <run-request.json>", "operator", "取消し後の停止状態を照合する。"),
+    "BUDGET_OPEN": ("python -m tools.gah_run status --runtime <runtime> --request <run-request.json>", "operator", "停止と未精算状態を照合する。"),
+    "SETTLEMENT_PENDING": ("python -m tools.gah_run status --runtime <runtime> --request <run-request.json>", "operator", "未精算状態を照合する。"),
+    "RUN_MISSING": ("python -m tools.gah_run run --runtime <runtime> --request <new-run-request.json>", "operator", "有効なrequestで新しいrun_idの実行を開始する。"),
+    "RUN_OUTPUTS_MISSING": ("python -m tools.gah_run status --runtime <runtime> --request <run-request.json>", "operator", "既存runの実行と保存状態を照合する。"),
+    "RUN_OUTPUTS_INVALID": ("python -m tools.gah_ops bundle create --workspace <workspace> --runtime <runtime> --run-id <run-id> --output <new-directory>", "operator", "保存済みdiagnostic metadataを別bundleへ収集できるか確認する。"),
+    "SOURCE_NOT_READY": ("python -m tools.gah_run run --runtime <runtime> --request <new-run-request.json>", "operator", "採択済み契約で新しいrun_idの評価を試みる。古いrunの証拠は再利用しない。"),
+    "SOURCE_EXPIRED": ("python -m tools.gah_run run --runtime <runtime> --request <new-run-request.json>", "operator", "採択済み契約で新しいrun_idの評価を開始する。期限切れrunの証拠は復活・再利用しない。"),
+    "EVIDENCE_REVOKED": ("python -m tools.gah_run run --runtime <runtime> --request <new-run-request.json>", "operator", "採択済み契約で新しいrun_idの評価を開始する。撤回済み証拠は復活・再利用しない。採択変更が必要ならmanagerへ依頼する。"),
+    "EVIDENCE_DELETED": ("python -m tools.gah_ops bundle create --workspace <workspace> --runtime <runtime> --run-id <run-id> --output <new-directory>", "operator", "保持済み診断metadataを別bundleへ収集できるか確認する。"),
+    "EVIDENCE_UNAVAILABLE": ("python -m tools.gah_ops doctor --phase ready --workspace <workspace> --runtime <runtime> --json", "operator", "既存runtimeとauthorityのreadinessを再確認する。"),
+    "REPORT_ARTIFACT_UNAVAILABLE": ("python -m tools.gah_ops bundle create --workspace <workspace> --runtime <runtime> --run-id <run-id> --output <new-directory>", "operator", "保持済み診断metadataを別bundleへ収集できるか確認する。"),
+    "REPORT_UNAVAILABLE": ("python -m tools.gah_ops doctor --phase ready --workspace <workspace> --runtime <runtime> --json", "operator", "runtimeとauthorityのreadinessを確認する。"),
+    "CI_GATE_UNAVAILABLE": ("python -m tools.gah_ops doctor --phase ready --workspace <workspace> --runtime <runtime> --json", "operator", "CI queryを使う前提のruntime readinessを確認する。"),
+}
+
+
+def _guidance(reasons, assurance=None):
+    # 未精算状態をcancel一般案内より優先して見せる。
+    ordered = sorted(reasons, key=lambda reason: (0 if reason == "BUDGET_OPEN" else 1))
+    for reason in ordered:
+        if reason in _REPORT_GUIDANCE:
+            operation, role, effect = _REPORT_GUIDANCE[reason]
+            return {"reason": reason, "next_operation": operation, "required_role": role,
+                "operation_effect": effect}
+    if not reasons and assurance == "HEALTHY":
+        return {"reason": "NONE", "next_operation": "追加操作不要。必要時に新しいrunを開始してください。",
+            "required_role": "none", "operation_effect": "現在のfresh gateは利用可能です。"}
+    if assurance == "WARNING":
+        return {"reason": "WARNING_REVIEW",
+            "next_operation": "python -m tools.gah_ops bundle create --workspace <workspace> --runtime <runtime> --run-id <run-id> --output <new-directory>",
+            "required_role": "operator", "operation_effect": "既存runの診断metadataを確認し、追加評価が必要か判断する。"}
+    return {"reason": reasons[0] if reasons else "CI_GATE_UNAVAILABLE",
+        "next_operation": "python -m tools.gah_ops doctor --phase ready --workspace <workspace> --runtime <runtime> --json",
+        "required_role": "operator", "operation_effect": "既存runtimeとauthorityのreadinessを再確認する。"}
+
+
+
+def _guidance_markdown_rows(report, literal):
+    operation = report["next_operation"]
+    command_templates = {value[0] for value in _REPORT_GUIDANCE.values()}
+    command_templates.add("python -m tools.gah_ops bundle create --workspace <workspace> --runtime <runtime> --run-id <run-id> --output <new-directory>")
+    display = "`" + operation + "`" if operation in command_templates else operation
+    return ["次の操作: " + display,
+        "必要な役割: " + report["required_role"],
+        "操作の目的: " + report["operation_effect"]]
+
+
+def _unknown_versions(contract_ref=None, baseline_ref=None):
+    return {"contract_ref": deepcopy(contract_ref), "contract_generation": None,
+            "baseline_ref": deepcopy(baseline_ref), "baseline_generation": None}
+
+
+def _evaluation_versions(query, artifact_action, manifest):
+    result = _unknown_versions(manifest["contract_ref"], manifest["baseline_ref"])
+    for field, kind, id_field in (("contract", "evaluation_contract", "contract_id"),
+                                  ("baseline", "baseline", "baseline_id")):
+        ref = result[field + "_ref"]
+        if ref is None and field == "baseline":
+            continue
+        require_ref(ref)
+        response = query(artifact_action, field + "-generation", artifact_ref=ref)
+        value = response["artifact"]
+        if (ref["kind"] != kind or response["artifact_ref"] != ref
+                or type(value) is not dict or value.get(id_field) != ref["id"]
+                or content_ref(kind, ref["id"], value) != ref
+                or type(value.get("generation")) is not int
+                or not 1 <= value["generation"] <= MAX_INTEGER):
+            raise ValueError("REPORT_BINDING_MISMATCH")
+        result[field + "_generation"] = value["generation"]
+    return result
+
+
+def _version_rows(report, literal):
+    versions = report["evaluation_versions"]
+    def generation(field):
+        if field == "baseline" and versions[field + "_ref"] is None and report["kind"] == "run_report":
+            return "対象外"
+        value = versions[field + "_generation"]
+        return "不明" if value is None else str(value)
+    return ["契約世代: " + generation("contract") + " / 参照: " + literal(versions["contract_ref"]),
+            "baseline世代: " + generation("baseline") + " / 参照: " + literal(versions["baseline_ref"])]
+
+
+def _unavailable_report(runtime, request, artifact_reason):
+    """保存成果物が読めなくても成功扱いせず、取得できたfresh gateだけを返す。"""
+    try:
+        gate = runtime.client(12004, request)
+        gate_code = response_exit_code(request, gate)
+    except Exception:
+        gate = None
+        gate_code = None
+    gate_reasons = gate["reasons"] if gate is not None else ["CI_GATE_UNAVAILABLE"]
+    reasons = list(gate_reasons)
+    if artifact_reason not in reasons:
+        reasons.append(artifact_reason)
+    guidance = _guidance(reasons, None if gate is None else gate["assurance"])
+    return {"schema_version": 1, "kind": "run_report_failure", "run_id": request["run_id"],
+        "requested_context": {key: deepcopy(request[key]) for key in
+            ("expected_manifest_ref", "expected_contract_ref", "expected_baseline_ref", "expected_target_refs", "expected_use_cases")},
+        "evaluation_versions": _unknown_versions(request["expected_contract_ref"], request["expected_baseline_ref"]),
+        "artifacts_available": False, "checked_at": None if gate is None else gate["checked_at"],
+        "assurance": "UNKNOWN" if gate is None else gate["assurance"],
+        "execution_status": "FAILED" if gate is None or gate_code == 0 else gate["execution_status"],
+        "gate_exit_code": gate_code, "ci_reasons": gate_reasons, "reasons": reasons,
+        **guidance, "ci_eligible": False, "exit_code": 2}
+
+
+def _render_failure_markdown(report):
+    literal = lambda value: json.dumps(value, ensure_ascii=True, sort_keys=True, allow_nan=False)
+    checked = "不明" if report["checked_at"] is None else str(report["checked_at"])
+    rows = ["# GAH実行結果", "", "run: " + literal(report["run_id"]),
+        "実行状態: " + report["execution_status"], "CI照会のAssurance: " + report["assurance"],
+        "現在のCI利用: 不可 / 終了値 2", "成果物: 取得不能。成功・充足の根拠には使用しない。",
+        "fresh gate確認時刻: " + checked,
+        *_version_rows(report, literal),
+        "要求対象（成果物を評価した事実ではない）: " + literal(report.get("requested_context")),
+        "", "## 判定理由", ""]
+    rows.extend("- " + literal(reason) for reason in report["reasons"])
+    rows += ["", "## 次の操作", ""] + _guidance_markdown_rows(report, literal)
+    return "\n".join(rows) + "\n"
 
 
 def _deleted_report(runtime,request,tag):
@@ -40,12 +174,13 @@ def _deleted_report(runtime,request,tag):
         "scope":{"use_cases":meta["use_cases"],"control_ids":meta["control_ids"],"target_refs":meta["target_refs"],
             "profile":meta["profile"],"executed_scope":"targeted" if meta["unexecuted_control_ids"] else "full",
             "unexecuted_control_ids":meta["unexecuted_control_ids"]},
+        "evaluation_versions": _unknown_versions(meta["contract_ref"], meta["baseline_ref"]),
         "checked_at":gate["checked_at"],"observed_at":meta["observed_at"],"valid_until":meta["valid_until"],
         "execution_status":gate["execution_status"],"assurance":gate["assurance"],"observed_assurance":state["saved_assurance"],
         "metrics":[],"metric_scopes":{},"decision_reasons":["REPRODUCTION_UNAVAILABLE"],"ci_reasons":gate["reasons"],
         "findings":[],"plans":[],"artifacts_available":False,"reproduction":"REPRODUCTION_UNAVAILABLE",
         "outputs_ref":None,"source_refs":{"evidence":state["evidence_ref"],"tombstone":state["tombstone_ref"]},
-        "ci_eligible":False,"exit_code":code}
+        "ci_eligible":False,"exit_code":code,**_guidance(gate["reasons"],gate["assurance"])}
 
 
 def _metrics(values):
@@ -87,6 +222,13 @@ def build_report(runtime, request, *, candidate=False):
         if (type(value) is dict and value.get("kind") == "authority_error"
                 and value.get("reason") == "EVIDENCE_DELETED" and value.get("ci_eligible") is False):
             raise EvidenceDeleted()
+        if (action == outputs_action and type(value) is dict
+                and value.get("kind") == "authority_error" and value.get("ci_eligible") is False
+                and value.get("reason") in {"STOP_UNCONFIRMED", "BUDGET_OPEN", "SETTLEMENT_PENDING",
+                    "SOURCE_EXPIRED", "EVIDENCE_REVOKED", "EVIDENCE_UNAVAILABLE", "RUN_MISSING",
+                    "RUN_OUTPUTS_MISSING", "RUN_OUTPUTS_INVALID", "SOURCE_NOT_READY", "SOURCE_OPERATION_INVALID",
+                    "NOT_FINALIZED", "EVIDENCE_RESTORED_AFTER_DELETION", "TARGET_RETIRED"}):
+            raise ReportArtifactsUnavailable(value["reason"])
         keys = {"schema_version", "kind", "action", "request_id", "ci_eligible"}
         keys |= {"outputs_ref", "outputs"} if action == outputs_action else {"artifact_ref", "artifact"}
         if (type(value) is not dict or set(value) != keys or type(value["schema_version"]) is not int
@@ -99,6 +241,10 @@ def build_report(runtime, request, *, candidate=False):
         fetched = query(outputs_action, "outputs")
     except EvidenceDeleted:
         return _deleted_report(runtime,request,tag)
+    except ReportArtifactsUnavailable as error:
+        return _unavailable_report(runtime, request, error.reason)
+    except (AuthorityRuntimeError, OSError, TimeoutError):
+        return _unavailable_report(runtime, request, "REPORT_ARTIFACT_UNAVAILABLE")
     outputs, outputs_ref = fetched["outputs"], fetched["outputs_ref"]
     require_ref(outputs_ref)
     if outputs_ref != content_ref("run_outputs", run_id, outputs):
@@ -132,21 +278,25 @@ def build_report(runtime, request, *, candidate=False):
             or aggregate.get("ci_eligible") is not False or type(aggregate.get("issues")) is not list):
         raise ValueError("REPORT_BINDING_MISMATCH")
     count_rows = _count_rows(aggregate["counts"])
-    from tools.gah_mutation_review import execute as mutation_review
-    reviews, review_code = mutation_review(runtime, {"schema_version":1, "action":"mutation_review_current",
-        "request_id":tag+"-mutation-reviews", "run_id":run_id, "expected_evidence_ref":outputs["evidence"]})
-    if (review_code or reviews["original_decision_ref"] != outputs["decision"]
-            or reviews["contract_ref"] != request["expected_contract_ref"]):
-        raise ValueError("REPORT_BINDING_MISMATCH")
-    reviewed_classification = {}
-    for variant in ("baseline", "candidate"):
-        observed = aggregate["counts"]["variant"][variant]["mutation_error"]
-        excluded = reviews["counts"][variant]["approved_exclusions"]
-        pending = reviews["counts"][variant]["pending_exclusions"]
-        if excluded + pending > observed:
-            raise ValueError("REPORT_COUNTS_INVALID")
-        reviewed_classification[variant] = {"mutation_errors_observed":observed,
-            "excluded":excluded, "exclusion_pending":pending, "remaining_mutation_errors":observed-excluded}
+    # 取消しreceiptには通常完了の除外審査を適用しない。未取得をゼロへ補完しない。
+    reviews = None
+    reviewed_classification = None
+    if artifacts["run_receipt"].get("kind") != "authority_cancel_receipt":
+        from tools.gah_mutation_review import execute as mutation_review
+        reviews, review_code = mutation_review(runtime, {"schema_version":1, "action":"mutation_review_current",
+            "request_id":tag+"-mutation-reviews", "run_id":run_id, "expected_evidence_ref":outputs["evidence"]})
+        if (review_code or reviews["original_decision_ref"] != outputs["decision"]
+                or reviews["contract_ref"] != request["expected_contract_ref"]):
+            raise ValueError("REPORT_BINDING_MISMATCH")
+        reviewed_classification = {}
+        for variant in ("baseline", "candidate"):
+            observed = aggregate["counts"]["variant"][variant]["mutation_error"]
+            excluded = reviews["counts"][variant]["approved_exclusions"]
+            pending = reviews["counts"][variant]["pending_exclusions"]
+            if excluded + pending > observed:
+                raise ValueError("REPORT_COUNTS_INVALID")
+            reviewed_classification[variant] = {"mutation_errors_observed":observed,
+                "excluded":excluded, "exclusion_pending":pending, "remaining_mutation_errors":observed-excluded}
     management = []
     for index, ref in enumerate(artifacts["findings"]["items"]):
         if ref["kind"] != "finding": continue
@@ -162,6 +312,7 @@ def build_report(runtime, request, *, candidate=False):
         else:
             management.append({"finding_ref":ref,"available":True,"state":state["state"],"state_ref":state["state_ref"],
                 "verification_current":state["verification_current"],"checked_at":state["checked_at"],"reasons":state["reasons"]})
+    versions = _evaluation_versions(query, artifact_action, manifest)
     # 読取り中に失効した根拠を成功表示に使わない。成果物取得後に必ず再照会する。
     gate = runtime.client(12004, request)
     code = response_exit_code(request, gate)
@@ -175,10 +326,12 @@ def build_report(runtime, request, *, candidate=False):
             "target_refs": manifest["target_refs"], "profile": manifest["profile"],
             "executed_scope": outputs.get("scope", {}).get("executed_scope", "full"),
             "unexecuted_control_ids": outputs.get("scope", {}).get("unexecuted_control_ids", [])},
+        "evaluation_versions": versions,
         "checked_at": gate["checked_at"], "observed_at": evidence["observed_at"],
         "valid_until": evidence["valid_until"], "execution_status": gate["execution_status"],
         "assurance": gate["assurance"], "observed_assurance": decision["assurance"],
         "metrics": _metrics(decision["metrics"]), "metric_scopes": decision["metric_scopes"],
+        "budget_warning": deepcopy(decision.get("budget_warning")),
         "measurements": {"aggregate_ref":aggregate_ref, "counts":aggregate["counts"],
             "count_rows":count_rows, "issues":aggregate["issues"],
             "mutation_reviews":reviews, "reviewed_classification":reviewed_classification},
@@ -186,6 +339,8 @@ def build_report(runtime, request, *, candidate=False):
         "findings": artifacts["findings"]["items"], "plans": artifacts["plans"]["items"], "finding_management": management,
         "outputs_ref": outputs_ref, "source_refs": {**{k: outputs[k] for k in artifacts}, "aggregation":aggregate_ref},
         "ci_eligible": gate["ci_eligible"], "exit_code": code}
+    guidance = _guidance(gate["reasons"], gate["assurance"])
+    report.update(guidance)
     if candidate:
         report["purpose"] = manifest["purpose"]
     if len(canonical_bytes(report)) > MAX_DOCUMENT_BYTES:
@@ -220,6 +375,18 @@ def _count_rows(counts):
     return result
 
 
+def _budget_warning_rows(report, literal):
+    basis = report.get("budget_warning")
+    if basis is None:
+        return ["予算警告の根拠: 未取得"]
+    numerator, denominator = basis["warning_usage_min"]
+    dimensions = [axis for axis in basis["usage"]
+        if basis["usage"][axis] * denominator >= basis["limits"][axis] * numerator]
+    return ["予算警告の対象: " + (literal(dimensions) if dimensions else "なし"),
+        "予算使用量（保存時）: " + literal(basis["usage"]),
+        "予算上限: " + literal(basis["limits"])]
+
+
 def render_markdown(report):
     def literal(value):
         return json.dumps(value, ensure_ascii=True, sort_keys=True, allow_nan=False).replace("|", "\\|").replace("`", "\\u0060").replace("<", "\\u003c").replace(">", "\\u003e")
@@ -236,6 +403,9 @@ def render_markdown(report):
         "実行状態: " + report["execution_status"], "CI照会のAssurance: " + report["assurance"],
         "保存時のAssurance: " + report["observed_assurance"],
         "現在のCI利用: " + ("可" if report["ci_eligible"] else "不可") + " / 終了値 " + str(report["exit_code"]),
+        *_guidance_markdown_rows(report, literal),
+        *_version_rows(report, literal),
+        *_budget_warning_rows(report, literal),
         "", "用途: " + literal(scope["use_cases"]), "プロファイル: " + literal(scope["profile"]),
         "評価範囲Control: " + literal(scope["control_ids"]),
         "実行範囲: " + literal(scope["executed_scope"]),
@@ -278,7 +448,7 @@ def render_markdown(report):
             rows.append("| " + literal(row["scope"]) + " | " + str(counts["complete"]) + "/" + str(counts["planned"])
                 + " | " + " | ".join(str(counts[k]) for k in
                     ("retry_count","duplicate_deliveries","killed","survived","no_coverage","mutation_error")) + " |")
-    if measurements is not None:
+    if measurements is not None and measurements["reviewed_classification"] is not None:
         rows += ["", "### Mutationの除外審査", "",
             "観測時のERRORは上表に保持し、現在有効な審査だけを以下で別計数する。未確定除外を成功や充足へ加算しない。", "",
             "| 版 | 観測Mutation ERROR | 根拠付き除外 | 除外未確定 | 審査後に残るMutation ERROR |", "|---|---|---|---|---|"]
@@ -293,6 +463,8 @@ def render_markdown(report):
                 "独立検証者: " + literal(item["validation"]["reviewed_by"]),
                 "承認者: " + literal(None if item["approval"] is None else item["approval"]["approved_by"]),
                 "検証・承認根拠: " + literal([item["validation_ref"],item["approval_ref"],proof["evidence_ref"],proof["contract_ref"]])]
+    elif measurements is not None:
+        rows += ["", "### Mutationの除外審査", "", "取消しrunの除外審査は未取得。審査件数を0に補完しない。"]
     rows += ["", "## 判定理由・欠損", "", "| 種別 | 理由 |", "|---|---|"]
     rows.extend("| 保存された判定 | " + literal(reason) + " |" for reason in report["decision_reasons"])
     rows.extend("| 現在のCI利用 | " + literal(reason) + " |" for reason in report["ci_reasons"])
@@ -328,8 +500,12 @@ def run(runtime, request, stream, *, output_format="markdown", candidate=False):
         if output_format not in {"markdown", "json"}:
             raise ValueError("INVALID_FORMAT")
         report = build_report(runtime, request, candidate=candidate)
-        text = (render_markdown(report) if output_format == "markdown" else
-            json.dumps(report, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+        if report.get("kind") == "run_report_failure":
+            text = (_render_failure_markdown(report) if output_format == "markdown" else
+                json.dumps(report, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+        else:
+            text = (render_markdown(report) if output_format == "markdown" else
+                json.dumps(report, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
         if len(text.encode("utf-8")) > MAX_DOCUMENT_BYTES:
             raise ValueError("REPORT_TOO_LARGE")
         stream.write(text)
@@ -337,8 +513,23 @@ def run(runtime, request, stream, *, output_format="markdown", candidate=False):
         return report["exit_code"]
     except Exception:
         try:
-            stream.write(json.dumps({"schema_version": 1, "kind": "run_report_error",
-                "reason": "REPORT_UNAVAILABLE", "ci_eligible": False, "exit_code": 2}) + "\n")
+            normalized = validate_request(request)
+            failure = _unavailable_report(runtime, normalized, "REPORT_UNAVAILABLE")
+            if output_format == "markdown":
+                text = _render_failure_markdown(failure)
+            else:
+                text = json.dumps(failure, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n"
+        except Exception:
+            failure = {"schema_version": 1, "kind": "run_report_failure", "run_id": None,
+                "evaluation_versions": _unknown_versions(),
+                "artifacts_available": False, "checked_at": None, "assurance": "UNKNOWN",
+                "execution_status": "FAILED", "gate_exit_code": None, "ci_reasons": ["CI_GATE_UNAVAILABLE"],
+                "reasons": ["REPORT_UNAVAILABLE"], **_guidance(["REPORT_UNAVAILABLE"]),
+                "ci_eligible": False, "exit_code": 2}
+            text = (_render_failure_markdown(failure) if output_format == "markdown" else
+                json.dumps(failure, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+        try:
+            stream.write(text)
             stream.flush()
         except Exception:
             pass
@@ -347,18 +538,37 @@ def run(runtime, request, stream, *, output_format="markdown", candidate=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--runtime", required=True)
-    parser.add_argument("--request", required=True, help="完全参照を指定したci_check JSON")
+    parser.add_argument("--runtime")
+    parser.add_argument("--request", help="完全参照を指定したci_check JSON")
     parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
     parser.add_argument("--candidate", action="store_true", help="契約候補runの保存結果を表示する")
+    parser.add_argument("--setup-plan", help="完了済みsetupの計画からruntime/requestを解決")
     args = parser.parse_args()
     try:
-        folder = Path(args.runtime).resolve()
+        if args.setup_plan is not None:
+            if args.runtime is not None or args.request is not None or args.candidate:
+                raise ValueError("SETUP_ARGUMENT_CONFLICT")
+            from tools.setup_request import resolve
+            paths = resolve(args.setup_plan)
+            args.runtime, args.request = paths["runtime"], paths["ci_request"]
+        elif args.runtime is None or args.request is None:
+            raise ValueError("RUNTIME_AND_REQUEST_REQUIRED")
+        folder = _plain_directory(Path(args.runtime))
         if not folder.is_relative_to(ROOT) or not (folder / "deployment.json").is_file():
             raise ValueError("EXISTING_RUNTIME_REQUIRED")
         with Path(args.request).open("rb") as source:
             request = decode_document(source.read(MAX_DOCUMENT_BYTES + 1))
-        return run(AuthorityRuntime(folder), request, sys.stdout, output_format=args.format, candidate=args.candidate)
+        with operation_lock(folder / "supervised-transport", "deployment", "supervisor"):
+            runtime = AuthorityRuntime(folder)
+            stream = io.StringIO()
+            try:
+                code = run(runtime, request, stream, output_format=args.format, candidate=args.candidate)
+            finally:
+                runtime.close_clients()
+            # cleanupが確定するまで成功応答をstdoutへ公開しない。
+            sys.stdout.write(stream.getvalue())
+            sys.stdout.flush()
+            return code
     except Exception:
         try:
             print(json.dumps({"schema_version": 1, "kind": "run_report_error",

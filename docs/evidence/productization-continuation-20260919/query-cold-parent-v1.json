@@ -1,0 +1,32 @@
+{
+  "base_snapshot": "source-v7",
+  "changes": [
+    "cold wall includes open_session before request and response validation",
+    "warm per-query wall unchanged",
+    "clock failure closes active session and preserves missing slots",
+    "slow cold >3s and warm >2s retained across all 2916 observations, not treated as timeout"
+  ],
+  "ci_eligible": false,
+  "dgx_extra_review": "URLError; no usable additional review",
+  "included_in_source_v7_regression": false,
+  "kind": "query_cold_parent_review",
+  "limits": [
+    "fake adapter boundary tests only",
+    "actual process lifecycle/workload sizes not validated",
+    "full-series deadline and transport timeout not implemented"
+  ],
+  "rejected_design": "SLO maximum is not an execution deadline; hard cut-off proposal removed before acceptance",
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/query_series.py": "d50b62997462a32c682155bbabb0e2aa560c0a574db9fdea77b6bbf4242b442a",
+    "tests/test_query_series.py": "66735663464f2b0d9296a0a48136a6c557f75e06a8a6584b64229339fba0e325",
+    "tests/test_query_series_review.py": "dba3d7c33336bc2e07da4a930ad6573f291ab4c21bec2bb72e49d838b0d67f81"
+  },
+  "tests": {
+    "elapsed_seconds": 7.530999999959022,
+    "exit_code": 0,
+    "log_sha256": "95d63ee88721363c5db710324d50f6730670c752d8b85642108e3d8daf350bb6",
+    "run": 16
+  },
+  "valid_for_slo": false
+}

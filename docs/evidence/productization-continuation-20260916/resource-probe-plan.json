@@ -1,0 +1,6 @@
+{
+  "id": "resource-smoke-plan",
+  "kind": "local_probe_plan",
+  "samples": 2,
+  "schema_version": 1
+}

@@ -185,8 +185,8 @@ def _validate_case(case: Any) -> None:
         raise _invalid()
 
 
-def validate_case_set(document: dict) -> dict:
-    """CaseSetを検査し、呼出し側から独立したdeepcopyを返す。"""
+def _validate_case_set(document: dict, *, copy_result: bool) -> dict:
+    """CaseSetを完全検査し、必要な場合だけ独立copyを返す。"""
 
     require_object(document, _CASE_SET_FIELDS)
     if type(document["schema_version"]) is not int or document["schema_version"] != 1:
@@ -210,10 +210,22 @@ def validate_case_set(document: dict) -> dict:
             raise _invalid()
     if len(_canonical(document)) > MAX_DOCUMENT_BYTES:
         raise _invalid()
+    if not copy_result:
+        return document
     try:
         return copy.deepcopy(document)
     except (TypeError, ValueError, RecursionError):
         raise _invalid() from None
+
+
+def validate_case_set(document: dict) -> dict:
+    """CaseSetを検査し、呼出し側から独立したdeepcopyを返す。"""
+    return _validate_case_set(document, copy_result=True)
+
+
+def _validate_case_set_for_report(document: dict) -> dict:
+    """完全検査後のCaseSetを、変更しないレポート計算向けに読む。"""
+    return _validate_case_set(document, copy_result=False)
 
 
 def _lineage_groups(cases: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
@@ -325,7 +337,7 @@ def _report_for_sets(
                 }
             )
 
-    validated_others = [validate_case_set(other) for other in other_sets]
+    validated_others = [_validate_case_set_for_report(other) for other in other_sets]
     all_sets = [
         case_set,
         *sorted(validated_others, key=lambda item: item["case_set_id"]),
@@ -423,7 +435,14 @@ def corpus_report(document: dict, other_sets: Iterable[dict] = ()) -> dict:
     oracleの認証を意味しない。
     """
 
-    case_set = validate_case_set(document)
+    # A lazy iterable can mutate document while it is consumed. Keep the
+    # historical detached snapshot for that boundary; exact list/tuple inputs
+    # have no iteration callbacks, so the internal read-only path is safe.
+    case_set = (
+        _validate_case_set_for_report(document)
+        if type(other_sets) in (list, tuple)
+        else validate_case_set(document)
+    )
     if isinstance(other_sets, (str, bytes, dict)):
         raise _invalid()
     try:

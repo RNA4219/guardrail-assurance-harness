@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 jobs:
   plan:
     runs-on: ubuntu-latest
@@ -12,24 +13,40 @@ jobs:
     outputs:
       matrix: ${{ steps.partition.outputs.matrix }}
       digest: ${{ steps.partition.outputs.digest }}
+      lock_digest: ${{ steps.partition.outputs.lock_digest }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
-      - name: Partition every test without splitting modules
+      - name: Locate timing history from a successful default-branch push
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: python -m tools.ci_history previous --repository "$REPOSITORY" --branch "$DEFAULT_BRANCH"
+      - name: Read the selected previous history once
+        if: steps.previous.outputs.run_id != ''
+        continue-on-error: true
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: gah-timing-history
+          path: _ci/previous
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.previous.outputs.run_id }}
+      - name: Freeze the history and partition every test
         id: partition
         run: |
-          python -m tools.test_matrix --plan > ci-plan.json
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          plan = json.loads(Path('ci-plan.json').read_text('utf-8'))
-          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
-              output.write('matrix=' + json.dumps(plan['matrix']) + '\n')
-              output.write('digest=' + plan['plan_digest'] + '\n')
-          print(json.dumps(plan, indent=2))
-          PY
+          python -m tools.ci_history prepare --previous _ci/previous/timing-history.json --output _ci/inputs/timing-history.json
+          python -m tools.ci_history plan --history _ci/inputs/timing-history.json --output _ci/inputs/ci-plan.json
+      - name: Distribute one immutable plan and history to all lanes
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: gah-ci-plan
+          path: _ci/inputs/
+          if-no-files-found: error
+          retention-days: 14
   suite:
     needs: plan
     name: suite (${{ matrix.lane }})
@@ -44,16 +61,28 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
-      - name: Run assigned modules including SQLite integration
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: gah-ci-plan
+          path: _ci/inputs
+      - name: Verify the shared plan and run assigned modules once
         env:
           TEST_LANE: ${{ matrix.lane }}
-          TEST_PLAN_DIGEST: ${{ needs.plan.outputs.digest }}
-        run: python -m tools.test_matrix --lane "$TEST_LANE" --expected-plan-digest "$TEST_PLAN_DIGEST"
+          TEST_PLAN_LOCK: ${{ needs.plan.outputs.lock_digest }}
+        run: python -m tools.ci_history lane --history _ci/inputs/timing-history.json --plan _ci/inputs/ci-plan.json --lane "$TEST_LANE" --expected-lock "$TEST_PLAN_LOCK" --output "_ci/results/timing-$TEST_LANE.json"
+      - name: Preserve module observations
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: gah-module-timing-${{ matrix.lane }}
+          path: _ci/results/timing-${{ matrix.lane }}.json
+          if-no-files-found: error
+          retention-days: 14
   unit:
     needs: [plan, suite]
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 5
     steps:
       - name: Require the complete plan and every test lane to pass
         env:
@@ -62,3 +91,25 @@ jobs:
         run: |
           test "$PLAN_RESULT" = success
           test "$SUITE_RESULT" = success
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: gah-ci-plan
+          path: _ci/inputs
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: gah-module-timing-*
+          path: _ci/results
+      - name: Merge distinct successful runs for the next plan
+        env:
+          TEST_PLAN_LOCK: ${{ needs.plan.outputs.lock_digest }}
+        run: python -m tools.ci_history collect --previous _ci/inputs/timing-history.json --reports _ci/results --plan _ci/inputs/ci-plan.json --expected-lock "$TEST_PLAN_LOCK" --output _ci/next/timing-history.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: gah-timing-history
+          path: _ci/next/timing-history.json
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,31 @@
+{
+  "status": "REVIEW_RECEIVED",
+  "elapsed_seconds": 4.781,
+  "request_sha256": "5137af57d8e83890dca190af0fba56cfa301ffd2de3bccf5498f0a23c33fb7f5",
+  "response_sha256": "20d4cc1b282b8373f7d993d4c868709f73027b1aae776475a58998c069bb7917",
+  "finish_reason": "stop",
+  "text": "1. 分割境界の末尾にカンマが残る場合、次のセグメント先頭がカンマで始まり、JSON パーサが構文エラーとなる。\n2. 整数の先頭ゼロや指数表記など、非正規な数値形式が canonical 化で無視され、再検査時に不一致が生じる。\n3. 文字列内の改行や空白の扱いが、入力と出力で一致せず、SHA256 ダイジェストがずれる。",
+  "review_is_not_acceptance": true,
+  "schema_version": 1,
+  "kind": "bounded_design_review_disposition",
+  "id": "dgx-partition-codec-v1",
+  "source": "user-designated local DGX Qwen endpoint",
+  "dispositions": [
+    {
+      "finding": "分割境界のcomma残存",
+      "decision": "NOT_APPLICABLE",
+      "reason": "手動でJSON断片を連結せず、各完成Python objectを標準json.dumpsで別々に直列化する。予測byte計算はwireを生成しない。"
+    },
+    {
+      "finding": "整数の先頭zero/指数表記",
+      "decision": "NOT_APPLICABLE",
+      "reason": "入力はPython valueでありraw数値表記を持たない。全floatを拒否し整数範囲を検査する。raw JSON decoderの責務は別途明記している。"
+    },
+    {
+      "finding": "文字列の改行/空白でdigestずれ",
+      "decision": "NO_CONCRETE_COUNTEREXAMPLE",
+      "reason": "生成/復元とも同じcanonical serializerとstrict UTF-8を使用し、実際のbyte長/digestを照合する。"
+    }
+  ],
+  "acceptance_pass": false
+}

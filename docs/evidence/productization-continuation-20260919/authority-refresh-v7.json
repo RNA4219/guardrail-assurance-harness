@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "kind": "offline_authority_build_result",
+  "exit_code": 0,
+  "elapsed_seconds": 1.797,
+  "source_unchanged": true,
+  "image_id": "sha256:1dfb8c3923ecd534a97baeaf9feea99ae83426e7a799e17a34186ee83277c754",
+  "sources_digest": "e127bed427b2705a651f1681e82fc1d7cf7b70c5a0a779b0d84c9d93797e5966",
+  "lock_sha256": "2f96827e59fbb107295f24cb0c7a652f099a434b29ad3687ac63fd2104a42800",
+  "plan_sha256": "8c1b8657e6792663b206ec7f1b3395128870f48aa20aff06ec27c9a30b7df476",
+  "log_sha256": "b64a12cb85bdf069bfa56aa274b7662b9a1eacf93d8833e815de2fc1a64ad15e"
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "dynamic_regression_runner_parent_review",
+  "id": "linux-regression-v3-preparation",
+  "status": "PREPARED_NOT_DOCKER_EXECUTED",
+  "driver_sha256": "ed237c36099041b367535dff4661000f1245dcfca0f683a4ac4ebdfdeaec003a",
+  "plan_sha256": "f12ea63fb762ee1aefb6c3b80f82ac17696fdf113b80de35e67f51e6c099c632",
+  "checks": [
+    {
+      "check": "--simulate-scheduler",
+      "exit_code": 0,
+      "result": {
+        "failure_preserved": true,
+        "lanes": 12,
+        "outcomes": {
+          "combined": "TIMEOUT",
+          "finding-revalidation": "FAIL",
+          "following-contract": "TIMEOUT",
+          "llm-revision": "TIMEOUT",
+          "llm-supervision": "PASS",
+          "mutation-review": "PASS",
+          "regression-0": "PASS",
+          "regression-1": "PASS",
+          "regression-2": "PASS",
+          "regression-3": "PASS",
+          "regression-4": "PASS",
+          "regression-5": "PASS"
+        },
+        "peak_active": 3,
+        "slot_reused_before_long_lane_end": true,
+        "timeout_preserved": true,
+        "unique_outcomes": 12
+      },
+      "log_sha256": "e688852ed8cf90cf0c602efbd412fda1f017d57a89b4be419c9b38ed46ee8cee"
+    },
+    {
+      "check": "--diagnose-timeout-helpers",
+      "exit_code": 0,
+      "result": {
+        "ack_deadline_enforced": true,
+        "actual_bootstrap_helpers": [
+          "arm_lane_watchdog",
+          "close_lane_watchdog",
+          "wait_for_host"
+        ],
+        "blocked_main_child_stopped": true,
+        "docker_started": false,
+        "normal_exit_preserved": true,
+        "status": "PASS"
+      },
+      "log_sha256": "be29689a5898ca8bbfebca82a9c51615f4ddb4c054cac0ef72664053f8c04c67"
+    }
+  ],
+  "parent_corrections": [
+    "同期copy/ACK中の2400秒監視欠落を独立watchdogで補正。",
+    "無期限ACKを15秒へ限定。",
+    "nested wrapperの同名再帰解決を改名し実record pathの結合検査を追加。"
+  ],
+  "test_limit": "Windows上のactual bootstrap helper/実child/実pipe検査。pipe readinessのみWindows用adapter。Linux Dockerでのv3実実行は未実施。",
+  "source_v8_and_active_v2_unchanged": true,
+  "acceptance_pass": false,
+  "parent_source_v8_files_verified": 1709
+}

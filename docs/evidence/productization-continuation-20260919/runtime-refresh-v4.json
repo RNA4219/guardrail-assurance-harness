@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "exit_code": 0,
+  "elapsed_seconds": 2.389999999955762,
+  "source_unchanged": true,
+  "guardrail_fixture_locks_unchanged": true,
+  "lock_sources_match": true,
+  "image_id": "sha256:f16932d5d6ec8e9b1234d2f2651b45e9bbdd7ba583e70dd00bec6adabbbacef3",
+  "sources_digest": "0842bae6d981a312def30adaf29d2e3af75de8362224af28241f2ab5ab6dbb43",
+  "authority_lock_sha256": "e7bfa886dbb353ac586a1435da9c017f22817c8bf7a12b5f4c8fbd9608bae0ca",
+  "old_lock_sha256": "6aa2d5b3bc38dbcfbb9b5831fe3c018c8e96c5e3be1430bc7e3e6dbfb4595614",
+  "build_log_sha256": "82e50dda78c4c1e804bca02e1cd65221368a52ddc7e83abfeaead4d3e134a3b0",
+  "plan_sha256": "2ead94ee6429a2d6705b7ce89a245698a452d920abd4bf3f8d60904021edc9d5",
+  "acceptance_pass": false
+}

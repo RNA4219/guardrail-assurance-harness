@@ -1,0 +1,69 @@
+{
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "heap_claim": "modeled bounded estimate, not formal allocator upper bound",
+  "heap_model": {
+    "description": "Conservative modeled key+entry storage, not a formal allocator peak. A single astral code point forces 4-byte CPython Unicode storage for all code points: 4*4093 plus object header (observed sys.getsizeof 16432). Adds digest, 5-argument key tuple, and 256-byte per-entry allowance for LRU/hash/node bookkeeping. Parsed mutable trees are not retained. Allocator fragmentation excluded.",
+    "entries": 64,
+    "modeled_64_entry_bytes": 1079872,
+    "modeled_bytes_per_entry": 16873,
+    "other_key_parts": {
+      "digest_64_ascii_sys_getsizeof": 105,
+      "five_argument_tuple_sys_getsizeof": 80
+    },
+    "overhead_allowance_per_entry_bytes": 256,
+    "unicode_examples": {
+      "ascii_4096_sys_getsizeof": 4137,
+      "ascii_4096_utf8_bytes": 4096,
+      "mixed_4092_ascii_plus_one_astral_utf8_bytes": 4096,
+      "mixed_character_count": 4093,
+      "mixed_sys_getsizeof": 16432
+    }
+  },
+  "kind": "resource_unpack_cache_result",
+  "micro_result_file": "micro-result.json",
+  "outputs": {
+    "focused-tests.log": "d8a135fa6791570e695b3dd105db67a60fd560f488ddc9a8733f4614a55fddef",
+    "micro-result.json": "848c6f8d81f89f53c80951d6c6b8700345ee15dc3a3ecb97148ab72d10d72c35"
+  },
+  "schema_version": 1,
+  "source_sha256": "571e308246d5582a79b38ab677d888e5799f1a0a1aa9f258ed0d943854478029",
+  "status": "FOCUSED_PASS_DIAGNOSTIC_ONLY",
+  "test_command": "python -E -B -X utf8 -m unittest tests.test_resource_unpack_cache -v",
+  "test_result": {
+    "elapsed_seconds": 0.004,
+    "execution_record": "Captured tool output transcribed verbatim to focused-tests.log; no rerun.",
+    "failed": 0,
+    "passed": 7
+  },
+  "test_sha256": "f11f63a3a98f8829aa638fe970fa696cbbfe0fb9673211047b95415b32f46d0c",
+  "agent_record_sha256": "c392366d4d5d3931ef1c7dc12489f902acf75857ec426bcc2cc038d1f30cf1e3",
+  "micro": {
+    "input": {
+      "digest": "5ee85083e85f0b42bc223de849fc36243718ef335a88fe55d51591dc642f72e0",
+      "old_new_output_equal": true,
+      "open_mode": "mode=ro&immutable=1",
+      "raw_utf8_bytes": 284,
+      "source": "normal-seed-v10-v1/artifacts/normal-before-first-op.sqlite"
+    },
+    "iterations_per_sample": 1000,
+    "marker_cache_info": "CacheInfo(hits=3001, misses=1, maxsize=64, currsize=1)",
+    "median_speedup": 2.5699188082936324,
+    "new_warm_median_seconds": 0.0029806,
+    "new_warm_seconds": [
+      0.0029838,
+      0.0029806,
+      0.002978
+    ],
+    "old_median_seconds": 0.0076599,
+    "old_seconds": [
+      0.0078647,
+      0.0074908,
+      0.0076599
+    ],
+    "rerun": false,
+    "samples": 3
+  },
+  "parent_assessment": "実装・専用テストを読んで旧canonical/digest条件とfresh decodeを確認。7件のagent出力は転記記録。親v4の同じ製品hashに対する当該7件も成功。約1.03MiBはheapモデル値で厳密なpeak上限ではない。",
+  "acceptance_pass": false
+}

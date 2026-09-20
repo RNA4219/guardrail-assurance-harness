@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "report_generation_and_state_verification",
+  "id": "report-generations-parent-v1",
+  "recorded_at": "2026-09-20T06:24:33.734064+00:00",
+  "changes": [
+    "対象runが参照する契約/baseline artifactだけを既存読取経路で返す。保存outputs/receipt/DB版の変更なし。",
+    "JSON/Markdownへ検証済みgenerationを表示。未取得はnull/不明。最後のfresh CIを維持。",
+    "取消しreceiptに通常完了専用Mutation除外審査を要求しない。審査未取得はnullであり0件ではない。取消し終了3と未精算理由を保持。"
+  ],
+  "rounds": [
+    {
+      "stage": "report-generations-parent-v1",
+      "plan_sha256": "42c0162e22c188e9c051a7e76e1749c705463ada08a6a7da1ecaef2e4c7b5c9f",
+      "source_sha256": {
+        "src/gah/run_outputs.py": "ad2c33d081fbabae0acf9be9ebc0486af563d08babecba6f910793fd23b32e10",
+        "tools/gah_report.py": "86717f5405e79e726b414b53c09e58ab498766c20e01efacaadf1ade2ca0b287",
+        "tests/test_run_report.py": "13b14b46414e98714942f3b89cfe202d4a8ea0a48a86c6567737895ead533a6f",
+        "tests/test_run_artifact_generations.py": "7d84ac7d0227c3ab4755e27f543c3aa056dd49575aeab0e70eb6f6882af484fb",
+        "tests/test_report_authority_states.py": "3e3a6332e578ce031ecabaf36fa65ccf3f034ce821745650b64f814c8443de2b",
+        "tests/test_run_report_guidance.py": "236f57ec72b0cf76b845b61bd339e30d8384da77db7e048c3ab3f4d663b566ad",
+        "tests/test_candidate_report.py": "dfa05d5a9288b07af5ff9c1187b1711033794e699836cc5daa70d41e93d15794"
+      },
+      "test_counts": {
+        "run": 34,
+        "failure_events": 3,
+        "error_events": 6,
+        "skipped": 1
+      },
+      "return_code": 1,
+      "elapsed_seconds": 314.078,
+      "source_unchanged": true,
+      "log_sha256": "9cce8da096b21ad1f853b2e756c5839e99fbdb8a354f40c6bde281cccb13dc26"
+    },
+    {
+      "stage": "report-generations-parent-v2",
+      "plan_sha256": "3893a5107cdfb1fdd5fd24f939fe5202405043fcdfcccee36566094ea33892f7",
+      "source_sha256": {
+        "src/gah/run_outputs.py": "ad2c33d081fbabae0acf9be9ebc0486af563d08babecba6f910793fd23b32e10",
+        "tools/gah_report.py": "af388f73a789c5c67d8aa4cb51dcdd554e3dcbf7e62307ecd4042334910b82cd",
+        "tests/test_run_report.py": "b125ffba44148e133c152138f835d08494030f74e38d6fa1180b7d9493650c22",
+        "tests/test_run_artifact_generations.py": "ba8a20a201ff54e6d648e524a08ecaf568ee06ab1ab1e7a92c2a06232f7535be",
+        "tests/test_report_authority_states.py": "b7cbc6ddf23c77dbc718d61176fb12f609767c817f439368668fc5fd1a9f2af8",
+        "tests/test_run_report_guidance.py": "236f57ec72b0cf76b845b61bd339e30d8384da77db7e048c3ab3f4d663b566ad",
+        "tests/test_candidate_report.py": "dfa05d5a9288b07af5ff9c1187b1711033794e699836cc5daa70d41e93d15794"
+      },
+      "test_counts": {
+        "run": 34,
+        "passed": 33,
+        "skipped": 1
+      },
+      "return_code": 0,
+      "elapsed_seconds": 411.141,
+      "source_unchanged": true,
+      "log_sha256": "8efcde3f322dbfcf5bc8d80441310be33d1a9bff9e0726d06f0fb91bc6b2d640"
+    },
+    {
+      "stage": "report-generations-parent-v3",
+      "plan_sha256": "32d6945b6508d1d4844c7669c6f0a27a7c1c3c83b2df0e0c59238869b4a9e57c",
+      "source_sha256": {
+        "src/gah/run_outputs.py": "ad2c33d081fbabae0acf9be9ebc0486af563d08babecba6f910793fd23b32e10",
+        "tools/gah_report.py": "af388f73a789c5c67d8aa4cb51dcdd554e3dcbf7e62307ecd4042334910b82cd",
+        "tests/test_run_report.py": "b125ffba44148e133c152138f835d08494030f74e38d6fa1180b7d9493650c22",
+        "tests/test_run_artifact_generations.py": "ba8a20a201ff54e6d648e524a08ecaf568ee06ab1ab1e7a92c2a06232f7535be",
+        "tests/test_report_authority_states.py": "0bd7224a2f1b89c1a79f12aab9b7479d7bef9257bee6ac7e34965f75301949ee",
+        "tests/test_run_report_guidance.py": "236f57ec72b0cf76b845b61bd339e30d8384da77db7e048c3ab3f4d663b566ad",
+        "tests/test_candidate_report.py": "dfa05d5a9288b07af5ff9c1187b1711033794e699836cc5daa70d41e93d15794"
+      },
+      "test_counts": {
+        "run": 1,
+        "passed": 1,
+        "skipped": 0
+      },
+      "return_code": 0,
+      "elapsed_seconds": 94.14,
+      "source_unchanged": true,
+      "log_sha256": "7a61111349c55d08dbf434fb5c1e81ed49fa0efdae8c29d3e3bfb9951aa694b4"
+    }
+  ],
+  "verified_real_sqlite_states": [
+    "HEALTHY",
+    "KNOWN_VIOLATION",
+    "MISSING_EVIDENCE",
+    "CANCELLED",
+    "STOP_UNCONFIRMED",
+    "UNSETTLED",
+    "EVIDENCE_REVOKED"
+  ],
+  "review": {
+    "luna": "backend/実DB試験を分担。親がfixture不足と誤期待値を修正。独立レビューで世代値/Markdown照合を追加し、その1件だけ再試験。",
+    "dgx": {
+      "status": "COMPLETE",
+      "elapsed_seconds": 36.578,
+      "request_sha256": "2702be212b45c9d1636a6eb4c33389f028fe7cf0e75863425849e0cb7b5cf3f0",
+      "response_sha256": "55832f80e0503dd07856fd47a284bfe3d3d339a6bd8b7b00a9b4e9d688a67755",
+      "finish_reason": "length",
+      "accepted_findings": [],
+      "review_complete": false,
+      "parent_disposition": "出力上限で途切れ、baselineなしと世代不明を具体的不具合と示していないため不採用。独立レビューの合格根拠にしない。"
+    }
+  },
+  "limitations": [
+    "WARNINGはrun_evidenceのwarning=False固定により正規runから生成できず未受入。skipを成功へ昇格しない。最終test sourceから形式的skipを除き、未実装条件としてここで保持する。",
+    "後続の世代assert追加後は該当1件だけの再試験。34件全ての最終test source再実行とは主張しない。",
+    "実AdoptionStoreのin-process接続であり、今回変更後image/OS brokerの受入ではない。配布image再構築は未実施。",
+    "全件回帰、SLO、PAC11/全PACの成功を主張しない。"
+  ],
+  "claims": {
+    "PAC11_pass": false,
+    "all_PAC_pass": false,
+    "whole_regression_pass": false,
+    "runtime_image_acceptance": false
+  }
+}

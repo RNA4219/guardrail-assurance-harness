@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_diagnostic_parent_verification",
+  "passed": true,
+  "tests_run": 86,
+  "test_elapsed_seconds": 87.755,
+  "host_elapsed_seconds": 88.125,
+  "modules": [
+    "tests.test_partitioned_diagnostic_run",
+    "tests.test_partitioned_diagnostic_cli",
+    "tests.test_partitioned_run_resources",
+    "tests.test_partitioned_run_integration",
+    "tests.test_partitioned_runtime_mode",
+    "tests.test_authority_runtime",
+    "tests.test_authority_deadline",
+    "tests.test_cli_lifecycle"
+  ],
+  "source_file_count": 1830,
+  "source_sha256": {
+    "src/gah/partitioned_diagnostic_run.py": "d36e7745192035136509254268d98e4942f8cad865b2d00cd8d7c08a13c9f418",
+    "tests/test_partitioned_diagnostic_run.py": "0459cfed67746c2708cf69e301c7e53af8cb889f04cb9d46ed13ef3ae96f5cae",
+    "tools/gah_run.py": "9d6d37473ea64f49d9f006ffdf3d969cf08eee99410b724a549ad9233c77454c",
+    "tests/test_partitioned_diagnostic_cli.py": "ceb1b7889d7303dd3ba2f9b742ed10bed468bb1cd60d0447718bae592fd7ba1e"
+  },
+  "plan_sha256": "ea9854af44943497adeb5e10c759d4932315509f9c226b23ff70e3a1b4504a6e",
+  "log_sha256": "e8da92cea92318e41d4ca781b36fa30dd04c5367437ffa0887a6ab24f769ed34",
+  "source_unchanged": true,
+  "scope": "RUNNING/STOPPEDからの停止確認と精算、close claim応答欠落の同一要求再送とlease更新、close commit後のsnapshot復元、CLI入力/成功判定、v6資源と既定runtime/期限/lifecycleを確認。Dockerは起動していない。",
+  "limits": [
+    "snapshot失効時は元理由を返す。現在のclaimまで拒否された場合は、停止・精算済みでもrun closeが未確定のまま残る。",
+    "現在のCI、全15件、全consumer、SLOまたはPAC受入ではない。"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "real_runtime_acceptance": false
+}

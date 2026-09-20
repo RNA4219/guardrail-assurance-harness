@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_local_enospc_diagnostic_plan",
+  "id": "capacity-enospc-v1",
+  "source": {
+    "snapshot_manifest": ".ga/productization-implementation-20260919/source-v7-manifest.json",
+    "authority_image": "sha256:d2f0476b4cde4b9aff040e0442618d9d1ded4cb7ae0107c24a325ad0c77a989d",
+    "authority_sources_digest": "4e421cc4244c81e36be4da047b3a91debadd0bb955826b456fbed0c7d13443db",
+    "target_hashes": {
+      "src/gah/bounded_files.py": "b155339994ad67af5af35e8c3bf571b76fbb922df14ecaf2e8fcb897ee0a99b3",
+      "src/gah/storage_budget.py": "a8b9f338b9164c1c36bfac46549bb4fa78cb5ffb1be18dc6e7a585acab35cb4c",
+      "src/gah/sqlite_limits.py": "224fac79185983c5ae2cb0565c0f39666d14dcf57053323c3dccff30aee6371a"
+    }
+  },
+  "container_constraints": {
+    "network": "none",
+    "rootfs_read_only": true,
+    "user": "65532:65532",
+    "cap_drop": ["ALL"],
+    "no_new_privileges": true,
+    "cpus": 1,
+    "memory_bytes": 268435456,
+    "pids_limit": 64,
+    "tmpfs": {"destination": "/scratch", "size_bytes": 33554432, "nosuid": true, "nodev": true, "noexec": true},
+    "host_mounts": ["single readonly bind of container_probe.py to /audit/container_probe.py"],
+    "forbidden_mounts": ["Docker socket", "workspace writable", "shared volume", "other host path"]
+  },
+  "procedure": [
+    "Confirm the locked source-v7 authority image identity and source label without pulling/building.",
+    "Inside the isolated tmpfs, save a preexisting file through write_bounded and a baseline row through connect_sqlite.",
+    "Allocate tmpfs to ENOSPC and retain at most 128 KiB free; attempt a 900 KiB write_bounded document and require no successful target, unchanged baseline bytes, and no leaked temporary.",
+    "Restore tmpfs free space and verify a new bounded write and readback succeed.",
+    "Refill tmpfs to ENOSPC; attempt a 2 MiB SQLite insert using the locked sqlite_limits connection; require SQLITE_FULL, rollback, baseline row preservation, then free space, integrity_check, and a recovery insert/readback.",
+    "Record all output and remove only the container with this run UUID and matching label."
+  ],
+  "limits": {"total_wall_seconds": 180, "network_access": false, "image_pull_or_build": false},
+  "scope_limit": "A local primitive diagnostic only. It does not exercise application setup/run receipt, reservation, failure sink durability, cross-root aggregation, Docker host backing quota, or all PAC acceptance conditions."
+}

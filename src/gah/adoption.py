@@ -15,6 +15,7 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+from .sqlite_limits import connect_sqlite
 import time
 from typing import Any, Callable, Iterator
 import re
@@ -258,8 +259,22 @@ class AdoptionStore:
             (self._extension_tables, self._extension_actions,
              self._fresh_actions, self._extension_digest) = _extension_definition(extension)
             self._extension_schema_version = getattr(extension, "schema_version", 2)
-            if type(self._extension_schema_version) is not int or self._extension_schema_version not in {2, 3, 4}:
+            if type(self._extension_schema_version) is not int or self._extension_schema_version not in {2, 3, 4, 5, 6, 7}:
                 raise _error("EXTENSION_INVALID")
+            if self._extension_schema_version == 6:
+                try:
+                    from .partitioned_run_authority import PartitionedRunEvaluationExtension
+                except ImportError:
+                    raise _error("EXTENSION_INVALID") from None
+                if type(extension) is not PartitionedRunEvaluationExtension:
+                    raise _error("EXTENSION_INVALID")
+            if self._extension_schema_version == 7:
+                try:
+                    from .partitioned_corpus_authority import PartitionedCorpusEvaluationExtension
+                except ImportError:
+                    raise _error("EXTENSION_INVALID") from None
+                if type(extension) is not PartitionedCorpusEvaluationExtension:
+                    raise _error("EXTENSION_INVALID")
         if bootstrap_policy is None:
             try:
                 bootstrap = initial_policy_profile()
@@ -291,7 +306,7 @@ class AdoptionStore:
                 raise _error("BOOTSTRAP_INVALID") from None
         self._db: sqlite3.Connection | None = None
         try:
-            db = sqlite3.connect(str(Path(path)), isolation_level=None, timeout=5)
+            db = connect_sqlite(str(Path(path)), isolation_level=None, timeout=5)
             self._db = db
             db.row_factory = sqlite3.Row
             db.execute("PRAGMA foreign_keys=ON")
@@ -460,8 +475,13 @@ class AdoptionStore:
             return False
         return ((self._extension_schema_version >= 3
                  and value == _PREDECESSOR_VALIDATOR_DIGEST)
-                or (self._extension_schema_version == 4
-                    and value == _V4_PREDECESSOR_VALIDATOR_DIGEST))
+                or (self._extension_schema_version in {4, 5}
+                    and value == _V4_PREDECESSOR_VALIDATOR_DIGEST)
+                or (self._extension_schema_version == 5
+                    and value == "208238ee2cabaaad6f756ff6eef847c248bf1da2b34fe666841bab88be06698a")
+                or (self._extension_schema_version == 6
+                    and value in {"10d966d46ac275fa1977049487cbcf44d5c9326e6e1f2f0ea1a70f81d1efa291",
+                                  "208238ee2cabaaad6f756ff6eef847c248bf1da2b34fe666841bab88be06698a"}))
 
     @staticmethod
     def _store_result(db: sqlite3.Connection, request_id: str, request_digest: str,
@@ -533,10 +553,21 @@ class AdoptionStore:
         if actor_id not in allowed:
             raise _error("AUTHORITY_DENIED")
         request_id = normalized["request_id"]
+        storage_key = request_id
+        if action in {"run_catalog_list", "run_diagnostics"} or action in {
+            "pilot_binding_register", "pilot_plan_register", "pilot_plan_validate", "pilot_plan_adopt", "pilot_plan_current"
+        }:
+            from .evaluation_authority import EvaluationExtension
+            from . import pilot_authority, run_catalog, run_diagnostics
+            if type(self._extension) is not EvaluationExtension or self._extension_digest != EvaluationExtension.digest:
+                raise _error("EXTENSION_INVALID")
+            key_function = (run_catalog.request_key if action == "run_catalog_list" else
+                            run_diagnostics.request_key if action == "run_diagnostics" else pilot_authority.request_key)
+            storage_key = key_function(actor_id,action,request_id)
         with self._transaction() as db:
             if self._actor_revoked(db, actor_id):
                 raise _error("AUTHORITY_REVOKED")
-            replay = self._replay(db, request_id, request_digest, actor_id, context)
+            replay = self._replay(db, storage_key, request_digest, actor_id, context)
             if replay is not None and action in self._fresh_actions and replay != {}:
                 raise _error("STORAGE_CORRUPT")
             if replay is not None and action not in self._fresh_actions and action != "current":
@@ -601,10 +632,10 @@ class AdoptionStore:
                 if replay is None:
                     db.execute(
                         "INSERT INTO idempotency(request_id,request_digest,actor_id,context,response_json,response_digest) VALUES(?,?,?,?,NULL,NULL)",
-                        (request_id, request_digest, actor_id, context),
+                        (storage_key, request_digest, actor_id, context),
                     )
                 return result
-            return self._store_result(db, request_id, request_digest, actor_id, context, result)
+            return self._store_result(db, storage_key, request_digest, actor_id, context, result)
 
     def _propose(self, db: sqlite3.Connection, request: dict[str, Any], actor_id: str,
                  context: str, now: int) -> dict[str, Any]:

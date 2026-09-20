@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "continuation_parent_regression_v4",
+  "status": "FAIL",
+  "returncode": 1,
+  "elapsed_seconds": 52.20299999997951,
+  "modules": [
+    "tests.test_resource_unpack_cache",
+    "tests.test_resources",
+    "tests.test_start_validation_reuse",
+    "tests.test_transition_validation_reuse",
+    "tests.test_partitioned_run_evidence",
+    "tests.test_run_evidence",
+    "tests.test_run_evidence_book",
+    "tests.test_bound_digest_cache",
+    "tests.test_authority_source_packaging"
+  ],
+  "source_and_test_hashes_unchanged": true,
+  "log_sha256": "a553f9a1532012a08fb1d1521bf1344f88d3a9f9cb05911716852dc28d7ab2cf",
+  "log_bytes": 27358,
+  "checked_at": "2026-09-19T23:53:45.802947+00:00",
+  "acceptance_pass": false,
+  "tests_run": 79,
+  "tests_passed": 78,
+  "test_harness_failure": "追加テストがgen1への必要な再帰検証もgen2単回assertへ合算した。",
+  "source_and_test_plan_sha256": "41be80895d7bac5c8bfabdd386f404370622ae8d07e883081f2f9151ea5e7550",
+  "full_suite_pass": false
+}

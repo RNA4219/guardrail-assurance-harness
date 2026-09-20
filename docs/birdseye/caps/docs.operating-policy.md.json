@@ -21,6 +21,7 @@
     "docs/detail-spec.md",
     "docs/evaluation-detail-spec.md",
     "docs/extension-roadmap.md",
+    "docs/productization-requirements.md",
     "docs/reference-boundary.md",
     "docs/requirements-traceability.md",
     "docs/requirements.md",
@@ -40,6 +41,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
+  "generated_at": "00161",
   "source_sha256": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025"
 }

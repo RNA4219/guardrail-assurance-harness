@@ -1,0 +1,181 @@
+{
+  "after_change": {
+    "ast_parse": {
+      "files": [
+        "src/gah/bounded_files.py",
+        "src/gah/storage_budget.py",
+        "tests/test_bounded_files.py",
+        "tests/test_storage_budget.py"
+      ],
+      "result": "PASS"
+    },
+    "counter_definition": "Count every os.scandir entry yielded for the dedicated root; root-level scans only. No wall time recorded.",
+    "limitations": [
+      "Entry visits remain O(N^2) across N sequential writes because each write retains an independent external-change precheck and post-write scan; root scans per write fell from five to three.",
+      "This is a local synthetic entry-count measurement only; source was not yet fixed/locked for acceptance, and results are not a whole-run SLO or Docker/product measurement."
+    ],
+    "scan_roles": [
+      "lock-held initial strict flat-root scan initializes StorageBudget",
+      "atomic_write independent precheck detects intervening external changes",
+      "atomic_write post-accounting strict scan validates final root and bytes"
+    ],
+    "scans_per_write": 3,
+    "scope_results": [
+      {
+        "documents_written": 100,
+        "root_scan_calls": 300,
+        "temporary_root_removed": true,
+        "total_root_entry_visits": 15250
+      },
+      {
+        "documents_written": 200,
+        "root_scan_calls": 600,
+        "temporary_root_removed": true,
+        "total_root_entry_visits": 60500
+      }
+    ],
+    "semantics_preserved": [
+      "directory entry limit",
+      "symlink/reparse/type/hardlink checks where filesystem metadata exposes them",
+      "quota and atomic temporary reserve",
+      "immutable replay and readback",
+      "external-change precheck",
+      "post-write accounting",
+      "temp cleanup, fsync, replace and crash behavior",
+      "general StorageBudget hardlink accounting behavior"
+    ],
+    "source_hashes_before_after_measurement": {
+      "src/gah/bounded_files.py": "b155339994ad67af5af35e8c3bf571b76fbb922df14ecaf2e8fcb897ee0a99b3",
+      "src/gah/storage_budget.py": "9e9a811ba0d7f81cfec6f98ff3c2f37b0327e305683005eacaa741567ee1b60e"
+    },
+    "source_hashes_unchanged_during_measurement": true,
+    "tests": {
+      "modules": [
+        "tests.test_bounded_files",
+        "tests.test_storage_budget"
+      ],
+      "result": "PASS",
+      "test_cases": 27
+    },
+    "trust_boundary": "Initial _FlatRootMeasurement is produced under the bounded writer OS operation lock for this write and immediately consumed by private StorageBudget._from_flat_measurement; never cached across writes or accepted as a public caller value."
+  },
+  "contract_notes": {
+    "duplicate_walks_confirmed": true,
+    "external_writer_detection_remains_required": true,
+    "proposed_minimal_change": "Use one strict flat-root scanner that validates direct-entry ceiling, regular file type, symlink/reparse/hardlink rejection and sums file bytes. Reuse its initial byte sum to initialize StorageBudget (combines the first bounded-tree + constructor walk), retain atomic_write precheck to detect intervening external changes, and combine atomic_write post-accounting with bounded post-tree validation (one strict final scan). Retain StorageBudget lock/reservation, target digest readback, atomic replace/fsync, and before/after accounting semantics. Do not cache root counts across writes because external modification detection would weaken.",
+    "quota_enforcement_remains_required": true,
+    "reparse_symlink_hardlink_and_entry_limit_checks_remain_required": true
+  },
+  "counter_definition": {
+    "entry_visits": "number of os.scandir entries yielded for the dedicated root, attributed to the active scanner function",
+    "storage_measure_calls": "calls to storage_budget._measure_root via StorageBudget construction and atomic_write",
+    "tree_calls": "calls to bounded_files._bounded_tree",
+    "wall_time_recorded": false
+  },
+  "execution_constraints": {
+    "docker": false,
+    "full_tests": false,
+    "llm_seed": false,
+    "v5_copy_profile_driver": false
+  },
+  "kind": "bounded_writer_cost_audit",
+  "local_artifact_sha256": "d048c204000f1cfaa0486bb1db25eb415ee32309c58c6583aebe01da71deab7b",
+  "not_measured_or_claimed": [
+    "wall latency",
+    "CPU or I/O cost",
+    "Checkpoint payload serialization/hash work",
+    "concurrent writers/external races",
+    "physical disk/Docker storage",
+    "product-level SLO",
+    "whether proposed combined scanner preserves every platform reparse-point contract; requires code review and tests"
+  ],
+  "observed_pattern": {
+    "each_write_storage_measure_calls": 3,
+    "each_write_tree_calls": 2,
+    "growth": "Entry visits grow quadratically in document count for this flat-root implementation: 5 scans per write (2 bounded-tree + 3 StorageBudget root measures), each scan visits the currently present root entries. The measured 100-to-200 ratio is 3.9608; no timing/SLO claim.",
+    "scans_each_write": "bounded_files: preflight and postwrite; StorageBudget: constructor, atomic_write precheck, atomic_write post-accounting"
+  },
+  "post_review_correction": {
+    "ast_parse": {
+      "files": [
+        "src/gah/bounded_files.py",
+        "src/gah/storage_budget.py",
+        "tests/test_bounded_files.py",
+        "tests/test_storage_budget.py"
+      ],
+      "result": "PASS"
+    },
+    "change": "The private strict flat-root scanner now calls os.stat(entry.path, follow_symlinks=False), classifies directory/regular/symlink/reparse from that result only, and rejects missing/invalid/non-positive link counts fail-closed. General StorageBudget scanner remains unchanged.",
+    "corrected_windows_note": "Prior claim that Windows hardlink detection was filesystem-limited was incorrect and is superseded. The platform DirEntry.stat metadata was the issue; fresh os.stat hardlink rejection passed on this Windows filesystem.",
+    "hardlink_test": "tests.test_bounded_files.BoundedFileTests.test_regular_file_hardlink_is_rejected_by_fresh_stat PASS using an actual filesystem hardlink.",
+    "prior_measurement_scope": "The immediately preceding 100/200 measurement belongs to the earlier source hashes in after_change.source_hashes_before_after_measurement. The current correction has these distinct hashes and was validated with the same counter test, but the counts are maintained by test assertion rather than a second separately timed profile.",
+    "reason": "Python Windows DirEntry.stat may report st_nlink=0; os.stat is the fresh metadata source required for reliable hardlink detection.",
+    "scan_counter_recheck": {
+      "100_documents": {
+        "entry_visits": 15250,
+        "scans": 300
+      },
+      "200_documents": {
+        "entry_visits": 60500,
+        "scans": 600
+      },
+      "result": "PASS; counter regression test rerun after correction",
+      "root_scans_per_write": 3
+    },
+    "source_hashes_after_correction": {
+      "src/gah/bounded_files.py": "b155339994ad67af5af35e8c3bf571b76fbb922df14ecaf2e8fcb897ee0a99b3",
+      "src/gah/storage_budget.py": "a8b9f338b9164c1c36bfac46549bb4fa78cb5ffb1be18dc6e7a585acab35cb4c"
+    },
+    "stat_cost": "The number of root scans and yielded-entry visits is unchanged; strict scanner now performs one fresh os.stat call per yielded root entry per strict scan (3*N document-level metadata calls), increasing metadata syscall work. No wall latency was measured.",
+    "tests": {
+      "modules": [
+        "tests.test_bounded_files",
+        "tests.test_storage_budget"
+      ],
+      "result": "PASS",
+      "test_cases": 28
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "api": "gah.bounded_files.write_bounded",
+    "cases": [
+      {
+        "bounded_tree_entry_visits": 10200,
+        "documents_written": 100,
+        "root_scan_calls": 500,
+        "storage_measure_calls": 300,
+        "storage_measure_entry_visits": 15250,
+        "temporary_root_cleanup_verified_after_context_exit": true,
+        "temporary_root_removed": true,
+        "total_root_entry_visits": 25450,
+        "tree_calls": 200
+      },
+      {
+        "bounded_tree_entry_visits": 40400,
+        "documents_written": 200,
+        "root_scan_calls": 1000,
+        "storage_measure_calls": 600,
+        "storage_measure_entry_visits": 60500,
+        "temporary_root_cleanup_verified_after_context_exit": true,
+        "temporary_root_removed": true,
+        "total_root_entry_visits": 100900,
+        "tree_calls": 400
+      }
+    ],
+    "entrypoint_note": "Checkpoint.put without injected StorageBudget delegates to write_bounded; this audit isolates that path directly.",
+    "storage_budget_mode": "recursive=False; per-file quota 256 MiB; immutable documents; dedicated TemporaryDirectory for each case"
+  },
+  "source_hashes_after": {
+    "src\\gah\\bounded_files.py": "ccf7324986bbeff3e501deb09fab17a5724f0a7bbf37226fc81e49088da8dd09",
+    "src\\gah\\storage_budget.py": "9add5bc1cf7c614eec11073fac617199ff03b7360d9d86bd39fab187cf45694f",
+    "src\\gah\\supervisor_checkpoint.py": "b3b3f63b4f626bf545a78cf7b518b310b61efa180dff4b62e03749789e26ab33"
+  },
+  "source_hashes_before_after": {
+    "src\\gah\\bounded_files.py": "ccf7324986bbeff3e501deb09fab17a5724f0a7bbf37226fc81e49088da8dd09",
+    "src\\gah\\storage_budget.py": "9add5bc1cf7c614eec11073fac617199ff03b7360d9d86bd39fab187cf45694f",
+    "src\\gah\\supervisor_checkpoint.py": "b3b3f63b4f626bf545a78cf7b518b310b61efa180dff4b62e03749789e26ab33"
+  },
+  "source_hashes_unchanged": true,
+  "status": "LOCAL_SYNTHETIC_ENTRY_COUNT_ONLY_AFTER_MINIMAL_SCAN_INTEGRATION"
+}

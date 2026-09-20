@@ -1,0 +1,111 @@
+{
+  "artifact_bytes": 105110010,
+  "ci_eligible": false,
+  "cleanup": {
+    "cleanup_confirmed": true,
+    "post_remove_lookup": "SUCCEEDED_EMPTY",
+    "rm_returncode": 0,
+    "state": "REMOVED"
+  },
+  "cleanup_confirmed": true,
+  "container_exit_code": 0,
+  "container_id": "d651dbadca461e04e66d5d055c7488888c807fd8177d927b98aa00ba5a66ab4c",
+  "container_name": "gah-normal-seed-v8-700fc514d955486f",
+  "container_state": {
+    "caps": [
+      "ALL"
+    ],
+    "exit_code": 0,
+    "labels": {
+      "org.gah.normal-seed-v8": "v1",
+      "org.gah.run-id": "700fc514d955486f"
+    },
+    "memory": 3221225472,
+    "mounts": [
+      {
+        "Destination": "/source",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Type": "bind"
+      },
+      {
+        "Destination": "/source-v8-manifest.json",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Type": "bind"
+      },
+      {
+        "Destination": "/artifacts",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": true,
+        "Type": "bind"
+      }
+    ],
+    "name": "/gah-normal-seed-v8-700fc514d955486f",
+    "nano_cpus": 2000000000,
+    "network": "none",
+    "pids": 64,
+    "readonly_root": true,
+    "security": [
+      "no-new-privileges:true"
+    ],
+    "status": "exited",
+    "user": "65532:65532"
+  },
+  "expected_manifest_sha256": "2196d608c8cb238d7112c43cde3b54b46d0aa61e4e48a35120bcf63c5dab6bce",
+  "full_file_count": 11,
+  "full_inventory_sha256": "1e8664533b27b47694057392c2c148b564c01b39b827e3e6a5b15cffbd87125d",
+  "full_pac_acceptance": false,
+  "host_source_unchanged": true,
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "kind": "normal_llm_v8_seed_result",
+  "manifest_unchanged": true,
+  "run_id": "700fc514d955486f",
+  "schema_version": 1,
+  "snapshots": [
+    {
+      "bytes": 25714688,
+      "file": "candidate-adopted.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-adopted.receipt.json",
+      "sha256": "7f5cd3c04b9647f2ebf2cda99671a0b68c53e52280d479218ff4d8fbe7aebe91"
+    },
+    {
+      "bytes": 25706496,
+      "file": "candidate-new-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-new-complete.receipt.json",
+      "sha256": "f67bcfaa032edfcdc9c1f302d42ceea5cb80f1c17ad8fd56175866c0e0a82ec0"
+    },
+    {
+      "bytes": 15466496,
+      "file": "candidate-old-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-old-complete.receipt.json",
+      "sha256": "8ab45018a672d7afd11d82413a08168561e4518492298cf3003ac2051c7b2b9c"
+    },
+    {
+      "bytes": 7766016,
+      "file": "initial-seed.sqlite",
+      "integrity": "ok",
+      "receipt_file": "initial-seed.receipt.json",
+      "sha256": "d4e97c29d51cf34d1cd35c2270f4bd8a1431b9d2776b58e8c73799ea940494d9"
+    },
+    {
+      "bytes": 28438528,
+      "file": "normal-before-first-op.sqlite",
+      "integrity": "ok",
+      "receipt_file": "normal-before-first-op.receipt.json",
+      "sha256": "b1e80668e37085fc552fd0df46c1a4e46a7a92a812603268d4489b625284ceea"
+    }
+  ],
+  "source_file_count": 1709,
+  "status": "COMPLETE",
+  "driver_sha256": "c28d0939c5bbaf49c7d250db36f2120d25c02bd953d85dc0e55ba1a97d2ea139",
+  "plan_sha256": "fda8cbcc4fc4b81bbcf34e049e02efd90caf26df6cde598fefa77782741b2fc9",
+  "ready_sha256": "e1fe7a10fe36a78c8b806ef21183e0949010fd37f77d675d9b182173c52cfc6e",
+  "scope": "legitimate version-bound source-v8 normal-run seed; execution intentionally stopped before first normal operation; not product acceptance"
+}

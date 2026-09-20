@@ -40,12 +40,18 @@ def main() -> int:
     parser.add_argument("--candidate-runs", action="store_true", help="固定した旧条件15件・新条件30件も実行する")
     parser.add_argument("--candidate-adoption", action="store_true", help="候補run完了後のgen2採択・再起動・根拠撤回も検査する")
     parser.add_argument("--regression", action="store_true", help="採択後の通常30件と現在のCI利用も検査する")
+    parser.add_argument("--budget-warning", action="store_true", help="回帰90件経路で固定budget warningの実判定・reportを検証する")
     parser.add_argument("--cancellation", action="store_true", help="通常runの停止済み取消しと後日精算も検査する")
     parser.add_argument("--recovery", action="store_true", help="実時計のlease切れ・根拠撤回後の取消し取得も検査する")
     parser.add_argument("--baseline-refresh", action="store_true", help="通常runからbaselineをgen2へ更新し、固定参照と依存失効も検査する")
     parser.add_argument("--supervisor", action="store_true", help="製品監督で通常30件・中断1件と再開・現在CIを検査する")
     parser.add_argument("--following-contract", action="store_true", help="baseline2から契約3を採択し、製品監督まで検査する")
     args = parser.parse_args()
+    if args.budget_warning and (args.cancellation or args.recovery or args.baseline_refresh
+                                or args.following_contract or args.supervisor):
+        parser.error("--budget-warning は90件専用で他の拡張検証flagとは併用できません")
+    if args.budget_warning:
+        args.regression = True
     if args.following_contract:
         args.baseline_refresh = True
     if args.supervisor:
@@ -140,6 +146,8 @@ def main() -> int:
             "src/gah/baseline_authority.py", "src/gah/fixture_admission.py",
             "fixtures/runtime/fixture_worker.py",
         )
+        if args.budget_warning:
+            extra = (*extra, "tools/gah_report.py")
         return {**runtime.lock["source_sha256"], **{
             path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in extra
         }}
@@ -154,6 +162,7 @@ def main() -> int:
             "schema_version": 1,
             "kind": "baseline_runtime_manifest",
             "baseline_refresh_enabled": args.baseline_refresh,
+            **({"budget_warning_enabled": True} if args.budget_warning else {}),
             "supervisor_enabled": args.supervisor,
             "following_contract_enabled": args.following_contract,
             "started_at": int(time.time()),
@@ -164,6 +173,12 @@ def main() -> int:
         })
 
         policy = initial_policy_profile()
+        if args.budget_warning:
+            for profile_name in ("pr", "full"):
+                policy["profiles"][profile_name]["case_trial_executions"] = 37
+            check("budget_warning_policy_limits", policy["warning_usage_min"] == [4, 5]
+                  and all(policy["profiles"][name]["case_trial_executions"] == 37
+                          for name in ("pr", "full")))
         success(12001, _request("propose", "policy-propose-baseline-runtime",
                                 proposal_id="policy-proposal-baseline-runtime",
                                 series_id=policy["policy_id"], expected_generation=0,
@@ -309,7 +324,8 @@ def main() -> int:
         finalized = success(12004, _request("evidence_finalize", "evidence-finalize-baseline-runtime", run_id=run_id))
         check("fifteen_entries_finalized", finalized.get("resource_closure_verified") is True
               and finalized.get("input_materialization_verified") is True
-              and finalized.get("ci_eligible") is False)
+              and finalized.get("ci_eligible") is False
+              and (not args.budget_warning or finalized.get("assurance") == "HEALTHY"))
 
         baseline_proposal = success(12001, _request(
             "baseline_propose", "baseline-propose-baseline-runtime",
@@ -459,7 +475,7 @@ def main() -> int:
             after_candidate_revocation = verify(success=success, denied=denied, check=check, runtime=runtime, runner=runner,
                 prepared=prepared, preflight_request=preflight_request, transition=transition,
                 receipts=receipts, active=active, save_observations=save_observations,
-                adopt=args.candidate_adoption, regression=args.regression, cancellation=args.cancellation, recovery=args.recovery, baseline_refresh=args.baseline_refresh, supervisor=args.supervisor, following_contract=args.following_contract, call=call)
+                adopt=args.candidate_adoption, regression=args.regression, cancellation=args.cancellation, recovery=args.recovery, baseline_refresh=args.baseline_refresh, supervisor=args.supervisor, following_contract=args.following_contract, call=call, budget_warning=args.budget_warning)
         success(12004, _request("evidence_revoke", "evidence-revoke-baseline-runtime", run_id=run_id))
         if after_candidate_revocation is not None:
             after_candidate_revocation()
@@ -548,6 +564,7 @@ def main() -> int:
         "candidate_runs_enabled": args.candidate_runs,
         "candidate_adoption_enabled": args.candidate_adoption,
         "regression_enabled": args.regression,
+        **({"budget_warning_enabled": True} if args.budget_warning else {}),
         "cancellation_enabled": args.cancellation,
         "recovery_enabled": args.recovery,
         "baseline_refresh_enabled": args.baseline_refresh,

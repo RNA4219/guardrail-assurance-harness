@@ -1,0 +1,801 @@
+{
+  "schema_version": 1,
+  "kind": "productization_spec_design_cases",
+  "scope": "設計用の入力断片と期待値。完全なCLI request・正式Schema・実行済み製品証拠ではない。",
+  "requirements_sha256": "37c710f92dd05510b3f1e0fd0aca60e11b715bd41c39b96ece8407f0b8d23cb4",
+  "case_count": 36,
+  "cases": [
+    {
+      "case_id": "GAH-PSC01",
+      "requirement_id": "GAH-PR01",
+      "acceptance_id": "GAH-PAC01",
+      "scenario": "未対応の接続を固定fixtureへ置換しない",
+      "input_fragment": {
+        "binding_capability": "unsupported",
+        "permission_verified": true
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "ci_eligible": false,
+        "fallback_to_fixture": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC02",
+      "requirement_id": "GAH-PR01",
+      "acceptance_id": "GAH-PAC01",
+      "scenario": "固定revisionの実体不一致",
+      "input_fragment": {
+        "target_digest_matches": false
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "ci_eligible": false,
+        "evaluation_started": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC03",
+      "requirement_id": "GAH-PR02",
+      "acceptance_id": "GAH-PAC02",
+      "scenario": "正常100件の誤通知境界",
+      "input_fragment": {
+        "clean_changes": 100,
+        "false_action_alerts": 5,
+        "false_critical_alerts": 0,
+        "history_pairs": 20,
+        "per_repo_pairs": [
+          10,
+          10
+        ],
+        "covered_known_mandatory_misses": 0,
+        "real_regression_revalidated": 1,
+        "calibration_mismatches": 0
+      },
+      "expected_fragment": {
+        "acceptance_status": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC04",
+      "requirement_id": "GAH-PR02",
+      "acceptance_id": "GAH-PAC02",
+      "scenario": "既知Criticalの見逃し",
+      "input_fragment": {
+        "covered_known_critical_misses": 1
+      },
+      "expected_fragment": {
+        "acceptance_status": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC05",
+      "requirement_id": "GAH-PR03",
+      "acceptance_id": "GAH-PAC03",
+      "scenario": "対象の劣化を正しく計測",
+      "input_fragment": {
+        "positive": 200,
+        "negative": 200,
+        "required_categories_have_each_100": true,
+        "oracle_independent": true,
+        "measurement_reproduced": true,
+        "target_assurance": "DEGRADED",
+        "all_measurement_obligations_met": true
+      },
+      "expected_fragment": {
+        "measurement_acceptance_status": "PASS",
+        "target_assurance": "DEGRADED",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC06",
+      "requirement_id": "GAH-PR03",
+      "acceptance_id": "GAH-PAC03",
+      "scenario": "ラベル不明を正常へ混ぜない",
+      "input_fragment": {
+        "positive_known": 200,
+        "negative_known": 195,
+        "label_unknown": 5
+      },
+      "expected_fragment": {
+        "acceptance_status": "INCONCLUSIVE",
+        "negative_denominator": 195,
+        "unknown_count": 5,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC07",
+      "requirement_id": "GAH-PR04",
+      "acceptance_id": "GAH-PAC04",
+      "scenario": "対応観測の工数30パーセント削減境界",
+      "input_fragment": {
+        "paired_observations": 20,
+        "uc_ci_pairs": 10,
+        "uc_llm_pairs": 10,
+        "baseline_median_ns": 100000000000,
+        "candidate_median_ns": 70000000000,
+        "resource_dimensions_nonincreasing": true,
+        "human_interventions_nonincreasing": true,
+        "oracle_equivalent": true
+      },
+      "expected_fragment": {
+        "reduction_numerator": 30,
+        "reduction_denominator": 100,
+        "acceptance_status": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC08",
+      "requirement_id": "GAH-PR04",
+      "acceptance_id": "GAH-PAC04",
+      "scenario": "基準作業時間ゼロの比率",
+      "input_fragment": {
+        "baseline_median_ns": 0,
+        "candidate_median_ns": 0
+      },
+      "expected_fragment": {
+        "reduction_ratio": null,
+        "acceptance_status": "INCONCLUSIVE",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC09",
+      "requirement_id": "GAH-PR05",
+      "acceptance_id": "GAH-PAC05",
+      "scenario": "機材条件の異なる比較",
+      "input_fragment": {
+        "baseline_environment_digest_matches_candidate": false
+      },
+      "expected_fragment": {
+        "operation_status": "INCOMPLETE",
+        "exit_code": 2,
+        "acceptance_status": "INCONCLUSIVE",
+        "speedup_ratio": null,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC10",
+      "requirement_id": "GAH-PR06",
+      "acceptance_id": "GAH-PAC06",
+      "scenario": "通常runの絶対と相対目標の両立",
+      "input_fragment": {
+        "baseline_seconds": [
+          3000,
+          3200,
+          3400
+        ],
+        "candidate_seconds": [
+          1800,
+          1800,
+          2100
+        ],
+        "functional_equivalence": true,
+        "cpu_nonincreasing": true,
+        "all_closed_settled": true
+      },
+      "expected_fragment": {
+        "candidate_median_seconds": 1800,
+        "candidate_max_seconds": 2100,
+        "ratio_numerator": 9,
+        "ratio_denominator": 16,
+        "acceptance_status": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC11",
+      "requirement_id": "GAH-PR06",
+      "acceptance_id": "GAH-PAC06",
+      "scenario": "相対改善だけでは不足",
+      "input_fragment": {
+        "baseline_seconds": [
+          4000,
+          4200,
+          4400
+        ],
+        "candidate_seconds": [
+          1800,
+          1950,
+          2100
+        ]
+      },
+      "expected_fragment": {
+        "candidate_median_seconds": 1950,
+        "acceptance_status": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC12",
+      "requirement_id": "GAH-PR06",
+      "acceptance_id": "GAH-PAC06",
+      "scenario": "coldの最大を除外しない",
+      "input_fragment": {
+        "candidate_seconds": [
+          2701,
+          1600,
+          1700
+        ],
+        "first_observation_condition": "cold"
+      },
+      "expected_fragment": {
+        "candidate_median_seconds": 1700,
+        "candidate_max_seconds": 2701,
+        "acceptance_status": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC13",
+      "requirement_id": "GAH-PR07",
+      "acceptance_id": "GAH-PAC07",
+      "scenario": "100回の観測p95の定義",
+      "input_fragment": {
+        "warm_ns": [
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          900000000,
+          1500000000,
+          1500000000,
+          1500000000,
+          1500000000,
+          1500000000
+        ],
+        "cold_ns": [
+          3000000000,
+          2000000000,
+          1000000000
+        ]
+      },
+      "expected_fragment": {
+        "p95_ns": 900000000,
+        "warm_max_ns": 1500000000,
+        "cold_max_ns": 3000000000,
+        "latency_goal": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC14",
+      "requirement_id": "GAH-PR07",
+      "acceptance_id": "GAH-PAC07",
+      "scenario": "仕事量2.5倍の境界",
+      "input_fragment": {
+        "case_counts": [
+          400,
+          800,
+          1600
+        ],
+        "series_unit": "visited_elements",
+        "series_values": [
+          100,
+          250,
+          625
+        ]
+      },
+      "expected_fragment": {
+        "growth_goal": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC15",
+      "requirement_id": "GAH-PR07",
+      "acceptance_id": "GAH-PAC07",
+      "scenario": "仕事量2.5倍超過",
+      "input_fragment": {
+        "case_counts": [
+          400,
+          800
+        ],
+        "series_unit": "serialized_bytes",
+        "series_values": [
+          100,
+          251
+        ]
+      },
+      "expected_fragment": {
+        "growth_goal": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC16",
+      "requirement_id": "GAH-PR07",
+      "acceptance_id": "GAH-PAC07",
+      "scenario": "cache後にEvidence撤回",
+      "input_fragment": {
+        "cache_hit_before_current_check": true,
+        "current_evidence_revoked": true
+      },
+      "expected_fragment": {
+        "cached_current_authorization_reused": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC17",
+      "requirement_id": "GAH-PR08",
+      "acceptance_id": "GAH-PAC08",
+      "scenario": "必須jobのskip",
+      "input_fragment": {
+        "required_job_states": [
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "skipped"
+        ],
+        "same_sha": true
+      },
+      "expected_fragment": {
+        "full_gate_success": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC18",
+      "requirement_id": "GAH-PR08",
+      "acceptance_id": "GAH-PAC08",
+      "scenario": "別SHAの全件成功",
+      "input_fragment": {
+        "required_job_states": [
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success",
+          "success"
+        ],
+        "same_sha": false
+      },
+      "expected_fragment": {
+        "full_gate_success": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC19",
+      "requirement_id": "GAH-PR08",
+      "acceptance_id": "GAH-PAC08",
+      "scenario": "queue時間とrunner費用を分離",
+      "input_fragment": {
+        "push_to_gate_seconds": 2100,
+        "queue_seconds": 300,
+        "execution_critical_path_seconds": 1800,
+        "summed_runner_seconds": 7200
+      },
+      "expected_fragment": {
+        "reported_total_seconds": 2100,
+        "reported_execution_seconds": 1800,
+        "reported_runner_minutes": 120,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC20",
+      "requirement_id": "GAH-PR09",
+      "acceptance_id": "GAH-PAC09",
+      "scenario": "導入目標の境界",
+      "input_fragment": {
+        "platform_uc_sessions": 4,
+        "all_sessions_at_most_five_commands": true,
+        "all_sessions_at_most_1800_seconds_including_image_fetch": true,
+        "manual_database_edits": 0,
+        "extra_explanations": 0,
+        "fresh_product_results_verified": true
+      },
+      "expected_fragment": {
+        "onboarding_acceptance_status": "PASS",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC21",
+      "requirement_id": "GAH-PR10",
+      "acceptance_id": "GAH-PAC10",
+      "scenario": "時計逆行を既知の前提違反として拒否",
+      "input_fragment": {
+        "clock_rollback_observed": true
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "evaluation_started": false,
+        "clock_configuration_changed": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC22",
+      "requirement_id": "GAH-PR10",
+      "acceptance_id": "GAH-PAC10",
+      "scenario": "時計を観測できない",
+      "input_fragment": {
+        "clock_probe_complete": false
+      },
+      "expected_fragment": {
+        "operation_status": "INCOMPLETE",
+        "exit_code": 2,
+        "evaluation_started": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC23",
+      "requirement_id": "GAH-PR09",
+      "acceptance_id": "GAH-PAC09",
+      "scenario": "同一requestの設定再配送",
+      "input_fragment": {
+        "same_authenticated_principal": true,
+        "same_command": true,
+        "same_request_id": true,
+        "same_input_digest": true,
+        "previous_result_exists": true
+      },
+      "expected_fragment": {
+        "new_side_effects": 0,
+        "saved_result_reused": true,
+        "current_authorization_rechecked": true,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC24",
+      "requirement_id": "GAH-PR09",
+      "acceptance_id": "GAH-PAC09",
+      "scenario": "同じrequestに別内容",
+      "input_fragment": {
+        "same_authenticated_principal": true,
+        "same_command": true,
+        "same_request_id": true,
+        "same_input_digest": false
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "reason": "IDEMPOTENCY_CONFLICT",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC25",
+      "requirement_id": "GAH-PR11",
+      "acceptance_id": "GAH-PAC11",
+      "scenario": "FAIL結果を正常表示した補助コマンド",
+      "input_fragment": {
+        "command_family": "show",
+        "saved_acceptance_status": "FAIL",
+        "output_complete": true
+      },
+      "expected_fragment": {
+        "operation_status": "COMPLETED",
+        "exit_code": 0,
+        "displayed_acceptance_status": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC26",
+      "requirement_id": "GAH-PR11",
+      "acceptance_id": "GAH-PAC11",
+      "scenario": "古いHEALTHYより現在照合を優先",
+      "input_fragment": {
+        "saved_assurance": "HEALTHY",
+        "current_evidence_usable": false
+      },
+      "expected_fragment": {
+        "display_saved_and_current_separately": true,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC27",
+      "requirement_id": "GAH-PR12",
+      "acceptance_id": "GAH-PAC12",
+      "scenario": "取消し後も使用量不明を残す",
+      "input_fragment": {
+        "operation_cancel_confirmed": true,
+        "owned_resources_stopped": true,
+        "usage_known": false
+      },
+      "expected_fragment": {
+        "operation_status": "CANCELLED",
+        "exit_code": 3,
+        "usage": null,
+        "budget_closure": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC28",
+      "requirement_id": "GAH-PR12",
+      "acceptance_id": "GAH-PAC12",
+      "scenario": "未対応DBの移行",
+      "input_fragment": {
+        "source_schema_supported": false
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "database_initialized": false,
+        "database_modified": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC29",
+      "requirement_id": "GAH-PR12",
+      "acceptance_id": "GAH-PAC12",
+      "scenario": "診断bundleはmetadataのみ",
+      "input_fragment": {
+        "raw_inputs_available": true,
+        "credentials_available": true,
+        "default_bundle": true
+      },
+      "expected_fragment": {
+        "raw_inputs_exported": false,
+        "credentials_exported": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC30",
+      "requirement_id": "GAH-PR13",
+      "acceptance_id": "GAH-PAC13",
+      "scenario": "速くても判定が変われば不合格",
+      "input_fragment": {
+        "performance_goal_passed": true,
+        "decision_equivalent": false
+      },
+      "expected_fragment": {
+        "acceptance_status": "FAIL",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC31",
+      "requirement_id": "GAH-PR14",
+      "acceptance_id": "GAH-PAC14",
+      "scenario": "候補作成者が計画採択を要求",
+      "input_fragment": {
+        "authenticated_role": "candidate",
+        "requested_action": "adopt"
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "adopted": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC32",
+      "requirement_id": "GAH-PR14",
+      "acceptance_id": "GAH-PAC14",
+      "scenario": "validator検査後に採択前提が失効",
+      "input_fragment": {
+        "validated_before": true,
+        "current_permission_revoked": true
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "adopted": false,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC33",
+      "requirement_id": "GAH-PR14",
+      "acceptance_id": "GAH-PAC14",
+      "scenario": "確定未達と観測不足の同居",
+      "input_fragment": {
+        "known_goal_failure": true,
+        "required_measurement_missing": true
+      },
+      "expected_fragment": {
+        "operation_status": "INCOMPLETE",
+        "exit_code": 2,
+        "acceptance_status": "FAIL",
+        "missing_reason_preserved": true,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC34",
+      "requirement_id": "GAH-PR14",
+      "acceptance_id": "GAH-PAC14",
+      "scenario": "未実行の条件をPASSへ昇格しない",
+      "input_fragment": {
+        "product_test_executed": false,
+        "document_check_passed": true
+      },
+      "expected_fragment": {
+        "acceptance_status": "NOT_RUN",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC35",
+      "requirement_id": "GAH-PR05",
+      "acceptance_id": "GAH-PAC05",
+      "scenario": "boolを数値として受理しない",
+      "input_fragment": {
+        "schema_version": true
+      },
+      "expected_fragment": {
+        "operation_status": "REJECTED",
+        "exit_code": 1,
+        "reason": "INVALID_INPUT",
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    },
+    {
+      "case_id": "GAH-PSC36",
+      "requirement_id": "GAH-PR11",
+      "acceptance_id": "GAH-PAC11",
+      "scenario": "保存後のstdout障害",
+      "input_fragment": {
+        "result_saved": true,
+        "stdout_write_failed": true
+      },
+      "expected_fragment": {
+        "operation_status": "INCOMPLETE",
+        "exit_code": 2,
+        "result_preserved": true,
+        "ci_eligible": false
+      },
+      "product_execution_status": "NOT_RUN"
+    }
+  ]
+}

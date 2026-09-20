@@ -1,0 +1,31 @@
+{
+  "base_cache_hit": true,
+  "ci_eligible": false,
+  "elapsed_ns": 21813000000,
+  "existing_runtime_migrated": false,
+  "kind": "verified_runtime_lock_installation",
+  "receipt_sha256": "fa935638a14e00e46bb32ac61b3d928c76033d0fe4d9bdb84d2a4cf96848e24c",
+  "records": [
+    {
+      "image_id": "sha256:278fcb998e4cb2971b8e42f68d42e67eeb98b1e4e4c375211655eb9e89301855",
+      "kind": "fixture",
+      "new_lock_sha256": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7",
+      "old_lock_sha256": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7"
+    },
+    {
+      "image_id": "sha256:a180ce3bfa1742ac626d937a42e48035fc96147229b74268b35cf365159fa8ee",
+      "kind": "guardrail",
+      "new_lock_sha256": "b04ae5c4588de7cf25cd584c03a5b176b6b0930a0bf52e2ed49ac014eaecad0d",
+      "old_lock_sha256": "b04ae5c4588de7cf25cd584c03a5b176b6b0930a0bf52e2ed49ac014eaecad0d"
+    },
+    {
+      "image_id": "sha256:d2f0476b4cde4b9aff040e0442618d9d1ded4cb7ae0107c24a325ad0c77a989d",
+      "kind": "authority",
+      "new_lock_sha256": "b5f655d02e9510bce7a61fc7fee5c8554fb6060d41069b5c34e2b4c5b1081515",
+      "old_lock_sha256": "4991bb1d9fb15083948eeb50bd1f0793524aa5b12aa328482679504fa82792d4"
+    }
+  ],
+  "schema_version": 1,
+  "source_snapshot": "source-v7-preimage",
+  "source_verified": true
+}

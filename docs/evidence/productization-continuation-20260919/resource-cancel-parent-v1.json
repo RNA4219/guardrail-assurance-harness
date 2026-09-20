@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "resource_cache_and_v6_cancel_parent_verification",
+  "status": "PASS",
+  "tests_passed": 71,
+  "exit_code": 0,
+  "timed_out": false,
+  "test_count": 71,
+  "test_seconds": 44.837,
+  "elapsed_seconds": 45.25,
+  "inputs_unchanged": true,
+  "log_sha256": "d886730b89592b9082e8ac5bc97f5dfd6817b3bb0b00319f54c89d1a394ef943",
+  "plan_sha256": "9c36cf7c7843900fd0ffbfd85aa7034746b25a135f3e7ea0d0b44fa8e33523ff",
+  "modules": [
+    "test_resource_unpack_cache",
+    "test_resources",
+    "test_resource_authority",
+    "test_partitioned_run_resources",
+    "test_partitioned_run_integration",
+    "test_partitioned_run_authority",
+    "test_partitioned_run_migrations"
+  ],
+  "input_file_count": 164,
+  "changed_sha256": {
+    "src/gah/resources.py": "2c56cd760b320419c40e561ba257dfc29a295c4c4c1f44d609cd0f473830f51c",
+    "tests/test_resource_unpack_cache.py": "2eabc1ca3e5a75e0b98633d853043c3588007b952748f32f4444671815211f69",
+    "src/gah/partitioned_run_authority.py": "73f5d14dced8902d4fdd76823c25f5ab909c0f45e7cccc9d3ea4f84af1b732a1",
+    "src/gah/partitioned_run_store.py": "f778cb8772d77922ee2566e482e77b04af77aafcb718208f0cec33263f8b05ad",
+    "tests/test_partitioned_run_resources.py": "1899537159733ca7eb326132b506c7ccc8f39ef2954fbc32670f2e8252759054"
+  },
+  "scope": [
+    "小nonflat JSONはdecode一回、完全byte/digest/処理関数identityの64件marker cache、独立返却tree、失敗非保持、同時呼出し。",
+    "v6 gen1診断runのrole/owner検査、取消し・lease期限切れ回収、途中失敗全rollback、開始前予約のrelease、送信済み操作の観測後精算とclose。",
+    "既存resource/分割run/明示移行の関連回帰。Docker起動なし。"
+  ],
+  "parent_corrections": [
+    "decodeに使う関数を実行前に捕捉してcache keyと一致させた。",
+    "LRU testの関数identityを区間中固定し、実際のevictionによるmissを検査した。"
+  ],
+  "prior_draft_failure": "Lunaの初稿は一時的なLock import配置不良でimport失敗。修復後のこの71試験だけを成功として数える。",
+  "limits": [
+    "source-v12全1498回帰とは別の後続差分。",
+    "全体性能の再改善・SLO成立を示さない。",
+    "resource_operation読取とfixture/guardrail admission、実worker・通常regressionのv2接続は残る。"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

@@ -119,6 +119,39 @@ def fetch(db, bound, receipt, ref):
             return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(value), "ci_eligible": False}
     if ref == content_ref(receipt["kind"], bound["manifest"]["run_id"], receipt):
         return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(receipt), "ci_eligible": False}
+    contract_ref = bound["manifest"]["contract_ref"]
+    if ref == contract_ref:
+        contract = bound.get("contract")
+        try:
+            valid_contract = (type(contract) is dict and type(contract.get("contract_id")) is str
+                and content_ref("evaluation_contract", contract["contract_id"], contract) == contract_ref)
+        except (ContractError, KeyError, TypeError, ValueError):
+            valid_contract = False
+        if not valid_contract:
+            raise AdoptionError("RUN_OUTPUTS_INVALID")
+        return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(contract), "ci_eligible": False}
+    baseline_ref = bound["manifest"].get("baseline_ref")
+    if baseline_ref is not None and ref == baseline_ref:
+        try:
+            rows = db.execute(
+                "SELECT * FROM baseline_adoptions WHERE baseline_digest=? LIMIT 2",
+                (baseline_ref["digest"],)).fetchall()
+            if len(rows) != 1:
+                raise AdoptionError("RUN_ARTIFACT_MISSING" if not rows else "RUN_OUTPUTS_INVALID")
+            row = rows[0]
+            value = resources._unpack(row["baseline_json"], row["baseline_digest"])
+            from .baselines import validate_baseline_record
+            value = validate_baseline_record(value)
+            if (type(row["series_id"]) is not str or type(row["generation"]) is not int
+                    or row["generation"] < 1 or value["baseline_series_id"] != row["series_id"]
+                    or value["generation"] != row["generation"]
+                    or content_ref("baseline", value["baseline_id"], value) != baseline_ref):
+                raise AdoptionError("RUN_OUTPUTS_INVALID")
+        except AdoptionError:
+            raise
+        except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError):
+            raise AdoptionError("RUN_OUTPUTS_INVALID") from None
+        return {"artifact_ref": deepcopy(ref), "artifact": deepcopy(value), "ci_eligible": False}
     if type(ref) is dict and ref.get("kind") == "aggregation":
         decision = assurance_authority._artifact(db, receipt["decision_ref"], bound["manifest"]["run_id"])
         expected = {"kind":"aggregation", "id":bound["manifest"]["run_id"], "digest":decision["aggregate_digest"]}

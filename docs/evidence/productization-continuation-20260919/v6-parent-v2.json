@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "exit_code": 1,
+  "host_elapsed_seconds": 27.32800000003772,
+  "reported_tests": 87,
+  "unittest_seconds": 26.987,
+  "input_unchanged": true,
+  "changed_inputs": [],
+  "log_sha256": "c6f5098186a3c7775961415d7ed9e8a21027674f3cd5d95f585262651af73caf",
+  "log_bytes": 18787,
+  "plan_sha256": "5ab06c396a7761e671e270c79bb373553d6cd0a71c2cc7ed09ab98d5b6f9767f",
+  "real_worker_acceptance": false,
+  "acceptance_pass": false,
+  "scope": "v6 diagnostic integration and related regressions",
+  "failure_cause": "追加された保存JSON検査のjson import漏れ",
+  "failed_tests": 3
+}

@@ -1,0 +1,18 @@
+{
+  "ci_eligible": false,
+  "elapsed_ns": 94844000000,
+  "exit_code": 0,
+  "full_pac_acceptance": false,
+  "kind": "local_validation_observation",
+  "local_source_artifact_sha256": "0c108d10e252ca30b92035e74d526c19a15bff328a2f4e5ed053d9c353add22d",
+  "log_sha256": "38c787e27e6ba7f004f52ad50de3abc1010d004cf6d73ec5df2e6d4dfe874e84",
+  "passed": true,
+  "schema_version": 1,
+  "source_sha256": {
+    "config/authority-runtime.lock.json": "b709f6e34e8ddd79f51e5e7ab795cf2baae33e6a07f37ddc51fc3cec06bc2f23",
+    "src/gah/fixture_materialization.py": "594571e6bd683f41c26045aed22f938ee2be1474fd9bbd564a8b86c052f62704",
+    "src/gah/transition_materialization.py": "53705a284874f198efe1b6d6a7ac89d99d5bc1de52acb6e6166c293126dedcde",
+    "tests/test_benchmark_worker_metrics.py": "4af79daa99a10cd57f7ef323aa087db2618c14453e669dc39e7320b9adf50057",
+    "tools/benchmark_worker_metrics.py": "cf0fbcecd0ce24ad9ed8c74c1c7e71063600a79a9c2be19b1fcabc4290411581"
+  }
+}

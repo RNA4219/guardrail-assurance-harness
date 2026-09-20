@@ -1,0 +1,188 @@
+{
+  "checks": {
+    "broker_cpu_observed": true,
+    "coverage_incomplete": true,
+    "host_cpu_observed": true,
+    "slo_remains_false": true,
+    "two_snapshots": true
+  },
+  "ci_eligible": false,
+  "coverage": {
+    "complete": false,
+    "expected_scope_ids": [
+      "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker",
+      "gah-authority-20b782ffd9b441edafb7d770cc01239c-client-a313d8d55d97439c96e694543b547c40",
+      "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness"
+    ],
+    "reasons": [
+      "WORKER_SCOPE_UNCONNECTED",
+      "CGROUP_PAYLOAD_INVALID"
+    ]
+  },
+  "driver_sha256": "053e385e03a005618d417c8afc680d6f970d1e7bad1173996441d62a72fbd71a",
+  "elapsed_ns": 4969000000,
+  "full_pac_acceptance": false,
+  "id": "resource-live-v1",
+  "image_id": "sha256:4cd256ec638cd863d7eea1fa862d00a26c374b02ed0f43da4305f18fa4f32b0a",
+  "kind": "local_validation_observation",
+  "observation": {
+    "binding": {
+      "plan_ref": {
+        "digest": "c008f7033a4aeedb80c13b3c1c910932192d8a6cc277b96e0da1a451471111ef",
+        "id": "resource-smoke-plan",
+        "kind": "local_probe_plan"
+      },
+      "request_digest": "fd9f31e1ab270798536644280c79a4b2be680ffa8630c73a0ef73ab59de3d846",
+      "source_ref": {
+        "digest": "846c7c523e757a2e3b01201e7982486163f1b45059be9352a0b0a96863657b60",
+        "id": "resource-package-source",
+        "kind": "snapshot_manifest"
+      }
+    },
+    "identity": {
+      "end": [
+        {
+          "epoch": 0,
+          "identity": "ecd9d33ae4ffbeca0d1a34853dba0b0a7ee4ca80f1a0604476ce3960d425e3db",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker",
+          "scope_kind": "container"
+        },
+        {
+          "epoch": 0,
+          "identity": "0f25636fdc5b838a4d58e38ea31335355cd5fd20735d7010738c993c056490b5",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-client-a313d8d55d97439c96e694543b547c40",
+          "scope_kind": "container"
+        },
+        {
+          "epoch": 0,
+          "identity": "pid-34352",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness",
+          "scope_kind": "host_harness"
+        }
+      ],
+      "start": [
+        {
+          "epoch": 0,
+          "identity": "ecd9d33ae4ffbeca0d1a34853dba0b0a7ee4ca80f1a0604476ce3960d425e3db",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker",
+          "scope_kind": "container"
+        },
+        {
+          "epoch": 0,
+          "identity": "0f25636fdc5b838a4d58e38ea31335355cd5fd20735d7010738c993c056490b5",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-client-a313d8d55d97439c96e694543b547c40",
+          "scope_kind": "container"
+        },
+        {
+          "epoch": 0,
+          "identity": "pid-34352",
+          "parent_scope_id": null,
+          "restart_count": 0,
+          "scope_id": "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness",
+          "scope_kind": "host_harness"
+        }
+      ]
+    },
+    "interval": {
+      "end_ns": 60163629218900,
+      "end_sample_seq": 2,
+      "sample_count": 2,
+      "start_ns": 60162715995600,
+      "start_sample_seq": 1
+    },
+    "kind": "resource_probe_result",
+    "measurement_complete": false,
+    "metrics": {
+      "cgroup_memory_current_by_scope": {
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker": 50716672
+      },
+      "cgroup_memory_current_bytes": 50716672,
+      "cgroup_memory_peak_by_scope": {
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker": 51560448
+      },
+      "cgroup_memory_peak_bytes": 51560448,
+      "cpu_ns": 115588000,
+      "host_harness_cpu_ns": 0,
+      "host_harness_io_read_bytes": null,
+      "host_harness_io_write_bytes": null,
+      "io_read_bytes": 0,
+      "io_write_bytes": 0,
+      "rss_group_peak_bytes": null,
+      "rss_group_peak_precision": null,
+      "rss_group_true_peak_bytes": null,
+      "total_cpu_ns": 115588000,
+      "wall_ns": 913223300
+    },
+    "operation_status": "INCOMPLETE",
+    "reasons": [
+      "SCOPE_INSUFFICIENT",
+      "REQUIRED_METRIC_MISSING"
+    ],
+    "schema_version": 1,
+    "scope": {
+      "excluded_scope_ids": {
+        "cgroup_memory_current_bytes": [],
+        "cgroup_memory_peak_bytes": [],
+        "cpu_ns": [],
+        "io_read_bytes": [],
+        "io_write_bytes": [],
+        "rss_group_peak_bytes": []
+      },
+      "expected_scope_ids": [
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker",
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-client-a313d8d55d97439c96e694543b547c40",
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness"
+      ],
+      "non_overlapping": true,
+      "observed_scope_ids": [
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker",
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-client-a313d8d55d97439c96e694543b547c40",
+        "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness"
+      ],
+      "scope_complete": true,
+      "selected_scope_ids": {
+        "cgroup_memory_current_bytes": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker"
+        ],
+        "cgroup_memory_peak_bytes": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker"
+        ],
+        "cpu_ns": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker"
+        ],
+        "host_harness_cpu_ns": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-host-harness"
+        ],
+        "io_read_bytes": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker"
+        ],
+        "io_write_bytes": [
+          "gah-authority-20b782ffd9b441edafb7d770cc01239c-broker"
+        ],
+        "rss_group_peak_bytes": []
+      }
+    },
+    "slo_blockers": [
+      "PRODUCT_SLO_NOT_CONNECTED"
+    ],
+    "valid_for_slo": false
+  },
+  "owned_containers_cleaned_state_retained": true,
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "5ec1bc68807d3391c4c50bf3a971438b415bd508c71eeb4f13ed24a6c5ef0db8",
+    "id": "continuation-source-v1",
+    "kind": "snapshot_manifest"
+  },
+  "status": "PASS"
+}

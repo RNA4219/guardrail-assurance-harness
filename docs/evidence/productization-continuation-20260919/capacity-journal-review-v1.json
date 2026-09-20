@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "sqlite_journal_capacity_review",
+  "id": "capacity-journal-review-v1",
+  "status": "PARTIAL_BOUND_ONLY",
+  "ci_eligible": false,
+  "bound_verified": false,
+  "main_database_cap_bytes": 268435456,
+  "record_payload_bound": {
+    "formula": "floor(268435456/page_size)*(page_size+8)",
+    "max_over_allowed_page_sizes_bytes": 272629760,
+    "page_sizes": "512..65536 powers of two",
+    "scope": "通常rollback journalのDBページレコード部分。ファイル全体peak、secondary journal、物理割当量ではない。"
+  },
+  "remaining_conditions": [
+    "運用SQLite/VFSにおけるsector sizeとheader追加数の上限を確認する。現行sourceのMAX_SECTOR_SIZEだけを別版binaryへ適用しない。",
+    "固定verification SAVEPOINTのsecondary journalが実際のtemp/compile条件でmemoryかdiskか検証する。",
+    "全保存先のfilesystem identity、Docker volumeの実backing容量、並行外部消費を別に扱う。"
+  ],
+  "observed_engines": {
+    "windows_python": {
+      "sqlite_version": "3.53.1",
+      "source_id": "2026-05-05 10:34:17 c88b22011a54b4f6fbd149e9f8e4de77658ce58143a1af0e3785e4e6475127e9"
+    },
+    "linux_regression_base": {
+      "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+      "sqlite_version": "3.46.1",
+      "source_id": "2024-08-13 09:16:08 c9c2ab54ba1f5f46360f1b4f35d849cd3f080e6fc2b6c60e91b16c63f69aalt1"
+    }
+  },
+  "shared_observed_compile_options": {
+    "DEFAULT_SECTOR_SIZE": 4096,
+    "DEFAULT_JOURNAL_SIZE_LIMIT": -1,
+    "TEMP_STORE": 1,
+    "note": "compile defaultはactive VFSのsectorや運用接続のtemp_storeの読戻しではない。"
+  },
+  "repository_conditions": {
+    "journal_mode": "DELETE required",
+    "synchronous": "FULL readback",
+    "temp_store": "MEMORY readback",
+    "cache_spill": "not fixed",
+    "attach_or_vacuum_in_fixed_sql": "not found in scoped source inspection",
+    "savepoint": "src/gah/adoption_migrations.py fixed verification savepoint"
+  },
+  "sources": [
+    {
+      "url": "https://www.sqlite.org/fileformat.html#rollbackjournal",
+      "use": "同一pageの重複禁止とpage record長page_size+8、header padding。"
+    },
+    {
+      "url": "https://www.sqlite.org/atomiccommit.html#sect_6_1",
+      "use": "cache spillと追加header。"
+    },
+    {
+      "url": "https://www.sqlite.org/pragma.html#pragma_journal_size_limit",
+      "use": "残存ファイルのcommit/reset後の切詰め。peak制限と解釈しない。"
+    },
+    {
+      "url": "https://www.sqlite.org/tempfiles.html",
+      "use": "secondary/temporary journalを通常rollback journalと区別する。"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/sqlite/sqlite/master/src/pager.c",
+      "use": "sector最大値の候補確認のみ。観測binaryへの適用は未立証。"
+    }
+  ],
+  "repository_source_sha256": {
+    "src/gah/sqlite_limits.py": "224fac79185983c5ae2cb0565c0f39666d14dcf57053323c3dccff30aee6371a",
+    "src/gah/adoption_migrations.py": "d022b9158aae1d37bb71c3e244c5a911a101b674e0335bc316525e5833ce0538"
+  },
+  "product_files_changed": false,
+  "acceptance_pass": false
+}

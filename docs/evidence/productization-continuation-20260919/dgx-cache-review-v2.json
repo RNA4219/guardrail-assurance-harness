@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "finish_reason": "stop",
+  "elapsed_seconds": 76.57800000003772,
+  "model": "qwen3.8-flash-next",
+  "request_sha256": "58306916d2b303147915b20fc66eedc9b547cd16e7fdca83464e71a5f54b1898",
+  "response_sha256": "18274e02b0251108c22d7e01447f47c5ef71d6a7cbfda763ab6848ab46f75bdf",
+  "source_sha256": {
+    "src\\gah\\resources.py": "571e308246d5582a79b38ab677d888e5799f1a0a1aa9f258ed0d943854478029",
+    "src\\gah\\evaluation_authority.py": "c5c69bad8f6e266f9a18b9354c3326eb56d650f76192874d16bfa2256bf14a33"
+  },
+  "acceptance_pass": false,
+  "parent_review_pending": false,
+  "parent_assessment": [
+    {
+      "item": 1,
+      "decision": "not_adopted",
+      "reason": "保存rawはcanonical bytesとの一致が契約。非canonical入力を先に正規化する提案は破損拒否を緩める。数値/Unicodeの旧oracle同値テストも成功。"
+    },
+    {
+      "item": 2,
+      "decision": "not_adopted",
+      "reason": "_packedはstr/digest strを返し、_unpack入口もexact strを要求する。具体的な型不一致は示されていない。"
+    },
+    {
+      "item": 3,
+      "decision": "not_adopted",
+      "reason": "比較式はvalidator実行後のdb.total_changesを実際に読み直している。値はtransaction単位ではなくconnection累計。追加テストで書込時fallbackを検証する。"
+    }
+  ]
+}

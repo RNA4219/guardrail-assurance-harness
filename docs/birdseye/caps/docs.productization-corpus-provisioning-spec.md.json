@@ -1,0 +1,20 @@
+{
+  "id": "docs/productization-corpus-provisioning-spec.md",
+  "role": "productization-corpus-provisioning-spec",
+  "title": "PAC07 query-scale corpus provisioning（schema-v7）仕様",
+  "summary": "本書は、固定 query-scale corpus を authority の認証付き・再検証可能な保存物として確定する、v7 provisioning 専用APIを規定する。契約、TrialPlan、run、LLM admission、baseline、通常実行を作成・許可する仕様ではない。corpus の commit は、後続の別producerがCaseSet refを契約へ結ぶ前提条件である。未commit upload は一切のread/contract bindingに使えない。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "docs/productization-partition-spec.md",
+    "docs/productization-status.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "e0856cc0f1cdb4ddb2564fb23324af17cca94cec8a3df253e79388e3e8020227"
+}

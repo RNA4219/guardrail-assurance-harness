@@ -1,0 +1,30 @@
+{
+  "checks": [
+    "initial finalize uses one aggregation",
+    "old/new fixture receipts and evidence identical",
+    "immutable replay",
+    "same-key wrong content digest rejected",
+    "valid content digest with invalid observed_at rejected",
+    "same digest in another run rejected",
+    "existing authority lifecycle/revocation/rollback"
+  ],
+  "elapsed_seconds": 11.481,
+  "exit_code": 0,
+  "included_in_source_v7_regression": false,
+  "kind": "finalize_aggregate_parent_review",
+  "limits": [
+    "small fixed fixture only",
+    "normal LLM timeout not resolved by this result",
+    "full regression and product SLO not proven"
+  ],
+  "log_sha256": "1fb3746639d0a0c632f61f0aa82b7d201ad76bd21adb5633c3412ddc00bc862d",
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/assurance_authority.py": "64acf4300bc3d6fb9bc98a5ab6fe6c0333c9a5e91db421a7a14f7fcf8b17955b",
+    "tests/test_assurance_authority.py": "81b45f442e66aa4998f0106e435324db4880cd5e309350b4ae28269e908288bb",
+    "tests/test_finalize_aggregate_reuse.py": "994ff48800e60f9671c814303c9dd955b96ce1b82a1517ac53e1fcc9e22ffc86"
+  },
+  "source_unchanged": true,
+  "tests_run": 12,
+  "timed_out": false
+}

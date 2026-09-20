@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_v6_resource_parent_verification",
+  "status": "PASS_AFTER_TEST_CORRECTIONS",
+  "distinct_tests_verified": 46,
+  "runs": [
+    {
+      "stage": "v6-resource-parent-v1",
+      "test_count": 39,
+      "test_seconds": 20.637,
+      "exit_code": 1,
+      "elapsed_seconds": 21.04699999996228,
+      "inputs_unchanged": true,
+      "log_sha256": "0a43774ef5264b4a15f690839abfdfb0d803c502d427a7420eda69bb2f941029",
+      "plan_sha256": "f435c66463a2fc5e8c1a7853cb57f046d5213419771498468653c58fbfc54c1b",
+      "input_sha256": {
+        "src/gah/partitioned_run_authority.py": "f1c530334bdebe0c53874254ee14dfc15bc43e5fb5869c32be534dea63507093",
+        "src/gah/partitioned_run_store.py": "e4d587a042890a1d51edcfd51a7da439f5ee44585af20faab8640eb40e8b1793",
+        "src/gah/partitioned_run_evidence.py": "3fb042a5571b49a9f2db2b196bcc251994f4543a04d5b47f5e2f0dd222c4662d",
+        "src/gah/partitioned_run_migrations.py": "30eeec363ff7b6aab7624dd117ef2d85070170d327293ca9fc56cfe6f46f1647",
+        "tests/test_partitioned_run_resources.py": "188978f01399e653b10045330df209af0b7dd7e256b7ac41fa596431ece1b209",
+        "tests/test_partitioned_run_integration.py": "441f3c1b206ca096e5c179fc30da3e81e9aa1d7354cf3ed85486a9f4a7b4708a",
+        "tests/test_partitioned_run_authority.py": "6050581b26ebc395fc785201772c401bdb72bdef04d8e082dd2047f736e4995f",
+        "tests/test_partitioned_run_migrations.py": "66ddf39f1c9a59421d9b5dcd22bdd0f9ae384243be5ac6c0cf0cd4f8c902d77b",
+        "tests/test_resource_authority.py": "9bb39bbdf5a304086984a7f3b687514ac11723df1562d9e637d5a5664d3ffd0d"
+      }
+    },
+    {
+      "stage": "v6-resource-parent-v2",
+      "test_count": 46,
+      "test_seconds": 32.695,
+      "exit_code": 1,
+      "elapsed_seconds": 33.06199999997625,
+      "inputs_unchanged": true,
+      "log_sha256": "66c1a8dd13090bcc6af646446276bf4f04da477de872038be10099076ce4c95a",
+      "plan_sha256": "f0b11dda9fb70c5ecf29c028a25f96624b2bc41bcfa5fa545481709c8ea640f6",
+      "input_sha256": {
+        "src/gah/partitioned_run_authority.py": "65ac3899b74d1a1462d1df8b52000a105f74986d4a459ef861498128dc1a6b88",
+        "src/gah/partitioned_run_store.py": "f3984e8fb084bd3597510e51ec9f93c9870f7e439b80e60a886c2fa2f83f40fa",
+        "src/gah/partitioned_run_evidence.py": "3fb042a5571b49a9f2db2b196bcc251994f4543a04d5b47f5e2f0dd222c4662d",
+        "src/gah/partitioned_run_migrations.py": "30eeec363ff7b6aab7624dd117ef2d85070170d327293ca9fc56cfe6f46f1647",
+        "tests/test_partitioned_run_resources.py": "5f9f13b318b53c1db3369f2f07e50a6900aa19e5dba7017ef97f6860a6d1c16c",
+        "tests/test_partitioned_run_integration.py": "441f3c1b206ca096e5c179fc30da3e81e9aa1d7354cf3ed85486a9f4a7b4708a",
+        "tests/test_partitioned_run_authority.py": "6050581b26ebc395fc785201772c401bdb72bdef04d8e082dd2047f736e4995f",
+        "tests/test_partitioned_run_migrations.py": "66ddf39f1c9a59421d9b5dcd22bdd0f9ae384243be5ac6c0cf0cd4f8c902d77b",
+        "tests/test_resource_authority.py": "9bb39bbdf5a304086984a7f3b687514ac11723df1562d9e637d5a5664d3ffd0d"
+      }
+    },
+    {
+      "stage": "v6-resource-parent-v3",
+      "test_count": 1,
+      "test_seconds": 1.507,
+      "exit_code": 0,
+      "elapsed_seconds": 1.827999999979511,
+      "inputs_unchanged": true,
+      "log_sha256": "acfb2c49fab513866ff59f8c61ceb2c00aba195cbcdb06072e0f38b835d25076",
+      "plan_sha256": "0171d723c056f4484e3c6e6d2cf4d5bba79220f2735e9419656c41d5090de658",
+      "input_sha256": {
+        "src/gah/partitioned_run_authority.py": "65ac3899b74d1a1462d1df8b52000a105f74986d4a459ef861498128dc1a6b88",
+        "src/gah/partitioned_run_store.py": "f3984e8fb084bd3597510e51ec9f93c9870f7e439b80e60a886c2fa2f83f40fa",
+        "tests/test_partitioned_run_resources.py": "694509393125d9d4b5be1591202c5c6fc0a5cf020adac7941f05c9e73d8122a7"
+      }
+    }
+  ],
+  "final_verification": "v2で45成功、close応答の期待1行を修正した試験をv3で再実行し成功。製品sourceはv2/v3間不変。",
+  "failed_expectations": [
+    "v1: 予約ゼロ時のbudget_closureをfalseと誤期待",
+    "v2: close応答のbudget_closureをresources配下と誤期待"
+  ],
+  "only_test_expectation_changed_between_v2_and_v3": true,
+  "parent_corrections": [
+    "終端/HOLD後の新規resource開始を拒否",
+    "EvidenceErrorをAdoptionErrorへ翻訳",
+    "正規v2 resource応答をlegacy run-ID衝突guardへ流さない"
+  ],
+  "scope": "実AdoptionStoreのv6 gen1診断runと既存資源台帳を同じtransactionへ接続。固定fixture予約/dispatch意図/validator停止・精算/close、失効・破損・期限・対象retirement・原子性を確認。",
+  "limits": [
+    "実worker実行と実SO_PEERCREDによる新資源経路は未実施",
+    "v2 resource_cancel/resource_cancel_claim/resource_operationは未接続",
+    "通常Supervisor/LLM admission/全consumer/CI受入は未完了"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "source_v12_regression_includes_this_change": false
+}

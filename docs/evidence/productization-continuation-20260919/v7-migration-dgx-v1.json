@@ -1,0 +1,28 @@
+{
+  "claims_verified_by_model": false,
+  "decisions": [
+    {
+      "decision": "既存方式のBEGIN前有効化とforeign_key_checkを維持。BEGIN後の有効化を有効とする説明は採用しない。",
+      "topic": "foreign_keys"
+    },
+    {
+      "decision": "PRAGMA schema_versionを7に手動設定する案は不採用。製品の版はadoption_meta.schema_versionとuser_versionで管理する。",
+      "topic": "schema_version"
+    },
+    {
+      "decision": "型を正規化する処理は追加しない。保存JSONと全rowを型を含めて保持する。",
+      "topic": "NULL_and_empty_string"
+    }
+  ],
+  "finish_reason": "stop",
+  "implementation_accepted": false,
+  "kind": "supervised_migration_design_review",
+  "model": "qwen3.8-flash-next",
+  "primary_references": [
+    "https://www.sqlite.org/pragma.html#pragma_foreign_keys",
+    "https://www.sqlite.org/pragma.html#pragma_schema_version"
+  ],
+  "request_sha256": "acf26de701c7a0937e82f1fcccd8b1bace7f671b4e12d472f6c239d936954925",
+  "response_sha256": "49f5dfd16394b46d66c13bb6b1a81edf7898f701cef47b1b264b4f550ab3eeec",
+  "schema_version": 1
+}

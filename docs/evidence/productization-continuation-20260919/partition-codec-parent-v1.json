@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "partition_codec_parent_verification",
+  "id": "partition-codec-parent-v1",
+  "exit_code": 0,
+  "elapsed_seconds": 2.578,
+  "modules": [
+    "tests.test_partitioned_trial_plan",
+    "tests.test_run_contracts",
+    "tests.test_run_binding_validation_reuse",
+    "tests.test_copy_hotpath"
+  ],
+  "test_source_functions": [
+    "test_small_plan_roundtrips_identically_to_v1_validator",
+    "test_3200_entries_above_v1_wire_limit_roundtrip_with_exact_digest",
+    "test_partition_and_restore_return_mutation_isolated_trees",
+    "test_ref_order_missing_segment_and_digest_mutations_reject",
+    "test_closed_shapes_integer_types_and_plan_contract_binding",
+    "test_duplicate_entry_and_empty_or_excessive_index_reject",
+    "test_canonical_rules_match_v1_for_depth_nodes_floats_integers_and_utf8",
+    "test_global_node_limit_is_checked_after_valid_segment_refs",
+    "test_cross_segment_duplicate_rejects_after_all_refs_and_outer_digest_are_resigned",
+    "test_reconstructed_byte_limit_and_strict_plain_json_rules"
+  ],
+  "source_sha256": {
+    "src/gah/partitioned_trial_plan.py": "718930ba2d7ffe2c31c7b595d92fbbef7e77446927db7f1a54fad1755ba438b7",
+    "tests/test_partitioned_trial_plan.py": "705d5ed830a3d97771296ceea71ed57b8a02ea8c57378f2e57060fdd518a045a",
+    "docs/productization-partition-spec.md": "bb7f22cf7b02da6f38a9f3906cf2bb3dabca83bf0a4e8fd47bf6f5a87ec75768"
+  },
+  "source_unchanged": true,
+  "tests_log_sha256": "65e86fc3d8029f498701c3d9cdde997c148ad50fb6c71f694c949ac3ebbb19a8",
+  "scope": "pure in-memory v2 codec and retained v1 binding/copy regression; no authority/DB/runtime integration",
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "tests_run": 28,
+  "tests_passed": 28,
+  "tests_failed": 0,
+  "fixture": {
+    "logical_bytes": 1437017,
+    "segment_bytes": [
+      899689,
+      537798
+    ],
+    "case_entry_count": 3200,
+    "description": "合成pure codec fixture。別のquery-scale診断1,438,640 bytesとは別入力。"
+  },
+  "parent_review_corrections": [
+    "完成segmentの予測byte数と実際のcanonical byte数を厳密照合。",
+    "新規独立treeの最終deepcopyを削除し、入力/segment/返値の分離を維持。",
+    "global node超過とcross-segment重複の負例はsegment ref・全体digestを再計算して意味検査へ到達。"
+  ],
+  "source_v8_delta": true,
+  "full_regression_includes_change": false
+}

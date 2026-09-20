@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "normal_v12_seed_parent_verification",
+  "status": "COMPLETE",
+  "source_manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "result_sha256": "97963fb37e5c87c7ae93c7513c9595de337ea3570ad9dd449fa4960edb5aab79",
+  "driver_sha256": "7c786e0da61c0099962e1a2b8ecf6843c422862165a3a5ef627680a7e0eb6524",
+  "plan_sha256": "af4bc1a80830f252729ce2dfe37e3969078d6c9af5452af5ba04c2223f308d9e",
+  "ready_sha256": "0e3f302ad626afb4154c04100682a291e2c877d2299213353f526ab23ee89f1f",
+  "snapshots": [
+    {
+      "bytes": 25710592,
+      "file": "candidate-adopted.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-adopted.receipt.json",
+      "sha256": "f02d4683d786dd1a711875fecd160875f60ac4ee094f4b7b3d3b6e83b8ee8de1"
+    },
+    {
+      "bytes": 25702400,
+      "file": "candidate-new-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-new-complete.receipt.json",
+      "sha256": "0759b5000a74edb98ceac24aa028d782b6befbd6b021c4ca15e4f6c5dbcf0284"
+    },
+    {
+      "bytes": 15466496,
+      "file": "candidate-old-complete.sqlite",
+      "integrity": "ok",
+      "receipt_file": "candidate-old-complete.receipt.json",
+      "sha256": "fe5926002b18613b5d27cab6e80c39333b7bc6b46f32ae38ee16bd499a9cbdda"
+    },
+    {
+      "bytes": 7766016,
+      "file": "initial-seed.sqlite",
+      "integrity": "ok",
+      "receipt_file": "initial-seed.receipt.json",
+      "sha256": "f40233ee748166633baafde489dc6e8b0cf0656addbf7568967bf951fa72bb24"
+    },
+    {
+      "bytes": 28434432,
+      "file": "normal-before-first-op.sqlite",
+      "integrity": "ok",
+      "receipt_file": "normal-before-first-op.receipt.json",
+      "sha256": "463407f021705ebbe5aa6836b9b915839c2f55d14d2b7f598c591cc0cb9d5469"
+    }
+  ],
+  "artifact_bytes": 105115208,
+  "checkpoint_full_file_count": 12,
+  "full_inventory_sha256": "7f81ba07dd9dc25e24a0e17059acb72b92d5184f79e69781611a63306f8b5636",
+  "tag": "supervised-fad7b6cc4412e49a04f9d06f",
+  "normal_entries": 800,
+  "normal_attempts": 0,
+  "normal_operations": 0,
+  "same_v11_request_tag_manifest_plan": true,
+  "same_v11_manifest_digest": "2d8b601fb3850693d8476c36b2ebbefa8c36e767a8b1ed807781a7952c839d03",
+  "same_v11_plan_digest": "3b677308c2c013461ebe460cad3a38c245c2b655ffd5221f850c26ca22534967",
+  "source_unchanged": true,
+  "cleanup_confirmed": true,
+  "synthetic_seed_observations": true,
+  "real_worker_acceptance": false,
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

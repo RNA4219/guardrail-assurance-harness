@@ -1,0 +1,17 @@
+{
+  "existing_deployments_migrated": false,
+  "id": "continuation-image-locks-v1",
+  "images_verified_in_fresh_package": true,
+  "kind": "local_lock_installation",
+  "new_sha256": {
+    "config/authority-runtime.lock.json": "5718b295ae421f84d3cb05f7870540533f523f0339acda655fe5147612868ef7",
+    "config/fixture-runtime.lock.json": "b7783e3a6eacb1fb6b08617a5ab8def2a48b68bbc1095de854d8bb2a4c9d1c7d",
+    "config/guardrail-runtime.lock.json": "a53e23f54f72fccdb601758d060adb7b666730062faf9e300c58287489b8ee98"
+  },
+  "previous_sha256": {
+    "config/authority-runtime.lock.json": "4b846524dc4f97492aed4febfde342460c020da05019a01a1c251d0f55210947",
+    "config/fixture-runtime.lock.json": "740845f15dbf01fe29716451e157383547771d414ef0d24c0dc9251e255443b9",
+    "config/guardrail-runtime.lock.json": "685317ab5cb4c8441e0d9e27f2911fcfe3184d996886c27d917e25c987f9ad37"
+  },
+  "schema_version": 1
+}

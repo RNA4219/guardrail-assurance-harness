@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "exit_code": 0,
+  "elapsed_seconds": 2.047000000020489,
+  "source_unchanged": true,
+  "other_locks_unchanged": true,
+  "lock_sources_match": true,
+  "image_id": "sha256:9613fcdd4c53cf4a1a8eb14b6b5b79d50b9a50dbc615827612ff05bbf53e51c9",
+  "sources_digest": "223431831ad270598a29480dfe9c665db2ce68651382cfc4cd463060e2a0233c",
+  "authority_lock_sha256": "494117cfcfb3f68b4f466cab1807c68ba2d865ccc153e3e7d4e5b57707f0375a",
+  "plan_sha256": "5ba9e6e1819bd56b1e98e5dea4194616a1546776d4b1b0305357b4db7c0f799d",
+  "build_log_sha256": "e0c68ca500b99a68c39beb702a5c1be5c05d1c5a544be9ae379c63a4b3faf414",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "kind": "authority_runtime_image_refresh",
+  "scope": "明示v6 brokerとLLM admission二重復元修正を配布imageへ反映。取得済みbase、network none、pull false。guardrail/fixture lockは不変。image構築だけでは実動作やPAC受入を証明しない。"
+}

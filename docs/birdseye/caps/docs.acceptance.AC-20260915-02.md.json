@@ -1,0 +1,25 @@
+{
+  "id": "docs/acceptance/AC-20260915-02.md",
+  "role": "acceptance",
+  "title": "Acceptance: 拡張仕様とLuna監督レビュー",
+  "summary": "[Task](../tasks/TASK.productization-spec-09-15-2026.md)の仕様文書作成と設計照合。製品コード・Schema実装・性能・実案件有用性・公開は対象外。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/productization-spec-20260915.md",
+    "docs/tasks/TASK.productization-spec-09-15-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.productization-spec-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "78cac2ff4a3f2dd919f8600574fefd07db064147c5c07f21ad06b9939cdb72f2"
+}

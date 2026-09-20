@@ -29,18 +29,48 @@ class CheckpointTests(unittest.TestCase):
         with self.assertRaisesRegex(module.CheckpointError,'CHECKPOINT_CONFLICT'):
             self.book.put('intent',value)
 
+    def test_input_return_get_and_replay_mutations_are_independent(self):
+        original = {"request_id": "send-alias", "nested": {"values": [1, 2]}}
+        returned = self.book.put("alias", original)
+        original["nested"]["values"].append(3)
+        returned["nested"]["values"].append(4)
+        self.assertEqual(self.book.get("alias"),
+                         {"request_id": "send-alias", "nested": {"values": [1, 2]}})
+
+        first_read = self.book.get("alias")
+        first_read["nested"]["values"].clear()
+        self.assertEqual(self.book.get("alias")["nested"]["values"], [1, 2])
+
+        replay = self.book.put(
+            "alias", {"request_id": "send-alias", "nested": {"values": [1, 2]}})
+        replay["nested"]["values"].append(9)
+        self.assertEqual(self.book.get("alias")["nested"]["values"], [1, 2])
+
+    def test_fresh_decode_paths_do_not_deepcopy_trees(self):
+        with patch.object(module, "deepcopy", create=True,
+                          side_effect=AssertionError("unexpected tree deepcopy")) as copied:
+            saved = self.book.put("cost", {"nested": {"values": [1, 2, 3]}})
+            self.assertEqual(saved["nested"]["values"], [1, 2, 3])
+            loaded = self.book.get("cost")
+            self.assertEqual(loaded["nested"]["values"], [1, 2, 3])
+            copied.assert_not_called()
+
     def test_failure_before_publish_has_no_partial_record(self):
         with patch.object(module.os,'replace',side_effect=OSError('synthetic')):
             with self.assertRaises(OSError):self.book.put('intent',{'ready':True})
         self.assertIsNone(self.book.get('intent'))
-        self.assertEqual(list(self.folder.iterdir()),[])
+        entries=list(self.folder.iterdir())
+        self.assertEqual(len(entries),1)
+        self.assertTrue(entries[0].name.startswith('.gah-bounded-write.') and entries[0].name.endswith('.lock'))
         self.assertEqual(self.book.put('intent',{'ready':True}),{'ready':True})
 
     def test_failure_during_flush_cannot_publish(self):
         with patch.object(module.os,'fsync',side_effect=OSError('synthetic')):
             with self.assertRaises(OSError):self.book.put('intent',{'ready':True})
         self.assertIsNone(self.book.get('intent'))
-        self.assertEqual(list(self.folder.iterdir()),[])
+        entries=list(self.folder.iterdir())
+        self.assertEqual(len(entries),1)
+        self.assertTrue(entries[0].name.startswith('.gah-bounded-write.') and entries[0].name.endswith('.lock'))
 
     def test_corruption_and_wrong_key_are_rejected(self):
         self.book.put('intent',{'ready':True})

@@ -1,0 +1,38 @@
+{
+  "artifacts_sha256": {
+    "check-result.json": "9fd38597da4ad884b29fd2baca43be3bc313731d8c4f184eeac928feb4cdd6e8",
+    "ci-result.json": "b7a81266c56b4f931c883683b54ce4e7edaba1168eaf855c85eeb58af07346dc",
+    "normal-result.json": "29add9f4e36f1720176edf0a0971e693af02e14106ad6ba116b2e087619e0768",
+    "receipt-summary.json": "c037a5d6d3c2b65447715d96eeec8efa3323472a7792fcab5abf6acb6c480f74",
+    "report-result.json": "6c42863578dc5989cd72bcd10a7b08d09ad945684f4afdea20b7ac39de3fdb7a",
+    "setup-result.json": "7bce6389143b657d8ae58907b56d1aa5e1c21d56bf1605c31334fde524492601"
+  },
+  "checks": {
+    "every_worker_stopped_and_cleaned": true,
+    "fresh_ci_exit_zero": true,
+    "gen2_adopted": true,
+    "normal_exit_zero": true,
+    "normal_run_30_full_entries": true,
+    "owned_containers_cleaned_state_retained": true,
+    "run_report_returned": true,
+    "setup_60_full_entries": true
+  },
+  "ci_eligible": false,
+  "driver_sha256": "0064cf930708c368309e60d8a7d16466eb4a8ced957656dce396716cc6f3b5b5",
+  "elapsed_milliseconds_reported": 1048321,
+  "full_pac_acceptance": false,
+  "id": "docker-integration-v5",
+  "kind": "local_validation_observation",
+  "log_sha256": "cb3f5a428d6057b61e1421b73ea639c315f7b2b703bb320e0d31fac470021bdd",
+  "schema_version": 1,
+  "separate_client_after_seconds": 2,
+  "setup_doctor_validated": false,
+  "source_ref": {
+    "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+    "id": "final-source-v5",
+    "kind": "snapshot_manifest"
+  },
+  "source_unchanged": true,
+  "status": "PASS",
+  "worker_count": 90
+}

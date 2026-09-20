@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "tuple_snapshot_parent_review",
+  "created_at": "2026-09-19T18:48:45.286143+00:00",
+  "exit_code": 0,
+  "modules": [
+    "tests.test_read_checks_hotpath",
+    "tests.test_read_checks",
+    "tests.test_source_check_scope",
+    "tests.test_evaluation_authority",
+    "tests.test_resource_start",
+    "tests.test_resource_start_integration"
+  ],
+  "wall_seconds": 2.13643630000297,
+  "source_sha256": {
+    "src/gah/read_checks.py": "1a5d297f132d740090923ea4b5c72d86eb1de7bc9ea21f0e5f23459c9bfbe517",
+    "tests/test_read_checks_hotpath.py": "a3e0eb6bd4f492d83877ae99be65a5fd0d0595c078033f9cef97ac7733a1ea00"
+  },
+  "source_unchanged": true,
+  "log_sha256": "b7f688e39ae9d210581131acc14248d6a2d5b3c8e34973d402d300630485226b",
+  "docker_started": false,
+  "implementation": "root tupleの各plain JSON要素を独立bytes snapshotとして保持する。Row等のslotとnested tupleは従来copy、復元は新しいtuple。要求/transaction/source検査は不変。",
+  "checks": [
+    "Row identityと大きなJSON subtreeの返却改変分離",
+    "2hitのcopyは2呼出以下、旧root tree copyの100分の1未満",
+    "nested tuple/custom/nonfinite/不正Unicode/深さ/marker似の形状を従来意味で保持",
+    "書込時/要求境界/source検査・resource開始の既存回帰"
+  ],
+  "limitations": [
+    "実型の限定反例であり、800操作全体や実Docker workerの改善ではない。",
+    "この新sourceでは同条件の製品profileをまだ実行していない。"
+  ],
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "tests_run": 38,
+  "passed": 38,
+  "failed": 0,
+  "test_seconds": 1.863
+}

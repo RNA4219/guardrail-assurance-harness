@@ -1,0 +1,16 @@
+{
+  "kind": "source_v11_freeze",
+  "file_count": 1765,
+  "total_bytes": 39203494,
+  "python_ast_checked": 535,
+  "copy_and_source_hashes_match": true,
+  "runtime_source_locks_match": true,
+  "manifest_sha256": "58ae19846a7af8edfd36bbd6e2de8a00a7112cce1deaf2bbecd471723efcdc3e",
+  "product_changes_from_v10": [
+    "config/authority-runtime.lock.json",
+    "src/gah/run_evidence.py"
+  ],
+  "changed_file_count": 194,
+  "normal_seed_executed": false,
+  "acceptance_pass": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "docs/tasks/TASK.productization-spec-09-15-2026.md",
+  "role": "tasks",
+  "title": "Task: 拡張仕様の作成とLuna監督レビュー",
+  "summary": "拡張14要件を、実装担当が参照できる具体的な入出力・状態・測定・失敗条件の仕様へ落とし込む。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/acceptance/AC-20260915-02.md",
+    "docs/productization-spec.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260915-02.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "c83f0f87047f5013f698ff8ad130f19a1e50a045d4cd387e8e4eba4e26e87f36"
+}

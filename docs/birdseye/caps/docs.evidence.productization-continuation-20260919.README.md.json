@@ -1,0 +1,27 @@
+{
+  "id": "docs/evidence/productization-continuation-20260919/README.md",
+  "role": "evidence",
+  "title": "保存上限・worker計測・コピー削減の継続検証",
+  "summary": "LunaがSQLite上限、host保存、worker計測、hotpathを分担し、親がsource/image束縛、計測区間、結合検証、DGXレビュー採否を確認した。[実装状況](../../productization-status.md)と[監督レビュー](../../reviews/productization-continuation-20260919.md)へ対応する。既存MVPの32条件と拡張14条件は別に扱う。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-status.md",
+    "docs/reviews/productization-continuation-20260919.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "README.md",
+    "docs/evidence/README.md",
+    "docs/productization-status.md",
+    "docs/reviews/productization-continuation-20260919.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "365d00a00057a08fa15fb7d8a9c1a2c2abbe795eae6ba0b54cc742a6ddc50412"
+}

@@ -93,6 +93,11 @@ def build(db, history, run_id, created_at, now, *, changed_refs=None):
             raise AdoptionError("CANDIDATE_ENTRY_REQUIRED")
         template = candidate["runs"]["new"]
         old_bound = template["bound_run"]
+        if old_bound["manifest"].get("schema_version") == 2:
+            if changed_refs is not None or run_scope.load(db, history, run_id) is not None:
+                raise AdoptionError("LLM_SCOPE_NOT_CONNECTED")
+            from .partitioned_llm_transitions import rebind
+            return rebind(template, run_id=run_id, now=created_at, purpose="regression")
         plan = deepcopy(old_bound["plan"])
         plan["plan_id"] = "regression-plan-" + run_id
         manifest = deepcopy(old_bound["manifest"])
@@ -146,8 +151,9 @@ def for_run(db, row, now):
     history = db.execute("SELECT * FROM eval_adoptions WHERE series_id=? AND generation=?",
         (row["contract_series_id"], row["contract_generation"])).fetchone()
     result = build(db, history, row["run_id"], manifest["created_at"], now)
+    stored_plan = result["plan_index"] if manifest.get("schema_version") == 2 else result["bound_run"]["plan"]
     if (manifest != result["bound_run"]["manifest"]
-            or resources._unpack(row["plan_json"], row["plan_digest"]) != result["bound_run"]["plan"]):
+            or resources._unpack(row["plan_json"], row["plan_digest"]) != stored_plan):
         raise AdoptionError("REGRESSION_BINDING_INVALID")
     return result
 
@@ -201,7 +207,20 @@ def ci_check(store, db, request, now):
         if manifest["purpose"] != "regression":
             raise AdoptionError("CI_PURPOSE_REQUIRED")
         extension = EvaluationExtension()
-        if run_cancellation.exists(db, request["run_id"]):
+        has_cancel_receipt = run_cancellation.exists(db, request["run_id"])
+        if not has_cancel_receipt:
+            # A single marker read avoids scanning every resource operation for
+            # ordinary CI calls. It only selects the exceptional path; _stopped
+            # re-reads the complete snapshot and proves every operation stopped.
+            marker = db.execute("SELECT cancelled FROM resource_runs WHERE run_id=?",
+                                (request["run_id"],)).fetchone()
+            if marker is not None and type(marker[0]) is int and marker[0] == 1:
+                if not _matches(request, manifest):
+                    raise AdoptionError("CI_TARGET_MISMATCH")
+                run_cancellation._stopped(db, request["run_id"], now)
+                # Fully stopped but not yet terminal still has no usable receipt.
+                raise AdoptionError("NOT_FINALIZED")
+        if has_cancel_receipt:
             bound, baseline = extension._bound_evidence_run(store, db, request["run_id"], now)
             cancellation = run_cancellation.load(db, bound, baseline, now)
             assurance = cancellation["assurance"]
@@ -219,7 +238,34 @@ def ci_check(store, db, request, now):
         if source["decision"]["assurance"] in {"HEALTHY", "WARNING", "DEGRADED", "UNKNOWN", "HOLD"}:
             assurance = source["decision"]["assurance"]
         outputs_ref = run_outputs.read(db, bound, source["receipt"])["outputs_ref"]
-        transition_acceptance._check_source(db, source, bound, now, allow_unhealthy=True)
+        try:
+            transition_acceptance._check_source(db, source, bound, now, allow_unhealthy=True)
+        except AdoptionError as error:
+            # A failed earlier integrity check is not the final revocation condition.
+            # Preserve it without inspecting possibly malformed source data.
+            if error.code != "SOURCE_NOT_READY":
+                raise
+            # _check_source validates bindings, closure, operations and expiry before
+            # collapsing a fresh evidence revocation into SOURCE_NOT_READY. Preserve
+            # the public revocation reason only for that verified terminal condition.
+            revoked = False
+            if type(source) is dict:
+                reasons_value = source.get("reasons")
+                revoked = (type(reasons_value) is list
+                           and any(type(item) is str and item == "EVIDENCE_REVOKED"
+                                   for item in reasons_value))
+                evidences_value = source.get("evidences")
+                states_value = source.get("evidence_states")
+                if (type(evidences_value) is list and len(evidences_value) == 1
+                        and type(evidences_value[0]) is dict and type(states_value) is dict):
+                    evidence_id = evidences_value[0].get("evidence_id")
+                    state_value = states_value.get(evidence_id)
+                    revoked = revoked or (type(state_value) is dict
+                                          and type(state_value.get("revoked")) is bool
+                                          and state_value["revoked"] is True)
+            if revoked:
+                raise AdoptionError("EVIDENCE_REVOKED") from None
+            raise
         current = db.execute("SELECT * FROM eval_current WHERE series_id=?", (row["contract_series_id"],)).fetchone()
         if (current is None or current["generation"] != row["contract_generation"]
                 or current["digest"] != manifest["contract_ref"]["digest"]):
@@ -230,7 +276,8 @@ def ci_check(store, db, request, now):
     except (AdoptionError, ContractError, resources.ResourceError, run_evidence.EvidenceError) as error:
         allowed = {"RUN_MISSING", "CI_PURPOSE_REQUIRED", "CURRENT_CONTRACT_MISMATCH", "CI_TARGET_MISMATCH",
             "CONTRACT_INVALID", "REGRESSION_BINDING_INVALID", "RUN_OUTPUTS_MISSING", "RUN_OUTPUTS_INVALID",
-            "SOURCE_NOT_READY", "SOURCE_EXPIRED", "SOURCE_OPERATION_INVALID", "NOT_FINALIZED",
+            "SOURCE_NOT_READY", "EVIDENCE_REVOKED", "SOURCE_EXPIRED", "SOURCE_OPERATION_INVALID", "NOT_FINALIZED",
+            "STOP_UNCONFIRMED",
             "PREREQUISITE_UNAVAILABLE", "CANDIDATE_EXPIRED", "EVIDENCE_DELETED", "EVIDENCE_RESTORED_AFTER_DELETION", "TARGET_RETIRED", "RETIREMENT_INVALID", "RETIREMENT_ORIGIN_INVALID"}
         reasons.append(error.code if error.code in allowed else "EVIDENCE_UNAVAILABLE")
     return _ci_result(request, now, reasons, assurance, outputs_ref, cancelled=cancelled)
@@ -249,7 +296,7 @@ def _ci_result(request, now, reasons, assurance, outputs_ref, *, cancelled=False
         reasons.append("ASSURANCE_NOT_ALLOWED")
     use = not reasons
     completed_rejections = {"ASSURANCE_NOT_ALLOWED", "CI_PURPOSE_REQUIRED", "CURRENT_CONTRACT_MISMATCH",
-        "CI_TARGET_MISMATCH", "CONTRACT_INVALID", "SOURCE_NOT_READY", "SOURCE_EXPIRED",
+        "CI_TARGET_MISMATCH", "CONTRACT_INVALID", "SOURCE_NOT_READY", "EVIDENCE_REVOKED", "SOURCE_EXPIRED",
         "PREREQUISITE_UNAVAILABLE", "CANDIDATE_EXPIRED"}
     exit_code = 3 if cancelled else (0 if use else (1 if set(reasons) <= completed_rejections else 2))
     return {"schema_version": 1, "kind": "ci_gate_result", "action": "ci_check",

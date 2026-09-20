@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "admission_decode_parent_verification",
+  "passed": true,
+  "tests_run": 18,
+  "test_elapsed_seconds": 4.832,
+  "host_elapsed_seconds": 13.811999999976251,
+  "base_source_manifest_sha256": "92ab965ae147759735a2e1b04ca0695781346f5af9a4bf4c9f442e1878e0bd6c",
+  "overlay_sha256": {
+    "src/gah/fixture_admission.py": "7f9e6af4d955b93c2ad46bd125a09dda2987c0bfcbe93613091386f42a5ff72b",
+    "src/gah/llm_admission.py": "80708a9fa4fa671d0f5197204c1d52b6fb8ef890dbfab0918e012b9e9368f4f6",
+    "tests/test_admission_decode.py": "36ba53b0c474e5ed4d796837935a789798d89543cac09b8223d981b517cf405b"
+  },
+  "plan_sha256": "8296ea3f86a1867abd3cd485bbbb42fe403193f77fc12947ebb301c0ca9bb9e8",
+  "log_sha256": "2e2bcc927b18d5239f01575bb2ae736304c3aa6d83f304a51c03bfd3d44be311",
+  "snapshot_unchanged": true,
+  "overlay_source_unchanged": true,
+  "verifier_remaining_body_and_error_handlers_ast_equal": true,
+  "scope": "固定source-v13に3ファイルのみ反映して検証。LLM dispatcherの重複復元を1回へ削減し、公開APIの独立decode・返値分離・時刻・行binding・factory照合・例外分類を保持。並行作業中のv6 runtime/consumer差分は含まない。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "performance_slo_pass": false
+}

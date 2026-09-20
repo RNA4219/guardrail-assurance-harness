@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "v6_worker_runtime_failure",
+  "status": "INCOMPLETE",
+  "reason": "DIAGNOSTIC_INCOMPLETE",
+  "host_elapsed_seconds": 25.391,
+  "inner_elapsed_seconds": 18.218,
+  "source_manifest_sha256": "cbc446ebab9adb27ed7deb79491a4d8e6e65a189d67cbe8237e5eccda097fd7d",
+  "plan_sha256": "100012c494f8a1c62ef528309fc9eaeadfb944a461711dc92b7844ae33a5e7e1",
+  "host_result_sha256": "df5447852d0d8637f0d9439963539b6656e046053bbc64064d9f44a331eeb190",
+  "inner_result_sha256": "7cec01637a8fd294ac9903af211c8a086bf5808a297153dc6adef2eb1be545d8",
+  "source_and_drivers_unchanged": true,
+  "cleanup_confirmed": true,
+  "state_volumes_retained": true,
+  "diagnosis": "driverがrun folderを作らずCLI wrapperを呼んだ。diagnostic-run/checkpoint/journalは未作成。operation_lockは存在しない親へのFileNotFoundErrorを返す前提を親が確認。v2は製品CLIと同じ事前作成を行う。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

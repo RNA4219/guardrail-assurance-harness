@@ -1,0 +1,536 @@
+[
+  {
+    "acceptance_id": "GAH-PAC01",
+    "checked_at": 1789484696,
+    "evidence_refs": [],
+    "id": "productization-pac-01-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR01",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC02",
+    "checked_at": 1789484696,
+    "evidence_refs": [],
+    "id": "productization-pac-02-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR02",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC03",
+    "checked_at": 1789484696,
+    "evidence_refs": [],
+    "id": "productization-pac-03-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR03",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC04",
+    "checked_at": 1789484696,
+    "evidence_refs": [],
+    "id": "productization-pac-04-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [],
+    "requirement_id": "GAH-PR04",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "NOT_RUN"
+  },
+  {
+    "acceptance_id": "GAH-PAC05",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "3fde37654d66d4a8cfd2eaebafc045a08e7a7ac19f51b989868c2df61ad9188a",
+        "id": "setup-copy-profile-v5",
+        "kind": "local_profile_comparison"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-05-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR05",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC06",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "3fde37654d66d4a8cfd2eaebafc045a08e7a7ac19f51b989868c2df61ad9188a",
+        "id": "setup-copy-profile-v5",
+        "kind": "local_profile_comparison"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-06-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR06",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC07",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-07-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR07",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC08",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "12d489c6e1c91f101355fbfd6e0961f9215a9c3142f65687ceeb213a469502bc",
+        "id": "test-inventory-v5",
+        "kind": "test_inventory_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-08-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR08",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC09",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "6fa2c625d5014cc4e3eaecf5656148a796b81958baffe23d063075d608fa1136",
+        "id": "image-preparation-live-v1",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-09-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR09",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC10",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "6fa2c625d5014cc4e3eaecf5656148a796b81958baffe23d063075d608fa1136",
+        "id": "image-preparation-live-v1",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-10-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR10",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC11",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-11-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR11",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC12",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-12-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR12",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC13",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "339e713880839ebaa39dca2099cd26107bb55d0228f9da7decac1e45b5729a16",
+        "id": "docker-integration-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "6fa2c625d5014cc4e3eaecf5656148a796b81958baffe23d063075d608fa1136",
+        "id": "image-preparation-live-v1",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-13-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR13",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  },
+  {
+    "acceptance_id": "GAH-PAC14",
+    "checked_at": 1789484696,
+    "evidence_refs": [
+      {
+        "digest": "7f1da609111bc501d48c58965561e985c31bd5f236345e63d4490453bb0103cd",
+        "id": "final-delta-v5",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "5e012c4d47e3dfd62a2b3b26ffc5c17e13b691e29ac1049b6e81219ca600cd1e",
+        "id": "regression-v4-with-fixture-recovery",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "12d489c6e1c91f101355fbfd6e0961f9215a9c3142f65687ceeb213a469502bc",
+        "id": "test-inventory-v5",
+        "kind": "test_inventory_observation"
+      },
+      {
+        "digest": "ca40d2b4a0638f4848f4ff6785662cb50663920ae955c24d9f9f925b01bc2bd7",
+        "id": "continuation-tests-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "7b75dd5c7d52ac4879b34ebfe5bdee001e7cb70d237e8f5fcb8cbbada6d8f086",
+        "id": "resource-live-v2",
+        "kind": "local_validation_observation"
+      },
+      {
+        "digest": "6fa2c625d5014cc4e3eaecf5656148a796b81958baffe23d063075d608fa1136",
+        "id": "image-preparation-live-v1",
+        "kind": "local_validation_observation"
+      }
+    ],
+    "id": "productization-pac-14-v7",
+    "kind": "productization_acceptance_record",
+    "plan_ref": {
+      "digest": "511146f3b8d4e7c4c2a5387a3612519d9be5304b4b84989825636f988b7f3255",
+      "id": "continuation-verification-v2",
+      "kind": "local_verification_plan"
+    },
+    "reasons": [
+      "OBSERVATION_MISSING"
+    ],
+    "requirement_id": "GAH-PR14",
+    "schema_version": 1,
+    "source_ref": {
+      "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+      "id": "continuation-source-v2",
+      "kind": "snapshot_manifest"
+    },
+    "status": "INCONCLUSIVE"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "ci_eligible": false,
+  "external_acceptance_pending": [
+    "two real CI repositories",
+    "one real guardrail target and independent dataset",
+    "20 paired observations and operational period",
+    "both supported OS onboarding",
+    "whole-group RSS peak and unobserved lifecycle tail",
+    "Docker storage free space and durable exhaustion handling"
+  ],
+  "full_pac_acceptance": false,
+  "id": "continuation-20260919-v1",
+  "kind": "local_verification_plan",
+  "original_evidence_retained": true,
+  "parallel_regression_workers": 6,
+  "schema_version": 1,
+  "scope": [
+    "sqlite connection caps and rollback",
+    "bounded immutable and mutable file writes",
+    "worker cgroup end snapshot binding",
+    "benchmark before cleanup capture and operation coverage",
+    "redundant copy removal with alias isolation",
+    "source locked image build",
+    "full discovered unittest lanes",
+    "dedicated fixed harmless Docker lifecycle"
+  ],
+  "validation_source": "fresh immutable snapshots; source hashes checked before and after tests"
+}

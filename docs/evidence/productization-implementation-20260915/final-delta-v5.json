@@ -1,0 +1,18 @@
+{
+  "all_tests_on_final_source": false,
+  "ci_eligible": false,
+  "elapsed_milliseconds_reported": 228349,
+  "full_pac_acceptance": false,
+  "id": "final-delta-v5",
+  "kind": "local_validation_observation",
+  "log_sha256": "6b1207454cff9ba6dccda0811f9c062100d7962aae3505d1492e5d132d65b943",
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "70c314e99a9ccf498499ae31c6a279242732712d952a076055e56021a3e2d499",
+    "id": "final-source-v5",
+    "kind": "snapshot_manifest"
+  },
+  "status": "PASS",
+  "test_scope": "setup time advance, operations, benchmark, clock, CLI cleanup, pure caches, setup request binding",
+  "tests_run": 93
+}

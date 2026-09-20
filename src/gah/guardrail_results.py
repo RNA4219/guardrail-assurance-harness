@@ -17,6 +17,26 @@ def _pack(source_digest):
     return build_pack()
 
 
+def _build_lookup_index(source_digest):
+    """既存の検証済みpackから、参照共有のprivate lookup mapを一度だけ作る。"""
+    pack = _pack(source_digest)
+    documents = {canonical_bytes(item["ref"]): item["document"] for item in pack["documents"]}
+    cases_by_id = {}
+    for case_set in pack["case_sets"].values():
+        for case in case_set["cases"]:
+            cases_by_id.setdefault(case["case_id"], []).append(case)
+    return {
+        "documents": documents,
+        "cases_by_id": {key: tuple(value) for key, value in cases_by_id.items()},
+    }
+
+
+@lru_cache(maxsize=1)
+def _lookup_index(source_digest):
+    """source digestに束縛された有限の純粋corpus index。authority stateは保持しない。"""
+    return _build_lookup_index(source_digest)
+
+
 def validate_request(value):
     require_object(value, {"schema_version", "kind", "target", "stages"})
     if type(value["schema_version"]) is not int or value["schema_version"] != 1 or value["kind"] != "guardrail_case_request":
@@ -49,11 +69,11 @@ def validate_request(value):
             or binding["adapter_digest"] != lock["source_sha256"]["src/gah/normalized.py"]
             or binding["isolation_digest"] != hashlib.sha256(canonical_bytes(PROFILE)).hexdigest()):
         raise ContractError("BINDING_MISMATCH")
-    pack = _pack(llm_materialization.source_key())
-    cases = [case for group in pack["case_sets"].values() for case in group["cases"] if case["case_id"] == binding["case_id"]]
+    index = _lookup_index(llm_materialization.source_key())
+    cases = index["cases_by_id"].get(binding["case_id"], ())
     if len(cases) != 1 or [x["stage_id"] for x in bindings] != [s["stage_id"] for s in cases[0]["session_steps"]]:
         raise ContractError("CASE_STAGE_MISMATCH")
-    documents = {canonical_bytes(x["ref"]):x["document"] for x in pack["documents"]}
+    documents = index["documents"]
     for item, stage in zip(stages, cases[0]["session_steps"]):
         if item["input"] != documents[canonical_bytes(stage["input_ref"])]:
             raise ContractError("INPUT_MATERIALIZATION_MISMATCH")
@@ -65,7 +85,27 @@ def validate_request(value):
 def validate_bundle(bundle):
     require_object(bundle, {"request", "worker_result"})
     request = validate_request(bundle["request"])
-    value = bundle["worker_result"]
+    return validate_worker_result(request, bundle["worker_result"])
+
+
+def validate_execution_bundle(bundle):
+    """journal専用の固定family分岐。v1公開validatorの受理範囲は維持する。"""
+    import re
+    require_object(bundle, {"request", "worker_result"})
+    try:
+        case_id = bundle["request"]["stages"][0]["binding"]["case_id"]
+    except (KeyError, TypeError, IndexError):
+        raise ContractError("CASE_REQUEST_INVALID") from None
+    match = re.fullmatch(r"q([48g])[01][0-9]{4}", case_id) if type(case_id) is str else None
+    if match is not None:
+        from .partitioned_guardrail_results import validate_bundle as validate_partitioned_bundle
+        count = {"4": 400, "8": 800, "g": 1600}[match.group(1)]
+        return validate_partitioned_bundle(bundle, case_count=count)
+    return validate_bundle(bundle)
+
+
+def validate_worker_result(request, value):
+    """入力family側で検査済みの要求に対し、共通worker出力を照合する。"""
     require_object(value, {"schema_version", "kind", "results", "effects", "stage_timings", "initial_counter", "final_counter", "synthetic_target", "trained_model", "usage"})
     if (type(value["schema_version"]) is not int or value["schema_version"] != 1
             or value["kind"] != "guardrail_case_result" or value["synthetic_target"] is not True
@@ -141,9 +181,9 @@ def for_entry(prepared, entry, operation_id, owner_epoch):
     if entry not in bound["plan"]["entries"]:
         raise ContractError("ENTRY_NOT_PLANNED")
     profile = expected(prepared["execution_profile"], entry["target_ref"]["digest"], entry["evaluator_ref"]["digest"])
-    pack = _pack(llm_materialization.source_key())
-    documents = {canonical_bytes(x["ref"]):x["document"] for x in pack["documents"]}
+    index = _lookup_index(llm_materialization.source_key())
     case = next(x for x in bound["case_set"]["cases"] if x["case_id"] == entry["case_id"])
+    documents = index["documents"]
     stages = []
     for stage in case["session_steps"]:
         binding = {"run_id":bound["manifest"]["run_id"], "operation_id":operation_id, "owner_epoch":owner_epoch,

@@ -9,10 +9,15 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
-SOURCES = ["src/gah/__init__.py", "src/gah/contracts.py", "src/gah/wire.py", "src/gah/policy.py",
+SOURCES = ["src/gah/sqlite_limits.py", "src/gah/bounded_files.py", "src/gah/storage_budget.py", "src/gah/worker_metrics.py", "src/gah/__init__.py", "src/gah/contracts.py", "src/gah/wire.py", "src/gah/policy.py",
            "src/gah/adoption.py", "src/gah/authority.py", "src/gah/registry.py", "src/gah/corpus.py",
-           "src/gah/run_contracts.py", "src/gah/resources.py", "src/gah/resource_authority.py", "src/gah/ledger.py", "src/gah/termination.py", "src/gah/mutation_reviews.py", "src/gah/evaluation_authority.py",
-           "src/gah/adoption_migrations.py", "src/gah/run_evidence.py", "src/gah/aggregation.py", "src/gah/decision.py",
+           "src/gah/run_contracts.py", "src/gah/resources.py", "src/gah/resource_authority.py", "src/gah/ledger.py", "src/gah/termination.py", "src/gah/mutation_reviews.py", "src/gah/run_catalog.py", "src/gah/run_diagnostics.py", "src/gah/pilot.py", "src/gah/pilot_authority.py", "src/gah/productization.py", "src/gah/evaluation_authority.py",
+           "src/gah/partitioned_authority.py", "src/gah/partitioned_plan_store.py", "src/gah/partitioned_plan_migrations.py",
+           "src/gah/partitioned_trial_plan.py", "src/gah/partitioned_run_contracts.py", "src/gah/partitioned_aggregation.py",
+           "src/gah/partitioned_run_evidence.py", "src/gah/partitioned_run_authority.py", "src/gah/partitioned_run_store.py", "src/gah/partitioned_run_migrations.py",
+           "src/gah/partitioned_corpus_authority.py", "src/gah/partitioned_corpus_store.py", "src/gah/partitioned_corpus_migrations.py",
+           "src/gah/partitioned_scale_corpus.py", "src/gah/partitioned_case_set.py", "src/gah/query_scale_data.py",
+           "src/gah/adoption_migrations.py", "src/gah/run_evidence.py", "src/gah/budget_warning.py", "src/gah/aggregation.py", "src/gah/decision.py",
            "src/gah/normalized.py", "src/gah/docker_runner.py", "src/gah/execution_journal.py",
            "src/gah/assurance_authority.py", "src/gah/baselines.py", "src/gah/contract_updates.py",
            "src/gah/baseline_authority.py", "src/gah/baseline_generations.py",
@@ -21,6 +26,8 @@ SOURCES = ["src/gah/__init__.py", "src/gah/contracts.py", "src/gah/wire.py", "sr
            "src/gah/fixture_materialization.py", "src/gah/transition_materialization.py",
            "src/gah/transition_authority.py", "src/gah/transition_migrations.py", "src/gah/transition_acceptance.py",
            "src/gah/regression_runs.py", "src/gah/run_scope.py", "src/gah/finding_lifecycle.py", "src/gah/execution_profiles.py", "src/gah/run_outputs.py", "src/gah/run_cancellation.py", "src/gah/remediation.py", "fixtures/runtime/fixture_worker.py",
+           "src/gah/partitioned_llm_materialization.py", "src/gah/partitioned_guardrail_results.py", "src/gah/partitioned_guardrail_runner.py",
+           "src/gah/partitioned_llm_admission.py", "src/gah/partitioned_normal_evidence.py", "src/gah/partitioned_llm_transitions.py",
            "src/gah/guardrail_runtime.py", "src/gah/llm_materialization.py", "src/gah/llm_admission.py",
            "src/gah/evaluation_data.py", "src/gah/llm_evaluator.py", "src/gah/measurement_calibration.py",
            "src/gah/guardrail_results.py", "src/gah/guardrail_runner.py", "src/gah/candidate_sections.py", "src/gah/llm_transitions.py", "src/gah/evidence_retention.py", "src/gah/candidate_outputs.py", "src/gah/combined_runs.py", "src/gah/cache_inputs.py", "src/gah/evidence_snapshot_cache.py", "src/gah/immutable_cache.py", "src/gah/target_retirement.py", "src/gah/finding_dispositions.py", "src/gah/llm_migration.py",

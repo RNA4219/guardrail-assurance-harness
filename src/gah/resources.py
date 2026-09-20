@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import hashlib
+from collections import OrderedDict
 from functools import lru_cache
 import json
 import sqlite3
+from threading import Lock
 from typing import Any
 
 from .contracts import ContractError, MAX_INTEGER, require_id, require_digest, require_object, require_ref, require_uint
@@ -49,6 +51,41 @@ def _flat_unpack(raw, digest, decoder, encoder):
     return tuple(value.items())
 
 
+_VERIFIED_MARKER = True
+_NONFLAT_CACHE_MAXSIZE = 64
+_NONFLAT_VERIFIED = OrderedDict()
+_NONFLAT_CACHE_LOCK = Lock()
+
+
+def _nonflat_cache_key(raw, digest, decoder, packer, encoder):
+    # Exact body, digest, and callable objects bind the marker to this verifier.
+    return (raw, digest, decoder, packer, encoder)
+
+
+def _nonflat_cache_contains(key):
+    with _NONFLAT_CACHE_LOCK:
+        if _NONFLAT_VERIFIED.get(key) is not _VERIFIED_MARKER:
+            return False
+        _NONFLAT_VERIFIED.move_to_end(key)
+        return True
+
+
+def _nonflat_cache_store(key):
+    with _NONFLAT_CACHE_LOCK:
+        _NONFLAT_VERIFIED[key] = _VERIFIED_MARKER
+        _NONFLAT_VERIFIED.move_to_end(key)
+        while len(_NONFLAT_VERIFIED) > _NONFLAT_CACHE_MAXSIZE:
+            _NONFLAT_VERIFIED.popitem(last=False)
+
+
+def _verify_nonflat_value(raw, digest, value, packer, encoder):
+    # Verify the already decoded fresh tree; cache only after every old check succeeds.
+    expected, actual = packer(value)
+    encoded = encoder(value)
+    if (expected != raw or actual != digest or encoded.decode("utf-8") != expected):
+        raise ResourceError("STORAGE_CORRUPT")
+
+
 def _unpack(raw, digest):
     if type(raw) is not str or type(digest) is not str:
         raise ResourceError("STORAGE_CORRUPT")
@@ -59,6 +96,15 @@ def _unpack(raw, digest):
             cached = _flat_unpack(raw, digest, json.loads, canonical_bytes)
             if cached is not None:
                 return dict(cached)
+        raw_bytes = raw.encode("utf-8") if len(raw) <= 4096 else None
+        if raw_bytes is not None and len(raw_bytes) <= 4096:
+            decoder, packer, encoder = json.loads, _packed, canonical_bytes
+            value = decoder(raw)
+            key = _nonflat_cache_key(raw, digest, decoder, packer, encoder)
+            if not _nonflat_cache_contains(key):
+                _verify_nonflat_value(raw, digest, value, packer, encoder)
+                _nonflat_cache_store(key)
+            return value
         value = json.loads(raw)
         expected, actual = _packed(value)
     except (ValueError, TypeError, UnicodeError, RecursionError):

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "normal_matched_profile_diagnostic",
+  "status": "INCOMPLETE",
+  "before": {
+    "status": "PROFILED_LIMIT_5",
+    "prepare_wall_seconds": 0.3954757649989915,
+    "five_trials_wall_seconds": 39.4619119659983,
+    "completed_new_operations": 5,
+    "attempts_added": 7,
+    "expected_attempts_added": 7,
+    "saved_attempts_sha256": "d715a53dc9673b04dbbaf6fa334d47ee95d2e9ba9a8b89ee3ec3450b162167c4",
+    "source_database_unchanged": true,
+    "checkpoint_snapshot_unchanged": true,
+    "scratch_removed": true
+  },
+  "after": {
+    "status": "FAILED",
+    "completed_new_operations": 0,
+    "error_type": "AdoptionError",
+    "error_code": "CONFIG_MISMATCH",
+    "failure_stage": "AdoptionStore initialization before operations/profiling"
+  },
+  "interpretation": "The after implementation changes the authority extension fingerprint. Opening the before-version database correctly refused CONFIG_MISMATCH. This is not an optimization result or a source-compatible resume; no binding metadata was rewritten.",
+  "follow_up": "Generate the same fixture and logical requests separately under each pinned code version, compare normal manifests/requests/counts before profiling.",
+  "cleanup_confirmed": true,
+  "input_database_unchanged": true,
+  "acceptance_pass": false,
+  "performance_improvement_established": false,
+  "slo_comparison": false,
+  "artifacts": {
+    "plan.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/plan.json",
+      "sha256": "5df6efba30adb8d91d7b8bb96a22dca77977724668af52e9844fd8dc23cee9c3"
+    },
+    "host-result.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/host-result.json",
+      "sha256": "7be4f6008690e71a87a1bfc67ebfca6e761202d2ffc8d05883c8f52b2a9c03de"
+    },
+    "host-artifacts.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/host-artifacts.json",
+      "sha256": "18e58e35935423e9bd860792cc06050b8ead19ccb11e313bcda81e1dc6d3351a"
+    },
+    "artifacts/before-result.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/artifacts/before-result.json",
+      "sha256": "a8541162161e426dd26ce52248d38fe76faf05abfa4c04621d2b5d7639f8988d"
+    },
+    "artifacts/after-result.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/artifacts/after-result.json",
+      "sha256": "a99f4a5d3d06095936ea4227e8d739ef4d532f43439a9c9e42466ad7cdae89db"
+    },
+    "artifacts/execution.json": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/artifacts/execution.json",
+      "sha256": "c27c85219a63ad0d2d1c1f48e8aedd2f251eb2b9af96175cd69593d3c9762d07"
+    },
+    "artifacts/before.pstats": {
+      "path": ".ga/productization-implementation-20260919/normal-matched-profile-v1/artifacts/before.pstats",
+      "sha256": "7c40d54839fc7d7cede5ce9c978b04f6d353370be7b283fdb15d6284fcf75522"
+    }
+  }
+}

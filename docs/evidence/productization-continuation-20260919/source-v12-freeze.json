@@ -1,0 +1,11 @@
+{
+  "kind": "source_v12_freeze",
+  "file_count": 1798,
+  "total_bytes": 39477423,
+  "python_ast_checked": 545,
+  "copy_and_source_hashes_match": true,
+  "runtime_source_locks_match": true,
+  "manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "normal_seed_executed": false,
+  "acceptance_pass": false
+}

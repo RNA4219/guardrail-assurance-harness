@@ -1,0 +1,44 @@
+{
+  "created_at": 1789470306,
+  "expires_at": 1790075106,
+  "id": "productization-local-verification-v4",
+  "kind": "productization_verification_plan",
+  "payload": {
+    "ci_eligible": false,
+    "full_pac_acceptance": false,
+    "purpose": "index_existing_verification_plan",
+    "source_integrity_required": true,
+    "test_plan_ref": {
+      "digest": "40285c1a7cd1ec6bd76d8fad3ef327cb78b2297c34ba3127f03e32235ff3fbd2",
+      "id": "local-regression-v4",
+      "kind": "local_regression_plan"
+    }
+  },
+  "requirement_ids": [
+    "GAH-PR01",
+    "GAH-PR02",
+    "GAH-PR03",
+    "GAH-PR04",
+    "GAH-PR05",
+    "GAH-PR06",
+    "GAH-PR07",
+    "GAH-PR08",
+    "GAH-PR09",
+    "GAH-PR10",
+    "GAH-PR11",
+    "GAH-PR12",
+    "GAH-PR13",
+    "GAH-PR14"
+  ],
+  "requirements_ref": {
+    "digest": "e3628533c716494d590d667b353831fc9ba14b9b2f79664588ab20c0173b2a43",
+    "id": "productization-requirements-v4",
+    "kind": "snapshot_manifest"
+  },
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "121947e5c2cdcf7eac16251193eb66f540ef7ed98ee455c36ba3b89c2e13072c",
+    "id": "regression-source-v4",
+    "kind": "snapshot_manifest"
+  }
+}

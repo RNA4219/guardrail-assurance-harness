@@ -1,0 +1,648 @@
+{
+  "acceptance_pass": false,
+  "attempts_added": 8,
+  "checkpoint_snapshot_unchanged": true,
+  "completed_new_operations": 5,
+  "copy_state_after": {
+    "attempts": 534,
+    "operations": 359,
+    "receipts": 0
+  },
+  "elapsed_seconds": 42.910363735998544,
+  "error": null,
+  "expected_attempts_added": 8,
+  "finalize_called": false,
+  "five_journal_and_ledger_completed": true,
+  "five_trials_wall_seconds": 41.30357108199678,
+  "full_plan_entries": 800,
+  "planned_new_operations": 5,
+  "prepare_wall_seconds": 0.40575635300046997,
+  "profile_summary": {
+    "category_cumulative_times_overlap": true,
+    "category_totals": {
+      "canonical": {
+        "calls": 134740,
+        "cumulative_seconds": 8.738448428,
+        "own_seconds": 2.228136823
+      },
+      "deepcopy": {
+        "calls": 10501726,
+        "cumulative_seconds": 23.749682400000005,
+        "own_seconds": 5.90158933
+      },
+      "guardrail": {
+        "calls": 3795,
+        "cumulative_seconds": 3.3633423950000005,
+        "own_seconds": 0.014828694
+      },
+      "read_checks": {
+        "calls": 6200721,
+        "cumulative_seconds": 70.657001046,
+        "own_seconds": 6.194173533
+      },
+      "source_reads": {
+        "calls": 11385,
+        "cumulative_seconds": 4.893786263999999,
+        "own_seconds": 0.019588006
+      }
+    },
+    "primitive_calls": 69784153,
+    "scope": "LlmSupervisor.prepare and five serial begin_new_operation/complete_operation calls; all worker code on profiled thread; no prior replay/finalize or parallel scheduler measurement",
+    "top30_cumulative": [
+      {
+        "calls": 11,
+        "cumulative_seconds": 39.96562385,
+        "file": "/workspace/source/src/gah/supervised_run.py",
+        "function": "call",
+        "line": 63,
+        "own_seconds": 0.002188413,
+        "primitive_calls": 11
+      },
+      {
+        "calls": 11,
+        "cumulative_seconds": 38.846499048000005,
+        "file": "/workspace/source/tests/test_supervised_run.py",
+        "function": "client",
+        "line": 38,
+        "own_seconds": 0.000107133,
+        "primitive_calls": 11
+      },
+      {
+        "calls": 11,
+        "cumulative_seconds": 38.844607063000005,
+        "file": "/workspace/source/src/gah/adoption.py",
+        "function": "dispatch",
+        "line": 510,
+        "own_seconds": 0.000582715,
+        "primitive_calls": 11
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 38.763957027000004,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "execute",
+        "line": 751,
+        "own_seconds": 0.000129591,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 38.761389196,
+        "file": "/workspace/source/src/gah/read_checks.py",
+        "function": "wrapped",
+        "line": 133,
+        "own_seconds": 0.000241307,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 38.625339705,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "_execute",
+        "line": 761,
+        "own_seconds": 0.013680277000000001,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 35.368843904,
+        "file": "/workspace/source/src/gah/llm_supervised_run.py",
+        "function": "begin_new_operation",
+        "line": 72,
+        "own_seconds": 8.2014e-05,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 34.842687795,
+        "file": "/workspace/source/src/gah/resource_authority.py",
+        "function": "execute",
+        "line": 125,
+        "own_seconds": 0.000444716,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 34.387974225,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "<lambda>",
+        "line": 932,
+        "own_seconds": 0.0064329240000000005,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 34.381541301,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "_check_start",
+        "line": 613,
+        "own_seconds": 0.006680499,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 15,
+        "cumulative_seconds": 32.325168694,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "_validate_state",
+        "line": 410,
+        "own_seconds": 0.025573618000000003,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 32.300678562,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "_validate_transition_state",
+        "line": 528,
+        "own_seconds": 0.034155290000000005,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 190,
+        "cumulative_seconds": 18.495944052000002,
+        "file": "/workspace/source/src/gah/read_checks.py",
+        "function": "wrapped",
+        "line": 58,
+        "own_seconds": 0.056642112,
+        "primitive_calls": 150
+      },
+      {
+        "calls": 15,
+        "cumulative_seconds": 16.424757556,
+        "file": "/workspace/source/src/gah/assurance_authority.py",
+        "function": "baseline_source",
+        "line": 423,
+        "own_seconds": 0.03376611,
+        "primitive_calls": 15
+      },
+      {
+        "calls": 20,
+        "cumulative_seconds": 15.792896357000002,
+        "file": "/workspace/source/src/gah/assurance_authority.py",
+        "function": "execute",
+        "line": 308,
+        "own_seconds": 0.038769704,
+        "primitive_calls": 20
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 14.621178028000001,
+        "file": "/workspace/source/src/gah/transition_acceptance.py",
+        "function": "validate_live_proof",
+        "line": 391,
+        "own_seconds": 0.009298982,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 14.235899481,
+        "file": "/workspace/source/src/gah/transition_acceptance.py",
+        "function": "_live_sources",
+        "line": 374,
+        "own_seconds": 0.00016528000000000002,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 12.235763321,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "<lambda>",
+        "line": 572,
+        "own_seconds": 6.742900000000001e-05,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 15,
+        "cumulative_seconds": 9.899674213,
+        "file": "/workspace/source/src/gah/transition_acceptance.py",
+        "function": "_candidate_value",
+        "line": 107,
+        "own_seconds": 0.000170628,
+        "primitive_calls": 15
+      },
+      {
+        "calls": 15,
+        "cumulative_seconds": 9.684338431,
+        "file": "/workspace/source/src/gah/evaluation_authority.py",
+        "function": "_assert_contract_history",
+        "line": 457,
+        "own_seconds": 0.00017417500000000002,
+        "primitive_calls": 15
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 9.654718037,
+        "file": "/workspace/source/src/gah/transition_acceptance.py",
+        "function": "history",
+        "line": 420,
+        "own_seconds": 0.0005772570000000001,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 8.882818523000001,
+        "file": "/workspace/source/src/gah/transition_authority.py",
+        "function": "load_candidate",
+        "line": 89,
+        "own_seconds": 0.059021512000000005,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 5268235,
+        "cumulative_seconds": 8.514916612,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "deepcopy",
+        "line": 118,
+        "own_seconds": 3.9113043920000004,
+        "primitive_calls": 68712
+      },
+      {
+        "calls": 10,
+        "cumulative_seconds": 8.485065889000001,
+        "file": "/workspace/source/src/gah/transition_authority.py",
+        "function": "_build",
+        "line": 54,
+        "own_seconds": 0.0004902460000000001,
+        "primitive_calls": 10
+      },
+      {
+        "calls": 509096,
+        "cumulative_seconds": 8.296848582,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "_deepcopy_dict",
+        "line": 217,
+        "own_seconds": 1.474573356,
+        "primitive_calls": 70147
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 7.7339397540000006,
+        "file": "/workspace/source/src/gah/baseline_authority.py",
+        "function": "execute",
+        "line": 719,
+        "own_seconds": 0.00015033600000000002,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 7.7291315130000005,
+        "file": "/workspace/source/src/gah/baseline_generations.py",
+        "function": "resolve",
+        "line": 182,
+        "own_seconds": 0.006622126000000001,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 5,
+        "cumulative_seconds": 7.688459601000001,
+        "file": "/workspace/source/src/gah/baseline_authority.py",
+        "function": "_fresh",
+        "line": 693,
+        "own_seconds": 0.001014055,
+        "primitive_calls": 5
+      },
+      {
+        "calls": 25,
+        "cumulative_seconds": 7.1336388920000005,
+        "file": "/workspace/source/src/gah/fixture_admission.py",
+        "function": "_verify",
+        "line": 84,
+        "own_seconds": 0.008912296,
+        "primitive_calls": 25
+      },
+      {
+        "calls": 30,
+        "cumulative_seconds": 6.965243941000001,
+        "file": "/workspace/source/src/gah/llm_admission.py",
+        "function": "verify",
+        "line": 49,
+        "own_seconds": 0.024843127000000003,
+        "primitive_calls": 30
+      }
+    ],
+    "top30_own": [
+      {
+        "calls": 6186610,
+        "cumulative_seconds": 6.8852631,
+        "file": "/workspace/source/src/gah/read_checks.py",
+        "function": "_copy",
+        "line": 31,
+        "own_seconds": 6.124116446,
+        "primitive_calls": 190
+      },
+      {
+        "calls": 160460,
+        "cumulative_seconds": 4.0108482190000005,
+        "file": "/usr/local/lib/python3.12/json/encoder.py",
+        "function": "iterencode",
+        "line": 205,
+        "own_seconds": 4.0108482190000005,
+        "primitive_calls": 160460
+      },
+      {
+        "calls": 5268235,
+        "cumulative_seconds": 8.514916612,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "deepcopy",
+        "line": 118,
+        "own_seconds": 3.9113043920000004,
+        "primitive_calls": 68712
+      },
+      {
+        "calls": 94287,
+        "cumulative_seconds": 2.024855009,
+        "file": "/usr/local/lib/python3.12/json/decoder.py",
+        "function": "raw_decode",
+        "line": 344,
+        "own_seconds": 1.954334806,
+        "primitive_calls": 94287
+      },
+      {
+        "calls": 1963,
+        "cumulative_seconds": 3.974630369,
+        "file": "/workspace/source/src/gah/run_contracts.py",
+        "function": "_canonical",
+        "line": 102,
+        "own_seconds": 1.655122975,
+        "primitive_calls": 1963
+      },
+      {
+        "calls": 109,
+        "cumulative_seconds": 3.410833036,
+        "file": "/workspace/source/src/gah/cache_inputs.py",
+        "function": "plain",
+        "line": 3,
+        "own_seconds": 1.634920589,
+        "primitive_calls": 109
+      },
+      {
+        "calls": 10552341,
+        "cumulative_seconds": 1.525905344,
+        "file": "~",
+        "function": "<method 'get' of 'dict' objects>",
+        "line": 0,
+        "own_seconds": 1.525905344,
+        "primitive_calls": 10552341
+      },
+      {
+        "calls": 509096,
+        "cumulative_seconds": 8.296848582,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "_deepcopy_dict",
+        "line": 217,
+        "own_seconds": 1.474573356,
+        "primitive_calls": 70147
+      },
+      {
+        "calls": 1556860,
+        "cumulative_seconds": 2.271277909,
+        "file": "~",
+        "function": "<method 'extend' of 'list' objects>",
+        "line": 0,
+        "own_seconds": 1.1253314760000002,
+        "primitive_calls": 1556860
+      },
+      {
+        "calls": 5045,
+        "cumulative_seconds": 2.431323725,
+        "file": "/workspace/source/src/gah/run_evidence.py",
+        "function": "_walk_json",
+        "line": 94,
+        "own_seconds": 0.9928877370000001,
+        "primitive_calls": 5045
+      },
+      {
+        "calls": 6862695,
+        "cumulative_seconds": 0.9148744830000001,
+        "file": "~",
+        "function": "<method 'pop' of 'list' objects>",
+        "line": 0,
+        "own_seconds": 0.9148744830000001,
+        "primitive_calls": 6862695
+      },
+      {
+        "calls": 1456029,
+        "cumulative_seconds": 2.196615778,
+        "file": "~",
+        "function": "<built-in method builtins.any>",
+        "line": 0,
+        "own_seconds": 0.903695935,
+        "primitive_calls": 1456029
+      },
+      {
+        "calls": 195931,
+        "cumulative_seconds": 0.7322422820000001,
+        "file": "~",
+        "function": "<built-in method posix.stat>",
+        "line": 0,
+        "own_seconds": 0.707393817,
+        "primitive_calls": 195931
+      },
+      {
+        "calls": 6687073,
+        "cumulative_seconds": 0.6762814420000001,
+        "file": "~",
+        "function": "<built-in method builtins.isinstance>",
+        "line": 0,
+        "own_seconds": 0.6761010970000001,
+        "primitive_calls": 6687073
+      },
+      {
+        "calls": 6641397,
+        "cumulative_seconds": 0.6126541090000001,
+        "file": "~",
+        "function": "<built-in method builtins.id>",
+        "line": 0,
+        "own_seconds": 0.6126541090000001,
+        "primitive_calls": 6641397
+      },
+      {
+        "calls": 17195,
+        "cumulative_seconds": 1.212894109,
+        "file": "/workspace/source/src/gah/evaluation_data.py",
+        "function": "_canonical",
+        "line": 84,
+        "own_seconds": 0.48616792300000006,
+        "primitive_calls": 17195
+      },
+      {
+        "calls": 90,
+        "cumulative_seconds": 1.2499844020000002,
+        "file": "/workspace/source/src/gah/storage_budget.py",
+        "function": "_measure_flat_root",
+        "line": 169,
+        "own_seconds": 0.412508003,
+        "primitive_calls": 90
+      },
+      {
+        "calls": 929699,
+        "cumulative_seconds": 0.396097725,
+        "file": "~",
+        "function": "<method 'fullmatch' of 're.Pattern' objects>",
+        "line": 0,
+        "own_seconds": 0.396097725,
+        "primitive_calls": 929699
+      },
+      {
+        "calls": 2444295,
+        "cumulative_seconds": 0.37180554200000004,
+        "file": "/workspace/source/src/gah/cache_inputs.py",
+        "function": "<genexpr>",
+        "line": 9,
+        "own_seconds": 0.37180554200000004,
+        "primitive_calls": 2444295
+      },
+      {
+        "calls": 2348343,
+        "cumulative_seconds": 0.35335787500000004,
+        "file": "/workspace/source/src/gah/run_contracts.py",
+        "function": "<genexpr>",
+        "line": 113,
+        "own_seconds": 0.35335787500000004,
+        "primitive_calls": 2348343
+      },
+      {
+        "calls": 156776,
+        "cumulative_seconds": 3.6933410110000002,
+        "file": "/workspace/source/src/gah/resources.py",
+        "function": "_unpack",
+        "line": 52,
+        "own_seconds": 0.347444168,
+        "primitive_calls": 156776
+      },
+      {
+        "calls": 2444295,
+        "cumulative_seconds": 0.34057744900000003,
+        "file": "/workspace/source/src/gah/cache_inputs.py",
+        "function": "<genexpr>",
+        "line": 10,
+        "own_seconds": 0.34057744900000003,
+        "primitive_calls": 2444295
+      },
+      {
+        "calls": 30,
+        "cumulative_seconds": 1.6731304630000001,
+        "file": "/workspace/source/src/gah/resources.py",
+        "function": "_totals",
+        "line": 211,
+        "own_seconds": 0.326225456,
+        "primitive_calls": 30
+      },
+      {
+        "calls": 2348343,
+        "cumulative_seconds": 0.31979180500000004,
+        "file": "/workspace/source/src/gah/run_contracts.py",
+        "function": "<genexpr>",
+        "line": 115,
+        "own_seconds": 0.31979180500000004,
+        "primitive_calls": 2348343
+      },
+      {
+        "calls": 32780,
+        "cumulative_seconds": 0.30998194100000004,
+        "file": "~",
+        "function": "<method 'execute' of 'sqlite3.Connection' objects>",
+        "line": 0,
+        "own_seconds": 0.30998194100000004,
+        "primitive_calls": 32780
+      },
+      {
+        "calls": 4581259,
+        "cumulative_seconds": 0.297075733,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "_deepcopy_atomic",
+        "line": 172,
+        "own_seconds": 0.297075733,
+        "primitive_calls": 4581259
+      },
+      {
+        "calls": 652232,
+        "cumulative_seconds": 0.43397196200000004,
+        "file": "/usr/local/lib/python3.12/copy.py",
+        "function": "_keep_alive",
+        "line": 231,
+        "own_seconds": 0.278851719,
+        "primitive_calls": 652232
+      },
+      {
+        "calls": 140455,
+        "cumulative_seconds": 0.27150476,
+        "file": "~",
+        "function": "<built-in method _hashlib.openssl_sha256>",
+        "line": 0,
+        "own_seconds": 0.27150476,
+        "primitive_calls": 140455
+      },
+      {
+        "calls": 231007,
+        "cumulative_seconds": 0.26518334600000004,
+        "file": "~",
+        "function": "<method 'encode' of 'str' objects>",
+        "line": 0,
+        "own_seconds": 0.26518334600000004,
+        "primitive_calls": 231007
+      },
+      {
+        "calls": 1745175,
+        "cumulative_seconds": 0.245853703,
+        "file": "~",
+        "function": "<method 'items' of 'dict' objects>",
+        "line": 0,
+        "own_seconds": 0.245853703,
+        "primitive_calls": 1745175
+      }
+    ],
+    "total_calls": 81724829,
+    "total_own_seconds": 41.71442115999999
+  },
+  "profiled": true,
+  "receipt_fabricated": false,
+  "reported_source_manifest_sha256": "f5c78a340a53f044cd2041558ed353f339392f5defc28d5576d099870dc571ac",
+  "reported_source_tree_sha256": "8638683da8ff9715dea3ad7961e085412e8c4e778b531c3a1e0a47339aee2b09",
+  "resume_scan_included": false,
+  "scratch_removed": true,
+  "selected_operation_ids": [
+    "supervised-7377fa0573a8799c8ba5c681-op-354",
+    "supervised-7377fa0573a8799c8ba5c681-op-355",
+    "supervised-7377fa0573a8799c8ba5c681-op-356",
+    "supervised-7377fa0573a8799c8ba5c681-op-357",
+    "supervised-7377fa0573a8799c8ba5c681-op-358"
+  ],
+  "selected_stage_ids": [
+    [
+      "setup-stage",
+      "score-stage"
+    ],
+    [
+      "setup-stage",
+      "score-stage"
+    ],
+    [
+      "score-stage"
+    ],
+    [
+      "score-stage"
+    ],
+    [
+      "setup-stage",
+      "score-stage"
+    ]
+  ],
+  "source_after": {
+    "files_checked": 1665,
+    "manifest_sha256": "f5c78a340a53f044cd2041558ed353f339392f5defc28d5576d099870dc571ac"
+  },
+  "source_before": {
+    "files_checked": 1665,
+    "manifest_sha256": "f5c78a340a53f044cd2041558ed353f339392f5defc28d5576d099870dc571ac"
+  },
+  "source_database_unchanged": true,
+  "source_snapshot_unchanged": true,
+  "source_state_after": {
+    "attempts": 526,
+    "other_receipts": 3,
+    "receipts": 0,
+    "resource_state": "OPEN"
+  },
+  "status": "PROFILED_LIMIT_5"
+}

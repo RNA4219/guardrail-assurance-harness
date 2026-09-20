@@ -57,6 +57,16 @@ class GuardrailRunner(DockerRunner):
         value["normalized_result"] = None
         return value
 
+    def run_partitioned(self, request, *, case_count, run_deadline, timeout_seconds=120, cancel_event=None):
+        from . import partitioned_guardrail_results
+        request = partitioned_guardrail_results.validate_request(request, case_count=case_count)
+        require_uint(run_deadline)
+        raw = canonical_bytes(request)
+        scenario = 'guardrail:' + hashlib.sha256(raw).hexdigest()
+        return self._run_fixed(scenario, request['stages'][0]['binding'], raw,
+            lambda output: partitioned_guardrail_results.from_worker(output, request, case_count=case_count),
+            run_deadline=run_deadline, timeout_seconds=timeout_seconds, cancel_event=cancel_event)
+
     def run(self, request, *, run_deadline, timeout_seconds=120, cancel_event=None):
         request = guardrail_results.validate_request(request)
         require_uint(run_deadline)

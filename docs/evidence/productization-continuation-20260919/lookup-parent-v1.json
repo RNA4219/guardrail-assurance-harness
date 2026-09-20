@@ -1,0 +1,128 @@
+{
+  "bounded_cache": {
+    "authority_state_cached": false,
+    "maxsize": 1,
+    "new_structures": "文書ref辞書・case-id辞書・tuple。pack本体は既存objectを参照。"
+  },
+  "ci_eligible": false,
+  "kind": "lookup_parent_review",
+  "preserved": [
+    "prepared case選択と改変拒否",
+    "fresh source key/read_lockの順序",
+    "重複case-id拒否、document-ref last-wins",
+    "返却deepcopyと独立request/bundle検査"
+  ],
+  "profile_limits": [
+    "同じ5試行driver。warm/coldを統制したSLO比較ではない。",
+    "inclusive categoryは重複するため加算不可。deepcopy数不変。全計数・全回帰ではない。"
+  ],
+  "profiles": [
+    {
+      "category_totals": {
+        "canonical": {
+          "calls": 20578,
+          "cumulative_seconds": 0.7547693000000001,
+          "own_seconds": 0.18367540000000002
+        },
+        "deepcopy": {
+          "calls": 383091,
+          "cumulative_seconds": 0.7592351,
+          "own_seconds": 0.20585050000000002
+        },
+        "guardrail": {
+          "calls": 435,
+          "cumulative_seconds": 1.7904878,
+          "own_seconds": 0.0134684
+        },
+        "read_checks": {
+          "calls": 1660,
+          "cumulative_seconds": 2.2687816,
+          "own_seconds": 0.0025885
+        },
+        "source_reads": {
+          "calls": 3885,
+          "cumulative_seconds": 0.8357008,
+          "own_seconds": 0.0094805
+        }
+      },
+      "completed_trials": 5,
+      "profile_seconds": 2.9679999999934807,
+      "raw_sha256": "8048431ef59df17125f34868eb800140b5d2a4be54068286a4f414396c6c44d4",
+      "source_hashes": {
+        "fixtures/llm/guardrail_worker.py": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+        "src/gah/guardrail_results.py": "f52c0d28254b785c2b46227a348ec2a14bc927757e8a6a73f353d0fd0fec48e8",
+        "src/gah/guardrail_runtime.py": "2542c59462d00864b4edd2218783ff7df9854c62ea590029da54197abf24a638",
+        "src/gah/llm_admission.py": "11dbda6c7557c6a70dbfb23e4e1732cd59388a46c1f6a2aa9b2ce6d47a28c4f5",
+        "src/gah/llm_materialization.py": "6fe2e33fbd978b86e46f387b8ff13e16689bac60edc862210e02827972969e7c",
+        "src/gah/read_checks.py": "ef0a098db5b7e61c7ab1d359e88be46e2866b0cd524974a3416370d849a532be",
+        "src/gah/resource_authority.py": "2887bcca1eaa35de5e6387686b81f8495694f17d8b0e0ef476636f950166831d",
+        "src/gah/supervised_run.py": "1b42a7294e0cb25754664490d8a39bb35d8140a20603b087dcf5166ce21a02d8",
+        "tests/llm_case_helpers.py": "73d5ad8d2a7f51e9225919d990e43d0edf199a365a35c394665b1257bee8251e",
+        "tests/test_guardrail_runner.py": "9ccc38800676164461f09759de661ed215a0fc23b13c8f8c11f1013da21d4517",
+        "tests/test_llm_admission.py": "0d599e2fedf025767cbc835cdcad1ae28c23bcb1abebd9095d926185bb7ac661",
+        "tests/test_llm_transitions.py": "31be4d22baf3f5a06516d450cc58fc4e97907503a8f8ad66bb8687627db2216a"
+      },
+      "version": "v1"
+    },
+    {
+      "category_totals": {
+        "canonical": {
+          "calls": 5542,
+          "cumulative_seconds": 0.5794642,
+          "own_seconds": 0.15172170000000001
+        },
+        "deepcopy": {
+          "calls": 383091,
+          "cumulative_seconds": 0.7155467,
+          "own_seconds": 0.19393050000000003
+        },
+        "guardrail": {
+          "calls": 437,
+          "cumulative_seconds": 2.4607902000000004,
+          "own_seconds": 0.004104
+        },
+        "read_checks": {
+          "calls": 1660,
+          "cumulative_seconds": 1.9345549,
+          "own_seconds": 0.0022363
+        },
+        "source_reads": {
+          "calls": 3885,
+          "cumulative_seconds": 0.7654308000000002,
+          "own_seconds": 0.0086523
+        }
+      },
+      "completed_trials": 5,
+      "profile_seconds": 2.5,
+      "raw_sha256": "58ca0f3850daf194bcd8722964fb214f4518d06cf72bb93996d6b750c7fa4e04",
+      "source_hashes": {
+        "fixtures/llm/guardrail_worker.py": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+        "src/gah/guardrail_results.py": "fa7dfab9651f60ef48a5639cbae33fd915ba72cae25973077f5d1cca332c388f",
+        "src/gah/guardrail_runtime.py": "2542c59462d00864b4edd2218783ff7df9854c62ea590029da54197abf24a638",
+        "src/gah/llm_admission.py": "11dbda6c7557c6a70dbfb23e4e1732cd59388a46c1f6a2aa9b2ce6d47a28c4f5",
+        "src/gah/llm_materialization.py": "6fe2e33fbd978b86e46f387b8ff13e16689bac60edc862210e02827972969e7c",
+        "src/gah/read_checks.py": "ef0a098db5b7e61c7ab1d359e88be46e2866b0cd524974a3416370d849a532be",
+        "src/gah/resource_authority.py": "2887bcca1eaa35de5e6387686b81f8495694f17d8b0e0ef476636f950166831d",
+        "src/gah/supervised_run.py": "1b42a7294e0cb25754664490d8a39bb35d8140a20603b087dcf5166ce21a02d8",
+        "tests/llm_case_helpers.py": "73d5ad8d2a7f51e9225919d990e43d0edf199a365a35c394665b1257bee8251e",
+        "tests/test_guardrail_runner.py": "9ccc38800676164461f09759de661ed215a0fc23b13c8f8c11f1013da21d4517",
+        "tests/test_llm_admission.py": "0d599e2fedf025767cbc835cdcad1ae28c23bcb1abebd9095d926185bb7ac661",
+        "tests/test_llm_transitions.py": "31be4d22baf3f5a06516d450cc58fc4e97907503a8f8ad66bb8687627db2216a"
+      },
+      "version": "v2"
+    }
+  ],
+  "schema_version": 1,
+  "slo_evidence": false,
+  "source_sha256": {
+    "src/gah/guardrail_results.py": "fa7dfab9651f60ef48a5639cbae33fd915ba72cae25973077f5d1cca332c388f",
+    "tests/test_guardrail_lookup.py": "d79b4976a6fe4e8d5718833dbbea4f4300a873f9cd02f966b839518742623895"
+  },
+  "tests": {
+    "elapsed_seconds": 3.405999999959022,
+    "exit_code": 0,
+    "log_sha256": "da9f9e6c6938f95a2f210f1327dde871b22973a21fc530823a1deac3476e0932",
+    "planned": 7,
+    "run": 7
+  }
+}

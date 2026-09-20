@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "src/gah/partitioned_run_authority.py": "cb8adf917e5f5d1391755cea5be66e060dd57bf895395ce2133094e4b0ce4569",
+    "src/gah/partitioned_run_store.py": "bdcbe3d1697a8710ab080b9c12215d5a86b1ffc5dc35fc086d59e22811bec276"
+  },
+  "request_sha256": "b69447c8383b83bac5e0d3da404f33a4132af0e5964e28fc5edbabaf4b93ce85",
+  "acceptance_pass": false,
+  "status": "INCOMPLETE",
+  "finish_reason": "length",
+  "response_sha256": "b6368ad7e5069f71b972c22ee2a72071244a783891196deff150f6f997233b5f",
+  "elapsed_seconds": 40.59399999998277,
+  "parent_assessment": {
+    "accepted_findings": [],
+    "rejected_findings": [
+      {
+        "claim": "request schemaをDB schemaと同じ6へ変更する",
+        "reason": "通信schema1、nested view2、DB schema6は別契約。AdoptionStoreのstrict envelopeと実結合7件で確認済み。"
+      },
+      {
+        "claim": "fromhex/import/table columnsの不整合",
+        "reason": "fromhexの入力出力型は整合。combined_runs._rows/_rawとbound_runs列は実在し、関連テストで接続を確認。"
+      }
+    ],
+    "review_quality": "出力が反復しlengthで終了。合格判断や実装変更の根拠へ採用しない。"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "elapsed_seconds": 1.327999999979511,
+  "returncode": 0,
+  "input_sha256_unchanged": true,
+  "log_sha256": "02876be2646074f3089bad4f689d848bd75096c2ae1e0692788c80751af72bae",
+  "log_bytes": 7660,
+  "acceptance_pass": false,
+  "kind": "partition-evidence-parent-v2",
+  "tests_run": 45,
+  "unittest_seconds": 1.142,
+  "modules": [
+    "tests.test_run_evidence",
+    "tests.test_run_evidence_book",
+    "tests.test_partitioned_run_evidence"
+  ],
+  "input_plan_sha256": "9eb41430a265f89a196214f12964c151bfe52ce32e25f639eea18cd9d0305fa0",
+  "tested_source_sha256": {
+    "src\\gah\\run_evidence.py": "b0dc1262f53b15fd34309e5d4151324e587d2ce27d6cbd69c68e0bc0fa213a18",
+    "src\\gah\\partitioned_run_evidence.py": "3fb042a5571b49a9f2db2b196bcc251994f4543a04d5b47f5e2f0dd222c4662d",
+    "tests\\test_run_evidence_book.py": "c412b8726f95b6862e3ddd60a12f229bde6e548d7eb652290625a37d2b9cc557",
+    "tests\\test_partitioned_run_evidence.py": "f56449dd83a3881f957b5c3a0bdf1329281d15b03ba901555d8a4a4cbc1a5908"
+  },
+  "real_worker_acceptance": false,
+  "full_suite_pass": false,
+  "parent_changes": [
+    "v1 get_terminalのmissing runでは従来NOT_FINALIZEDを維持",
+    "v2 inherited startは書込み前拒否",
+    "新規v2はgen1 diagnosticに限定。実authority actionへはまだ未接続"
+  ]
+}

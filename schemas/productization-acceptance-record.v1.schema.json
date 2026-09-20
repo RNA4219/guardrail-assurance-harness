@@ -1,0 +1,511 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "id",
+    "requirement_id",
+    "acceptance_id",
+    "plan_ref",
+    "source_ref",
+    "evidence_refs",
+    "status",
+    "reasons",
+    "checked_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "type": "integer"
+    },
+    "kind": {
+      "const": "productization_acceptance_record"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "requirement_id": {
+      "enum": [
+        "GAH-PR01",
+        "GAH-PR02",
+        "GAH-PR03",
+        "GAH-PR04",
+        "GAH-PR05",
+        "GAH-PR06",
+        "GAH-PR07",
+        "GAH-PR08",
+        "GAH-PR09",
+        "GAH-PR10",
+        "GAH-PR11",
+        "GAH-PR12",
+        "GAH-PR13",
+        "GAH-PR14"
+      ]
+    },
+    "acceptance_id": {
+      "enum": [
+        "GAH-PAC01",
+        "GAH-PAC02",
+        "GAH-PAC03",
+        "GAH-PAC04",
+        "GAH-PAC05",
+        "GAH-PAC06",
+        "GAH-PAC07",
+        "GAH-PAC08",
+        "GAH-PAC09",
+        "GAH-PAC10",
+        "GAH-PAC11",
+        "GAH-PAC12",
+        "GAH-PAC13",
+        "GAH-PAC14"
+      ]
+    },
+    "plan_ref": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "id",
+            "digest"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id",
+        "digest"
+      ],
+      "properties": {
+        "kind": {
+          "const": "snapshot_manifest"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "id",
+          "digest"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "NOT_RUN",
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "AUTHORITY_REQUIRED",
+          "BINDING_MISMATCH",
+          "CAPACITY_EXCEEDED",
+          "CLOCK_ROLLBACK",
+          "CLOCK_UNAVAILABLE",
+          "CONDITION_MISMATCH",
+          "DATA_INCOMPLETE",
+          "DISK_INSUFFICIENT",
+          "DOCKER_UNAVAILABLE",
+          "EVIDENCE_UNAVAILABLE",
+          "IDEMPOTENCY_CONFLICT",
+          "IDENTITY_UNAVAILABLE",
+          "IMAGE_UNAVAILABLE",
+          "INVALID_INPUT",
+          "IO_ERROR",
+          "NOT_STARTED",
+          "OBSERVATION_MISSING",
+          "OPERATION_CANCELLED",
+          "OPERATION_UNKNOWN",
+          "PATH_REJECTED",
+          "PLAN_EXPIRED",
+          "PLATFORM_UNSUPPORTED",
+          "PYTHON_UNSUPPORTED",
+          "REFERENCE_MISMATCH",
+          "RESULT_CONFLICT",
+          "RUNTIME_UNAVAILABLE",
+          "SCHEMA_UNSUPPORTED",
+          "SETTLEMENT_PENDING",
+          "SLO_FAILED",
+          "STOP_UNCONFIRMED",
+          "UNSUPPORTED_CAPABILITY",
+          "AUTHORITY_DENIED",
+          "AUTHORITY_REVOKED",
+          "STALE_OR_INVALIDATED",
+          "RETENTION_NOT_EXPIRED",
+          "RETENTION_HOLD",
+          "RETENTION_STATE_CONFLICT",
+          "RETENTION_PLAN_INVALID"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 31
+    },
+    "checked_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR01"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC01"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR02"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC02"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR03"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC03"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR04"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC04"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR05"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC05"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR06"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC06"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR07"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC07"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR08"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC08"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR09"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC09"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR10"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC10"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR11"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC11"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR12"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC12"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR13"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC13"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requirement_id": {
+            "const": "GAH-PR14"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acceptance_id": {
+            "const": "GAH-PAC14"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "NOT_RUN"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_refs": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "plan_ref": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "id",
+              "digest"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "FAIL",
+              "INCONCLUSIVE"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reasons": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

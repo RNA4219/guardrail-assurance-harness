@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "bound_digest_review",
+  "source_scope": "working checkout source-v10 successor; no source/Docker/full-suite changes",
+  "reviewed_sha256": {
+    "src/gah/run_evidence.py": "d0ce3b2f1a9c7fc2bada7a01a7ee115a99ffbf1b73bfa8394acdbdd4f6703059",
+    "tests/test_bound_digest_cache.py": "9c88a8b92f6851bb9154bd4d751a1e9496537ed10d6988404999a50e7671d70a",
+    "src/gah/immutable_cache.py": "611e971276fd69b2ea2ec844b05768cc48f3ab76c8d0a90561e755b6919512c3",
+    "src/gah/cache_inputs.py": "1a3a9edd51693ebdd94a16f313ba1915a1520271e881466d331c5c05b32ed620"
+  },
+  "comparison": {
+    "legacy_oracle": "The focused test oracle computes _pack(_bound_uncached(bound, baseline_context))[1], representing the previous full-rebind/full-pack result.",
+    "canonical_and_normalization": "Eligible inputs are plain JSON, serialized with sorted keys, compact separators, UTF-8, and allow_nan=false. Cache key includes the complete serialized [bound_run, baseline_context], not only a digest. Ineligible/nonplain/deep/oversize input falls back to the regular binder path.",
+    "full_semantics_and_limits": "On miss, _bound_uncached repeats run/contract/plan/policy/registry/CaseSet validation and bind_run_manifest; _pack performs global depth=16, nodes=100000, integer MAX_INTEGER, and MAX_DOCUMENT_BYTES checks. Failed computation is not cached. The key includes _bound_uncached, _pack, _walk_json identities and document/integer limit values.",
+    "source_identity": "evaluation_authority._source_digest includes run_evidence and bound validators' source modules, so source edits change the key when normal source identity is refreshed. The shared binding_cache is bounded at 16 MiB/32 entries; JsonCache keys the full input payload (reversibly compressing long text) and caches only immutable string results.",
+    "baseline": "baseline_context is serialized with the bound tree and therefore affects the full key and output digest."
+  },
+  "focused_validation": {
+    "tests.test_bound_digest_cache": "PASS, 6 tests",
+    "warm_hit_dynamic_validator_probe": "REPRODUCED: after priming the cache, patching run_evidence.validate_trial_plan to raise still returned the cached digest without invoking the replacement validator. This is an in-process dynamic rebinding case; no external input or production hot-reload path was found."
+  },
+  "findings": [
+    {
+      "id": "validator_callable_identity_not_in_key",
+      "severity": "conditional correctness gap",
+      "location": "src/gah/run_evidence.py:_cached_bound_digest and _bound_uncached",
+      "condition": "A cached key exists and a validator/binder global used by _bound_uncached (validate_run_manifest, validate_evaluation_contract, validate_trial_plan, validate_policy_profile, validate_registry, validate_case_set, or bind_run_manifest) is rebound in-process while source digest, _bound_uncached, _pack, _walk_json, limits, and payload remain unchanged.",
+      "impact": "A warm cache hit skips a currently rebound validator and can return the digest where a cold full _pack(_bound(...)) call would revalidate and reject. This is not a new regression from _cached_bound_digest: code inspection shows the pre-existing _cached_bound warm path also called the same _bound_uncached callable without keying its transitive module-global validators. The focused probe exercised the new digest cache only.",
+      "qualification": "Normal pinned source changes are covered by source_digest. The reviewed public path exposes no supported hot-reload mechanism, and no untrusted actor can rebind these module globals. This is an inherited dynamic-rebinding limitation, not a newly introduced production correctness regression; exact transitive validator identity is outside the current cache contract.",
+      "minimal_resolution": "No change is required for the current fixed-source/no-hot-reload contract. If a supported runtime rebinding mechanism is introduced, it must invalidate both bound caches or include that mechanism's callable identities in their keys."
+    }
+  ],
+  "evidence_limit": "Only the focused six-test suite and one safe in-process monkeypatch probe were run. No parent-added test, full suite, Docker run, restored source-v10 artifact, or SLO claim is included.",
+  "parent_assessment": "既存warm legacy cacheと共通の未サポート動的validator差替制限。新規regressionではない。親追加2件を含む63件は別証跡。",
+  "review_artifact_sha256": "2a834077975af1ceb9c2da8f5cfec685cf05ff8ae466c75976fbb4016b3a0fb3",
+  "acceptance_pass": false
+}

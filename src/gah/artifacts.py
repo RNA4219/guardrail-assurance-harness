@@ -3,6 +3,7 @@ from contextlib import contextmanager
 import hashlib
 from pathlib import Path
 import sqlite3
+from .sqlite_limits import connect_sqlite
 import time
 from typing import Callable, Iterator, Mapping
 
@@ -70,7 +71,7 @@ class ArtifactStore:
         self._clock = clock or (lambda: int(time.time()))
         self._db = None
         try:
-            db = sqlite3.connect(str(Path(path)), isolation_level=None, timeout=5)
+            db = connect_sqlite(str(Path(path)), isolation_level=None, timeout=5)
             self._db = db
             db.row_factory = sqlite3.Row
             db.execute("PRAGMA foreign_keys=ON")

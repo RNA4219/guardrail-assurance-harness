@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "INCOMPARABLE",
+  "reason": "REQUEST_MISMATCH",
+  "differences": [
+    {
+      "path": "request/expected_contract_ref/digest",
+      "before": "e904c69e761ce5d579d4992fa5594d808b3e86237f6bb6c3fa76873bd3683467",
+      "after": "e1a26995fd0aa22f4d2894dc9849403f2d0e72963413c3677f5398540d81d565"
+    }
+  ],
+  "docker_started": false,
+  "comparison_ran": false,
+  "inputs_rebound": false,
+  "validation_weakened": false,
+  "acceptance_pass": false,
+  "valid_for_slo": false,
+  "ci_eligible": false
+}

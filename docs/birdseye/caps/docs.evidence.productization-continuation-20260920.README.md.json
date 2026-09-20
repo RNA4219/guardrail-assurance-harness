@@ -1,0 +1,21 @@
+{
+  "id": "docs/evidence/productization-continuation-20260920/README.md",
+  "role": "evidence",
+  "title": "通常run 800件の継続試験",
+  "summary": "採択済み候補checkpointから通常run 800件を実行し、保存・再開・status・出力refの不変性、current CI照会、baseline世代2の採択とcurrent世代照合まで確認した。テストは1件、失敗・error・skipは0件、所要7,359.23秒。",
+  "public_api": [],
+  "deps_out": [],
+  "deps_in": [
+    "docs/evidence/README.md",
+    "docs/productization-status.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "af905ab6eaf9f852522aa0fead41ab727377d8ecb3bb123792453504f993022a"
+}

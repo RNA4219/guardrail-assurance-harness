@@ -1,13 +1,15 @@
 """固定UC-CI packと測定校正を採択DBの保存実体へ結ぶ。"""
-from copy import deepcopy
+import json
 from pathlib import Path
 import hashlib
 
 from . import fixture_calibration, fixture_materialization, resources
 from .adoption import AdoptionError
+from .cache_inputs import encode_result, plain
 from .contracts import ContractError, MAX_INTEGER, decode_document, require_object
 from .docker_runner import PROFILE
 from .run_contracts import content_ref
+from .immutable_cache import binding_cache
 from .wire import canonical_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,12 +32,66 @@ def execution_context():
     return worker, lock, profile
 
 
-def _verify(row, now):
+_CACHE_PAYLOAD_BYTES = 3 * 1024 * 1024
+
+
+@binding_cache.memoize
+def _cached_fixture_pack(source_digest, implementation, payload):
+    values = json.loads(payload)
+    (policy, worker_hex, lock, profile, created_at, run_id,
+     policy_generation) = values
+    worker = bytes.fromhex(worker_hex)
+    return encode_result(implementation(
+        policy, worker, lock, profile, created_at, run_id,
+        policy_generation=policy_generation,
+    ))
+
+
+def _expected_fixture_pack(policy, worker, lock, profile, created_at, run_id,
+                           policy_generation):
+    implementation = fixture_materialization.build_fixture_pack
+    if type(worker) is not bytes:
+        return implementation(
+            policy, worker, lock, profile, created_at, run_id,
+            policy_generation=policy_generation,
+        )
+    values = [
+        policy, worker.hex(), lock, profile, created_at, run_id,
+        policy_generation,
+    ]
+    if not plain(values):
+        return implementation(
+            policy, worker, lock, profile, created_at, run_id,
+            policy_generation=policy_generation,
+        )
+    try:
+        payload = encode_result(values)
+        if len(payload.encode("utf-8")) > _CACHE_PAYLOAD_BYTES:
+            raise ValueError("CACHE_PAYLOAD_TOO_LARGE")
+        from .evaluation_authority import _source_digest
+        source_digest = _source_digest()
+    except (ImportError, OSError, TypeError, ValueError, UnicodeError,
+            RecursionError):
+        return implementation(
+            policy, worker, lock, profile, created_at, run_id,
+            policy_generation=policy_generation,
+        )
+    return json.loads(_cached_fixture_pack(
+        source_digest, implementation, payload,
+    ))
+
+
+def _verify(row, now, db=None):
     try:
         value = resources._unpack(row["payload_json"], row["digest"])
+        if value.get("kind") == "partitioned_guardrail_admission":
+            from .partitioned_llm_admission import _verify as verify_partitioned
+            if db is None:
+                raise AdoptionError("RESOLVER_REQUIRED")
+            return verify_partitioned(db, row, now)
         if value.get("kind") == "synthetic_guardrail_admission":
-            from .llm_admission import verify
-            return verify(row, now)
+            from .llm_admission import _verify_value
+            return _verify_value(row, now, value)
         require_object(value, {"prepared", "materialization", "calibration"})
         prepared = value["prepared"]
         bound = prepared["bound_run"]
@@ -46,8 +102,10 @@ def _verify(row, now):
                 or bound["manifest"]["contract_ref"]["digest"] != row["contract_digest"]):
             raise ContractError()
         worker, lock, profile = execution_context()
-        expected = fixture_materialization.build_fixture_pack(bound["policy"], worker, lock, profile,
-            row["created_at"], row["run_id"], policy_generation=bound["contract"]["policy_generation"])
+        expected = _expected_fixture_pack(
+            bound["policy"], worker, lock, profile, row["created_at"],
+            row["run_id"], bound["contract"]["policy_generation"],
+        )
         if prepared != expected:
             raise ContractError()
         materialization = fixture_materialization.validate_fixture_manifest(
@@ -77,10 +135,12 @@ def prepare(db, policy, policy_generation, run_id, now, permission_generation):
         if (bound["policy"] != policy or bound["contract"]["policy_generation"] != policy_generation
                 or existing["permission_generation"] != permission_generation):
             raise AdoptionError("FIXTURE_ADMISSION_CONFLICT")
-        return deepcopy(value)
+        # _verifyは保存JSONを毎回decodeし、新しいobject graphを返す。
+        return value
     worker, lock, profile = execution_context()
-    prepared = fixture_materialization.build_fixture_pack(policy, worker, lock, profile, now, run_id,
-        policy_generation=policy_generation)
+    prepared = _expected_fixture_pack(
+        policy, worker, lock, profile, now, run_id, policy_generation,
+    )
     materialization = fixture_materialization.materialize_fixture_manifest(
         bound_run=prepared["bound_run"], worker_source=worker, runtime_lock=lock, execution_profile=profile, now=now)
     calibration = fixture_calibration.calibrate_fixed_fixture()
@@ -99,7 +159,7 @@ def for_contract(db, contract, now, permission_generation):
     row = db.execute("SELECT * FROM fixture_admissions WHERE contract_digest=?", (digest,)).fetchone()
     if row is None:
         return None
-    value = _verify(row, now)
+    value = _verify(row, now, db)
     if row["permission_generation"] != permission_generation:
         raise AdoptionError("CALIBRATION_UNAVAILABLE")
     if value["prepared"]["bound_run"]["contract"] != contract:
@@ -110,6 +170,12 @@ def for_contract(db, contract, now, permission_generation):
 def materialized_run(db, bound, now):
     """参照だけのtransport runはfalse。既存packとの不一致は固定error。"""
     from . import transition_authority, regression_runs
+    if bound["manifest"].get("schema_version") == 2:
+        from .partitioned_llm_admission import for_run
+        value = for_run(db, bound["manifest"]["run_id"], now)
+        if bound != value["prepared"]["bound_run"]:
+            raise AdoptionError("FIXTURE_RUN_MISMATCH")
+        return True
     if bound["manifest"]["purpose"] in transition_authority.PURPOSES:
         return transition_authority.materialized_run(db, bound, now)
     if bound["manifest"]["purpose"] == "regression" and bound["contract"]["generation"] >= 2:

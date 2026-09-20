@@ -1,4 +1,4 @@
-"""既知のAdoptionStore v2を、明示指定したpathだけv3へ移行するCLI。"""
+"""既知のAdoptionStoreを明示指定したpathと移行経路で更新するCLI。"""
 
 import argparse
 import json
@@ -30,11 +30,22 @@ def _write_error(code: str) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = _Parser(description="既知v2 AdoptionStoreの明示的v3移行")
+    parser = _Parser(description="既知AdoptionStoreの明示移行（既定v2→v4、指定時v6→v7）")
     parser.add_argument("path")
+    parser.add_argument("--partitioned-corpus", action="store_true",
+                        help="固定sourceを照合し、分割corpus用のv6→v7移行を行う")
+    parser.add_argument("--expected-source-digest",
+                        help="移行元v6 extensionのSHA256（corpus移行時だけ必須）")
     try:
         args = parser.parse_args(argv)
-        result = migrate_evaluation_store(args.path)
+        if args.partitioned_corpus != (args.expected_source_digest is not None):
+            raise MigrationError("INVALID_ARGUMENTS")
+        if args.partitioned_corpus:
+            from gah.partitioned_corpus_migrations import migrate_partitioned_corpus_store_v6_to_v7
+            result = migrate_partitioned_corpus_store_v6_to_v7(
+                args.path, expected_source_digest=args.expected_source_digest)
+        else:
+            result = migrate_evaluation_store(args.path)
         payload = canonical_bytes(result)
         sys.stdout.write(payload.decode("utf-8") + "\n")
         sys.stdout.flush()

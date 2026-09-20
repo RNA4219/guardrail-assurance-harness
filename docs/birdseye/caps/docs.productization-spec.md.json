@@ -1,0 +1,35 @@
+{
+  "id": "docs/productization-spec.md",
+  "role": "productization-spec",
+  "title": "MVP後の拡張仕様 v1: 共通契約と統合",
+  "summary": "[拡張14要件](productization-requirements.md)を実装へ渡すための仕様。2026-09-15、Lunaの分担執筆を親Codexが監督・統合した。**本書と分冊は仕様上の設計であり、新しいCLI・接続・計測・受入は未実装/NOT_RUN。** MVPの32/32受入、既存の要求・方針・契約・証跡は維持する。実際の製品状態は[MVP監査](mvp-completion-audit.md)を参照する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/mvp-completion-audit.md",
+    "docs/productization-operations-spec.md",
+    "docs/productization-performance-spec.md",
+    "docs/productization-pilot-spec.md",
+    "docs/productization-requirements.md",
+    "docs/reviews/productization-spec-20260915.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "README.md",
+    "docs/contracts/README.md",
+    "docs/extension-roadmap.md",
+    "docs/productization-implementation-spec.md",
+    "docs/productization-operations-spec.md",
+    "docs/productization-performance-spec.md",
+    "docs/reviews/productization-spec-20260915.md",
+    "docs/tasks/TASK.productization-spec-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "93a02a6a39b778fb4818dbae67bf21650df88eb5e78a0ddb5d5ba4e5803e4f23"
+}

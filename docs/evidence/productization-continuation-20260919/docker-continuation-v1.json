@@ -1,0 +1,154 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "docker-integration-v1",
+      "checks": {
+        "gen2_adopted": true,
+        "owned_containers_cleaned_state_retained": true,
+        "setup_60_full_entries": true,
+        "source_unchanged": true
+      },
+      "ci_eligible": false,
+      "classification": "driver duplicated broker preparation after successful setup",
+      "elapsed_seconds": 649.865881900012,
+      "error": "DOCKER_COMMAND_FAILED",
+      "error_type": "AuthorityRuntimeError",
+      "full_pac_acceptance": false,
+      "kind": "local_fixed_docker_check",
+      "local_artifact_sha256": "dafafd4f290f9e0cc1f0fc9ed43d4658f96d7c60df616e455fd2dafc75580200",
+      "passed": false,
+      "setup_doctor_validated": false,
+      "source_manifest_sha256": "f8c9b30dbb68c683c94d68650186b39dee43faea16da1342720547bc1fcdbac8",
+      "worker_count": 60
+    },
+    {
+      "attempt_id": "docker-integration-v2",
+      "checks": {
+        "gen2_adopted": true,
+        "owned_containers_cleaned_state_retained": true,
+        "setup_60_full_entries": true,
+        "source_unchanged": true
+      },
+      "ci_eligible": false,
+      "classification": "resource probe failed on historical removed client",
+      "elapsed_seconds": 5.746917000040412,
+      "error": "DOCKER_COMMAND_FAILED",
+      "error_type": "AuthorityRuntimeError",
+      "full_pac_acceptance": false,
+      "kind": "local_fixed_docker_check",
+      "local_artifact_sha256": "c9d370e64d4b0fee9880d5ee26df06ca74fb6c86559d9b928ef2ce643c6c31fd",
+      "passed": false,
+      "prior_failure_retained": true,
+      "prior_result_sha256": "dafafd4f290f9e0cc1f0fc9ed43d4658f96d7c60df616e455fd2dafc75580200",
+      "resume_from": "docker-integration-v1",
+      "setup_doctor_validated": false,
+      "source_manifest_sha256": "f8c9b30dbb68c683c94d68650186b39dee43faea16da1342720547bc1fcdbac8",
+      "worker_count": 60
+    },
+    {
+      "attempt_id": "docker-integration-v3",
+      "checks": {
+        "all_30_worker_metrics_bound": true,
+        "every_worker_stopped_and_cleaned": true,
+        "fresh_ci_exit_zero": true,
+        "gen2_adopted": true,
+        "normal_exit_zero": true,
+        "normal_run_30_full_entries": true,
+        "owned_containers_cleaned_state_retained": true,
+        "partial_resources_not_slo": true,
+        "run_report_returned": true,
+        "setup_60_full_entries": true,
+        "source_unchanged": true,
+        "state_ipc_storage_observed": true,
+        "worker_cpu_observed": true
+      },
+      "ci_eligible": false,
+      "classification": "resume after provider fix; prior failures preserved",
+      "elapsed_seconds": 388.8895540999947,
+      "full_pac_acceptance": false,
+      "kind": "local_fixed_docker_check",
+      "local_artifact_sha256": "f4fa6c988c8cee389c0137e38a9a17667c50c2c27b32e2c1d99a6eec0d2dd3f7",
+      "passed": true,
+      "prior_failure_retained": true,
+      "prior_probe_failure_retained": "docker-integration-v2/check-result.json",
+      "prior_result_sha256": "dafafd4f290f9e0cc1f0fc9ed43d4658f96d7c60df616e455fd2dafc75580200",
+      "resume_from": "docker-integration-v1",
+      "runtime_source_compatible_with_prior_setup": true,
+      "setup_doctor_validated": false,
+      "source_manifest_sha256": "419d3209f8573610a5849803c14b750972f165b5aedc4f618365992ababb58a6",
+      "worker_count": 90
+    }
+  ],
+  "capacity_bound_verified": false,
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "kind": "local_fixed_docker_continuation",
+  "normal_entries_executed": 30,
+  "physical_backing_free_space_verified": false,
+  "resource_endpoints_sha256": "0aa8f8caaa3769c2f9dda2a1ae2f19ae1aed5b4fddd05db89e91fef9ecf442c3",
+  "schema_version": 1,
+  "setup_entries_carried": 60,
+  "single_uninterrupted_run": false,
+  "storage_observation": {
+    "checked_at": 1789820343,
+    "checked_at_source": "host_observed",
+    "ci_eligible": false,
+    "kind": "gah_authority_storage_observation",
+    "reason": null,
+    "schema_version": 1,
+    "scopes": {
+      "ipc": {
+        "available_bytes": 1005643685888,
+        "available_inodes": 66579995,
+        "free_bytes": 1060636041216,
+        "total_bytes": 1081101176832
+      },
+      "state": {
+        "available_bytes": 1005643685888,
+        "available_inodes": 66579995,
+        "free_bytes": 1060636041216,
+        "total_bytes": 1081101176832
+      }
+    },
+    "source": {
+      "container_id": "8975f93ff7d3318d5ef78d970a2a6e743e7d0e3a503033ab642d73c1b836aaed",
+      "image_id": "sha256:b9363030983c70960a5a388a4e8c3fbe4645fd62453d7eaac592371b4f2e7ba5",
+      "prefix": "gah-authority-52433afd3abf4d07bebad5d6ef722966"
+    },
+    "status": "OBSERVED"
+  },
+  "valid_for_slo": false,
+  "worker_observations": {
+    "artifact_count": 30,
+    "capture_complete": true,
+    "captured_count": 30,
+    "ci_eligible": false,
+    "contract_ref": {
+      "digest": "1470184f65b8983856623076cdf8835c36f6cabca0a81f833be04d4ec51f2cb0",
+      "id": "setup-4e9a4984f8bd9902c522cbde-comparison",
+      "kind": "evaluation_contract"
+    },
+    "kind": "worker_metrics_observation_set",
+    "local_artifact_sha256": "84919f3cc7c8f1b3607351fb8c7b5125d6cd152d6d756e31b64c40308900757e",
+    "missing": [],
+    "plan_ref": {
+      "digest": "2fbd3515ecfd44fe796f728d00f2b598b572f6da7dc6cc432ba871ee73cf0664",
+      "id": "regression-plan-setup-4e9a4984f8bd9902c522cbde-run",
+      "kind": "trial_plan"
+    },
+    "planned_count": 30,
+    "rss_group_peak_bytes": null,
+    "run_id": "setup-4e9a4984f8bd9902c522cbde-run",
+    "schema_version": 1,
+    "slo_eligible": false,
+    "status": "CAPTURE_COMPLETE",
+    "totals": {
+      "cgroup_memory_peak_sum_bytes": 455790592,
+      "cpu_ns": 7891874000,
+      "io_read_bytes": null,
+      "io_write_bytes": null
+    },
+    "true_group_peak_bytes": null,
+    "true_group_peak_measured": false
+  }
+}

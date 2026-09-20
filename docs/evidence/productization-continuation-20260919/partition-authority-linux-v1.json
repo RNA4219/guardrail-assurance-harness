@@ -1,0 +1,33 @@
+{
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "cleanup_confirmed": true,
+  "container_id": "f92cd9b3af6219a3aad1e288cf1dbe0aec396be49b35439ba5d06d2f72d34e56",
+  "container_name": "gah-pa-linux-f9589ae33564496587c8",
+  "create_absence_confirmed": false,
+  "diagnostic_version": 1,
+  "docker_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "driver_sha256": "a502f7685bc76f3ddfd8fc926af62d33acd7cd2371eea31d9e5ae611ba534873",
+  "elapsed_ns": 579000000,
+  "exit_code": null,
+  "full_pac_acceptance": false,
+  "host_source_hashes_unchanged": true,
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "inside_result": null,
+  "inside_result_sha256": null,
+  "kind": "partition_authority_linux_host_result",
+  "labels": {
+    "org.gah.diagnostic": "partition-authority-linux-v1",
+    "org.gah.run-id": "f9589ae33564496587c8b38ff3dd5947"
+  },
+  "local_host_result_sha256": "746ba1d7feffaa3d8f4a2aa6991a668ff5c53f5e01dbcb84e9dc860ae02f6b0c",
+  "plan_driver_unchanged": true,
+  "plan_sha256": "70c74c93b12548fae9dbb423f9e2571cd64fd36960389e45c96be0b3eb11672e",
+  "reason": "CONTAINER_CONFIG_MISMATCH",
+  "run_id": "f9589ae33564496587c8b38ff3dd5947",
+  "runtime_run_admission_verified": false,
+  "schema_version": 1,
+  "source_bytes": 1374885,
+  "source_file_count": 87,
+  "source_manifest_sha256": "1eb6a7a9a1c00732d72b464dbd2810f7b94617565c246317e436e63897a51126"
+}

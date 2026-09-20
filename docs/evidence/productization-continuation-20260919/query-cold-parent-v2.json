@@ -1,0 +1,35 @@
+{
+  "base_snapshot": "source-v7",
+  "changes": [
+    "cold startup measured without SLO-threshold cutoffs",
+    "warmup/warm cancellation halts requests and preserves remaining slots",
+    "redundant duration calculation removed"
+  ],
+  "ci_eligible": false,
+  "included_in_source_v7_regression": false,
+  "kind": "query_cold_parent_review",
+  "limits": [
+    "fake adapter only",
+    "actual runtime lifecycle and total counters not connected",
+    "execution deadline separate from SLO criteria"
+  ],
+  "prior_review": "query-cold-parent-v1.json",
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/query_series.py": "3adb57b472d699ec9e8d959442d2218e980abb8d88cf95316b49372355b326bf",
+    "tests/test_query_series.py": "66735663464f2b0d9296a0a48136a6c557f75e06a8a6584b64229339fba0e325",
+    "tests/test_query_series_review.py": "d399c7012ff23293774ff25fc6429906e720bbe3d599c3e0099e4444107a9e48"
+  },
+  "tests": {
+    "after": {
+      "elapsed_seconds": 7.875,
+      "exit_code": 0,
+      "run": 17
+    },
+    "before": {
+      "exit_code": 1,
+      "failure": "warmup/warm cancellation continued to108 queries"
+    }
+  },
+  "valid_for_slo": false
+}

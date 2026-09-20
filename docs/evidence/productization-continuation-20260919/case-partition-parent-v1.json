@@ -1,0 +1,54 @@
+{
+  "acceptance_pass": false,
+  "case_codec_tests": 13,
+  "elapsed_seconds": 5.3439999999827705,
+  "exit_code": 0,
+  "fix": "Restore validates and uses private canonical snapshots, so caller mutation after digest validation cannot change the returned CaseSet.",
+  "kind": "case_partition_parent_tests",
+  "local_result_sha256": "7ed65bed94644083e1a305ccd5221d24705f944b8fd51e916a8ba6a932d07642",
+  "log_bytes": 8306,
+  "log_sha256": "61ae3c0f752e7640919e7e3be2e64b5659f0065f5eea76524fac23bb419df300",
+  "logical_case_set_bytes_1600": 1038560,
+  "runtime_admission_verified": false,
+  "schema_version": 1,
+  "segment_bytes_1600": [
+    899393,
+    139419
+  ],
+  "source_hashes_after": {
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7",
+    "src/gah/partitioned_case_set.py": "3a5633ad02e141f5dc4a809049a0483b52d8674faf8cc6d8973386f9af26ffbc",
+    "src/gah/partitioned_trial_plan.py": "718930ba2d7ffe2c31c7b595d92fbbef7e77446927db7f1a54fad1755ba438b7",
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d",
+    "tests/test_corpus.py": "defaa47c1877c2f2cdefd19a75425f6f9994295c72fd6f1a3bf9ed05920b0ea8",
+    "tests/test_corpus_validation_copy.py": "dc6e52dfed89eb51b28c1f487a1305f6b6c17cee7592b76f93d127f7284df3aa",
+    "tests/test_partitioned_case_set.py": "f569c11cf7b068e17e9acf894f2322874bf1957c64baebbc936a26b6b948d48f",
+    "tests/test_partitioned_trial_plan.py": "705d5ed830a3d97771296ceea71ed57b8a02ea8c57378f2e57060fdd518a045a",
+    "tests/test_query_scale_data.py": "d9bc4b222c17e8c250f0e87950444345af48856d73f7d9eae667044620a00fff"
+  },
+  "source_hashes_before": {
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7",
+    "src/gah/partitioned_case_set.py": "3a5633ad02e141f5dc4a809049a0483b52d8674faf8cc6d8973386f9af26ffbc",
+    "src/gah/partitioned_trial_plan.py": "718930ba2d7ffe2c31c7b595d92fbbef7e77446927db7f1a54fad1755ba438b7",
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d",
+    "tests/test_corpus.py": "defaa47c1877c2f2cdefd19a75425f6f9994295c72fd6f1a3bf9ed05920b0ea8",
+    "tests/test_corpus_validation_copy.py": "dc6e52dfed89eb51b28c1f487a1305f6b6c17cee7592b76f93d127f7284df3aa",
+    "tests/test_partitioned_case_set.py": "f569c11cf7b068e17e9acf894f2322874bf1957c64baebbc936a26b6b948d48f",
+    "tests/test_partitioned_trial_plan.py": "705d5ed830a3d97771296ceea71ed57b8a02ea8c57378f2e57060fdd518a045a",
+    "tests/test_query_scale_data.py": "d9bc4b222c17e8c250f0e87950444345af48856d73f7d9eae667044620a00fff"
+  },
+  "source_hashes_unchanged": true,
+  "test_modules": [
+    "tests.test_partitioned_case_set",
+    "tests.test_partitioned_trial_plan",
+    "tests.test_query_scale_data",
+    "tests.test_corpus",
+    "tests.test_corpus_validation_copy"
+  ],
+  "tests_run": 45,
+  "unittest_seconds": 5.158
+}

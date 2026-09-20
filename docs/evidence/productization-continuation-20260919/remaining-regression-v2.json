@@ -1,0 +1,131 @@
+{
+  "all_selected_lanes_complete": true,
+  "driver_error": null,
+  "finished_unix": 1789891180.3723512,
+  "full_productization_acceptance": false,
+  "kind": "selected_regression_lane_rerun",
+  "lane_timeout_seconds": 7200,
+  "lanes": {
+    "combined": 4,
+    "finding-revalidation": 5,
+    "llm-supervision": 1
+  },
+  "logs_verified": true,
+  "manifest_copy_files_semantics": "snapshot bytes copied per lane; manifest files are the source-input pin map",
+  "max_parallel": 2,
+  "planned_tests_total": 10,
+  "platform": "Windows",
+  "results": [
+    {
+      "clone_source_unchanged": true,
+      "complete": true,
+      "elapsed_seconds": 4264.141,
+      "errors": 0,
+      "expected_failures": 0,
+      "failures": 0,
+      "lane": "combined",
+      "logs": {
+        "stderr": "c1518196df88b3667753ceaadc5288deec8f9ac302161913b1985e151f443b8d",
+        "stdout": "10d0c72e83e8a690c0875da494a4244a150a0b2f317080ab5ceb371502c39662"
+      },
+      "passed": true,
+      "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+      "planned_tests": 4,
+      "return_code": 0,
+      "skipped": 0,
+      "summary": {
+        "errors": 0,
+        "expected_failures": 0,
+        "failures": 0,
+        "lane": "combined",
+        "passed": true,
+        "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+        "planned_tests": 4,
+        "seconds": 4248.308,
+        "skipped": 0,
+        "tests_run": 4,
+        "unexpected_successes": 0
+      },
+      "tests_run": 4,
+      "timed_out": false,
+      "unexpected_successes": 0
+    },
+    {
+      "clone_source_unchanged": true,
+      "complete": true,
+      "elapsed_seconds": 2887.735,
+      "errors": 0,
+      "expected_failures": 0,
+      "failures": 0,
+      "lane": "finding-revalidation",
+      "logs": {
+        "stderr": "eb4a35652a7e246adba0dc8ea670b1d9b121a244d042deb81da990c1633e7cee",
+        "stdout": "fdbe9fe2e62c211bdba28b458e6c77b264bf266fb7675dbfd10a1d3318fe7770"
+      },
+      "passed": true,
+      "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+      "planned_tests": 5,
+      "return_code": 0,
+      "skipped": 0,
+      "summary": {
+        "errors": 0,
+        "expected_failures": 0,
+        "failures": 0,
+        "lane": "finding-revalidation",
+        "passed": true,
+        "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+        "planned_tests": 5,
+        "seconds": 2871.948,
+        "skipped": 0,
+        "tests_run": 5,
+        "unexpected_successes": 0
+      },
+      "tests_run": 5,
+      "timed_out": false,
+      "unexpected_successes": 0
+    },
+    {
+      "clone_source_unchanged": true,
+      "complete": true,
+      "elapsed_seconds": 3939.64,
+      "errors": 0,
+      "expected_failures": 0,
+      "failures": 0,
+      "lane": "llm-supervision",
+      "logs": {
+        "stderr": "85163ec1f4565d001fd2ebb2c6ab3afbfc8893c0c8b59e91e8fa1c4d8e6ec073",
+        "stdout": "fce3a08f7b364f556faffad782ff1b76231a52dc7eda2a8388c23ae9a9e2101a"
+      },
+      "passed": true,
+      "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+      "planned_tests": 1,
+      "return_code": 0,
+      "skipped": 0,
+      "summary": {
+        "errors": 0,
+        "expected_failures": 0,
+        "failures": 0,
+        "lane": "llm-supervision",
+        "passed": true,
+        "plan_digest": "1f98b5a4f3c64cb45a3406641e81284ee8568e0c7eafbf7fb817f0264ab94e57",
+        "planned_tests": 1,
+        "seconds": 3921.531,
+        "skipped": 0,
+        "tests_run": 1,
+        "unexpected_successes": 0
+      },
+      "tests_run": 1,
+      "timed_out": false,
+      "unexpected_successes": 0
+    }
+  ],
+  "schema_version": 1,
+  "source_after_digest": "76af37d13fec2e94816b59bd927140e30c8914651591135b103c31bbaf078caa",
+  "source_before_digest": "76af37d13fec2e94816b59bd927140e30c8914651591135b103c31bbaf078caa",
+  "source_id": "source-v15",
+  "source_manifest_sha256": "f7df1e45eb2c5cb89910d583053ac7efbc49754f573d6b8324aa5953913fa029",
+  "source_unchanged": true,
+  "started_unix": 1789884351.2166772,
+  "timeout_is_slo_claim": false,
+  "whole_regression_claim": false
+}

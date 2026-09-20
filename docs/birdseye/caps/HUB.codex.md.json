@@ -41,6 +41,10 @@
     "docs/mvp-completion-audit.md",
     "docs/open-questions.md",
     "docs/operating-policy.md",
+    "docs/productization-quickstart.md",
+    "docs/productization-requirements.md",
+    "docs/productization-spec.md",
+    "docs/productization-status.md",
     "docs/reference-boundary.md",
     "docs/regression-ci-detail-spec.md",
     "docs/remediation-detail-spec.md",
@@ -59,6 +63,7 @@
     "docs/reviews/mvp-regression-20260912.md",
     "docs/reviews/mvp-run-contract-20260911.md",
     "docs/reviews/mvp-supervisor-20260912.md",
+    "docs/reviews/productization-requirements-20260915.md",
     "docs/reviews/requirements-adversarial-20260910.md",
     "docs/reviews/runtime-core-20260911.md",
     "docs/run-cancellation-detail-spec.md",
@@ -73,6 +78,7 @@
     "docs/supervised-run-detail-spec.md",
     "docs/tasks/README.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md",
     "orchestration/development-plan.md"
   ],
   "deps_in": [
@@ -88,6 +94,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "d0a1281118635b0e1ea6d7d6a84bfcf7bb04bc63cb4068a5dbae0e1ad6f2370b"
+  "generated_at": "00161",
+  "source_sha256": "be0640bef85fb982106999cf38d331263f364db5a8e9ebc6916c47ca2d22349f"
 }

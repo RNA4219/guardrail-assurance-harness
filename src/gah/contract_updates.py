@@ -85,6 +85,24 @@ def _validate_source(source: Any) -> tuple[dict[str, Any], ...]:
     return manifest, contract, plan, policy, registry, case_set
 
 
+def _validate_partitioned_source(source: Any) -> tuple[dict[str, Any], ...]:
+    """Restore and validate schema-2 source without inventing a v1 plan ref."""
+    from .partitioned_run_contracts import validate_partitioned_runtime
+
+    try:
+        rebound = validate_partitioned_runtime(source)
+        context = rebound["_partitioned_context"]
+        index = context["index"]
+        expected_ref = content_ref("trial_plan_index", index["plan_id"], index)
+    except ContractError as exc:
+        raise _bad(getattr(exc, "code", "SOURCE_INVALID")) from None
+    if (rebound["manifest"].get("schema_version") != 2
+            or rebound["manifest"].get("plan_ref") != expected_ref):
+        raise _bad("SOURCE_BINDING_MISMATCH")
+    return (rebound["manifest"], rebound["contract"], rebound["plan"],
+            rebound["policy"], rebound["registry"], rebound["case_set"], rebound)
+
+
 def bind_contract_transition(previous_contract, next_contract, *, baseline_record,
                              baseline_source_bound, source_baseline_context=None,
                              following_registry=None):
@@ -150,9 +168,23 @@ def _bind_contract_transition(
             raise _bad('BASELINE_SOURCE_MISMATCH')
         following = validate_evaluation_contract(next_contract)
         baseline = validate_baseline_record(baseline_record)
-        manifest, source_contract, plan, policy, registry, case_set = _validate_source(
-            baseline_source_bound
-        )
+        source_manifest = (baseline_source_bound.get("manifest")
+                           if type(baseline_source_bound) is dict else None)
+        source_version = (source_manifest.get("schema_version")
+                          if type(source_manifest) is dict else None)
+        partitioned = baseline["schema_version"] == 2 or source_version == 2
+        if partitioned:
+            if (baseline["schema_version"] != 2 or source_version != 2
+                    or source_baseline_context is not None):
+                raise _bad("SCHEMA_VERSION_MISMATCH")
+            (manifest, source_contract, plan, policy, registry, case_set,
+             rebound) = _validate_partitioned_source(baseline_source_bound)
+        else:
+            if source_baseline_context is not None:
+                raise _bad("BASELINE_SOURCE_MISMATCH")
+            manifest, source_contract, plan, policy, registry, case_set = _validate_source(
+                baseline_source_bound
+            )
         if source_contract != previous:
             raise _bad("PREVIOUS_CONTRACT_MISMATCH")
         if manifest["purpose"] != "baseline_candidate" or manifest["baseline_ref"] is not None:
@@ -165,12 +197,13 @@ def _bind_contract_transition(
             raise _bad("PREVIOUS_CONTRACT_MISMATCH")
         if baseline["generation"] != 1:
             raise _bad("BASELINE_GENERATION_MISMATCH")
-        try:
-            rebound = bind_run_manifest(
-                manifest, source_contract, plan, policy, registry, case_set
-            )
-        except (ContractError, KeyError, TypeError, ValueError, RecursionError):
-            raise _bad("SOURCE_BINDING_INVALID") from None
+        if not partitioned:
+            try:
+                rebound = bind_run_manifest(
+                    manifest, source_contract, plan, policy, registry, case_set
+                )
+            except (ContractError, KeyError, TypeError, ValueError, RecursionError):
+                raise _bad("SOURCE_BINDING_INVALID") from None
         for field in _CORE_FIELDS:
             if baseline_source_bound[field] != rebound[field]:
                 raise _bad("SOURCE_BINDING_MISMATCH")
@@ -218,18 +251,25 @@ def _bind_contract_transition(
         if previous["evaluator_refs"] != _evaluator_refs(registry):
             raise _bad("EVALUATOR_MISMATCH")
         _ref(baseline["source_run_ref"], "run_manifest", manifest["run_id"], manifest)
-        _ref(baseline["trial_plan_ref"], "trial_plan", plan["plan_id"], plan)
+        if partitioned:
+            index = rebound["_partitioned_context"]["index"]
+            index_ref = content_ref("trial_plan_index", index["plan_id"], index)
+            if baseline["trial_plan_ref"] != manifest["plan_ref"] or index_ref != manifest["plan_ref"]:
+                raise _bad("PLAN_REFERENCE_MISMATCH")
+        else:
+            _ref(baseline["trial_plan_ref"], "trial_plan", plan["plan_id"], plan)
         if baseline["target_refs"] != manifest["target_refs"]:
             raise _bad("TARGET_MISMATCH")
         if baseline["evaluator_refs"] != previous["evaluator_refs"]:
             raise _bad("EVALUATOR_MISMATCH")
         if baseline["oracle_refs"] != _oracle_refs(case_set):
             raise _bad("ORACLE_MISMATCH")
-        repeat = repeat_config_for_plan(plan)
+        repeat = (repeat_config_for_plan(plan, partitioned_context=rebound)
+                  if partitioned else repeat_config_for_plan(plan))
         _ref(baseline["repeat_config_ref"], "repeat_config",
              repeat["repeat_config_id"], repeat)
         comparison_context = {
-            "schema_version": 1,
+            "schema_version": baseline["schema_version"],
             "kind": "comparison_context",
             "comparison_id": baseline["comparison_context_ref"]["id"],
             "mode": previous["comparison"]["mode"],
@@ -265,9 +305,9 @@ def _bind_contract_transition(
             "source_run_ref": deepcopy(baseline["source_run_ref"]),
             "baseline_ref": deepcopy(expected_baseline),
             "baseline_record": baseline,
-            "source_bound": {
+            "source_bound": deepcopy(rebound if partitioned else {
                 field: rebound[field] for field in _CORE_FIELDS
-            },
+            }),
             "comparison": deepcopy(expected_comparison),
             **({"following_registry":deepcopy(changed_registry)} if changed_registry is not None else {}),
             "structurally_bound": True,

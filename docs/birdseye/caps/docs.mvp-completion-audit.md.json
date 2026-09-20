@@ -24,6 +24,7 @@
     "docs/llm-authority-detail-spec.md",
     "docs/open-questions.md",
     "docs/oss-publication.md",
+    "docs/productization-spec.md",
     "docs/regression-ci-detail-spec.md",
     "docs/reviews/mvp-acceptance-20260913.md",
     "docs/reviews/mvp-cancellation-20260912.md",
@@ -45,6 +46,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
+  "generated_at": "00161",
   "source_sha256": "d77ee439686df8ab732d86a75fdf6ce2821eb1bcbe1a58034f34028f3c72fd6b"
 }

@@ -1,0 +1,13 @@
+{
+  "ci_eligible": false,
+  "copy_source_hashes_equal": true,
+  "existing_destination_rejected": true,
+  "full_pac_acceptance": false,
+  "helper_sha256": "b04323dd39b98ac2fe66b3e87474388a3fee5199feb12f5612ba99158a0e1c0b",
+  "id": "freeze-helper-v1",
+  "inventory_files_copied": 1583,
+  "kind": "local_verification_preflight",
+  "manifest_unchanged_after_rejection": true,
+  "required_inputs": 4,
+  "schema_version": 1
+}

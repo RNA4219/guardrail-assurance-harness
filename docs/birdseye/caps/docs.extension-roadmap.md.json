@@ -6,7 +6,10 @@
   "public_api": [],
   "deps_out": [
     "docs/operating-policy.md",
+    "docs/productization-requirements.md",
+    "docs/productization-spec.md",
     "docs/requirements.md",
+    "docs/reviews/productization-requirements-20260915.md",
     "docs/reviews/requirements-adversarial-20260910.md"
   ],
   "deps_in": [
@@ -14,6 +17,7 @@
     "HUB.codex.md",
     "README.md",
     "docs/open-questions.md",
+    "docs/productization-requirements.md",
     "docs/requirements-traceability.md",
     "docs/requirements.md",
     "docs/reviews/requirements-adversarial-20260910.md",
@@ -25,6 +29,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "b407c45772b25765479d779d8b40af99f26b8f227d5ee719361b8b070e8ca3b3"
+  "generated_at": "00161",
+  "source_sha256": "771418ab37da45eeaa6cce17f112da5a738443172c1b1c34e41fed2b82a5b980"
 }

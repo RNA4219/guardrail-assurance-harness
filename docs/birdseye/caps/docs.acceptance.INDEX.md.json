@@ -19,6 +19,8 @@
     "docs/acceptance/AC-20260911-03.md",
     "docs/acceptance/AC-20260911-04.md",
     "docs/acceptance/AC-20260911-05.md",
+    "docs/acceptance/AC-20260915-01.md",
+    "docs/acceptance/AC-20260915-02.md",
     "docs/acceptance/README.md"
   ],
   "deps_in": [
@@ -32,6 +34,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "001dc0c3bf1d25bfcb7d5a6786f107e83dcf8a0fa60ca5d9a8a26bfcf6f6f77b"
+  "generated_at": "00161",
+  "source_sha256": "003ac9520f2e78308d7d0fc474f3a96b9da4fed57b9e2229a64fd4d65063de34"
 }

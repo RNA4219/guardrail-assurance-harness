@@ -44,10 +44,16 @@ def isolation_probe():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("broker", "client", "probe", "client-host"))
+    parser.add_argument("mode", choices=("broker", "broker-v6", "broker-v7", "client", "probe", "client-host"))
     args = parser.parse_args()
     if args.mode == "broker":
         serve(SOCKET, DATABASE)
+        return 0
+    if args.mode == "broker-v6":
+        serve(SOCKET, DATABASE, database_mode="partitioned-v6")
+        return 0
+    if args.mode == "broker-v7":
+        serve(SOCKET, DATABASE, database_mode="partitioned-v7")
         return 0
     if args.mode == "client-host":
         # 固定clientだけを起動するコンテナを維持する。要求処理は毎回別プロセス。

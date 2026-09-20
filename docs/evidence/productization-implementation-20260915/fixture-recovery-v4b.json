@@ -1,0 +1,39 @@
+{
+  "ci_eligible": false,
+  "elapsed_milliseconds": 1067,
+  "fixture_hashes": {
+    "docs/contracts/initial-policy.v1.json": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+    "docs/evidence/mvp-baseline-refresh-20260912/runtime-observations.json": "04fd295cbc3ae0334b29c5f878fbaba30cef6502db8f095d9cfa72b57ffc2ea6",
+    "docs/evidence/mvp-baseline-refresh-20260912/verification.json": "c64c9b846670e340de4d928fb4fe91fdd0d665c47bc6fd6d3bb1eeedf5a2f9a0"
+  },
+  "full_pac_acceptance": false,
+  "id": "fixture-recovery-v4b",
+  "kind": "local_validation_observation",
+  "log_sha256": "0603b37d59a8bd2f6e52360c513448c8d3a2a65600bb06d81f7685df601f7ce6",
+  "original_plan_digest": "8a7140a64c62e651433411c648463932621d03b22703aa9431652ef948137dbd",
+  "original_source_code_unchanged": true,
+  "passed": true,
+  "returncode": 0,
+  "schema_version": 1,
+  "source_manifest": "fixture-recovery-source-v4-manifest.json",
+  "source_ref": {
+    "digest": "121947e5c2cdcf7eac16251193eb66f540ef7ed98ee455c36ba3b89c2e13072c",
+    "id": "regression-source-v4",
+    "kind": "snapshot_manifest"
+  },
+  "status": "PASS",
+  "tests": [
+    "tests.test_policy.PolicyFixedRulesTests.test_design_metadata_is_not_accepted_as_runtime_profile",
+    "tests.test_policy.PolicyShapeTests.test_bootstrap_matches_design_policy_without_design_metadata",
+    "tests.test_following_contracts.FollowingTransitionTests.test_baseline_two_and_old_comparison_one_are_both_retained",
+    "tests.test_following_contracts.FollowingTransitionTests.test_comparison_change_or_missing_old_context_are_rejected",
+    "tests.test_following_contracts.FollowingTransitionTests.test_comparison_context_reference_cannot_be_substituted",
+    "tests.test_following_contracts.FollowingTransitionTests.test_generation_skip_or_reused_id_are_rejected",
+    "tests.test_following_contracts.FollowingTransitionTests.test_malformed_source_and_boolean_generation_fail_with_contract_error",
+    "tests.test_following_contracts.FollowingTransitionTests.test_materialization_duplicate_and_missing_record_rejected",
+    "tests.test_following_contracts.FollowingTransitionTests.test_materialization_has_thirty_on_each_side_and_unchanged_payloads",
+    "tests.test_following_contracts.FollowingTransitionTests.test_outputs_are_independent_and_never_ci_evidence",
+    "tests.test_following_contracts.FollowingTransitionTests.test_record_evaluator_and_repeat_are_bound_to_source",
+    "tests.test_following_contracts.FollowingTransitionTests.test_wrong_baseline_source_cannot_be_substituted"
+  ]
+}

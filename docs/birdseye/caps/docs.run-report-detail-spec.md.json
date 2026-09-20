@@ -5,6 +5,7 @@
   "summary": "固定UC-CIの通常runと取消しrunを、同じ保存根拠から日本語MarkdownまたはJSONで表示する。 [通常run・CI](regression-ci-detail-spec.md)と[取消し](run-cancellation-detail-spec.md)の読取りAPIを使う。",
   "public_api": [],
   "deps_out": [
+    "docs/assurance-authority-detail-spec.md",
     "docs/evidence/mvp-report-20260912/README.md",
     "docs/mutation-review-detail-spec.md",
     "docs/regression-ci-detail-spec.md",
@@ -27,6 +28,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "c972f7b59d8b845c289bb61a9ebdc875a2fbb91ccdabef0210da1ca574b81a18"
+  "generated_at": "00161",
+  "source_sha256": "4ea9a3a882fdd9217b86e489926c68903fb8c6c0b5f3ae2c1bcff1f6cad87794"
 }

@@ -1,0 +1,26 @@
+{
+  "id": "docs/reviews/productization-continuation-20260919.md",
+  "role": "reviews",
+  "title": "継続実装の監督レビュー",
+  "summary": "対象は[実装Task](../tasks/TASK.productization-implementation-09-15-2026.md)。Lunaの担当を保存、worker計測、hotpathへ分け、親が依存接続と全体検証を確認した。コード変更と受入判定の根拠は[継続証跡](../evidence/productization-continuation-20260919/README.md)へ保存する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/productization-partition-spec.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/productization-status.md",
+    "docs/reviews/README.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "03e08bdba1b2c1257eafb4306010fb93521f9c8e7efb280d4f4c3415666b853d"
+}
