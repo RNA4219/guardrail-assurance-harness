@@ -1,1084 +1,1084 @@
 {
-  "generated_at": "00161",
+  "generated_at": "00162",
   "nodes": {
     "AGENTS.md": {
       "role": "AGENTS",
       "caps": "docs/birdseye/caps/AGENTS.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1d9b189dd4f4835991c9c6477e92595763572bf70789a5880f3ac21efa9c5d9d"
     },
     "BLUEPRINT.md": {
       "role": "BLUEPRINT",
       "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "7664e03fc6d2ee019e8028855b483ff75e30c02593bcc310653332987a53ad60"
     },
     "CHANGELOG.md": {
       "role": "CHANGELOG",
       "caps": "docs/birdseye/caps/CHANGELOG.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a03b45c7ea11a5727964276612355668e368558c1de528766474916f43b1e47c"
     },
     "CHECKLISTS.md": {
       "role": "CHECKLISTS",
       "caps": "docs/birdseye/caps/CHECKLISTS.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a26bf2110c3964ea9927fe8b84921be647ca89316cfeed55203c25ca0e6d673b"
     },
     "CONTRIBUTING.md": {
       "role": "CONTRIBUTING",
       "caps": "docs/birdseye/caps/CONTRIBUTING.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d6fcc72a2bf4ebfd9dfb20a74d4aaa4110b8149384e7f2609ed7e1c3ab93827e"
     },
     "EVALUATION.md": {
       "role": "EVALUATION",
       "caps": "docs/birdseye/caps/EVALUATION.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "73911207bee27270eea1e992576c6de19a24627832338a8c7510dcedc9ad7aa8"
     },
     "GUARDRAILS.md": {
       "role": "GUARDRAILS",
       "caps": "docs/birdseye/caps/GUARDRAILS.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "49a52797157d9990589a1e89d757cfbcd807cddb33c299b27cc28334af9f4f8e"
     },
     "HUB.codex.md": {
       "role": "HUB.codex",
       "caps": "docs/birdseye/caps/HUB.codex.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "be0640bef85fb982106999cf38d331263f364db5a8e9ebc6916c47ca2d22349f"
     },
     "README.md": {
       "role": "README",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d196012f1fe724112c1df7702236079a94db7c4d6ec45c77690943e90624134d"
     },
     "RUNBOOK.md": {
       "role": "RUNBOOK",
       "caps": "docs/birdseye/caps/RUNBOOK.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f2f13fd2995b14b6ac8a6672aeb7edf417969b6ab1181dab17bea5b7075bc183"
     },
     "SECURITY.md": {
       "role": "SECURITY",
       "caps": "docs/birdseye/caps/SECURITY.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2fb789f27f15641f8531f7eaac5a13ea779c00952190b0b211d4109c553bce11"
     },
     "TASK.codex.md": {
       "role": "TASK.codex",
       "caps": "docs/birdseye/caps/TASK.codex.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4afa97012dc1203d9cc01161c45842fe96e65275e9ead172f309ee75a5b0f8c0"
     },
     "datasets/README.md": {
       "role": "datasets",
       "caps": "docs/birdseye/caps/datasets.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4377935812c57e06ce7705c90f3a0623fb5ea589e42fc3501bf03505144583e8"
     },
     "datasets/synthetic-policy-v1/README.md": {
       "role": "datasets",
       "caps": "docs/birdseye/caps/datasets.synthetic-policy-v1.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f526b7f0fb682f5cb13888219caca4275902a2a76056a8573cd5aa3e7b2560ef"
     },
     "docs/ADR/0001-workflow-cookbook-adoption.md": {
       "role": "ADR",
       "caps": "docs/birdseye/caps/docs.ADR.0001-workflow-cookbook-adoption.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "140de21f9222d25bbdb2ec7b206d41b25577874c45b8700beae33a456dcd291c"
     },
     "docs/ADR/0002-contract-boundaries.md": {
       "role": "ADR",
       "caps": "docs/birdseye/caps/docs.ADR.0002-contract-boundaries.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1cf1349cb9efb3cb26e15d11d46a91315e47efba477c40259895522a49109a1d"
     },
     "docs/ADR/0003-runtime-core.md": {
       "role": "ADR",
       "caps": "docs/birdseye/caps/docs.ADR.0003-runtime-core.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b29893af902b9f1a625f45e78d367e50c0d1d56e5034b1331ba2ca2b11c30bc1"
     },
     "docs/ADR/0004-lifecycle-recovery.md": {
       "role": "ADR",
       "caps": "docs/birdseye/caps/docs.ADR.0004-lifecycle-recovery.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "9a3b3a63c750b7b734926608a8e8ac4f679aa634b67dba5770c01d6c5f889228"
     },
     "docs/ADR/README.md": {
       "role": "ADR",
       "caps": "docs/birdseye/caps/docs.ADR.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5aba7db57c5745da7268ab4130b88a1be0abccacf5b4ca0765ad9f317a80000b"
     },
     "docs/BIRDSEYE.md": {
       "role": "BIRDSEYE",
       "caps": "docs/birdseye/caps/docs.BIRDSEYE.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "67cb046b51e22d9e55a09bfdcf035403d2161a461d1dd108ae224cdf21c9a822"
     },
     "docs/TASKS.md": {
       "role": "TASKS",
       "caps": "docs/birdseye/caps/docs.TASKS.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f79bc6528eac4dcc99bbca57cf88d919ea3765bc7f5f32c11ee866837b844ea5"
     },
     "docs/UPSTREAM.md": {
       "role": "UPSTREAM",
       "caps": "docs/birdseye/caps/docs.UPSTREAM.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "ebf1aa38f103275dfa130493f719b59253356d7afbd4c4943508ef900c37db85"
     },
     "docs/acceptance-criteria.md": {
       "role": "acceptance-criteria",
       "caps": "docs/birdseye/caps/docs.acceptance-criteria.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "cad5a977dafae928e6ab4eb2c9c3b4169c6b6439823b52a350ec535a85b89caa"
     },
     "docs/acceptance/AC-20260910-03.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-03.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "56e27f66fe77dc8d7bf9000dcb19882d02032aeca237dfbd43292d14dcf6b3b9"
     },
     "docs/acceptance/AC-20260910-04.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-04.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "e539ee5f248ef925c3206867dcb7a160623b8fba658af534a3be8b00adef8156"
     },
     "docs/acceptance/AC-20260910-05.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-05.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c833fcee37c973dcd1b9dcc05a28dfd9d92533e39a6063607df2c4faa58e0179"
     },
     "docs/acceptance/AC-20260910-06.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-06.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2d11fa91736432c561814289a5626f8052377b2f44ab30eb743bdc66c2db92b1"
     },
     "docs/acceptance/AC-20260910-07.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-07.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d368345e89ff995192af2fde265ba47f05f713e6e4582136677c8213803d01b1"
     },
     "docs/acceptance/AC-20260910-08.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-08.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "679abbb981a97002749ab78730d10512e991acef4ec4e92f327e06873a01b093"
     },
     "docs/acceptance/AC-20260910-09.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-09.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c244086c16598697774dfee8aceb5ab3eba46b65099a121db660495a603a2d45"
     },
     "docs/acceptance/AC-20260910-10.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-10.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "bc65f638845db263f5597466db6410a92a09ab8bd6447c4f0cdf035d0f4b673f"
     },
     "docs/acceptance/AC-20260910-11.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260910-11.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "8f74ee4652555a81c164baa550c95e09135a109a0ce70f892b53081ac06609f2"
     },
     "docs/acceptance/AC-20260911-01.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260911-01.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "29a6adfeb279d77fdc6b2d4722852a7ce9cd2aa6b36c7e315a9637abbc84bead"
     },
     "docs/acceptance/AC-20260911-02.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260911-02.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4e240d991eb76ba84bed0e66ced19fa7e0cce3997163d83be01403f79b56ab2a"
     },
     "docs/acceptance/AC-20260911-03.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260911-03.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "bd0108df542cf54a857b24a5a9d25c5cb62d27dc4b82700c59755aeb30c17640"
     },
     "docs/acceptance/AC-20260911-04.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260911-04.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f78e7eb82b2c67f5a2e5667b873df8021fd251ca193ff3113aad0d7e552c1003"
     },
     "docs/acceptance/AC-20260911-05.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260911-05.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d39b613fc809219ed088a3733c3ba19879d7af6646aaf3f3ea4d0a620e1e337f"
     },
     "docs/acceptance/AC-20260915-01.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260915-01.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "482ff6c7f5cceae2fc378c811bf5a63e1e5ad5e97ccdbc32faa13ac28458a782"
     },
     "docs/acceptance/AC-20260915-02.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.AC-20260915-02.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "78cac2ff4a3f2dd919f8600574fefd07db064147c5c07f21ad06b9939cdb72f2"
     },
     "docs/acceptance/INDEX.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.INDEX.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "003ac9520f2e78308d7d0fc474f3a96b9da4fed57b9e2229a64fd4d65063de34"
     },
     "docs/acceptance/README.md": {
       "role": "acceptance",
       "caps": "docs/birdseye/caps/docs.acceptance.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "00259bc9233ebc9f9b08ebdd12b28de9cb629192650a801439c3e90d3c7fffe3"
     },
     "docs/adapter-spec.md": {
       "role": "adapter-spec",
       "caps": "docs/birdseye/caps/docs.adapter-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2602dfdf7b16252b3703c778089cb45057808d7daba2ee9b90266381345eea04"
     },
     "docs/assurance-authority-detail-spec.md": {
       "role": "assurance-authority-detail-spec",
       "caps": "docs/birdseye/caps/docs.assurance-authority-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c85a82815ecae5d1e347498dd6310b02d0ee0f056de19ec422ab04d6edfdb3f6"
     },
     "docs/auth-adoption-detail-spec.md": {
       "role": "auth-adoption-detail-spec",
       "caps": "docs/birdseye/caps/docs.auth-adoption-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c31d02c8f3fab25ef87419986a18002e6d3c9edc456845b4d25b6be513bd5b3d"
     },
     "docs/baseline-adoption-detail-spec.md": {
       "role": "baseline-adoption-detail-spec",
       "caps": "docs/birdseye/caps/docs.baseline-adoption-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "943c91f27cf71b48d8cf73e5b79b12b3a64c86f5d38714d57f031633894cce79"
     },
     "docs/baseline-refresh-detail-spec.md": {
       "role": "baseline-refresh-detail-spec",
       "caps": "docs/birdseye/caps/docs.baseline-refresh-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "293b3b41499335cb202c3206e7c110ec51c8b877e61f38513bb7dc615d56937a"
     },
     "docs/birdseye/README.md": {
       "role": "birdseye",
       "caps": "docs/birdseye/caps/docs.birdseye.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "85744c08f2affd82fecb5c6cf3ede9622db7053275b99c1495c98e178fea4d4f"
     },
     "docs/ci-config.md": {
       "role": "ci-config",
       "caps": "docs/birdseye/caps/docs.ci-config.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a5d5cd067cbd52a8cc7e657e29592654d495b89b62c5b0867b1efa9c657ff4b2"
     },
     "docs/combined-run-detail-spec.md": {
       "role": "combined-run-detail-spec",
       "caps": "docs/birdseye/caps/docs.combined-run-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5dbda99fbe781f754a1827bf4e625e5d7bc8b1f869930e36e6b3c5e71cf3ef98"
     },
     "docs/contract-revision-detail-spec.md": {
       "role": "contract-revision-detail-spec",
       "caps": "docs/birdseye/caps/docs.contract-revision-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "604779117bee5fec0407722f83a1facaca9aee0c5943f5fbe80e9bba936d1df1"
     },
     "docs/contract-transition-detail-spec.md": {
       "role": "contract-transition-detail-spec",
       "caps": "docs/birdseye/caps/docs.contract-transition-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "95d9a8282273248531806356778d37cbbf884477eaf5c6c443ae02004b1f10a0"
     },
     "docs/contracts/README.md": {
       "role": "contracts",
       "caps": "docs/birdseye/caps/docs.contracts.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "7ca3f32a08c23f7fdbed26753c598398feda93827990232001a8a4c48d55fd23"
     },
     "docs/contracts/evaluation-contract.md": {
       "role": "contracts",
       "caps": "docs/birdseye/caps/docs.contracts.evaluation-contract.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c86f8b1389d02b18c4f3c44a3f5a0106c7878bf038859bb9d4329a59db5eaab7"
     },
     "docs/contracts/evaluation-design.md": {
       "role": "contracts",
       "caps": "docs/birdseye/caps/docs.contracts.evaluation-design.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a70358ce0c3ca8b5d712211e645bfd98b9fd6f33e6998d528466c03c13edd6cc"
     },
     "docs/contracts/lifecycle-contract.md": {
       "role": "contracts",
       "caps": "docs/birdseye/caps/docs.contracts.lifecycle-contract.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "dfd7d2b14c2b0728f20cb162370c25510d835c1eddb8670d15b8d8416b1020e2"
     },
     "docs/design.md": {
       "role": "design",
       "caps": "docs/birdseye/caps/docs.design.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5d629fd2b6fdfcc22b411af448d2d734a3c5051dba00bd3766e5e17fc8533f90"
     },
     "docs/detail-spec.md": {
       "role": "detail-spec",
       "caps": "docs/birdseye/caps/docs.detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2488929256442fa11099bacc85b76329c4a82723579c46085da8bdf77b1b6c49"
     },
     "docs/evaluation-detail-spec.md": {
       "role": "evaluation-detail-spec",
       "caps": "docs/birdseye/caps/docs.evaluation-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a54146bcbd83752f47ce63870d730e52c8502e349b1ea1be62a0a09fd021d6d4"
     },
     "docs/evidence/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "ad94b6df258dfc4f7952b8798c3f60155a097033663411e20c45f0c7675529c5"
     },
     "docs/evidence/mvp-acceptance-20260913/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-acceptance-20260913.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a4ec709e4e2cc07cb9a9af4fcabd7dc62f35f2d273f3ce87190f8a549d9e42b6"
     },
     "docs/evidence/mvp-adoption-20260911/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-adoption-20260911.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2381701d84e69fa8293d528ce19977b217659a7787cf329e24bd6f9f1c0e45e9"
     },
     "docs/evidence/mvp-baseline-refresh-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-baseline-refresh-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a8e164737802700d6943e0baad872272b0ccfc65b2a7821807ca5a7e73df4fff"
     },
     "docs/evidence/mvp-cancellation-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-cancellation-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "7ff2688f671c93fda8a36290c745fe4287c6f653a2c8721a1594e8d124b5f5e7"
     },
     "docs/evidence/mvp-candidate-20260911/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-candidate-20260911.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "907d3595f62a8c848ec1c577b07622f4204066e84ac765e296b6ed8eb2c46fcb"
     },
     "docs/evidence/mvp-condition-core-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-condition-core-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d3f96606cc2b54d518df883f8f8f12f16acf4d7807a3db7e4301f74255fddb1b"
     },
     "docs/evidence/mvp-contract-adoption-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-contract-adoption-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b6b2343b8d76f8646430f9054a98b5f07a59363d174d78b8eb409c0d90672b2b"
     },
     "docs/evidence/mvp-evaluation-20260911/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-evaluation-20260911.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "3f18220888ce61ebe096399a14e225c2d4d6b4200feab60f6dbb882bbfcd5f0c"
     },
     "docs/evidence/mvp-recovery-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-recovery-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "73dca5825841b08fa25939ccf4207c0d395db187725324e8ec2bab11cb8ddfa8"
     },
     "docs/evidence/mvp-regression-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-regression-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "65cbb036e001820f0bc9620c51b89c20a0a82bb3ae777e995bdef765c73b3b31"
     },
     "docs/evidence/mvp-report-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-report-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f30b0f6d850df673359f02053cdc0b672697fbf02f21c107b7eccc2472f41633"
     },
     "docs/evidence/mvp-report-20260912/cancellation-runtime-report.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-report-20260912.cancellation-runtime-report.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "51db3a5b0c827e6b7a0ca9044cb1a15aabf061a8fa59b7721c2a3e32ef43fbcf"
     },
     "docs/evidence/mvp-report-20260912/regression-runtime-report.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-report-20260912.regression-runtime-report.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "8281c3469fd99ead9e82760e2eced50f84611ff2b88ee90a65fa3efab4d119eb"
     },
     "docs/evidence/mvp-supervisor-20260912/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-supervisor-20260912.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c487b339fd08f8dc0eea084cb26d9d209912d57e392e1c7401d389fac812b8ad"
     },
     "docs/evidence/mvp-transition-20260911/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.mvp-transition-20260911.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "503e5786457fcc20c0ed9e123b60c3fa7e4ab927fb0ba3eba02894900e95587d"
     },
     "docs/evidence/productization-continuation-20260916/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.productization-continuation-20260916.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b5a142eb45b9e47f19051ad15beea05d022b74c4874b85a5067ea72cd6645c11"
     },
     "docs/evidence/productization-continuation-20260919/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.productization-continuation-20260919.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "365d00a00057a08fa15fb7d8a9c1a2c2abbe795eae6ba0b54cc742a6ddc50412"
     },
     "docs/evidence/productization-continuation-20260920/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.productization-continuation-20260920.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "af905ab6eaf9f852522aa0fead41ab727377d8ecb3bb123792453504f993022a"
     },
     "docs/evidence/productization-implementation-20260915/README.md": {
       "role": "evidence",
       "caps": "docs/birdseye/caps/docs.evidence.productization-implementation-20260915.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "702c86ccf41813b531f2cbaec85092b6019052ec62d6d2cbefc48b7e1745d745"
     },
     "docs/execution-detail-spec.md": {
       "role": "execution-detail-spec",
       "caps": "docs/birdseye/caps/docs.execution-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a72cebba604b065f2183d6bc5db33c84946875d3a9c09a59d75d260dd56a7a34"
     },
     "docs/extension-roadmap.md": {
       "role": "extension-roadmap",
       "caps": "docs/birdseye/caps/docs.extension-roadmap.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "771418ab37da45eeaa6cce17f112da5a738443172c1b1c34e41fed2b82a5b980"
     },
     "docs/fixture-materialization-detail-spec.md": {
       "role": "fixture-materialization-detail-spec",
       "caps": "docs/birdseye/caps/docs.fixture-materialization-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a2a87c7a8648ca43e2e9c9f5a741bdb9e28d03f830335c418c0a6285b6ab98bc"
     },
     "docs/following-migration-detail-spec.md": {
       "role": "following-migration-detail-spec",
       "caps": "docs/birdseye/caps/docs.following-migration-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "34fb1300ef18aac4af7d679a8d9756a1cc20eef8c18b7572503e2844e846b8a2"
     },
     "docs/lifecycle-detail-spec.md": {
       "role": "lifecycle-detail-spec",
       "caps": "docs/birdseye/caps/docs.lifecycle-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "3063f2fd6af98fd6efe8b3aeeb5e64f2f15cc2de427b5dc4d4aebbcf0f26eb43"
     },
     "docs/llm-authority-detail-spec.md": {
       "role": "llm-authority-detail-spec",
       "caps": "docs/birdseye/caps/docs.llm-authority-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "955b69c4e537b7442569503ab17b2e0bad45e5c41c0a2bccb1ab48271d6b8e28"
     },
     "docs/mutation-review-detail-spec.md": {
       "role": "mutation-review-detail-spec",
       "caps": "docs/birdseye/caps/docs.mutation-review-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2a459ab9ae40073b55eba6057f09c7ca6682a7630a0dcd78451c171d25c9037c"
     },
     "docs/mvp-completion-audit.md": {
       "role": "mvp-completion-audit",
       "caps": "docs/birdseye/caps/docs.mvp-completion-audit.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d77ee439686df8ab732d86a75fdf6ce2821eb1bcbe1a58034f34028f3c72fd6b"
     },
     "docs/open-questions.md": {
       "role": "open-questions",
       "caps": "docs/birdseye/caps/docs.open-questions.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0fa2da8ad8e9732c9f833f3a4027d54bfab87aca762e2f28fac5f5e475a815da"
     },
     "docs/operating-policy.md": {
       "role": "operating-policy",
       "caps": "docs/birdseye/caps/docs.operating-policy.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5de9c75d5b5c8ccb3642642e87dd5eeb057ad34f66ddbd4d85300c495007c025"
     },
     "docs/oss-publication.md": {
       "role": "oss-publication",
       "caps": "docs/birdseye/caps/docs.oss-publication.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "714d6df8ce5c907667369a03f23aaafcb209082c2bbbbf9d654e40f1fcfc7881"
     },
     "docs/productization-corpus-provisioning-spec.md": {
       "role": "productization-corpus-provisioning-spec",
       "caps": "docs/birdseye/caps/docs.productization-corpus-provisioning-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "e0856cc0f1cdb4ddb2564fb23324af17cca94cec8a3df253e79388e3e8020227"
     },
     "docs/productization-implementation-spec.md": {
       "role": "productization-implementation-spec",
       "caps": "docs/birdseye/caps/docs.productization-implementation-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "af8db9cb4b0c313362019ca6f5172dc1e02c0d744521fd7e42e239368b73ad0a"
     },
     "docs/productization-operations-spec.md": {
       "role": "productization-operations-spec",
       "caps": "docs/birdseye/caps/docs.productization-operations-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4cb954558933d0b74deaae429699b7585c24ec9f8d8f519da356c8c3970787bc"
     },
     "docs/productization-partition-spec.md": {
       "role": "productization-partition-spec",
       "caps": "docs/birdseye/caps/docs.productization-partition-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "9424fb4f515f8812e42951b2fe1bb9ea720dbfdcbe249fc46a62c603e21ccfc4"
     },
     "docs/productization-performance-spec.md": {
       "role": "productization-performance-spec",
       "caps": "docs/birdseye/caps/docs.productization-performance-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "fd7704a8b5971c06888f1aaf50ea1989fd8af6c59c4c379d447d1ac074b704ec"
     },
     "docs/productization-pilot-spec.md": {
       "role": "productization-pilot-spec",
       "caps": "docs/birdseye/caps/docs.productization-pilot-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a8afe723c61a085421c71c01ee9b83cbe389b28032f8252c4c1ecd326f52d49c"
     },
     "docs/productization-quickstart.md": {
       "role": "productization-quickstart",
       "caps": "docs/birdseye/caps/docs.productization-quickstart.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1d3b42e018e4d4422fb170736965c918de5b7bab72753bb951f0a4964e070da6"
     },
     "docs/productization-requirements.md": {
       "role": "productization-requirements",
       "caps": "docs/birdseye/caps/docs.productization-requirements.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b10d5eb59b78d80c622893373a5c7abf86aa03c967adf8a58b72d1f5b8d29c04"
     },
     "docs/productization-spec.md": {
       "role": "productization-spec",
       "caps": "docs/birdseye/caps/docs.productization-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "93a02a6a39b778fb4818dbae67bf21650df88eb5e78a0ddb5d5ba4e5803e4f23"
     },
     "docs/productization-status.md": {
       "role": "productization-status",
       "caps": "docs/birdseye/caps/docs.productization-status.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "6e8da1712fd40e1eb306618138f4ca3ffee244578cdafaa74541c5bf48bfaa39"
     },
     "docs/reference-boundary.md": {
       "role": "reference-boundary",
       "caps": "docs/birdseye/caps/docs.reference-boundary.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c653ba25de833fde5139d3b877defaf6e736f0555edfcbb88ea649a6db6eae0b"
     },
     "docs/regression-ci-detail-spec.md": {
       "role": "regression-ci-detail-spec",
       "caps": "docs/birdseye/caps/docs.regression-ci-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "05abe9b2bc788df8eb0615877079debacc540287bbeb018fc9e9ff8b97ff7d90"
     },
     "docs/releases/README.md": {
       "role": "releases",
       "caps": "docs/birdseye/caps/docs.releases.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "45042e7db5c2952b046828c3e675238e5f1153f48fc6308d0c81c4acfb66ae36"
     },
     "docs/remediation-detail-spec.md": {
       "role": "remediation-detail-spec",
       "caps": "docs/birdseye/caps/docs.remediation-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "32f0743e3df9dc2e908055974069ea934e03401d91f9b75088a73497b601e4a5"
     },
     "docs/requirements-traceability.md": {
       "role": "requirements-traceability",
       "caps": "docs/birdseye/caps/docs.requirements-traceability.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "af505aab9d372859205803ac7850fddfa2dc67dd006b3e1d30beb2afe978d024"
     },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c5f20a6e52d0c6bc7cff606d27349effafe5751c203f5128133ae23369271e98"
     },
     "docs/research/README.md": {
       "role": "research",
       "caps": "docs/birdseye/caps/docs.research.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "748de5f12ea2425a14b2330857c6e249feb24e4f397d14c89446594ad54b819a"
     },
     "docs/research/citation-register.md": {
       "role": "research",
       "caps": "docs/birdseye/caps/docs.research.citation-register.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0fb3253cf44891b95363b84d88c99b0978eb94fcb1ea23f7a9cf714f93d7b504"
     },
     "docs/retention-revalidation-detail-spec.md": {
       "role": "retention-revalidation-detail-spec",
       "caps": "docs/birdseye/caps/docs.retention-revalidation-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a5e9643bc95678cfc8de7ffc630abf88dcef86854cee5d89fdeff78600c17b0d"
     },
     "docs/reviews/README.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5c4572ef7c9853fcada1963ae8c033f9bff31b34a9c01028ea710ce352b5def1"
     },
     "docs/reviews/contract-design-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.contract-design-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "bb987f94c8ed899a0088829526066b2cce28cdf11e6e101885851986dbed51fc"
     },
     "docs/reviews/design-review-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.design-review-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "6a200e7572683dacba1d92623f7f33b7e07dfb58b2199f04eb5c29d9a4446bfe"
     },
     "docs/reviews/docs-cleanup-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.docs-cleanup-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "e30524191dbea62eb9665b38aeada594df590b1d345e893a7718b2ca186cccc3"
     },
     "docs/reviews/dual-usecases-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.dual-usecases-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "9e62d5943d75f715abb1636f4719d42c204da0bcdebc9bbf2f13b4e452bb6b46"
     },
     "docs/reviews/lifecycle-core-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.lifecycle-core-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "8b264b9c0520d854bb21779ebd1cee84f9a11ee4a8405d5bdf82d725d170fbd1"
     },
     "docs/reviews/mvp-acceptance-20260913.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-acceptance-20260913.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2c29b4a3aee38f9423f54353f939104ccd337ced509a2acd586d9b763aa0cd97"
     },
     "docs/reviews/mvp-acceptance-20260915.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-acceptance-20260915.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "536155b085130eeb6401977b2bcabf6d1ce5facad51978ae612320c9d24bf564"
     },
     "docs/reviews/mvp-adoption-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-adoption-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2694f0685e6a19cbcd31cd4cef63e8c8faf75be0d8d51edb79bbfa411a5a443a"
     },
     "docs/reviews/mvp-authority-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-authority-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "03f145a3c2baa81cc4c28a4a269aa93ef70b83f2c42ac0bd7b7ca43dba67e191"
     },
     "docs/reviews/mvp-baseline-refresh-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-baseline-refresh-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "734fbba5a92369ba07d72fb5b02983d8348e112e3db1018e67f71fb266c4c8f8"
     },
     "docs/reviews/mvp-cancellation-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-cancellation-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "42061228bec7005b4765d23c3cc64f7713cde23510a8517ffb604103e98465d1"
     },
     "docs/reviews/mvp-candidate-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-candidate-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5367e9abd9581e3611447be1fe3547e6eed0f3d8b16f6ae02bb9bd1101ddd1dc"
     },
     "docs/reviews/mvp-completion-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-completion-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "29804cd91f3fe6ca93fcd3fd84719352172d7f491bb42fc262570f42d97126fa"
     },
     "docs/reviews/mvp-condition-core-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-condition-core-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "68e56c7538256fff702edf05099476773f339e5218485ac970a8c386cf458f55"
     },
     "docs/reviews/mvp-contract-adoption-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-contract-adoption-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "8e83137890dc7a49c304b2c115368bada7b7ab2382938e886f59ccf60ba6477e"
     },
     "docs/reviews/mvp-evaluation-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-evaluation-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a7aa7c359d29e66b9a196d9ec42d612ed0e5ab737ac174657b15f0b14963b459"
     },
     "docs/reviews/mvp-execution-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-execution-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "75859c6871ff8efb745715a589b6da3a605b6b7b199c1a58a516ef9932c8ecdc"
     },
     "docs/reviews/mvp-recovery-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-recovery-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f86b93349d3395cdab5ac68fe93650684066e5fa683cb99856ad188fdb091fbc"
     },
     "docs/reviews/mvp-regression-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-regression-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "ea994451708ca4fa3481c20fad68dd907af7959e0f38113934cc976fcb5eace2"
     },
     "docs/reviews/mvp-report-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-report-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "de209ea1a45730052ded28b32bc3d45b762bdf7e84c5a55ae578e0ea4c92182b"
     },
     "docs/reviews/mvp-run-contract-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-run-contract-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "60854e247abc57876077dd42ef1ab64378b0f35c9c6f0c960c368293ab884a98"
     },
     "docs/reviews/mvp-supervisor-20260912.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-supervisor-20260912.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a1206e4b1d8a325c8cbf939f0e3604d92753efbfaed7f47b73bf0daaf64ec1df"
     },
     "docs/reviews/mvp-transition-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.mvp-transition-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "49aa2007d4005da1a46f698f93139c3643d593fc56f83bc5ee1086c0df5a0ec4"
     },
     "docs/reviews/operating-decisions-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.operating-decisions-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1e88f85136b530b4b20d4ce71d32dc5ba1a9e89e6b4391112602ead9aabef8cf"
     },
     "docs/reviews/productization-continuation-20260919.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.productization-continuation-20260919.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "03e08bdba1b2c1257eafb4306010fb93521f9c8e7efb280d4f4c3415666b853d"
     },
     "docs/reviews/productization-implementation-20260915.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.productization-implementation-20260915.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d9c1dd8782356a8858c39bc77eb4664f456546ca0446b51a7863a2313fe97910"
     },
     "docs/reviews/productization-requirements-20260915.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.productization-requirements-20260915.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0357e14bdedb4aa546d4e5c0564a98e372c48377dfc92cb29a7de14d895ed338"
     },
     "docs/reviews/productization-spec-20260915.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.productization-spec-20260915.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2d4b43e35acf55d37f20eeaeeddcb0db2d50ba6f8d91a523cdcfff83b6667576"
     },
     "docs/reviews/requirements-adversarial-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.requirements-adversarial-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a78a54ce2eca1cf80184bbc224d95409432b6d50513bad457beefa6f1d6726f9"
     },
     "docs/reviews/requirements-clarification-20260910.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.requirements-clarification-20260910.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "50f9203827aa696cf6ce04d86d527de3ef0799b972b8f5407ab217f7cb9b7c6d"
     },
     "docs/reviews/runtime-core-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.runtime-core-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f17201180d07afffeb952ac15ba7ceaa6a69ac3fb6ee818551ed561c037e0afa"
     },
     "docs/reviews/state-review-20260911.md": {
       "role": "reviews",
       "caps": "docs/birdseye/caps/docs.reviews.state-review-20260911.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "04f0247c92fd930cfdf5a513db22b65e46a81af9636b0aa01a1c8ec8d5edaea2"
     },
     "docs/run-cancellation-detail-spec.md": {
       "role": "run-cancellation-detail-spec",
       "caps": "docs/birdseye/caps/docs.run-cancellation-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "918e180670acfe54c185e0255a203107dffbe05e3d47991313cdd0f54499554e"
     },
     "docs/run-contract-detail-spec.md": {
       "role": "run-contract-detail-spec",
       "caps": "docs/birdseye/caps/docs.run-contract-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "ffed6a1203fc3e0f09de62b316b7f73bc48924d181fdf7793f241ab1b499daef"
     },
     "docs/run-evidence-detail-spec.md": {
       "role": "run-evidence-detail-spec",
       "caps": "docs/birdseye/caps/docs.run-evidence-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d15015e243dda5fa3f9cffe053a94af3118f4e25e674725b460a0c121bd2edc7"
     },
     "docs/run-recovery-detail-spec.md": {
       "role": "run-recovery-detail-spec",
       "caps": "docs/birdseye/caps/docs.run-recovery-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "7c15fac33ad2304628188635b2489c097c68af7e0cde19c1a7e1bd32784641c4"
     },
     "docs/run-report-detail-spec.md": {
       "role": "run-report-detail-spec",
       "caps": "docs/birdseye/caps/docs.run-report-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4ea9a3a882fdd9217b86e489926c68903fb8c6c0b5f3ae2c1bcff1f6cad87794"
     },
     "docs/runtime-contract-spec.md": {
       "role": "runtime-contract-spec",
       "caps": "docs/birdseye/caps/docs.runtime-contract-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "226f2d21847af06e45f7753ecd803606329ca55378066284a7c9fa96c746dfea"
     },
     "docs/security/SAC.md": {
       "role": "security",
       "caps": "docs/birdseye/caps/docs.security.SAC.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "6b6545b403f423c59f630657e174fb44e8373273372214ed4b8046f8a2b5731b"
     },
     "docs/security/Security_Review_Checklist.md": {
       "role": "security",
       "caps": "docs/birdseye/caps/docs.security.Security_Review_Checklist.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "dbeabfd9f365e4d76daec05360f0577ab34d47ef388ec8840d6743d270b2f3e7"
     },
     "docs/semantic-conditions-detail-spec.md": {
       "role": "semantic-conditions-detail-spec",
       "caps": "docs/birdseye/caps/docs.semantic-conditions-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "f86d96d01662a97859a086fff58e8fbb6800e96a3c45be7de789b19024681024"
     },
     "docs/spec.md": {
       "role": "spec",
       "caps": "docs/birdseye/caps/docs.spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "be749a1ae39d33f1255227bdaf84f01e582808a1145a3e18ead85e597205a20d"
     },
     "docs/supervised-run-detail-spec.md": {
       "role": "supervised-run-detail-spec",
       "caps": "docs/birdseye/caps/docs.supervised-run-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "fd4dd15cee6ad6f10a7ab1dd822fe9ab99af60b4f2bd4304a026b7ae8b303c6f"
     },
     "docs/synthetic-guardrail-runtime-detail-spec.md": {
       "role": "synthetic-guardrail-runtime-detail-spec",
       "caps": "docs/birdseye/caps/docs.synthetic-guardrail-runtime-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "64c03f18a99d43dcc01d8cf98a416a9dd0ff4483406ed11906486db8d05aa41d"
     },
     "docs/targeted-run-detail-spec.md": {
       "role": "targeted-run-detail-spec",
       "caps": "docs/birdseye/caps/docs.targeted-run-detail-spec.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "6a43c0037fb17fa860759bd0bf8d003b53e8bb0386a361ba18b669bf4ea12012"
     },
     "docs/tasks/README.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a6781b5ff7531872ac56f2401ad0611c2a033b94238f092311237e925c865521"
     },
     "docs/tasks/TASK.contract-design-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.contract-design-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "d20bb2130c72cbfd1469a68640694deb34f083dd7fdf3c277159eaf17a28d6af"
     },
     "docs/tasks/TASK.design-review-09-11-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.design-review-09-11-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1f284cb77d92c973d28396e314c683a283d06fe17d912fdc7e677224156875bc"
     },
     "docs/tasks/TASK.docs-cleanup-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.docs-cleanup-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2096f5068cff2160a30b6afe790be2c01f0543326e7ef0a397a0532a9eec51f7"
     },
     "docs/tasks/TASK.dual-usecases-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.dual-usecases-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "faa56033cfd0554cb60cb755e5d3ba097d2e0b07d4a2902538d4899b4a1d2d03"
     },
     "docs/tasks/TASK.lifecycle-core-09-11-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.lifecycle-core-09-11-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0cbd917c5fd873e2b4597538dcf3e970288ea3fdd171e0d476ae03f86e30c365"
     },
     "docs/tasks/TASK.mvp-completion-09-11-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.mvp-completion-09-11-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "e4bb8ddad621feb40b5e67a79a002662790a511c69b0a00704dd594753a689f7"
     },
     "docs/tasks/TASK.operating-decisions-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.operating-decisions-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b553fe34d94fb0d4b25c07015507a15de027bc693bc274779a0f8ddb0dad70ef"
     },
     "docs/tasks/TASK.productization-implementation-09-15-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.productization-implementation-09-15-2026.md.json",
-      "mtime": "00161",
-      "source_sha256": "67d11d5dbad040f153c6eca50696eb6323e6e8dfb47e7687a2d7630c548b8af5"
+      "mtime": "00162",
+      "source_sha256": "9841603780f0e26e6d3c0483fef1b2c8232a7d0117efcb9b21edb6e8cd8e752c"
     },
     "docs/tasks/TASK.productization-requirements-09-15-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.productization-requirements-09-15-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "a1e09e05170ca685f03e4b66fd7f9dfc6daccb2a26da919ca00f2a2d5fbe8194"
     },
     "docs/tasks/TASK.productization-spec-09-15-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.productization-spec-09-15-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "c83f0f87047f5013f698ff8ad130f19a1e50a045d4cd387e8e4eba4e26e87f36"
     },
     "docs/tasks/TASK.reference-anonymization-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.reference-anonymization-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "9f14210ac0210c534855b83a61d13c4518b26a4cc6a80c4e75c276d17b8bfe76"
     },
     "docs/tasks/TASK.reference-boundary-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.reference-boundary-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0515028b56f77bf711939750f0685fd442b8b956b512baa9edb3cc116102e514"
     },
     "docs/tasks/TASK.reference-confirmation-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.reference-confirmation-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "e4ee647946d2faba67ebc7aa711265024360b346b22d4c4250f5c47514dfd460"
     },
     "docs/tasks/TASK.requirements-adversarial-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.requirements-adversarial-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b79f7b14b139b3f62f5273e81b652fdadaf423864f725cd64e475aa0e7a056a9"
     },
     "docs/tasks/TASK.requirements-clarification-09-10-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.requirements-clarification-09-10-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b374dac1346399610bc42a2cde7c2cb9951b69b87ae36ae41f1ed91c7656b62f"
     },
     "docs/tasks/TASK.runtime-core-09-11-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.runtime-core-09-11-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "5ad7ba29fe8ed5a62d2d4442e28288b2ae3c1e3d89fa429b9031006c51d986ee"
     },
     "docs/tasks/TASK.state-review-09-11-2026.md": {
       "role": "tasks",
       "caps": "docs/birdseye/caps/docs.tasks.TASK.state-review-09-11-2026.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "89c96af67c472fefc19d93d069fbd656e5eba984b0eed4d6726642560cafa89c"
     },
     "examples/README.md": {
       "role": "examples",
       "caps": "docs/birdseye/caps/examples.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "2ab252a6a42c522b99a745deb91fb75b82ceb9a5756308e6d8cf3257dcf0041a"
     },
     "fixtures/README.md": {
       "role": "fixtures",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "4a1b12d22bfdfc8035413041519746c37c5967d0d34a05c82519601cfcdab875"
     },
     "orchestration/development-plan.md": {
       "role": "orchestration",
       "caps": "docs/birdseye/caps/orchestration.development-plan.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "ad5608dfb9380d8e9d2bb6661e6f17d1cda84a128a586a8d733186e25b6198dd"
     },
     "schemas/README.md": {
       "role": "schemas",
       "caps": "docs/birdseye/caps/schemas.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "cfbf48bbde76af660fed7b95aa5f16a499a216f456c9e32e6c9360ae2edd1939"
     },
     "src/README.md": {
       "role": "src",
       "caps": "docs/birdseye/caps/src.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "0288378ecc7d778870b67a8c48674e14bd846cc490248ca22eb55c6a733490da"
     },
     "tests/README.md": {
       "role": "tests",
       "caps": "docs/birdseye/caps/tests.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "b994a5adbd95bb56d93db36d1d01bcc779f9aa61de6ef783f1b26a6a88d55af5"
     },
     "tools/README.md": {
       "role": "tools",
       "caps": "docs/birdseye/caps/tools.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "17e9590372b4d98521120ddb4449065d1dec01b5f2d2a01ba30573c29704bcd5"
     },
     "tools/review/README.md": {
       "role": "tools",
       "caps": "docs/birdseye/caps/tools.review.README.md.json",
-      "mtime": "00161",
+      "mtime": "00162",
       "source_sha256": "1634cfd95c262326265f62776af5317cc237df10faa40034cb8f44f5e1e5463e"
     }
   },

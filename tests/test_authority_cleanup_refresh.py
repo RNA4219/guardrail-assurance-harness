@@ -14,6 +14,7 @@ class AuthorityCleanupRefreshTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.runtime = AuthorityRuntime.__new__(AuthorityRuntime)
         r = self.runtime
+        r.database_mode = 'default'
         r.folder = Path(self.temp.name)
         r.prefix = 'gah-authority-' + 'a' * 32
         r.lock = {'image_id': 'sha256:' + 'b' * 64}

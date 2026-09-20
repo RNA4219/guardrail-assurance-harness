@@ -3,8 +3,8 @@ task_id: 20260915-03
 intent_id: INT-GAH-001
 owner: RNA4219
 status: in_progress
-last_reviewed_at: 2026-09-20
-next_review_due: 2026-10-20
+last_reviewed_at: 2026-09-21
+next_review_due: 2026-10-21
 ---
 
 # Task: Luna・DGXを監督した拡張実装
@@ -170,3 +170,11 @@ Lunaが固定query-scale builderとテストを担当し、親がworker・journa
 広いsetup test patternは、初回/旧候補/新候補の400/800件全評価を再実行する長時間testを含むと判明したため中断した。setup applyの先行2件とsetup baselineの先行4件は成功表示を確認したが、各suiteを最後まで実行していないので集計や受入へ加算しない。重複する大規模実行は既存の800件証跡を使い、実Docker/実案件の欠けた証拠を補ったとは扱わない。
 
 文書生成・整合確認はtools.workflow generate/checkともpass。workflow checkのremote_validation/product_acceptanceはnot_runで、拡張14要件の受入は未完了。
+
+## 2026-09-21 GitHub CIのfixture初期化修正
+
+利用者の赤CI修正依頼に基づき、Lunaが修正を担当し、親が製品コードとの整合とLinuxでの動作をレビューした。[mainのregression-2](https://github.com/RNA4219/guardrail-assurance-harness/actions/runs/35527448876/job/106122009544)は277件を実行し、失敗moduleはtest_authority_cleanup_refreshだけだった。AuthorityRuntime.__new__で生成したfixtureに、通常constructorが設定するdatabase_modeがなく、7件のerrorが発生していた。
+
+fixtureへdatabase_mode='default'を1行追加した。製品側の検査、所有権・不正state拒否のassert、テストの割当と成功条件は変更していない。LunaによるWindowsの対象5件と、親によるLinux Python 3.12の対象5件・既存モード検証13件がすべて成功した。後者は固定Python image内でネットワークなし・repo読取専用で実行したunittestであり、製品Docker workerの実行受入ではない。
+
+この修正のPR・push・マージは利用者の継続依頼に含む。全レーンの結果はGitHubの該当commitのChecksで確認し、局所試験を全件CI成功へ読み替えない。実データ依存の拡張受入は利用者の指示どおり保留する。
