@@ -51,10 +51,10 @@ jobs:
     needs: plan
     name: suite (${{ matrix.lane }})
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: ${{ matrix.lane == 'partitioned-transition' && 240 || 180 }}
     strategy:
       fail-fast: false
-      max-parallel: 12
+      max-parallel: 13
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6

@@ -20,6 +20,7 @@ DEDICATED = (
     ("finding-revalidation", "test_finding_revalidation_integration"),
     ("following-contract", "test_following_contract_integration"),
     ("mutation-review", "test_mutation_review_integration"),
+    ("partitioned-transition", "test_partitioned_transition_integration"),
 )
 GENERAL_SHARDS = 6
 
