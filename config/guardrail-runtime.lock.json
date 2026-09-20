@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "kind": "guardrail_runtime_lock",
-  "image_id": "sha256:70a95227f4489d1d2cbc9bc5edfa84a85467f1daf6bd6c4c447711ef496b5977",
+  "image_id": "sha256:282d6016e047c5662a1486d0b8fb80da9a70f62722cb56acb24504c0fda5f45b",
   "base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
-  "worker_digest": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+  "worker_digest": "b823952a82f39137f4561b782b43a08139b0b4909865cc039994d9fd080ddc5f",
   "target_source_digest": "2d931e2b97093b262e3145cc2dece27472391eefa82c9f83c4e89d59c1cb14d3",
-  "sources_digest": "b2b5f4f3a87abfcb535e284a198075ff180a2b867e49ac567a8b9b9c17742de5",
+  "sources_digest": "db28e227aacfb4abbcb4a9eeb9fb2080bc2c9d8862cfa0266e1c2e5c7730889b",
   "source_sha256": {
-    "fixtures/llm/guardrail_worker.py": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+    "fixtures/llm/guardrail_worker.py": "b823952a82f39137f4561b782b43a08139b0b4909865cc039994d9fd080ddc5f",
     "fixtures/llm/guardrail_target.py": "2d931e2b97093b262e3145cc2dece27472391eefa82c9f83c4e89d59c1cb14d3",
     "src/gah/__init__.py": "beee48202a74dae0d7ef5122fa479f3dffb3e568d7d28ea88ec7cf304d3a1d31",
     "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "image_id": "sha256:278fcb998e4cb2971b8e42f68d42e67eeb98b1e4e4c375211655eb9e89301855",
+  "image_id": "sha256:3a94fbcd3a622caaea881e9555bdfa11e187410fe5a166ad3945c9268ea1aecd",
   "base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
-  "worker_digest": "fa2e9c8b0ce706d75f0a2331c62ca8edf84234601c3294ffb4903a44583234d7",
+  "worker_digest": "578c27c0f6e9118c3febcd2087986ff89c29f0fc1b9c19ec093ffb44530b6669",
   "docker_binary_digest": "0a4d8fe2ab107ceae44ee5f5fc1e1c155790042b7e3d3163826660da882b389d",
   "entrypoint": [
     "/usr/local/bin/python",
