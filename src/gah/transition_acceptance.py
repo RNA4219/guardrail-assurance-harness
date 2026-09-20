@@ -231,7 +231,8 @@ def _check_source(db: sqlite3.Connection, source: Any, bound: dict[str, Any], no
     _ref(evidence.get("conditions_ref"), "bound_bundle")
     _ref(evidence.get("decision_ref"), "run_decision")
     _ref(evidence.get("closure_ref"), "resource_closure")
-    if (evidence["conditions_ref"] != content_ref("bound_bundle", run_id, bound)
+    stored_bound = assurance_authority._stored_bound(bound, source.get("baseline_context"))
+    if (evidence["conditions_ref"] != content_ref("bound_bundle", run_id, stored_bound)
             or evidence["decision_ref"] != content_ref("run_decision", run_id, decision)
             or evidence["closure_ref"] != content_ref("resource_closure", run_id, closure)
             or closure.get("manifest_digest") != content_ref("run_manifest", run_id, manifest)["digest"]):

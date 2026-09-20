@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "authority_deadline_parent_verification",
+  "status": "PASS",
+  "tests_passed": 61,
+  "runs": [
+    {
+      "stage": "deadline-parent-v1",
+      "test_count": 35,
+      "test_seconds": 0.506,
+      "exit_code": 0,
+      "elapsed_seconds": 0.7820000000065193,
+      "inputs_unchanged": true,
+      "log_sha256": "e6f176c1db044a2914118620e85e4f2048f9d7e991758c494c9fbfd94a2fe032",
+      "plan_sha256": "055e6fc3b23e32e486f240668fe0be0cb5a66af1dbe7d30e3efb03ac67ac9b43",
+      "modules": [
+        "tests.test_authority_deadline",
+        "tests.test_authority_clock",
+        "tests.test_authority_runtime",
+        "tests.test_docker_runner"
+      ]
+    },
+    {
+      "stage": "deadline-client-modes-v1",
+      "test_count": 26,
+      "test_seconds": 0.15,
+      "exit_code": 0,
+      "elapsed_seconds": 0.35999999998603016,
+      "inputs_unchanged": true,
+      "log_sha256": "a666b299e64f74b2353ea2ea40bacfbb6a128569bde55d5f3c85251d7015b046",
+      "plan_sha256": "d47a7daa816b4736c9ab17fa63a60feb2bf48a0c73970cef02f73426cb387677",
+      "modules": [
+        "tests.test_authority_client_reuse",
+        "tests.test_authority_running_clients",
+        "tests.test_authority_clock_recovery",
+        "tests.test_authority_readiness",
+        "tests.test_authority_cleanup_refresh"
+      ]
+    }
+  ],
+  "input_sha256": {
+    "tools/authority_runtime.py": "35cd41ae655148c6ae93b52ae85cf625cedf091473a29e06cf4d6ede49229c65",
+    "tests/test_authority_deadline.py": "b2987d858a37c3fa8f4a55a384598a03b8c949404930a7f7f3abe586ebd3e80f"
+  },
+  "parent_corrections": [
+    "client冒頭UID検査の復元",
+    "応答到着時にdeadline超過しても時計逆行の拒否を保存",
+    "RLock解放を別threadから検証",
+    "専用試験の独立import順を修正"
+  ],
+  "scope": "absolute time.monotonic_ns deadlineを指定したclientのdispatch/transport/mutex/retry予算。未指定経路のclient互換性と既存子process停止を確認。Docker実行なし。",
+  "limits": [
+    "cleanupはdispatch期限と独立した既存有限待ちを使う",
+    "クライアント停止はbroker transactionやworkerの取消し保証ではない",
+    "run_query_seriesの製品adapter/CLI接続と27cell実測は未完了"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "source_v12_regression_includes_this_change": false
+}

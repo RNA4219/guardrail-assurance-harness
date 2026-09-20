@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "scope": "authority packaging dependency and image-preparation unit tests",
+  "reported_tests": 15,
+  "passed": 14,
+  "skipped": 1,
+  "skip_reason": "Windows symlink unavailable",
+  "unittest_seconds": 13.278,
+  "source_file": "tools/prepare_authority_runtime.py",
+  "source_sha256": "51fe6110450503536c0bf6e7dea30feaf2617fe6eaeafdbb4c8232f18a37dee8",
+  "evidence_form": "parent tool output transcription; no raw log file",
+  "acceptance_pass": false
+}

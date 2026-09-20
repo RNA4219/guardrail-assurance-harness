@@ -15,10 +15,11 @@ from threading import RLock
 import json
 from pathlib import Path
 import sqlite3
+from .sqlite_limits import connect_sqlite
 import time
 from typing import Any, Callable, Iterator, Mapping
 
-from . import aggregation, decision, execution_profiles
+from . import aggregation, budget_warning, decision, execution_profiles
 from .contracts import ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER, require_digest, require_id
 from .corpus import validate_case_set
 from .policy import validate_policy_profile
@@ -250,6 +251,16 @@ def _cached_bound(source_digest, implementation, payload):
     return encode_result(implementation(value, baseline_context))
 
 
+@binding_cache.memoize
+def _cached_bound_digest(source_digest, implementation, packer, walker, limits, payload):
+    """検査済み完全入力からdigestだけを純粋に再利用する。"""
+    value, baseline_context = json.loads(payload)
+    rebound = implementation(value, baseline_context)
+    # packerはmiss時に全bundleのdepth/node/sizeを再検査する。
+    # walkerとlimitsはcache identityに含め、検査規則の変更で旧digestを再利用しない。
+    return packer(rebound)[1]
+
+
 def _bound_uncached(value: Any, baseline_context: Any = None) -> dict[str, Any]:
     fields = {"manifest", "contract", "plan", "policy", "registry", "case_set", "selected_controls", "ci_eligible"}
     if type(value) is not dict or set(value) != fields:
@@ -281,7 +292,41 @@ def _bound_uncached(value: Any, baseline_context: Any = None) -> dict[str, Any]:
 
 def bound_bundle_digest(bound_run: Any, baseline_context: Any = None) -> str:
     """実際の比較対象を再束縛して、開始許可表のcanonical digestを返す。"""
+    if type(bound_run) is dict and "_partitioned_context" in bound_run:
+        return _pack(bound_storage_document(bound_run, baseline_context))[1]
+    from .cache_inputs import plain
+    try:
+        cases = bound_run['case_set']['cases']
+        eligible = type(cases) is list and 400 <= len(cases) <= 415
+    except (KeyError, TypeError):
+        eligible = False
+    if eligible and plain([bound_run, baseline_context]):
+        try:
+            payload = json.dumps([bound_run, baseline_context], sort_keys=True,
+                ensure_ascii=False, separators=(',', ':'), allow_nan=False)
+        except (TypeError, ValueError, UnicodeError, RecursionError):
+            payload = None
+        if payload is not None:
+            try:
+                payload_size = len(payload.encode('utf-8'))
+            except UnicodeError:
+                payload_size = 2 * MAX_DOCUMENT_BYTES + 1
+            if payload_size <= 2 * MAX_DOCUMENT_BYTES:
+                from .evaluation_authority import _source_digest
+                limits = f"{MAX_DOCUMENT_BYTES}:{MAX_INTEGER}"
+                return _cached_bound_digest(
+                    _source_digest(), _bound_uncached, _pack, _walk_json,
+                    limits, payload,
+                )
     return _pack(_bound(bound_run, baseline_context))[1]
+
+
+def bound_storage_document(bound_run: Any, baseline_context: Any = None) -> dict[str, Any]:
+    """保存用documentを返す。v2の大きい内部contextを単一文書にしない。"""
+    if type(bound_run) is dict and "_partitioned_context" in bound_run:
+        from .partitioned_run_contracts import validate_partitioned_runtime
+        return validate_partitioned_runtime(bound_run, baseline_context)["_partitioned_receipt"]
+    return _bound(bound_run, baseline_context)
 
 
 def _binding_summary(bound: dict[str, Any], profile: dict[str, Any], baseline_context: Any) -> dict[str, Any]:
@@ -433,7 +478,7 @@ class RunEvidenceStore:
         self._allowed = _normalize_allowed_bindings(allowed_bindings)
         self._db: sqlite3.Connection | None = None
         try:
-            db = sqlite3.connect(str(Path(path)), isolation_level=None, timeout=5)
+            db = connect_sqlite(str(Path(path)), isolation_level=None, timeout=5)
             db.row_factory = sqlite3.Row
             db.execute("PRAGMA foreign_keys=ON")
             self._db = db
@@ -507,7 +552,33 @@ class RunEvidenceStore:
         bound = _load(row["bundle_json"], row["bundle_digest"])
         profile = _load(row["profile_json"], row["profile_digest"])
         baseline = None if row["baseline_json"] is None else _load(row["baseline_json"], row["baseline_digest"])
+        # The default v1 store never interprets the separate v2 receipt schema.
+        if type(bound) is not dict or "kind" in bound or "schema_version" in bound:
+            raise _error("STORAGE_CORRUPT")
         return bound, profile, baseline
+
+    def _resolve_run_context(self, db: sqlite3.Connection, row: sqlite3.Row,
+                             now: int) -> tuple[dict[str, Any], dict[str, Any], Any]:
+        """Return context for one operation; specialized books may resolve it freshly."""
+        return self._load_run(row)
+
+    def _binding_summary(self, bound: dict[str, Any], profile: dict[str, Any],
+                         baseline: Any) -> dict[str, Any]:
+        return _binding_summary(bound, profile, baseline)
+
+    def _aggregate_value(self, bound: dict[str, Any], attempts: list[dict[str, Any]],
+                         profile: dict[str, Any], baseline: Any) -> dict[str, Any]:
+        return aggregation.aggregate(bound, attempts, execution_profile=profile,
+                                     baseline_context=baseline)
+
+    def _aggregate_kind(self) -> str:
+        return "aggregation"
+
+    def _check_context(self, db: sqlite3.Connection, row: sqlite3.Row, now: int,
+                       bound: dict[str, Any], profile: dict[str, Any], baseline: Any) -> None:
+        execution_profiles.check_plan(profile, bound)
+        if _bound(bound, baseline) != bound or _profile(profile) != profile:
+            raise _error("STORAGE_CORRUPT")
 
     @staticmethod
     def _state(db: sqlite3.Connection, run_id: str) -> sqlite3.Row:
@@ -520,9 +591,9 @@ class RunEvidenceStore:
                 raise _error("STORAGE_CORRUPT")
         return row
 
-    def _run_view(self, db: sqlite3.Connection, run_id: str) -> dict[str, Any]:
+    def _run_view(self, db: sqlite3.Connection, run_id: str, now: int) -> dict[str, Any]:
         row = self._run_row(db, run_id)
-        bound, profile, baseline = self._load_run(row)
+        bound, profile, baseline = self._resolve_run_context(db, row, now)
         state = self._state(db, run_id)
         return {
             "schema_version": 1, "kind": "run_evidence_run", "run_id": run_id,
@@ -544,9 +615,7 @@ class RunEvidenceStore:
                                  state: sqlite3.Row) -> None:
         """現在利用判定の前に、run内の保存payloadと参照を再検査する。"""
         try:
-            execution_profiles.check_plan(profile, bound)
-            if _bound(bound, baseline) != bound or _profile(profile) != profile:
-                raise _error("STORAGE_CORRUPT")
+            self._check_context(db, row, now, bound, profile, baseline)
             if row["run_id"] != run_id or type(row["started_at"]) is not int or type(row["updated_at"]) is not int:
                 raise _error("STORAGE_CORRUPT")
             for value in (row["started_at"], row["updated_at"]):
@@ -653,14 +722,14 @@ class RunEvidenceStore:
                 current_aggregate_value = _load(
                     current_aggregate_row["aggregate_json"], current_aggregate_row["aggregate_digest"]
                 )
-            expected_aggregate = aggregation.aggregate(bound, list(attempts.values()), execution_profile=profile, baseline_context=baseline)
+            expected_aggregate = self._aggregate_value(bound, list(attempts.values()), profile, baseline)
             observed = [a["finished_at"] if a["finished_at"] is not None else a["started_at"] for a in attempts.values()]
             expected_aggregate["observed_at"] = min(observed) if observed else row["started_at"]
             expected_aggregate_digest = _pack(expected_aggregate)[1]
             aggregate_by_digest = {}
             for item in aggregate_rows:
                 aggregate_value = _load(item["aggregate_json"], item["aggregate_digest"])
-                if (aggregate_value.get("kind") != "aggregation" or aggregate_value.get("run_id") != run_id
+                if (aggregate_value.get("kind") != self._aggregate_kind() or aggregate_value.get("run_id") != run_id
                         or aggregate_value.get("contract_digest") != bound["manifest"]["contract_ref"]["digest"]
                         or aggregate_value.get("execution_profile") != profile
                         or aggregate_value.get("ci_eligible") is not False
@@ -692,7 +761,8 @@ class RunEvidenceStore:
                     raise _error("STORAGE_CORRUPT")
                 decision_input = deepcopy(aggregate_value)
                 decision_input["aggregate_digest"] = value["aggregate_digest"]
-                if self._decision_from_aggregate(bound, decision_input, value["assessed_at"]) != value:
+                if self._decision_from_aggregate(bound, decision_input, value["assessed_at"],
+                        budget_warning_basis=value.get("budget_warning")) != value:
                     raise _error("STORAGE_CORRUPT")
                 decision_digests.add(item["decision_digest"])
             if state["decision_digest"] is not None and not decision_rows:
@@ -706,7 +776,7 @@ class RunEvidenceStore:
                     raise _error("STORAGE_CORRUPT")
             else:
                 value = _load(terminal["terminal_json"], terminal["terminal_digest"])
-                binding = _binding_summary(bound, profile, baseline)
+                binding = self._binding_summary(bound, profile, baseline)
                 decision_digest = value.get("decision_digest")
                 if (value.get("kind") != "run_evidence_finalization" or value.get("run_id") != run_id
                         or value.get("binding") != binding or value.get("state") not in {"HOLD", "FINALIZED"}
@@ -749,21 +819,21 @@ class RunEvidenceStore:
                 if (existing["bundle_digest"] != bundle_digest or existing["profile_digest"] != profile_digest
                         or existing["baseline_digest"] != baseline_digest):
                     raise _error("RUN_CONFLICT")
-                view = self._run_view(db, run_id)
-                view["binding"] = _binding_summary(bound, profile, baseline_context)
+                view = self._run_view(db, run_id, now)
+                view["binding"] = self._binding_summary(bound, profile, baseline_context)
                 return view
             db.execute("INSERT INTO bound_runs VALUES(?,?,?,?,?,?,?,?,?)", (run_id, bundle_raw, bundle_digest, profile_raw, profile_digest, baseline_raw, baseline_digest, now, now))
             db.execute("INSERT INTO run_state VALUES(?,?,?,?,?,?,?,?,?,?)", (run_id, "OPEN", None, None, None, None, "UNKNOWN", now, None, 0))
-            view = self._run_view(db, run_id)
-            view["binding"] = _binding_summary(bound, profile, baseline_context)
+            view = self._run_view(db, run_id, now)
+            view["binding"] = self._binding_summary(bound, profile, baseline_context)
             return view
 
     def get_run(self, run_id: str) -> dict[str, Any]:
         _id(run_id)
         with self._transaction() as db:
-            self._now(db)
-            view = self._run_view(db, run_id)
-            view["binding"] = _binding_summary(view["bundle"], view["execution_profile"], view["baseline_context"])
+            now = self._now(db)
+            view = self._run_view(db, run_id, now)
+            view["binding"] = self._binding_summary(view["bundle"], view["execution_profile"], view["baseline_context"])
             return view
 
     def record_evidence_state(self, run_id: str, evidence_state: Any) -> dict[str, Any]:
@@ -786,7 +856,8 @@ class RunEvidenceStore:
             raise _error("INVALID_EVIDENCE_STATE")
         with self._transaction() as db:
             now = self._now(db)
-            self._run_row(db, run_id)
+            run_row = self._run_row(db, run_id)
+            self._resolve_run_context(db, run_row, now)
             current = self._state(db, run_id)
             current_generation = current["evidence_generation"]
             if generation < current_generation:
@@ -838,7 +909,7 @@ class RunEvidenceStore:
         with self._transaction() as db:
             now = self._now(db)
             row = self._run_row(db, run_id)
-            bound, profile, _ = self._load_run(row)
+            bound, profile, _ = self._resolve_run_context(db, row, now)
             _binding_matches(bound, profile, normalized)
             state = self._state(db, run_id)
             existing = db.execute("SELECT * FROM attempts WHERE attempt_id=?", (normalized["attempt_id"],)).fetchone()
@@ -875,15 +946,17 @@ class RunEvidenceStore:
     def get_attempt(self, attempt_id: str) -> dict[str, Any]:
         _id(attempt_id)
         with self._transaction() as db:
-            self._now(db)
+            now = self._now(db)
             row = db.execute("SELECT * FROM attempts WHERE attempt_id=?", (attempt_id,)).fetchone()
             if row is None:
                 raise _error("ATTEMPT_NOT_FOUND")
+            run_row = self._run_row(db, row["run_id"])
+            self._resolve_run_context(db, run_row, now)
             return {"schema_version": 1, "kind": "attempt_record", "attempt": _load(row["attempt_json"], row["attempt_digest"]), "attempt_digest": row["attempt_digest"], "delivery_count": row["delivery_count"], "ci_eligible": False}
 
     def _aggregate_in_tx(self, db: sqlite3.Connection, run_id: str, now: int) -> dict[str, Any]:
         row = self._run_row(db, run_id)
-        bound, profile, baseline = self._load_run(row)
+        bound, profile, baseline = self._resolve_run_context(db, row, now)
         rows = db.execute("SELECT * FROM attempts WHERE run_id=? ORDER BY attempt_id", (run_id,)).fetchall()
         attempts = [_load(item["attempt_json"], item["attempt_digest"]) for item in rows]
         observed_times = [
@@ -893,7 +966,7 @@ class RunEvidenceStore:
         if any(value > now for value in observed_times):
             raise _error("FUTURE_ATTEMPT")
         try:
-            result = aggregation.aggregate(bound, attempts, execution_profile=profile, baseline_context=baseline)
+            result = self._aggregate_value(bound, attempts, profile, baseline)
         except (ContractError, ValueError, TypeError, KeyError, RecursionError):
             raise _error("AGGREGATION_INVALID") from None
         result["observed_at"] = min(observed_times) if observed_times else row["started_at"]
@@ -916,7 +989,13 @@ class RunEvidenceStore:
             return self._aggregate_in_tx(db, run_id, now)
 
     @staticmethod
-    def _decision_from_aggregate(bound: dict[str, Any], aggregate_value: dict[str, Any], now: int) -> dict[str, Any]:
+    def _decision_from_aggregate(bound: dict[str, Any], aggregate_value: dict[str, Any], now: int,
+                                 *, budget_warning_basis=None) -> dict[str, Any]:
+        basis = None
+        warning = False
+        if budget_warning_basis is not None:
+            warning = bool(budget_warning.warning_dimensions(bound, budget_warning_basis, now))
+            basis = deepcopy(budget_warning_basis)
         metrics = aggregate_value.get("metrics")
         if type(metrics) is not list:
             raise _error("DECISION_UNAVAILABLE")
@@ -943,7 +1022,7 @@ class RunEvidenceStore:
                 "integrity_failure": aggregate_value["integrity_failure"] if index == 0 else False,
                 "forbidden_violation": aggregate_value["forbidden_violation"] if index == 0 else False,
                 "critical_violation": aggregate_value["critical_violation"] if index == 0 else False,
-                "warning": False,
+                "warning": warning if index == 0 else False,
             }
             try:
                 component = (decision.assess(request) if metrics
@@ -967,25 +1046,31 @@ class RunEvidenceStore:
             "assessed_at": now, "purpose": "component_validation", "assurance": assurance,
             "metrics": all_metrics, "metric_scopes": deepcopy(aggregate_value.get("metric_scopes", {})),
             "reasons": reasons, "components": components, "ci_eligible": False,
+            **({"budget_warning": basis} if basis is not None else {}),
         }
 
-    def finalize(self, run_id: str) -> dict[str, Any]:
+    def finalize(self, run_id: str, *, budget_warning_basis=None) -> dict[str, Any]:
         _id(run_id)
         with self._transaction() as db:
             now = self._now(db)
             row = self._run_row(db, run_id)
-            bound, profile, baseline = self._load_run(row)
+            bound, profile, baseline = self._resolve_run_context(db, row, now)
             state = self._state(db, run_id)
             terminal = db.execute("SELECT * FROM terminals WHERE run_id=?", (run_id,)).fetchone()
             if terminal is not None:
                 value = _load(terminal["terminal_json"], terminal["terminal_digest"])
+                if budget_warning_basis is not None:
+                    basis = budget_warning.validate_basis(bound, budget_warning_basis, value["decision"]["assessed_at"])
+                    if value["decision"].get("budget_warning") != basis:
+                        raise _error("BUDGET_WARNING_MISMATCH")
                 return deepcopy(value)
             aggregate_value = self._aggregate_in_tx(db, run_id, now)
-            decision_value = self._decision_from_aggregate(bound, aggregate_value, now)
+            decision_value = self._decision_from_aggregate(bound, aggregate_value, now,
+                budget_warning_basis=budget_warning_basis)
             raw, digest = _pack(decision_value)
             if db.execute("SELECT 1 FROM decisions WHERE run_id=? AND decision_digest=?", (run_id, digest)).fetchone() is None:
                 db.execute("INSERT INTO decisions VALUES(?,?,?,?)", (run_id, digest, raw, now))
-            binding = _binding_summary(bound, profile, baseline)
+            binding = self._binding_summary(bound, profile, baseline)
             current_state = self._state(db, run_id)
             if decision_value["assurance"] == "HOLD" and current_state["state"] != "HOLD":
                 db.execute("UPDATE run_state SET state='HOLD', hold_reason=COALESCE(hold_reason,'DECISION_HOLD') WHERE run_id=?", (run_id,))
@@ -1008,10 +1093,12 @@ class RunEvidenceStore:
     def get_terminal(self, run_id: str) -> dict[str, Any]:
         _id(run_id)
         with self._transaction() as db:
-            self._now(db)
+            now = self._now(db)
             row = db.execute("SELECT * FROM terminals WHERE run_id=?", (run_id,)).fetchone()
             if row is None:
                 raise _error("NOT_FINALIZED")
+            run_row = self._run_row(db, run_id)
+            self._resolve_run_context(db, run_row, now)
             return deepcopy(_load(row["terminal_json"], row["terminal_digest"]))
 
     def current_use(self, run_id: str, expected_binding: Any) -> dict[str, Any]:
@@ -1021,11 +1108,11 @@ class RunEvidenceStore:
         with self._transaction() as db:
             now = self._now(db)
             row = self._run_row(db, run_id)
-            bound, profile, baseline = self._load_run(row)
+            bound, profile, baseline = self._resolve_run_context(db, row, now)
             state = self._state(db, run_id)
             from .evidence_snapshot_cache import check
             check(db, run_id, now, row, bound, profile, baseline, state, self._validate_store_contents)
-            expected = _binding_summary(bound, profile, baseline)
+            expected = self._binding_summary(bound, profile, baseline)
             binding_match = expected_binding == expected
             reasons: list[str] = []
             if not binding_match:

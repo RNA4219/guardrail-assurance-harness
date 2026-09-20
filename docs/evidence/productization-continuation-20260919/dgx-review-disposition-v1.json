@@ -1,0 +1,30 @@
+{
+  "ci_eligible": false,
+  "elapsed_seconds": 3.603,
+  "full_pac_acceptance": false,
+  "items": [
+    {
+      "disposition": "REJECT",
+      "index": 1,
+      "reason": "A database page cap does not itself imply existing row loss; rollback and reopen tests preserve committed rows."
+    },
+    {
+      "disposition": "REJECT",
+      "index": 2,
+      "reason": "The page-count disk cap is not a 256 MiB process memory limit."
+    },
+    {
+      "disposition": "ACCEPT_AS_REMAINING_CONDITION",
+      "index": 3,
+      "reason": "The real filesystem may become full before the logical cap; free-space observation and failure behavior remain separate conditions."
+    }
+  ],
+  "kind": "supervised_model_review_disposition",
+  "local_source_artifact_sha256": "7f2b6f57b93103f542b5ae103ae90778b58234e26824dfdf53a0691ba787fc9b",
+  "model": "qwen3.8-flash-next",
+  "proof_authority": false,
+  "request_sha256": "0de4ee71c0ec230f8c1154e1f9020ddb1d2c572c7079cdfa782f7d91021b0232",
+  "response_artifact": "dgx-storage-review-v2.json",
+  "reviewer": "parent-agent",
+  "schema_version": 1
+}

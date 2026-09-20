@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "command",
+    "request_id",
+    "operation_status",
+    "checked_at",
+    "result_ref",
+    "reasons",
+    "ci_eligible",
+    "exit_code"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "type": "integer"
+    },
+    "kind": {
+      "const": "extension_operation_result"
+    },
+    "command": {
+      "enum": [
+        "benchmark.compare",
+        "benchmark.invalid",
+        "benchmark.measure",
+        "benchmark.plan",
+        "ops.bundle.create",
+        "ops.doctor",
+        "ops.invalid",
+        "ops.migrate.apply",
+        "ops.migrate.preview",
+        "ops.retention.apply",
+        "ops.retention.plan",
+        "ops.setup.apply",
+        "ops.setup.preview",
+        "pilot.execute",
+        "pilot.import",
+        "pilot.invalid",
+        "pilot.plan",
+        "pilot.register",
+        "pilot.report",
+        "pilot.status"
+      ]
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "operation_status": {
+      "enum": [
+        "COMPLETED",
+        "REJECTED",
+        "INCOMPLETE",
+        "CANCELLED"
+      ]
+    },
+    "checked_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "result_ref": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "id",
+            "digest"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "AUTHORITY_REQUIRED",
+          "BINDING_MISMATCH",
+          "CAPACITY_EXCEEDED",
+          "CLOCK_ROLLBACK",
+          "CLOCK_UNAVAILABLE",
+          "CONDITION_MISMATCH",
+          "DATA_INCOMPLETE",
+          "DISK_INSUFFICIENT",
+          "DOCKER_UNAVAILABLE",
+          "EVIDENCE_UNAVAILABLE",
+          "IDEMPOTENCY_CONFLICT",
+          "IDENTITY_UNAVAILABLE",
+          "IMAGE_UNAVAILABLE",
+          "INVALID_INPUT",
+          "IO_ERROR",
+          "NOT_STARTED",
+          "OBSERVATION_MISSING",
+          "OPERATION_CANCELLED",
+          "OPERATION_UNKNOWN",
+          "PATH_REJECTED",
+          "PLAN_EXPIRED",
+          "PLATFORM_UNSUPPORTED",
+          "PYTHON_UNSUPPORTED",
+          "REFERENCE_MISMATCH",
+          "RESULT_CONFLICT",
+          "RUNTIME_UNAVAILABLE",
+          "SCHEMA_UNSUPPORTED",
+          "SETTLEMENT_PENDING",
+          "SLO_FAILED",
+          "STOP_UNCONFIRMED",
+          "UNSUPPORTED_CAPABILITY",
+          "AUTHORITY_DENIED",
+          "AUTHORITY_REVOKED",
+          "STALE_OR_INVALIDATED",
+          "RETENTION_NOT_EXPIRED",
+          "RETENTION_HOLD",
+          "RETENTION_STATE_CONFLICT",
+          "RETENTION_PLAN_INVALID"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 31
+    },
+    "ci_eligible": {
+      "const": false
+    },
+    "exit_code": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "operation_status": {
+            "const": "COMPLETED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "exit_code": {
+            "const": 0
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "AUTHORITY_REQUIRED",
+                "BINDING_MISMATCH",
+                "CAPACITY_EXCEEDED",
+                "CLOCK_ROLLBACK",
+                "CLOCK_UNAVAILABLE",
+                "CONDITION_MISMATCH",
+                "DATA_INCOMPLETE",
+                "DISK_INSUFFICIENT",
+                "DOCKER_UNAVAILABLE",
+                "EVIDENCE_UNAVAILABLE",
+                "IDEMPOTENCY_CONFLICT",
+                "IDENTITY_UNAVAILABLE",
+                "IMAGE_UNAVAILABLE",
+                "INVALID_INPUT",
+                "IO_ERROR",
+                "NOT_STARTED",
+                "OBSERVATION_MISSING",
+                "OPERATION_CANCELLED",
+                "OPERATION_UNKNOWN",
+                "PATH_REJECTED",
+                "PLAN_EXPIRED",
+                "PLATFORM_UNSUPPORTED",
+                "PYTHON_UNSUPPORTED",
+                "REFERENCE_MISMATCH",
+                "RESULT_CONFLICT",
+                "RUNTIME_UNAVAILABLE",
+                "SCHEMA_UNSUPPORTED",
+                "SETTLEMENT_PENDING",
+                "SLO_FAILED",
+                "STOP_UNCONFIRMED",
+                "UNSUPPORTED_CAPABILITY"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 31
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operation_status": {
+            "const": "REJECTED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "exit_code": {
+            "const": 1
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "AUTHORITY_REQUIRED",
+                "BINDING_MISMATCH",
+                "CAPACITY_EXCEEDED",
+                "CLOCK_ROLLBACK",
+                "CLOCK_UNAVAILABLE",
+                "CONDITION_MISMATCH",
+                "DATA_INCOMPLETE",
+                "DISK_INSUFFICIENT",
+                "DOCKER_UNAVAILABLE",
+                "EVIDENCE_UNAVAILABLE",
+                "IDEMPOTENCY_CONFLICT",
+                "IDENTITY_UNAVAILABLE",
+                "IMAGE_UNAVAILABLE",
+                "INVALID_INPUT",
+                "IO_ERROR",
+                "NOT_STARTED",
+                "OBSERVATION_MISSING",
+                "OPERATION_CANCELLED",
+                "OPERATION_UNKNOWN",
+                "PATH_REJECTED",
+                "PLAN_EXPIRED",
+                "PLATFORM_UNSUPPORTED",
+                "PYTHON_UNSUPPORTED",
+                "REFERENCE_MISMATCH",
+                "RESULT_CONFLICT",
+                "RUNTIME_UNAVAILABLE",
+                "SCHEMA_UNSUPPORTED",
+                "SETTLEMENT_PENDING",
+                "SLO_FAILED",
+                "STOP_UNCONFIRMED",
+                "UNSUPPORTED_CAPABILITY"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 31,
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operation_status": {
+            "const": "INCOMPLETE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "exit_code": {
+            "const": 2
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "AUTHORITY_REQUIRED",
+                "BINDING_MISMATCH",
+                "CAPACITY_EXCEEDED",
+                "CLOCK_ROLLBACK",
+                "CLOCK_UNAVAILABLE",
+                "CONDITION_MISMATCH",
+                "DATA_INCOMPLETE",
+                "DISK_INSUFFICIENT",
+                "DOCKER_UNAVAILABLE",
+                "EVIDENCE_UNAVAILABLE",
+                "IDEMPOTENCY_CONFLICT",
+                "IDENTITY_UNAVAILABLE",
+                "IMAGE_UNAVAILABLE",
+                "INVALID_INPUT",
+                "IO_ERROR",
+                "NOT_STARTED",
+                "OBSERVATION_MISSING",
+                "OPERATION_CANCELLED",
+                "OPERATION_UNKNOWN",
+                "PATH_REJECTED",
+                "PLAN_EXPIRED",
+                "PLATFORM_UNSUPPORTED",
+                "PYTHON_UNSUPPORTED",
+                "REFERENCE_MISMATCH",
+                "RESULT_CONFLICT",
+                "RUNTIME_UNAVAILABLE",
+                "SCHEMA_UNSUPPORTED",
+                "SETTLEMENT_PENDING",
+                "SLO_FAILED",
+                "STOP_UNCONFIRMED",
+                "UNSUPPORTED_CAPABILITY"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 31,
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operation_status": {
+            "const": "CANCELLED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "exit_code": {
+            "const": 3
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "AUTHORITY_REQUIRED",
+                "BINDING_MISMATCH",
+                "CAPACITY_EXCEEDED",
+                "CLOCK_ROLLBACK",
+                "CLOCK_UNAVAILABLE",
+                "CONDITION_MISMATCH",
+                "DATA_INCOMPLETE",
+                "DISK_INSUFFICIENT",
+                "DOCKER_UNAVAILABLE",
+                "EVIDENCE_UNAVAILABLE",
+                "IDEMPOTENCY_CONFLICT",
+                "IDENTITY_UNAVAILABLE",
+                "IMAGE_UNAVAILABLE",
+                "INVALID_INPUT",
+                "IO_ERROR",
+                "NOT_STARTED",
+                "OBSERVATION_MISSING",
+                "OPERATION_CANCELLED",
+                "OPERATION_UNKNOWN",
+                "PATH_REJECTED",
+                "PLAN_EXPIRED",
+                "PLATFORM_UNSUPPORTED",
+                "PYTHON_UNSUPPORTED",
+                "REFERENCE_MISMATCH",
+                "RESULT_CONFLICT",
+                "RUNTIME_UNAVAILABLE",
+                "SCHEMA_UNSUPPORTED",
+                "SETTLEMENT_PENDING",
+                "SLO_FAILED",
+                "STOP_UNCONFIRMED",
+                "UNSUPPORTED_CAPABILITY"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 31,
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "enum": [
+              "ops.invalid",
+              "benchmark.invalid",
+              "pilot.invalid"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "operation_status": {
+            "const": "REJECTED"
+          },
+          "result_ref": {
+            "type": "null"
+          },
+          "reasons": {
+            "const": [
+              "INVALID_INPUT"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

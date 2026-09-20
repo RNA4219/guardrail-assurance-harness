@@ -1,0 +1,25 @@
+{
+  "id": "docs/productization-performance-spec.md",
+  "role": "productization-performance-spec",
+  "title": "プロダクト化性能・CI詳細仕様（GAH-PR05〜08/13）",
+  "summary": "本書は [productization-requirements.md](productization-requirements.md) のGAH-PR05〜08/13を、同じ入力・判定・権限・資源上限で測るための計測とCIの仕様案である。数値は提案SLOであり、達成済みの性能ではない。今回の文書検収、技術受入、性能達成、製品CIでの利用を別の状態として記録する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-partition-spec.md",
+    "docs/productization-requirements.md",
+    "docs/productization-spec.md"
+  ],
+  "deps_in": [
+    "docs/productization-operations-spec.md",
+    "docs/productization-spec.md",
+    "docs/productization-status.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "fd7704a8b5971c06888f1aaf50ea1989fd8af6c59c4c379d447d1ac074b704ec"
+}

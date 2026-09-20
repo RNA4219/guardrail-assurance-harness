@@ -27,6 +27,25 @@ def encode_result(value):
 from .immutable_cache import binding_cache
 
 
+_CACHE_LARGE_CASE_COUNTS = frozenset(range(400, 416))
+_CACHE_SMALL_CI_CASE_COUNTS = frozenset((15, 30))
+
+
+def _cacheable_case_set(manifest, contract, case_set):
+    """固定大規模集合と固定CI小集合だけを純粋cacheへ送る。"""
+    if type(case_set) is not dict or type(case_set.get('cases')) is not list:
+        return False
+    count = len(case_set['cases'])
+    if count in _CACHE_LARGE_CASE_COUNTS:
+        return True
+    return (count in _CACHE_SMALL_CI_CASE_COUNTS
+            and type(manifest) is dict
+            and manifest.get('use_cases') == ['UC-CI']
+            and type(contract) is dict
+            and contract.get('use_cases') == ['UC-CI']
+            and case_set.get('purpose') == 'acceptance')
+
+
 @binding_cache.memoize
 def _bound_manifest(source_digest, implementation, payload):
     manifest,contract,plan,policy,registry,case_set,baseline=json.loads(payload)
@@ -34,10 +53,10 @@ def _bound_manifest(source_digest, implementation, payload):
 
 
 def bind_run_manifest(manifest,contract,plan,policy,registry,case_set,*,baseline_context=None):
-    """大規模な固定JSONだけを完全入力で再束縛する。認証・DB状態は扱わない。"""
+    """固定JSONだけを完全入力で再束縛する。認証・DB状態を扱わない。"""
     from .run_contracts import bind_run_manifest as implementation
     values=[manifest,contract,plan,policy,registry,case_set,baseline_context]
-    eligible=(type(case_set) is dict and type(case_set.get('cases')) is list and 400<=len(case_set['cases'])<=415)
+    eligible=_cacheable_case_set(manifest,contract,case_set)
     if eligible and plain(values):
         try:payload=encode_result(values)
         except (TypeError,ValueError,UnicodeError,RecursionError):payload=None

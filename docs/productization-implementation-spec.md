@@ -1,0 +1,112 @@
+---
+intent_id: INT-GAH-001
+owner: RNA4219
+status: active
+last_reviewed_at: 2026-09-15
+next_review_due: 2026-10-15
+---
+
+# 拡張実装仕様: 共通境界と接続
+
+[拡張仕様](productization-spec.md)を実装する際の追加決定。仕様作成時の証拠は当時の版として保持し、実装の検査結果を別に記録する。[実装Task](tasks/TASK.productization-implementation-09-15-2026.md)が進捗の正本である。
+
+## 共通契約
+
+`src/gah/productization.py` は補助操作の10 fieldを厳密に検査する。既存の製品CI応答へfieldを追加しない。応答は `extension_operation_result` 一つであり、結果本文は `result_ref` の別artifactで読む。COMPLETED/0も常にci_eligible=false。保存済み根拠があればINCOMPLETEにもresult_refを保持できる。
+
+構文不正等でrequest_idを得られない場合はnull付きREJECTEDを返し、journalの作成と外部操作は開始しない。 未知操作や必須subcommand欠損で実操作名を得られない場合に限り、commandをops.invalid / benchmark.invalid / pilot.invalidとする。これらはエラー表示専用でREJECTED・INVALID_INPUT・result_ref=nullだけを許し、実行やjournal保存の操作集合には入れない。IDなしの操作を入力digestだけで再配送することは認めない。固定reason集合は同moduleのREASONSを正本とし、[結果Schema](../schemas/extension-operation-result.v1.schema.json)へ反映する。
+
+計画の共通外枠はschema_version、kind、id、requirement_ids、source_ref、requirements_ref、created_at、expires_at、payloadの9 field。source_refとrequirements_refはsnapshot_manifest参照。GAH-PR01〜14の重複のない非空集合を許す。payloadは操作別の専用validatorが未知fieldを拒否する。共通検査を通過しただけで採択済みにはしない。
+
+`ProductizationAcceptanceRecord` の正式wireはschema_version=1、kind=productization_acceptance_record、idに、requirement_id、acceptance_id、plan_ref、source_ref、evidence_refs、status、reasons、checked_atを加えた11 field。[受入記録Schema](../schemas/productization-acceptance-record.v1.schema.json)とPython validatorを使用する。PR/PAC番号は一致、NOT_RUNのEvidenceは空、PASSにはplanと1件以上の根拠が必要。FAILと欠測の併存ではFAILと不足理由を保存する。
+
+## 保存と再配送
+
+artifact入出力は明示workspace内だけで行い、pathの親参照・symlink・Windows reparse pointを拒否する。各操作は専用validatorを通したkind/id付き文書をcanonical UTF-8でexclusive createし、同内容の再配送だけを許す。異内容、途中保存、参照不一致を自動上書きで修復しない。workspaceのOSアクセス制御はtrustedな配置側の責務で、path検査を認証や隔離の代替にはしない。
+
+参照digestはcanonical artifactのSHA-256。snapshotが保持する元ファイルのraw SHA-256とは比較対象が異なる。両者を直接比較する実装は不可。
+
+`src/gah/productization_journal.py` は専用SQLite v1。trustedな管理入口が現在認証したprincipalを渡し、入力JSONのrole/principalを認証として使わない。唯一キーはprincipal/command/request_id、入力digestの不一致は拒否する。beginのcreated=falseかつresult=nullは、開始済みか不明な既存意図であり再実行許可ではない。authorityへ同requestのreceipt/現在状態を照会し、内容一致を確認してfinishする。照会不能時には未完了の意図を保持する。
+
+確定した補助応答は不変。stdout障害でartifactや応答を削除しない。未確認外部操作をINCOMPLETEの確定応答として閉じて再送可能にすることも禁止する。権限・実予算・送信・停止は従来のauthorityとrunnerが判断する。
+
+## CI履歴と実行計画
+
+`tools/ci_history.py`は既定ブランチの成功pushから直近の履歴artifactを一度だけ取得する。固定SHAのartifact Actionsを使い、履歴がない初回も全試験を計画する。履歴はrunner/Python/image/計測方式の4条件で分け、moduleごとの直近3つの異なるrunを使う。source SHAは観測の出典であり、過去履歴の環境比較には含めない。
+
+CI実行計画はschema_version=1、kind=ci_execution_plan、source_sha、history_digest、plan、lane_modulesの6 field。正規化した全体のSHA-256をplan jobから全laneへ渡す。lane_modulesは各moduleを一つのlaneへ対応させ、全test inventoryのdigestも再計算して照合する。実測は各moduleを準備・終了処理ごと一度だけ実行し、失敗・skip・未実行を成功履歴へ入れない。汎用6分割と専用6jobを維持する。
+
+各laneの計画には同じ凍結profileを使い、実測profileは実hostから別に取得する。未commit内容を同じcommitの実測と称しない。unit gateは全lane成功を要求した上で、report名・module集合・件数・source SHA・run ID/attemptを照合する。異なる実測profileのreportは元artifactに保持し、履歴へ混ぜた数と除外数を区別する。push後のGitHub実行・3回比較・性能目標の達成は別の実測を要する。
+
+## 履歴一覧
+
+`python -m tools.gah_run list --runtime <既存runtime> --request <一覧request JSON>`を追加する。run/resume/cancel/statusの既存契約は維持する。新modeは評価を開始せず、認証済みoperatorで`run_catalog_list`へ照会する。入力はschema_version=1、action、request_id、series_id、scope_ref（evaluation_contract）、page_size_count（1〜100）、cursor（初回null）の7 field。次pageでは新しいrequest_idと返されたopaque cursorを渡す。
+
+一覧の成功はevaluation_authority_result、ci_eligible=false、current_ci_checked=false。itemsはrun_id、created_at、manifest_ref、plan_digest、contract_generationのみで、現在CIの判定や証拠本文を返さない。sortはcreated_at ASC、run_id ASC。plan固有IDを本文なしで推測せず、planはdigestまで示す。必要な本文は既存の点照会から取得する。
+
+cursorは4096 byte以下で、principal・context・authorityインスタンス・scope・page size・metadata snapshotに結合した署名付きtoken。クライアントは内部表現を使用しない。有効期間は単調時計による900秒で、次pageへ進んでも延長しない。brokerまたはstoreの再起動、参照・権限世代・run状態・停止精算・証拠metadataの変化、改変・scope変更はSTALE_OR_INVALIDATEDで拒否する。snapshot確認のためmetadataは走査するが、manifest/plan/usage本文は展開しない。各対象表10000行を上限とし、上限超過はCAPACITY_EXCEEDEDとする。Pythonへ取得したmetadata行数をmetadata_rows_materializedへ返す。これはSQLite内部の走査回数ではなく、DB内部の作業量と時間は性能計測で別に確認する。
+
+一覧CLIは正常0、確定入力/権限/失効/容量拒否1、通信/出力等の不明2。エラーはrun_catalog_errorと固定reasonを返し、いずれもci_eligible=false。現在契約のrefは照合するが、その契約・過去runが今CIに使えるかの検証は一覧に含めない。
+
+## authority診断
+
+`authority_diagnostics`の入力はschema_version、action、request_idのみ。manager/operator/validatorの実認証でfreshに照会し、既存evaluation_authority_resultへdatabase_schema_version、permission_generation、extension_digest、checked_atを返す。DBのPRAGMA user_version、adoption_meta、実装版の一致を同transactionで検査する。未知版、権限失効、時計逆行は既存エラーとし、診断によって採択・実行・CI許可を発行しない。
+
+## pilot metadataの採択
+
+pilot_binding_register / pilot_plan_register / pilot_plan_validate / pilot_plan_adopt / pilot_plan_currentは専用の固定action。managerが登録、独立validatorが検査、managerが検査receiptを参照して採択する。expected_generation・permission_generation・期限・actor失効・originの保存行を照合する。schema_versionはboolを整数として受け付けない。
+
+初版は外部参照の正式importが未接続であり、metadata_only=true、external_refs_verified=false、authority_required=true、product_run_authority=falseを返す。current.valid=trueはmetadataの状態だけで、製品runを開始する許可ではない。状態照会は毎回freshに行い、個別観測の算術結果も、実案件の出所・独立検査・計画採択が未照合ならPACのPASSへ昇格させない。
+
+## 保持の運用入口
+
+operations_retention.executeは既存evidence_retention_plan/applyだけへ接続する。planはmanager UID、applyはoperator UID。入力にroleや任意actionを追加できない。認証principal/command/request_idを私有broker requestへ結び、authorityの確定応答と同じ入力digestを専用journalに保存する。
+
+外部commit後の応答消失では、新しい操作を作らず同じbroker requestで保存receiptを回収する。二回目の拒否だけで前回未実行とは断定しない。Evidence本文の削除・tombstone・元receiptの不変性は既存authorityが検査する。RETENTION_NOT_EXPIRED、RETENTION_HOLD、RETENTION_STATE_CONFLICT、RETENTION_PLAN_INVALIDを同名の補助reasonで保持する。
+
+## 診断bundle
+
+operations_bundle.createは既存runtimeへ固定operatorで照会し、新規出力directoryにdiagnostics.jsonとmanifest.jsonを保存する。64 MiB/256ファイルを上限とし、manifest自身もファイル数と実byteへ含める。manifestのentriesはデータファイルだけ、file_countはmanifestを含む総数とする。単一writeは1 MiB以下、fsync後にmanifestを完了markerとして保存する。成果物のbytes/hash、空き容量、実出力量を記録する。
+
+run_diagnosticsはschema_version/action/request_id/run_idの4 fieldを受け、operator/validatorの認証transactionで対象runのartifact参照、状態、資源上限、保持保留・tombstone、DB版・権限世代を読む。artifact本文を一覧でコピーせず、参照は256件を上限にする。run_statusから得るmanifest/planも完全参照と固定数値だけへ投影し、actor名、path、raw入力、モデル出力、自由文ログを保存しない。前後のrun状態と権限世代を再照合し、途中変更はSTALE_OR_INVALIDATEDとする。
+
+doctor・レンダリング済みreport・migration receiptを指定していない初版bundleは、その欠落をuncollectedへ明記する。利用可能なplan/run/report関連artifactの参照と現在の移行先DB版は診断metadataで追える。bundleの成功は指定metadataの保存だけであり、fresh CIや全情報の収集を意味しない。
+
+出力先が既存なら上書きせず拒否する。完成済みbundleの保存後にjournal応答が失われた場合だけ、manifestと各entryを照合して同じ操作を回収する。途中出力はINCOMPLETEとして残し、別要求や推測削除で隠さない。確定済み応答の再配送は当時の保存結果であり、ファイルの現在状態や現在CIの証明ではない。
+
+## setupと共通transport
+
+`python -m tools.gah_ops setup apply --workspace <workspace> --plan <plan>` は固定sampleだけを適用する。`tools/setup_apply.py`がplanの期限・source・要件・保存ref・固定role配置・設定・容量・sampleを再照合し、OS principal/command/request_idと全plan参照をjournalへ結ぶ。変更操作のID省略時はplan IDを使い、明示不正IDを補完しない。setup単位の排他の内側で、既存CLIと同じ `supervised-transport` / `deployment` / `supervisor` の排他を保持する。doctor等で最後のlock keyを変えると別排他になるため禁止する。
+
+固定policyをmanagerが提案、validatorが検査、managerが採択する。初回sample契約も同じ順序とする。`tools/setup_baseline.py`は既存Supervisorの予約・送信・停止・usage・Evidence保存を再利用し、UC-CIは15件、UC-LLMは400件/600段階を実行する。開始済みなのに実終了時刻がない操作へ終刻を補わず、同operationの停止回収と未精算を保持する。Evidence確定後にbaselineの独立検証と採択を行う。
+
+初回契約gen1だけでは通常runを開始できないため、setupは比較gen2も作成する。変更は比較baselineの追加だけで、閾値・対象・oracleは変えない。候補の旧/新を固定factoryの全本文と完全refで照合し、CIは旧15/新30件、LLMは旧400/新800件を実行する。validatorのcandidate検査後だけmanagerがgen2を採択する。各変更request/responseを不変checkpointへ残し、採択応答消失からも同requestのreceiptを回収する。
+
+管理planの保存完了は採択authorityではない。実際のpolicy・契約・baseline・比較候補について、分離された認証APIの検証/採択receiptを追跡する。ready doctorと出力直前のsource/期限照合、client cleanupが完了した後に、異なるrun-request.jsonとci-request.jsonを保存する。通常runはまだ実行せず、次のgah_runが開始条件をfreshに検査する。setup成功は現在CIを許可しない。
+
+初版のimage準備は、固定lockに対応するローカルimageの検査と既存authority配置である。imageの配布・取得・異なるOSでの再buildまで含む新規導入は未検収であり、5コマンド/30分のPAC09を達成済みとしない。applyの途中でlockを書き換えて古いplanのまま続けることも認めない。
+
+`gah_ci`/`gah_report`のmainも同じtransport排他を保持する。client cleanupが確定するまで結果をbufferへ置き、cleanup失敗時は成功応答を先に出さない。bundleはrequest digestへruntime pathと固定deployment identityを含め、同名runがある別runtimeへ保存済みreceiptを流用しない。
+
+## 分担と検証
+
+Lunaは性能/CI、導入/運用、実案件評価を所有ファイルで分担。親が共通契約、Schema、接続、コードレビュー、検収を担当し、DGX Qwenの局所レビューは採否を記録する。モデルの応答は実行証拠や独立認証の根拠にしない。
+
+実案件対象と観測manifestの実値が未選定の条件は未実施として残す。合成データの単体試験をPAC01〜14の合格へ換算しない。新しい数値SLOも実測前には達成済みと表示しない。
+
+## 実接続時に確定した補正
+
+実行開始/終了のUTC整数秒はAuthorityRuntime.clockのfreshなoperator診断から観測する。Windows hostとLinux brokerの時刻を混在させず、intended <= started <= finished <= stopped <= nowを維持する。元の終了時刻の補完はしない。完了setupのruntime metadata v2はcontract_series_idとbaseline_series_idを別に保存し、readyは現在baseline全文refを契約の比較条件と照合する。
+
+固定offline SQLite移行は、元形式backupと移行dry-runを分離し、planにDB・両snapshot・実装・要求の完全refを固定する。applyは同一transaction内でbefore/afterを検査し、応答消失は保存済みcommit receiptだけで回収する。現在DBの状態一致から元requestの完了を合成しない。receipt前の中断はUNKNOWNを保持する。
+
+whole-run計測は固定runとfresh CIとcleanupを一回のwall区間として観測する。既存runまたはcheckpointのあるrun_idを新しい反復として再計測しない。全子CPU/RSS/IO等が欠けるためvalid_for_slo=falseを維持する。固定sample容量式は推定予算であり、未検証の上界からdoctorをPASSにしない。現CLIの簡易導入は容量UNKNOWNで停止し、内部接続のDocker試験をPAC09/PAC10の代替にしない。
+
+通常runのrun_requestをsetup中に固定し、canonical bytesのSHA-256から通常Supervisorと同じprepare request IDを作る。同一operator・正規化body・contextの既存authority receiptを使い、setup直後と別clientからの通常runで同じmanifest refを得る。run_beginと現在CIの期限・権限・世代検査は継続する。[固定source-v5の実Docker検証](evidence/productization-implementation-20260915/docker-integration-v5.json)で、clientを閉じて2秒後に再開した通常30件、現在CI、レポート、全90workerの停止・回収を確認した。容量doctorと両OSの導入受入を証明する試験ではない。
+
+
+## 継続実装の接続境界
+
+容量保存部品をCheckpointの明示予算へ、offline結果importをpilot CLI・共通result・journalへ、固定cgroup観測をwhole-run副証跡へ接続した。配布先を新規作成してbase取得・3image構築・lock照合する`gah_images prepare`も追加した。詳細は各分冊の「継続実装」節へ従う。
+
+`pilot.import`のCOMPLETEDは正規化artifactの保存完了だけを表す。固定imageのPREPARED、容量部品のreadback、部分資源観測はいずれも製品CIやPAC合格を発行しない。全writerへの容量接続、短命workerを含む全計数、実target adapter、公開imageの発行、両OSの全導入受入は残る。

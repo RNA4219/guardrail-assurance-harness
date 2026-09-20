@@ -1,0 +1,63 @@
+{
+  "constraints": {
+    "docker": false,
+    "llm_seed": false,
+    "product_source_edits": false,
+    "tests": false
+  },
+  "evidence": {
+    "profile": ".ga/productization-implementation-20260919/profile-copy-v2.pstats",
+    "profile_id": "setup-copy-profile-source-v3",
+    "profile_rerun": false,
+    "profile_sha256": "e98d578f2f930429439ff479d342517f01161891c76797a208316b0cf52e0739",
+    "scope": {
+      "candidate_receipts": 2,
+      "fixed_ci_entries": 60,
+      "profiled_operation": "SetupApplyCoreTests.setup_sample -> execute_contract_setup once"
+    },
+    "source_id": "source-v3",
+    "source_manifest_sha256": "f8c9b30dbb68c683c94d68650186b39dee43faea16da1342720547bc1fcdbac8",
+    "whole_run_slo_claim": false
+  },
+  "kind": "reference_digest_optimization_proposal",
+  "llm_scope_note": "This is setup-only source-v3 profile evidence (60 fixed CI entries, two candidate receipts), not a profile of combined/llm-supervision/finding-revalidation. It cannot establish that this path is the cause of their timeouts or extrapolate its counts to 400/800 entries.",
+  "schema_version": 1,
+  "single_assessed_candidate": {
+    "call_path": "fixture_materialization._build_manifest -> _check_calibration -> fixture_materialization._ref -> run_contracts.content_ref -> _canonical -> SHA256",
+    "decision": "Do not add a digest map/cache or omit ref comparisons for this boundary. Hashing the current payloads is required to detect nested case/material mismatch and current mutations; the complete case_set digest alone does not prove its embedded refs match the payloads.",
+    "deduplication_assessment": "No safe same-document duplicate was identified inside one _build_manifest/_check_calibration call: each of the 109 refs is for a distinct current document (one complete case set plus 108 individual payload documents). Counts aggregate across 1002 separate builds; 752 are validate_fixture_manifest rebuilds and 250 are materialize_fixture_manifest calls. These calls re-read/revalidate caller or stored state, so digest reuse across them is not a construction-local optimization.",
+    "ownership_and_mutation_window": "Within one _check_calibration call, pack and calibration are read as mutable dictionaries/lists supplied by the current prepared input. The function makes no immutable snapshot or ownership transfer proving those payloads remain unchanged between separate builds. During one call each payload is hashed once; no safe alias-free reuse window is established across calls.",
+    "per_build_expansion": {
+      "one": "Hash complete calibration case_set to compare bound_run.contract.calibration_case_set_ref against its current value.",
+      "one_hundred_eight": "Hash each of 36 calibration materials’ distinct input_payload, oracle_payload, and initial_state_payload and compare its current ref to the case-set entry."
+    },
+    "pstats": {
+      "build_manifest_from_materialize_fixture_manifest": 250,
+      "build_manifest_from_validate_fixture_manifest": 752,
+      "fixture_materialization._build_manifest_calls": 1002,
+      "fixture_materialization._check_calibration_calls": 1002,
+      "fixture_materialization._check_calibration_cumulative_seconds": 10.5045,
+      "fixture_materialization._ref_calls_from_check_calibration": 109218,
+      "fixture_materialization._ref_total_calls": 173700
+    },
+    "required_invariants": [
+      "per-call current digest for complete calibration case set",
+      "per-payload input/oracle/initial_state ref validation",
+      "no cross-request cache",
+      "retain DB readback and stored materialization validation",
+      "no shared public mutable ref/result aliases"
+    ]
+  },
+  "small_counterexample_check_plan": {
+    "expected": "Reject with the existing fixed invalid-materialization error path because the current payload/ref relationship no longer agrees.",
+    "fixture": "Use a prepared bound_run and fixture_pack with 36 calibration materials; no Docker or worker execution.",
+    "not_executed": true,
+    "purpose": "A cross-call digest reuse tied to an earlier object/value would risk accepting stale references; a within-call duplicate-removal test has no target because pstats/source show each current payload hashed once per build.",
+    "steps": [
+      "Materialize once and retain the returned manifest.",
+      "Mutate one nested calibration_materials[i].input_payload field, or the corresponding calibration case input_ref, before validating against the same manifest.",
+      "Call validate_fixture_manifest using the now-current bound_run."
+    ]
+  },
+  "status": "READ_ONLY_ANALYSIS_NO_SAFE_INTRA_BUILD_DEDUPLICATION_IDENTIFIED"
+}

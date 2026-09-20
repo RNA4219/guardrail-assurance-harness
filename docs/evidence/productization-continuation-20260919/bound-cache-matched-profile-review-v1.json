@@ -1,0 +1,159 @@
+{
+  "status": "READ_ONLY_MATCHED_PROFILE_REVIEW",
+  "scope": {
+    "profile_runs": [
+      "normal-v10-profile-v2",
+      "normal-v11-profile-v1"
+    ],
+    "each": "one local profile of prepare plus first five serial operations from an 800-entry bound plan; no whole-run/SLO/PAC acceptance",
+    "inputs": "Parent-confirmed full plan/ref/request/guardrail runtime matched; each version used its corresponding normal seed and frozen source. v10 and v11 seed DB hashes differ as expected for source versions.",
+    "source_change": "Parent-confirmed product source delta is run_evidence digest-only binding cache plus authority lock. Each profile result reports source and seed unchanged during its own run, 5 operations/7 attempts, 0 terminal receipts, no finalize, cleanup confirmed.",
+    "v10": {
+      "five_trial_wall_seconds": 27.141926155003603,
+      "plan_ref": {
+        "kind": "trial_plan",
+        "id": "regression-plan-llm-normal",
+        "digest": "3b677308c2c013461ebe460cad3a38c245c2b655ffd5221f850c26ca22534967"
+      },
+      "seed_db_sha256": "7d7861741821849c233a559ad4d0593f3adcf8937b13eb9b9715ba543dd99aca",
+      "pstats_sha256": "8845d942c2103786253792b40f518ec7466e279f0d102f024f290787a359fd49"
+    },
+    "v11": {
+      "five_trial_wall_seconds": 26.921145820000675,
+      "plan_ref": {
+        "kind": "trial_plan",
+        "id": "regression-plan-llm-normal",
+        "digest": "3b677308c2c013461ebe460cad3a38c245c2b655ffd5221f850c26ca22534967"
+      },
+      "seed_db_sha256": "bcc704803812a0546b678c03f5119d18f252388659371f6c00e18511f777f4ca",
+      "pstats_sha256": "91e5566af0c3f020754f42ca71f5391d002e9fec2f371ae41722a9261e50f2a2"
+    }
+  },
+  "raw_pstats": {
+    "copy_deepcopy": {
+      "v10": {
+        "calls": 3441111,
+        "cumulative_seconds": 4.8945,
+        "own_seconds": 2.245
+      },
+      "v11": {
+        "calls": 3671629,
+        "cumulative_seconds": 5.3289,
+        "own_seconds": 2.452
+      },
+      "delta_calls": 230518,
+      "delta_cumulative_seconds": 0.4344,
+      "delta_percent_calls": 6.7009368
+    },
+    "run_evidence": {
+      "bound_bundle_digest": {
+        "v10": {
+          "calls": 45,
+          "cumulative_seconds": 4.0426,
+          "callers": {
+            "execute": 20,
+            "baseline_source": 15,
+            "_trusted_binding": 10
+          }
+        },
+        "v11": {
+          "calls": 45,
+          "cumulative_seconds": 2.5668,
+          "callers": {
+            "execute": 20,
+            "baseline_source": 15,
+            "_trusted_binding": 10
+          }
+        }
+      },
+      "_bound": {
+        "v10": {
+          "calls": 48,
+          "cumulative_seconds": 2.7162,
+          "callers": {
+            "_validate_store_contents": 3,
+            "bound_bundle_digest": 45
+          }
+        },
+        "v11": {
+          "calls": 3,
+          "cumulative_seconds": 0.7346,
+          "callers": {
+            "_validate_store_contents": 3
+          }
+        }
+      },
+      "_bound_uncached": {
+        "v10": {
+          "calls": 4,
+          "cumulative_seconds": 0.8309,
+          "callers": {
+            "_cached_bound": 4
+          }
+        },
+        "v11": {
+          "calls": 7,
+          "cumulative_seconds": 1.4537,
+          "callers": {
+            "_cached_bound": 3,
+            "_cached_bound_digest": 4
+          }
+        }
+      },
+      "_cached_bound": {
+        "v10": {
+          "miss_body_calls": 4,
+          "cumulative_seconds": 0.8743
+        },
+        "v11": {
+          "miss_body_calls": 3,
+          "cumulative_seconds": 0.6165
+        }
+      },
+      "_cached_bound_digest": {
+        "v10": {
+          "calls": 0
+        },
+        "v11": {
+          "miss_body_calls": 4,
+          "cumulative_seconds": 1.0175
+        }
+      },
+      "_pack": {
+        "v10": {
+          "calls": 129,
+          "cumulative_seconds": 1.4251,
+          "bound_bundle_digest_calls": 45,
+          "digest_path_cumulative_seconds": 1.4181
+        },
+        "v11": {
+          "calls": 88,
+          "cumulative_seconds": 0.1427,
+          "_cached_bound_digest_calls": 4,
+          "digest_path_cumulative_seconds": 0.1356
+        }
+      }
+    }
+  },
+  "interpretation": {
+    "copy_measure": "Used the raw pstats copy.deepcopy function row above. The profile_summary deepcopy category is excluded because category totals overlap and double-count nested cumulative time/calls.",
+    "cache_warming": "The v10 path for all 45 bound_bundle_digest calls entered _bound and therefore the full-bound cache; v11 calls the digest-only cache instead. Cache keys include decorated function identity, so digest-only entries cannot satisfy/warm _cached_bound. The profile has four digest-cache miss body calls and three later/full-bound _validate_store_contents misses, versus four full-bound miss body calls total in v10. This is consistent with lost cross-path warming adding three uncached binds (~0.623s cumulative in this profile), although pstats does not expose exact input-key equality/hit/eviction data.",
+    "workload_shift": "v11 saves about 1.276s of _pack cumulative work on the 45 digest calls and reduces bound_bundle_digest cumulative by about 1.476s, while _bound_uncached cumulative rises by about 0.623s and raw deepcopy by 0.434s. Five-op wall decreases only 0.220780335s (about 0.81%). This is a modest net win in one matched pair, not proof of general improvement."
+  },
+  "shared_cache": {
+    "evidence": "src/gah/run_evidence.py imports the process-global binding_cache for both _cached_bound and _cached_bound_digest. src/gah/immutable_cache.py defines one 16 MiB/32-entry JsonCache; keys include the decorated function object, and all entries share one LRU byte/entry budget.",
+    "competition": "Digest-only and full-bound keys compete with each other and other binding_cache users. Its digest value is small, but its key retains the complete payload; no cache_info/hit/eviction counters are in these profiles, so actual eviction/pressure cannot be asserted."
+  },
+  "decision": {
+    "recommendation": "Keep the digest-only implementation provisionally; do not revert based only on the raw deepcopy increase. Its explicit purpose—avoid serializing/copying/packing a full rebound tree for digest callers—shows in lower _pack/bound digest cumulative cost, and the matched five-op wall is slightly lower.",
+    "acceptance": "Hold any performance acceptance claim. A single pair has only 0.81% wall difference and no hit/miss/eviction evidence; treat result as diagnostic and acknowledge the +230,518 raw deepcopy calls.",
+    "one_followup_candidate": "If a later bounded comparison shows the three _validate_store_contents full-bound misses have the same complete payloads as the four digest-cache misses, consider a narrowly scoped shared per-key immutable binding record carrying both digest and encoded bound, but only if its full retained value is charged to the existing 16 MiB/32-entry shared budget and mutable public return isolation remains. Otherwise keep the current separate modes; do not add a second cache or increase limits."
+  },
+  "not_done": [
+    "No additional profile/test/source execution or edits.",
+    "No cache hit/eviction rate is inferred from pstats.",
+    "No whole-run, SLO, source acceptance, or CI eligibility claim."
+  ],
+  "agent_record_sha256": "c51e69a7dd5d9bcecd135695a45160266886922d674262f4643cb20079d759db",
+  "parent_assessment": "45回のdigest経路の軽量化に対しfull bind bodyが4→7回となった。warming喪失と整合するがeviction数は未計測。単回5操作では有意な全体改善を主張せず暫定維持。"
+}

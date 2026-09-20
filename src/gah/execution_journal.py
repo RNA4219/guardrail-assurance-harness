@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import re
 import sqlite3
+from .sqlite_limits import connect_sqlite
 from typing import Any, Iterator
 import uuid
 
@@ -280,9 +281,9 @@ def _validate_receipt(value: Any, *, binding: dict[str, Any], scenario: str,
         if receipt["normalized_result"] is not None or receipt["probe_result"] is not None:
             raise _invalid("INVALID_RECEIPT")
         if receipt["case_result"] is not None:
-            from .guardrail_results import validate_bundle
+            from .guardrail_results import validate_execution_bundle
             try:
-                validate_bundle(receipt["case_result"])
+                validate_execution_bundle(receipt["case_result"])
                 request = receipt["case_result"]["request"]
                 if ("guardrail:" + hashlib.sha256(canonical_bytes(request)).hexdigest() != scenario
                         or request["stages"][0]["binding"] != binding or request["target"]["runtime_image_id"] != image_id):
@@ -340,7 +341,7 @@ class ExecutionJournal:
     def __init__(self, path: str | Path):
         self._db: sqlite3.Connection | None = None
         try:
-            db = sqlite3.connect(str(Path(path)), isolation_level=None, timeout=5)
+            db = connect_sqlite(str(Path(path)), isolation_level=None, timeout=5)
             self._db = db
             db.row_factory = sqlite3.Row
             db.execute("PRAGMA foreign_keys=ON")

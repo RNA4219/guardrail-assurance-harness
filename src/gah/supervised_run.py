@@ -121,9 +121,14 @@ class Supervisor:
         self.manifest_ref = content_ref('run_manifest', self.run_id, manifest)
         return manifest
 
+    def begin_run(self):
+        return self.call(OPERATOR, 'run_begin', 'begin', durable=True, manifest=self.manifest,
+            plan=self.bound['plan'], contract_series_id=self.request['contract_series_id'])
+
     def status(self):
         value = self.call(OPERATOR, 'run_status', 'status', run_id=self.run_id)
-        if (value['manifest'] != self.manifest or value['plan'] != self.bound['plan']
+        expected_plan = getattr(self, 'plan_for_status', self.bound['plan'])
+        if (value['manifest'] != self.manifest or value['plan'] != expected_plan
                 or value['contract_series_id'] != self.request['contract_series_id']
                 or value['resource_snapshot']['manifest_digest'] != self.manifest_ref['digest']):
             raise SupervisorError('RUN_BINDING_MISMATCH')
@@ -358,8 +363,7 @@ class Supervisor:
             raise SupervisorError('CHECKPOINT_REQUIRED')
         self.prepare()
         if mode in ('run', 'resume'):
-            self.call(OPERATOR, 'run_begin', 'begin', durable=True, manifest=self.manifest,
-                plan=self.bound['plan'], contract_series_id=self.request['contract_series_id'])
+            self.begin_run()
         snapshot = self.status()
         if mode == 'status':
             result = self.gate()

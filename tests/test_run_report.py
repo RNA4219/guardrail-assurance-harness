@@ -15,8 +15,12 @@ from gah.run_contracts import content_ref
 class RunReportTests(unittest.TestCase):
     def setUp(self):
         ref = lambda kind: {"kind": kind, "id": "synthetic-" + kind, "digest": "a" * 64}
-        self.manifest = {"run_id": "normal", "contract_ref": ref("evaluation_contract"),
-            "baseline_ref": ref("baseline"), "target_refs": [ref("target")], "use_cases": ["UC-CI"],
+        self.contract = {"kind": "evaluation_contract", "contract_id": "contract-2", "generation": 2}
+        self.baseline = {"kind": "baseline", "baseline_id": "baseline-1", "generation": 1}
+        contract_ref = content_ref("evaluation_contract", self.contract["contract_id"], self.contract)
+        baseline_ref = content_ref("baseline", self.baseline["baseline_id"], self.baseline)
+        self.manifest = {"run_id": "normal", "contract_ref": contract_ref,
+            "baseline_ref": baseline_ref, "target_refs": [ref("target")], "use_cases": ["UC-CI"],
             "profile": "full", "control_ids": ["constraint-one"]}
         manifest_ref = content_ref("run_manifest", "normal", self.manifest)
         self.request = {"schema_version": 1, "action": "ci_check", "request_id": "report-gate", "run_id": "normal",
@@ -37,7 +41,8 @@ class RunReportTests(unittest.TestCase):
             "value": [9, 10], "baseline_value": [1, 1], "absolute_pass": True, "delta_pass": True}],
             "metric_scopes": {"coverage": {"control_id": "constraint-one"}}, "reasons": []}
         self.evidence = {"observed_at": 90, "valid_until": 200}
-        self.artifacts = {aggregate_ref["digest"]:self.aggregate}
+        self.artifacts = {aggregate_ref["digest"]:self.aggregate,
+            contract_ref["digest"]: self.contract, baseline_ref["digest"]: self.baseline}
         self.outputs = {"schema_version": 1, "kind": "run_outputs", "run_id": "normal"}
         for field, kind, value in (("manifest_ref", "run_manifest", self.manifest),
                 ("decision", "run_decision", self.decision), ("evidence", "evidence", self.evidence),
@@ -86,6 +91,49 @@ class RunReportTests(unittest.TestCase):
         self.assertEqual(json.loads(machine.getvalue()), report)
         self.assertEqual(human.getvalue(), render_markdown(report))
         self.assertIn("現在のCI利用: 可", human.getvalue())
+        self.assertEqual(report["evaluation_versions"], {"contract_ref": self.manifest["contract_ref"],
+            "contract_generation": 2, "baseline_ref": self.manifest["baseline_ref"], "baseline_generation": 1})
+        self.assertIn("契約世代: 2", human.getvalue())
+        self.assertIn("baseline世代: 1", human.getvalue())
+
+    def test_generation_values_require_matching_artifacts_and_positive_integers(self):
+        from tools.gah_report import _evaluation_versions
+        for field, kind, identifier in (("contract", "evaluation_contract", "contract_id"),
+                                         ("baseline", "baseline", "baseline_id")):
+            for generation in (True, 0, -1, "2", None):
+                with self.subTest(field=field, generation=generation):
+                    values = {"contract": deepcopy(self.contract), "baseline": deepcopy(self.baseline)}
+                    values[field]["generation"] = generation
+                    manifest = deepcopy(self.manifest)
+                    artifacts = {}
+                    for name, ref_kind, id_field in (("contract", "evaluation_contract", "contract_id"),
+                                                      ("baseline", "baseline", "baseline_id")):
+                        ref = content_ref(ref_kind, values[name][id_field], values[name])
+                        manifest[name + "_ref"] = ref
+                        artifacts[ref["digest"]] = values[name]
+                    def query(action, suffix, *, artifact_ref):
+                        return {"artifact_ref": artifact_ref, "artifact": artifacts[artifact_ref["digest"]]}
+                    with self.assertRaisesRegex(ValueError, "REPORT_BINDING_MISMATCH"):
+                        _evaluation_versions(query, "run_artifact", manifest)
+        altered = deepcopy(self.baseline)
+        altered["generation"] = 3
+        def query(action, suffix, *, artifact_ref):
+            return {"artifact_ref": artifact_ref,
+                    "artifact": self.contract if artifact_ref == self.manifest["contract_ref"] else altered}
+        with self.assertRaisesRegex(ValueError, "REPORT_BINDING_MISMATCH"):
+            _evaluation_versions(query, "run_artifact", self.manifest)
+
+    def test_absent_candidate_baseline_is_explicit_and_never_inferred_from_id(self):
+        from tools.gah_report import _evaluation_versions
+        manifest = {**self.manifest, "baseline_ref": None}
+        calls = []
+        def query(action, suffix, *, artifact_ref):
+            calls.append(artifact_ref)
+            return {"artifact_ref": artifact_ref, "artifact": self.contract}
+        result = _evaluation_versions(query, "candidate_artifact", manifest)
+        self.assertEqual(result["contract_generation"], 2)
+        self.assertIsNone(result["baseline_generation"])
+        self.assertEqual(calls, [self.manifest["contract_ref"]])
 
     def test_saved_counts_are_not_reconstructed_from_reduced_fractions(self):
         report = build_report(self.runtime, self.request)

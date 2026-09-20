@@ -84,7 +84,9 @@ def bind_candidate(db, proposal, source, now):
     manifest = source["bound"]["manifest"]
     if (manifest["baseline_ref"] != proposal["comparison_context"]["baseline_ref"]
             or manifest["created_at"] < old["adopted_at"]
-            or base._trusted_binding(source["bound"]) != proposal["binding_digest"]):
+            or base._trusted_binding(
+                source["bound"], source.get("baseline_context")
+            ) != proposal["binding_digest"]):
         raise AdoptionError("BINDING_MISMATCH")
     from . import regression_runs
     run = db.execute("SELECT * FROM eval_runs WHERE run_id=?", (manifest["run_id"],)).fetchone()
@@ -94,18 +96,48 @@ def bind_candidate(db, proposal, source, now):
     if prepared["bound_run"] != source["bound"]:
         raise AdoptionError("BINDING_MISMATCH")
     digest = run_evidence.bound_bundle_digest(source["bound"], prepared["baseline_context"])
-    book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={manifest["run_id"]: digest})
+    if manifest.get("schema_version") == 2:
+        from .partitioned_normal_evidence import PartitionedNormalEvidenceBook
+
+        def resolve_context(connection, checked_at, receipt, stored_profile):
+            if connection is not db or checked_at != now:
+                raise AdoptionError("CURRENTNESS_UNAVAILABLE")
+            source_run_id = receipt["manifest_ref"]["id"]
+            source_row = connection.execute(
+                "SELECT * FROM eval_runs WHERE run_id=?", (source_run_id,)
+            ).fetchone()
+            fresh = regression_runs.for_run(connection, source_row, checked_at)
+            if (fresh["bound_run"] != source["bound"]
+                    or fresh["baseline_context"] != prepared["baseline_context"]):
+                raise AdoptionError("BINDING_MISMATCH")
+            return fresh["bound_run"], fresh["execution_profile"], fresh["baseline_context"]
+
+        book = PartitionedNormalEvidenceBook(
+            db, now=now, allowed_bindings={manifest["run_id"]: digest},
+            context_resolver=resolve_context,
+        )
+    else:
+        book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={manifest["run_id"]: digest})
     view = book.get_run(manifest["run_id"])
     profile = (prepared["execution_profile"] if manifest["use_cases"] == ["UC-LLM"]
                else assurance_authority.fixed_profile())
     if (view["execution_profile"] != profile or view["bundle_digest"] != digest
             or view["baseline_context"] != prepared["baseline_context"]):
         raise AdoptionError("BINDING_MISMATCH")
+    if manifest.get("schema_version") == 2:
+        repeat_config = base.repeat_config_for_plan(
+            source["bound"]["plan"], partitioned_context=source["bound"],
+            baseline_context=view["baseline_context"],
+        )
+    else:
+        repeat_config = base.repeat_config_for_plan(source["bound"]["plan"])
     enriched = {**source["bound"], "baseline_context": view["baseline_context"],
-        "comparison_context": candidate["comparison_context"],
-        "repeat_config": base.repeat_config_for_plan(source["bound"]["plan"])}
+        "comparison_context": candidate["comparison_context"], "repeat_config": repeat_config}
     base.bind_baseline_record(candidate["record"], bound_run=enriched, decision=source["decision"],
-        evidences=source["evidences"], closure=source["closure"], now=now, evidence_states=source["evidence_states"])
+        evidences=source["evidences"], closure=source["closure"], now=now,
+        evidence_states=source["evidence_states"], baseline_context=(
+            view["baseline_context"] if manifest.get("schema_version") == 2 else None
+        ))
     return candidate
 
 
@@ -124,7 +156,9 @@ def propose(store, db, request, actor, context, now, resolve_source):
     candidate = base.build_candidate(source, request["series_id"], request["proposal_id"], now, expected_generation=expected)
     proposal = {"schema_version": 1, "kind": KIND, "proposal_id": request["proposal_id"],
         "series_id": request["series_id"], "run_id": request["run_id"], "expected_generation": expected,
-        "contract_generation": contract_generation, **candidate, "binding_digest": base._trusted_binding(source["bound"]), "created_at": now}
+        "contract_generation": contract_generation, **candidate,
+        "binding_digest": base._trusted_binding(source["bound"], source.get("baseline_context")),
+        "created_at": now}
     current_predecessor(db, proposal)
     bind_candidate(db, proposal, source, now)
     raw, digest = base._pack(proposal)

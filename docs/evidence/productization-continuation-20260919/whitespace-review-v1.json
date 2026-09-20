@@ -1,0 +1,9 @@
+{
+  "ci_eligible": false,
+  "crlf_recognized_as_line_ending": true,
+  "exit_code": 0,
+  "kind": "local_diff_whitespace_check",
+  "output_line_count": 0,
+  "passed": true,
+  "schema_version": 1
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "authority_runtime_smoke_summary",
+  "recorded_at": "2026-09-20T03:04:19.330410+00:00",
+  "scope": "既定schema-v4の配布authority imageに対する実OS認証・採択・再起動・失効の確認。新v6資源actionの受入とは分離する。",
+  "source_v13_manifest_sha256": "92ab965ae147759735a2e1b04ca0695781346f5af9a4bf4c9f442e1878e0bd6c",
+  "image_id": "sha256:f16932d5d6ec8e9b1234d2f2651b45e9bbdd7ba583e70dd00bec6adabbbacef3",
+  "checks": {
+    "identity_12001_isolation": true,
+    "identity_12002_isolation": true,
+    "identity_12003_isolation": true,
+    "identity_12004_isolation": true,
+    "candidate_proposal_denied": true,
+    "candidate_self_claim_rejected": true,
+    "manager_self_validation_denied": true,
+    "weaker_policy_denied": true,
+    "manager_proposal_saved": true,
+    "independent_validation": true,
+    "operator_adoption_denied": true,
+    "policy_adopted": true,
+    "current_valid": true,
+    "restart_preserves_receipt": true,
+    "different_replay_rejected": true,
+    "revoked_validation_cannot_adopt": true,
+    "same_current_id_rechecks_revocation": true,
+    "replay_does_not_restore_validity": true,
+    "revoked_manager_replay_denied": true,
+    "operator_can_read_invalid_current": true,
+    "owned_containers_stopped_removed": true,
+    "tested_image_matches_sources": true
+  },
+  "checks_passed": 22,
+  "passed": true,
+  "source_unchanged": true,
+  "elapsed_seconds": 50.39000000001397,
+  "persistent_state_retained": true,
+  "artifacts": {
+    ".ga/productization-implementation-20260919/authority-smoke-v13/check.json": {
+      "sha256": "47e1cb786d09cada5a8e5634abfd070d2361c2943558bc6784f16d83792f5521",
+      "bytes": 11108
+    },
+    ".ga/productization-implementation-20260919/authority-smoke-v13/observations.json": {
+      "sha256": "b5d7d4d5c70b3d0a169b7ccdd5724c712f70164763de6aafd9ab8a9d9e87be94",
+      "bytes": 35655
+    },
+    ".ga/productization-implementation-20260919/authority-smoke-v13-process/result.json": {
+      "sha256": "342c4b67a0f22035cd3ef82206e65898e181c2698ae49238a9b03044cd7eb1ac",
+      "bytes": 339
+    },
+    ".ga/productization-implementation-20260919/authority-smoke-v13-process/plan.json": {
+      "sha256": "e49b6809d1df4419fff500c6a66303deceb6664ff0788f3823f77a95aad97a3c",
+      "bytes": 18755
+    },
+    ".ga/productization-implementation-20260919/authority-smoke-v13-process/run.log": {
+      "sha256": "7448dcd3936f66c8049fbefe9d452dba9b3ea2648fd83aa99be36623be2771ed",
+      "bytes": 1962
+    }
+  },
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "full_mvp_accepted": false
+}

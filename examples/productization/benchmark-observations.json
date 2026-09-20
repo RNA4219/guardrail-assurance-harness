@@ -1,0 +1,234 @@
+{
+  "baseline": [
+    {
+      "id": "benchmark-observation-555b16d89aa5472539cabf7cd7cba6ea5f60d767",
+      "iteration_id": "baseline-cold",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 250000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 1,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 500000000,
+        "warmness": "cold"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "961e0d4fe420fff52fd3e2e478d475547baedc8914abb5e85a7f06fbd6c289cb",
+        "id": "benchmark-example-baseline",
+        "kind": "snapshot_manifest"
+      }
+    },
+    {
+      "id": "benchmark-observation-0b38bdc5224a03556c730e6831adcd4aefc50c9e",
+      "iteration_id": "baseline-warm-1",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 250000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 1,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 500000000,
+        "warmness": "warm"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "961e0d4fe420fff52fd3e2e478d475547baedc8914abb5e85a7f06fbd6c289cb",
+        "id": "benchmark-example-baseline",
+        "kind": "snapshot_manifest"
+      }
+    },
+    {
+      "id": "benchmark-observation-b1893b973c146ecf08f2ef4fc1f311e87a192473",
+      "iteration_id": "baseline-warm-2",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 250000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 2,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 500000000,
+        "warmness": "warm"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "961e0d4fe420fff52fd3e2e478d475547baedc8914abb5e85a7f06fbd6c289cb",
+        "id": "benchmark-example-baseline",
+        "kind": "snapshot_manifest"
+      }
+    }
+  ],
+  "candidate": [
+    {
+      "id": "benchmark-observation-cbe2f289bd1a487b047e669923121cd944bb0da4",
+      "iteration_id": "candidate-cold",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 50000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 1,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 100000000,
+        "warmness": "cold"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "779fe04e699ef4732cc9179dc46eccc4b42c80b28383e407254530c1eb742948",
+        "id": "benchmark-example-candidate",
+        "kind": "snapshot_manifest"
+      }
+    },
+    {
+      "id": "benchmark-observation-0a0806940863995bfe05d467ed7bfcb7fa09e33a",
+      "iteration_id": "candidate-warm-1",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 50000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 1,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 100000000,
+        "warmness": "warm"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "779fe04e699ef4732cc9179dc46eccc4b42c80b28383e407254530c1eb742948",
+        "id": "benchmark-example-candidate",
+        "kind": "snapshot_manifest"
+      }
+    },
+    {
+      "id": "benchmark-observation-f879b0ed399d683442924233010f97a7fe8ed0f8",
+      "iteration_id": "candidate-warm-2",
+      "kind": "benchmark_observation",
+      "payload": {
+        "authority_call_count": null,
+        "copy_count": null,
+        "cpu_ns": 50000000,
+        "db_scan_count": null,
+        "exit_code": 0,
+        "failure_class": "NONE",
+        "harness_wall_ns": null,
+        "hash_count": null,
+        "io_read_bytes": null,
+        "io_write_bytes": null,
+        "iteration": 2,
+        "operation_status": "COMPLETED",
+        "retry_count": 0,
+        "rss_group_peak_bytes": 1024,
+        "serialize_bytes": null,
+        "stored_bytes": null,
+        "target_wait_ns": null,
+        "valid_for_slo": true,
+        "wall_ns": 100000000,
+        "warmness": "warm"
+      },
+      "plan_ref": {
+        "digest": "210f2f03b0f00c5f92102c7f1796bcac418423500e3d98af4a956b1f7e3f9e09",
+        "id": "benchmark-example-plan",
+        "kind": "benchmark_plan"
+      },
+      "schema_version": 1,
+      "source_ref": {
+        "digest": "779fe04e699ef4732cc9179dc46eccc4b42c80b28383e407254530c1eb742948",
+        "id": "benchmark-example-candidate",
+        "kind": "snapshot_manifest"
+      }
+    }
+  ]
+}

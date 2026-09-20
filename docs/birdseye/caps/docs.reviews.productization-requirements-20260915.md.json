@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/productization-requirements-20260915.md",
+  "role": "reviews",
+  "title": "拡張要件の反例レビュー",
+  "summary": "対象は[MVP後の拡張要件 v1](../productization-requirements.md)。Codexが要件を読み、受入を誤って通せる反例を点検して本文へ反映した。独立した外部監査・モデル委任・製品試験を行った記録ではない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-requirements.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "docs/acceptance/AC-20260915-01.md",
+    "docs/extension-roadmap.md",
+    "docs/productization-requirements.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "0357e14bdedb4aa546d4e5c0564a98e372c48377dfc92cb29a7de14d895ed338"
+}

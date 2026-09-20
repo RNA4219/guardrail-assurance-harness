@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_runtime_mode_parent_verification",
+  "passed": true,
+  "tests_run": 32,
+  "test_elapsed_seconds": 0.287,
+  "host_elapsed_seconds": 8.03100000001723,
+  "base_plan_sha256": "8296ea3f86a1867abd3cd485bbbb42fe403193f77fc12947ebb301c0ca9bb9e8",
+  "overlay_sha256": {
+    "src/gah/authority.py": "2ca1421da504f45cfffce2a94029865e988cfd7375bcb3ac4c472af3aa37fe49",
+    "tests/test_partitioned_runtime_mode.py": "c705b14818d7b86bfdd2f3ed341f91aa93320753b521ed908bdbef7a18b8e5fc",
+    "tools/authority_entry.py": "b1692e32366f8aef4996ab811458f3c9f3c6f201b2b2a779e3581f990c3ddabc",
+    "tools/authority_runtime.py": "42079f769137bad7f8b01aac418e47a70eca3466fa0df973ec52b1c79d5a8dde"
+  },
+  "plan_sha256": "1fd5d8c582e83ab81d410938a6aa7f72f7e84816c94dbe5fb2f7d852f731b58b",
+  "log_sha256": "8b689950bf18e35cfaa21ddec67c8b3e3252fd41a51f20799e8ae670753e55c8",
+  "source_unchanged": true,
+  "scope": "固定source-v13とadmission修正に明示v6 runtime差分だけを追加。既定v4、空v6 DB新規作成、既存DB版不一致拒否、保存mode、readiness、mount、再起動/回収、期限伝播を部品試験で確認。Dockerの起動は含まない。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "real_runtime_acceptance": false
+}

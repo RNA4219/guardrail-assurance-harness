@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "exit_code": 1,
+  "host_elapsed_seconds": 26.28200000000652,
+  "reported_tests": 68,
+  "unittest_seconds": 25.924,
+  "input_unchanged": true,
+  "changed_inputs": [],
+  "log_sha256": "f2c5ee6e52780172b88fb738854a71a083527c2c8264668da0f7af1cbb9414c6",
+  "log_bytes": 18238,
+  "plan_sha256": "d83f5d050a57d007ff76092961f790290b5ec99c19ee526a794b796eb485cd6c",
+  "real_worker_acceptance": false,
+  "acceptance_pass": false,
+  "scope": "v6 diagnostic integration and related regressions",
+  "failure_cause": "migration共通validatorのschema4固定とtest fixtureのv4/v5開き違い",
+  "failed_tests": 5
+}

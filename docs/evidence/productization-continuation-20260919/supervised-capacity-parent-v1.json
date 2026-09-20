@@ -1,0 +1,147 @@
+{
+  "acceptance_pass": false,
+  "aggregate": {
+    "passed": 99,
+    "single_invocation_pass": false,
+    "skipped": 3,
+    "unique_tests": 102,
+    "unresolved_failures": 0
+  },
+  "ci_eligible": false,
+  "earlier_test_sql_failure": {
+    "acceptance_pass": false,
+    "error": "Integration test referred to nonexistent dispatch_intended_at; actual schema column is intended_at. Failure occurred after real capacity path returned exit2 and RECORDED.",
+    "errors": 1,
+    "passed": 48,
+    "result": "FAILED_TEST_SQL",
+    "seconds": 60.189,
+    "tests": 49
+  },
+  "fixed_failure_sink_bytes": 65536,
+  "kind": "supervised_capacity_parent_validation",
+  "limitations": [
+    "injected capacity exception and errno tests; actual full-filesystem product diagnostic pending",
+    "three Windows FIFO/symlink skips",
+    "one process-spawn test first failed due stdin driver; exact same product/test source passed file-driver retry",
+    "no global capacity bound, OS-crash durability, or complete extension acceptance"
+  ],
+  "main_run": {
+    "acceptance_pass": false,
+    "errors": 1,
+    "expected_failures": 0,
+    "failures": 0,
+    "modules": [
+      "tests.test_supervised_capacity",
+      "tests.test_supervised_run",
+      "tests.test_checkpoint_capacity_errors",
+      "tests.test_bounded_files",
+      "tests.test_checkpoint_budget",
+      "tests.test_supervisor_checkpoint",
+      "tests.test_failure_sink_reopen",
+      "tests.test_failure_sink_recovery",
+      "tests.test_storage_budget",
+      "tests.test_read_checks_hotpath",
+      "tests.test_read_checks",
+      "tests.test_source_check_scope"
+    ],
+    "passed": 98,
+    "seconds": 313.0779999999795,
+    "skipped": 3,
+    "source_sha256": {
+      "src\\gah\\bounded_files.py": "6e7543ec9f43b1bf844ed7a9c31597b6b4ca9a11ab3be1b3623bc872ca6c07ee",
+      "src\\gah\\read_checks.py": "57b7fe42fced0923b899b76f53dfe1ce18e96ee3c4ad2de9c2e13e91451c72bd",
+      "src\\gah\\storage_budget.py": "27c7efa0d110eb99bbb274b998ae8512f682e16e0fc7e1cc369228829cc879c1",
+      "src\\gah\\supervised_capacity.py": "b63e88ed1c5f6925eeb023b022c82bdba81ae39e7e366cd486131cb0c3ffd3b6",
+      "src\\gah\\supervisor_checkpoint.py": "b6fde7b6153018e7aa77c0f341090556ec85283185338e8a1d2e3df4d2711e8d",
+      "tests\\test_checkpoint_capacity_errors.py": "aef324f5cfc3143ed93f0b91cbe20c2a1cc94346c86fd06ac801730810693cd0",
+      "tests\\test_failure_sink_reopen.py": "3945c51a54fd26ea0f25dfc4135802203c85cf1bf6bead1bc50309e5ce5ba34c",
+      "tests\\test_supervised_capacity.py": "95f3e19ba2b11e91f6f67adfbce5a3ec5d8ad8645031359ecebd0fa283576223",
+      "tools\\gah_run.py": "4ca00a504203a9885a934c6b8a89c0a5f352a009fab2009277f36d9dcc4da419"
+    },
+    "status": "FAILED",
+    "tests": 102,
+    "unexpected_successes": 0
+  },
+  "review": {
+    "checks": [
+      {
+        "refs": [
+          "tools/gah_run.py:24-36",
+          "tests/test_supervised_capacity.py:80-96"
+        ],
+        "result": "No reproduced issue in reviewed boundary: run/resume returns exit 2 before Checkpoint/Supervisor construction when sink preparation fails; cancel/status continue with sink=None.",
+        "topic": "sink initialization failure and new run"
+      },
+      {
+        "refs": [
+          "src/gah/supervised_capacity.py:57-78",
+          "tools/gah_run.py:34-49",
+          "tests/test_supervised_capacity.py:65-78",
+          "tests/test_supervised_capacity.py:122-152"
+        ],
+        "result": "Sink record failure is downgraded to failure_record=UNAVAILABLE and does not synthesize completion, cancellation, receipt, or settlement; capacity exceptions are caught at execute boundary and returned non-CI exit 2.",
+        "topic": "record failure and completion state"
+      },
+      {
+        "refs": [
+          "src/gah/supervised_capacity.py:40-54",
+          "tools/gah_run.py:24-34",
+          "tests/test_supervised_capacity.py:88-96"
+        ],
+        "result": "Sink initialization exception is ignored only for cancel/status, then normal Supervisor path still runs; sink contents are read-only for status.",
+        "topic": "cancel/status independence from sink"
+      },
+      {
+        "refs": [
+          "src/gah/supervised_capacity.py:57-78",
+          "tests/test_supervised_capacity.py:40-55",
+          "tests/test_supervised_capacity.py:122-152"
+        ],
+        "result": "failure_result reads before record, preserves a prior record, and records UNKNOWN rather than copied checkpoint/receipt or assumed settled-empty operations. Integration test verifies a completed runner receipt remains in journal, authority receipt rows remain unchanged, and reservation stop/settle timestamps remain null after end-checkpoint capacity failure.",
+        "topic": "first failure and live receipt/reservation preservation"
+      },
+      {
+        "refs": [
+          "tools/gah_run.py:38-44",
+          "src/gah/supervised_capacity.py:18-38",
+          "tests/test_supervised_capacity.py:30-38",
+          "tests/test_supervised_capacity.py:74-78"
+        ],
+        "result": "The new supervised_capacity module is included in source-lock. capacity_reason uses error types, fixed codes, and errno/SQLite numeric codes; it does not classify from arbitrary exception text. Generic EIO containing ENOSPC text is rejected by test.",
+        "topic": "source lock and fixed capacity classification"
+      }
+    ],
+    "edited_source_files": false,
+    "execution_tests_run_by_reviewer": false,
+    "findings": [],
+    "kind": "supervised_capacity_read_only_review",
+    "review_limit": "Scoped source review only; no Docker, live authority, long-run, cross-process race, or whole-repository search performed.",
+    "review_scope": [
+      "src/gah/supervised_capacity.py",
+      "tools/gah_run.py execute boundary and source-lock list",
+      "tests/test_supervised_capacity.py"
+    ],
+    "schema_version": 1,
+    "test_limit": "Reviewed test source only. Parent reported related suite is running; this review did not run tests or inspect evolving run logs/results."
+  },
+  "schema_version": 1,
+  "targeted_retry": {
+    "errors": 0,
+    "failures": 0,
+    "previous_failure": "stdin wrapper cannot be imported by Windows spawn; no product code/test timeout changed",
+    "seconds": 0.3440000000409782,
+    "skipped": 0,
+    "source_unchanged": true,
+    "status": "PASS",
+    "tests": 1
+  },
+  "verified": [
+    "run/resume sink initialization failure prevents supervisor construction",
+    "status/cancel still use ordinary supervisor if sink unavailable",
+    "real journal FINISHED receipt survives checkpoint capacity exception",
+    "authority prior receipts unchanged; actual operation dispatched but not yet stopped or settled; no attempt manufactured",
+    "first failure survives sink reopen and later capacity failure",
+    "capacity reason uses typed code/errno, not arbitrary exception text",
+    "write_bounded first-lock/mkdir/fsync/readback preserve ENOSPC/EDQUOT distinction"
+  ]
+}

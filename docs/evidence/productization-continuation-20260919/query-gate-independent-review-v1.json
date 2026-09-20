@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "query-gate-independent-review-v1",
+  "kind": "independent_read_only_review",
+  "comparison": {
+    "baseline": ".ga/productization-implementation-20260919/source-v5",
+    "current": [
+      "src/gah/benchmark.py",
+      "tools/test_matrix.py",
+      "tests/test_benchmark.py",
+      "tests/test_test_matrix.py"
+    ],
+    "public_artifact": "docs/evidence/productization-continuation-20260919/query-slo-parent-review-v1.json",
+    "artifact_source_hashes_match": true
+  },
+  "findings": [],
+  "checks": [
+    {
+      "topic": "query evidence gate",
+      "result": "matches",
+      "evidence": "src/gah/benchmark.py compare_observations lines 820-835 forces complete query series to INCONCLUSIVE/EVIDENCE_UNAVAILABLE regardless of evidence_confirmed; slo_evidence line 862-864 excludes query. validate_result lines 582-603 rejects non-bool flags and any query status other than INCONCLUSIVE or slo_evidence=true. Metrics, ratios and failures are still computed before the status gate."
+    },
+    {
+      "topic": "other surfaces and trusted flag",
+      "result": "matches",
+      "evidence": "Non-query comparison paths still consult evidence_confirmed and _slo_result; tests add quickstart_total PASS with true, INCONCLUSIVE with default false, and rejection of 1/string/list/dict truthy values. Existing failure collection and ratio calculation remain unchanged."
+    },
+    {
+      "topic": "duplicate Fraction helper removal",
+      "result": "matches",
+      "evidence": "source-v5 contained two definitions each of _fraction, _fraction_wire, fraction_wire. AST dumps (attributes excluded) for each pair were identical. Current benchmark.py retains one definition of each; comparison confirms the removed later shadows had the same bodies."
+    },
+    {
+      "topic": "plain lane completion",
+      "result": "matches",
+      "evidence": "tools/test_matrix.py _complete_result requires wasSuccessful, testsRun==planned_count, and empty skipped/expectedFailures/unexpectedSuccesses; main uses it and reports failures/errors/skips/expected/unexpected counts. Tests cover full success, ordinary failure, each of skip/expected failure/unexpected success, and setUpClass error causing testsRun below planned."
+    },
+    {
+      "topic": "timed lane behavior",
+      "result": "matches",
+      "evidence": "_execute_timing_suite replaces its former inline predicate with _complete_result(result,len(group)); predicates are textually equivalent. Thus timed observations continue to exclude any failed/incomplete/skipped/expected/unexpected module. Plain lane now shares that pre-existing timed-lane contract."
+    },
+    {
+      "topic": "public artifact agreement",
+      "result": "matches",
+      "evidence": "The public artifact describes the same query gate, plain lane gate and duplicate Fraction cleanup; all recorded source hashes for the four reviewed files and two contextual files match the working tree."
+    }
+  ],
+  "limits": {
+    "method": "Read-only diff/source/AST/hash review. Parent-reported 58-test result was not rerun as instructed.",
+    "no_runtime_claims": true,
+    "timed_lane_review": "Static predicate equivalence only; no timing test execution."
+  },
+  "conclusion": "No material mismatch or blocking issue found in the reviewed diff."
+}

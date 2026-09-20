@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "returncode": 0,
+  "elapsed_seconds": 59.60899999999674,
+  "input_sha256_unchanged": true,
+  "log_sha256": "668443bc7801fc8d1e5b0e821aa3cb2b847ab1710081c3abb4fd3598cab56388",
+  "log_bytes": 486,
+  "acceptance_pass": false,
+  "kind": "start-validation-parent-v2",
+  "tests_run": 2,
+  "unittest_seconds": 59.275,
+  "modules": [
+    "tests.test_start_validation_reuse"
+  ],
+  "input_plan_sha256": "853ce32a3ede766b2baa77198f41c1babecd3fc28d9d9734d994a67818f1b10a",
+  "tested_source_sha256": {
+    "src/gah/evaluation_authority.py": "c5c69bad8f6e266f9a18b9354c3326eb56d650f76192874d16bfa2256bf14a33",
+    "src/gah/partitioned_run_evidence.py": "3fb042a5571b49a9f2db2b196bcc251994f4543a04d5b47f5e2f0dd222c4662d",
+    "src/gah/resources.py": "571e308246d5582a79b38ab677d888e5799f1a0a1aa9f258ed0d943854478029",
+    "src/gah/run_evidence.py": "718dee337824194fadb841cec263646554a6f3d49c26b6f3f71144268dbd07ab",
+    "tests/test_partitioned_run_evidence.py": "f56449dd83a3881f957b5c3a0bdf1329281d15b03ba901555d8a4a4cbc1a5908",
+    "tests/test_run_evidence_book.py": "30711ee8760bc04b1c2bdfbfa4561135294f78da80d02c35bac9c9ec566bc235",
+    "tests/test_start_validation_reuse.py": "f14c178f26628b58f9f86abe9f6aee09126fdcd01a59bee6c039a6ddd4ba98db"
+  },
+  "real_worker_acceptance": false,
+  "full_suite_pass": false
+}

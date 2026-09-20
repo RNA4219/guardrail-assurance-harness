@@ -46,9 +46,9 @@ def expected(policy, generation, run_id, created_at, version):
     return json.loads(result)
 
 
-def verify(row, now):
+def _verify_value(row, now, value):
+    """保存rowとfreshにdecode済みの値を照合するprivate verifier。"""
     try:
-        value = resources._unpack(row["payload_json"], row["digest"])
         require_object(value, {"kind", "prepared", "runtime_lock", "materialization", "calibration"})
         bound = value["prepared"]["bound_run"]
         if (value["kind"] != KIND or type(row["created_at"]) is not int
@@ -65,6 +65,14 @@ def verify(row, now):
         return value
     except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError, OSError):
         raise AdoptionError("LLM_ADMISSION_INVALID") from None
+
+
+def verify(row, now):
+    try:
+        value = resources._unpack(row["payload_json"], row["digest"])
+    except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError, OSError):
+        raise AdoptionError("LLM_ADMISSION_INVALID") from None
+    return _verify_value(row, now, value)
 
 
 def prepare(db, policy, generation, run_id, now, permission_generation, version):
@@ -92,7 +100,11 @@ def prepare(db, policy, generation, run_id, now, permission_generation, version)
 def for_run(db, run_id, now):
     row = db.execute("SELECT * FROM fixture_admissions WHERE run_id=?", (run_id,)).fetchone()
     if row is not None:
-        return verify(row, now)
+        value = resources._unpack(row["payload_json"], row["digest"])
+        if value.get("kind") == "partitioned_guardrail_admission":
+            from .partitioned_llm_admission import _verify
+            return _verify(db, row, now)
+        return _verify_value(row, now, value)
     from . import transition_authority, regression_runs
     mapping = db.execute("SELECT * FROM transition_runs WHERE run_id=?", (run_id,)).fetchone()
     if mapping is not None:
@@ -120,7 +132,11 @@ def check_entry(db, run_id, entry, scenario, now):
     value = for_run(db, run_id, now)
     prepared = value["prepared"]
     from .guardrail_results import target_for_entry
-    target=target_for_entry(prepared,entry)
+    if prepared["bound_run"]["manifest"].get("schema_version") == 2:
+        documents = list(prepared["target_documents"].values())
+        target = target_for_entry({"target_documents": documents, "target_document": documents[0]}, entry)
+    else:
+        target = target_for_entry(prepared, entry)
     if (scenario != "guardrail:" + target["behavior_version"]
             or entry not in prepared["bound_run"]["plan"]["entries"]):
         raise AdoptionError("LLM_ENTRY_MISMATCH")

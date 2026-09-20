@@ -1,0 +1,22 @@
+{
+  "id": "docs/productization-pilot-spec.md",
+  "role": "productization-pilot-spec",
+  "title": "実案件pilot接続・有用性・採択追跡の詳細仕様",
+  "summary": "本書は [拡張要件 v1](productization-requirements.md) の GAH-PR01〜04 と GAH-PR14 を、実装前に再現可能なpilot計画へ落とす。対象は利用者が所有または明示的な利用許可を持つ二つの開発repoと、一つのLLM評価対象だけである。攻撃、任意コード、第三者対象の操作、危険な入力は扱わず、repoの無害な履歴と固定した検査変更・秘匿済み評価入力に限定する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-requirements.md",
+    "docs/productization-status.md"
+  ],
+  "deps_in": [
+    "docs/productization-spec.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "a8afe723c61a085421c71c01ee9b83cbe389b28032f8252c4c1ecd326f52d49c"
+}

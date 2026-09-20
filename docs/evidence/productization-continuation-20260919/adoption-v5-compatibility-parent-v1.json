@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "adoption_v5_compatibility_parent_verification",
+  "modules": [
+    "tests.test_adoption",
+    "tests.test_adoption_migrations",
+    "tests.test_evaluation_authority"
+  ],
+  "exit_code": 0,
+  "tests_run": 32,
+  "unittest_seconds": 1.535,
+  "wall_seconds": 1.844,
+  "source_sha256": {
+    "src/gah/adoption.py": "7f781b2073451691d7a0996ea48c2ffdcfddcd3fc6b7584bb3ff9a411d6f353e"
+  },
+  "source_unchanged": true,
+  "log_sha256": "36a5259e03fbad4d73a21163059cfc136bd30ef4f5bd6695adae9eee03806023",
+  "scope": "existing v4 behavior after explicit v5 schema allowlist and fixed predecessor validator branch",
+  "source_v8_regression_includes_change": false,
+  "ci_eligible": false,
+  "acceptance_pass": false
+}

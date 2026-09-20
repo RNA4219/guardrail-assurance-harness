@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "query_series_budget_parent_verification",
+  "id": "query-budget-parent-v2",
+  "exit_code": 0,
+  "tests_run": 28,
+  "unittest_seconds": "7.545",
+  "wall_seconds": 7.734,
+  "modules": [
+    "tests.test_query_series",
+    "tests.test_query_series_review",
+    "tests.test_query_series_budget"
+  ],
+  "source_sha256": {
+    "src/gah/query_series.py": "a51eccad34fe7254a16d67dbda8966ad48b8871ca385dff6df3cadb392cafbc6",
+    "tests/test_query_series_budget.py": "d2338b48daf617190d52291f3b58ba9dfa671e5def52e8894e56bbdcdfea2e53"
+  },
+  "source_unchanged": true,
+  "tests_log_sha256": "29a01a1781c03ef7b25cf65aac267de0cee30e0bada18cd7bb4d2458644cf342",
+  "scope": "cooperative boundary budget and timeout/clock handling; fake adapter lifecycle; no transport hard timeout proof",
+  "budget_seconds": {
+    "default": 7200,
+    "maximum": 14400
+  },
+  "planned_cells": 27,
+  "planned_observations": 2916,
+  "parent_review_corrections": [
+    "残予算0ちょうどでもopen/queryを開始しない。",
+    "27番目の保存だけで予算超過する反例。全観測保存済みでも全体INCOMPLETE。",
+    "cold/warm open TimeoutErrorで返っていないsessionの回収を捏造しない。",
+    "cleanup/persist > clock > cancellation/timeout > budget の停止理由優先順位を固定。"
+  ],
+  "in_flight_blocking_call_can_be_interrupted": false,
+  "source_v8_regression_includes_change": false,
+  "acceptance_pass": false,
+  "valid_for_slo": false,
+  "ci_eligible": false,
+  "prior_driver_failure": {
+    "record": "query-budget-parent-v1/result.json",
+    "reason": "Existing test_query_series needs explicit src import path; first parent driver omitted it. No product/test source was changed for rerun."
+  }
+}

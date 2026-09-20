@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "kind": "verification_source_freeze",
+  "status": "PASS",
+  "source_id": "source-v13",
+  "manifest_sha256": "92ab965ae147759735a2e1b04ca0695781346f5af9a4bf4c9f442e1878e0bd6c",
+  "file_count": 1814,
+  "total_bytes": 39606266,
+  "python_ast_count": 547,
+  "all_manifest_hashes_match": true,
+  "extension_digest": "d3f30739aa5a1b3d3052e8d0382d18db523f91c46d8520bb5075e6519a1d5d77",
+  "authority_lock_sha256": "e7bfa886dbb353ac586a1435da9c017f22817c8bf7a12b5f4c8fbd9608bae0ca",
+  "workflow_generation": "00146",
+  "workflow_checked_at": "2026-09-20T02:47:35+00:00",
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

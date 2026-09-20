@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_transition_progress",
+  "date": "2026-09-20",
+  "scope": "固定分割LLM入力の通常authority・候補保存・監督CLI接続の途中検証",
+  "current_regression": {
+    "tests": [
+      "tests.test_partitioned_prepared_io",
+      "tests.test_partitioned_candidate_storage",
+      "tests.test_partitioned_llm_authority",
+      "tests.test_candidate_sections",
+      "tests.test_transition_candidate_integration",
+      "tests.test_transition_validation_reuse"
+    ],
+    "tests_run": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "elapsed_seconds": 156.449,
+    "source_unchanged": true,
+    "changed_files": [],
+    "worker_kind": "inprocess_fixed_worker",
+    "docker_verified": false,
+    "completed_entries": {
+      "partitioned-llm-run": 1
+    }
+  },
+  "current_source_sha256": {
+    "src/gah/partitioned_llm_admission.py": "104f8307a1656a9b392746da82b34ee8eab6408e121d9ed65e101f1c98ffa985",
+    "src/gah/partitioned_llm_transitions.py": "ea0d81e1158f5aba5545b036beece02c838337a2716e21b8f4fd3be124dae64d",
+    "src/gah/candidate_sections.py": "b88fb337834e2672b7fb4d34a9759e2e03af6cecf7b1436a9046502cb89090bc",
+    "src/gah/transition_authority.py": "209ed1b9700243906c7714bc4b4487abcb757338799fd7036538caf73566993f",
+    "src/gah/llm_supervised_run.py": "15486654ba99d5b526411d3af39c3efab12f3cc8e9b92db66e87cd76c423907b",
+    "src/gah/budget_warning.py": "d52f063c139f40d2c362f3e011a19d72afb51fa3bc7a978c655a28667136d0e9",
+    "tests/test_partitioned_transition_integration.py": "791b94e5d9304fa7e662b3ecab426884c26c5488acddbc170df5d6c1f828334c",
+    "tests/test_partitioned_candidate_storage.py": "2c246866d1520e003b2ac0dffee819fa6207d2ade5209b8dee0ff8755e8eb1ff",
+    "tests/test_partitioned_prepared_io.py": "74f00a56b15ea7fbe3f6839f8e47c9f10ea7b90dcdbe6300a882d0e5b6cdd4e4"
+  },
+  "source_manifest_sha256": "bccebc25215a13421be2ee39e892015086c1a0fcb9d0aef123200cd157cdd7f4",
+  "log_sha256": "91c189de8e4eb598a56e212b62438e79152f9ad24fa4bc77decd2bbd2f00a073",
+  "earlier_verified_boundary": {
+    "stage": "partitioned-transition-journey-v3",
+    "completed_entries": 400,
+    "worker": "inprocess_fixed_worker",
+    "evidence_finalized": true,
+    "baseline_independently_adopted": true,
+    "backup_sha256": "3cb710c4e3498e84ce3880a24c295d072cfc7db236efa195f8556504f2128dd1",
+    "reopened_by_normal_validation_in_v4": true,
+    "final_source_acceptance": false
+  },
+  "incomplete_runs": [
+    {
+      "stage": "partitioned-transition-journey-v2",
+      "reason": "比較処理の遅延で中断。全体成功ではない。"
+    },
+    {
+      "stage": "partitioned-transition-journey-v3",
+      "reason": "親がLuna修正前の表示を見てテスト期待値を誤判断し中断。実行時の期待値は既に修正済み。400件完了と基準採択のDBを保存。"
+    },
+    {
+      "stage": "partitioned-transition-journey-v4",
+      "last_reported_old_completed_entries": 79,
+      "reason": "遅延の構造を計測して中断。基準snapshotから継続できたが比較全件・通常CLIは未完了。"
+    }
+  ],
+  "profile_before_latest_storage_change": {
+    "resource_start_seconds": 2.6941036,
+    "materialize_partitioned_run_calls": 19,
+    "slo_measurement": false
+  },
+  "implemented_changes": [
+    "初回400/800/1600入力からgen2候補と通常regressionへの分割入力接続",
+    "artifactをmanifest参照へ束縛して取得するCLI経路",
+    "schema2の予算WARNING、取消し、baseline更新の接続",
+    "pure build/rebindの既存共有cache利用。400件hit、1600件は入力上限で通常計算へ戻る",
+    "保存候補の事前全文復元を外し、固定生成値と現在DBの全artifact bytesを照合",
+    "seed照合済み18artifactの重複取得を削除。本文取得上限はSQL側でも適用"
+  ],
+  "cache_test_history": {
+    "first_run_tests": 30,
+    "first_run_passed": 29,
+    "first_run_failed": 1,
+    "failure": "1600件にもcache hitを期待したテストが既存入力node上限と不整合だった。",
+    "corrected_cache_tests_passed": 5,
+    "capacity_limits_increased": false,
+    "performance_slo_accepted": false
+  },
+  "remaining": [
+    "現行sourceで初回400件・旧400件・新800件・通常CLI800件を同一DBで完了しfresh CIとbaseline更新まで受入",
+    "現行imageでのDocker経路・再開・取消し確認",
+    "1600件を含む性能SLO、cache個別本文上限と内部保持の仕様整合、capacityの実証",
+    "拡張14要件の残件はproductization-status.mdを正本とする"
+  ],
+  "dgx_used_in_this_slice": false,
+  "dgx_status": "利用可能toolにDGX/Qwen接続なし。Lunaの限定実装を親レビューした。",
+  "full_extension_accepted": false,
+  "ci_eligible": false,
+  "commit_created": false,
+  "pushed": false
+}

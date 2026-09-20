@@ -48,7 +48,7 @@ def _source_prepared(db, source_id, now):
     row = db.execute("SELECT * FROM fixture_admissions WHERE run_id=?", (source_id,)).fetchone()
     if row is None:
         raise AdoptionError("FIXTURE_ADMISSION_INVALID")
-    return fixture_admission._verify(row, now)["prepared"]
+    return fixture_admission._verify(row, now, db)["prepared"]
 
 
 def _build(db, transition, old_id, new_id, created_at, now):
@@ -75,7 +75,10 @@ def _build(db, transition, old_id, new_id, created_at, now):
             source_prepared=source, now=created_at, old_run_id=old_id, new_run_id=new_id)
     source = _source_prepared(db, transition["source_run_ref"]["id"], now)
     if previous["use_cases"] == ["UC-LLM"]:
-        from .llm_transitions import build
+        if source["bound_run"]["manifest"].get("schema_version") == 2:
+            from .partitioned_llm_transitions import build
+        else:
+            from .llm_transitions import build
         return build(previous, following, baseline_record=transition["baseline_record"], source_prepared=source,
             now=created_at, old_run_id=old_id, new_run_id=new_id, following_registry=transition.get("following_registry"))
     worker, lock, profile = fixture_admission.execution_context()
@@ -102,7 +105,7 @@ def load_candidate(db, candidate_id, now):
                 or any(row[key] != value[key] for key in ("proposal_id", "proposal_digest", "baseline_series_id"))):
             raise ContractError()
         proposal = db.execute("SELECT * FROM eval_proposals WHERE id=?", (row["proposal_id"],)).fetchone()
-        value["runs"] = candidate_sections.unpack(db, candidate_id, value["runs"])
+        value["runs"] = candidate_sections.unpack(db, candidate_id, value["runs"], restore_prepared=False)
         transition = value["runs"]["transition"]
         contract = transition["next_contract"]
         if (proposal is None or proposal["digest"] != row["proposal_digest"]
@@ -127,13 +130,25 @@ def load_candidate(db, candidate_id, now):
                 or value["expected_baseline_ref"] != transition["baseline_ref"]
                 or value["baseline_series_id"] != transition["baseline_record"]["baseline_series_id"]):
             raise ContractError()
-        old_id = value["runs"]["old"]["bound_run"]["manifest"]["run_id"]
-        new_id = value["runs"]["new"]["bound_run"]["manifest"]["run_id"]
+        compact = [type(value["runs"][side]) is dict
+                   and value["runs"][side].get("kind") == "partitioned_prepared_run"
+                   for side in ("old", "new")]
+        if any(compact) and not all(compact):
+            raise ContractError()
+        if all(compact):
+            old_id, new_id = (value["runs"][side]["run_id"] for side in ("old", "new"))
+        else:
+            old_id = value["runs"]["old"]["bound_run"]["manifest"]["run_id"]
+            new_id = value["runs"]["new"]["bound_run"]["manifest"]["run_id"]
         maps = [tuple(item) for item in db.execute(
             "SELECT run_id,candidate_id,side FROM transition_runs WHERE candidate_id=? ORDER BY side", (candidate_id,))]
         if maps != [(new_id, candidate_id, "new"), (old_id, candidate_id, "old")]:
             raise ContractError()
         expected = _build(db, transition, old_id, new_id, row["created_at"], now)
+        if all(compact):
+            from .partitioned_llm_admission import verify_expected_prepared
+            for side in ("old", "new"):
+                value["runs"][side] = verify_expected_prepared(db, value["runs"][side], expected[side])
         if value["runs"] != expected:
             raise ContractError()
     except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError, OSError):
@@ -189,10 +204,11 @@ def candidate_run(db, bound_row, now):
     result = value["runs"][mapping["side"]]
     bound = result["bound_run"]
     proposal = db.execute("SELECT series_id FROM eval_proposals WHERE id=?", (value["proposal_id"],)).fetchone()
+    stored_plan = result["plan_index"] if bound["manifest"].get("schema_version") == 2 else bound["plan"]
     if (bound_row["contract_series_id"] != proposal[0]
             or bound_row["contract_generation"] != bound["contract"]["generation"]
             or resources._unpack(bound_row["manifest_json"], bound_row["manifest_digest"]) != bound["manifest"]
-            or resources._unpack(bound_row["plan_json"], bound_row["plan_digest"]) != bound["plan"]):
+            or resources._unpack(bound_row["plan_json"], bound_row["plan_digest"]) != stored_plan):
         raise AdoptionError("CANDIDATE_INVALID")
     return mapping, bound, result["baseline_context"]
 

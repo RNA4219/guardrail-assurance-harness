@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "limited_model_review_disposition",
+  "model": "qwen3.8-flash-next",
+  "request_sha256": "49faf29cbfe0ece1c8ba1dd717b542ddd5ddfe0044d92194207789cebc2ed92c",
+  "response_sha256": "6b72d65e46b26689f0323b06c35e86ce41424158c67df689f4813f291e99215c",
+  "elapsed_seconds": 31.609,
+  "finish_reason": "length",
+  "response_complete": false,
+  "code_inspected_by_model": false,
+  "model_output_is_acceptance_evidence": false,
+  "dispositions": [
+    {
+      "topic": "State change between outputs fetch and fresh gate",
+      "disposition": "Adopted as test consideration",
+      "evidence": "test_run_report_guidance: healthy fresh gate with absent outputs remains failure/exit2; mismatched request/run/manifest/outputs ref is not current evidence."
+    },
+    {
+      "topic": "Choosing among multiple unrelated fresh gates",
+      "disposition": "Not applicable",
+      "reason": "The actual API returns one gate bound to a single exact ci_check request; unrelated gates are rejected, not selected."
+    },
+    {
+      "topic": "Ordering of revocation classification",
+      "disposition": "Incomplete model response; no independent finding claimed",
+      "evidence": "Parent requirement preserves prior integrity/expiry failures and only classifies revocation after SOURCE_NOT_READY."
+    }
+  ],
+  "parent_test_result": ".ga/productization-implementation-20260919/report-guidance-parent-v1/unit-result.json",
+  "parent_test_result_sha256": "7fe09963f3c6fbc3bf80ce1165d5045e6645ca8c7e9d47cb348c0c5f12e55ed6"
+}

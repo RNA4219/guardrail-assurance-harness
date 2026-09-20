@@ -1,0 +1,15 @@
+{
+  "files": {
+    "docs/productization-implementation-spec.md": "9d4507e39a8901ce562816e8021b08a2863d73ec61a30b2652a10452c00600f8",
+    "docs/productization-operations-spec.md": "be4e43bc1c5273a0ac8305aa3c05e84ef4012863441b6b82bdb767cc82b1ea1f",
+    "docs/productization-performance-spec.md": "ae8eb1c287c56bda68a3a6cbf14cd53360204ed3c4efb66eebbd8c7840d9173c",
+    "docs/productization-pilot-spec.md": "e97f590a0310bad6f525af3952542b0dc359654c347e741bd6ac6ae44c5ab7ac",
+    "docs/productization-quickstart.md": "a275ddc4440a0ccc43b01fc707df829c476edacdeb6371be5b1276acf0a72104",
+    "docs/productization-requirements.md": "37c710f92dd05510b3f1e0fd0aca60e11b715bd41c39b96ece8407f0b8d23cb4",
+    "docs/productization-spec.md": "1b3bec30b1f3646fb831817a8639ad251fd2a824d2eb85c7ece489edaaf30bbc",
+    "docs/productization-status.md": "5bf0ba05fe2b15897c08663dd93cd06ac1905170626299a6ab442e277f508a05"
+  },
+  "id": "productization-requirements-v4",
+  "kind": "snapshot_manifest",
+  "schema_version": 1
+}

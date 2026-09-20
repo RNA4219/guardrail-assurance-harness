@@ -1,0 +1,42 @@
+{
+  "base_cache_hit": true,
+  "ci_eligible": false,
+  "kind": "verified_runtime_lock_installation",
+  "prepared_receipt_sha256": "7b9bd8ddcda5ae4678ebdb04852aa5ffe6446cde0354c1b54cb510c233474000",
+  "records": [
+    {
+      "image_id": "sha256:278fcb998e4cb2971b8e42f68d42e67eeb98b1e4e4c375211655eb9e89301855",
+      "kind": "fixture",
+      "new_lock_sha256": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7",
+      "old_lock_sha256": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7",
+      "path": "config/fixture-runtime.lock.json",
+      "worker_digest": "fa2e9c8b0ce706d75f0a2331c62ca8edf84234601c3294ffb4903a44583234d7"
+    },
+    {
+      "image_id": "sha256:02dbf07143526842ec1842ec1ec1ed82016aabb6ae9c71f11c5b22b4b9530aa7",
+      "kind": "guardrail",
+      "new_lock_sha256": "2bfd4da559e0f526c114917906c8bb180b01ea65324769a8e380c327701a96f3",
+      "old_lock_sha256": "b04ae5c4588de7cf25cd584c03a5b176b6b0930a0bf52e2ed49ac014eaecad0d",
+      "path": "config/guardrail-runtime.lock.json",
+      "worker_digest": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
+      "sources_digest": "db42c9ae1e79d657077a4c15cafd7b9b954c89138234100c1d00e4e53473bac3"
+    },
+    {
+      "image_id": "sha256:3d2545823dbf3dcf3f578055a0267c4a5ad7bb4fa638d4d9f8fb79efbc03af77",
+      "kind": "authority",
+      "new_lock_sha256": "8822ad77391dcca951d522b3ab18f62fdb7f3a8f1fb3dc6e1b197a1674ba219a",
+      "old_lock_sha256": "b5f655d02e9510bce7a61fc7fee5c8554fb6060d41069b5c34e2b4c5b1081515",
+      "path": "config/authority-runtime.lock.json",
+      "sources_digest": "030f434fe6d138bb183e077278654ffeacaec1429dde8560e01d16a392f320a7"
+    }
+  ],
+  "schema_version": 1,
+  "source_manifest_sha256": "64bb99cdfd7dcfcd53b73790cc24d29c47eeaacd383ea315e252e04adf754193",
+  "source_snapshot": "source-v8-preimage",
+  "source_verified": true,
+  "status": "INSTALLED",
+  "elapsed_ns": 21828000000,
+  "acceptance_pass": false,
+  "existing_runtime_migrated": false,
+  "all_recorded_sources_match_checkout": true
+}

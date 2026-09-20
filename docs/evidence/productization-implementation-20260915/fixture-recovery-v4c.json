@@ -1,0 +1,50 @@
+{
+  "ci_eligible": false,
+  "elapsed_milliseconds": 16048,
+  "fixture_hashes": {
+    "datasets/synthetic-policy-v1/pack.json": "48488e3d3206f9ef20795cd0879dbb32ef1e7c8e29ba08e0d0562cafae943143",
+    "docs/contracts/initial-policy.v1.json": "6b22d1819f1aba5e05ac7225159fe45825c7ae35b97593f91c26806e7dda66ba",
+    "docs/evidence/mvp-baseline-refresh-20260912/runtime-observations.json": "04fd295cbc3ae0334b29c5f878fbaba30cef6502db8f095d9cfa72b57ffc2ea6",
+    "docs/evidence/mvp-baseline-refresh-20260912/verification.json": "c64c9b846670e340de4d928fb4fe91fdd0d665c47bc6fd6d3bb1eeedf5a2f9a0"
+  },
+  "full_pac_acceptance": false,
+  "id": "fixture-recovery-v4c",
+  "kind": "local_validation_observation",
+  "log_sha256": "7fa9ea8ed59953b07e45877a57a039c194b5957eaf8aadda160633b94e1e93f1",
+  "original_plan_digest": "8a7140a64c62e651433411c648463932621d03b22703aa9431652ef948137dbd",
+  "original_source_code_unchanged": true,
+  "passed": true,
+  "returncode": 0,
+  "schema_version": 1,
+  "selector": "tests.test_synthetic_llm_runner",
+  "source_manifest": "fixture-recovery-source-v4c-manifest.json",
+  "source_ref": {
+    "digest": "121947e5c2cdcf7eac16251193eb66f540ef7ed98ee455c36ba3b89c2e13072c",
+    "id": "regression-source-v4",
+    "kind": "snapshot_manifest"
+  },
+  "source_unchanged": true,
+  "status": "PASS",
+  "tests": 19,
+  "verified_test_ids": [
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_acceptance_is_held_before_launch_when_reserved_token_budget_is_exceeded",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_child_timeout_is_recorded_without_retry",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_complete_requires_usage_and_checks_effect_action_only",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_existing_output_directory_is_never_overwritten",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_failed_or_wrong_pack_evaluator_calibration_prevents_every_target_call",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_fake_process_reader_enforces_child_stdout_limit_and_timeout",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_indeterminate_observation_has_separate_metric_and_calibration_flag",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_invalid_purpose_is_rejected_before_creating_output",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_malformed_and_oversized_child_output_is_not_saved",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_monotonic_deadline_prevents_dispatch_despite_wall_clock_rollback",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_provider_does_not_send_later_stage_after_invalid_first_response",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_provider_sends_one_request_per_stage_and_returns_no_raw",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_provider_timeout_keeps_remote_stop_unknown",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_provider_uses_only_fixed_endpoint_and_bounded_response",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_record_shape_rejects_untrusted_nested_content_and_counter_drift",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_running_reservation_stops_new_submissions_after_bad_child",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_supervisor_accepts_only_complete_structured_child_record",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_supervisor_keeps_timeout_exposure_from_structured_nonzero_child",
+    "tests.test_synthetic_llm_runner.SyntheticLLMRunnerTests.test_target_errors_do_not_invalidate_a_calibrated_measurement"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "dispositions": [
+    {
+      "basis": "canonical byte equality, duplicate/nonfinite/deep JSON rejection and independent returned values are tested",
+      "decision": "already_covered",
+      "point": "JSON parsing/order"
+    },
+    {
+      "basis": "failure_stage and reason distinguish the boundary; UNKNOWN deliberately does not infer actual authority/receipt state",
+      "decision": "not_adopted_as_reported",
+      "point": "UNKNOWN ambiguity"
+    },
+    {
+      "basis": "fixed small envelope excludes raw request/exception and records only first failure; oversized payload is rejected and never truncated",
+      "decision": "not_adopted_as_reported",
+      "point": "64KiB truncation"
+    }
+  ],
+  "earlier_attempt": {
+    "elapsed_seconds": 15.047000000020489,
+    "error_type": "TimeoutError",
+    "independent_validation": false,
+    "status": "UNAVAILABLE"
+  },
+  "independent_validation": false,
+  "kind": "model_review_disposition",
+  "model": "qwen3.8-flash-next",
+  "response": "1. **JSON解析の非決定性**: 厳密JSON検査時のパースエラーや順序依存による復元不一致リスク。\n2. **UNKNOWN値の曖昧性**: 固定envelopeのUNKNOWNが、初期化失敗と実行時障害を区別できず、原因特定が困難。\n3. **容量上限の硬直性**: 64KiB固定により、複雑なステータスや多数の例外が切り詰められ、情報欠落が生じる。",
+  "result": {
+    "elapsed_seconds": 4.436999999976251,
+    "finish_reason": "stop",
+    "independent_validation": false,
+    "status": "RECEIVED"
+  },
+  "schema_version": 1
+}

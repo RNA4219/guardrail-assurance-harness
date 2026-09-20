@@ -2,8 +2,8 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-12
-next_review_due: 2026-10-12
+last_reviewed_at: 2026-09-19
+next_review_due: 2026-10-19
 template_version: 1.0.0
 ---
 
@@ -12,6 +12,17 @@ template_version: 1.0.0
 GAHで実施した変更を記録する。コピー元の履歴は[整理前構成](docs/research/README.md)に保存し、GAHの版・実績として引き継がない。
 
 ## [Unreleased]
+
+- 0035: SQLiteのwriting接続と既定のhost文書保存へ容量上限を接続。終了workerの計測をrun/sourceへ束縛し、client回収前のsnapshot・read-only collector・Docker保存先観測を追加。コピー削減の呼出元不一致と過去clientの観測失敗を修正。[継続証跡](docs/evidence/productization-continuation-20260919/README.md)に実行source、途中失敗、検査結果と未受入条件を保持する。
+
+- 0034: Luna・DGXを監督して拡張仕様を実装へ接続。性能計測/CI分割、導入・診断・履歴・保持・bundle・移行、実案件metadata管理を追加し、純粋pack/bind生成の重複、authority時計、setupと通常runのmanifest不一致を修正。関連93試験と固定実Docker90件が成功。容量強制・全資源計数・実案件入力経路・image配布取得は未実装で、全14受入は未完了。
+  [実装仕様](docs/productization-implementation-spec.md) / [Task](docs/tasks/TASK.productization-implementation-09-15-2026.md) / [監督レビュー](docs/reviews/productization-implementation-20260915.md)。
+
+- 0033: [拡張仕様 v1](docs/productization-spec.md)と性能/CI・導入運用・実案件評価の3分冊を作成。Lunaの分担執筆を親が監督し、共通入出力・役割・再実行・計測式・失敗条件と設計ケースを整理する。製品コードと既存要求は維持し、新規受入はNOT_RUN。
+  [Task](docs/tasks/TASK.productization-spec-09-15-2026.md) / [監督レビュー](docs/reviews/productization-spec-20260915.md) / [文書検収](docs/acceptance/AC-20260915-02.md)。
+
+- 0032: MVP後の[拡張要件 v1](docs/productization-requirements.md)を作成。実案件での有用性、処理速度、初回導入・運用の14要件と14受入条件、提案SLO、実施順、反例レビューを整理した。元MVPの要求・受入証拠を維持し、拡張の製品受入は全NOT_RUN。
+  [Task](docs/tasks/TASK.productization-requirements-09-15-2026.md) / [文書検収](docs/acceptance/AC-20260915-01.md)。
 
 - 0031: GitHub初回公開時に判明したWindows/Linux間の文書索引の順序差を補正。repo相対POSIX文字列で生成順を固定し、混在文字種の再現試験と既存の文書運用試験を検証した。
 
@@ -96,3 +107,12 @@ GAHで実施した変更を記録する。コピー元の履歴は[整理前構�
 
 - 0001: 要求段階に合わせて文書を整理。要求本文を内容保持のまま整形し、未決定事項・出典台帳・資料来歴を追加。コピー元のレビューと検収をarchiveへ分離し、識別子と現行索引を更新。
   [Task](docs/tasks/TASK.docs-cleanup-09-10-2026.md) / [Acceptance](docs/acceptance/AC-20260910-03.md) / [整理記録](docs/reviews/docs-cleanup-20260910.md)。
+
+
+## 2026-09-16 拡張実装の継続
+
+- offline評価結果の厳密importと冪等CLIを追加。
+- 論理容量・新規SQLite上限・failure sink部品とCheckpointの明示予算を追加。
+- 固定authority cgroup/host CPU観測をwhole-run副証跡へ接続。空I/Oの欠測をCPUと分離。
+- 新規配布先での固定base取得・3image構築とlock照合を追加。
+- [検証証跡](docs/evidence/productization-continuation-20260916/README.md): 関連116件中114成功/2skip、実image準備と資源観測。全拡張受入は未完了。

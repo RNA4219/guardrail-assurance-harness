@@ -1,0 +1,53 @@
+{
+  "ci_eligible": false,
+  "first_attempt": {
+    "ci_eligible": false,
+    "elapsed_ns": 283860000000,
+    "errors": 1,
+    "failures": 0,
+    "full_pac_acceptance": false,
+    "id": "final-delta-v1",
+    "kind": "local_validation_observation",
+    "log_sha256": "b409789d81cb357db9648f8ec0b283a41eb67e2289253bf37996cfe7555a3863",
+    "passed": false,
+    "schema_version": 1,
+    "skips": 0,
+    "source_id": "source-v5",
+    "source_manifest_sha256": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+    "source_unchanged": true,
+    "tests_run": 100
+  },
+  "full_pac_acceptance": false,
+  "full_regression": false,
+  "id": "continuation-source-v5-delta",
+  "kind": "local_validation_aggregate",
+  "passed": true,
+  "planned_test_count": 100,
+  "schema_version": 1,
+  "single_invocation_all_passed": false,
+  "source_id": "source-v5",
+  "source_manifest_sha256": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+  "successful_unique_test_count": 100,
+  "targeted_retry": {
+    "ci_eligible": false,
+    "elapsed_ns": 812000000,
+    "exit_code": 0,
+    "full_pac_acceptance": false,
+    "id": "final-delta-driver-retry-v1",
+    "kind": "local_validation_observation",
+    "log_sha256": "32a44ea5ae5e3ee5b733d029d059ef848387d594a4aa79aec7d6c79a025fa525",
+    "passed": true,
+    "prior_failure": "final-delta-v1",
+    "product_source_changed": false,
+    "retry_reason": "Windows spawn re-imported unguarded custom verification driver; standard unittest launcher used",
+    "schema_version": 1,
+    "source_id": "source-v5",
+    "source_manifest_sha256": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+    "source_unchanged": true,
+    "test_ids": [
+      "test_bounded_files.BoundedFileTests.test_same_root_writers_serialize_across_processes"
+    ],
+    "tests_run": 1
+  },
+  "unresolved_test_errors": 0
+}

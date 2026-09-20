@@ -1,0 +1,121 @@
+{
+  "id": "linux-lane-diagnostic-v2",
+  "kind": "linux_lane_diagnostic",
+  "limits": [
+    "900秒の限定診断はTIMEOUT。全回帰・SLO・製品受入を達成した証拠ではない。",
+    "docker statsの一時点は全資源積算ではない。",
+    "Windows bindとtmpfsの比較から制御された速度改善を主張しない。"
+  ],
+  "raw_result_sha256": "2d55ff5f7acb2c2998ef984ec7750e75cf863df201afe1a96026c38a37355a6c",
+  "result": {
+    "ci_eligible": false,
+    "cleanup_confirmed": true,
+    "container": {
+      "container_id": "59114c57d69a0699194959b8557bebc4f59d20c47c1d88b0ba5c6740abfac4ce",
+      "name": "gah-linux-llm-tmpfs-7bfac9a0253b42adb72826d146545d08",
+      "run_id_label": "7bfac9a0253b42adb72826d146545d08",
+      "state_at_end": {
+        "cap_drop": [
+          "ALL"
+        ],
+        "exit_code": 124,
+        "image": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
+        "labels": {
+          "org.gah.linux-lane": "llm-supervision-tmpfs-v1",
+          "org.gah.run-id": "7bfac9a0253b42adb72826d146545d08"
+        },
+        "memory_bytes": 4294967296,
+        "memory_swap_bytes": 4294967296,
+        "mounts": [
+          {
+            "Destination": "/source",
+            "Mode": "",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": ".ga/productization-implementation-20260919/source-v5",
+            "Type": "bind"
+          },
+          {
+            "Destination": "/source-v5-manifest.json",
+            "Mode": "",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": ".ga/productization-implementation-20260919/source-v5-manifest.json",
+            "Type": "bind"
+          }
+        ],
+        "name": "/gah-linux-llm-tmpfs-7bfac9a0253b42adb72826d146545d08",
+        "nano_cpus": 2000000000,
+        "network_mode": "none",
+        "pids_limit": 128,
+        "read_only_rootfs": true,
+        "running": false,
+        "security_opt": [
+          "no-new-privileges:true"
+        ],
+        "status": "exited",
+        "tmpfs": {
+          "/tmp": "rw,nosuid,nodev,size=1073741824,uid=65532,gid=65532,mode=755",
+          "/workspace": "rw,nosuid,nodev,size=1073741824,uid=65532,gid=65532,mode=755"
+        },
+        "user": "65532:65532"
+      }
+    },
+    "copy_and_lane_evidence": {
+      "copy_source_hashes_unchanged": true,
+      "lane_elapsed_ns": 900253703827,
+      "lane_exit_code": 124,
+      "phase": "lane_timeout"
+    },
+    "copy_timeout_seconds": 120,
+    "diagnostic_only": true,
+    "expected_plan_digest": "4c834d689e346942ec2c9f58cc791130a96bad69a90703d947121da7803ede5b",
+    "full_pac_acceptance": false,
+    "host_source_hashes_after_digest": "961524a230611d59901c6b7beb08e9b72835a042a098bca95d01186dc519a4a4",
+    "host_source_hashes_before_digest": "961524a230611d59901c6b7beb08e9b72835a042a098bca95d01186dc519a4a4",
+    "host_source_hashes_match": true,
+    "kind": "linux_tmpfs_lane_result",
+    "lane": "llm-supervision",
+    "lane_timeout_seconds": 900,
+    "linux_conditions": {
+      "api_version": "1.52",
+      "architecture": "amd64",
+      "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+      "os": "linux",
+      "repo_digests": [
+        "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
+      ],
+      "server_version": "29.0.1"
+    },
+    "log": "container.log",
+    "reason": "LANE_TIMEOUT",
+    "resource_sample": {
+      "diagnostic_only": true,
+      "not_slo_measurement": true,
+      "not_true_group_accounting": true,
+      "observed_at_utc": "2026-09-19T13:58:14.930657+00:00",
+      "sample": {
+        "BlockIO": "23.2MB / 0B",
+        "CPUPerc": "99.07%",
+        "Container": "59114c57d69a0699194959b8557bebc4f59d20c47c1d88b0ba5c6740abfac4ce",
+        "ID": "59114c57d69a",
+        "MemPerc": "4.08%",
+        "MemUsage": "167MiB / 4GiB",
+        "Name": "gah-linux-llm-tmpfs-7bfac9a0253b42adb72826d146545d08",
+        "NetIO": "0B / 0B",
+        "PIDs": "2"
+      }
+    },
+    "schema_version": 1,
+    "slo_comparison": false,
+    "source_manifest_sha256_after": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+    "source_manifest_sha256_before": "256f5ff5d11b22ad61d4a6dc895c9aee7083a18e01d2311d992ff2009ce0d66b",
+    "source_manifest_unchanged": true,
+    "status": "TIMEOUT",
+    "tests": [
+      "test_llm_supervision_integration.LlmSupervisionIntegrationTests.test_adopted_comparison_supervision_ci_report_and_checkpoint_recovery"
+    ]
+  },
+  "schema_version": 1,
+  "source_snapshot": "source-v5"
+}

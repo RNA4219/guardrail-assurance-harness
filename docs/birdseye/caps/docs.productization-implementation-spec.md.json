@@ -1,0 +1,26 @@
+{
+  "id": "docs/productization-implementation-spec.md",
+  "role": "productization-implementation-spec",
+  "title": "拡張実装仕様: 共通境界と接続",
+  "summary": "[拡張仕様](productization-spec.md)を実装する際の追加決定。仕様作成時の証拠は当時の版として保持し、実装の検査結果を別に記録する。[実装Task](tasks/TASK.productization-implementation-09-15-2026.md)が進捗の正本である。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-spec.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/ci-config.md",
+    "docs/evidence/productization-continuation-20260916/README.md",
+    "docs/productization-operations-spec.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "af8db9cb4b0c313362019ca6f5172dc1e02c0d744521fd7e42e239368b73ad0a"
+}

@@ -31,7 +31,7 @@ from .run_contracts import (
     validate_trial_plan,
 )
 from .wire import canonical_bytes
-from . import combined_runs, target_retirement, mutation_reviews
+from . import combined_runs, target_retirement, mutation_reviews, run_catalog, pilot_authority, run_diagnostics
 
 
 
@@ -43,7 +43,7 @@ _ROLES = {"manager", "validator", "operator"}
 _ACTIONS = {
     "object_register", "calibration_record", "contract_propose",
     "contract_validate", "contract_adopt", "contract_current",
-    "run_begin", "run_status", "fixture_prepare", "guardrail_prepare", "contract_preflight",
+    "run_begin", "run_begin_partitioned", "run_input_artifact", "run_status", "fixture_prepare", "guardrail_prepare", "guardrail_prepare_partitioned", "contract_preflight", "authority_diagnostics",
 }
 _ACTION_ROLES = {
     "object_register": {"manager"},
@@ -53,13 +53,18 @@ _ACTION_ROLES = {
     "contract_adopt": {"manager"},
     "contract_current": _ROLES,
     "run_begin": {"operator"},
+    "run_begin_partitioned": {"operator"},
     "run_status": _ROLES,
+    "run_input_artifact": _ROLES,
     "fixture_prepare": {"manager"},
     "guardrail_prepare": {"manager"},
+    "guardrail_prepare_partitioned": {"manager"},
     "contract_preflight": {"validator"},
+    "authority_diagnostics": _ROLES,
 }
-_FRESH_ACTIONS = {"contract_current", "run_status", "contract_preflight"}
+_FRESH_ACTIONS = {"contract_current", "run_status", "contract_preflight", "authority_diagnostics", "run_input_artifact"}
 _ACTION_FIELDS = {
+    "authority_diagnostics": {"schema_version", "action", "request_id"},
     "object_register": {"schema_version", "action", "request_id", "document"},
     "calibration_record": {"schema_version", "action", "request_id", "calibration_id", "case_set_ref", "evaluator_ref", "observations"},
     "contract_propose": {"schema_version", "action", "request_id", "proposal_id", "series_id", "expected_generation", "contract"},
@@ -67,9 +72,12 @@ _ACTION_FIELDS = {
     "contract_adopt": {"schema_version", "action", "request_id", "proposal_id", "validation_id", "expected_generation"},
     "contract_current": {"schema_version", "action", "request_id", "series_id"},
     "run_begin": {"schema_version", "action", "request_id", "manifest", "plan", "contract_series_id"},
+    "run_begin_partitioned": {"schema_version", "action", "request_id", "run_id", "contract_series_id", "expected_manifest_ref"},
     "run_status": {"schema_version", "action", "request_id", "run_id"},
+    "run_input_artifact": {"schema_version", "action", "request_id", "run_id", "expected_manifest_ref", "artifact_ref"},
     "fixture_prepare": {"schema_version", "action", "request_id", "run_id", "policy_series_id"},
     "guardrail_prepare": {"schema_version", "action", "request_id", "run_id", "policy_series_id", "target_version"},
+    "guardrail_prepare_partitioned": {"schema_version", "action", "request_id", "run_id", "policy_series_id", "target_version", "case_count"},
     "contract_preflight": {"schema_version", "action", "request_id", "proposal_id", "baseline_series_id", "expected_contract_ref", "expected_baseline_ref"},
 }
 
@@ -127,8 +135,14 @@ def _validate_request(request: Any) -> dict[str, Any]:
     if type(request) is not dict:
         raise _invalid()
     action = request.get("action")
-    if type(action) is not str or action not in (set(_ACTION_FIELDS) | set(resource_authority.FIELDS) | set(assurance_authority.FIELDS) | set(baseline_authority.FIELDS) | set(transition_authority.FIELDS) | set(transition_acceptance.FIELDS) | set(regression_runs.FIELDS) | set(finding_lifecycle.FIELDS) | set(evidence_retention.FIELDS) | set(candidate_outputs.FIELDS) | set(combined_runs.FIELDS) | set(target_retirement.FIELDS) | set(mutation_reviews.FIELDS)):
+    if type(action) is not str or action not in (set(_ACTION_FIELDS) | set(resource_authority.FIELDS) | set(assurance_authority.FIELDS) | set(baseline_authority.FIELDS) | set(transition_authority.FIELDS) | set(transition_acceptance.FIELDS) | set(regression_runs.FIELDS) | set(finding_lifecycle.FIELDS) | set(evidence_retention.FIELDS) | set(candidate_outputs.FIELDS) | set(combined_runs.FIELDS) | set(target_retirement.FIELDS) | set(mutation_reviews.FIELDS) | set(run_catalog.FIELDS) | set(pilot_authority.FIELDS) | set(run_diagnostics.FIELDS)):
         raise _error("INVALID_ACTION")
+    if action in run_diagnostics.FIELDS:
+        return run_diagnostics.validate_request(request)
+    if action in pilot_authority.FIELDS:
+        return pilot_authority.validate_request(request)
+    if action in run_catalog.FIELDS:
+        return run_catalog.validate_request(request)
     if action in mutation_reviews.FIELDS:
         return mutation_reviews.validate_request(request)
     if action in combined_runs.FIELDS:
@@ -202,10 +216,24 @@ def _validate_request(request: Any) -> dict[str, Any]:
             normalized["manifest"] = validate_run_manifest(normalized["manifest"])
             normalized["plan"] = validate_trial_plan(normalized["plan"])
             require_id(normalized["contract_series_id"])
+        elif action == "run_begin_partitioned":
+            require_id(normalized["run_id"])
+            require_id(normalized["contract_series_id"])
+            _validate_ref(normalized["expected_manifest_ref"], "run_manifest")
+        elif action == "run_input_artifact":
+            require_id(normalized["run_id"])
+            _validate_ref(normalized["expected_manifest_ref"], "run_manifest")
+            reference = normalized["artifact_ref"]
+            if type(reference) is not dict or reference.get("kind") not in {
+                    "partitioned_input_artifact", "control_registry", "case_set"}:
+                raise _invalid()
+            _validate_ref(reference, reference["kind"])
         elif action == "run_status":
             require_id(normalized["run_id"])
-        elif action in {"fixture_prepare", "guardrail_prepare"}:
-            if action == "guardrail_prepare" and (type(normalized["target_version"]) is not str or normalized["target_version"] not in llm_materialization.VERSIONS):
+        elif action in {"fixture_prepare", "guardrail_prepare", "guardrail_prepare_partitioned"}:
+            if action == "guardrail_prepare_partitioned" and (type(normalized["case_count"]) is not int or normalized["case_count"] not in {400, 800, 1600}):
+                raise _invalid()
+            if action in {"guardrail_prepare", "guardrail_prepare_partitioned"} and (type(normalized["target_version"]) is not str or normalized["target_version"] not in llm_materialization.VERSIONS):
                 raise _invalid()
             require_id(normalized["run_id"])
             require_id(normalized["policy_series_id"])
@@ -232,7 +260,7 @@ def _compute_source_digest() -> str:
         Path(__file__).with_name("registry.py"),
         Path(__file__).with_name("corpus.py"),
         *(Path(__file__).with_name(name + ".py") for name in (
-            "adoption", "wire", "contracts", "policy", "run_evidence", "aggregation", "mutation_reviews", "termination",
+            "adoption", "wire", "contracts", "policy", "run_catalog", "run_diagnostics", "pilot", "pilot_authority", "productization", "run_evidence", "budget_warning", "aggregation", "mutation_reviews", "termination",
             "decision", "normalized", "docker_runner", "execution_journal", "assurance_authority",
             "adoption_migrations", "baselines", "baseline_authority", "fixture_admission",
             "fixture_materialization", "fixture_calibration", "contract_updates",
@@ -240,7 +268,10 @@ def _compute_source_digest() -> str:
             "regression_runs", "run_outputs", "remediation", "run_cancellation", "baseline_generations",
             "resource_operation", "baseline_refresh_migration", "following_contracts",
             "semantic_conditions", "contract_revision_rules", "read_checks", "run_scope", "finding_lifecycle", "execution_profiles", "guardrail_runtime", "llm_materialization", "llm_admission",
-            "evaluation_data", "llm_evaluator", "measurement_calibration", "guardrail_results", "guardrail_runner", "candidate_sections", "llm_transitions", "evidence_retention", "candidate_outputs", "combined_runs", "cache_inputs", "target_retirement", "finding_dispositions", "llm_migration", "evidence_snapshot_cache", "immutable_cache")),
+            "query_scale_data", "partitioned_case_set", "partitioned_scale_corpus", "partitioned_trial_plan", "partitioned_run_contracts",
+            "partitioned_llm_materialization", "partitioned_guardrail_results", "partitioned_guardrail_runner",
+            "partitioned_llm_admission", "partitioned_normal_evidence", "partitioned_aggregation", "partitioned_llm_transitions",
+            "evaluation_data", "llm_evaluator", "measurement_calibration", "guardrail_results", "guardrail_runner", "candidate_sections", "llm_transitions", "evidence_retention", "candidate_outputs", "combined_runs", "cache_inputs", "target_retirement", "finding_dispositions", "llm_migration", "evidence_snapshot_cache", "immutable_cache", "sqlite_limits", "bounded_files", "storage_budget", "worker_metrics")),
         Path(__file__).resolve().parents[2] / "fixtures/llm/guardrail_target.py",
         Path(__file__).resolve().parents[2] / "fixtures/llm/guardrail_worker.py",
         Path(__file__).resolve().parents[2] / "config/guardrail-runtime.lock.json",
@@ -493,10 +524,9 @@ def _assert_contract_history(db: sqlite3.Connection, current: sqlite3.Row,
     return validation
 
 
-def _assert_contract_fresh(store: Any, db: sqlite3.Connection, current: sqlite3.Row,
-                           contract: dict[str, Any], now: int) -> None:
-    """不変結合に加えてvalidation期限とpermission世代を照合する。"""
-    validation = _assert_contract_history(db, current, contract)
+def _assert_validation_fresh(store: Any, db: sqlite3.Connection, validation: sqlite3.Row,
+                             now: int) -> dict[str, Any]:
+    """既にhistory照合済みのrowについて、動的freshnessを今の要求時点で検査する。"""
     validation_payload = _load_json(validation, "payload_json", "digest")
     if (type(validation["created_at"]) is not int
             or type(validation["expires_at"]) is not int
@@ -509,6 +539,14 @@ def _assert_contract_fresh(store: Any, db: sqlite3.Connection, current: sqlite3.
             or store._actor_revoked(db, "manager")
             or store._actor_revoked(db, "validator")):
         raise _error("CONTRACT_INVALID")
+    return validation_payload
+
+
+def _assert_contract_fresh(store: Any, db: sqlite3.Connection, current: sqlite3.Row,
+                           contract: dict[str, Any], now: int) -> None:
+    """不変結合に加えてvalidation期限とpermission世代を照合する。"""
+    validation = _assert_contract_history(db, current, contract)
+    _assert_validation_fresh(store, db, validation, now)
 
 
 def _assert_current_valid(store: Any, db: sqlite3.Connection, current: sqlite3.Row,
@@ -525,8 +563,7 @@ def _validate_transition_state(store, db, contract, now, *, policy_state=None):
         raise _error("CONTRACT_INVALID")
     current = histories[0]
     validation = _assert_contract_history(db, current, contract)
-    payload = _load_json(validation, "payload_json", "digest")
-    _assert_contract_fresh(store, db, current, contract, now)
+    payload = _assert_validation_fresh(store, db, validation, now)
     candidate_row, candidate = transition_authority.load_candidate(db, payload["candidate_id"], now)
     if candidate_row["permission_generation"] != store._permission_generation(db):
         raise _error("CANDIDATE_EXPIRED")
@@ -578,8 +615,8 @@ class EvaluationExtension:
 
     tables = TABLES
     schema_version = 4
-    actions = {**_ACTION_ROLES, **resource_authority.ACTIONS, **assurance_authority.ACTIONS, **baseline_authority.ACTIONS, **transition_authority.ACTIONS, **transition_acceptance.ACTIONS, **regression_runs.ACTIONS, **finding_lifecycle.ACTIONS, **evidence_retention.ACTIONS, **candidate_outputs.ACTIONS, **combined_runs.ACTIONS, **target_retirement.ACTIONS, **mutation_reviews.ACTIONS}
-    fresh_actions = {"contract_candidate_read"} | _FRESH_ACTIONS | resource_authority.FRESH_ACTIONS | assurance_authority.FRESH_ACTIONS | baseline_authority.FRESH_ACTIONS | regression_runs.FRESH_ACTIONS | finding_lifecycle.FRESH_ACTIONS | evidence_retention.FRESH_ACTIONS | candidate_outputs.FRESH_ACTIONS | combined_runs.FRESH_ACTIONS | mutation_reviews.FRESH_ACTIONS
+    actions = {**_ACTION_ROLES, **resource_authority.ACTIONS, **assurance_authority.ACTIONS, **baseline_authority.ACTIONS, **transition_authority.ACTIONS, **transition_acceptance.ACTIONS, **regression_runs.ACTIONS, **finding_lifecycle.ACTIONS, **evidence_retention.ACTIONS, **candidate_outputs.ACTIONS, **combined_runs.ACTIONS, **target_retirement.ACTIONS, **mutation_reviews.ACTIONS, **run_catalog.ACTIONS, **pilot_authority.ACTIONS, **run_diagnostics.ACTIONS}
+    fresh_actions = {"contract_candidate_read"} | _FRESH_ACTIONS | resource_authority.FRESH_ACTIONS | assurance_authority.FRESH_ACTIONS | baseline_authority.FRESH_ACTIONS | regression_runs.FRESH_ACTIONS | finding_lifecycle.FRESH_ACTIONS | evidence_retention.FRESH_ACTIONS | candidate_outputs.FRESH_ACTIONS | combined_runs.FRESH_ACTIONS | mutation_reviews.FRESH_ACTIONS | run_catalog.FRESH_ACTIONS | pilot_authority.FRESH_ACTIONS | run_diagnostics.FRESH_ACTIONS
     digest = _source_digest()
 
     def create_schema(self, db: sqlite3.Connection) -> None:
@@ -624,9 +661,17 @@ class EvaluationExtension:
         if proposal is None or contract["generation"] != row["contract_generation"] or _packed(contract)[1] != proposal[0]:
             raise _error("CONTRACT_INVALID")
         policy_state = self._pinned_policy(store, db, contract, now, require_current=True)
+        validation_in_transaction = db.in_transaction
+        validation_changes = db.total_changes
         _validate_state(store, db, contract, now, policy_state=policy_state)
-        _assert_current_valid(store, db, current, contract, now)
+        if not (contract["generation"] >= 2 and validation_in_transaction
+                and db.in_transaction and db.total_changes == validation_changes):
+            _assert_current_valid(store, db, current, contract, now)
         policy, _, _ = policy_state
+        if manifest.get("schema_version") == 2:
+            from .partitioned_llm_admission import bound_for_row
+            bound, _ = bound_for_row(db, row, contract, policy, now)
+            return bound["manifest"], bound["plan"]
         if contract["comparison"]["mode"] == "required":
             bound = regression_runs.for_run(db, row, now)["bound_run"]
             return bound["manifest"], bound["plan"]
@@ -667,6 +712,10 @@ class EvaluationExtension:
         # 旧runは当時の採択世代を使うが、historyとproposal/validationの
         # 不変結合は毎回検査する。期限・permissionのfresh判定はreceipt/current側に委ねる。
         _assert_contract_history(db, history, contract)
+        if manifest.get("schema_version") == 2:
+            from .partitioned_llm_admission import bound_for_row
+            policy, _, _ = self._pinned_policy(store, db, contract, now, require_current=False)
+            return bound_for_row(db, row, contract, policy, now)
         if contract["comparison"]["mode"] == "required":
             result = regression_runs.for_run(db, row, now)
             return result["bound_run"], result["baseline_context"]
@@ -754,6 +803,21 @@ class EvaluationExtension:
     def _execute(self, store: Any, db: sqlite3.Connection, request: dict[str, Any], actor_id: str, context: str, now: int) -> dict[str, Any]:
         action = request["action"]
         request_id = request["request_id"]
+        if action in run_diagnostics.FIELDS:
+            return _result(action,request_id,**run_diagnostics.execute(store,db,request,now))
+        if action in pilot_authority.FIELDS:
+            return pilot_authority.execute(store,db,request,actor_id,context,now)
+        if action in run_catalog.FIELDS:
+            return _result(action,request_id,**run_catalog.execute(store,db,request,actor_id,context,now))
+        if action == "authority_diagnostics":
+            # 同じ認証transactionで読む版・権限世代だけ。製品採択やCI許可は返さない。
+            version = store._meta(db, "schema_version")
+            pragma = db.execute("PRAGMA user_version").fetchone()[0]
+            if type(pragma) is not int or version != pragma or version != self.schema_version:
+                raise _error("UNSUPPORTED_STORE")
+            return _result(action, request_id, database_schema_version=version,
+                           permission_generation=store._permission_generation(db),
+                           extension_digest=store._extension_digest, checked_at=now)
         if action in mutation_reviews.FIELDS:
             fields = mutation_reviews.execute(store, db, request, actor_id, context, now,
                 lambda run_id: self._baseline_source(store, db, run_id, now, actor_id=actor_id, context=context))
@@ -775,7 +839,11 @@ class EvaluationExtension:
                 lambda run_id: self._bound_evidence_run(store, db, run_id, now))
             return _result(action, request_id, **fields)
         if action in {"run_prepare", "run_prepare_scoped"}:
-            return _result(action, request_id, **regression_runs.prepare(store, db, request, now))
+            prepared = regression_runs.prepare(store, db, request, now)
+            if prepared["bound_run"]["manifest"].get("schema_version") == 2:
+                from .partitioned_llm_admission import store_prepared
+                return _result(action, request_id, prepared=store_prepared(db, prepared))
+            return _result(action, request_id, **prepared)
         if action == "run_cancel_finalize":
             bound, baseline = self._bound_evidence_run(store, db, request["run_id"], now)
             try:
@@ -811,9 +879,13 @@ class EvaluationExtension:
                     fields = transition_authority.prepare(store, db, request, now, actor_id, context, check)
                 elif action == "contract_candidate_read":
                     candidate_row, value = transition_authority.fresh_candidate(store, db, request["candidate_id"], now, check)
+                    prepared = value["runs"][request["side"]]
+                    if prepared["bound_run"]["manifest"].get("schema_version") == 2:
+                        from .partitioned_llm_admission import compact_prepared
+                        prepared = compact_prepared(prepared)
                     fields = {"candidate_id": request["candidate_id"], "side": request["side"],
                         "candidate_ref": transition_authority.candidate_sections.stored_reference(candidate_row, request["candidate_id"]),
-                        "prepared": value["runs"][request["side"]], "adoption_verified": False}
+                        "prepared": prepared, "adoption_verified": False}
                 else:
                     _, value = transition_authority.fresh_candidate(store, db, request["candidate_id"], now, check)
                     bound = value["runs"][request["side"]]["bound_run"]
@@ -824,7 +896,9 @@ class EvaluationExtension:
                         raise _error("RUN_TIME_INVALID")
                     proposal, _ = _proposal(db, value["proposal_id"])
                     manifest_raw, manifest_digest = _packed(manifest)
-                    plan_raw, plan_digest = _packed(bound["plan"])
+                    plan = (value["runs"][request["side"]]["plan_index"]
+                            if manifest.get("schema_version") == 2 else bound["plan"])
+                    plan_raw, plan_digest = _packed(plan)
                     snapshot = resources.ResourceBook(db).create_run(manifest["run_id"], manifest_digest,
                         bound["policy"], manifest["profile"], request_id, now, manifest["deadline"])
                     db.execute("INSERT INTO eval_runs VALUES(?,?,?,?,?,?,?)", (manifest["run_id"], manifest_raw,
@@ -835,12 +909,16 @@ class EvaluationExtension:
             except (ContractError, resources.ResourceError) as error:
                 raise _error(error.code) from None
             return _result(action, request_id, **fields)
-        if action in {"fixture_prepare", "guardrail_prepare"}:
+        if action in {"fixture_prepare", "guardrail_prepare", "guardrail_prepare_partitioned"}:
             if db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (request["run_id"],)).fetchone():
                 raise _error("RUN_CONFLICT")
             policy, _, generation = _policy(store, db, request["policy_series_id"], now)
             try:
-                if action == "guardrail_prepare":
+                if action == "guardrail_prepare_partitioned":
+                    from . import partitioned_llm_admission
+                    value = partitioned_llm_admission.prepare(db, policy, generation, request["run_id"], now,
+                        store._permission_generation(db), request["target_version"], request["case_count"])
+                elif action == "guardrail_prepare":
                     value = llm_admission.prepare(db, policy, generation, request["run_id"], now,
                         store._permission_generation(db), request["target_version"])
                 else:
@@ -854,6 +932,8 @@ class EvaluationExtension:
                     _store_object(db, kind, identifier, document)
             except ContractError as error:
                 raise _error(error.code) from None
+            if action == "guardrail_prepare_partitioned":
+                prepared = partitioned_llm_admission.prepared_response(value)
             return _result(action, request_id, prepared=prepared,
                 calibration=value["calibration"], materialization_ref=value["materialization"]["manifest_ref"])
         if action in baseline_authority.FIELDS:
@@ -880,6 +960,8 @@ class EvaluationExtension:
                         fields["reasons"].append("ADOPTED_CONDITIONS_UNAVAILABLE")
             except (run_evidence.EvidenceError, resources.ResourceError) as error:
                 raise _error(error.code) from None
+            if fields.get("schema_version") == 2:
+                return _result(action, request_id, run_id=request["run_id"], evidence=fields)
             return _result(action, request_id, **fields)
         if action in resource_authority.FIELDS:
             try:
@@ -1054,9 +1136,18 @@ class EvaluationExtension:
                 valid = False
             return _result(action, request_id, series_id=request["series_id"], adopted=True, valid=valid, generation=row["generation"], contract=contract, proposal_id=row["proposal_id"], validation_id=row["validation_id"])
 
-        if action == "run_begin":
+        if action in {"run_begin", "run_begin_partitioned"}:
+            partitioned = action == "run_begin_partitioned"
+            if partitioned:
+                from .partitioned_llm_admission import prepared_for_begin
+                prepared = prepared_for_begin(db, request["run_id"], now)
+                bound = prepared["bound_run"]
+                if content_ref("run_manifest", request["run_id"], bound["manifest"]) != request["expected_manifest_ref"]:
+                    raise _error("BINDING_MISMATCH")
+                request = {**request, "manifest": bound["manifest"], "plan": prepared["plan_index"]}
             target_retirement.check_targets(db, request["manifest"]["target_refs"], now)
-            combined_runs.check_binding(db, request["manifest"], request["plan"], now, request["contract_series_id"])
+            if not partitioned:
+                combined_runs.check_binding(db, request["manifest"], request["plan"], now, request["contract_series_id"])
             if (request["manifest"]["purpose"] in transition_authority.PURPOSES
                     or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (request["manifest"]["run_id"],)).fetchone()):
                 raise _error("CANDIDATE_ENTRY_REQUIRED")
@@ -1070,7 +1161,21 @@ class EvaluationExtension:
             policy, _, _ = _policy(store, db, contract["policy_series_id"], now)
             registry_value = _object(db, contract["registry_ref"])
             acceptance = _object(db, contract["case_set_ref"])
-            if contract["generation"] >= 2:
+            if partitioned:
+                if (bound["contract"] != contract or bound["policy"] != policy
+                        or bound["registry"] != registry_value or bound["case_set"] != acceptance):
+                    raise _error("BINDING_MISMATCH")
+                if contract["generation"] >= 2:
+                    if bound["manifest"]["purpose"] != "regression":
+                        raise _error("CI_PURPOSE_REQUIRED")
+                    expected = regression_runs.build(db, current, request["run_id"],
+                        bound["manifest"]["created_at"], now)
+                    if prepared != expected:
+                        raise _error("REGRESSION_BINDING_INVALID")
+                elif not db.execute("SELECT 1 FROM fixture_admissions WHERE run_id=?",
+                                    (request["run_id"],)).fetchone():
+                    raise _error("LLM_ADMISSION_MISSING")
+            elif contract["generation"] >= 2:
                 if request["manifest"]["purpose"] != "regression":
                     raise _error("CI_PURPOSE_REQUIRED")
                 result = regression_runs.build(db, current, request["manifest"]["run_id"],
@@ -1085,11 +1190,37 @@ class EvaluationExtension:
             if not manifest["created_at"] <= now < manifest["deadline"]:
                 raise _error("RUN_TIME_INVALID")
             manifest_raw, manifest_digest = _packed(manifest)
-            plan_raw, plan_digest = _packed(bound["plan"])
+            plan_raw, plan_digest = _packed(request["plan"] if partitioned else bound["plan"])
             book = resources.ResourceBook(db)
             snapshot = book.create_run(manifest["run_id"], manifest_digest, policy, manifest["profile"], request_id, now, manifest["deadline"])
             db.execute("INSERT INTO eval_runs VALUES(?,?,?,?,?,?,?)", (manifest["run_id"], manifest_raw, manifest_digest, plan_raw, plan_digest, request["contract_series_id"], contract["generation"]))
             return _result(action, request_id, run_id=manifest["run_id"], contract_generation=contract["generation"], resource_snapshot=snapshot)
+
+        if action == "run_input_artifact":
+            from .partitioned_llm_admission import (prepared_for_begin, for_run, compact_prepared)
+            identifier = request["run_id"]
+            if (db.execute("SELECT 1 FROM eval_runs WHERE run_id=?", (identifier,)).fetchone()
+                    or db.execute("SELECT 1 FROM transition_runs WHERE run_id=?", (identifier,)).fetchone()):
+                prepared = for_run(db, identifier, now)["prepared"]
+            else:
+                prepared = prepared_for_begin(db, identifier, now)
+                if prepared["contract"]["generation"] >= 2:
+                    history = db.execute("SELECT * FROM eval_adoptions WHERE digest=?",
+                                         (prepared["manifest"]["contract_ref"]["digest"],)).fetchone()
+                    if history is None or prepared != regression_runs.build(db, history, identifier,
+                                                    prepared["manifest"]["created_at"], now):
+                        raise _error("REGRESSION_BINDING_INVALID")
+            compact = compact_prepared(prepared)
+            if compact["binding"]["manifest_ref"] != request["expected_manifest_ref"]:
+                raise _error("BINDING_MISMATCH")
+            references = [ref for value in compact["artifact_refs"].values()
+                          for ref in (value if type(value) is list else [value]) if ref is not None]
+            if request["artifact_ref"] not in references:
+                raise _error("BINDING_MISMATCH")
+            # 保存入力の読取は停止・取消しにも必要。開始/CIの現在許可は各境界で再検査する。
+            return _result(action, request_id, run_id=identifier,
+                           manifest_ref=request["expected_manifest_ref"], artifact_ref=request["artifact_ref"],
+                           document=_object(db, request["artifact_ref"]))
 
         if action == "run_status":
             row = db.execute("SELECT * FROM eval_runs WHERE run_id=?", (request["run_id"],)).fetchone()

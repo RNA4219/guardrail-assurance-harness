@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "kind": "guardrail_runtime_lock",
-  "image_id": "sha256:d9d59ba9ef2ffe7ff3dd1f06cdd26cabe293b26cb20fc253dc7e4cd00d454486",
+  "image_id": "sha256:70a95227f4489d1d2cbc9bc5edfa84a85467f1daf6bd6c4c447711ef496b5977",
   "base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
-  "worker_digest": "072daa2e5524cd1cfd70495321683b3c8121059b7e56358f60a1a21ae3add2b4",
+  "worker_digest": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
   "target_source_digest": "2d931e2b97093b262e3145cc2dece27472391eefa82c9f83c4e89d59c1cb14d3",
-  "sources_digest": "f31ee356b547df6f7cf0618b77858e02487ccf2cf58665236ae148b853f9137b",
+  "sources_digest": "b2b5f4f3a87abfcb535e284a198075ff180a2b867e49ac567a8b9b9c17742de5",
   "source_sha256": {
-    "fixtures/llm/guardrail_worker.py": "072daa2e5524cd1cfd70495321683b3c8121059b7e56358f60a1a21ae3add2b4",
+    "fixtures/llm/guardrail_worker.py": "0ce080caabdfd4b059329cab4a5c2ebbbc3a4e8f38e731013a9565c659bfed1f",
     "fixtures/llm/guardrail_target.py": "2d931e2b97093b262e3145cc2dece27472391eefa82c9f83c4e89d59c1cb14d3",
     "src/gah/__init__.py": "beee48202a74dae0d7ef5122fa479f3dffb3e568d7d28ea88ec7cf304d3a1d31",
     "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
     "src/gah/normalized.py": "3050cd3a6a1994a4faf858f04ce6fb21c01893534244f65bb31c202eb658fc97",
-    "src/gah/run_contracts.py": "e4b2c6399ec7dc98d7f5af877ef570aca0ac783a6a178af0fc976d68e11841a9",
+    "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d",
     "src/gah/wire.py": "abe5df4ef634557a89aefe5186e80b12312f653ffecd7d2867cb9a7140026781",
     "src/gah/policy.py": "1ff9acbe697cd9172aa97455d6ef5c8c7026cd62712e753808e3793d22535478",
     "src/gah/registry.py": "6a09f33617665c9a2b254ee76463d6594d53a061fe58d07334fa2c5ea71fe18c",
-    "src/gah/corpus.py": "83b9f7925f7176d81db5e4fe3d85b5169f66f900de84f67b5ebb1f59958537da"
+    "src/gah/corpus.py": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7"
   },
   "docker_binary_digest": "0a4d8fe2ab107ceae44ee5f5fc1e1c155790042b7e3d3163826660da882b389d",
   "entrypoint": [

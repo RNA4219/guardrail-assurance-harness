@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_resource_linux_diagnostic_failure",
+  "status": "FAILED",
+  "source_manifest_sha256": "92ab965ae147759735a2e1b04ca0695781346f5af9a4bf4c9f442e1878e0bd6c",
+  "driver_sha256": "2a491c081afd65ddae18e8023edd8765cc432d190c7e3d027c17f7ea03f9ffa1",
+  "plan_sha256": "cbe12bd6ca635463be92937606413548c37d03b9163c371aaa3d777c75340436",
+  "host_result_sha256": "56e8e8fea99cdcc42ff10b5d741045bf71483e07f661b8fb9797d5cd5f194aee",
+  "inside_result_sha256": "b799123d0fe0ec345ab0b57a44835a737337262d330e1d5a5740ac2e1739589c",
+  "exit_code": 2,
+  "error_type": "OperationalError",
+  "reason": "CONTAINER_NONZERO_EXIT",
+  "cause": "診断helper uid0はCAP_SETUID/CAP_SETGIDのみであり、uid12000所有mode0700の/stateを直接読めない。resource_state_hashでSQLite openが拒否された。",
+  "scope": "資源開始前の補助ハッシュ計算で停止。後続資源actionの成功を証明しない。製品の権限境界は変更しない。",
+  "cleanup_confirmed": true,
+  "source_unchanged": true,
+  "plan_driver_unchanged": true,
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "real_worker_acceptance": false
+}

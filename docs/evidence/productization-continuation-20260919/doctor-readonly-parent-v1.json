@@ -1,0 +1,59 @@
+{
+  "filesystem_verification": {
+    "cases": [
+      {
+        "case": "existing workspace with sentinel file",
+        "result": "entire path/content snapshot unchanged; .ga/operations/capacity absent"
+      },
+      {
+        "case": "nonexistent workspace",
+        "result": "doctor CLI dispatch did not create workspace"
+      },
+      {
+        "case": "invalid profile",
+        "result": "INVALID_INPUT/REJECTED; existing workspace snapshot unchanged"
+      }
+    ],
+    "docker_started": false,
+    "doctor_probe_mocked": true,
+    "mock_boundary": "run_doctor was stubbed to isolate and exercise the real gah_ops.main -> _run_doctor_cli -> capacity_profile CLI path; filesystem snapshots were measured around actual capacity_profile execution.",
+    "test_file": "tests/test_doctor_readonly.py"
+  },
+  "finding": {
+    "cause": "tools/gah_ops.py doctor CLI called capacity_profile(profile, workspace=...), which created .ga/operations/capacity and wrote a profile JSON inside the inspected workspace. That contradicted the bootstrap doctor read-only contract.",
+    "change": "Doctor now calls capacity_profile(profile) without a workspace. The fixed profile/ref and estimated bounds remain available in memory; bound_verified remains false. Setup apply/profile persistence is unchanged.",
+    "existing_test_expectation": "The existing tests/test_operations.py mock was updated to expect capacity_profile(\"sample-ci\") without a workspace argument."
+  },
+  "id": "doctor-readonly-parent-v1",
+  "limits": [
+    "Docker was not started; this validates read-only filesystem behavior of the doctor CLI capacity-profile path, not actual host/Docker probes.",
+    "The capacity profile remains an estimate; bound_verified stays false and UNKNOWN capacity gating is unchanged.",
+    "No setup apply or capacity-profile evidence persistence behavior was altered."
+  ],
+  "schema_version": 1,
+  "source_hashes": {
+    "src/gah/operations.py": "7ad1d4608aa64e69fd62deef71eabe805a59f6af515c5d3275983e550e804793",
+    "tests/test_doctor_readonly.py": "c2aa3955df14fba85d649a7dcff72d12449e9bb3c3d7efcab79a01c2ac8f7195",
+    "tests/test_operations.py": "d31e0870f7bc439362d28b9aa59e652834dd8f75909af8c037adbf674e988864",
+    "tools/gah_ops.py": "f2078905b902dd7779e898238f95ff0b9fc85596f8d457ab9ff1995a8c3db368",
+    "tools/setup_capacity.py": "e8326eac702cb896b3c9670b7edcb1499f801e87889836d686d1372b86967c33"
+  },
+  "status": "VERIFIED_LIMITED",
+  "validation": {
+    "elapsed_test_seconds": 3.617,
+    "elapsed_wall_seconds": 4.0,
+    "failed": 0,
+    "log_path": ".ga/productization-implementation-20260919/doctor-readonly-parent-v1/tests.log",
+    "log_sha256": "224fa168135da38a3fae09e600fa07f92a6c69f5e27cf4332295912a26320b1e",
+    "modules": [
+      "tests.test_doctor_readonly",
+      "tests.test_operations",
+      "tests.test_doctor_storage_connection",
+      "tests.test_cli_lifecycle"
+    ],
+    "passed": 47,
+    "plan_path": ".ga/productization-implementation-20260919/doctor-readonly-parent-v1/plan.json",
+    "result_path": ".ga/productization-implementation-20260919/doctor-readonly-parent-v1/result.json",
+    "source_unchanged_during_test_run": true
+  }
+}

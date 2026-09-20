@@ -9,7 +9,7 @@ from gah.transition_materialization import build_transition_runs
 
 
 def verify(*, success, denied, check, runtime, runner, prepared, preflight_request,
-           transition, receipts, active, save_observations, adopt=False, regression=False, cancellation=False, recovery=False, baseline_refresh=False, supervisor=False, following_contract=False, call=None):
+           transition, receipts, active, save_observations, adopt=False, regression=False, cancellation=False, recovery=False, baseline_refresh=False, supervisor=False, following_contract=False, call=None, budget_warning=False):
     def request(action, identifier, **fields):
         return {"schema_version": 1, "action": action, "request_id": identifier, **fields}
 
@@ -113,7 +113,9 @@ def verify(*, success, denied, check, runtime, runner, prepared, preflight_reque
                 and final[key]["kind"] == kind and final[key]["id"] == run_id
                 and type(final[key]["digest"]) is str and re.fullmatch(r"[0-9a-f]{64}", final[key]["digest"]) is not None
                 for key, kind in expected_kinds.items()))
-        check(f"candidate_{side}_healthy_materialized_evidence", final.get("assurance") == "HEALTHY"
+        expected_assurance = "WARNING" if budget_warning and side == "new" else "HEALTHY"
+        assurance_check = "warning" if expected_assurance == "WARNING" else "healthy"
+        check(f"candidate_{side}_{assurance_check}_materialized_evidence", final.get("assurance") == expected_assurance
             and final.get("purpose") == bound["manifest"]["purpose"]
             and final.get("input_materialization_verified") is True and final.get("resource_closure_verified") is True
             and final.get("adoption_verified") is False and final.get("ci_eligible") is False)
@@ -140,7 +142,8 @@ def verify(*, success, denied, check, runtime, runner, prepared, preflight_reque
             from tools.regression_runtime_checks import verify as verify_regression
             after_regression = verify_regression(success=success, call=call, denied=denied, check=check,
                 runtime=runtime, runner=runner, contract=transition["next_contract"],
-                receipts=receipts, active=active, save_observations=save_observations)
+                receipts=receipts, active=active, save_observations=save_observations,
+                expected_assurance="WARNING" if budget_warning else "HEALTHY")
             after_baseline_refresh = None
             if baseline_refresh:
                 from tools.baseline_refresh_runtime_checks import verify as verify_refresh

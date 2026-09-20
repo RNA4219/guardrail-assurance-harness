@@ -1,0 +1,39 @@
+{
+  "base_cache_hit": true,
+  "base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
+  "ci_eligible": false,
+  "distribution_file_count": 1405,
+  "elapsed_ns": 21719000000,
+  "full_pac_acceptance": false,
+  "id": "image-preparation-live-v1",
+  "images": {
+    "authority": {
+      "image_id": "sha256:4cd256ec638cd863d7eea1fa862d00a26c374b02ed0f43da4305f18fa4f32b0a",
+      "lock_sha256": "5718b295ae421f84d3cb05f7870540533f523f0339acda655fe5147612868ef7"
+    },
+    "fixture": {
+      "image_id": "sha256:657e34e927268149ddaa0eefc91d791c7aa7c20e359374adbcf2139f7ecf43b6",
+      "lock_sha256": "b7783e3a6eacb1fb6b08617a5ab8def2a48b68bbc1095de854d8bb2a4c9d1c7d"
+    },
+    "guardrail": {
+      "image_id": "sha256:410a5f8fc036742879c7a253812904ba22d260485ee522befb1d7363673aeef5",
+      "lock_sha256": "a53e23f54f72fccdb601758d060adb7b666730062faf9e300c58287489b8ee98"
+    }
+  },
+  "kind": "local_validation_observation",
+  "network_acquisition_measured": false,
+  "offline": true,
+  "package_input_ref": {
+    "digest": "4acc7b41c5b480c23f80a973698b29ec4b97d57bc720f8cb020d1923fde4de12",
+    "id": "image-preparation-input-source",
+    "kind": "snapshot_manifest"
+  },
+  "receipt_sha256": "59ac705d7925bd5ec69529284e294a65587ed80bbd2b48c8854cac962da57cbd",
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "5ec1bc68807d3391c4c50bf3a971438b415bd508c71eeb4f13ed24a6c5ef0db8",
+    "id": "continuation-source-v1",
+    "kind": "snapshot_manifest"
+  },
+  "status": "PREPARED"
+}

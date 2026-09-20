@@ -1,0 +1,27 @@
+{
+  "checks": [
+    "fresh JSON decoding retained",
+    "input/return/get/replay aliases cannot mutate saved data",
+    "default bounded writer and explicit StorageBudget paths",
+    "immutable conflicts/digests/fault handling unchanged",
+    "redundant fresh-tree deepcopy removed"
+  ],
+  "ci_eligible": false,
+  "elapsed_seconds": 0.4,
+  "exit_code": 0,
+  "included_in_source_v7_regression": false,
+  "kind": "checkpoint_copy_parent_review",
+  "limits": [
+    "no whole-run performance claim",
+    "normal five-operation profile will use unchanged source-v7"
+  ],
+  "log_sha256": "782265f1c61a962a483cbf09e88d6f6a185804ecd72dd586fa74c77b2c63fa86",
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/supervisor_checkpoint.py": "d1994e793883fabdd3536203a1ae21abd8214203cc851245cfa7fc4f122b8d0f",
+    "tests/test_checkpoint_budget.py": "1b52c8d9f1555365281200274121c1928045bbd0f8eb7f8d181d1a136540e03f",
+    "tests/test_supervisor_checkpoint.py": "61802786f41290853a44333322d083c5979e5fe8388f6285b933324762a6c72f"
+  },
+  "source_unchanged": true,
+  "tests_run": 15
+}

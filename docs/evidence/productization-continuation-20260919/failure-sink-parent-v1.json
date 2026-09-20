@@ -1,0 +1,26 @@
+{
+  "ci_eligible": false,
+  "elapsed_seconds": 0.475,
+  "exit_code": 0,
+  "included_in_source_v7_regression": false,
+  "kind": "failure_sink_parent_review",
+  "limits": [
+    "Windows POSIX FIFO unit test skipped; matching rejection separately checked in Linux diagnostic",
+    "no application reservation integration or product acceptance"
+  ],
+  "log_sha256": "a0893350359eef8f17cbf5dcfce308f62642b73be61a1ac8ad6ea2a82f2758a5",
+  "review_corrections": [
+    "deep JSON RecursionError converted to fixed rejection",
+    "nonregular files rejected before nonblocking open and after fstat",
+    "recovery reader validates full zero padding and rejects noncanonical payload"
+  ],
+  "schema_version": 1,
+  "skipped": 1,
+  "source_sha256": {
+    "src/gah/storage_budget.py": "3d2d51596b9c20e75ee6d55fbd3880319bf25f1e835c044a1a9a6276f8ddf970",
+    "tests/test_failure_sink_recovery.py": "29c46c45186d2e6e1a6dabdd76af99df75226e405ac53cb85bcf9ece2be095bf",
+    "tests/test_storage_budget.py": "d8e92950b8ab637b2acd27773d50fe7e7fc9d26c4fb5344c0c09678e64d671f3"
+  },
+  "source_unchanged": true,
+  "tests_run": 18
+}

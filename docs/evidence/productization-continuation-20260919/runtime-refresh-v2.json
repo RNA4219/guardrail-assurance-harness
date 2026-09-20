@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "runtime_refresh_parent_record",
+  "id": "runtime-refresh-v2",
+  "created_at": "2026-09-19T23:01:42.666646+00:00",
+  "base_ref": "python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
+  "network_during_build": "none",
+  "runtimes": {
+    "guardrail": {
+      "lock_sha256": "b10bc1f9847a829b6ebff40c0a65cfb575dddbef237c8f883eb501264ded0d23",
+      "image_id": "sha256:70a95227f4489d1d2cbc9bc5edfa84a85467f1daf6bd6c4c447711ef496b5977",
+      "sources_digest": "b2b5f4f3a87abfcb535e284a198075ff180a2b867e49ac567a8b9b9c17742de5",
+      "source_files": 10,
+      "source_hashes_match": true,
+      "image_inspection_matches": true,
+      "rebuilt": false
+    },
+    "authority": {
+      "lock_sha256": "9045f9196c0f4f2b2ed8cc839bd5248eb39d0f7f14206a806401733e5248c333",
+      "image_id": "sha256:5e84fd7d55f6916396454ae7402f481ec274629b3d7ab4bdbcf4fb48690e22ca",
+      "sources_digest": "b61329da27985ab4942af33320b55dd300ca5636033a86bdd0da16dc6ae1a9c8",
+      "source_files": 82,
+      "source_hashes_match": true,
+      "image_inspection_matches": true,
+      "rebuilt": true
+    },
+    "fixture": {
+      "lock_sha256": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7",
+      "image_id": "sha256:278fcb998e4cb2971b8e42f68d42e67eeb98b1e4e4c375211655eb9e89301855",
+      "sources_digest": null,
+      "source_files": 0,
+      "source_hashes_match": true,
+      "image_inspection_matches": true,
+      "rebuilt": false
+    }
+  },
+  "runtime_execution_verified": false,
+  "acceptance_pass": false
+}

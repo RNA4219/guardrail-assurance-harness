@@ -40,10 +40,32 @@ def _documents(candidate_id, name, payload):
         "section":name, "payload_bytes":len(raw), "payload_digest":hashlib.sha256(raw).hexdigest(), "chunks":refs}
 
 
+def _stored_runs(runs, db=None):
+    result = dict(runs)
+    from .partitioned_llm_admission import compact_prepared, store_prepared
+    for side in ('old', 'new'):
+        prepared = runs[side]
+        if prepared.get('bound_run', {}).get('manifest', {}).get('schema_version') == 2:
+            result[side] = compact_prepared(prepared) if db is None else store_prepared(db, prepared)
+    return result
+
+
+def _restored_runs(db, runs):
+    if type(runs) is not dict:
+        return runs
+    from .partitioned_llm_admission import load_prepared
+    for side in ('old', 'new'):
+        value = runs.get(side)
+        if type(value) is dict and value.get('kind') == 'partitioned_prepared_run':
+            runs[side] = load_prepared(db, value)
+    return runs
+
+
 def pack(db, candidate_id, runs):
     require_object(runs, set(KINDS) | set(FLAGS))
     if any(runs[key] is not value for key,value in FLAGS.items()):
         raise ContractError("CANDIDATE_INVALID")
+    runs = _stored_runs(runs, db)
     if len(canonical_bytes(runs)) < MAX_DOCUMENT_BYTES - 4096:
         return deepcopy(runs)
     from .assurance_authority import _save
@@ -58,7 +80,7 @@ def pack(db, candidate_id, runs):
 def reference(candidate):
     """各節の完全refを持つ小さい保存rootを参照する。本文をコピーしない。"""
     root = dict(candidate)
-    runs = root["runs"]; identifier = root["candidate_id"]
+    runs = _stored_runs(root["runs"]); root["runs"] = runs; identifier = root["candidate_id"]
     if len(canonical_bytes(runs)) >= MAX_DOCUMENT_BYTES - 4096:
         sections = {"schema_version":1, "kind":"candidate_run_sections", "candidate_id":identifier, **FLAGS}
         for name in KINDS:
@@ -130,9 +152,10 @@ def _payload(db, candidate_id, name, section):
     return payload
 
 
-def unpack(db, candidate_id, value):
+def unpack(db, candidate_id, value, *, restore_prepared=True):
     if type(value) is not dict or value.get("kind") != "candidate_run_sections":
-        return deepcopy(value)
+        copied = deepcopy(value)
+        return _restored_runs(db, copied) if restore_prepared else copied
     try:
         require_object(value, {"schema_version","kind","candidate_id"} | set(FLAGS) | {name+"_ref" for name in KINDS})
         if (type(value["schema_version"]) is not int or value["schema_version"] != 1 or value["candidate_id"] != candidate_id
@@ -142,6 +165,6 @@ def unpack(db, candidate_id, value):
         for name in KINDS:
             section = _load(db, candidate_id, value[name+"_ref"], "candidate_section", _identifier(candidate_id, name))
             result[name] = _payload(db, candidate_id, name, section)
-        return result
+        return _restored_runs(db, result) if restore_prepared else result
     except (ContractError, resources.ResourceError, KeyError, TypeError, ValueError, UnicodeError):
         raise ContractError("CANDIDATE_SECTION_INVALID") from None

@@ -1,0 +1,35 @@
+{
+  "ci_eligible": false,
+  "elapsed_ns": 10109000000,
+  "exit_code": 0,
+  "full_pac_acceptance": false,
+  "full_regression": false,
+  "id": "continuation-tests-v2",
+  "kind": "local_validation_observation",
+  "log_sha256": "0c0ffba660b92c0152ad5d252bfa29f2ae73d8221cc17c4888ea11f8cd14e596",
+  "modules": [
+    "tests.test_image_preparation",
+    "tests.test_pilot_inputs",
+    "tests.test_pilot_import_cli",
+    "tests.test_storage_budget",
+    "tests.test_checkpoint_budget",
+    "tests.test_resource_probe",
+    "tests.test_authority_resource_probe",
+    "tests.test_benchmark_resource_connection",
+    "tests.test_benchmark",
+    "tests.test_benchmark_review",
+    "tests.test_productization",
+    "tests.test_productization_journal",
+    "tests.test_pilot_cli",
+    "tests.test_authority_source_packaging"
+  ],
+  "schema_version": 1,
+  "skipped": 2,
+  "source_ref": {
+    "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+    "id": "continuation-source-v2",
+    "kind": "snapshot_manifest"
+  },
+  "source_unchanged": true,
+  "tests_run": 116
+}

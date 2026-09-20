@@ -1,0 +1,23 @@
+{
+  "id": "docs/reviews/productization-implementation-20260915.md",
+  "role": "reviews",
+  "title": "拡張実装の監督レビュー",
+  "summary": "[実装Task](../tasks/TASK.productization-implementation-09-15-2026.md)のレビュー記録。作業は継続中であり、本文の局所検査は全14製品受入を意味しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/productization-continuation-20260916/README.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/reviews/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "d9c1dd8782356a8858c39bc77eb4664f456546ca0446b51a7863a2313fe97910"
+}

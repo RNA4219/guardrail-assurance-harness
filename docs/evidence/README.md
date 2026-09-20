@@ -2,11 +2,15 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-12
-next_review_due: 2026-10-12
+last_reviewed_at: 2026-09-19
+next_review_due: 2026-10-19
 ---
 
 # 検証証跡
+
+[9月19日の継続検証](productization-continuation-20260919/README.md)に保存上限、worker計測、コピー削減、実Dockerの失敗と再開を記録する。旧MVPの32条件と拡張14条件の受入を区別する。
+
+[9月20日の通常run 800件の継続試験](productization-continuation-20260920/README.md)は固定in-process workerでの完了結果を記録する。実Docker workerや性能SLOを含まず、拡張14条件の受入状態は変更しない。
 
 [条件比較部品](mvp-condition-core-20260912/README.md)は新規30件と既存21件のfocused試験を記録する。後続契約の採択・実行は未接続である。
 

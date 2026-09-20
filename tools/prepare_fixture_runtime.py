@@ -49,7 +49,7 @@ def main():
         "ENTRYPOINT " + json.dumps(ENTRYPOINT) + "\nCMD []\n")
     (context / "Dockerfile").write_text(dockerfile, encoding="utf-8")
     # 入力は固定した自作2ファイルのみ。モデル/評価payloadはcontextへ入れない。
-    result = subprocess.run(prefix + ["build", "--network=none", "--pull=false", "--tag", tag, str(context)],
+    result = subprocess.run(prefix + ["build", "--platform=linux/amd64", "--network=none", "--pull=false", "--tag", tag, str(context)],
                             cwd=ROOT, timeout=180)
     if result.returncode:
         raise SystemExit("BUILD_FAILED")

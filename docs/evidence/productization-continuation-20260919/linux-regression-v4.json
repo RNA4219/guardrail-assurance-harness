@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_source_linux_regression_summary",
+  "status": "INCOMPLETE",
+  "source_manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "source": "source-v12",
+  "plan_digest": "35a70d96542fb7946ace2b8b32583c5e68659e0ed4c249b480638b8ea86a6111",
+  "planned_tests": 1498,
+  "completed_passing_tests": 1488,
+  "unresolved_tests": 10,
+  "complete_passing_lanes": 9,
+  "timeout_lanes": 3,
+  "per_lane_deadline_seconds": 2400,
+  "lanes": [
+    {
+      "lane": "combined",
+      "status": "TIMEOUT",
+      "tests_run": null,
+      "reason": "LANE_TIMEOUT",
+      "elapsed_ns": 2400248974470,
+      "result_sha256": "ae89f61541f397801977358b1221008d35ab02a9aefb8d0ab257e14d35265fb6"
+    },
+    {
+      "lane": "finding-revalidation",
+      "status": "TIMEOUT",
+      "tests_run": null,
+      "reason": "LANE_TIMEOUT",
+      "elapsed_ns": 2400377462673,
+      "result_sha256": "62a307ef63b7acfe352aa81dd4c5ca42524942b34163646286d9fa7529b763bb"
+    },
+    {
+      "lane": "following-contract",
+      "status": "PASS",
+      "tests_run": 6,
+      "reason": null,
+      "elapsed_ns": 534762099865,
+      "result_sha256": "2609c9b763e76f0dde860ce9bbefae056a1f91539a2e23a25d5c723d1ff84b69"
+    },
+    {
+      "lane": "llm-revision",
+      "status": "PASS",
+      "tests_run": 1,
+      "reason": null,
+      "elapsed_ns": 1019387097478,
+      "result_sha256": "424249346da44ca9b6001eebb8d9cac551254b4b6311d98d74bafa44f8fdcc2c"
+    },
+    {
+      "lane": "llm-supervision",
+      "status": "TIMEOUT",
+      "tests_run": null,
+      "reason": "LANE_TIMEOUT",
+      "elapsed_ns": 2400388879534,
+      "result_sha256": "957dbd0fa4745650df5e39a752e1b0d285f0480392f20013f9a573c64a808ba1"
+    },
+    {
+      "lane": "mutation-review",
+      "status": "PASS",
+      "tests_run": 5,
+      "reason": null,
+      "elapsed_ns": 276674364402,
+      "result_sha256": "5c0fe5011b5cbd081dae800172f59472558fce4cff87f2921b859e3235e7c6e7"
+    },
+    {
+      "lane": "regression-0",
+      "status": "PASS",
+      "tests_run": 247,
+      "reason": null,
+      "elapsed_ns": 1044739670600,
+      "result_sha256": "6311c6afc71e25ccf3f1004125a5a00d363d0eab4e5da07e7514d245617b3ddc"
+    },
+    {
+      "lane": "regression-1",
+      "status": "PASS",
+      "tests_run": 247,
+      "reason": null,
+      "elapsed_ns": 2398753240958,
+      "result_sha256": "7c411c49019544786b7e4bb261426619315aef76d7555965b02c5cf792b6b445"
+    },
+    {
+      "lane": "regression-2",
+      "status": "PASS",
+      "tests_run": 245,
+      "reason": null,
+      "elapsed_ns": 575369817480,
+      "result_sha256": "9bddd876b25698ab939cf96246543004c532a69588c262af534f0165c60239e1"
+    },
+    {
+      "lane": "regression-3",
+      "status": "PASS",
+      "tests_run": 245,
+      "reason": null,
+      "elapsed_ns": 865773905852,
+      "result_sha256": "8de74bba6ca36877849e98e7cd880dadfbaebcd034d6897b3949097071323234"
+    },
+    {
+      "lane": "regression-4",
+      "status": "PASS",
+      "tests_run": 246,
+      "reason": null,
+      "elapsed_ns": 317399175105,
+      "result_sha256": "d9a8bd89dd570bb5cd1f09a7b04dad18a49fe37e86f3a62541b49cc8974bfe27"
+    },
+    {
+      "lane": "regression-5",
+      "status": "PASS",
+      "tests_run": 246,
+      "reason": null,
+      "elapsed_ns": 117248246922,
+      "result_sha256": "a3f4a79a7a1f23f86b05240b23bb983011df15cd47a873078166eb8080f3f6c2"
+    }
+  ],
+  "driver_sha256": "2efdafc7b05762c4d6dc50c46ad7ec45e3f65f2771fc944ce2d163df07cba17f",
+  "plan_sha256": "2dc9a3d58b56d8b4ec7e76451df4eef85b7c0d37033d30588c0804e8ceb06e7a",
+  "host_result_sha256": "ea8d7749af9c712b3dccca5d0a437442740010aabe1886046344b60cdae2f45a",
+  "source_tree_unchanged": true,
+  "manifest_unchanged": true,
+  "cleanup_confirmed": true,
+  "scope": "固定source-v12、12laneを最大3並列で実行。成功9laneの1488件のみを成功とし、3laneの10件は時間切れで未確認。途中までのログを合格件数に加算しない。後続source-v13以降の差分、CI/SLO/PAC受入の成功を示さない。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "slo_comparison": false
+}

@@ -1,0 +1,49 @@
+{
+  "acceptance_pass": false,
+  "change": "Borrow validated documents/CaseSets only within read-only internal checks; retain public independent deepcopy and all semantic/digest checks.",
+  "elapsed_seconds": 3.452999999979511,
+  "exit_code": 0,
+  "kind": "evaluation_copy_parent_tests",
+  "local_result_sha256": "95e995b73839e6b62934af8c96455eac70fa1a6b234eab3523c09ebe28c2d88c",
+  "log_bytes": 9369,
+  "log_sha256": "8366c11086e17f9a1469fb204ec7c6d56eee544cfc9c135f01970338f46ae0c3",
+  "performance_slo_verified": false,
+  "schema_version": 1,
+  "source_hashes_after": {
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7",
+    "src/gah/evaluation_data.py": "85728a32b07ecee39b396dba64b72272124ec57e6da7eb8fb90db2815851bc2a",
+    "src/gah/llm_evaluator.py": "18bf4d7a4acffe3e6781086ec6d53f708d8216e7bfa2921bac7fde716c9f207c",
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "tests/test_corpus.py": "defaa47c1877c2f2cdefd19a75425f6f9994295c72fd6f1a3bf9ed05920b0ea8",
+    "tests/test_corpus_validation_copy.py": "dc6e52dfed89eb51b28c1f487a1305f6b6c17cee7592b76f93d127f7284df3aa",
+    "tests/test_evaluation_data.py": "47b3981f9d83e8e2141477ec832282718ebb93834cabb7147e75e4928ca3b8f4",
+    "tests/test_evaluation_validation_copy.py": "a6741b5fdaada46349d64d78dfac2b7ea77a5cd43b94fb983fc66e6ebe5cde57",
+    "tests/test_llm_evaluator.py": "96b298d3b17010cc96fda4d999d9bd26f1a5dfbf78f390947c26dac55b447cfd",
+    "tests/test_query_scale_data.py": "d9bc4b222c17e8c250f0e87950444345af48856d73f7d9eae667044620a00fff"
+  },
+  "source_hashes_before": {
+    "src/gah/contracts.py": "be6a92d51b3683272309f9c14a6b787f19d304f5b1073f32ec24caed8ee13a20",
+    "src/gah/corpus.py": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7",
+    "src/gah/evaluation_data.py": "85728a32b07ecee39b396dba64b72272124ec57e6da7eb8fb90db2815851bc2a",
+    "src/gah/llm_evaluator.py": "18bf4d7a4acffe3e6781086ec6d53f708d8216e7bfa2921bac7fde716c9f207c",
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "tests/test_corpus.py": "defaa47c1877c2f2cdefd19a75425f6f9994295c72fd6f1a3bf9ed05920b0ea8",
+    "tests/test_corpus_validation_copy.py": "dc6e52dfed89eb51b28c1f487a1305f6b6c17cee7592b76f93d127f7284df3aa",
+    "tests/test_evaluation_data.py": "47b3981f9d83e8e2141477ec832282718ebb93834cabb7147e75e4928ca3b8f4",
+    "tests/test_evaluation_validation_copy.py": "a6741b5fdaada46349d64d78dfac2b7ea77a5cd43b94fb983fc66e6ebe5cde57",
+    "tests/test_llm_evaluator.py": "96b298d3b17010cc96fda4d999d9bd26f1a5dfbf78f390947c26dac55b447cfd",
+    "tests/test_query_scale_data.py": "d9bc4b222c17e8c250f0e87950444345af48856d73f7d9eae667044620a00fff"
+  },
+  "source_hashes_unchanged": true,
+  "test_modules": [
+    "tests.test_evaluation_validation_copy",
+    "tests.test_evaluation_data",
+    "tests.test_query_scale_data",
+    "tests.test_llm_evaluator",
+    "tests.test_corpus",
+    "tests.test_corpus_validation_copy"
+  ],
+  "tests_run": 53,
+  "unittest_seconds": 3.278
+}

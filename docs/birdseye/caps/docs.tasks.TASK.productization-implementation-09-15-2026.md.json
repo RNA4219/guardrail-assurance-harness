@@ -1,0 +1,35 @@
+{
+  "id": "docs/tasks/TASK.productization-implementation-09-15-2026.md",
+  "role": "tasks",
+  "title": "Task: Luna・DGXを監督した拡張実装",
+  "summary": "拡張14要件と4仕様を実装へ接続し、実際の検証範囲を追跡できる状態にする。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/evidence/productization-continuation-20260916/README.md",
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/evidence/productization-continuation-20260920/README.md",
+    "docs/evidence/productization-implementation-20260915/README.md",
+    "docs/productization-implementation-spec.md",
+    "docs/reviews/productization-continuation-20260919.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "HUB.codex.md",
+    "docs/productization-implementation-spec.md",
+    "docs/productization-operations-spec.md",
+    "docs/productization-quickstart.md",
+    "docs/productization-status.md",
+    "docs/reviews/productization-continuation-20260919.md",
+    "docs/reviews/productization-implementation-20260915.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "67d11d5dbad040f153c6eca50696eb6323e6e8dfb47e7687a2d7630c548b8af5"
+}

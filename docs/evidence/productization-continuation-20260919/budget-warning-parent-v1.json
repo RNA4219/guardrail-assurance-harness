@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "budget_warning_parent_validation",
+  "date": "2026-09-20",
+  "scope": "閉鎖・精算済み予算の80%警告をDecision、authority receipt照合、通常reportへ接続",
+  "changes": [
+    "5軸を採択済み比率へ整数比較",
+    "保存根拠を使う過去Decision再検証",
+    "現在CI利用の拒否と過去判定の分離",
+    "authority source digestと配布依存の追加"
+  ],
+  "rounds": [
+    {
+      "modules": [
+        "tests.test_budget_warning",
+        "tests.test_authority_source_packaging",
+        "tests.test_run_evidence",
+        "tests.test_run_evidence_book",
+        "tests.test_assurance_authority",
+        "tests.test_finalize_aggregate_reuse",
+        "tests.test_run_report",
+        "tests.test_run_report_guidance",
+        "tests.test_candidate_report",
+        "tests.test_budget_warning_authority"
+      ],
+      "tests_run": 76,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": false,
+      "duration_seconds": 121.95299999997951,
+      "source_unchanged": true,
+      "source_sha256": {
+        "src/gah/budget_warning.py": "71bec9c9da6a18b5cb80262f212ca6706c2ef44b9c683b6b00bd916e6096318a",
+        "src/gah/run_evidence.py": "53364e4a97a586b19287bb367a8cb49bfa2b9d498985045ab47b383f35b8a78d",
+        "src/gah/assurance_authority.py": "5a7be56a51e098af3b8294c544ce7c2626bb1596c887e05fa2eede4ded68e992",
+        "src/gah/evaluation_authority.py": "5a720004facf6693326c8585c333d9d81513498fda2aabaae03cf5ccac32935e",
+        "tools/prepare_authority_runtime.py": "d06a3e47d36cd4ab0c4fd2dac23fbb02e6edb8e2ffdae6f50ab5768b80db07c3",
+        "tools/gah_report.py": "7209862e65a362785d3b1dcca40b30c671b52b02aa97aa87f2a9631564051f9c",
+        "tests/test_budget_warning.py": "399db0958959901d465f26d88b67a1f84c4e026c625e27ee9da8e91e5b7f5c70",
+        "tests/test_budget_warning_authority.py": "d590120be54261bb0269026142bdf834995af8ed1daf0e5bdb2f7fd4b1d598f4",
+        "tests/test_authority_source_packaging.py": "71ce6f94098013adab3237ff2cbc5c986e92df2ce473e0d3d0e924a9f919e5a6"
+      },
+      "log_sha256": "916a41e88a1d0b7a95e49c23ab170b1fd637e34aff41f7f305c5d40c55086d37"
+    },
+    {
+      "modules": [
+        "tests.test_budget_warning_authority"
+      ],
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": false,
+      "duration_seconds": 109.25,
+      "source_unchanged": true,
+      "source_sha256": {
+        "src/gah/budget_warning.py": "71bec9c9da6a18b5cb80262f212ca6706c2ef44b9c683b6b00bd916e6096318a",
+        "src/gah/run_evidence.py": "53364e4a97a586b19287bb367a8cb49bfa2b9d498985045ab47b383f35b8a78d",
+        "src/gah/assurance_authority.py": "5a7be56a51e098af3b8294c544ce7c2626bb1596c887e05fa2eede4ded68e992",
+        "src/gah/evaluation_authority.py": "5a720004facf6693326c8585c333d9d81513498fda2aabaae03cf5ccac32935e",
+        "tools/prepare_authority_runtime.py": "d06a3e47d36cd4ab0c4fd2dac23fbb02e6edb8e2ffdae6f50ab5768b80db07c3",
+        "tools/gah_report.py": "7209862e65a362785d3b1dcca40b30c671b52b02aa97aa87f2a9631564051f9c",
+        "tests/test_budget_warning.py": "399db0958959901d465f26d88b67a1f84c4e026c625e27ee9da8e91e5b7f5c70",
+        "tests/test_budget_warning_authority.py": "77733d4157bb4bba56c4d65f03e5b71a15b2ba28347851f830db301303555fae",
+        "tests/test_authority_source_packaging.py": "71ce6f94098013adab3237ff2cbc5c986e92df2ce473e0d3d0e924a9f919e5a6"
+      },
+      "log_sha256": "364271358796a227742286b3543058160eb378910d5e7392f051702000984e08"
+    },
+    {
+      "modules": [
+        "tests.test_budget_warning_authority"
+      ],
+      "tests_run": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true,
+      "duration_seconds": 108.18800000002375,
+      "source_unchanged": true,
+      "source_sha256": {
+        "src/gah/budget_warning.py": "71bec9c9da6a18b5cb80262f212ca6706c2ef44b9c683b6b00bd916e6096318a",
+        "src/gah/run_evidence.py": "53364e4a97a586b19287bb367a8cb49bfa2b9d498985045ab47b383f35b8a78d",
+        "src/gah/assurance_authority.py": "5a7be56a51e098af3b8294c544ce7c2626bb1596c887e05fa2eede4ded68e992",
+        "src/gah/evaluation_authority.py": "5a720004facf6693326c8585c333d9d81513498fda2aabaae03cf5ccac32935e",
+        "tools/prepare_authority_runtime.py": "d06a3e47d36cd4ab0c4fd2dac23fbb02e6edb8e2ffdae6f50ab5768b80db07c3",
+        "tools/gah_report.py": "7209862e65a362785d3b1dcca40b30c671b52b02aa97aa87f2a9631564051f9c",
+        "tests/test_budget_warning.py": "399db0958959901d465f26d88b67a1f84c4e026c625e27ee9da8e91e5b7f5c70",
+        "tests/test_budget_warning_authority.py": "177270d26be67003148069e521fa45ae3a3cb78151c30f1efc169a93ad3665d2",
+        "tests/test_authority_source_packaging.py": "71ce6f94098013adab3237ff2cbc5c986e92df2ce473e0d3d0e924a9f919e5a6"
+      },
+      "log_sha256": "fb8f363ffd348771138a1f0a892bb750a29da777f15bc9336c51caffbc47b218"
+    }
+  ],
+  "unique_tests_resolved": 76,
+  "unresolved_tests": 0,
+  "interpretation": "初回75成功と、テストだけを補正した統合1件の成功を組み合わせた限定検証。最終test版で76件一括再実行した記録ではない。",
+  "initial_failures": [
+    "v1:非課金固定fixtureへ入力token 1を渡したためBILLING_BASIS_MISMATCH。元event IDへの矛盾した停止観測へ修正。",
+    "v2:保存receiptとは別のresponse request_idまで再送の不変比較に含めたため失敗。request_idを比較から除外。製品コードは全3試行で同一。"
+  ],
+  "coverage": [
+    "79/80/100%と全5軸",
+    "HOLD/DEGRADED/UNKNOWN優先",
+    "保存根拠の独立返却、再open、異なる根拠のfinalize拒否",
+    "実AdoptionStoreと30件の無害fixture観測、経過4320/5400秒",
+    "WARNINGのfresh CI終了0、JSON/Markdown表示",
+    "遅延した資源event矛盾で現在CIを拒否し、保存Decisionとreceipt本文は不変"
+  ],
+  "reviews": {
+    "luna": "helper/専用試験の分担後に親が接続。独立静的レビューでは具体的な欠陥なし。親がテストの不存在field参照・表示期待値・遅延観測・再送比較を補正。",
+    "dgx": {
+      "model": "qwen3.8-flash-next",
+      "finish_reason": "stop",
+      "disposition": "不採用",
+      "reason": "token個別値を警告5軸へ追加すべきという指摘は運用方針と不一致。合計の整合はsnapshotで検査済み。開始時刻はresource_runs.created_atへ照合し、manifest.created_atとの差は許容する既存契約。",
+      "request_sha256": "976798cb2ce792fd53705385263ce3a05952545143ccbd158ef24c65b9bc36ae",
+      "response_sha256": "a357c3d3dcfee4e89b7dbaa2b9c4c6f0b310fb73da7c3a6831275b77797ac0e2"
+    }
+  },
+  "limits": {
+    "docker_executed": false,
+    "authority_image_rebuilt": false,
+    "final_source_full_regression": false,
+    "all_pac_accepted": false,
+    "scope_note": "旧source-v15の継続回帰とは別。既存7状態確認と合わせても最終imageの8状態受入にはしない。"
+  }
+}

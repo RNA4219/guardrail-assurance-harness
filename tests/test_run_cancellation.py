@@ -2,6 +2,7 @@
 from contextlib import closing
 from copy import deepcopy
 import importlib.util
+import io
 import json
 from pathlib import Path
 import sqlite3
@@ -137,10 +138,43 @@ class CancellationIntegrationTests(unittest.TestCase):
         owner = self.begin(prepared)
         op = self.operation(prepared, owner)
         self.cancel(owner)
+        self.assertIsNone(self.store._db.execute(
+            "SELECT 1 FROM authority_artifacts WHERE kind='authority_cancel_receipt' AND id='normal'"
+        ).fetchone())
         with self.assertRaises(AdoptionError):
             self.finalize()
-        self.gate(prepared, 2)
+        pending = self.gate(prepared, 2)
+        self.assertIn("STOP_UNCONFIRMED", pending["reasons"])
+        self.assertFalse(pending["ci_eligible"])
+
+        wrong_target = self.gate_request(prepared)
+        wrong_target["request_id"] = "wrong-target-cancel-pending"
+        wrong_target["expected_manifest_ref"]["digest"] = "f" * 64
+        mismatch = self.store.dispatch(12004, 12004, wrong_target)
+        self.assertIn("CI_TARGET_MISMATCH", mismatch["reasons"])
+        self.assertNotIn("STOP_UNCONFIRMED", mismatch["reasons"])
+
+        from tests.test_supervised_run import Runtime
+        from tools.gah_report import run as report_run
+        report_runtime = Runtime(self.store)
+        json_stream = io.StringIO()
+        json_exit = report_run(report_runtime, self.gate_request(prepared), json_stream, output_format="json")
+        self.assertEqual(json_exit, 2)
+        failure = json.loads(json_stream.getvalue())
+        self.assertEqual(failure["kind"], "run_report_failure")
+        self.assertIn("STOP_UNCONFIRMED", failure["ci_reasons"])
+        self.assertIn("STOP_UNCONFIRMED", failure["reasons"])
+        self.assertFalse(failure["ci_eligible"])
+        markdown_stream = io.StringIO()
+        markdown_exit = report_run(report_runtime, self.gate_request(prepared), markdown_stream, output_format="markdown")
+        self.assertEqual(markdown_exit, 2)
+        self.assertIn('"STOP_UNCONFIRMED"', markdown_stream.getvalue())
+
         self.observe("normal", op, "stopped")
+        stopped_pending = self.gate(prepared, 2)
+        self.assertIn("NOT_FINALIZED", stopped_pending["reasons"])
+        self.assertNotIn("STOP_UNCONFIRMED", stopped_pending["reasons"])
+        self.assertNotEqual(stopped_pending["execution_status"], "CANCELLED")
         receipt = self.finalize()
         self.assertFalse(receipt["budget_closure"])
         self.assertIn("BUDGET_OPEN", self.gate(prepared, 3)["reasons"])

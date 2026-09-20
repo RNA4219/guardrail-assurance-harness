@@ -2,7 +2,7 @@
   "id": "docs/reviews/README.md",
   "role": "reviews",
   "title": "設計・コードレビュー",
-  "summary": "[全MVPへの実装・監督記録](mvp-completion-20260911.md)でRegistry・CaseSet・Evidenceの追加、相互レビュー修正と全MVPへ残る接続を追跡する。",
+  "summary": "[9月19日の継続監督レビュー](productization-continuation-20260919.md)にLunaの実装、親の接続検査、DGX提案の採否と修正前後の証拠を記録する。",
   "public_api": [],
   "deps_out": [
     "docs/research/README.md",
@@ -11,6 +11,9 @@
     "docs/reviews/docs-cleanup-20260910.md",
     "docs/reviews/lifecycle-core-20260911.md",
     "docs/reviews/mvp-completion-20260911.md",
+    "docs/reviews/productization-continuation-20260919.md",
+    "docs/reviews/productization-implementation-20260915.md",
+    "docs/reviews/productization-spec-20260915.md",
     "docs/reviews/requirements-clarification-20260910.md",
     "docs/reviews/runtime-core-20260911.md",
     "docs/reviews/state-review-20260911.md"
@@ -22,6 +25,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "7a2c42d4e88eeae12e09047f1e1ef67e56478a77aa221b554416b54fe6479429"
+  "generated_at": "00161",
+  "source_sha256": "5c4572ef7c9853fcada1963ae8c033f9bff31b34a9c01028ea710ce352b5def1"
 }

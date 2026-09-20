@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "binding_validation_reuse_parent_review",
+  "exit_code": 0,
+  "modules": [
+    "tests.test_run_binding_validation_reuse",
+    "tests.test_run_contracts",
+    "tests.test_copy_hotpath"
+  ],
+  "wall_seconds": 0.45384530001319945,
+  "source_sha256": {
+    "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d",
+    "tests/test_run_binding_validation_reuse.py": "72b51e3e869be6ba399ecea83a5ec25e1bdd8e9300338b7e02f1b5f7b4589bcd",
+    "tests/test_copy_hotpath.py": "6c5cdd040496486f57bf3bcbb38b0736238ddb694cfdf4cf3db00f7d9302e5c2"
+  },
+  "source_unchanged": true,
+  "log_sha256": "711262b06bf60c919d3fa7937c1887adea0cdf14ae5feaa69b86a35ba430a0c9",
+  "old_binder_source_sha256": "99526bc49246b399eaab7310d0c4a1a3dc51ccefd07d27e44188b35e67f6093a",
+  "canonical_comparisons": [
+    {
+      "comparison": "not_applicable",
+      "canonical_bytes_equal": true,
+      "sha256": "d44e2669831cb6bfee7526913428c6220ee0cb66762d38e7e62f1d3f34ad66c5",
+      "inputs_unchanged": true
+    },
+    {
+      "comparison": "required",
+      "canonical_bytes_equal": true,
+      "sha256": "318c6999298b472c137281de70e578e553fd6cf9af2982fc02c15a7000e990e0",
+      "inputs_unchanged": true
+    }
+  ],
+  "changes": [
+    "manifest bindingが同関数内で検証済みの4入力をprivate helperへ渡し再検証を除く。公開plan bindingは4 validatorを保持。",
+    "trial_idとcase_idの対応を既存entry loopで収集し、従来の位置でTRIAL_CASE_MISMATCHを判定。trialごとの全entry再走査を除く。"
+  ],
+  "preserved": [
+    "元入力・返却mutable分離",
+    "stage/両variant/required obligationの正確な拒否code",
+    "case別trial受理、2case同trial拒否、candidate/baseline同trial受理",
+    "権限/鮮度/撤回/source・transaction境界"
+  ],
+  "docker_started": false,
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "limitations": [
+    "固定小fixtureのpure binding比較と局所回帰。全製品性能・最新image全回帰ではない。"
+  ],
+  "prior_attempt": {
+    "exit_code": 1,
+    "log_sha256": "41f3e1db6dcf8692813caaea6c40549b968b095fe9a5c113a5ad7bda9f9bdbb7",
+    "source_sha256": {
+      "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d",
+      "tests/test_run_binding_validation_reuse.py": "72b51e3e869be6ba399ecea83a5ec25e1bdd8e9300338b7e02f1b5f7b4589bcd"
+    },
+    "tests_run": 18,
+    "passed": 17,
+    "failed": 1,
+    "test_copy_hotpath_sha256": "0c728b0bfcbeb9b8208208f4e34f2675d271b77e89d7104b8e2090a9cc137e4e",
+    "reason": "copy削減により既存性能assertの6/12回が4/8回になった。値分離のassertを維持して期待数だけ更新。"
+  },
+  "tests_run": 18,
+  "passed": 18,
+  "failed": 0
+}

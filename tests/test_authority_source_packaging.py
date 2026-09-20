@@ -34,10 +34,28 @@ class AuthoritySourcePackagingTests(unittest.TestCase):
                         missing.add(target)
         self.assertEqual(missing, set())
 
+    def test_partitioned_v7_runtime_dependency_closure_is_packaged(self):
+        required = {
+            'src/gah/partitioned_corpus_authority.py',
+            'src/gah/partitioned_corpus_store.py',
+            'src/gah/partitioned_corpus_migrations.py',
+            'src/gah/partitioned_scale_corpus.py',
+            'src/gah/partitioned_case_set.py',
+            'src/gah/query_scale_data.py',
+            'src/gah/partitioned_llm_materialization.py',
+            'src/gah/partitioned_guardrail_results.py',
+            'src/gah/partitioned_guardrail_runner.py',
+            'src/gah/partitioned_llm_admission.py',
+            'src/gah/partitioned_normal_evidence.py',
+        }
+        self.assertTrue(required <= set(SOURCES))
+        for name in required:
+            self.assertTrue((ROOT / name).is_file(), name)
+
     def test_review_and_termination_code_are_bound_to_extension_digest(self):
         original = Path.read_bytes
         baseline = _compute_source_digest()
-        for filename in ('mutation_reviews.py', 'termination.py'):
+        for filename in ('mutation_reviews.py', 'termination.py', 'run_catalog.py', 'run_diagnostics.py', 'pilot.py', 'pilot_authority.py', 'productization.py', 'sqlite_limits.py', 'bounded_files.py', 'storage_budget.py', 'worker_metrics.py', 'budget_warning.py', 'partitioned_llm_admission.py', 'partitioned_normal_evidence.py', 'partitioned_aggregation.py', 'partitioned_llm_materialization.py', 'partitioned_guardrail_results.py', 'partitioned_guardrail_runner.py', 'partitioned_case_set.py', 'partitioned_scale_corpus.py', 'partitioned_trial_plan.py', 'partitioned_run_contracts.py', 'query_scale_data.py'):
             with self.subTest(filename=filename):
                 def changed(path):
                     value = original(path)

@@ -1,0 +1,35 @@
+{
+  "id": "docs/productization-status.md",
+  "role": "productization-status",
+  "title": "拡張実装と製品受入の対応",
+  "summary": "2026-09-20。対象は[拡張14要件](productization-requirements.md)と[実装Task](tasks/TASK.productization-implementation-09-15-2026.md)。文書検収・技術受入・実案件での有用性・GitHub公開を別に扱う。下表の局所試験は全PACの合格を意味しない。変更中のsourceに対する長時間試験は不変コピーを使用し、試験時sourceと最終sourceの差を記録する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/evidence/productization-continuation-20260920/README.md",
+    "docs/productization-corpus-provisioning-spec.md",
+    "docs/productization-partition-spec.md",
+    "docs/productization-performance-spec.md",
+    "docs/productization-quickstart.md",
+    "docs/productization-requirements.md",
+    "docs/reviews/productization-continuation-20260919.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "deps_in": [
+    "HUB.codex.md",
+    "README.md",
+    "docs/evidence/productization-continuation-20260916/README.md",
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/evidence/productization-implementation-20260915/README.md",
+    "docs/productization-pilot-spec.md",
+    "docs/productization-requirements.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "6e8da1712fd40e1eb306618138f4ca3ffee244578cdafaa74541c5bf48bfaa39"
+}

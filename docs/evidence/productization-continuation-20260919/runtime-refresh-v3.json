@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "exit_code": 0,
+  "elapsed_seconds": 1.8439999999827705,
+  "source_unchanged": true,
+  "guardrail_fixture_locks_unchanged": true,
+  "lock_sources_match": true,
+  "image_id": "sha256:4bf246ed9dec80b5c61aa902be6874b683cd22e21ff30b5f5b280ca70edd71c5",
+  "sources_digest": "89be8a15c777a23d20a99b792d99721098d793077cb35dc4cb09ee779228f7b5",
+  "authority_lock_sha256": "6aa2d5b3bc38dbcfbb9b5831fe3c018c8e96c5e3be1430bc7e3e6dbfb4595614",
+  "old_lock_sha256": {
+    "authority": "9045f9196c0f4f2b2ed8cc839bd5248eb39d0f7f14206a806401733e5248c333",
+    "guardrail": "b10bc1f9847a829b6ebff40c0a65cfb575dddbef237c8f883eb501264ded0d23",
+    "fixture": "7a272bef22fe7cb649accef6a75be2015d44c3c1f2f2dde3b93b55d1e6d8b7e7"
+  },
+  "build_log_sha256": "9d621fa06bb0e7724df6c876bd96e076b8bca861793fbb498cbdd2d9f1bfe4cc",
+  "plan_sha256": "5b751d6efaa40a5c93cad1eca33b58e5bbca32d4893538838530365c52f8084b",
+  "acceptance_pass": false,
+  "scope": "authority runtime refresh including explicit v5/v6 dependencies",
+  "runtime_behavior_acceptance": false
+}

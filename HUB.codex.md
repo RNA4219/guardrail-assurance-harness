@@ -12,6 +12,8 @@ template_version: 1.0.0
 
 # Agent Hub
 
+[固定sample導入手順](docs/productization-quickstart.md)
+
 [条件比較部品](docs/semantic-conditions-detail-spec.md) / [親レビュー](docs/reviews/mvp-condition-core-20260912.md) / [証跡](docs/evidence/mvp-condition-core-20260912/README.md)。世代更新の採択・実行や修復成功の権限は持たない。
 
 製品監督の[仕様](docs/supervised-run-detail-spec.md)、[親レビュー](docs/reviews/mvp-supervisor-20260912.md)、[工程証跡](docs/evidence/mvp-supervisor-20260912/README.md)。固定全体runを開始・再開・取消し・照会する。対象限定・CIからの定期起動接続は継続中。
@@ -26,7 +28,7 @@ template_version: 1.0.0
 
 ## Purpose
 
-GAHの要求・詳細仕様・開発運用への入口を示す。契約・評価設計v0.3から、判定・永続化・診断CLIの初期実装へ進んだ。全MVPの設計凍結・受入は未実施。
+GAHの要求・詳細仕様・開発運用への入口を示す。MVPの32条件の技術検収は完了した。次の改修は拡張要件に従い、実案件での有用性・処理速度・導入運用を改善する。工程別の過去記述は、その時点の進捗として読む。
 
 ## Read Order
 
@@ -43,9 +45,10 @@ GAHの要求・詳細仕様・開発運用への入口を示す。契約・評�
 | 作業 | 入口 | 位置づけ |
 |---|---|---|
 | 通常run・成果物・CI利用 | [仕様](docs/regression-ci-detail-spec.md)、[証跡](docs/evidence/mvp-regression-20260912/README.md) | 固定UC-CIの30件と現在の利用検査 |
-| 全MVP完成へ継続 | [完了監査](docs/mvp-completion-audit.md)、[登録・ケース・証拠](docs/runtime-contract-spec.md)、[全体Task](docs/tasks/TASK.mvp-completion-09-11-2026.md) | 32要求の不足・必要証拠・実装進捗 |
+| MVP受入の根拠 | [完了監査](docs/mvp-completion-audit.md)、[登録・ケース・証拠](docs/runtime-contract-spec.md)、[全体Task](docs/tasks/TASK.mvp-completion-09-11-2026.md) | 32条件の技術検収完了と各工程の証拠 |
 | 目的・範囲・要求 | [要求明確化案](docs/requirements.md) | coding agentの開発・CIとLLMガードレール評価の共通要求・判定条件 |
 | 製品の受入・要求の来歴 | [受入条件](docs/acceptance-criteria.md)、[対応表](docs/requirements-traceability.md) | 未実行の製品受入案と原稿の処遇 |
+| MVP後の改修 | [拡張要件 v1](docs/productization-requirements.md)、[拡張仕様 v1](docs/productization-spec.md)、[ロードマップ](docs/extension-roadmap.md)、[反例レビュー](docs/reviews/productization-requirements-20260915.md) | 実案件・処理速度・導入運用の14要件。[実装と検証](docs/tasks/TASK.productization-implementation-09-15-2026.md)は進行中、製品受入は未完了 |
 | 要求の反例と拡張 | [敵対的検証](docs/reviews/requirements-adversarial-20260910.md)、[拡張案](docs/extension-roadmap.md) | 改訂根拠、優先度、後期の着手条件 |
 | 初期運用の決定・設計事項 | [運用方針](docs/operating-policy.md)、[判断事項](docs/open-questions.md) | WARNINGのCI成功、初期閾値・予算、管理AI、外部参照元の参照境界と残る設計 |
 | 設計・仕様・契約 | [設計](docs/design.md)、[仕様](docs/spec.md)、[契約](docs/contracts/README.md) | 契約・評価設計初版、機械可読な初期値と境界例 |
@@ -69,3 +72,5 @@ GAHの要求・詳細仕様・開発運用への入口を示す。契約・評�
 ## Update Rule
 
 正本文書・Task・検収を変更したら参照を更新し、Birdseyeを再生成する。`index`、`hot`、`caps`の世代とsource hashを揃える。archiveは現行ノード・Task・検収の集計対象に含めない。
+
+- [拡張実装と既存32条件の影響](docs/productization-status.md)

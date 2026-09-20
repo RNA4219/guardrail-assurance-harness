@@ -21,6 +21,8 @@
     "docs/acceptance/AC-20260911-03.md",
     "docs/acceptance/AC-20260911-04.md",
     "docs/acceptance/AC-20260911-05.md",
+    "docs/acceptance/AC-20260915-01.md",
+    "docs/acceptance/AC-20260915-02.md",
     "docs/research/README.md",
     "docs/tasks/TASK.contract-design-09-10-2026.md",
     "docs/tasks/TASK.design-review-09-11-2026.md",
@@ -29,6 +31,9 @@
     "docs/tasks/TASK.lifecycle-core-09-11-2026.md",
     "docs/tasks/TASK.mvp-completion-09-11-2026.md",
     "docs/tasks/TASK.operating-decisions-09-10-2026.md",
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md",
+    "docs/tasks/TASK.productization-requirements-09-15-2026.md",
+    "docs/tasks/TASK.productization-spec-09-15-2026.md",
     "docs/tasks/TASK.reference-anonymization-09-10-2026.md",
     "docs/tasks/TASK.reference-boundary-09-10-2026.md",
     "docs/tasks/TASK.reference-confirmation-09-10-2026.md",
@@ -50,6 +55,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "dcb505d31afc9295ea5ad04f2a2d36d401ffa98e1c91802d626aff79b5d42c3c"
+  "generated_at": "00161",
+  "source_sha256": "a6781b5ff7531872ac56f2401ad0611c2a033b94238f092311237e925c865521"
 }

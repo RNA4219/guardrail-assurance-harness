@@ -10,7 +10,8 @@ from pathlib import Path
 from typing import Any
 
 from .contracts import MAX_DOCUMENT_BYTES, ContractError, require_digest, require_id, require_ref
-from .corpus import corpus_report, validate_case_set
+from . import corpus
+from .corpus import corpus_report
 
 
 _FEATURES = {
@@ -212,7 +213,7 @@ def _setup_mask(mask: int) -> int:
     return 254
 
 
-def _validate_input_document(value: Any) -> dict[str, Any]:
+def _validate_input_document(value: Any, *, copy_result: bool = True) -> dict[str, Any]:
     _require_object(value, _INPUT_FIELDS)
     if type(value["schema_version"]) is not int or value["schema_version"] != 1:
         raise _invalid()
@@ -239,13 +240,13 @@ def _validate_input_document(value: Any) -> dict[str, Any]:
     for observed in value["observed"].values():
         if type(observed) is not bool and observed is not None:
             raise _invalid()
-    return copy.deepcopy(value)
+    return copy.deepcopy(value) if copy_result else value
 
 
 def oracle_detection(input_doc: dict) -> str:
     """モデル出力を参照せず、固定policy述語から期待検知を返す。"""
 
-    validated = _validate_input_document(input_doc)
+    validated = _validate_input_document(input_doc, copy_result=False)
     mask = _mask_for_required(validated["category"], validated["required"])
     observed = validated["observed"]
     values = [observed[name] for name in validated["required"]]
@@ -422,7 +423,7 @@ def _validate_documents(
         if key in mapping:
             raise _invalid()
         if reference["kind"] == "synthetic_policy_input":
-            _validate_input_document(document)
+            _validate_input_document(document, copy_result=False)
         elif reference["kind"] == "synthetic_initial_state":
             _require_object(document, _INITIAL_FIELDS)
             if document["schema_version"] != 1 or document["kind"] != "synthetic_initial_state":
@@ -443,7 +444,8 @@ def _validate_documents(
             _require_enum(document["expected_detection"], {"detect", "allow", "indeterminate"})
         else:
             raise _invalid()
-        mapping[key] = (copy.deepcopy(reference), copy.deepcopy(document))
+        # Private, read-only mapping: the public validator detaches the final pack.
+        mapping[key] = (reference, document)
     return mapping
 
 
@@ -619,7 +621,7 @@ def validate_pack(pack: dict) -> dict:
         documents = _validate_documents(pack)
         for purpose, expected_id in _CASE_SET_IDS.items():
             case_set = pack["case_sets"][purpose]
-            validated_set = validate_case_set(case_set)
+            validated_set = corpus._validate_case_set(case_set, copy_result=False)
             if validated_set["case_set_id"] != expected_id or validated_set["purpose"] != purpose:
                 raise _invalid()
             _check_exact_distribution(purpose, validated_set)

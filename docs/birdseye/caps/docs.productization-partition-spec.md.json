@@ -1,0 +1,23 @@
+{
+  "id": "docs/productization-partition-spec.md",
+  "role": "productization-partition-spec",
+  "title": "評価TrialPlan・admission bundleの内容参照分割仕様案",
+  "summary": "対象はbenchmark query planではなく、評価系のTrialPlanと、それをRunManifest・CaseSet・document等へ束ねるadmission/prepared bundleである。サイズ診断の1,600-case、baseline/candidate両variantでは3,200 entriesのTrialPlanがcanonical 1,438,640 bytesとなり、validate_trial_planのDOCUMENT_SIZEで拒否された。代表admission bundleは2,482,771 bytesだが、診断上fully boundではなく、実保存・transport・runtime成功を示さない。CaseSet単体1,038,560 bytesは1 MiB未満だが、authority frameへの外側request分の余白がほぼない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-corpus-provisioning-spec.md"
+  ],
+  "deps_in": [
+    "docs/productization-performance-spec.md",
+    "docs/productization-status.md",
+    "docs/reviews/productization-continuation-20260919.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "9424fb4f515f8812e42951b2fe1bb9ea720dbfdcbe249fc46a62c603e21ccfc4"
+}

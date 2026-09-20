@@ -25,9 +25,11 @@ checker_stages: adoption / task_acceptance / birdseye / docs / security_posture�
 
 security-ciという上流の5scanner一式は製品runtime導入時に再評価する。現時点のposture成功をSAST・secret scan成功とは呼ばない。DependabotはActionsを週次確認する定義で、GitHub公開後に有効となる。
 
+履歴付きCIではactions: readも必要とする。planだけが既定ブランチの成功pushの履歴を読み、固定SHAのupload/download-artifactで同じ履歴と計画を全jobへ配布する。履歴は分割の推定にだけ使い、成功の根拠にはしない。[結合仕様](productization-implementation-spec.md)に版・出典・再配送・全laneの照合を示す。
+
 ローカル操作は [RUNBOOK](../RUNBOOK.md)、検査実装は [tools/workflow.py](../tools/workflow.py)。
 
-固定source80の4分割は、最長7508秒・最短1936秒と偏りがあった。2026-09-15から [test_matrix](../tools/test_matrix.py) で全件を収集し、LLM通常監督・対象版変更・複合run・Finding再検証・後続契約・Mutation reviewの6モジュールを専用ジョブにする。残るモジュールは試験数を基準に6分割し、最大12ジョブを独立runnerで並行実行する。共有するmodule/class準備を分断しない。
+固定source80の4分割は、最長7508秒・最短1936秒と偏りがあった。2026-09-15から [test_matrix](../tools/test_matrix.py) で全件を収集し、LLM通常監督・対象版変更・複合run・Finding再検証・後続契約・Mutation reviewの6モジュールを専用ジョブにする。残るモジュールは同条件の実測時間（履歴不足時は試験数から推定）を基準に6分割し、最大12ジョブを独立runnerで並行実行する。共有するmodule/class準備を分断しない。
 
 計画段階で収集エラー・重複ID・専用モジュールの欠落を拒否する。計画のdigestを各ジョブで再照合し、全試験がちょうど1ジョブへ割り当てられたことを検査する。新規試験も自動収集する。各ジョブは全割当件数の実行と成功を確認し、件数・所要時間をログへ残す。fail-fastを無効にして独立ジョブを最後まで実行し、必須のunitは計画と全ジョブの成功を要求する。失敗・timeout・cancel・skipで成功へ進めない。
 

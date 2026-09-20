@@ -10,6 +10,7 @@ import hashlib
 import json
 import re
 import sqlite3
+from .sqlite_limits import connect_sqlite
 import time
 from contextlib import contextmanager
 from decimal import Decimal, InvalidOperation
@@ -50,7 +51,7 @@ class Ledger:
         self._closed = False
         existed = self.path.exists()
         try:
-            self._db = sqlite3.connect(str(self.path), timeout=5.0, isolation_level=None)
+            self._db = connect_sqlite(str(self.path), timeout=5.0, isolation_level=None)
             self._db.row_factory = sqlite3.Row
             self._db.execute("PRAGMA foreign_keys = ON")
             self._db.execute("PRAGMA busy_timeout = 5000")
@@ -295,7 +296,7 @@ class Ledger:
             raise LedgerError("invalid_database", "invalid database")
         db: sqlite3.Connection | None = None
         try:
-            db = sqlite3.connect(str(target), timeout=5.0, isolation_level=None)
+            db = connect_sqlite(str(target), timeout=5.0, isolation_level=None)
             db.row_factory = sqlite3.Row
             db.execute("PRAGMA foreign_keys = ON")
             # 版・構造・保存内容の検査をロック取得後に行い、検査と変更を

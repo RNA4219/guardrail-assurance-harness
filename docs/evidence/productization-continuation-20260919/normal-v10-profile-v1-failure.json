@@ -1,0 +1,56 @@
+{
+  "acceptance_pass": false,
+  "artifact_summary": {
+    "after-result.json": {
+      "bytes": 20719,
+      "sha256": "3e6b603c1427275069f95e36cbdc9ae8585dac7a4c3e1c443b649d4992ac2fde"
+    },
+    "after.pstats": {
+      "bytes": 158981,
+      "sha256": "66d1c5a30939abaf3bdf60e1c7cf33b25374726f4c46d0f71e1cc7cc8eeb26ba"
+    },
+    "execution.json": {
+      "bytes": 560,
+      "sha256": "d1d23179d06d7f8d797658e15b03945b991b9859f1191cd37bffad88f2fe79a0"
+    }
+  },
+  "checkpoint_snapshot_unchanged": true,
+  "cleanup": {
+    "cleanup_confirmed": true,
+    "post_remove_query": "SUCCEEDED_EMPTY",
+    "rm_returncode": 0,
+    "state": "REMOVED"
+  },
+  "cleanup_confirmed": true,
+  "comparison_performed": false,
+  "container_id": "32eca0e753a198ceb2c0b30e44110957e2608e0d9eb211a96dc54c280865715f",
+  "container_name": "gah-normal-v10-profile-478771fba7234143",
+  "container_state": {
+    "exit_code": 0,
+    "status": "exited"
+  },
+  "elapsed_seconds": 94.23399999999674,
+  "failure_reason": "DRIVER_AND_PLAN_CHANGED_DURING_EXECUTION",
+  "host_log_bytes": 522,
+  "kind": "normal_v10_single_profile_result",
+  "latest_source_profile_only": true,
+  "plan_sha256_after": "4b16d78ef2a5dd59277b8117d0602eefcbe934d36fb8371ba3f53ab9f74c5cd7",
+  "plan_sha256_before": "b82bd5a9296a3697257f24fd1f16b659cfdeaebc94859f008119425ba1bfd2b5",
+  "schema_version": 1,
+  "script_sha256_after": {
+    "container.py": "0a1c973a2745bc30781bcaf7b2be270a4250221ee8bd4e1333360d2f2e748833",
+    "host.py": "ab4d0be1ca041af4dd089c996f51cc11c6639f344d0197d03c4c3428b10d14e4",
+    "profile.py": "5eae21f73489e2c01899d8936acbb3a948c711d1b61fa76fdf6e8d9422d39553"
+  },
+  "scripts_unchanged": false,
+  "seed_db_sha256": "7d7861741821849c233a559ad4d0593f3adcf8937b13eb9b9715ba543dd99aca",
+  "seed_inputs_unchanged": true,
+  "seed_ready_sha256": "37f16d209b9d1c2154e403476e4ff0fae6d914099b5fb83b5030780c89d8303b",
+  "slo_comparison": false,
+  "source_files_after": 1758,
+  "source_files_before": 1758,
+  "source_unchanged": true,
+  "status": "INCONCLUSIVE_INPUTS_CHANGED",
+  "parent_assessment": "準備担当の最終調整完了より前に親が実行を開始したため、driver/plan不変条件不成立。source/seedは不変、5操作は完了、回収確認。性能比較には採用せず、別v2 stageで再計測。",
+  "accepted_for_comparison": false
+}

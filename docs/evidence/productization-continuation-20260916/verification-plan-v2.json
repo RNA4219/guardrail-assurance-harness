@@ -1,0 +1,30 @@
+{
+  "full_regression": false,
+  "id": "continuation-verification-v2",
+  "index_written_after_execution": true,
+  "kind": "local_verification_plan",
+  "modules": [
+    "tests.test_image_preparation",
+    "tests.test_pilot_inputs",
+    "tests.test_pilot_import_cli",
+    "tests.test_storage_budget",
+    "tests.test_checkpoint_budget",
+    "tests.test_resource_probe",
+    "tests.test_authority_resource_probe",
+    "tests.test_benchmark_resource_connection",
+    "tests.test_benchmark",
+    "tests.test_benchmark_review",
+    "tests.test_productization",
+    "tests.test_productization_journal",
+    "tests.test_pilot_cli",
+    "tests.test_authority_source_packaging"
+  ],
+  "schema_version": 1,
+  "slo_adoption": false,
+  "source_frozen_before_execution": true,
+  "source_ref": {
+    "digest": "4950db4e1f6cf1f39749f7e938155bedda3d0c5247ac0e3ea065156ce217b1c8",
+    "id": "continuation-source-v2",
+    "kind": "snapshot_manifest"
+  }
+}

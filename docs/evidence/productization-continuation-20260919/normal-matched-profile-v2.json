@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_normal_run_comparison",
+  "created_at": "2026-09-19T18:45:20.064407+00:00",
+  "status": "COMPLETED",
+  "scope": "同じ合成fixture・時計・request・800件planから各source版で正規生成した別DBの先頭5操作。通常のauthority版拘束を維持。",
+  "source_manifest_sha256": {
+    "before": "f5c78a340a53f044cd2041558ed353f339392f5defc28d5576d099870dc571ac",
+    "after": "62ba04df3092600e69789044d46dee456d846f58c046607505ac989fc8d7b92c"
+  },
+  "only_source_delta": "src/gah/read_checks.py",
+  "configuration_rebinding": false,
+  "input_bytes_identical": false,
+  "equal_logical_requests_and_manifests": true,
+  "semantic_equal": true,
+  "arms": {
+    "before": {
+      "status": "PROFILED_LIMIT_5",
+      "planned_new_operations": 5,
+      "completed_new_operations": 5,
+      "full_plan_entries": 800,
+      "prepare_wall_seconds": 0.3807543929979147,
+      "five_trials_wall_seconds": 37.35509430499951,
+      "attempts_added": 7,
+      "copy_state_after": {
+        "attempts": 7,
+        "operations": 5,
+        "receipts": 0
+      },
+      "saved_attempts_sha256": "d715a53dc9673b04dbbaf6fa334d47ee95d2e9ba9a8b89ee3ec3450b162167c4",
+      "five_journal_and_ledger_completed": true,
+      "input_db_sha256": "b13dd2df6d2f4b77d8253020db7f0914c7611b583c47c7bb093a61b245ee89b4",
+      "checkpoint_snapshot_unchanged": true,
+      "functions": {
+        "deepcopy": {
+          "primitive_calls": 68677,
+          "total_calls": 5266033,
+          "own_seconds": 3.7466332770000004,
+          "cumulative_seconds": 8.119385566
+        },
+        "_copy": {
+          "primitive_calls": 190,
+          "total_calls": 6186610,
+          "own_seconds": 5.716694471,
+          "cumulative_seconds": 6.4242208970000005
+        },
+        "_check_start": {
+          "primitive_calls": 5,
+          "total_calls": 10,
+          "own_seconds": 0.005798045,
+          "cumulative_seconds": 32.000280162
+        }
+      },
+      "result_sha256": "edbb9869d58d65926d0a9c856facd27f1873f669e65821b2697d1d6e1ade0f45",
+      "pstats_sha256": "ee10171b9d8133296bb8820d91978da0e72814e2da377248bdb612a4b250c444"
+    },
+    "after": {
+      "status": "PROFILED_LIMIT_5",
+      "planned_new_operations": 5,
+      "completed_new_operations": 5,
+      "full_plan_entries": 800,
+      "prepare_wall_seconds": 0.38051064200044493,
+      "five_trials_wall_seconds": 37.74350105100166,
+      "attempts_added": 7,
+      "copy_state_after": {
+        "attempts": 7,
+        "operations": 5,
+        "receipts": 0
+      },
+      "saved_attempts_sha256": "d715a53dc9673b04dbbaf6fa334d47ee95d2e9ba9a8b89ee3ec3450b162167c4",
+      "five_journal_and_ledger_completed": true,
+      "input_db_sha256": "4526a06fe07ce8ec5e8354d502293fc14f7605f505827c4eaa3a6277feb44f57",
+      "checkpoint_snapshot_unchanged": true,
+      "functions": {
+        "_copy": {
+          "primitive_calls": 170,
+          "total_calls": 5683670,
+          "own_seconds": 5.343271427,
+          "cumulative_seconds": 6.006054891000001
+        },
+        "_check_start": {
+          "primitive_calls": 5,
+          "total_calls": 10,
+          "own_seconds": 0.007484487000000001,
+          "cumulative_seconds": 32.543670956
+        },
+        "deepcopy": {
+          "primitive_calls": 68677,
+          "total_calls": 5266033,
+          "own_seconds": 3.7414454910000003,
+          "cumulative_seconds": 8.171239012000001
+        }
+      },
+      "result_sha256": "23302b0bcd674fdea0726ffc34a474ac7f4de7ccde2d396bb4179535c74dc23c",
+      "pstats_sha256": "3174f091fa29a762f4aeb66ac41c96cfc7a0afe19b2924aeb1cf8eb35b755bd9"
+    }
+  },
+  "driver_and_result_refs": {
+    "host-artifacts.json": "6d8aa17c020afd2cf4d9a85cc34c40fd4279427dfa3349d30d0fed539c0ea143",
+    "host-result.json": "4386959369e7a08c73cb444c3e3c78976bb0251ba4d8255e3e54bd6e16799d9a",
+    "plan.json": "947917d9742c329105734fa8dac2665629452cec71f0b054a8c6420384941b8f",
+    "running.json": "62c19fd114b62a2b9b353338721ac702e49e04e4d47212dda409503e5c5bb414",
+    "semantic-comparison.json": "a3c3d1b3be2f9b71a508af795026ccd5fb6b57d349f54431a1bb0683e640858d"
+  },
+  "constraints": {
+    "cpu": 2,
+    "memory_bytes": 3221225472,
+    "network": "none",
+    "read_only_root": true,
+    "uid": 65532,
+    "capabilities": "drop ALL",
+    "per_arm_timeout_seconds": 180
+  },
+  "cleanup_confirmed": true,
+  "inputs_unchanged": true,
+  "interpretation": "出力一致。_copyは6186610から5683670へ減ったがdeepcopyは5266033で同数。5操作wallは37.355秒から37.744秒となり速度改善を確認できない。Row混在tupleのfallbackが残る。category合計ではdeepcopy補助関数と再帰を重複計数するため、関数単独のtotal_callsを示す。",
+  "limitations": [
+    "各版1回・5操作のみ。全800操作、確定処理、製品SLO、全資源counterの受入ではない。",
+    "同じsource-bound fixtureを別々に生成したDBであり、DB bytesは異なる。",
+    "cProfile有効、固定合成runnerを同じ計測threadで実行。製品Docker worker全体の速度ではない。"
+  ],
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "slo_comparison": false
+}

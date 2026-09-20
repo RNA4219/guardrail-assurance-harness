@@ -2,7 +2,7 @@
   "id": "docs/evidence/README.md",
   "role": "evidence",
   "title": "検証証跡",
-  "summary": "[条件比較部品](mvp-condition-core-20260912/README.md)は新規30件と既存21件のfocused試験を記録する。後続契約の採択・実行は未接続である。",
+  "summary": "[9月19日の継続検証](productization-continuation-20260919/README.md)に保存上限、worker計測、コピー削減、実Dockerの失敗と再開を記録する。旧MVPの32条件と拡張14条件の受入を区別する。",
   "public_api": [],
   "deps_out": [
     "docs/acceptance/AC-20260910-03.md",
@@ -19,6 +19,8 @@
     "docs/evidence/mvp-report-20260912/README.md",
     "docs/evidence/mvp-supervisor-20260912/README.md",
     "docs/evidence/mvp-transition-20260911/README.md",
+    "docs/evidence/productization-continuation-20260919/README.md",
+    "docs/evidence/productization-continuation-20260920/README.md",
     "docs/research/README.md"
   ],
   "deps_in": [
@@ -31,6 +33,6 @@
   "tests": [
     "python -m tools.workflow check"
   ],
-  "generated_at": "00111",
-  "source_sha256": "d444933af68b53e9e12a67514963186c99c4411472394acd5edc598f476ed772"
+  "generated_at": "00161",
+  "source_sha256": "ad94b6df258dfc4f7952b8798c3f60155a097033663411e20c45f0c7675529c5"
 }

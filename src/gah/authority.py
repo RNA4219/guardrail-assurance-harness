@@ -112,9 +112,25 @@ def _check_directory(path):
         raise AuthorityError("UNTRUSTED_SOCKET_DIRECTORY")
 
 
-def serve(socket_path, db_path):
+def _database_extension(database_mode):
+    """Select the legacy default or an exact explicitly requested schema mode."""
+    if type(database_mode) is not str:
+        raise AuthorityError("DATABASE_MODE_INVALID")
+    if database_mode == "default":
+        from .evaluation_authority import EvaluationExtension
+        return EvaluationExtension()
+    if database_mode == "partitioned-v6":
+        from .partitioned_run_authority import PartitionedRunEvaluationExtension
+        return PartitionedRunEvaluationExtension()
+    if database_mode == "partitioned-v7":
+        from .partitioned_corpus_authority import PartitionedCorpusEvaluationExtension
+        return PartitionedCorpusEvaluationExtension()
+    raise AuthorityError("DATABASE_MODE_INVALID")
+
+
+def serve(socket_path, db_path, *, database_mode="default"):
     from .adoption import AdoptionStore
-    from .evaluation_authority import EvaluationExtension
+    extension = _database_extension(database_mode)
     if not sys.platform.startswith("linux") or os.geteuid() != 12000 or os.getegid() != 12000:
         raise AuthorityError("BROKER_IDENTITY_MISMATCH")
     path = Path(socket_path)
@@ -135,7 +151,9 @@ def serve(socket_path, db_path):
                 raise AuthorityError("BROKER_ALREADY_RUNNING")
         path.unlink()
     os.umask(0o077)
-    with AdoptionStore(db_path, extension=EvaluationExtension()) as store, socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as server:
+    # AdoptionStore creates a blank DB using this exact extension. Existing DB version
+    # or digest mismatches fail closed; serve never performs a schema migration.
+    with AdoptionStore(db_path, extension=extension) as store, socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as server:
         server.bind(str(path))
         os.chmod(path, 0o666)
         server.listen(8)

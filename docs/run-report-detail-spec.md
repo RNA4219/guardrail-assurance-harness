@@ -62,3 +62,11 @@ JSONの`measurements`に元のcounts、用途/対象範囲/版ごとのcount_row
 [除外審査](mutation-review-detail-spec.md)は、前提が成立しMutationが未適用だった保存根拠を独立validatorが検証し、managerが承認する。元のERROR・必須欠損・Decisionは保持し、現在有効な除外、未確定除外、審査後に残るERRORを別計数する。表示だけでCI利用や全MVP受入を許可しない。
 
 未回復のMutation ERRORは採点段階で一試行につき一度だけ計数する。段階ごとの総ERRORとは単位を区別し、正規の再試行で回復した試行にMutation ERRORを重ねて加算しない。元のfault_countとretry_countは保持する。
+
+## 保存された予算警告
+
+保存成果物を取得できる通常reportの`budget_warning`は保存Decisionの予算根拠を返す。根拠がない取消し・従来診断ではnullとし、
+Markdownには「未取得」と表示する。警告がないことと未取得を混同しない。
+取得済みなら閉鎖時の使用量・上限と閾値以上の軸を表示し、現在の資源値から過去の根拠を作り直さない。
+WARNING単独はfreshなCI照会で終了0になり得るが、撤回・停止不明・未精算等の現在の拒否を打ち消さない。
+算出と保存の契約は[authority仕様](assurance-authority-detail-spec.md)に従う。

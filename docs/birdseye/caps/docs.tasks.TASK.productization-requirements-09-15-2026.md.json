@@ -1,0 +1,26 @@
+{
+  "id": "docs/tasks/TASK.productization-requirements-09-15-2026.md",
+  "role": "tasks",
+  "title": "Task: MVP後の拡張要件作成",
+  "summary": "実案件での有用性、処理速度、導入・運用の改善を、追跡・検証できる追加要件へ具体化する。",
+  "public_api": [],
+  "deps_out": [
+    "RUNBOOK.md",
+    "docs/acceptance/AC-20260915-01.md",
+    "docs/productization-requirements.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260915-01.md",
+    "docs/productization-requirements.md",
+    "docs/tasks/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "a1e09e05170ca685f03e4b66fd7f9dfc6daccb2a26da919ca00f2a2d5fbe8194"
+}

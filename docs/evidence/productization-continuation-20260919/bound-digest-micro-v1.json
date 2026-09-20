@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "bound-digest-micro-v1",
+  "scope": "same-process actual 400-case fixture, warm pure digest call only; no product lifecycle or SLO acceptance",
+  "source_sha256": "d0ce3b2f1a9c7fc2bada7a01a7ee115a99ffbf1b73bfa8394acdbdd4f6703059",
+  "fixture_sha256": "816a6942666cf84e59ea7d942335bd3364ccccf706e800b3d229ef203743729d",
+  "digest": "dc8cfb586e10746bb784039781deb85670789a9afff34bf68ffc951cd0b569f4",
+  "inputs_unchanged": true,
+  "runs": [
+    {
+      "repeat": 1,
+      "path": "legacy",
+      "calls": 30,
+      "warm_wall_seconds": 1.5049800999695435,
+      "warm_cpu_seconds": 1.484375,
+      "cache": {
+        "retained_bytes": 130309,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    },
+    {
+      "repeat": 1,
+      "path": "digest_only",
+      "calls": 30,
+      "warm_wall_seconds": 0.8738255999633111,
+      "warm_cpu_seconds": 0.875,
+      "cache": {
+        "retained_bytes": 66472,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    },
+    {
+      "repeat": 2,
+      "path": "digest_only",
+      "calls": 30,
+      "warm_wall_seconds": 0.8164323999662884,
+      "warm_cpu_seconds": 0.828125,
+      "cache": {
+        "retained_bytes": 66472,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    },
+    {
+      "repeat": 2,
+      "path": "legacy",
+      "calls": 30,
+      "warm_wall_seconds": 1.4882691000238992,
+      "warm_cpu_seconds": 1.484375,
+      "cache": {
+        "retained_bytes": 130309,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    },
+    {
+      "repeat": 3,
+      "path": "legacy",
+      "calls": 30,
+      "warm_wall_seconds": 1.5078686999622732,
+      "warm_cpu_seconds": 1.5,
+      "cache": {
+        "retained_bytes": 130309,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    },
+    {
+      "repeat": 3,
+      "path": "digest_only",
+      "calls": 30,
+      "warm_wall_seconds": 0.8214071000111289,
+      "warm_cpu_seconds": 0.828125,
+      "cache": {
+        "retained_bytes": 66472,
+        "max_bytes": 16777216,
+        "currsize": 1,
+        "maxsize": 32
+      }
+    }
+  ],
+  "median_seconds_per_30_calls": {
+    "legacy": 1.5049800999695435,
+    "digest_only": 0.8214071000111289
+  },
+  "median_reduction_percent": 45.4207334683195,
+  "acceptance_pass": false,
+  "full_run_performance": false
+}

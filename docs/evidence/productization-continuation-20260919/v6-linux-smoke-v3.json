@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_resource_linux_diagnostic_summary",
+  "passed": true,
+  "source_manifest_sha256": "92ab965ae147759735a2e1b04ca0695781346f5af9a4bf4c9f442e1878e0bd6c",
+  "extension_digest": "d3f30739aa5a1b3d3052e8d0382d18db523f91c46d8520bb5075e6519a1d5d77",
+  "driver_sha256": "de7469ea3cbe66f864847f589465811cf6e3c36c30f7ce0604eb114f0bc746ed",
+  "plan_sha256": "36ca93c1f5dd287bad74517b9ff179ae035c4602647589dd725e44295cc3263a",
+  "host_result_sha256": "56e4a1c6397a9bb4a635d3b1b66f3375b17a967f6efeeba4c1761b87860efe05",
+  "inside_result_sha256": "09184a5c906272050f32110a777a8eee8923b13f6f9d81f2b60116672a6cf3ad",
+  "container_inspect_sha256": "3deb8c7e1abf2cab77bd805d6baae2b4e4efe9df3842611a8aadec39443849ce",
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "runtime_scope": "cached Python baseと固定source-v13コピー。配布authority imageの既定schema4確認はauthority-smoke-v13.jsonへ分離。",
+  "elapsed_seconds": 97.172,
+  "operation_count": 31,
+  "operations": [
+    {
+      "action": "plan_partition_status",
+      "kind": "authority_error",
+      "reason": "UPLOAD_MISSING",
+      "request_id": "warmup",
+      "uid": 12001
+    },
+    {
+      "action": "propose",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-propose",
+      "uid": 12001
+    },
+    {
+      "action": "validate",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-validate",
+      "uid": 12003
+    },
+    {
+      "action": "adopt",
+      "kind": "policy_adoption_result",
+      "reason": null,
+      "request_id": "policy-adopt",
+      "uid": 12001
+    },
+    {
+      "action": "fixture_prepare",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "fixture-prepare",
+      "uid": 12001
+    },
+    {
+      "action": "contract_propose",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-propose",
+      "uid": 12001
+    },
+    {
+      "action": "contract_validate",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-validate",
+      "uid": 12003
+    },
+    {
+      "action": "contract_adopt",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "contract-adopt",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_begin",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-begin",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_put_segment",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-put-0",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_commit",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-commit",
+      "uid": 12001
+    },
+    {
+      "action": "plan_partition_read",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-read-index",
+      "uid": 12004
+    },
+    {
+      "action": "plan_partition_read",
+      "kind": "partitioned_plan_store_result",
+      "reason": null,
+      "request_id": "plan-read-segment-0",
+      "uid": 12003
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-manager-begin",
+      "uid": 12001
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-validator-begin",
+      "uid": 12003
+    },
+    {
+      "action": "plan_partition_begin",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-candidate-plan",
+      "uid": 12002
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-operator-attempt",
+      "uid": 12004
+    },
+    {
+      "action": "run_begin_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "v6-run-begin",
+      "uid": 12004
+    },
+    {
+      "action": "resource_start",
+      "kind": "authority_error",
+      "reason": "AUTHORITY_DENIED",
+      "request_id": "denied-candidate-resource",
+      "uid": 12002
+    },
+    {
+      "action": "resource_start",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "resource-start",
+      "uid": 12004
+    },
+    {
+      "action": "resource_cancel",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "resource-cancel",
+      "uid": 12004
+    },
+    {
+      "action": "resource_cancel_claim",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "resource-cancel-claim",
+      "uid": 12004
+    },
+    {
+      "action": "resource_operation",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "resource-after-cancel",
+      "uid": 12003
+    },
+    {
+      "action": "resource_observe",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "synthetic-resource-observe",
+      "uid": 12003
+    },
+    {
+      "action": "resource_operation",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "resource-after-synthetic-observe",
+      "uid": 12003
+    },
+    {
+      "action": "resource_close",
+      "kind": "evaluation_authority_result",
+      "reason": null,
+      "request_id": "resource-close",
+      "uid": 12004
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-first",
+      "uid": 12003
+    },
+    {
+      "action": "evidence_record_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-replay",
+      "uid": 12003
+    },
+    {
+      "action": "run_status_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "status-after-restart",
+      "uid": 12001
+    },
+    {
+      "action": "evidence_attempt_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "attempt-read-after-restart",
+      "uid": 12004
+    },
+    {
+      "action": "evidence_current_v2",
+      "kind": "partitioned_run_authority_result",
+      "reason": null,
+      "request_id": "current-after-restart",
+      "uid": 12003
+    }
+  ],
+  "identity_probes": {
+    "12001": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12001,
+      "groups": [],
+      "uid": 12001
+    },
+    "12002": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12002,
+      "groups": [],
+      "uid": 12002
+    },
+    "12003": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12003,
+      "groups": [],
+      "uid": 12003
+    },
+    "12004": {
+      "checks": {
+        "capabilities_dropped": true,
+        "database_unavailable": true,
+        "identity_not_changeable": true,
+        "no_extra_groups": true,
+        "no_new_privileges": true,
+        "nonroot": true,
+        "socket_not_replaceable": true
+      },
+      "gid": 12004,
+      "groups": [],
+      "uid": 12004
+    }
+  },
+  "plan_entry_count": 15,
+  "plan_segment_count": 1,
+  "resource_lifecycle_diagnostic": {
+    "all_six_acceptance_flags_false": true,
+    "cancel_left_settled_false": true,
+    "cancel_left_stopped_false": true,
+    "candidate_denial_db_unchanged": true,
+    "closed": true,
+    "expired_owner_takeover_proven": false,
+    "operation_id": "v6-resource-op",
+    "same_owner_cancel_claim": true,
+    "slo_evidence": false,
+    "slots_after_cancel": 1,
+    "slots_after_close": 0,
+    "synthetic_observe_settled": true,
+    "synthetic_only": true,
+    "unsettled_after_cancel": 1,
+    "unsettled_after_close": 0,
+    "worker_started": false,
+    "worker_stop_proven": false
+  },
+  "broker_restarted": true,
+  "status_after_restart": true,
+  "attempt_first_accepted": true,
+  "attempt_redelivery_duplicate": true,
+  "attempt_delivery_count_after_restart": 2,
+  "source_unchanged": true,
+  "plan_driver_unchanged": true,
+  "cleanup_confirmed": true,
+  "scope": "SO_PEERCREDの役割分離とv6資源action。取消しは停止証拠ではなく、合成validator観測後の台帳精算だけを検証する。実worker起動・停止・資源測定・SLOの証拠ではない。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "real_worker_acceptance": false
+}

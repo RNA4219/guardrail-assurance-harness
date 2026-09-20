@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "normal_v12_profile_parent_comparison",
+  "status": "DIAGNOSTIC_COMPLETE_NO_SPEEDUP",
+  "source_manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "plan_sha256": "163d1a7c55b7e59a60baf121313ca0c717727e101318c04a8505a6da90dd8817",
+  "host_result_sha256": "9a0bfbd5f20a8d45b9a6b26cd1c661dd1f923033c13176a0d6657ffc908b3b35",
+  "script_sha256": {
+    "host.py": "4ce717035ef21fede49418323b826ed67b472127d81d705dffbf6bc745e1e8a7",
+    "container.py": "1b45306f6bad647c3ac685ad390661a95a8612fb668e575d064efeac9e7d4b1a",
+    "profile.py": "bbf3ca12c8ebbaf24a3f76d5976d9db89c0683688815d129b42a548d5308c873"
+  },
+  "artifact_summary": {
+    "after-result.json": {
+      "bytes": 20712,
+      "sha256": "874751f7b4ac40acb8f1db3897a5ffcf3e0f943f051ddf6a6aac171253a9156a"
+    },
+    "after.pstats": {
+      "bytes": 160222,
+      "sha256": "5569e3447acd06f294b3c7b737b3702b15e9d0b7aea137f6cdafef82a53ff4da"
+    },
+    "execution.json": {
+      "bytes": 560,
+      "sha256": "917c7f5ace9dab6d47c827ee7cb4590bd1101f3e372f65e9779fbabfe6ce9df1"
+    }
+  },
+  "host_elapsed_seconds": 101.51500000001397,
+  "same_workload_fields": [
+    "full_plan_entries",
+    "full_plan_ref",
+    "selected_operation_ids",
+    "selected_stage_ids",
+    "completed_new_operations",
+    "attempts_added",
+    "copy_state_after",
+    "saved_attempts_sha256",
+    "saved_attempts_column_sha256"
+  ],
+  "same_saved_attempts_sha256": "0b2b9f59ec342be9d928163c3d333324cf8d6f1cbaee0cc07e82473b1d06d1ad",
+  "metrics": {
+    "v11": {
+      "five_operations_seconds": 26.921145820000675,
+      "prepare_seconds": 0.31381426400184864,
+      "deepcopy": {
+        "primitive_calls": 37845,
+        "total_calls": 3671629,
+        "own_seconds": 2.4520088,
+        "cumulative_seconds": 5.328922593000001
+      },
+      "after_result_sha256": "7d5b2623cd333ba2e91f1ec1414da954aafd83275e5e293a371862086e75f4aa",
+      "pstats_sha256": "91e5566af0c3f020754f42ca71f5391d002e9fec2f371ae41722a9261e50f2a2"
+    },
+    "v12": {
+      "five_operations_seconds": 28.495533561006596,
+      "prepare_seconds": 0.31912408499920275,
+      "deepcopy": {
+        "primitive_calls": 37845,
+        "total_calls": 3671629,
+        "own_seconds": 2.530017051,
+        "cumulative_seconds": 5.535600872000001
+      },
+      "after_result_sha256": "874751f7b4ac40acb8f1db3897a5ffcf3e0f943f051ddf6a6aac171253a9156a",
+      "pstats_sha256": "5569e3447acd06f294b3c7b737b3702b15e9d0b7aea137f6cdafef82a53ff4da"
+    }
+  },
+  "single_pair_wall_change_percent": 5.84814536324918,
+  "source_and_seed_unchanged": true,
+  "cleanup_confirmed": true,
+  "limits": [
+    "固定800entry planの先頭5操作・7Attemptのみ。全800操作とfinalizeは未実行。",
+    "各版1回のprofile付き診断。SLOまたは統計的回帰を判定しない。",
+    "deepcopy function単体の値を使用。category累積合計は重複するため比較しない。",
+    "source-v12には後続のauthority deadlineとv6 resource接続修正は含まれない。"
+  ],
+  "parent_review": "保存Attempt全体と5列hash、操作ID/stage、plan、完了状態が一致。局所cacheとgen2検査省略は作動したが全体高速化は確認できない。",
+  "remaining_hotpath_hypothesis": "小nonflat cache missで既存decode値があるのにhelperで再decodeする経路。wall差の原因とは断定しない。",
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

@@ -82,7 +82,7 @@ def _source(source_prepared: Any, worker_source: bytes, runtime_lock: Any,
             or source_bound["ci_eligible"] is not False):
         raise _bad("SOURCE_PACK_MISMATCH")
     try:
-        source_core, rebound = fixture_materialization._core_bound(source_bound)
+        source_core = fixture_materialization._core_bound(source_bound)
     except ContractError:
         raise _bad("SOURCE_BINDING_INVALID") from None
     if source_prepared["pack_ref"] != content_ref("fixture_pack", pack["pack_id"], pack):

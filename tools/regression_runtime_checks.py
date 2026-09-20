@@ -9,7 +9,10 @@ from tools.gah_ci import run as consume_ci
 
 
 def verify(*, success, call, denied, check, runtime, runner, contract,
-           receipts, active, save_observations):
+           receipts, active, save_observations, expected_assurance="HEALTHY"):
+    if expected_assurance not in {"HEALTHY", "WARNING"}:
+        raise ValueError("EXPECTED_ASSURANCE_INVALID")
+    budget_warning = expected_assurance == "WARNING"
     def request(action, identifier, **fields):
         return {"schema_version": 1, "action": action, "request_id": identifier, **fields}
 
@@ -101,25 +104,70 @@ def verify(*, success, call, denied, check, runtime, runner, contract,
     receipt = success(12004, finalize)
     outputs_request = request("run_outputs", "regression-outputs", run_id=run_id)
     outputs = success(12004, outputs_request)
-    check("regression_required_outputs_saved", receipt["assurance"] == "HEALTHY"
+    check("regression_required_outputs_saved", receipt["assurance"] == expected_assurance
         and all(outputs["outputs"].get(k) for k in ("decision", "evidence", "findings", "plans", "run_receipt")))
     for kind in ("findings", "plans"):
         ref = outputs["outputs"][kind]
-        report = success(12004, request("run_artifact", "regression-read-" + kind,
+        report_response = success(12004, request("run_artifact", "regression-read-" + kind,
             run_id=run_id, artifact_ref=ref))
-        check("regression_" + kind + "_report_retrievable", report["artifact_ref"] == ref
-            and report["artifact"]["items"] == [] and len(report["artifact"]["assessed_controls"]) == 15)
+        report_value = report_response["artifact"]
+        base_valid = (report_response["artifact_ref"] == ref
+            and len(report_value["assessed_controls"]) == 15)
+        if budget_warning:
+            items = report_value["items"]
+            check("regression_" + kind + "_warning_report_retrievable", base_valid
+                and type(items) is list and len(items) == 15)
+            if kind == "findings" and type(items) is list and len(items) == 15:
+                controls = set()
+                for index, finding_ref in enumerate(items):
+                    finding_response = success(12004, request("run_artifact",
+                        f"regression-warning-finding-{index:02d}", run_id=run_id,
+                        artifact_ref=finding_ref))
+                    finding = finding_response["artifact"]
+                    controls.add(finding.get("control_ref", {}).get("id"))
+                    check(f"regression_warning_finding_{index:02d}",
+                        finding_response["artifact_ref"] == finding_ref
+                        and finding.get("reason_code") == "warning" and finding.get("status") == "OPEN")
+                check("regression_warning_findings_cover_assessed_controls",
+                    controls == set(report_value["assessed_controls"]))
+        else:
+            check("regression_" + kind + "_report_retrievable", base_valid
+                and report_value["items"] == [])
     ready = gate_result(0)
     check("regression_fresh_ci_success", ready["outputs_ref"] == outputs["outputs_ref"]
-        and ready["assurance"] == "HEALTHY" and ready["reasons"] == [])
+        and ready["assurance"] == expected_assurance and ready["reasons"] == [])
     check("regression_consumer_returns_zero", consume_ci(SimpleNamespace(client=call), gate, io.StringIO()) == 0)
+    if budget_warning:
+        decision_response = success(12004, request("run_artifact", "regression-read-budget-warning",
+            run_id=run_id, artifact_ref=outputs["outputs"]["decision"]))
+        decision = decision_response["artifact"]
+        basis = decision.get("budget_warning")
+        check("regression_saved_warning_basis", decision_response["artifact_ref"] == outputs["outputs"]["decision"]
+            and decision.get("assurance") == "WARNING" and type(basis) is dict
+            and basis.get("run_id") == run_id and basis.get("usage", {}).get("case_trial_executions") == 30
+            and basis.get("limits", {}).get("case_trial_executions") == 37
+            and basis.get("warning_usage_min") == [4, 5])
+        from tools.gah_report import build_report, render_markdown
+        report = build_report(runtime, gate)
+        markdown = render_markdown(report)
+        versions = report.get("evaluation_versions", {})
+        check("regression_warning_report", report.get("assurance") == "WARNING"
+            and report.get("observed_assurance") == "WARNING" and report.get("exit_code") == 0
+            and report.get("ci_eligible") is True and report.get("budget_warning") == basis
+            and type(versions.get("contract_generation")) is int and versions["contract_generation"] == 2
+            and type(versions.get("baseline_generation")) is int and versions["baseline_generation"] == 1
+            and "WARNING" in markdown and "予算使用量（保存時）" in markdown
+            and "case_trial_executions" in markdown
+            and "契約世代" in markdown and "baseline世代" in markdown)
     runtime.restart_broker()
-    check("regression_ci_rechecks_after_restart", gate_result(0)["outputs_ref"] == ready["outputs_ref"])
+    restarted_gate = gate_result(0)
+    check("regression_ci_rechecks_after_restart", restarted_gate["outputs_ref"] == ready["outputs_ref"]
+        and restarted_gate["assurance"] == expected_assurance)
     check("regression_historical_receipt_after_restart", success(12004, finalize) == receipt)
     check("regression_outputs_after_restart", success(12004, outputs_request) == outputs)
 
     def after_revocation():
-        check("regression_source_revocation_blocks_ci", gate_result(1)["assurance"] == "HEALTHY")
+        check("regression_source_revocation_blocks_ci", gate_result(1)["assurance"] == expected_assurance)
         check("regression_consumer_returns_one_after_revocation",
             consume_ci(SimpleNamespace(client=call), gate, io.StringIO()) == 1)
         check("regression_source_revocation_keeps_history", success(12004, finalize) == receipt

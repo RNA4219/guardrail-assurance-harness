@@ -18,7 +18,7 @@ ENTRYPOINT=['/usr/local/bin/python','-I','-B','/opt/gah/guardrail_worker.py']
 def main():
     docker=shutil.which('docker')
     if not docker:raise SystemExit('DOCKER_UNAVAILABLE')
-    prefix=[docker,'--host','npipe:////./pipe/dockerDesktopLinuxEngine'] if os.name=='nt' else [docker]
+    prefix=[docker,'--host','npipe:////./pipe/dockerDesktopLinuxEngine' if os.name=='nt' else 'unix:///var/run/docker.sock']
     hashes={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in SOURCES}
     digest=hashlib.sha256(json.dumps(hashes,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     parent=ROOT/'.ga'/'guardrail-build'

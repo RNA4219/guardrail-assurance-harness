@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "scale_corpus_codec_sizes",
+  "source_sha256": "aa3271daafcc7727446c973c64f509f9e9e2d30929228bbe6d1a6efa6f59214b",
+  "rows": [
+    {
+      "cases": 400,
+      "documents": 802,
+      "logical_bytes": 597766,
+      "index_bytes": 732,
+      "case_index_bytes": 625,
+      "case_segments_bytes": [
+        259803
+      ],
+      "document_segments_bytes": [
+        337982
+      ],
+      "roundtrip_equal": true
+    },
+    {
+      "cases": 800,
+      "documents": 1602,
+      "logical_bytes": 1205246,
+      "index_bytes": 734,
+      "case_index_bytes": 625,
+      "case_segments_bytes": [
+        519403
+      ],
+      "document_segments_bytes": [
+        685863
+      ],
+      "roundtrip_equal": true
+    },
+    {
+      "cases": 1600,
+      "documents": 2590,
+      "logical_bytes": 2210921,
+      "index_bytes": 904,
+      "case_index_bytes": 787,
+      "case_segments_bytes": [
+        899393,
+        139419
+      ],
+      "document_segments_bytes": [
+        899579,
+        272986
+      ],
+      "roundtrip_equal": true
+    }
+  ],
+  "runtime_admission_verified": false,
+  "acceptance_pass": false
+}

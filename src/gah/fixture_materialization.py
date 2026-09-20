@@ -12,6 +12,7 @@ from .run_contracts import (
     bind_run_manifest, content_ref, validate_evaluation_contract,
     validate_run_manifest, validate_trial_plan,
 )
+from .cache_inputs import bind_run_manifest as cached_bind_run_manifest
 from .registry import validate_registry
 from .corpus import validate_case_set
 
@@ -178,16 +179,18 @@ def _calibration_materials(worker_digest: str) -> list[dict[str, Any]]:
     return materials
 
 
-def _core_bound(bound_run: Any) -> tuple[dict[str, Any], dict[str, Any]]:
+def _core_bound(bound_run: Any) -> dict[str, Any]:
     if type(bound_run) is not dict:
         raise _bad("BINDING_INPUT_INVALID")
     required = {"manifest", "contract", "plan", "policy", "registry", "case_set", "ci_eligible"}
     if not required.issubset(bound_run):
         raise _bad("BINDING_INPUT_MISSING")
     try:
-        rebound = bind_run_manifest(bound_run["manifest"], bound_run["contract"], bound_run["plan"],
-                                    bound_run["policy"], bound_run["registry"], bound_run["case_set"],
-                                    baseline_context=bound_run.get("baseline_context"))
+        rebound = cached_bind_run_manifest(
+            bound_run["manifest"], bound_run["contract"], bound_run["plan"],
+            bound_run["policy"], bound_run["registry"], bound_run["case_set"],
+            baseline_context=bound_run.get("baseline_context"),
+        )
     except ContractError:
         raise
     except (KeyError, TypeError, ValueError, RecursionError):
@@ -197,7 +200,9 @@ def _core_bound(bound_run: Any) -> tuple[dict[str, Any], dict[str, Any]]:
     fields = ("manifest", "contract", "plan", "policy", "registry", "case_set", "selected_controls", "ci_eligible")
     if any(field not in bound_run or bound_run[field] != rebound[field] for field in fields):
         raise _bad("BINDING_MISMATCH")
-    return ({field: deepcopy(rebound[field]) for field in fields}, rebound)
+    # cached_bind_run_manifest returns a fresh JSON decode, so this projection
+    # is isolated from bound_run without recursively copying each validated tree.
+    return {field: rebound[field] for field in fields}
 
 
 def _documents(policy: Any, worker_digest: str, lock: dict, profile: dict, now: int, run_id: str,
@@ -442,7 +447,7 @@ def _build_manifest(bound_run: Any, worker_source: bytes, runtime_lock: Any, pro
     if lock["worker_digest"] != digest or profile_value["fixture_digest"] != digest:
         raise _bad("WORKER_DIGEST_MISMATCH")
     created_at = _time(created_at)
-    bound, _ = _core_bound(bound_run); manifest = bound["manifest"]
+    bound = _core_bound(bound_run); manifest = bound["manifest"]
     if manifest.get("purpose") != "baseline_candidate" or "UC-CI" not in manifest.get("use_cases", []):
         raise _bad("PURPOSE_MISMATCH")
     pack = bound_run.get("fixture_pack")

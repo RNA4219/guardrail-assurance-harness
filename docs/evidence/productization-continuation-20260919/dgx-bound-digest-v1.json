@@ -1,0 +1,20 @@
+{
+  "elapsed_seconds": 21.437,
+  "model": "qwen3.8-flash-next",
+  "finish_reason": "length",
+  "reply": "提示されたコードに基づき、指定された観点（canonical digest、baseline key、global size/depth/node、入力alias/失敗cache）で最大3件の問題を抽出します。\n\n### 1. `_cached_bound_digest` における `limits` 引数の未使用とキャッシュキーの不一致\n**箇所:** `_cached_bound_digest` 関数内\n**条件:** `limits` 引数が定義されているが、関数本体で一度も参照されていない。\n**問題:** 仕様では「walkerとlimitsはcache identityに含め」とあるが、実装では `limits` が無視されている。これにより、`MAX_DOCUMENT_BYTES` や `MAX_INTEGER` の値が変更された場合、キャッシュキーが変化せず、古い制限値で計算されたdigestが再利用される可能性がある（または、`_walk_json` 内の定数参照とキャッシュキー生成の間に不整合が生じる）。`_cached_bound` と `_cached_bound_digest` でキャッシュキーの構成要素が異なるため、同一入力に対するdigestが安定しないリスクがある。\n\n### 2. `_bound` と `bound_bundle_digest` における `eligible` 判定の重複と `plain` 関数の依存\n**箇所:** `_bound` 関数と `bound_bundle_digest` 関数の冒頭部分\n**条件:** 両関数で `cases` の長さが `400 <= len(cases) <= 415` であることと `plain([value, baseline_context])` が真であることでキャッシュ利用可否を判定している。\n**問題:** `plain` 関数の実装が不明だが、`json.dumps` の `sort_keys=True` と `separators` の指定が `plain` 内で同一である保証がない。もし `plain` が異なるシリアライズ方式（例: `indent` の有無、キー順序の扱い）を使用すると、`_bound` と `bound_bundle_digest` で生成される `payload` 文字列が異なり、キャッシュキーが不一致となる。特に `bound_bundle_digest` では `payload_size` の計算に `encode('utf-8')` を明示しているが、`_bound` では `json.dumps` の戻り値の長さを直接比較している可能性があり、エンコーディングの差異によるサイズ判定の不一致が生じる可能性がある。\n\n### 3. `_walk_json` における `nodes` カウンタの初期化と深さ制限の競合\n**箇所:** `_walk_json` 関数内の `while pending:` ループ\n**条件:** `nodes` が `100_000` を超えた場合、`depth` が `16` を超えた場合の両方でエラーを投げている。\n**問題:** `nodes` のカウントが `pending.pop()` の直後に行われているが、`depth` のチェックは `item` の型判定の前に行われている。この順序自体は問題ないが、`nodes` の上限 `100_000` と `depth` の上限 `16`",
+  "request_sha256": "34994fa6c9ab2e9f2d04093a2849e535ee92a201df9902999070f9809116c1ff",
+  "response_sha256": "516bd5ea413b0e555d319e922f970c872a92597feb6776240ac4895786ed33ba",
+  "source_sha256": "d0ce3b2f1a9c7fc2bada7a01a7ee115a99ffbf1b73bfa8394acdbdd4f6703059",
+  "acceptance_pass": false,
+  "schema_version": 1,
+  "id": "dgx-bound-digest-v1",
+  "review_complete": false,
+  "adopted_changes": [],
+  "parent_assessment": [
+    "応答はmax_tokensで中断。完全なレビュー結果として採用しない。",
+    "limitsとwalkerはdecoratorが全引数をkeyへ含めるため、本体で未使用でもidentityを構成する。実limit変更拒否を親テストで確認した。",
+    "plainは型と形状の判定でありserializerではない。旧新版とも同じJSON設定とUTF-8 byte長を使う。異なるserializerという指摘は根拠がない。",
+    "全体depth/node検査は変更していない。途中で切れた3番目の指摘は新規回帰を示していない。"
+  ]
+}

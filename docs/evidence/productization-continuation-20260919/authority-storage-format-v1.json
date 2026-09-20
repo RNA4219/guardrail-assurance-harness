@@ -1,0 +1,21 @@
+{
+  "ast_dump_identical": true,
+  "behavior_or_api_changed": false,
+  "file": "tools/authority_storage_probe.py",
+  "kind": "authority_storage_probe_format_check",
+  "local_artifact_sha256": "7481bbf05992b6cc396f888caf31af2fbce4644cfcda510a12c1a8e5abf91df3",
+  "new_ast_sha256": "6302eff3af055908ccb03197699bcb99b5ad8e441a4957f99110ec6adbdba544",
+  "new_sha256": "e6375d4cc0df0b133482a5b3dadb48bd438b70ff922020595b4d12ba3eb694c2",
+  "old_ast_sha256": "6302eff3af055908ccb03197699bcb99b5ad8e441a4957f99110ec6adbdba544",
+  "old_sha256": "caac11f057b857488bf294e987dde6bf665a3930ae8746891aab5d9f1433f991",
+  "raw_command_arguments_ast_identical": true,
+  "replacement": "temp file in target directory, flush+fsync, atomic os.replace, readback AST and embedded script verification",
+  "schema_version": 1,
+  "statvfs_script_value_identical": true,
+  "tests": {
+    "command": "python -m unittest tests.test_authority_storage_probe",
+    "failed": 0,
+    "passed": 11,
+    "result": "PASS"
+  }
+}

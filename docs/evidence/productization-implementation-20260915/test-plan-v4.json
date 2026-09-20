@@ -1,0 +1,59 @@
+{
+  "id": "local-regression-v4",
+  "kind": "local_regression_plan",
+  "matrix": {
+    "include": [
+      {
+        "lane": "llm-supervision",
+        "tests": 1
+      },
+      {
+        "lane": "llm-revision",
+        "tests": 1
+      },
+      {
+        "lane": "combined",
+        "tests": 4
+      },
+      {
+        "lane": "finding-revalidation",
+        "tests": 5
+      },
+      {
+        "lane": "following-contract",
+        "tests": 6
+      },
+      {
+        "lane": "mutation-review",
+        "tests": 5
+      },
+      {
+        "lane": "regression-0",
+        "tests": 181
+      },
+      {
+        "lane": "regression-1",
+        "tests": 181
+      },
+      {
+        "lane": "regression-2",
+        "tests": 181
+      },
+      {
+        "lane": "regression-3",
+        "tests": 181
+      },
+      {
+        "lane": "regression-4",
+        "tests": 182
+      },
+      {
+        "lane": "regression-5",
+        "tests": 182
+      }
+    ]
+  },
+  "plan_digest": "8a7140a64c62e651433411c648463932621d03b22703aa9431652ef948137dbd",
+  "schema_version": 1,
+  "total_tests": 1110
+}

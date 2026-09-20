@@ -6,9 +6,11 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+from .sqlite_limits import connect_sqlite
 from typing import Any
 
-from .contracts import ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER
+from .contracts import (ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER,
+                        require_digest, require_uint)
 from . import transition_migrations
 from .wire import canonical_bytes
 
@@ -117,6 +119,117 @@ def _digest(value: Any) -> str:
         raise _error("STORAGE_CORRUPT")
     return hashlib.sha256(raw).hexdigest()
 
+
+
+_EXPECTED_MIGRATION_STATE_FIELDS = {
+    "schema_version", "bootstrap_digest", "validator_digest",
+    "extension_digest", "permission_generation", "last_clock",
+    "logical_digest", "table_digests",
+}
+
+
+def _validate_expected_migration_state(value: Any, *, target: bool = False) -> dict:
+    if type(value) is not dict or set(value) != _EXPECTED_MIGRATION_STATE_FIELDS:
+        raise _error("BINDING_MISMATCH")
+    version = value["schema_version"]
+    if type(version) is not int or version not in {_V2_VERSION, _V3_VERSION, _V4_VERSION}:
+        raise _error("BINDING_MISMATCH")
+    if target and version != _V4_VERSION:
+        raise _error("BINDING_MISMATCH")
+    for name in ("bootstrap_digest", "validator_digest",
+                 "extension_digest", "logical_digest"):
+        try:
+            require_digest(value[name])
+        except ContractError:
+            raise _error("BINDING_MISMATCH") from None
+    try:
+        require_uint(value["permission_generation"])
+    except ContractError:
+        raise _error("BINDING_MISMATCH") from None
+    if (type(value["last_clock"]) is not int
+            or not -1 <= value["last_clock"] <= MAX_INTEGER):
+        raise _error("BINDING_MISMATCH")
+    tables = _V2_COLUMNS if version == _V2_VERSION else (
+        _V3_COLUMNS if version == _V3_VERSION else _V4_COLUMNS)
+    digests = value["table_digests"]
+    if (type(digests) is not dict or set(digests) != set(tables)
+            or any(type(item) is not str or len(item) != 64
+                   or any(char not in "0123456789abcdef" for char in item)
+                   for item in digests.values())):
+        raise _error("BINDING_MISMATCH")
+    return value
+
+
+def _migration_sql_value(value: Any) -> Any:
+    if value is None or type(value) in {int, str}:
+        return value
+    if type(value) is bytes:
+        return {"bytes": value.hex()}
+    raise _error("BINDING_MISMATCH")
+
+
+def _migration_row_digest(db: sqlite3.Connection, table: str) -> str:
+    try:
+        columns = [row[1] for row in db.execute(
+            'PRAGMA table_info("' + table + '")')]
+        rows = []
+        for row in db.execute('SELECT * FROM "' + table + '"'):
+            rows.append({"columns": columns,
+                         "values": [_migration_sql_value(item) for item in row]})
+        rows.sort(key=canonical_bytes)
+        return hashlib.sha256(canonical_bytes(rows)).hexdigest()
+    except MigrationError:
+        raise
+    except (sqlite3.Error, TypeError, ValueError, UnicodeError):
+        raise _error("BINDING_MISMATCH") from None
+
+
+def _verify_expected_migration_state(db: sqlite3.Connection, value: Any,
+                                     *, target: bool = False) -> None:
+    expected = _validate_expected_migration_state(value, target=target)
+    version = expected["schema_version"]
+    tables = _V2_COLUMNS if version == _V2_VERSION else (
+        _V3_COLUMNS if version == _V3_VERSION else _V4_COLUMNS)
+    try:
+        observed_version = db.execute("PRAGMA user_version").fetchone()[0]
+    except sqlite3.Error:
+        raise _error("BINDING_MISMATCH") from None
+    if observed_version != version:
+        raise _error("BINDING_MISMATCH")
+    _verify_columns(db, tables)
+    config = _config(db)
+    meta = _meta(db, version)
+    if (config != {
+        "bootstrap_digest": expected["bootstrap_digest"],
+        "validator_digest": expected["validator_digest"],
+        "extension_digest": expected["extension_digest"],
+    } or meta["permission_generation"] != expected["permission_generation"]
+            or meta["last_clock"] != expected["last_clock"]):
+        raise _error("BINDING_MISMATCH")
+    digests = {table: _migration_row_digest(db, table) for table in sorted(tables)}
+    observed = {
+        "schema_version": version,
+        "bootstrap_digest": config["bootstrap_digest"],
+        "validator_digest": config["validator_digest"],
+        "extension_digest": config["extension_digest"],
+        "permission_generation": meta["permission_generation"],
+        "last_clock": meta["last_clock"],
+        "logical_digest": _digest({
+            "schema_version": version, "config": config, "meta": meta,
+            "table_digests": digests,
+        }),
+        "table_digests": digests,
+    }
+    if observed != expected:
+        raise _error("BINDING_MISMATCH")
+
+
+def _validate_expected_migration_states(value: Any) -> dict:
+    if type(value) is not dict or set(value) != {"before", "after"}:
+        raise _error("BINDING_MISMATCH")
+    _validate_expected_migration_state(value["before"])
+    _validate_expected_migration_state(value["after"], target=True)
+    return value
 
 def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     value: dict[str, Any] = {}
@@ -370,8 +483,14 @@ def _verify_v3_history_graph(db: sqlite3.Connection, *, adopted: bool = False, f
                 raise _error("STORAGE_CORRUPT")
 
 
-def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, regression: bool = False, cancellation: bool = False, following: bool = False, scoped: bool = False) -> None:
-    """旧v4候補を元factoryへ再結合し、fresh失効とは分離して検査する。"""
+def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, regression: bool = False, cancellation: bool = False, following: bool = False, scoped: bool = False, expected_schema_version: int = _V4_VERSION) -> None:
+    """旧v4候補を元factoryへ再結合し、fresh失効とは分離して検査する。
+
+    v6 explicit migration caller may validate identical legacy candidate rows in a
+    schema-v5/v6 database. All existing callers retain the strict default of version 4.
+    """
+    if type(expected_schema_version) is not int or expected_schema_version not in {_V4_VERSION, 5, 6}:
+        raise _error("UNSUPPORTED_STORE")
     if db.execute("SELECT 1 FROM authority_artifacts WHERE kind IN ('finding_management_event','target_retirement','combined_run_binding','combined_run_receipt','combined_cancel_request')").fetchone():
         raise _error("STORAGE_CORRUPT")
     from . import transition_authority
@@ -387,7 +506,7 @@ def _verify_v4_candidate_rows(db: sqlite3.Connection, *, adopted: bool = False, 
                     raise _error("STORAGE_CORRUPT") from None
             elif row["generation"] != 1:
                 raise _error("STORAGE_CORRUPT")
-    clock = _meta(db, _V4_VERSION)["last_clock"]
+    clock = _meta(db, expected_schema_version)["last_clock"]
     for candidate in db.execute("SELECT * FROM transition_candidates"):
         try:
             _, value = transition_authority.load_candidate(db, candidate["candidate_id"], clock)
@@ -592,7 +711,7 @@ def _set_v4(db: sqlite3.Connection, extension: Any, base_columns: dict[str, set[
     db.execute("PRAGMA user_version=4")
 
 
-def migrate_evaluation_store(path: str | Path) -> dict[str, Any]:
+def migrate_evaluation_store(path: str | Path, *, expected_state: dict[str, dict] | None = None) -> dict[str, Any]:
     """既知のv2/v3をv4へ、既知の旧v4を現行v4へ明示移行する。"""
 
     if not isinstance(path, (str, Path)):
@@ -611,10 +730,15 @@ def migrate_evaluation_store(path: str | Path) -> dict[str, Any]:
         raise _error("BOOTSTRAP_MISMATCH") from None
 
     try:
-        db = sqlite3.connect(str(target), isolation_level=None, timeout=5)
+        db = connect_sqlite(str(target), isolation_level=None, timeout=5)
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA foreign_keys=ON")
         db.execute("BEGIN IMMEDIATE")
+        if expected_state is not None:
+            _validate_expected_migration_states(expected_state)
+            _verify_expected_migration_state(
+                db, expected_state["before"],
+            )
         version = db.execute("PRAGMA user_version").fetchone()[0]
         if version not in {_V2_VERSION, _V3_VERSION, _V4_VERSION}:
             raise _error("UNSUPPORTED_STORE")
@@ -710,11 +834,19 @@ def migrate_evaluation_store(path: str | Path) -> dict[str, Any]:
                 db.execute("RELEASE gah_migration_verification")
             db.execute("UPDATE adoption_config SET value=? WHERE key='extension_digest'", (extension.digest,))
             predecessor = config["extension_digest"]
+            if expected_state is not None:
+                _verify_expected_migration_state(
+                    db, expected_state["after"], target=True,
+                )
             db.commit()
             return {"schema_version": 4, "kind": "adoption_migration_result", "changed": True,
                     "predecessor_extension_digest": predecessor,
                     "predecessor_validator_digest": config["validator_digest"],
                     "extension_digest": extension.digest, "ci_eligible": False}
+        if expected_state is not None:
+            _verify_expected_migration_state(
+                db, expected_state["after"], target=True,
+            )
         db.commit()
         return {"schema_version": 4, "kind": "adoption_migration_result", "changed": True,
                 "predecessor_extension_digest": predecessor,

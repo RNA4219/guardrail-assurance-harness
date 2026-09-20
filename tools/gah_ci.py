@@ -1,5 +1,6 @@
 """既存の固定authorityへ現在のCI利用を問い合わせ、結果に応じた終了値を返す。"""
 import argparse
+import io
 import json
 from pathlib import Path
 import sys
@@ -9,6 +10,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from gah.contracts import ContractError, decode_document, require_ref
 from gah.regression_runs import validate_request
 from tools.authority_runtime import AuthorityRuntime
+from gah.docker_runner import operation_lock
+from gah.supervisor_checkpoint import _plain_directory
 
 
 def response_exit_code(request, value):
@@ -68,12 +71,22 @@ def main():
     parser.add_argument("--request", required=True, help="対象の完全参照を指定したci_check JSON")
     args = parser.parse_args()
     try:
-        folder = Path(args.runtime).resolve()
+        folder = _plain_directory(Path(args.runtime))
         if not folder.is_relative_to(ROOT) or not (folder / "deployment.json").is_file():
             raise ValueError("EXISTING_RUNTIME_REQUIRED")
         with Path(args.request).open("rb") as source:
             request = decode_document(source.read(1024 * 1024 + 1))
-        return run(AuthorityRuntime(folder), request, sys.stdout)
+        with operation_lock(folder / "supervised-transport", "deployment", "supervisor"):
+            runtime = AuthorityRuntime(folder)
+            stream = io.StringIO()
+            try:
+                code = run(runtime, request, stream)
+            finally:
+                runtime.close_clients()
+            # cleanupが確定するまで成功応答をstdoutへ公開しない。
+            sys.stdout.write(stream.getvalue())
+            sys.stdout.flush()
+            return code
     except Exception:
         try:
             print(json.dumps({"schema_version": 1, "kind": "ci_client_error",

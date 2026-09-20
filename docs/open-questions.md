@@ -2,11 +2,15 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: draft
-last_reviewed_at: 2026-09-12
-next_review_due: 2026-10-12
+last_reviewed_at: 2026-09-15
+next_review_due: 2026-10-15
 ---
 
 # 決定事項と残る設計事項
+
+2026-09-15現在: MVPの32条件は[技術検収済み](mvp-completion-audit.md)。以下の旧工程の設計・実装待ちは当時の記録として読む。次の改修は[拡張要件 v1](productization-requirements.md)に分離した。
+
+拡張M0で固定するのは、利用許可のある2repo・1評価対象、実利用集合と独立した期待結果、機材・版・測定manifestである。未選定の対象を架空の実績で埋めない。14件の製品受入は全NOT_RUN。CI成功方針、数値選定の委任、生成AIによる管理、非掲載指定は維持し、再承認待ちへ戻さない。新しい性能数値は目標案であり、既存契約の上限や検出閾値の変更ではない。
 
 [baseline更新](baseline-refresh-detail-spec.md)は固定contract 2・同条件で1→2まで実装した。基準2を参照する後続契約と対象・条件を変える更新は引き続き未完了である。
 

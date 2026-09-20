@@ -1,0 +1,15 @@
+{
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "implementation_files_changed_since_snapshot": [],
+  "kind": "local_static_review",
+  "prior_mvp_evidence_changed_count": 0,
+  "prior_mvp_evidence_files_checked": 559,
+  "private_identifier_content_occurrences": 0,
+  "private_identifier_filename_occurrences": 0,
+  "private_identifier_scan_scope": "Git inventory filenames and UTF-8 text files; .ga and .git excluded",
+  "python_files_parsed": 318,
+  "schema_version": 1,
+  "source_id": "source-v5",
+  "test_count": 1244
+}

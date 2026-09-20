@@ -1,0 +1,19 @@
+{
+  "test": "normal_cli_800_resume_outputs_ci_and_baseline_refresh",
+  "tests_run": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "elapsed_seconds": 7359.23,
+  "source_matches_interrupted_run": true,
+  "source_unchanged": true,
+  "changed_files": [],
+  "checkpoint_sha256": "fab43c56d8a47a1e3ee2f82fc54d17a716ea771661ed08157cd7ddf2a45bd6ba",
+  "checkpoint": "partitioned-transition-journey-v5-linux/boundary-6.sqlite",
+  "worker_kind": "inprocess_fixed_worker",
+  "docker_verified": false,
+  "completed_entries": {
+    "partitioned-llm-normal-v2": 800
+  }
+}

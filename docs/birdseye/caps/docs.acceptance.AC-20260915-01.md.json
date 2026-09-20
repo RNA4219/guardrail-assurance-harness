@@ -1,0 +1,25 @@
+{
+  "id": "docs/acceptance/AC-20260915-01.md",
+  "role": "acceptance",
+  "title": "Acceptance: MVP後の拡張要件作成",
+  "summary": "[Task](../tasks/TASK.productization-requirements-09-15-2026.md)の要件文書作成。製品機能・性能・実案件の有用性・GitHub公開の受入は含まない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/reviews/productization-requirements-20260915.md",
+    "docs/tasks/TASK.productization-requirements-09-15-2026.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/INDEX.md",
+    "docs/tasks/README.md",
+    "docs/tasks/TASK.productization-requirements-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "482ff6c7f5cceae2fc378c811bf5a63e1e5ad5e97ccdbc32faa13ac28458a782"
+}

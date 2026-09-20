@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "ci_reason_preservation_evidence",
+  "created_at": "2026-09-20",
+  "scope": {
+    "source": "src/gah/regression_runs.py",
+    "tests": ["tests/test_ci_reason_preservation.py", "tests/test_run_cancellation.py"],
+    "docker_started": false
+  },
+  "cause": "transition_acceptance._check_source performs integrity, closure, operation, and expiry checks before representing evidence revocation as SOURCE_NOT_READY. The CI wrapper must preserve EVIDENCE_REVOKED only for that verified terminal condition; earlier integrity failures must remain authoritative and must not cause a read of potentially malformed source shape.",
+  "implementation": {
+    "revocation": "ci_check catches only SOURCE_NOT_READY for the narrow revocation translation. The code check now precedes reads of source.reasons/evidence_states; verified revocation maps to EVIDENCE_REVOKED, while other errors re-raise unchanged.",
+    "cancellation": "When no terminal cancellation receipt exists, ci_check reads the cancelled marker only to select an exceptional path. A cancelled marker is not proof: request/manifest matching and run_cancellation._stopped perform the full stop check. STOP_UNCONFIRMED remains incomplete (exit 2), and stopped-but-unfinalized remains NOT_FINALIZED. Normal non-cancelled CI does not scan the full resource snapshot.",
+    "exit_semantics": "EVIDENCE_REVOKED is a completed rejection (exit 1, use=false); STOP_UNCONFIRMED is an incomplete gate (exit 2, use=false). Existing finalized cancellation handling remains receipt-gated (exit 3)."
+  },
+  "validation": {
+    "current_source_lightweight_test": {
+      "command": "python -E -B -X utf8 -m unittest tests.test_ci_reason_preservation.CIErrorOrderingUnitTests.test_earlier_source_error_does_not_inspect_source_shape",
+      "result": "PASS",
+      "tests_run": 1,
+      "duration_seconds": 0.020,
+      "checks": "A source whose .get() raises is supplied; SOURCE_BINDING_MISMATCH remains EVIDENCE_UNAVAILABLE/exit 2 and source shape is not inspected.",
+      "note": "Two initial attempts failed due to test-fixture construction issues (late-import patch target, then missing bound field); fixture was corrected and the final explicit test passed."
+    },
+    "prior_real_database_tests": [
+      {
+        "test": "tests.test_ci_reason_preservation.CIReasonPreservationTests.test_verified_revocation_reason_and_integrity_error_precedence",
+        "result": "PASS",
+        "tests_run": 1,
+        "duration_seconds": 93.442,
+        "captured_source_sha256": null,
+        "source_note": "Observed in prior tool stdout before the guard-order-only correction; exact regression_runs.py hash was not retained. This is not a result for the latest source."
+      },
+      {
+        "test": "tests.test_run_cancellation.RunCancellationTests.test_stopping_and_late_settlement_keep_reservation_and_receipt",
+        "result": "PASS",
+        "tests_run": 1,
+        "duration_seconds": 97.134,
+        "captured_source_sha256": "f12409ac49bd94ce51a7872ee78705cae49dd73a4b663e4775052a24d9bcc8c3",
+        "test_file_sha256": "213d8a5be239e5157b1fd20ef27b2b204e26834c5f825dab7bce4c61c3e565053",
+        "source_note": "Observed in prior tool stdout before the guard-order-only correction. Not a result for the latest source."
+      }
+    ],
+    "current_source_full_database_suite": "NOT_RUN",
+    "current_hashes": {
+      "src/gah/regression_runs.py": "ccb8799b0b521e03cc2d00660cc34d4be795206b15d792f4780213adc7d267e3",
+      "tests/test_ci_reason_preservation.py": "58d6f76ac499894f5d65079372dbdad64d638ac947612c7ec7be9ccc4b5ea7a8",
+      "tests/test_run_cancellation.py": "213d8a5be239e5157b1fd20ef27b2b204e26834c5f825dab7bce4c61c3e565053"
+    },
+    "syntax": "ast.parse succeeded for all three current Python files.",
+    "limitations": [
+      "The two real-database results are prior executions and are not re-certified against the latest source.",
+      "No full regression suite or Docker run was performed for this order-only correction.",
+      "The public evidence records prior stdout-derived test counts and durations; no saved raw test log artifact was available."
+    ]
+  }
+}

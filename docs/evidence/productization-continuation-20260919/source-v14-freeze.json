@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "kind": "verification_source_freeze",
+  "source_id": "source-v14",
+  "manifest_sha256": "cbc446ebab9adb27ed7deb79491a4d8e6e65a189d67cbe8237e5eccda097fd7d",
+  "file_count": 1831,
+  "total_bytes": 39756389,
+  "python_ast_files": 552,
+  "copy_hashes_verified": true,
+  "extension_digest": "e2822871573b63fd5a7e20aff153839f96adb93f7aa473d94d96a005925a320f",
+  "authority_image_id": "sha256:9613fcdd4c53cf4a1a8eb14b6b5b79d50b9a50dbc615827612ff05bbf53e51c9",
+  "authority_lock_sha256": "494117cfcfb3f68b4f466cab1807c68ba2d865ccc153e3e7d4e5b57707f0375a",
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "docker_executed": false
+}

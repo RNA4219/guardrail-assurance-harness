@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "normal_seed_v9_failure_parent_record",
+  "status": "INCOMPLETE",
+  "created_at": "2026-09-19T22:16:42.233781+00:00",
+  "source_id": "source-v9",
+  "source_manifest_sha256": "8a8a4202549fe12f9a0b69753b5c92a387645f4be40cdd65330fd2722a29eb35",
+  "source_files": 1749,
+  "source_unchanged": true,
+  "driver_sha256": "56d2c863383c1df024cfe4bd46883376f11b5dc241545150c92ecc5e480791bf",
+  "plan_sha256": "b19b1a4636411626976123947c7d78278bc161d3ceee998c37101347b325c36a",
+  "local_result_sha256": "9b579ecf4c6d7bfe1f515ce400ee074e97221875d1f8cdce09f3a916b9290273",
+  "log_sha256": "c87ce7e0fc87e3c1517a3fbfaedb56dcda2550afac7212e1ba00e0272b4ebc94",
+  "log_bytes": 1916,
+  "container_exit_code": 1,
+  "root_failure": "GUARDRAIL_RUNTIME_MISMATCH",
+  "host_summary_failure": "SNAPSHOT_SET_INVALID",
+  "guardrail_source_lock_drift": {
+    "src/gah/corpus.py": {
+      "expected": "83b9f7925f7176d81db5e4fe3d85b5169f66f900de84f67b5ebb1f59958537da",
+      "actual": "2a108aebf2cc0820e105d99cf6d7cf9617f027373cda682bf1550d5c26ee02b7"
+    }
+  },
+  "cleanup": {
+    "cleanup_confirmed": true,
+    "post_remove_lookup": "SUCCEEDED_EMPTY",
+    "rm_returncode": 0,
+    "state": "REMOVED"
+  },
+  "container_id": "7d413f00ae0ffd15db433919f9b8b41041c63c9726e5c2de6b2c0c438790ce3e",
+  "image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "normal_operations": 0,
+  "normal_seed_created": false,
+  "performance_comparison_performed": false,
+  "acceptance_pass": false,
+  "explanation": "Source file pin preflight passed, but stale guardrail runtime lock rejected fixture setup. No normal seed was produced. Runtime must be legitimately rebuilt with a new source snapshot; frozen source-v9 is retained unchanged."
+}

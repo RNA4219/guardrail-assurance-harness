@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "partition_binding_parent_verification",
+  "id": "partition-binding-parent-v1",
+  "exit_code": 0,
+  "tests_run": 38,
+  "unittest_seconds": "4.192",
+  "wall_seconds": 4.437,
+  "modules": [
+    "tests.test_partitioned_run_contracts",
+    "tests.test_partitioned_trial_plan",
+    "tests.test_run_contracts",
+    "tests.test_run_binding_validation_reuse",
+    "tests.test_copy_hotpath"
+  ],
+  "source_sha256": {
+    "src/gah/partitioned_run_contracts.py": "eb38f37271ee0bfef65a4650059d767d31b1a987cf2506f44b17544821a20988",
+    "tests/test_partitioned_run_contracts.py": "29ddb26cdbc0059fccce09a215af44c1ef7d498e87d7cd5a0d111598ded89d9d",
+    "src/gah/partitioned_trial_plan.py": "718930ba2d7ffe2c31c7b595d92fbbef7e77446927db7f1a54fad1755ba438b7",
+    "src/gah/run_contracts.py": "8188fee6e7206e56e67a2d646452c3b87e1b06494d2a4ba7e73b501739c4612d"
+  },
+  "source_unchanged": true,
+  "tests_log_sha256": "48cc7156d81fcb007b769f94eccd685c50e0b9c3557a69151a55626f647c353d",
+  "parent_finding": {
+    "before_fix": "contract.case_set_ref mismatch was accepted after outer refs were rebound",
+    "after_fix": "contract policy/registry/case_set refs each matched against actual content; three resigned negatives rejected with REFERENCE_MISMATCH"
+  },
+  "coverage": [
+    "1600 distinct cases within v1 CaseSet byte bound; 3200 baseline/candidate entries above 1MiB",
+    "global restore validation, closed ref-only output, original content refs",
+    "missing baseline/whole case rejected with exact semantic codes",
+    "14 purpose/profile/baseline/deadline conditions matched v1 for consistent contract refs",
+    "input/return isolation and retained v1 wire rejection"
+  ],
+  "authority_or_runtime_integration": false,
+  "full_source_v8_regression_includes_change": false,
+  "acceptance_pass": false,
+  "ci_eligible": false,
+  "tests_passed": 38
+}

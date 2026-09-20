@@ -44,7 +44,6 @@ _REF_KINDS = {
     "case_set_ref": "case_set",
     "repeat_config_ref": "repeat_config",
     "source_run_ref": "run_manifest",
-    "trial_plan_ref": "trial_plan",
     "decision_ref": "run_decision",
     "resource_closure_ref": "resource_closure",
     "comparison_context_ref": "comparison_context",
@@ -132,7 +131,7 @@ def validate_baseline_record(value: Any) -> dict[str, Any]:
     """`kind=baseline` の不変候補を検査し、入力を変更せずdeep copyを返す。"""
     try:
         _strict_object(value, _RECORD_FIELDS)
-        if value["schema_version"] != 1 or type(value["schema_version"]) is not int:
+        if type(value["schema_version"]) is not int or value["schema_version"] not in {1, 2}:
             raise _bad("UNSUPPORTED_VERSION")
         if value["kind"] != "baseline":
             raise _bad("INVALID_KIND")
@@ -142,6 +141,8 @@ def validate_baseline_record(value: Any) -> dict[str, Any]:
             raise _bad("INVALID_GENERATION")
         for field, kind in _REF_KINDS.items():
             _ref(value[field], kind)
+        expected_plan_kind = "trial_plan" if value["schema_version"] == 1 else "trial_plan_index"
+        _ref(value["trial_plan_ref"], expected_plan_kind)
         for field, kind in _LIST_KINDS.items():
             _refs(value[field], kind)
         if type(value["created_at"]) is not int or not 0 <= value["created_at"] <= MAX_INTEGER:
@@ -162,7 +163,7 @@ def validate_comparison_context(value: Any) -> dict[str, Any]:
     """比較条件の固定構造を検査する。差分軸は初期実装ではtargetだけ許す。"""
     try:
         _strict_object(value, _CONTEXT_FIELDS)
-        if type(value["schema_version"]) is not int or value["schema_version"] != 1:
+        if type(value["schema_version"]) is not int or value["schema_version"] not in {1, 2}:
             raise _bad("UNSUPPORTED_VERSION")
         if value["kind"] != "comparison_context":
             raise _bad("INVALID_KIND")
@@ -269,11 +270,35 @@ def _bound_object(bound_run: Any, name: str) -> Any:
     return bound_run[name]
 
 
-def repeat_config_for_plan(plan: dict[str, Any]) -> dict[str, Any]:
-    """反復は保存Planの全trialで固定し、別の自己申告設定を作らない。"""
-    plan_ref = _canonical_ref("trial_plan", plan["plan_id"], plan)
-    return {"schema_version": 1, "kind": "repeat_config",
-            "repeat_config_id": "repeat-" + plan_ref["digest"], "plan_ref": plan_ref}
+def repeat_config_for_plan(plan: dict[str, Any], *, partitioned_context: Any = None,
+                           baseline_context: Any = None) -> dict[str, Any]:
+    """計画全体へ結ぶ。v2では認証済みpartition contextのindex refを使う。"""
+    if partitioned_context is None:
+        plan_ref = _canonical_ref("trial_plan", plan["plan_id"], plan)
+        return {"schema_version": 1, "kind": "repeat_config",
+                "repeat_config_id": "repeat-" + plan_ref["digest"], "plan_ref": plan_ref}
+    try:
+        from .partitioned_run_contracts import validate_partitioned_runtime
+        if (type(partitioned_context) is dict and set(partitioned_context) == {"bound_run", "baseline_context"}):
+            runtime_bound = partitioned_context["bound_run"]
+            baseline_context = partitioned_context["baseline_context"]
+        else:
+            runtime_bound = partitioned_context
+        validated = validate_partitioned_runtime(runtime_bound, baseline_context=baseline_context)
+        manifest = validated["manifest"]
+        checked_plan = validated["plan"]
+        plan_ref = deepcopy(manifest["plan_ref"])
+        _ref(plan_ref, "trial_plan_index")
+        if checked_plan != plan or checked_plan["plan_id"] != plan_ref["id"]:
+            raise _bad("PLAN_BINDING_MISMATCH")
+        repeat = {"schema_version": 2, "kind": "repeat_config",
+                  "repeat_config_id": "repeat-" + plan_ref["digest"], "plan_ref": plan_ref}
+        _canonical_ref("repeat_config", repeat["repeat_config_id"], repeat)
+        return repeat
+    except ContractError:
+        raise
+    except (KeyError, TypeError, ValueError, RecursionError):
+        raise _bad("PLAN_BINDING_MISMATCH") from None
 
 
 def _unique_refs_in_cases(case_set: dict[str, Any]) -> list[dict[str, str]]:
@@ -297,7 +322,8 @@ def _unique_refs_in_cases(case_set: dict[str, Any]) -> list[dict[str, str]]:
 
 def bind_baseline_record(record: Any, *, bound_run: Any, decision: Any,
                          evidences: Any, closure: Any, now: int,
-                         evidence_states: Any = None) -> dict[str, Any]:
+                         evidence_states: Any = None,
+                         baseline_context: Any = None) -> dict[str, Any]:
     """保存済み実体の代わりに渡された構造化値を一度だけ照合する。
 
     実際のauthority接続、OS主体、保存状態、撤回世代は検査できないため、返却値の
@@ -322,24 +348,74 @@ def bind_baseline_record(record: Any, *, bound_run: Any, decision: Any,
                            (plan, "plan_id")):
             if type(obj) is not dict or type(obj.get(ident)) is not str:
                 raise _bad("BINDING_INPUT_INVALID")
-        rebound = bind_run_manifest(
-            manifest, contract, plan, policy, registry, case_set,
-            baseline_context=bound_run.get("baseline_context"),
-        )
+        partitioned = bound_record["schema_version"] == 2
+        if type(context.get("schema_version")) is not int or context["schema_version"] != bound_record["schema_version"]:
+            raise _bad("SCHEMA_VERSION_MISMATCH")
         core_fields = ("manifest", "contract", "plan", "policy", "registry",
                        "case_set", "selected_controls", "ci_eligible")
-        if any(bound_run.get(field) != rebound[field] for field in core_fields):
-            raise _bad("BINDING_MISMATCH")
-        # reboundはこの呼出しで生成した独立値。hash計算は本文を変更しない。
-        core_bound = {field: rebound[field] for field in core_fields}
-        bound_bundle_ref = _canonical_ref("bound_bundle", manifest["run_id"], core_bound)
+        if partitioned:
+            from .partitioned_run_contracts import validate_partitioned_runtime
+            try:
+                runtime_fields = set(core_fields) | {"_partitioned_context", "_partitioned_receipt"}
+                if not runtime_fields.issubset(bound_run):
+                    raise _bad("BINDING_INPUT_INVALID")
+                runtime_input = {field: bound_run[field] for field in runtime_fields}
+                rebound = validate_partitioned_runtime(
+                    runtime_input, baseline_context=baseline_context
+                )
+            except ContractError as exc:
+                raise _bad(getattr(exc, "code", "BINDING_MISMATCH")) from None
+            if (type(bound_run.get("_partitioned_context")) is not dict
+                    or type(bound_run.get("_partitioned_receipt")) is not dict
+                    or type(rebound.get("_partitioned_context")) is not dict
+                    or type(rebound.get("_partitioned_receipt")) is not dict):
+                raise _bad("BINDING_INPUT_INVALID")
+            if any(bound_run.get(field) != rebound.get(field) for field in core_fields):
+                raise _bad("BINDING_MISMATCH")
+            partitioned_context = rebound["_partitioned_context"]
+            expected_context_fields = {"manifest", "contract", "index", "segments", "policy", "registry", "case_set"}
+            if set(partitioned_context) != expected_context_fields:
+                raise _bad("BINDING_INPUT_INVALID")
+            index = partitioned_context["index"]
+            index_ref = _canonical_ref("trial_plan_index", plan["plan_id"], index)
+            if (manifest.get("schema_version") != 2 or manifest.get("plan_ref") != index_ref
+                    or bound_record["trial_plan_ref"] != index_ref):
+                raise _bad("PLAN_REFERENCE_MISMATCH")
+            from . import run_evidence
+            storage_document = run_evidence.bound_storage_document(
+                rebound, baseline_context=baseline_context
+            )
+            bound_bundle_ref = _canonical_ref("bound_bundle", manifest["run_id"], storage_document)
+        else:
+            if baseline_context is not None:
+                raise _bad("SCHEMA_VERSION_MISMATCH")
+            rebound = bind_run_manifest(
+                manifest, contract, plan, policy, registry, case_set,
+                baseline_context=bound_run.get("baseline_context"),
+            )
+            if any(bound_run.get(field) != rebound[field] for field in core_fields):
+                raise _bad("BINDING_MISMATCH")
+            core_bound = {field: rebound[field] for field in core_fields}
+            bound_bundle_ref = _canonical_ref("bound_bundle", manifest["run_id"], core_bound)
         _check_ref_content(bound_record["contract_ref"], "evaluation_contract", contract["contract_id"], contract)
         _check_ref_content(bound_record["policy_ref"], "policy_profile", policy["policy_id"], policy)
         _check_ref_content(bound_record["registry_ref"], "control_registry", registry["registry_id"], registry)
         _check_ref_content(bound_record["case_set_ref"], "case_set", case_set["case_set_id"], case_set)
-        _check_ref_content(bound_record["trial_plan_ref"], "trial_plan", plan["plan_id"], plan)
+        if not partitioned:
+            _check_ref_content(bound_record["trial_plan_ref"], "trial_plan", plan["plan_id"], plan)
         repeat_config = _bound_object(bound_run, "repeat_config")
-        if repeat_config != repeat_config_for_plan(plan):
+        if partitioned:
+            expected_repeat_config = repeat_config_for_plan(
+                plan, partitioned_context={
+                    "bound_run": rebound,
+                    "baseline_context": baseline_context,
+                }, baseline_context=baseline_context
+            )
+            if (type(repeat_config) is not dict or repeat_config != expected_repeat_config
+                    or repeat_config.get("schema_version") != 2
+                    or repeat_config.get("plan_ref") != manifest["plan_ref"]):
+                raise _bad("BINDING_INPUT_INVALID")
+        elif repeat_config != repeat_config_for_plan(plan):
             raise _bad("BINDING_INPUT_INVALID")
         _check_ref_content(bound_record["repeat_config_ref"], "repeat_config",
                            repeat_config["repeat_config_id"], repeat_config)

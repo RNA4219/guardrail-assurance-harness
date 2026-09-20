@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "partitioned_corpus_design_review",
+  "status": "REVIEW_COMPLETE",
+  "model": "qwen3.8-flash-next",
+  "elapsed_seconds": 11.578,
+  "request_sha256": "f8df6a8bae59cf1c82b051933762722a7f684246e59e6f51003f1496c1515a60",
+  "response_sha256": "6a18e851b417962b7115c31e70ce2aafaab586bd57ca20c0e1158a039c7130f1",
+  "specification_sha256": "dfa6f92d7abfcc8e3c857c67cb8b0348e22f4e3c836f898d4edd74555c3c0b21",
+  "accepted": [
+    "CaseSet参照を含む契約より前にcorpusを確定する順序",
+    "全segmentの順序・digest・意味検証とcommitの原子性",
+    "未commit uploadの評価利用禁止",
+    "400/800/1600の系列と観測結果の分離"
+  ],
+  "deferred": [
+    "規模別の実測上限・timeout確定はwhole-run計測後。未測定値を性能保証にしない。"
+  ],
+  "parent_corrections": [
+    "staging削除後も保持するcommitted segment専用表を追加",
+    "commits.upload_idを保持して成功commitのACK喪失後もfresh再送を照合",
+    "輸送bodyを固定producer出力のcanonical bytesへ照合",
+    "read本文keyをartifactへ固定"
+  ],
+  "implementation_tested": false,
+  "runtime_verified": false,
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "limits": [
+    "モデルの提案は設計補助であり、認証・採択・製品性能・受入の証拠ではない。",
+    "新規v7 DBのprovisioning実装を進める段階。明示移行・LLM materializer・gen2通常runは未接続。"
+  ]
+}

@@ -53,6 +53,21 @@ finalizeは、resource runが閉鎖され、未停止・未精算・予算超過
 確認する。保存Attemptとoriginから診断Decisionを再計算し、Manifest、bundle、Decision、
 resource closure、Evidenceの内容参照をauthority内へ保存する。
 
+予算警告は閉鎖・精算済みsnapshotの累積値から求める。対象はelapsed_seconds、
+case_trial_executions、model_calls、total_tokens、api_cost_usd_microsの5軸とし、
+採択したPolicyProfileのwarning_usage_min（初期値4/5）以上を整数の積で比較する。
+経過時間はresource runのcreated_atからclosed_atまで。並列数・個別call上限はこの警告に含めない。
+HOLD・DEGRADED・UNKNOWNはWARNINGに優先し、未停止・未精算・取消しを警告だけで許可しない。
+
+新規のauthority Decisionはbudget_warning根拠を同じtransactionで不変保存する。
+根拠はschema_version=1、kind=run_budget_warning_basis、run_id、manifest_ref、policy_ref、
+profile、started_at、closed_at、usage、limits、warning_usage_minの11項目。
+usage/limitsは上記5軸。保存時刻・内容参照・採択済み上限と閾値を照合し、
+receipt読取時には保存closureと開始時刻にも照合する。過去Decisionの再計算は保存根拠を使い、
+後日のlive snapshotを混入させない。現在CIの利用可否は別途live資源状態・撤回・鮮度から判定する。
+独立RunEvidenceStoreの診断呼出しでは根拠省略を従来どおり許すが、通常authorityの新規finalizeは必ず渡す。
+再送で異なる根拠を指定した場合はBUDGET_WARNING_MISMATCHとして拒否する。
+
 Evidenceは初回baseline候補ならbaseline_comparison、その他ならnormal用途を作成時に固定する。
 元の観測時刻から30日または24時間、保持は90日を上限とし、取得し直した時刻で期限を延長しない。
 保存したEvidenceと関連artifactの参照先、本文、digest、run、元のDecisionを再照合する。

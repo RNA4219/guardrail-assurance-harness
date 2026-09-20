@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "INCOMPLETE",
+  "reason": "EMBEDDED_BOOTSTRAP_SYNTAX_ERROR",
+  "reported_reason": "SNAPSHOT_SET_INVALID",
+  "cause": "埋込BOOTSTRAPのruntime-lock辞書でauthority keyが欠落。外側driverのAST検査だけでは検出できず、製品処理開始前に終了した。",
+  "source_manifest_sha256": "cea9fd9e7e10b0ad6b75f1ecb2876b160469a17b603ce6f625a52f62b24181d9",
+  "driver_sha256": "e86b81e3a1399866afb4a9347b300b46b7730f74d74f70fce1adf3b0e9911461",
+  "plan_sha256": "baf7778567828baae1c677417415950ec6ce56df3ae6da8e73a89d1a08cd9d29",
+  "result_sha256": "a162081a8d12f52faa9c14190cb866f0b88a807f1be50a5cc4f8007cd9ac6f8a",
+  "log_sha256": "a901a22d20ff4d6bded2d033b675bf075fc12ba03a7152bb7fd53babd1397a53",
+  "cleanup_confirmed": true,
+  "container_exit_code": 1,
+  "seed_completed": false,
+  "product_execution_started": false,
+  "ci_eligible": false,
+  "full_pac_acceptance": false,
+  "correction": "別stage v2で辞書keyを修正。外側と埋込scriptのAST双方を確認してから再実行する。"
+}

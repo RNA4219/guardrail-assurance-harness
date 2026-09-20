@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "kind": "verification_source_freeze",
+  "source_id": "source-v15",
+  "manifest_sha256": "f7df1e45eb2c5cb89910d583053ac7efbc49754f573d6b8324aa5953913fa029",
+  "file_count": 1844,
+  "total_bytes": 39871647,
+  "extension_digest": "907111e1b6a07596133cec842a026ab51b75dec74262f719d3b8687ebcb7e00a",
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

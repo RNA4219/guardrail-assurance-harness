@@ -1,0 +1,278 @@
+{
+  "audit_id": "capacity-first-run-bound-v2",
+  "derived_reservation": {
+    "docker_engineering_reserve": "Separately propose 768 MiB on proven Docker backing FS: 256 MiB state DB + 256 MiB journal engineering reserve + 256 MiB margin. Existing statvfs sees container scope only.",
+    "host_engineering_reserve": "15*256 MiB roots + 5*(256 MiB main DB + proposed 256 MiB rollback journal reserve) + 256 MiB free-space margin = 6.5 GiB, conditional on all paths sharing the measured filesystem. Per-DB journal reserve is not a SQLite guarantee.",
+    "main_sqlite_plus_first_run": {
+      "bytes": 1342177280,
+      "dbs": 5,
+      "gib": 1.25
+    },
+    "multiple_fs": "Resolve each fixed path to filesystem identity and aggregate required bytes by that device; workspace root free bytes alone cannot justify the sum.",
+    "not_a_reservation": "Preflight does not reserve physical blocks. External consumption can still produce ENOSPC/SQLITE_FULL; safe incomplete/fail-closed handling is a separate property.",
+    "roots_plus_first_run": {
+      "bytes": 4026531840,
+      "gib": 3.75,
+      "roots": 15
+    }
+  },
+  "first_normal_run": {
+    "authority": "No further volume or DB path: embedded CI gate and standalone tools/gah_ci.py append/query the same authority.sqlite on state volume; standalone gah_ci only emits stdout locally.",
+    "counts": {
+      "sample-ci": {
+        "cumulative_lock_files": 96,
+        "cumulative_operations": 90,
+        "new_metric_files_max": 30,
+        "new_runner_locks_max": 30,
+        "normal_operations": 30,
+        "outer_supervisor_locks": 1,
+        "stages": 30
+      },
+      "sample-llm": {
+        "cumulative_lock_files": 2406,
+        "cumulative_operations": 2400,
+        "new_metric_files_max": 800,
+        "new_runner_locks_max": 800,
+        "normal_operations": 800,
+        "outer_supervisor_locks": 1,
+        "stages": 1200
+      }
+    },
+    "entrypoint": "tools/gah_run.py --setup-plan <completed plan> run",
+    "new_db": {
+      "main_cap_bytes": 268435456,
+      "path": ".ga/runtime/<setup_id>/supervised/<sha256(run_id)>/execution.sqlite",
+      "writer": "DockerRunner/GuardrailRunner -> ExecutionJournal -> connect_sqlite"
+    },
+    "new_roots": [
+      {
+        "cap_bytes": 268435456,
+        "path": ".ga/runtime/<setup_id>/supervised/<sha256(run_id)>/checkpoints",
+        "writer": "gah_run.execute -> Checkpoint"
+      },
+      {
+        "cap_bytes": 268435456,
+        "path": ".ga/runtime/<setup_id>/supervised/<sha256(run_id)>/execution.sqlite.worker-metrics",
+        "writer": "DockerRunner._record_worker_metrics -> WorkerMetricsJournal.save -> write_bounded"
+      }
+    ],
+    "path": "tools/setup_request.resolve -> .ga/runtime/<setup_id>/supervised/<sha256(run_id)>; setup apply writes run_prepare and request files only. It does not execute normal trials; setup result explicitly current_ci_checked=false."
+  },
+  "kind": "fixed_setup_first_run_capacity_bound_design",
+  "local_artifact_sha256": "26ae87a06dd86d2218abf6f956a72e83e4a2f8117b12cdb4c875e8d64785173b",
+  "minimal_closure": [
+    "Keep bound_verified=false; add an explicit bounded retry count including clock failures.",
+    "Derive and enforce per-writer maxima from fixed plan entries/stages and serialized lengths; reserve temp and in-flight bytes before write.",
+    "Resolve every host root/SQLite DB to actual filesystem and enforce/project-quota or isolated bounded filesystem over roots, main DBs, journals, and lock sidecars.",
+    "Obtain Docker-backend-specific quota/free capacity for the actual state volume backing store; do not substitute in-container statvfs.",
+    "Use a bounded filesystem/quota fixture to inject SQLITE_FULL/ENOSPC and verify no success receipt, immutable old bytes retained, incomplete state retained, replay stable.",
+    "Keep logical cap, preflight observation, physical bound, and post-observation ENOSPC safety as separate claims."
+  ],
+  "profile_estimates": {
+    "caveat": "LLM stage counts are 600/600/1200/1200 while runner-call counts are 400/400/800/800. This is intentionally conservative as an estimate but not measured or enforced per writer.",
+    "formula": "tools/setup_capacity.py uses 32*1 MiB documents*SQLite factor 2 per stage, 1 GiB management, 4-stage reserve, plus 256 MiB doctor margin. Formula is not tied to writer reservations and bound_verified=false.",
+    "sample-ci": {
+      "counts": [
+        15,
+        15,
+        30,
+        30
+      ],
+      "doctor_margin_bytes": 268435456,
+      "remaining_bytes": 7113531392,
+      "required_bytes": 7650410496,
+      "required_gib": 7.125,
+      "reserve_bytes": 268435456
+    },
+    "sample-llm": {
+      "counts": [
+        600,
+        600,
+        1200,
+        1200
+      ],
+      "doctor_margin_bytes": 268435456,
+      "remaining_bytes": 242665218048,
+      "required_bytes": 243202236416,
+      "required_gib": 226.5,
+      "reserve_bytes": 268435456
+    }
+  },
+  "retry": {
+    "finite_count_caveat": "Authority clock-rejection files have UUID names; each client invocation may add up to two. Repeating the same request through arbitrarily many clock failures can create distinct sidecars; aggregate directory cap/entry limit fail closed, but no fixed per-request retry counter bounds that path.",
+    "incomplete": "Partial checkpoint/temp/DB state is retained and counts against caps; no cleanup/reset assumed.",
+    "same_request": "Stable operation journal/checkpoint keys, same run folder/DB, same operation lock names; successful immutable artifacts replay by identical bytes and do not create another root/database."
+  },
+  "schema_version": 1,
+  "scope": {
+    "excluded": [
+      "image build/pull/preparation",
+      "unrelated workspaces/tools",
+      "concurrent external writers",
+      "later arbitrary runs"
+    ],
+    "operation": "one setup apply for one new plan plus its first normal gah_run --setup-plan run; selected profile is sample-ci OR sample-llm",
+    "product_files_changed": false,
+    "read_only_audit": true,
+    "retry": "same request/run identities; successful immutable replay reuses same paths"
+  },
+  "setup_apply": {
+    "bounded_roots": {
+      "cap_each_bytes": 268435456,
+      "count": 13,
+      "limits": "256 MiB/direct root; 65,536 entries; 1 MiB/document; temporary publication and root lock sidecar count against root. Nested roots are separate caps, not aggregated.",
+      "paths": [
+        ".ga/operations/capacity",
+        ".ga/operations/setup/<setup_id>",
+        ".ga/operations/setup/<setup_id>/metadata",
+        ".ga/operations/setup/<setup_id>/steps",
+        ".ga/operations/setup/<setup_id>/initial/initial-checkpoints",
+        ".ga/operations/setup/<setup_id>/candidate-old/initial-checkpoints",
+        ".ga/operations/setup/<setup_id>/candidate-new/initial-checkpoints",
+        ".ga/runtime/<setup_id>",
+        ".ga/runtime/<setup_id>/clock-rejections",
+        ".ga/setup/<setup_id>",
+        ".ga/operations/setup/<setup_id>/initial/execution.sqlite.worker-metrics",
+        ".ga/operations/setup/<setup_id>/candidate-old/execution.sqlite.worker-metrics",
+        ".ga/operations/setup/<setup_id>/candidate-new/execution.sqlite.worker-metrics"
+      ],
+      "sum_cap_bytes": 3489660928,
+      "sum_cap_gib": 3.25
+    },
+    "docker": {
+      "inspect": "Owner/name/local driver is checked; no quota is set. In-container /state statvfs does not prove host DockerRootDir or Docker Desktop/WSL VHDX backing free space.",
+      "paths": [
+        "<prefix>-state -> /state/authority.sqlite via tools/authority_entry.py and gah.adoption.AdoptionStore; main DB 256 MiB cap",
+        "<prefix>-ipc -> transient fixed /ipc/authority.sock"
+      ],
+      "volumes": 2
+    },
+    "entrypoints": [
+      "tools/gah_ops.py setup apply",
+      "tools/setup_apply.py:96 execute_contract_setup",
+      "tools/setup_apply.py:246-327 apply"
+    ],
+    "lock_files": {
+      "counts": {
+        "note": "operation_lock keys are stable on replay but sibling lock files are outside write_bounded root byte accounting.",
+        "sample-ci": {
+          "outer_setup_baseline_candidate_apply_transport": 5,
+          "runner": 60,
+          "total": 65
+        },
+        "sample-llm": {
+          "outer_setup_baseline_candidate_apply_transport": 5,
+          "runner": 1600,
+          "total": 1605
+        }
+      },
+      "source": "src/gah/docker_runner.py:43-70"
+    },
+    "ordering": "setup apply opens journal and writes identity/outputs-initially-absent checkpoint before capacity_profile/bootstrap doctor. Preflight precedes images/volume/adoption/sample execution, not all setup writes.",
+    "runner_counts": {
+      "sample-ci": {
+        "operations": {
+          "initial": 15,
+          "new": 30,
+          "old": 15,
+          "total": 60
+        },
+        "stages": {
+          "initial": 15,
+          "new": 30,
+          "old": 15,
+          "total": 60
+        }
+      },
+      "sample-llm": {
+        "note": "plan entries/runner calls differ from worker stages; 400/400/800 is lock/DB-operation count, 600/600/1200 is stage count",
+        "operations": {
+          "initial": 400,
+          "new": 800,
+          "old": 400,
+          "total": 1600
+        },
+        "stages": {
+          "initial": 600,
+          "new": 1200,
+          "old": 600,
+          "total": 2400
+        }
+      }
+    },
+    "sqlite": {
+      "cap_each_main_bytes": 268435456,
+      "count": 4,
+      "gap": "Main DB pages capped; DELETE rollback journal has no separate byte cap. MEMORY temp_store controls spill to disk but not peak RAM.",
+      "paths": [
+        ".ga/operations/setup/journal.sqlite",
+        ".ga/operations/setup/<setup_id>/initial/execution.sqlite",
+        ".ga/operations/setup/<setup_id>/candidate-old/execution.sqlite",
+        ".ga/operations/setup/<setup_id>/candidate-new/execution.sqlite"
+      ],
+      "settings": "src/gah/sqlite_limits.py reapplies/readbacks max_page_count per connection preserving page_size; DELETE journal, FULL synchronous, MEMORY temp. WAL and over-cap DB rejected without conversion.",
+      "sum_main_bytes": 1073741824
+    }
+  },
+  "sources": [
+    "tools/setup_apply.py:96-198,246-327",
+    "tools/setup_baseline.py:60-80,164-205,252-270",
+    "tools/setup_capacity.py:10-40",
+    "tools/gah_ops.py:144-159,178-187",
+    "tools/gah_run.py:16-33,72-105",
+    "tools/gah_ci.py:40-75",
+    "src/gah/supervised_run.py:312-373",
+    "src/gah/llm_supervised_run.py:15-50,155-193",
+    "src/gah/docker_runner.py:43-70,342-353,377-481",
+    "src/gah/supervisor_checkpoint.py:29-96",
+    "src/gah/bounded_files.py:11-13,157-224",
+    "src/gah/storage_budget.py:266-320,433-535",
+    "src/gah/sqlite_limits.py:6-82",
+    "src/gah/productization_journal.py:24-26",
+    "src/gah/execution_journal.py:338-350",
+    "tools/authority_entry.py:15,49-50; src/gah/adoption.py:238-300",
+    "tools/authority_runtime.py:264-275,300-320,366-375",
+    "tools/authority_storage_probe.py observe_authority_storage",
+    "docs/productization-operations-spec.md:260,273-283"
+  ],
+  "unproved": [
+    {
+      "gap": "Rollback-journal byte peak lacks strict filesystem quota or supported-SQLite worst-case transaction envelope.",
+      "id": "CAP-FR-01"
+    },
+    {
+      "gap": "No per-root filesystem/device identity; nested mounts can invalidate one-workspace-free-space aggregation.",
+      "id": "CAP-FR-02"
+    },
+    {
+      "gap": "Docker named volume inspect and in-container statvfs do not prove Docker Desktop/WSL VHDX or daemon backing capacity.",
+      "id": "CAP-FR-03"
+    },
+    {
+      "gap": "Capacity observation races concurrent consumption; ENOSPC behavior must be tested independently.",
+      "id": "CAP-FR-04"
+    },
+    {
+      "gap": "Unbounded repeated clock-rejection retries can add UUID sidecars up to aggregate root caps.",
+      "id": "CAP-FR-05"
+    },
+    {
+      "gap": "Stable runner operation-lock siblings are finite for one graph but outside bounded directory accounting.",
+      "id": "CAP-FR-06"
+    },
+    {
+      "gap": "Image acquisition is excluded by setup profile but included in PAC09 elapsed-time scope; setup apply only inspects existing locked images.",
+      "id": "CAP-FR-07"
+    }
+  ],
+  "verdict": {
+    "apply_only_host_roots": 13,
+    "apply_only_host_sqlite_dbs": 4,
+    "apply_plus_first_run_host_roots": 15,
+    "apply_plus_first_run_host_sqlite_dbs": 5,
+    "bound_verified_must_remain_false": true,
+    "fixed_graph_cardinality_finite": true,
+    "reason": "write_bounded caps each dedicated direct-directory logical root and SQLite max_page_count caps main DB pages. DELETE rollback-journal physical bytes have no separate quota/readback; host roots may be on separate mounts; Docker local volumes have no proven host backing quota; free space can be consumed after observation.",
+    "strict_physical_peak_bound_verified": false
+  }
+}

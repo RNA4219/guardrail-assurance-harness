@@ -1,0 +1,13 @@
+{
+  "base_image_id": "sha256:ec7d6c95cd3692a2e2d228a8b1ca74e4025b54121fcc4c5da6f09cfa473315ad",
+  "build_log_sha256": "73eeef3c2845d5cf446aca63804f438b604dbf6b9a399dcef9e23b0604464d11",
+  "full_productization_acceptance": false,
+  "image_id": "sha256:e59b43abdf23c1c2df5edda413820570436cd4d4a7f1214efb01884eff12b2d5",
+  "kind": "authority_runtime_refresh",
+  "lock_sha256": "83458bf02be08fd9eaa14dfe446aa34b918f145729e5b8d4fdb8de0161ae8ab7",
+  "passed": true,
+  "schema_version": 1,
+  "seconds": 1.828,
+  "source_unchanged": true,
+  "sources_digest": "74259bd63d2200804497ffa787e6034bf270cde12056749a2cb3b5b108041d53"
+}

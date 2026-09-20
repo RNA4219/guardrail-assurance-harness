@@ -16,6 +16,7 @@ from .contracts import ContractError, decode_document, require_digest, require_o
 from .execution_journal import ExecutionJournal, JournalError
 from .normalized import normalize_generic, validate_binding
 from .wire import canonical_bytes
+from .worker_metrics import WorkerMetricsJournal, empty_worker_metrics, split_metrics_footer
 
 STREAM_LIMIT = 256 * 1024
 CONTROL_LIMIT = 128 * 1024
@@ -338,6 +339,19 @@ class DockerRunner:
         except (RunnerError, JournalError, ContractError):
             return False, False, None, record
 
+    def _record_worker_metrics(self, binding: dict, stderr: bytes, record: dict) -> bytes:
+        """計測footerをstderrから除外し、固定binding keyのsidecarへbest effort保存する。"""
+        remainder, metrics = split_metrics_footer(stderr)
+        try:
+            metrics_dir = self.journal_path.with_name(self.journal_path.name + ".worker-metrics")
+            execution = {key: record[key] for key in ("run_id", "operation_id", "request_digest", "binding", "scenario", "image_id")}
+            source = {key: binding[key] for key in ("fixture_digest", "evaluator_digest", "adapter_digest", "policy_digest", "target_digest")}
+            source["worker_digest"] = self.lock["worker_digest"]
+            WorkerMetricsJournal(metrics_dir).save(execution, source, metrics)
+        except (OSError, ValueError, TypeError):
+            pass
+        return remainder
+
     def _receipt(self, record: dict, *, status: str, reason: str | None, stopped: bool,
                  cleaned: bool, exit_code: int | None, elapsed: int, verified: bool,
                  normalized: dict | None = None, probe: dict | None = None, recovered: bool = False) -> dict:
@@ -405,6 +419,8 @@ class DockerRunner:
                 record = journal.advance(binding["run_id"], binding["operation_id"], record["owner_token"], "STARTING", container_id=container_id)
                 captured = self._capture(["container", "start", "--attach", "--interactive", record["container_name"]],
                     timeout=remaining(), input_bytes=input_bytes, cancel_event=cancel_event, limit=STREAM_LIMIT)
+                # 欠測/不正/永続化障害は既存判定を変更しない。
+                captured.stderr = self._record_worker_metrics(binding, captured.stderr, record)
                 container = self._inspect(record)
                 if container is not None and container["State"].get("StartedAt", "0001").startswith("0001") is False:
                     record = journal.advance(binding["run_id"], binding["operation_id"], record["owner_token"], "RUNNING", container_id=container_id)

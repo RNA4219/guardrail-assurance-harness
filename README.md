@@ -2,8 +2,8 @@
 intent_id: INT-GAH-001
 owner: RNA4219
 status: active
-last_reviewed_at: 2026-09-15
-next_review_due: 2026-10-15
+last_reviewed_at: 2026-09-19
+next_review_due: 2026-10-19
 template_version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ template_version: 1.0.0
 
 ガードレールと、その検査系の劣化を追跡するPythonプロジェクトです。coding agentの開発・CIでは制約違反と検査漏れを、LLMガードレール評価では検出率・見逃し率・誤検知率の変化を扱います。
 
-**MIT License / MVP技術検収完了。** 全32条件を受入済み、`release_gate=go`です。[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)と[要件別の監査](docs/mvp-completion-audit.md)に検証範囲を記録しています。
+**MIT License / 固定版のMVP技術検収完了。** 受入済み固定版では全32条件を満たし、`release_gate=go`です。開発中の拡張版は全回帰・製品受入を継続しています。[最終証跡](docs/evidence/mvp-acceptance-20260913/mvp-final-20260915-summary.json)と[要件別の監査](docs/mvp-completion-audit.md)に検証範囲を記録しています。
 
 ## 実装と検証の範囲
 
@@ -22,11 +22,13 @@ template_version: 1.0.0
 | 管理と証拠 | OS認証による役割分離、独立採択、Finding/Plan、修復確認・再発、保持・撤回・削除後の現在CI判定 |
 | 全MVP | GAH-AC01〜32の技術検収完了。GitHubでの定期実行と新しい12ジョブCIの実行は未確認 |
 
-固定source80の全898試験と、追加したCI分割の9試験が成功しました。source81との差分は実Docker検証ツール一つで、製品コアは同一です。実Dockerでは初回400ケース・600段階、旧400/新800の比較と独立採択、通常CLI800試行、freshなCI、JSON/Markdown、再起動後の出力・receipt不変、全精算・回収を確認しました。907件を重い統合6ジョブと残り6分割へ割り当て、全ジョブ成功を必須チェックで集約します。[CI構成](docs/ci-config.md)を参照してください。
+固定source80の全898試験と、追加したCI分割の9試験が成功しました。source81との差分は実Docker検証ツール一つで、製品コアは同一です。実Dockerでは初回400ケース・600段階、旧400/新800の比較と独立採択、通常CLI800試行、freshなCI、JSON/Markdown、再起動後の出力・receipt不変、全精算・回収を確認しました。MVP検収時の907件は重い統合6ジョブと残り6分割へ割り当てました。拡張後もdiscoveryした全テストから12laneの計画を生成し、同じsource・計画・全件の成功を必須チェックで集約します。[CI構成](docs/ci-config.md)を参照してください。
 
 製品入口は `python -m tools.gah_run`、現在のCI判定は `python -m tools.gah_ci`、表示は `python -m tools.gah_report` です。基準管理AIが契約とbaselineを管理し、最終判定・認証・予算の照合は決定的なルールで行います。変更を作るAI、基準管理AI、評価器の役割を分離します。
 
 合成ガードレールの受入は学習済みモデル一般の性能保証を含みません。実行環境には安定した時計が必要です。今回のWSL検証では時刻同期を一時調整し、検証後に元の設定へ復元しました。過去の失敗や使用量不明の取消しrunは証跡へ保持しています。ソース公開・技術検収・GitHub上のCI結果は別に扱います。[公開時の状態](docs/oss-publication.md)を参照してください。
+
+[拡張14要件](docs/productization-requirements.md)を[4仕様](docs/productization-spec.md)へ具体化し、Lunaの分担実装を親がレビュー、DGX Qwenへ局所レビューを依頼しました。計測/CI分割、setup・診断・履歴・保持・bundle・移行、実案件評価の計画/metadata管理を実装しています。[実装と残件の対応表](docs/productization-status.md)に検証範囲を記録しました。固定source-v5の関連93試験と実Docker90件に加え、[9月19日の継続検証](docs/evidence/productization-continuation-20260919/README.md)で保存上限・worker計測・Docker容量観測を確認しています。拡張14条件の製品受入は未完了です。簡易setupは容量上限未実証のため開始前に停止します。[導入手順と前提](docs/productization-quickstart.md)を確認してください。
 
 ## 読む順序
 
@@ -74,3 +76,8 @@ python -m tools.gah_cli show --id sample-assessment-1 --db .ga/diagnostic.sqlite
 本体コード・文書・自作fixture/合成データは[MIT License](LICENSE)です。Workflow-Cookbook由来のツールと雛形には既存の[MIT表示](third_party/workflow-cookbook.LICENSE)を保持します。外部サービス・モデル・第三者依存物には各提供元の条件が適用されます。
 
 [GitHubリポジトリ](https://github.com/RNA4219/guardrail-assurance-harness)でソースを公開します。配布パッケージ・コンテナ・正式リリースは未発行です。GitHub Actionsの結果は各commitのChecksで確認してください。branch protectionの実設定は未検証です。[Security方針](SECURITY.md)も参照してください。
+
+- [拡張実装・受入対応](docs/productization-status.md)
+
+
+2026-09-16の[継続実装](docs/evidence/productization-continuation-20260916/README.md)で、offline結果import、容量保存部品、資源観測、固定imageの新規取得・構築を追加しました。関連116件は114成功・2スキップ、実Dockerのimage構築・資源観測も確認済みです。全writer/全子scope/実target接続と拡張受入は継続中です。

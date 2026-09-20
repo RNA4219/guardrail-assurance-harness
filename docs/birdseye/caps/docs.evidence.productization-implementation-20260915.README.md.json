@@ -1,0 +1,22 @@
+{
+  "id": "docs/evidence/productization-implementation-20260915/README.md",
+  "role": "evidence",
+  "title": "拡張実装の検証証跡",
+  "summary": "Lunaが性能・運用・pilotを分担し、親が接続・反例レビュー・DGXレビューの採否と検証を担当した。対象は[拡張14要件](../../productization-requirements.md)。現在の実装と残件は[対応表](../../productization-status.md)で追跡する。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-requirements.md",
+    "docs/productization-status.md"
+  ],
+  "deps_in": [
+    "docs/tasks/TASK.productization-implementation-09-15-2026.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "702c86ccf41813b531f2cbaec85092b6019052ec62d6d2cbefc48b7e1745d745"
+}

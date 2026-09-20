@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "v6_resource_saved_read_parent_verification",
+  "status": "PASS",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 62.06199999997625,
+  "inputs_unchanged": true,
+  "log_sha256": "dc101696c3efb36268549b33cc043504e710cd3acf380d737640341c5ad3c413",
+  "plan_sha256": "fe6659b44d93c0918dfb532404592db84e15d4583e295b12567b2963f8635658",
+  "counts": {
+    "planned": 60,
+    "tests_run": 60,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "all_passed": true
+  },
+  "modules": [
+    "test_partitioned_run_resources",
+    "test_resource_operation",
+    "test_resource_authority",
+    "test_partitioned_run_integration",
+    "test_partitioned_run_authority",
+    "test_partitioned_run_migrations"
+  ],
+  "changed_sha256": {
+    "src/gah/partitioned_run_authority.py": "2a451d00489926160bc0b4267bc5dcce132270ba774d8e3e0863094cc601e47c",
+    "src/gah/partitioned_run_store.py": "8de8b765cb5357346d188afd39c83ebc27420e550a2f0d0e865cc93457ed7563",
+    "tests/test_partitioned_run_resources.py": "aaf204c8bc0f81b4d96ccaa19020efea233e91b7925d774a05faac5a70219a75"
+  },
+  "parent_corrections": [
+    "保存readerのmanifest作成時刻とrun開始時刻の等式を、manifest.created_at <= 保存開始時刻 < deadline、および開始時刻 <= 照会時刻へ補正。遅延beginを明示試験。",
+    "segment破損試験のSELECT/復元SQL placeholder数を修正。"
+  ],
+  "independent_luna_review": "保存route/receipt/history/policy/plan/resource bindingとrole・actor失効、新規開始との分離を読取り確認。親の2補正以外の具体的findingなし。",
+  "scope": [
+    "保存manifest/ref-only receipt/profile/採択履歴とpolicy pin/committed plan全segment/resource entryと状態を照合。",
+    "取消・期限切れ・current pointer/permission generation変更後も保存状態を読めるが、新規開始はfresh checkで拒否。",
+    "現在認可されたoperator/validatorに限定。domain状態を変えず、許可されたclock/idempotency bookkeepingのみ。"
+  ],
+  "limits": [
+    "v6 gen1 diagnosticと固定fixtureの保存read。guardrail admission、通常gen2 regressionと全consumerは未接続。",
+    "実OS peer認証の新resource経路は別診断で検証予定。",
+    "全PAC/SLO受入ではない。"
+  ],
+  "ci_eligible": false,
+  "full_pac_acceptance": false
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "normal_v10_v11_matched_five_operation_profile",
+  "status": "COMPLETE_DIAGNOSTIC_ONLY",
+  "before": "normal-v10-profile-v2",
+  "after": "normal-v11-profile-v1",
+  "same_request_manifest_plan_and_tag": true,
+  "same_guardrail_and_fixture_runtime_identity": true,
+  "same_operations_stages_and_saved_attempt_bytes": true,
+  "repetitions": 1,
+  "before_seconds": 27.141926155003603,
+  "after_seconds": 26.921145820000675,
+  "reduction_percent": 0.8134291344766176,
+  "before_deepcopy": {
+    "calls": 3441111,
+    "own_seconds": 2.245016865,
+    "cumulative_seconds": 4.894460169
+  },
+  "after_deepcopy": {
+    "primitive_calls": 37845,
+    "total_calls": 3671629,
+    "own_seconds": 2.4520088,
+    "cumulative_seconds": 5.328922593000001
+  },
+  "conclusion": "単回の5操作はほぼ同時間。全runの改善・SLO達成は未証明。digest経路の局所改善を全体へ外挿しない。deepcopy呼出増加は追加分析中。",
+  "profile_overhead_included": true,
+  "real_worker_acceptance": false,
+  "acceptance_pass": false,
+  "slo_comparison": false
+}

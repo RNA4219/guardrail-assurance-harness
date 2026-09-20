@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "capacity_journal_memory_review",
+  "date": "2026-09-20",
+  "scope": "固定sample setupと最初の通常runの容量上界",
+  "source_sha256": {
+    "src/gah/sqlite_limits.py": "224fac79185983c5ae2cb0565c0f39666d14dcf57053323c3dccff30aee6371a",
+    "tools/authority_runtime.py": "5a94dce4279b729e9279bbcb8d993a40485fbca8f4bffc3c315d92aa42b6c972",
+    "tools/setup_capacity.py": "e8326eac702cb896b3c9670b7edcb1499f801e87889836d686d1372b86967c33"
+  },
+  "findings": [
+    "主DB256MiB capはrollback journalとstatement journalの総量capではない。",
+    "cache_spill=OFFで単一journal headerを仮定する案を検討したが、未commit dirty pageをメモリへ保持する変更となる。",
+    "authority containerのmemory/memory-swap上限は各128MiB。主DB256MiBに対するspill全面無効化はメモリ退行を招き得る。",
+    "temp_store=MEMORYだけでstatement journalを含む全一時領域をdisk-freeと断定しない。"
+  ],
+  "decision": "cache_spillを変更しない。現行動作のspill/statement journal、filesystem物理割当、Docker backingを含む上界の確定が必要。開始gateを成功へ切り替えていない。",
+  "review": "LunaがSQLite一次資料と固定SQL経路を調査。親が128MiB container制限と照合し、単純なPRAGMA追加を不採用とした。",
+  "primary_sources": [
+    "https://www.sqlite.org/pragma.html#pragma_cache_spill",
+    "https://www.sqlite.org/atomiccommit.html#section_6_3",
+    "https://www.sqlite.org/tempfiles.html#statement_journal_files"
+  ],
+  "product_source_changed": false,
+  "capacity_bound_verified": false,
+  "product_acceptance": false
+}

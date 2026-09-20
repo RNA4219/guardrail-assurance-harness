@@ -1,0 +1,36 @@
+{
+  "all_single_stage": true,
+  "case_set_canonical_bytes": {
+    "1600": 1038560,
+    "400": 259759,
+    "800": 519359
+  },
+  "ci_eligible": false,
+  "document_byte_limit": 1048576,
+  "existing_acceptance_pack_changed": false,
+  "included_in_source_v7_regression": false,
+  "kind": "query_scale_parent_review",
+  "limits": [
+    "provision only; not a query hot path",
+    "same synthetic family sizes only; not comparable to existing mixed-stage acceptance400/normal800 workloads",
+    "runtime admission and scale binding not connected",
+    "synthetic structure only; no semantic oracle independence or real workload performance claim"
+  ],
+  "review_corrections": [
+    "stage_counts rejects bool",
+    "balanced positive/negative label swapping rejected against oracle",
+    "non-string oracle required features rejected as ContractError"
+  ],
+  "schema_version": 1,
+  "source_sha256": {
+    "src/gah/query_scale_data.py": "b5a28cead2188571fa5f2a0c49e17837f482d413db043553504e97028f55dd9e",
+    "tests/test_query_scale_data.py": "d9bc4b222c17e8c250f0e87950444345af48856d73f7d9eae667044620a00fff"
+  },
+  "tests": {
+    "elapsed_seconds": 2.0,
+    "exit_code": 0,
+    "log_sha256": "953f888b71dcbc856831639ccf264e32a26b4015cb3472e1ad2f7c380063c3da",
+    "run": 5
+  },
+  "valid_for_slo": false
+}

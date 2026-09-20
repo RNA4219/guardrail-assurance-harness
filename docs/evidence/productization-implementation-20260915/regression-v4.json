@@ -1,0 +1,134 @@
+{
+  "all_tests_on_final_source": false,
+  "ci_eligible": false,
+  "fixture_recovery_refs": [
+    {
+      "digest": "fc9b23382ded5ffb680c8bbd77fb291b1523372cb6f005cab878a827249ed1ed",
+      "id": "fixture-recovery-v4b",
+      "kind": "local_validation_observation"
+    },
+    {
+      "digest": "bdfb0632032316849b097132573f6e67fc039f524eeb4e94b78e5a934461f50f",
+      "id": "fixture-recovery-v4c",
+      "kind": "local_validation_observation"
+    }
+  ],
+  "full_pac_acceptance": false,
+  "id": "regression-v4-with-fixture-recovery",
+  "kind": "local_validation_observation",
+  "lanes": [
+    {
+      "elapsed_milliseconds_reported": 6121223,
+      "lane": "combined",
+      "log_sha256": "6d6f0ed1cf66e89a8d7e556669699836c694160c65237097e74bd2fbc6f9afbb",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 4
+    },
+    {
+      "elapsed_milliseconds_reported": 4874493,
+      "lane": "finding-revalidation",
+      "log_sha256": "c8e993a26e72b2cfdb585cd23898d242a71c1da5fadff6f7404a0d4237f3d5d2",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 5
+    },
+    {
+      "elapsed_milliseconds_reported": 918199,
+      "lane": "following-contract",
+      "log_sha256": "3d9cda0e02bfffee08b0386d098016236bcaf2f6112168ad6c84e7aefb60abfb",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 6
+    },
+    {
+      "elapsed_milliseconds_reported": 1690216,
+      "lane": "llm-revision",
+      "log_sha256": "08fef8b0db4e53b6bf8041f7cc7b0fee2963a195ea5b284c5d46308686fe8461",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 1
+    },
+    {
+      "elapsed_milliseconds_reported": 5682341,
+      "lane": "llm-supervision",
+      "log_sha256": "d7669647b051015aea2ee55f9a1c1500d2136da77bfae775a7d1e2ac6bf4af53",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 1
+    },
+    {
+      "elapsed_milliseconds_reported": 478804,
+      "lane": "mutation-review",
+      "log_sha256": "901fee35b2ca87bd9738469b742eccd3a412a15c3e3f162056f2b025849cf245",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 5
+    },
+    {
+      "elapsed_milliseconds_reported": 1288080,
+      "lane": "regression-0",
+      "log_sha256": "25bfc6da5adc96c7d573319d8634ce03f62111008a184fc5141986da3f1904cb",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 181
+    },
+    {
+      "elapsed_milliseconds_reported": 813509,
+      "lane": "regression-1",
+      "log_sha256": "9864fe969f1487008cd97bd8b3b59e84ff746428e9fa6b43e3f6263fe66805a0",
+      "original_status": "ERROR",
+      "source_unchanged": true,
+      "tests_run": 181
+    },
+    {
+      "elapsed_milliseconds_reported": 1161366,
+      "lane": "regression-2",
+      "log_sha256": "9d7bbc3b583763faef50da2d608b16035f54e234286b7c5d6325b12d072399dc",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 181
+    },
+    {
+      "elapsed_milliseconds_reported": 3326033,
+      "lane": "regression-3",
+      "log_sha256": "8173323586fabff3d28d78f0d5f84aef3b6648f630e560afae7cf9414f679ef1",
+      "original_status": "ERROR",
+      "source_unchanged": true,
+      "tests_run": 181
+    },
+    {
+      "elapsed_milliseconds_reported": 796663,
+      "lane": "regression-4",
+      "log_sha256": "ed9d387bbcf5d5f139bde1d67f51b98d30d602c6655625a89a6fa379bc34c2dd",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 182
+    },
+    {
+      "elapsed_milliseconds_reported": 760775,
+      "lane": "regression-5",
+      "log_sha256": "e50d8058ee782c239560934b8113a95b8c6f05d24c8dfa60fb4cbcbd97b59450",
+      "original_status": "PASS",
+      "source_unchanged": true,
+      "tests_run": 182
+    }
+  ],
+  "original_failed_test_methods": 23,
+  "original_failure_events": 24,
+  "original_failure_preserved": true,
+  "original_result_sha256": "1701b632e14bc29065fcc0ca751ab39e4a33bd75fa5240e0490cfe2b31fa7ccd",
+  "original_run_status": "FAIL",
+  "original_source_code_unchanged": true,
+  "plan_digest": "8a7140a64c62e651433411c648463932621d03b22703aa9431652ef948137dbd",
+  "schema_version": 1,
+  "source_ref": {
+    "digest": "121947e5c2cdcf7eac16251193eb66f540ef7ed98ee455c36ba3b89c2e13072c",
+    "id": "regression-source-v4",
+    "kind": "snapshot_manifest"
+  },
+  "status": "PASS_WITH_FIXTURE_RECOVERY",
+  "supplemental_test_attempts": 31,
+  "unique_planned_tests": 1110,
+  "unresolved_errors": 0
+}

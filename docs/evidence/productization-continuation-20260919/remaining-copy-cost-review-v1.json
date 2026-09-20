@@ -1,0 +1,95 @@
+{
+  "evidence": {
+    "candidate_receipts": 2,
+    "ci_eligible": false,
+    "deepcopy_calls": 28048541,
+    "deepcopy_primitive_calls": 262826,
+    "fixed_ci_entries": 60,
+    "profile": ".ga/productization-implementation-20260919/profile-copy-v2.pstats",
+    "profile_id": "setup-copy-profile-source-v3",
+    "profile_sha256": "e98d578f2f930429439ff479d342517f01161891c76797a208316b0cf52e0739",
+    "profiled_operation": "SetupApplyCoreTests.setup_sample -> execute_contract_setup once",
+    "source_manifest_sha256": "f8c9b30dbb68c683c94d68650186b39dee43faea16da1342720547bc1fcdbac8",
+    "summary": ".ga/productization-implementation-20260919/profile-copy-v2-summary.json",
+    "wall_seconds_under_profiler": 201.0653393000248,
+    "whole_run_slo_claim": false
+  },
+  "execution_constraints": {
+    "docker": false,
+    "product_source_edits": false,
+    "profile_rerun": false,
+    "tests": false
+  },
+  "findings": [
+    {
+      "additional_reduction_feasibility": "Potentially avoid a second canonical pass only where the exact same bytes are already produced and consumed in one construction/validation operation; profile supports high cumulative cost but does not prove identical-object duplicate work for every call.",
+      "boundary": "Repeated canonical serialization/hash for content references",
+      "concrete_call_path": "fixture_materialization._ref -> run_contracts.content_ref -> _canonical(json validation + full canonical JSON encode) -> SHA256; content_ref/_require_ref_match and _document_size are separate serialization boundaries.",
+      "pstats": {
+        "content_ref_calls": 204185,
+        "fixture_materialization._ref_cumulative_seconds": 11.101,
+        "fixture_materialization._ref_to_content_ref_calls": 173700,
+        "run_contracts._canonical_calls": 218839,
+        "run_contracts._canonical_cumulative_seconds": 29.369,
+        "run_contracts._canonical_self_seconds": 11.892,
+        "run_contracts._document_size_calls": 14654,
+        "run_contracts._require_ref_match_to_content_ref_calls": 7120
+      },
+      "rank": 1,
+      "required_invariants": [
+        "digest must match the current canonical value at the ref boundary",
+        "no persistent cache keyed only by object identity or mutable value",
+        "retain bounded depth/node/size and exact JSON type validation",
+        "reuse only immutable/freshly owned canonical bytes or recompute after mutation"
+      ]
+    },
+    {
+      "additional_reduction_feasibility": "Only conditionally. Preserve public validator independence. A private internal path could skip a second tree copy only when ownership is proven local and the value cannot escape or be mutated by the caller; current pstats alone does not prove that condition.",
+      "boundary": "Defensive copies returned by large-document validators",
+      "concrete_call_path": "Public validators validate nested documents and return deepcopy copies; setup workflow repeatedly crosses these validation/ownership boundaries.",
+      "pstats": {
+        "corpus.validate_case_set_cumulative_seconds": 11.571,
+        "corpus.validate_case_set_deepcopy_calls": 6522,
+        "registry.validate_registry_cumulative_seconds": 8.076,
+        "registry.validate_registry_deepcopy_calls": 5898,
+        "run_contracts.validate_trial_plan_cumulative_seconds": 4.163,
+        "run_contracts.validate_trial_plan_deepcopy_calls": 4123,
+        "transition_materialization._deepcopy_core_calls": 3984,
+        "transition_materialization._deepcopy_core_cumulative_seconds": 2.591
+      },
+      "rank": 2,
+      "required_invariants": [
+        "returned documents remain independent from input and other calls",
+        "no shared mutable nested dict/list across validators or API results",
+        "all validation still runs on each value unless an immutable snapshot with freshness proof is introduced"
+      ]
+    },
+    {
+      "additional_reduction_feasibility": "Limited without changing mutability semantics. An immutable cache representation may reduce recursive copies but requires decode cost and must retain caller isolation; likely lower priority than canonicalization and large validator copies.",
+      "boundary": "Transaction-scoped checked-read cache copy on store and replay",
+      "concrete_call_path": "read_checks.checked_read wraps 1337 calls; within a transaction it stores an independent copy of results and returns independent copies on cache hits. _copy recursively traverses dict/list/tuple result trees.",
+      "pstats": {
+        "deepcopy_calls_inside_profile_overall": 28048541,
+        "read_checks._copy_cumulative_seconds": 3.996,
+        "read_checks._copy_outer_calls": 1337,
+        "read_checks._copy_recursive_calls": 2934610,
+        "read_checks._copy_tottime_seconds": 3.561
+      },
+      "rank": 3,
+      "required_invariants": [
+        "cache remains limited to the same DB transaction/scope",
+        "invalidate on db.total_changes changes",
+        "transaction-external reads must still observe current committed state",
+        "returned mutable trees cannot alias the cache or another caller"
+      ]
+    }
+  ],
+  "kind": "remaining_copy_cost_review",
+  "llm_integration": {
+    "note": "This profile is setup-only with 60 fixed CI entries and two candidate receipts. It is not representative evidence for fixed 400/800-entry LLM integration; neither timing nor call counts are extrapolated.",
+    "source_hypothesis": "If the LLM path repeatedly builds and revalidates similarly nested material/ref documents, canonical reference serialization and defensive result copies may scale with its larger collections. The profile does not establish that these exact callers dominate LLM runtime; a separate same-scope LLM profile would be required for attribution.",
+    "status": "SOURCE_HYPOTHESIS_ONLY_NO_LLM_PROFILE_EVIDENCE"
+  },
+  "schema_version": 1,
+  "status": "READ_ONLY_COMPLETED_SETUP_60_PROFILE_ANALYSIS"
+}

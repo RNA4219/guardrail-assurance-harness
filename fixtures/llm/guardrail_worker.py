@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import sys
 import time
@@ -81,6 +82,90 @@ def main():
     except (Exception,KeyboardInterrupt):
         sys.stdout.write('{"schema_version":1,"kind":"guardrail_worker_error","reason":"CASE_INVALID"}\n')
         return 2
+    finally:
+        _emit_worker_metrics()
+
+
+def _worker_metric_integer(value):
+    value=value.strip()
+    if not value.isdigit() or len(value)>19:return None
+    parsed=int(value)
+    return parsed if parsed<=(1<<63)-1 else None
+
+
+def _worker_cgroup_metrics():
+    """終了直前に固定cgroup累積値だけを読み、測定不能値はnullにする。"""
+    def read(path):
+        try:
+            with Path(path).open('rb') as stream:raw=stream.read(65537)
+            return raw.decode('ascii') if len(raw)<=65536 else None
+        except (OSError,UnicodeError):
+            return None
+    def keyed(path,key):
+        value=read(path)
+        if value is not None:
+            for line in value.splitlines():
+                fields=line.split()
+                if len(fields)==2 and fields[0]==key:return _worker_metric_integer(fields[1])
+        return None
+    cpu=keyed('/sys/fs/cgroup/cpu.stat','usage_usec')
+    cpu=cpu*1000 if cpu is not None else None
+    if cpu is None:
+        value=read('/sys/fs/cgroup/cpuacct/cpuacct.usage')
+        cpu=_worker_metric_integer(value) if value is not None else None
+    memory=read('/sys/fs/cgroup/memory.peak')
+    if memory is None or not memory.strip().isdigit():memory=read('/sys/fs/cgroup/memory/memory.max_usage_in_bytes')
+    memory=_worker_metric_integer(memory) if memory is not None else None
+    rb=wb=None
+    value=read('/sys/fs/cgroup/io.stat')
+    if value is not None:
+        totals={'rbytes':0,'wbytes':0};devices=set();ok=True
+        for line in value.splitlines():
+            fields=line.split()
+            if not fields or not re.fullmatch(r'[0-9]+:[0-9]+',fields[0]) or fields[0] in devices:ok=False;break
+            devices.add(fields[0]);found=set()
+            for item in fields[1:]:
+                pair=item.split('=',1)
+                if len(pair)!=2 or pair[0] in found or _worker_metric_integer(pair[1]) is None:ok=False;break
+                found.add(pair[0])
+                if pair[0] in totals:
+                    totals[pair[0]]+=int(pair[1])
+                    if totals[pair[0]]>(1<<63)-1:ok=False;break
+            if not {'rbytes','wbytes'}.issubset(found):ok=False
+            if not ok:break
+        if ok and devices:rb,wb=totals['rbytes'],totals['wbytes']
+    else:
+        value=read('/sys/fs/cgroup/blkio/blkio.io_service_bytes_recursive')
+        if value is not None:
+            totals={'Read':0,'Write':0};seen=set();devices=set();ok=True
+            for line in value.splitlines():
+                fields=line.split()
+                if not fields or not re.fullmatch(r'[0-9]+:[0-9]+',fields[0]):ok=False;break
+                device=fields[0];devices.add(device)
+                if len(fields)==3 and fields[1]=='Total':
+                    if _worker_metric_integer(fields[2]) is None or (device,'Total') in seen:ok=False;break
+                    seen.add((device,'Total'));continue
+                if len(fields)==4 and fields[1] in {'Sync','Async'} and fields[2] in totals:
+                    key=(device,fields[1]+' '+fields[2])
+                    if _worker_metric_integer(fields[3]) is None or key in seen:ok=False;break
+                    seen.add(key);continue
+                if len(fields)!=3 or fields[1] not in totals or _worker_metric_integer(fields[2]) is None or (device,fields[1]) in seen:ok=False;break
+                seen.add((device,fields[1]));totals[fields[1]]+=int(fields[2])
+                if totals[fields[1]]>(1<<63)-1:ok=False;break
+            if ok and devices and all((device,kind) in seen for device in devices for kind in totals):rb,wb=totals['Read'],totals['Write']
+    return {'schema_version':1,'kind':'gah_worker_metrics','capture_scope':'container_cgroup_until_worker_exit',
+        'capture_status':'CAPTURED','cpu_ns':cpu,'rss_peak_bytes':None,'memory_peak_bytes':memory,
+        'io_read_bytes':rb,'io_write_bytes':wb,'valid_for_slo':False}
+
+
+def _emit_worker_metrics():
+    try:
+        data=json.dumps(_worker_cgroup_metrics(),sort_keys=True,separators=(',',':'))
+        if len(data)>4096:raise ValueError()
+    except Exception:
+        data='{"capture_status":"INVALID"}'
+    sys.stderr.write('\nGAH-WORKER-METRICS-V1 '+data+'\n')
+    sys.stderr.flush()
 
 
 if __name__=='__main__':raise SystemExit(main())

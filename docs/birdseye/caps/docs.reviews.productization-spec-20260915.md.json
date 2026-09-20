@@ -1,0 +1,24 @@
+{
+  "id": "docs/reviews/productization-spec-20260915.md",
+  "role": "reviews",
+  "title": "拡張仕様の監督レビュー",
+  "summary": "[統合仕様](../productization-spec.md)と3分冊、[設計ケース](../contracts/productization-spec-cases.v1.json)を対象にする。利用者の指示でLunaを使用し、親Codexが既存コード・要求への対応を検査する。製品試験や外部監査の実績へ換算しない。",
+  "public_api": [],
+  "deps_out": [
+    "docs/productization-spec.md"
+  ],
+  "deps_in": [
+    "CHANGELOG.md",
+    "docs/acceptance/AC-20260915-02.md",
+    "docs/productization-spec.md",
+    "docs/reviews/README.md"
+  ],
+  "risks": [
+    "文書の要約であり、製品の実装・受入を保証しない"
+  ],
+  "tests": [
+    "python -m tools.workflow check"
+  ],
+  "generated_at": "00161",
+  "source_sha256": "2d4b43e35acf55d37f20eeaeeddcb0db2d50ba6f8d91a523cdcfff83b6667576"
+}

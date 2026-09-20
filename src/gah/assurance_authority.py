@@ -10,7 +10,7 @@ from pathlib import Path
 from .adoption import AdoptionError
 from .contracts import ContractError, MAX_DOCUMENT_BYTES, MAX_INTEGER, require_id, require_object
 from .docker_runner import PROFILE
-from . import resources, resource_authority, run_evidence, fixture_admission
+from . import resources, resource_authority, run_evidence, fixture_admission, budget_warning
 from .run_contracts import content_ref
 from .wire import canonical_bytes
 
@@ -202,7 +202,7 @@ def _origins(db, run_id, generation, now):
             raise _error("EVIDENCE_ORIGIN_INVALID")
 
 
-def _receipt(db, run_id, bound, book):
+def _receipt(db, run_id, bound, book, baseline=None):
     row = db.execute("SELECT * FROM authority_run_receipts WHERE run_id=?", (run_id,)).fetchone()
     if row is None:
         raise _error("NOT_FINALIZED")
@@ -236,7 +236,7 @@ def _receipt(db, run_id, bound, book):
                 raise _error("STORAGE_CORRUPT")
         _origins(db, run_id, row["permission_generation"], row["created_at"])
         terminal = book.get_terminal(run_id)
-        if (objects["manifest_ref"] != bound["manifest"] or objects["bundle_ref"] != bound
+        if (objects["manifest_ref"] != bound["manifest"] or objects["bundle_ref"] != _stored_bound(bound, baseline)
                 or objects["decision_ref"] != terminal["decision"]
                 or value["assurance"] != terminal["decision"]["assurance"]):
             raise _error("STORAGE_CORRUPT")
@@ -245,7 +245,7 @@ def _receipt(db, run_id, bound, book):
                                  "closed_at", "resources", "budget_closure"})
         require_object(closure["resources"], set(resources.COUNTERS) |
                        {"slots", "unsettled", "total_tokens", "global_api_cost_usd_micros"})
-        resource_row = db.execute("SELECT closed_at FROM resource_runs WHERE run_id=?", (run_id,)).fetchone()
+        resource_row = db.execute("SELECT closed_at,created_at FROM resource_runs WHERE run_id=?", (run_id,)).fetchone()
         if (type(closure["schema_version"]) is not int or closure["schema_version"] != 1
                 or type(closure["closed_at"]) is not int
                 or not bound["manifest"]["created_at"] <= closure["closed_at"] <= row["created_at"]
@@ -256,6 +256,14 @@ def _receipt(db, run_id, bound, book):
                 or closure.get("kind") != "resource_closure" or closure.get("run_id") != run_id
                 or closure.get("manifest_digest") != value["manifest_ref"]["digest"]
                 or closure.get("budget_closure") is not True):
+            raise _error("STORAGE_CORRUPT")
+        # 保存時のclosureに照合する。後日の資源観測で過去の判定を再計算しない。
+        saved_basis = budget_warning.validate_basis(bound, terminal["decision"].get("budget_warning"),
+            terminal["decision"]["assessed_at"])
+        if (saved_basis["started_at"] != resource_row[1]
+                or saved_basis["closed_at"] != closure["closed_at"]
+                or any(saved_basis["usage"][axis] != closure["resources"][axis]
+                       for axis in budget_warning.AXES if axis != "elapsed_seconds")):
             raise _error("STORAGE_CORRUPT")
         evidence = objects["evidence_ref"]
         aggregate_row = db.execute("SELECT aggregate_json,aggregate_digest FROM aggregates WHERE run_id=? AND aggregate_digest=?",
@@ -305,12 +313,50 @@ def _evidence_payload(run_id, bound, observed_at, now, generation, manifest_ref,
         "resource_closure_verified": True, "input_materialization_verified": input_materialization_verified, "ci_eligible": False}
 
 
+def _aggregate_observed_at(db, run_id, terminal):
+    """finalize済みterminalが参照する保存aggregateを検証して時刻だけ読む。"""
+    decision_value = terminal.get("decision") if type(terminal) is dict else None
+    aggregate_digest = decision_value.get("aggregate_digest") if type(decision_value) is dict else None
+    if type(aggregate_digest) is not str:
+        raise _error("STORAGE_CORRUPT")
+    row = db.execute(
+        "SELECT aggregate_json,aggregate_digest FROM aggregates WHERE run_id=? AND aggregate_digest=?",
+        (run_id, aggregate_digest),
+    ).fetchone()
+    if row is None:
+        raise _error("STORAGE_CORRUPT")
+    try:
+        aggregate = resources._unpack(row[0], row[1])
+    except resources.ResourceError:
+        raise _error("STORAGE_CORRUPT") from None
+    observed_at = aggregate.get("observed_at") if type(aggregate) is dict else None
+    if type(observed_at) is not int or not 0 <= observed_at <= MAX_INTEGER:
+        raise _error("STORAGE_CORRUPT")
+    return observed_at
+
+
+def _stored_bound(bound, baseline):
+    return (run_evidence.bound_storage_document(bound, baseline)
+            if bound["manifest"].get("schema_version") == 2 else bound)
+
+
 def execute(store, db, request, actor_id, context, now, resolve_bound):
     """固定extensionから呼ぶ。resolve_boundは同DBの保存実体だけを読む。"""
     action, run_id = request["action"], request["run_id"]
     bound, baseline = resolve_bound(run_id)
     digest = run_evidence.bound_bundle_digest(bound, baseline)
-    book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
+    if bound["manifest"].get("schema_version") == 2:
+        from .partitioned_normal_evidence import PartitionedNormalEvidenceBook
+        from .llm_admission import execution_profile
+        def resolve_context(connection, checked_at, receipt, stored_profile):
+            if connection is not db or checked_at != now:
+                raise _error("CURRENTNESS_UNAVAILABLE")
+            fresh_bound, fresh_baseline = resolve_bound(receipt["manifest_ref"]["id"])
+            return fresh_bound, execution_profile(db, fresh_bound, now), fresh_baseline
+        book = PartitionedNormalEvidenceBook(db, now=now, allowed_bindings={run_id: digest},
+                                            context_resolver=resolve_context)
+    else:
+        book = run_evidence.RunEvidenceBook(db, now=now, allowed_bindings={run_id: digest})
     if bound["manifest"]["use_cases"] == ["UC-LLM"]:
         from .llm_admission import execution_profile
         profile = execution_profile(db, bound, now)
@@ -350,7 +396,7 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
         previous = db.execute("SELECT 1 FROM authority_run_receipts WHERE run_id=?", (run_id,)).fetchone()
         if previous is not None:
             book.current_use(run_id, run_evidence._binding_summary(bound, profile, baseline))
-            return _receipt(db, run_id, bound, book)[1]
+            return _receipt(db, run_id, bound, book, baseline)[1]
         snapshot = resources.ResourceBook(db).snapshot(run_id, now)
         if not snapshot["closed"] or not snapshot["budget_closure"] or snapshot["cancelled"]:
             raise _error("RESOURCE_CLOSURE_REQUIRED")
@@ -359,17 +405,18 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
             raise _error("EVIDENCE_ORIGIN_INVALID")
         for item in db.execute("SELECT * FROM attempts WHERE run_id=?", (run_id,)):
             _operation(db, resources._unpack(item["attempt_json"], item["attempt_digest"]), now)
-        terminal = book.finalize(run_id)
+        started_at = db.execute("SELECT created_at FROM resource_runs WHERE run_id=?", (run_id,)).fetchone()[0]
+        basis = budget_warning.build_basis(bound, snapshot, started_at)
+        terminal = book.finalize(run_id, budget_warning_basis=basis)
         manifest_ref = _save(db, run_id, "run_manifest", run_id, bound["manifest"])
-        bundle_ref = _save(db, run_id, "bound_bundle", run_id, bound)
+        bundle_ref = _save(db, run_id, "bound_bundle", run_id, _stored_bound(bound, baseline))
         decision_ref = _save(db, run_id, "run_decision", run_id, terminal["decision"])
         # lease/現在時刻で変わるsnapshotを過去のclosure本文へ再解釈しない。
         closure = {"schema_version": 1, "kind": "resource_closure", "run_id": run_id,
             "manifest_digest": snapshot["manifest_digest"], "closed_at": snapshot["closed_at"],
             "resources": deepcopy(snapshot["resources"]), "budget_closure": True}
         closure_ref = _save(db, run_id, "resource_closure", run_id, closure)
-        aggregate = book.aggregate(run_id)
-        observed_at = aggregate["observed_at"]
+        observed_at = _aggregate_observed_at(db, run_id, terminal)
         materialized = fixture_admission.materialized_run(db, bound, now)
         evidence = _evidence_payload(run_id, bound, observed_at, now, permission_generation,
             manifest_ref, bundle_ref, decision_ref, closure_ref, input_materialization_verified=materialized)
@@ -385,7 +432,7 @@ def execute(store, db, request, actor_id, context, now, resolve_bound):
         db.execute("INSERT INTO authority_run_receipts VALUES(?,?,?,?,?,NULL)",
             (run_id, raw.decode("utf-8"), hashlib.sha256(raw).hexdigest(), permission_generation, now))
         return value
-    row, value = _receipt(db, run_id, bound, book)
+    row, value = _receipt(db, run_id, bound, book, baseline)
     if action == "evidence_revoke":
         if row["revoked_at"] is None:
             event = {"kind": "evidence_revocation", "run_id": run_id, "receipt_digest": row["digest"], "revoked_at": now}
@@ -429,7 +476,8 @@ def baseline_source(store, db, run_id, now, resolve_bound):
     receipt = current["receipt"]
     evidence = _artifact(db, receipt["evidence_ref"], run_id)
     row = db.execute("SELECT revoked_at FROM authority_run_receipts WHERE run_id=?", (run_id,)).fetchone()
-    return {"bound": bound, "receipt": receipt,
+    return {**({"baseline_context": baseline} if bound["manifest"].get("schema_version") == 2 else {}),
+        "bound": bound, "receipt": receipt,
         "decision": _artifact(db, receipt["decision_ref"], run_id),
         "evidences": [evidence], "closure": _artifact(db, receipt["closure_ref"], run_id),
         "evidence_states": {evidence["evidence_id"]: {"revoked": row[0] is not None, "deleted": False}},

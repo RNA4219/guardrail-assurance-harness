@@ -1,0 +1,48 @@
+[
+  {
+    "action": "ci_check",
+    "run_id": "partitioned-llm-normal-v2",
+    "elapsed_seconds": 54.593,
+    "counts": {}
+  },
+  {
+    "action": "evidence_finalize",
+    "run_id": "partitioned-llm-normal-v2",
+    "elapsed_seconds": 7247.41,
+    "counts": {
+      "partitioned-llm-normal-v2": 800
+    }
+  },
+  {
+    "action": "ci_check",
+    "run_id": "partitioned-llm-normal-v2",
+    "elapsed_seconds": 7254.071,
+    "counts": {
+      "partitioned-llm-normal-v2": 800
+    }
+  },
+  {
+    "action": "ci_check",
+    "run_id": "partitioned-llm-normal-v2",
+    "elapsed_seconds": 7291.007,
+    "counts": {
+      "partitioned-llm-normal-v2": 800
+    }
+  },
+  {
+    "action": "ci_check",
+    "run_id": "partitioned-llm-normal-v2",
+    "elapsed_seconds": 7328.075,
+    "counts": {
+      "partitioned-llm-normal-v2": 800
+    }
+  },
+  {
+    "action": "baseline_adopt",
+    "run_id": null,
+    "elapsed_seconds": 7349.463,
+    "counts": {
+      "partitioned-llm-normal-v2": 800
+    }
+  }
+]

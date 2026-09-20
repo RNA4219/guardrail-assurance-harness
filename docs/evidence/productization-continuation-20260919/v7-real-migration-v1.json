@@ -1,0 +1,74 @@
+{
+  "allowed_metadata_only_changed": true,
+  "ci_eligible": false,
+  "current_source_chain": {
+    "ci_eligible": false,
+    "kind": "current_source_migration_chain",
+    "old_rows_preserved": true,
+    "old_tables": 44,
+    "passed": true,
+    "path": "v5-v6-v7",
+    "predecessor": {
+      "changed": true,
+      "ci_eligible": false,
+      "extension_digest": "0fd0c38cf2995bef78d3989ce7b7c97fe25727d0c810e3da26591fd79a873774",
+      "kind": "partitioned_run_migration_result",
+      "old_plan_reupload_requires_new_plan_id": true,
+      "old_plan_rows_preserved": true,
+      "predecessor_extension_digest": "76dcb18f94df87219c7071c9e2820e7c4ce751adc0fa3493174b163a3d1e2761",
+      "schema_version": 6
+    },
+    "result": {
+      "changed": true,
+      "ci_eligible": false,
+      "extension_digest": "8e7e6d2b01d748b82dc6f5ceef266b4c5363e76c7b707efb814dee3c4eebe315",
+      "kind": "partitioned_corpus_migration_result",
+      "old_run_and_plan_rows_preserved": true,
+      "old_v6_plan_rows_require_new_upload": true,
+      "predecessor_extension_digest": "0fd0c38cf2995bef78d3989ce7b7c97fe25727d0c810e3da26591fd79a873774",
+      "schema_version": 7
+    },
+    "schema_version": 1,
+    "seconds": 0.625
+  },
+  "full_productization_acceptance": false,
+  "kind": "partitioned_corpus_real_migration",
+  "migration_result": {
+    "changed": true,
+    "ci_eligible": false,
+    "extension_digest": "8e7e6d2b01d748b82dc6f5ceef266b4c5363e76c7b707efb814dee3c4eebe315",
+    "kind": "partitioned_corpus_migration_result",
+    "old_run_and_plan_rows_preserved": true,
+    "old_v6_plan_rows_require_new_upload": true,
+    "predecessor_extension_digest": "267711ce3e4de23c9f5646e7e9bc68f28f92da9409f169a0220163a9efec5b00",
+    "schema_version": 7
+  },
+  "new_tables": [
+    "partition_scale_corpus_commits",
+    "partition_scale_corpus_committed_segments",
+    "partition_scale_corpus_segments",
+    "partition_scale_corpus_upload"
+  ],
+  "old_plan_rejected": "PLAN_STALE",
+  "old_tables": 45,
+  "passed": true,
+  "preserved_rows": 46,
+  "real_worker": false,
+  "reopened_v7": true,
+  "schema_version": 1,
+  "seconds": 0.515,
+  "seed_database_original_preserved": true,
+  "seed_driver_first_attempt": "import failed before database creation; corrected driver generated the fixture",
+  "source_database_sha256": "75d33b8f0f08c69d8f27afa8cec3bcedd799b4caa7b8dd9179c20951cca5c4cf",
+  "source_extension_digest": "267711ce3e4de23c9f5646e7e9bc68f28f92da9409f169a0220163a9efec5b00",
+  "source_fixture": "source-v16",
+  "source_sha256": {
+    "src/gah/adoption_migrations.py": "9530305587e569d7de4d48ff10c64a6a6ef15ee2f61becab9400415ee5efe614",
+    "src/gah/partitioned_corpus_authority.py": "2eb6288b5a53fb9e582d58762d544a2620c51178f77a4b0d39164656cd5db3dd",
+    "src/gah/partitioned_corpus_migrations.py": "1eeff2da2000bfec5df754618eddbe65f8d04165510a613eabe602c99de03da1",
+    "src/gah/partitioned_run_migrations.py": "bc2b92f99c0904952b92c795e983d6b5804c516dbb3e671e8cd06375136056cc",
+    "tools/migrate_evaluation_store.py": "56a27749c0076d357c87e763f3909c6c969f134751aab76d1b2e5f1044677e7b"
+  },
+  "source_unchanged": true,
+  "synthetic_attempt": true
+}

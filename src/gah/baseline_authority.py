@@ -229,10 +229,10 @@ def validate_request(request: Any) -> dict[str, Any]:
     return deepcopy(request)
 
 
-def _trusted_binding(bound: dict[str, Any]) -> str:
+def _trusted_binding(bound: dict[str, Any], baseline_context: Any = None) -> str:
     try:
         from . import run_evidence
-        derived = run_evidence.bound_bundle_digest(bound)
+        derived = run_evidence.bound_bundle_digest(bound, baseline_context)
     except Exception:
         raise _error("BINDING_INVALID") from None
     return derived
@@ -240,15 +240,23 @@ def _trusted_binding(bound: dict[str, Any]) -> str:
 
 def _source_impl(source: Any, run_id: str, now: int, store: Any, *, purpose="baseline_candidate") -> dict[str, Any]:
     required = {"bound", "receipt", "decision", "evidences", "closure", "evidence_states", "reasons"}
-    if type(source) is not dict or set(source) != required:
+    if type(source) is not dict or type(source.get("bound")) is not dict:
         raise _error("SOURCE_INVALID")
     bound = source["bound"]
-    if type(bound) is not dict or type(bound.get("manifest")) is not dict:
+    manifest = bound.get("manifest")
+    if type(manifest) is not dict:
         raise _error("SOURCE_INVALID")
-    manifest = bound["manifest"]
+    schema_version = manifest.get("schema_version")
+    if type(schema_version) is not int or schema_version not in {1, 2}:
+        raise _error("SOURCE_INVALID")
+    if schema_version == 2:
+        required.add("baseline_context")
+    if set(source) != required:
+        raise _error("SOURCE_INVALID")
+    baseline_context = source.get("baseline_context") if schema_version == 2 else None
     if purpose not in {"baseline_candidate", "regression"} or manifest.get("run_id") != run_id or manifest.get("purpose") != purpose:
         raise _error("SOURCE_INVALID")
-    binding_digest = _trusted_binding(bound)
+    binding_digest = _trusted_binding(bound, baseline_context)
     if type(source["reasons"]) is not list or any(type(reason) is not str for reason in source["reasons"]):
         raise _error("SOURCE_INVALID")
     receipt = source["receipt"]
@@ -373,6 +381,24 @@ def _build_candidate(source: dict[str, Any], series_id: str, proposal_id: str, n
         raise _error("SOURCE_INVALID")
     run_id = manifest.get("run_id")
     _id(run_id)
+    schema_version = manifest.get("schema_version")
+    if type(schema_version) is not int or schema_version not in {1, 2}:
+        raise _error("SOURCE_INVALID")
+    baseline_context = source.get("baseline_context") if schema_version == 2 else None
+    if schema_version == 2:
+        from .partitioned_run_contracts import validate_partitioned_runtime
+        runtime_fields = {"manifest", "contract", "plan", "policy", "registry", "case_set",
+                          "selected_controls", "ci_eligible", "_partitioned_context", "_partitioned_receipt"}
+        if set(bound) != runtime_fields:
+            raise _error("SOURCE_INVALID")
+        if ((manifest["purpose"] == "baseline_candidate" and baseline_context is not None)
+                or (manifest["purpose"] == "regression" and type(baseline_context) is not dict)):
+            raise _error("SOURCE_INVALID")
+        checked = validate_partitioned_runtime(bound, baseline_context=baseline_context)
+        if checked != bound:
+            raise _error("SOURCE_INVALID")
+    elif "_partitioned_context" in bound or "baseline_context" in source:
+        raise _error("SOURCE_INVALID")
     evaluator_refs, oracle_refs = _refs_from_source(source)
     evidence_refs: list[dict[str, str]] = []
     for evidence in source.get("evidences", []):
@@ -385,8 +411,20 @@ def _build_candidate(source: dict[str, Any], series_id: str, proposal_id: str, n
     closure_id = closure.get("closure_id", run_id) if type(closure) is dict else run_id
     decision_ref = content_ref("run_decision", decision_id, decision)
     closure_ref = content_ref("resource_closure", closure_id, closure)
+    schema_version = manifest["schema_version"]
+    baseline_context = source.get("baseline_context") if schema_version == 2 else None
+    if schema_version == 2:
+        repeat_config = repeat_config_for_plan(
+            plan, partitioned_context={"bound_run": bound, "baseline_context": baseline_context},
+            baseline_context=baseline_context)
+        trial_plan_ref = deepcopy(manifest["plan_ref"])
+        if trial_plan_ref.get("kind") != "trial_plan_index":
+            raise _error("SOURCE_INVALID")
+    else:
+        repeat_config = repeat_config_for_plan(plan)
+        trial_plan_ref = content_ref("trial_plan", plan["plan_id"], plan)
     comparison = {
-        "schema_version": 1, "kind": "comparison_context",
+        "schema_version": schema_version, "kind": "comparison_context",
         "comparison_id": "comparison-" + proposal_id,
         "mode": contract.get("comparison", {}).get("mode"),
         "baseline_ref": deepcopy(contract.get("comparison", {}).get("baseline_ref")),
@@ -399,10 +437,10 @@ def _build_candidate(source: dict[str, Any], series_id: str, proposal_id: str, n
         "evaluator_refs": deepcopy(evaluator_refs),
         "case_set_ref": content_ref("case_set", case_set["case_set_id"], case_set),
         "oracle_refs": deepcopy(oracle_refs),
-        "repeat_config_ref": content_ref("repeat_config", repeat_config_for_plan(plan)["repeat_config_id"], repeat_config_for_plan(plan)),
+        "repeat_config_ref": content_ref("repeat_config", repeat_config["repeat_config_id"], repeat_config),
     }
     record = {
-        "schema_version": 1, "kind": "baseline",
+        "schema_version": schema_version, "kind": "baseline",
         "baseline_id": "baseline-" + proposal_id,
         "baseline_series_id": series_id, "generation": expected_generation + 1,
         "contract_ref": deepcopy(manifest["contract_ref"]),
@@ -413,7 +451,7 @@ def _build_candidate(source: dict[str, Any], series_id: str, proposal_id: str, n
         "evaluator_refs": deepcopy(evaluator_refs), "oracle_refs": deepcopy(oracle_refs),
         "repeat_config_ref": deepcopy(comparison["repeat_config_ref"]),
         "source_run_ref": content_ref("run_manifest", run_id, manifest),
-        "trial_plan_ref": content_ref("trial_plan", plan["plan_id"], plan),
+        "trial_plan_ref": trial_plan_ref,
         "decision_ref": decision_ref, "evidence_refs": evidence_refs,
         "resource_closure_ref": closure_ref,
         "comparison_context_ref": content_ref("comparison_context", comparison["comparison_id"], comparison),
@@ -503,13 +541,18 @@ def _bind_candidate(proposal, source, now, *, db=None):
     candidate = build_candidate(source, proposal["series_id"], proposal["proposal_id"], proposal["created_at"])
     if candidate != {"record": proposal["record"], "comparison_context": proposal["comparison_context"]}:
         raise _error("PROPOSAL_MISMATCH")
-    if _trusted_binding(source["bound"]) != proposal["binding_digest"]:
+    baseline_context = source.get("baseline_context") if candidate["record"]["schema_version"] == 2 else None
+    if _trusted_binding(source["bound"], baseline_context) != proposal["binding_digest"]:
         raise _error("BINDING_MISMATCH")
+    repeat_config = (repeat_config_for_plan(source["bound"]["plan"],
+        partitioned_context={"bound_run": source["bound"], "baseline_context": baseline_context},
+        baseline_context=baseline_context) if candidate["record"]["schema_version"] == 2
+        else repeat_config_for_plan(source["bound"]["plan"]))
     enriched = {**source["bound"], "comparison_context": candidate["comparison_context"],
-                "repeat_config": repeat_config_for_plan(source["bound"]["plan"])}
+                "repeat_config": repeat_config}
     bind_baseline_record(candidate["record"], bound_run=enriched, decision=source["decision"],
         evidences=source["evidences"], closure=source["closure"], now=now,
-        evidence_states=source["evidence_states"])
+        evidence_states=source["evidence_states"], baseline_context=baseline_context)
     return candidate
 
 
@@ -585,7 +628,7 @@ def _execute_propose(store: Any, db: sqlite3.Connection, request: dict[str, Any]
         raise _error("PREREQUISITE_UNAVAILABLE")
     source = _source(_source_from_resolver(resolve_source, request["run_id"]), request["run_id"], now, store)
     candidate = build_candidate(source, request["series_id"], request["proposal_id"], now)
-    binding_digest = _trusted_binding(source["bound"])
+    binding_digest = _trusted_binding(source["bound"], source.get("baseline_context"))
     proposal = {"schema_version": 1, "kind": "baseline_proposal", "proposal_id": request["proposal_id"],
                 "series_id": request["series_id"], "run_id": request["run_id"],
                 "expected_generation": 0, "contract_generation": 1,

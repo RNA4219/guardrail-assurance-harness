@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "report_guidance_parent_review",
+  "created_at": "2026-09-19T18:45:20.079055+00:00",
+  "source_sha256": {
+    "tools/gah_report.py": "849c386c749cbf36c176ec5732fb404adf21b60bdf1d3184550c9312c85b42a2",
+    "tests/test_run_report_guidance.py": "236f57ec72b0cf76b845b61bd339e30d8384da77db7e048c3ab3f4d663b566ad",
+    "tools/gah_ci.py": "392b527d79b74fc9adf257d8d40b0931862a54a7700d0d66b3715946aae96a85"
+  },
+  "validation": {
+    "tests_run": 18,
+    "passed": 18,
+    "failed": 0,
+    "test_seconds": 0.118,
+    "wall_seconds": 0.356467200035695,
+    "modules": [
+      "tests.test_run_report_guidance",
+      "tests.test_run_report",
+      "tests.test_candidate_report"
+    ],
+    "source_unchanged": true,
+    "log_sha256": "6daa0fa6f0d9fa1ae439abe00a084ec08ec0d1fc53fb45aa549f169a232ba886",
+    "docker_started": false
+  },
+  "changes": [
+    "JSON/Markdownに同じ固定catalogから理由・次操作・必要役割・操作目的を表示する。",
+    "成果物未取得はrun_report_failureとして要求対象とfresh gateを分離し、終了2・ci_eligible=falseを保つ。",
+    "撤回・期限切れは現採択契約から新runを開始する案内。停止不明・取消し・未精算は既存runのstatus照会。"
+  ],
+  "parent_counterexamples": [
+    "8状態の案内とJSON/Markdown一致。撤回のfresh gateは終了1、成果物のないreport自体は終了2。",
+    "全command templateを本物のargparseへ渡し、実行前で止めてrequired/unknown argumentを検査。",
+    "healthy fresh gateでも成果物欠落を成功へ変換しない。",
+    "request/run/manifest/outputs参照の不一致は現在のgateとして表示しない。",
+    "transport例外の詳細を公開しない。"
+  ],
+  "related_real_database_evidence": "ci-reason-preservation-v1.json",
+  "limitations": [
+    "表示18件はfake authority応答を使用。実際のDB撤回・停止経路は別記録へ分離する。",
+    "8状態全てを最終imageの実操作で受入れた記録ではない。",
+    "CI順序補正後の全回帰とPAC11受入は未完了。"
+  ],
+  "acceptance_pass": false,
+  "ci_eligible": false
+}
