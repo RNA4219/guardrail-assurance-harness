@@ -41,7 +41,7 @@ jobs:
           python -m tools.ci_history prepare --previous _ci/previous/timing-history.json --output _ci/inputs/timing-history.json
           python -m tools.ci_history plan --history _ci/inputs/timing-history.json --output _ci/inputs/ci-plan.json
       - name: Distribute one immutable plan and history to all lanes
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: gah-ci-plan
           path: _ci/inputs/
@@ -72,7 +72,7 @@ jobs:
         run: python -m tools.ci_history lane --history _ci/inputs/timing-history.json --plan _ci/inputs/ci-plan.json --lane "$TEST_LANE" --expected-lock "$TEST_PLAN_LOCK" --output "_ci/results/timing-$TEST_LANE.json"
       - name: Preserve module observations
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: gah-module-timing-${{ matrix.lane }}
           path: _ci/results/timing-${{ matrix.lane }}.json
@@ -107,7 +107,7 @@ jobs:
         env:
           TEST_PLAN_LOCK: ${{ needs.plan.outputs.lock_digest }}
         run: python -m tools.ci_history collect --previous _ci/inputs/timing-history.json --reports _ci/results --plan _ci/inputs/ci-plan.json --expected-lock "$TEST_PLAN_LOCK" --output _ci/next/timing-history.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: gah-timing-history
           path: _ci/next/timing-history.json
